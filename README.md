@@ -21,8 +21,17 @@ Compress, merge, split, dan konversi PDF dengan mudah. Mobile-first, cepat, dan 
 | Backend | FastAPI (Python) |
 | Server PDF | PyMuPDF, Ghostscript |
 | Storage | Cloudflare R2 |
-| Hosting | Vercel (frontend), Render (backend) |
+| Hosting | Vercel (frontend), Railway (backend) |
 | Analytics | Plausible |
+
+## Deployed URLs
+
+| Service | URL |
+|---------|-----|
+| Frontend | [frontend-ten-omega-35.vercel.app](https://frontend-ten-omega-35.vercel.app) |
+| Backend API | [papyr-production.up.railway.app](https://papyr-production.up.railway.app) |
+| Health Check | [/health](https://papyr-production.up.railway.app/health) |
+| Domain (soon) | [mypapyr.com](https://mypapyr.com) |
 
 ## Setup
 

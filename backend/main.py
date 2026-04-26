@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from routers.connectivity import router as connectivity_router
 from utils.config import settings
 
 app = FastAPI(
@@ -20,6 +21,9 @@ app.add_middleware(
 
 
 # Supabase: standby, not active in MVP 0.1
+
+# --- Routers ---
+app.include_router(connectivity_router)
 
 
 @app.get("/health")
