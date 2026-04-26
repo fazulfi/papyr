@@ -5,7 +5,6 @@ Provides upload, signed URL generation, and deletion for temporary PDF files.
 Uses boto3 S3-compatible API with Cloudflare R2 endpoint.
 """
 
-import os
 import uuid
 import logging
 from datetime import datetime, timezone
@@ -13,40 +12,25 @@ from datetime import datetime, timezone
 import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
-from dotenv import load_dotenv
 
-load_dotenv()
+from utils.config import settings
 
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Configuration — all from environment variables, never hardcoded
+# Derived constants from centralized settings
 # ---------------------------------------------------------------------------
-R2_ACCOUNT_ID = os.getenv("R2_ACCOUNT_ID", "")
-R2_ACCESS_KEY_ID = os.getenv("R2_ACCESS_KEY_ID", "")
-R2_SECRET_ACCESS_KEY = os.getenv("R2_SECRET_ACCESS_KEY", "")
-R2_BUCKET_NAME = os.getenv("R2_BUCKET_NAME", "papyr-files")
-R2_PUBLIC_URL = os.getenv("R2_PUBLIC_URL", "")
-
-R2_ENDPOINT = f"https://{R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
-
-# Signed URL expiry — matches FILE_RETENTION_MINUTES (default 60 min)
-SIGNED_URL_EXPIRY_SECONDS = int(os.getenv("FILE_RETENTION_MINUTES", "60")) * 60
+R2_ENDPOINT = f"https://{settings.r2_account_id}.r2.cloudflarestorage.com"
+SIGNED_URL_EXPIRY_SECONDS = settings.file_retention_minutes * 60
 
 
 def _get_client():
     """Create a boto3 S3 client configured for Cloudflare R2."""
-    if not R2_ACCOUNT_ID or not R2_ACCESS_KEY_ID or not R2_SECRET_ACCESS_KEY:
-        raise RuntimeError(
-            "R2 credentials not configured. "
-            "Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY in .env"
-        )
-
     return boto3.client(
         "s3",
         endpoint_url=R2_ENDPOINT,
-        aws_access_key_id=R2_ACCESS_KEY_ID,
-        aws_secret_access_key=R2_SECRET_ACCESS_KEY,
+        aws_access_key_id=settings.r2_access_key_id,
+        aws_secret_access_key=settings.r2_secret_access_key,
         config=Config(
             signature_version="s3v4",
             retries={"max_attempts": 2, "mode": "standard"},
@@ -87,7 +71,7 @@ def upload_file(
 
     try:
         client.put_object(
-            Bucket=R2_BUCKET_NAME,
+            Bucket=settings.r2_bucket_name,
             Key=object_key,
             Body=file_bytes,
             ContentType=content_type,
@@ -105,7 +89,7 @@ def upload_file(
 
     return {
         "key": object_key,
-        "bucket": R2_BUCKET_NAME,
+        "bucket": settings.r2_bucket_name,
         "size_bytes": len(file_bytes),
         "uploaded_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -130,7 +114,7 @@ def generate_signed_url(object_key: str, expiry_seconds: int | None = None) -> s
     try:
         url = client.generate_presigned_url(
             "get_object",
-            Params={"Bucket": R2_BUCKET_NAME, "Key": object_key},
+            Params={"Bucket": settings.r2_bucket_name, "Key": object_key},
             ExpiresIn=expiry_seconds,
         )
     except ClientError as e:
@@ -153,7 +137,7 @@ def delete_file(object_key: str) -> bool:
     client = _get_client()
 
     try:
-        client.delete_object(Bucket=R2_BUCKET_NAME, Key=object_key)
+        client.delete_object(Bucket=settings.r2_bucket_name, Key=object_key)
     except ClientError as e:
         logger.error("R2 delete failed for key=%s: %s", object_key, e)
         return False
