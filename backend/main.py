@@ -23,6 +23,9 @@ app.add_middleware(
 )
 
 
+# Supabase: standby, not active in MVP 0.1
+
+
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
