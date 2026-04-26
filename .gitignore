@@ -74,3 +74,5 @@ blueprint/
 *.tmp
 *.temp
 .design-canvas.state.json
+
+.vercel

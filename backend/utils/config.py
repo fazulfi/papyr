@@ -93,7 +93,7 @@ def _load_settings() -> Settings:
         cors_origins=[
             origin.strip()
             for origin in _optional(
-                "CORS_ORIGINS", "https://mypapyr.com,http://localhost:3000"
+                "CORS_ORIGINS", "https://mypapyr.com,https://frontend-ten-omega-35.vercel.app,http://localhost:3000"
             ).split(",")
         ],
         # App limits
