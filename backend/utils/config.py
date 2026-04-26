@@ -92,7 +92,9 @@ def _load_settings() -> Settings:
         # CORS
         cors_origins=[
             origin.strip()
-            for origin in _optional("CORS_ORIGINS", "http://localhost:3000").split(",")
+            for origin in _optional(
+                "CORS_ORIGINS", "https://mypapyr.com,http://localhost:3000"
+            ).split(",")
         ],
         # App limits
         max_upload_size_mb=_int("MAX_UPLOAD_SIZE_MB", 20),
