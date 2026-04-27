@@ -39,6 +39,28 @@ const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png"]);
 /** Client-side threshold: below this total size, process in browser */
 const CLIENT_THRESHOLD_BYTES = 3 * 1024 * 1024; // 3MB
 
+/** JPEG magic bytes: FF D8 FF */
+const JPEG_MAGIC = [0xff, 0xd8, 0xff];
+/** PNG magic bytes: 89 50 4E 47 0D 0A 1A 0A */
+const PNG_MAGIC = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+
+/** Read first N bytes of a File */
+function readFileHeader(file: File, bytes: number): Promise<Uint8Array> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(new Uint8Array(reader.result as ArrayBuffer));
+    reader.onerror = () => reject(new Error("Gagal membaca file."));
+    reader.readAsArrayBuffer(file.slice(0, bytes));
+  });
+}
+
+/** Check if file header matches JPEG or PNG magic bytes */
+function isValidImageHeader(header: Uint8Array): boolean {
+  const isJpeg = JPEG_MAGIC.every((b, i) => header[i] === b);
+  const isPng = PNG_MAGIC.every((b, i) => header[i] === b);
+  return isJpeg || isPng;
+}
+
 /* ── Inline SVG Icons ── */
 
 function ImageIcon() {
@@ -267,11 +289,12 @@ export default function ImageToPdfPage() {
 
   /* ── Image Management ── */
 
-  const addImages = useCallback((newFiles: FileList | File[]) => {
+  const addImages = useCallback(async (newFiles: FileList | File[]) => {
     const toAdd: ImageItem[] = [];
     const errors: string[] = [];
 
     for (const file of Array.from(newFiles)) {
+      // Check MIME type + extension
       if (!ALLOWED_TYPES.has(file.type)) {
         const ext = getExtension(file.name);
         if (!ALLOWED_EXTENSIONS.has(ext)) {
@@ -287,6 +310,19 @@ export default function ImageToPdfPage() {
         errors.push(`"${file.name}" kosong.`);
         continue;
       }
+
+      // Validate magic bytes — catches fake files with wrong extension
+      try {
+        const header = await readFileHeader(file, 8);
+        if (!isValidImageHeader(header)) {
+          errors.push(`"${file.name}" bukan file gambar yang valid.`);
+          continue;
+        }
+      } catch {
+        errors.push(`"${file.name}" tidak bisa dibaca.`);
+        continue;
+      }
+
       toAdd.push({
         id: generateId(),
         file,

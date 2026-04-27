@@ -28,44 +28,59 @@ ALLOWED_MIME_TYPES = {"image/jpeg", "image/png"}
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png"}
 
 
+# Magic bytes for image format detection
+_JPEG_MAGIC = b"\xff\xd8\xff"
+_PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
+
+
 def _validate_image(file: UploadFile, file_bytes: bytes) -> None:
     """
-    Validasi file gambar: MIME type, ekstensi, dan ukuran.
+    Validasi file gambar: MIME type, ekstensi, magic bytes, dan ukuran.
     Raises HTTPException(400) jika tidak valid.
     """
+    filename = file.filename or "unknown"
+
+    # Validasi file tidak kosong
+    size_bytes = len(file_bytes)
+    if size_bytes == 0:
+        raise HTTPException(
+            status_code=400,
+            detail=f'"{filename}" kosong. Silakan upload gambar yang valid.',
+        )
+
     # Validasi MIME type
     if file.content_type not in ALLOWED_MIME_TYPES:
         raise HTTPException(
             status_code=400,
-            detail=f'Tipe file tidak valid: {file.content_type}. Hanya JPG dan PNG yang diterima.',
+            detail=f'"{filename}" bukan format yang didukung. Hanya JPG dan PNG.',
         )
 
     # Validasi ekstensi
-    filename = file.filename or ""
     ext = ""
     if "." in filename:
         ext = "." + filename.rsplit(".", 1)[-1].lower()
     if ext not in ALLOWED_EXTENSIONS:
         raise HTTPException(
             status_code=400,
-            detail=f"Ekstensi file tidak valid: '{ext}'. Hanya .jpg, .jpeg, .png yang diterima.",
+            detail=f'"{filename}" ekstensi tidak valid. Hanya .jpg, .jpeg, .png.',
+        )
+
+    # Validasi magic bytes — file harus benar-benar gambar, bukan text/binary lain
+    is_jpeg = file_bytes[:3] == _JPEG_MAGIC
+    is_png = file_bytes[:8] == _PNG_MAGIC
+    if not (is_jpeg or is_png):
+        raise HTTPException(
+            status_code=400,
+            detail=f'"{filename}" bukan file gambar yang valid. Konten file tidak sesuai format JPG/PNG.',
         )
 
     # Validasi ukuran
-    size_bytes = len(file_bytes)
     if size_bytes > settings.max_upload_size_bytes:
         max_mb = settings.max_upload_size_mb
         actual_mb = round(size_bytes / (1024 * 1024), 1)
         raise HTTPException(
             status_code=400,
-            detail=f'Ukuran file terlalu besar: {actual_mb}MB. Maksimal {max_mb}MB.',
-        )
-
-    # Validasi file tidak kosong
-    if size_bytes == 0:
-        raise HTTPException(
-            status_code=400,
-            detail="File kosong. Silakan upload gambar yang valid.",
+            detail=f'"{filename}" terlalu besar: {actual_mb}MB. Maksimal {max_mb}MB.',
         )
 
 
@@ -101,7 +116,7 @@ async def image_to_pdf_endpoint(
     try:
         doc = fitz.open()
 
-        for filename, img_bytes in image_data:
+        for idx, (filename, img_bytes) in enumerate(image_data):
             # Simpan gambar ke temp file (PyMuPDF butuh path atau bytes)
             suffix = ".png" if filename.lower().endswith(".png") else ".jpg"
             fd, temp_path = tempfile.mkstemp(suffix=suffix, prefix="papyr_img_")
@@ -112,9 +127,15 @@ async def image_to_pdf_endpoint(
                 f.write(img_bytes)
 
             # Buka gambar untuk mendapatkan dimensi
-            img = fitz.open(temp_path)
-            rect = img[0].rect  # dimensi halaman pertama dari gambar
-            img.close()
+            try:
+                img = fitz.open(temp_path)
+                rect = img[0].rect  # dimensi halaman pertama dari gambar
+                img.close()
+            except Exception:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f'"{filename}" tidak bisa dibaca sebagai gambar. File mungkin rusak.',
+                )
 
             # Buat halaman PDF sesuai ukuran gambar
             page = doc.new_page(width=rect.width, height=rect.height)
