@@ -81,5 +81,6 @@ blueprint/
 # Test artifacts
 # ========================
 backend/tests/benchmark/
+backend/tests/merge_test_files/
 backend/tests/compress_test_results.md
 backend/tests/benchmark_results.md
