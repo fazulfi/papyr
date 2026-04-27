@@ -30,39 +30,3 @@ app.include_router(connectivity_router)
 async def health_check():
     return {"status": "ok"}
 
-
-# --- Temporary test endpoint for PAPYR-011 (remove after verification) ---
-@app.get("/health/gs")
-async def health_ghostscript():
-    import subprocess
-    import importlib
-
-    result: dict = {"ghostscript": "not found", "pymupdf": "not found", "pillow": "not found"}
-
-    # Check Ghostscript
-    try:
-        proc = subprocess.run(["gs", "--version"], capture_output=True, text=True, timeout=5)
-        if proc.returncode == 0:
-            result["ghostscript"] = proc.stdout.strip()
-        else:
-            result["ghostscript"] = f"error: {proc.stderr.strip()}"
-    except FileNotFoundError:
-        result["ghostscript"] = "not installed"
-    except Exception as e:
-        result["ghostscript"] = f"error: {e}"
-
-    # Check PyMuPDF
-    try:
-        fitz = importlib.import_module("fitz")
-        result["pymupdf"] = getattr(fitz, "VersionBind", getattr(fitz, "__version__", "unknown"))
-    except ImportError:
-        result["pymupdf"] = "not installed"
-
-    # Check Pillow
-    try:
-        pil = importlib.import_module("PIL")
-        result["pillow"] = getattr(pil, "__version__", "unknown")
-    except ImportError:
-        result["pillow"] = "not installed"
-
-    return result
