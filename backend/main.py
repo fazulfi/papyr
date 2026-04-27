@@ -7,6 +7,7 @@ from slowapi.errors import RateLimitExceeded
 
 from routers.connectivity import router as connectivity_router
 from routers.compress import router as compress_router
+from routers.image_to_pdf import router as image_to_pdf_router
 from utils.config import settings
 
 # --- Rate Limiter ---
@@ -48,6 +49,7 @@ app.add_middleware(
 # --- Routers ---
 app.include_router(connectivity_router)
 app.include_router(compress_router)
+app.include_router(image_to_pdf_router)
 
 
 @app.get("/health")

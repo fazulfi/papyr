@@ -1,4 +1,55 @@
-import { PDFDocument } from "pdf-lib";
+import { PDFDocument, PageSizes } from "pdf-lib";
+
+/**
+ * Convert multiple images (JPG/PNG) into a single PDF.
+ *
+ * Each image becomes one page sized to fit the image dimensions.
+ * Runs entirely client-side using pdf-lib.
+ *
+ * @param files  Array of image Files (JPG or PNG)
+ * @returns      Uint8Array of the resulting PDF
+ */
+export async function imagesToPDF(files: File[]): Promise<Uint8Array> {
+  if (files.length === 0) {
+    throw new Error("Pilih minimal 1 gambar untuk dikonversi.");
+  }
+
+  const doc = await PDFDocument.create();
+
+  for (const file of files) {
+    const buffer = await file.arrayBuffer();
+    const bytes = new Uint8Array(buffer);
+
+    const type = file.type.toLowerCase();
+    let image;
+
+    try {
+      if (type === "image/png") {
+        image = await doc.embedPng(bytes);
+      } else if (type === "image/jpeg" || type === "image/jpg") {
+        image = await doc.embedJpg(bytes);
+      } else {
+        throw new Error(
+          `"${file.name}" bukan format yang didukung. Hanya JPG dan PNG yang diterima.`,
+        );
+      }
+    } catch (err) {
+      if (err instanceof Error && err.message.includes("bukan format")) {
+        throw err;
+      }
+      throw new Error(
+        `Gagal memproses "${file.name}". File mungkin rusak atau format tidak valid.`,
+      );
+    }
+
+    // Create a page sized to the image dimensions
+    const { width, height } = image.scale(1);
+    const page = doc.addPage([width, height]);
+    page.drawImage(image, { x: 0, y: 0, width, height });
+  }
+
+  return doc.save();
+}
 
 /**
  * Load a PDF and return its page count.

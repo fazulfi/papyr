@@ -1,0 +1,164 @@
+"""
+Router untuk konversi gambar ke PDF.
+
+POST /api/image-to-pdf — menerima beberapa file gambar (JPG/PNG),
+konversi ke PDF via PyMuPDF, upload ke R2, return signed download URL.
+"""
+
+import logging
+import os
+import tempfile
+from typing import List
+
+import fitz  # PyMuPDF
+from fastapi import APIRouter, File, Request, UploadFile, HTTPException
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+
+from utils.config import settings
+from utils.r2 import upload_file, generate_signed_url
+
+limiter = Limiter(key_func=get_remote_address)
+
+logger = logging.getLogger(__name__)
+
+router = APIRouter(prefix="/api", tags=["image-to-pdf"])
+
+ALLOWED_MIME_TYPES = {"image/jpeg", "image/png"}
+ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png"}
+
+
+def _validate_image(file: UploadFile, file_bytes: bytes) -> None:
+    """
+    Validasi file gambar: MIME type, ekstensi, dan ukuran.
+    Raises HTTPException(400) jika tidak valid.
+    """
+    # Validasi MIME type
+    if file.content_type not in ALLOWED_MIME_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail=f'Tipe file tidak valid: {file.content_type}. Hanya JPG dan PNG yang diterima.',
+        )
+
+    # Validasi ekstensi
+    filename = file.filename or ""
+    ext = ""
+    if "." in filename:
+        ext = "." + filename.rsplit(".", 1)[-1].lower()
+    if ext not in ALLOWED_EXTENSIONS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Ekstensi file tidak valid: '{ext}'. Hanya .jpg, .jpeg, .png yang diterima.",
+        )
+
+    # Validasi ukuran
+    size_bytes = len(file_bytes)
+    if size_bytes > settings.max_upload_size_bytes:
+        max_mb = settings.max_upload_size_mb
+        actual_mb = round(size_bytes / (1024 * 1024), 1)
+        raise HTTPException(
+            status_code=400,
+            detail=f'Ukuran file terlalu besar: {actual_mb}MB. Maksimal {max_mb}MB.',
+        )
+
+    # Validasi file tidak kosong
+    if size_bytes == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="File kosong. Silakan upload gambar yang valid.",
+        )
+
+
+@router.post("/image-to-pdf")
+@limiter.limit(f"{settings.rate_limit_per_minute}/minute")
+async def image_to_pdf_endpoint(
+    request: Request,
+    files: List[UploadFile] = File(...),
+):
+    """
+    Konversi beberapa gambar (JPG/PNG) menjadi satu file PDF.
+
+    - **files**: Satu atau lebih file gambar (multipart/form-data)
+
+    Returns:
+        download_url, image_count, pdf_size
+    """
+    if len(files) == 0:
+        raise HTTPException(status_code=400, detail="Minimal 1 gambar diperlukan.")
+
+    # Baca dan validasi semua file terlebih dahulu
+    image_data: list[tuple[str, bytes]] = []  # (filename, bytes)
+
+    for file in files:
+        file_bytes = await file.read()
+        _validate_image(file, file_bytes)
+        image_data.append((file.filename or "image.jpg", file_bytes))
+
+    # Buat PDF dari gambar menggunakan PyMuPDF
+    output_path = None
+    temp_paths: list[str] = []
+
+    try:
+        doc = fitz.open()
+
+        for filename, img_bytes in image_data:
+            # Simpan gambar ke temp file (PyMuPDF butuh path atau bytes)
+            suffix = ".png" if filename.lower().endswith(".png") else ".jpg"
+            fd, temp_path = tempfile.mkstemp(suffix=suffix, prefix="papyr_img_")
+            os.close(fd)
+            temp_paths.append(temp_path)
+
+            with open(temp_path, "wb") as f:
+                f.write(img_bytes)
+
+            # Buka gambar untuk mendapatkan dimensi
+            img = fitz.open(temp_path)
+            rect = img[0].rect  # dimensi halaman pertama dari gambar
+            img.close()
+
+            # Buat halaman PDF sesuai ukuran gambar
+            page = doc.new_page(width=rect.width, height=rect.height)
+            page.insert_image(rect, filename=temp_path)
+
+        # Simpan PDF ke temp file
+        fd, output_path = tempfile.mkstemp(suffix=".pdf", prefix="papyr_img2pdf_")
+        os.close(fd)
+        doc.save(output_path)
+        doc.close()
+
+        # Baca output
+        with open(output_path, "rb") as f:
+            pdf_bytes = f.read()
+
+        # Upload ke R2
+        r2_result = upload_file(
+            file_bytes=pdf_bytes,
+            original_filename="images.pdf",
+            content_type="application/pdf",
+        )
+
+        # Generate signed URL (1 jam)
+        download_url = generate_signed_url(r2_result["key"], expiry_seconds=3600)
+
+        logger.info(
+            "Image-to-PDF OK: images=%d pdf_size=%d key=%s",
+            len(image_data),
+            len(pdf_bytes),
+            r2_result["key"],
+        )
+
+        return {
+            "download_url": download_url,
+            "image_count": len(image_data),
+            "pdf_size": len(pdf_bytes),
+        }
+
+    finally:
+        # Cleanup semua temp files
+        all_paths = temp_paths + ([output_path] if output_path else [])
+        for path in all_paths:
+            if path and os.path.exists(path):
+                try:
+                    os.remove(path)
+                except OSError:
+                    logger.warning("Gagal hapus temp file: %s", path)
