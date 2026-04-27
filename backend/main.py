@@ -1,14 +1,37 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 from routers.connectivity import router as connectivity_router
+from routers.compress import router as compress_router
 from utils.config import settings
+
+# --- Rate Limiter ---
+limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI(
     title="Papyr API",
     description="Backend API untuk Papyr — Alat PDF Gratis untuk Indonesia",
     version="0.1.0",
 )
+
+app.state.limiter = limiter
+
+
+# Custom 429 handler — pesan Bahasa Indonesia
+async def _rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    return JSONResponse(
+        status_code=429,
+        content={
+            "detail": "Terlalu banyak permintaan. Coba lagi dalam 1 menit.",
+        },
+    )
+
+
+app.add_exception_handler(RateLimitExceeded, _rate_limit_handler)
 
 # CORS — hanya izinkan origin yang terdaftar
 app.add_middleware(
@@ -24,9 +47,9 @@ app.add_middleware(
 
 # --- Routers ---
 app.include_router(connectivity_router)
+app.include_router(compress_router)
 
 
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
-
