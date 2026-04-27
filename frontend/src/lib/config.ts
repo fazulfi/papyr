@@ -5,19 +5,22 @@
  * Non-public vars are only available server-side.
  */
 
+/** Strip BOM (U+FEFF) that Vercel/Turbopack may inject into env vars. */
+const clean = (v: string): string => v.replace(/^\uFEFF/, "");
+
 export const config = {
   /** Base URL for the FastAPI backend */
-  apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000",
+  apiUrl: clean(process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"),
 
   /** Plausible Analytics domain (kosong = analytics nonaktif) */
-  plausibleDomain: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? "",
+  plausibleDomain: clean(process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? ""),
 
   /** Public site URL */
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  siteUrl: clean(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
 
   /** Supabase — standby, belum aktif di MVP 0.1 */
-  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-  supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
+  supabaseUrl: clean(process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""),
+  supabaseAnonKey: clean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""),
 } as const;
 
 /** Upload constraints (mirrored from backend) */
