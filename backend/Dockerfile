@@ -10,6 +10,12 @@ RUN pip install --user --no-cache-dir -r requirements.txt
 FROM python:3.11-slim
 WORKDIR /app
 
+# Install Ghostscript for server-side PDF compression
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ghostscript && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy installed dependencies from builder
 COPY --from=builder /root/.local /root/.local
 COPY . .
