@@ -76,3 +76,10 @@ blueprint/
 .design-canvas.state.json
 
 .vercel
+
+# ========================
+# Test artifacts
+# ========================
+backend/tests/benchmark/
+backend/tests/compress_test_results.md
+backend/tests/benchmark_results.md

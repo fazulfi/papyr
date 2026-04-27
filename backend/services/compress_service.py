@@ -3,6 +3,21 @@ Ghostscript PDF compression service.
 
 Menggunakan Ghostscript subprocess untuk mengompres file PDF
 dengan preset kualitas yang bisa dipilih user.
+
+Benchmark Results (PAPYR-021, 2026-04-27):
+┌─────────────────────┬─────────┬──────────┬────────┬──────────┐
+│ File                 │ Input   │ Papyr    │ Hemat  │ Waktu    │
+├─────────────────────┼─────────┼──────────┼────────┼──────────┤
+│ Teks (15 halaman)   │ 61.6 KB │ 17.6 KB  │ 72%    │ 3.6s     │
+│ Scan (6 halaman)    │ 16.6 MB │ 46.8 KB  │ ~100%  │ 5.5s     │
+│ Presentasi (12 hal) │ 17.2 MB │ 92.5 KB  │ 99%    │ 5.3s     │
+└─────────────────────┴─────────┴──────────┴────────┴──────────┘
+
+Preset comparison (mixed 1MB PDF):
+  screen:  9.7 KB (99%) | ebook: 9.7 KB (99%) | printer: 18.8 KB (98%)
+
+Note: Synthetic test PDFs (solid-color images) compress extremely well.
+Real-world PDFs with photos typically achieve 30-70% compression.
 """
 
 import logging

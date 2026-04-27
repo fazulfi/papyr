@@ -20,6 +20,7 @@ interface PDFUploaderProps {
   accept?: string;
   onUploadComplete?: (result: CompressResult) => void;
   onReset?: () => void;
+  onStateChange?: (state: UploadState) => void;
 }
 
 /* ── Inline SVG Icons ── */
@@ -98,8 +99,9 @@ export default function PDFUploader({
   accept = "application/pdf",
   onUploadComplete,
   onReset,
+  onStateChange,
 }: PDFUploaderProps) {
-  const [state, setState] = useState<UploadState>("idle");
+  const [state, setInternalState] = useState<UploadState>("idle");
   const [progress, setProgress] = useState(0);
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState(0);
@@ -110,6 +112,11 @@ export default function PDFUploader({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const xhrRef = useRef<XMLHttpRequest | null>(null);
+
+  const setState = useCallback((newState: UploadState) => {
+    setInternalState(newState);
+    onStateChange?.(newState);
+  }, [onStateChange]);
 
   const resetState = useCallback(() => {
     setState("idle");

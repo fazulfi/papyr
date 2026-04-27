@@ -50,54 +50,55 @@ const FEATURES = [
 /* ── Page ── */
 
 export default function CompressPage() {
-  const [isIdle, setIsIdle] = useState(true);
+  const [uploaderState, setUploaderState] = useState<string>("idle");
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 sm:py-12">
       {/* Tool header */}
-      <div className="mb-2.5 flex items-center gap-3">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+      <div className="mb-8 text-center flex flex-col items-center">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10 text-accent">
           <CompressIcon />
         </div>
-        <h1 className="text-2xl font-semibold tracking-tight text-navy">
+        <h1 className="mb-2 text-3xl font-bold tracking-tight text-navy md:text-4xl">
           Kompres PDF
         </h1>
+        <p className="text-base text-slate-500">
+          Perkecil ukuran PDF tanpa mengurangi kualitas.
+        </p>
       </div>
-      <p className="mb-7 text-[15px] leading-relaxed text-slate-500">
-        Perkecil ukuran PDF tanpa mengurangi kualitas.
-      </p>
 
       {/* Uploader */}
       <PDFUploader
         endpoint={`${config.apiUrl}/api/compress`}
-        onUploadComplete={() => setIsIdle(false)}
-        onReset={() => setIsIdle(true)}
+        onStateChange={(state) => setUploaderState(state)}
       />
 
-      {/* Feature badges — only visible in idle state */}
-      {isIdle && (
-        <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:gap-3">
-          {FEATURES.map((f) => (
-            <div
-              key={f.text}
-              className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-4 py-3 sm:flex-1"
-            >
-              <span className="text-accent">{f.icon}</span>
-              <span className="text-sm font-medium text-slate-500">{f.text}</span>
-            </div>
-          ))}
+      {/* Feature badges & Privacy — only visible in idle state */}
+      {uploaderState === "idle" && (
+        <div className="animate-fade-up">
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {FEATURES.map((f) => (
+              <div
+                key={f.text}
+                className="flex flex-col items-center rounded-2xl bg-white p-5 text-center border border-slate-100 shadow-sm"
+              >
+                <div className="text-accent mb-3">{f.icon}</div>
+                <h3 className="text-sm font-semibold text-navy">{f.text}</h3>
+              </div>
+            ))}
+          </div>
+
+          {/* Privacy notice */}
+          <div className="mt-8 flex items-start justify-center rounded-xl bg-slate-50 p-4 text-sm text-slate-500 border border-slate-100">
+            <span className="mt-0.5 text-slate-400 mr-2 shrink-0">
+              <ShieldIcon size={16} />
+            </span>
+            <p>
+              File kamu otomatis dihapus setelah 1 jam. Kami tidak pernah menyimpan dokumenmu.
+            </p>
+          </div>
         </div>
       )}
-
-      {/* Privacy notice */}
-      <div className="mt-5 flex items-start gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-3">
-        <span className="mt-0.5 text-slate-400">
-          <ShieldIcon size={14} />
-        </span>
-        <p className="text-xs leading-relaxed text-slate-400">
-          File kamu otomatis dihapus setelah 1 jam. Kami tidak pernah menyimpan dokumenmu.
-        </p>
-      </div>
     </div>
   );
 }
