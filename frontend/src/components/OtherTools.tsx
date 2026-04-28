@@ -24,11 +24,11 @@ const ALL_TOOLS = [
 /* ── Component ── */
 
 interface OtherToolsProps {
-  currentHref: string;
+  currentTool: string;
 }
 
-export default function OtherTools({ currentHref }: OtherToolsProps) {
-  const otherTools = ALL_TOOLS.filter((t) => t.href !== currentHref);
+export default function OtherTools({ currentTool }: OtherToolsProps) {
+  const otherTools = ALL_TOOLS.filter((t) => t.href !== currentTool);
 
   return (
     <div className="mt-16 w-full border-t border-slate-200 pb-8 pt-8">

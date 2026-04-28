@@ -103,7 +103,7 @@ export default function CompressPage() {
           </div>
         </div>
       )}
-      <OtherTools currentHref="/compress" />
+      <OtherTools currentTool="/compress" />
     </div>
   );
 }
