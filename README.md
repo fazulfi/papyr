@@ -37,9 +37,9 @@
 
 <br />
 
-> **Status: MVP 0.6 — Dalam Pengembangan Aktif**
+> **Status: MVP 0.7 — Dalam Pengembangan Aktif**
 >
-> Milestone 1–6 selesai (Setup · Compress · Merge · Split · Image to PDF · PDF to Image). Lanjut ke Milestone 7 (Landing Page + SEO).
+> Milestone 1–7 selesai (Setup · Compress · Merge · Split · Image to PDF · PDF to Image · Landing Page + SEO). Lanjut ke Milestone 8 (Analytics).
 
 ---
 
@@ -169,7 +169,7 @@
 | M04 | Split PDF | Page picker, client-side extraction | PAPYR-029 — 035 | ✅ Selesai |
 | M05 | Image to PDF | Multi-image upload, ordering, fallback | PAPYR-036 — 042 | ✅ Selesai |
 | M06 | PDF to Image | Page selection, PyMuPDF rendering | PAPYR-043 — 050 | ✅ Selesai |
-| M07 | Landing Page + SEO | Hero, tool pages, meta tags, sitemap | — | ⏳ |
+| M07 | Landing Page + SEO | Hero, tool pages, navbar, footer | PAPYR-051 — 054 | ✅ Selesai |
 | M08 | Analytics | Plausible integration, event tracking | — | ⏳ |
 | M09 | Cleanup & Privacy | Cron auto-delete, security hardening | — | ⏳ |
 | M10 | Testing + Launch | E2E tests, soft launch, monitoring | — | ⏳ |
@@ -268,8 +268,11 @@ papyr/
 │       │   ├── image-to-pdf/  # /image-to-pdf — Image conversion
 │       │   └── pdf-to-image/  # /pdf-to-image — PDF to image
 │       ├── components/        # Reusable UI components
+│       │   ├── Navbar.tsx     # Sticky nav, mobile hamburger
+│       │   ├── Footer.tsx     # Footer + language switcher
+│       │   ├── OtherTools.tsx # Cross-link to other tools
 │       │   ├── PDFUploader.tsx
-│       │   ├── SortableFileList.tsx
+│       │   ├── PageRangeInput.tsx
 │       │   └── ...
 │       └── lib/               # Config, utilities, helpers
 │           ├── config.ts      # Typed env config + limits

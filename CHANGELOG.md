@@ -9,6 +9,30 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 
 ## [Unreleased]
 
+### M07 — Landing Page + SEO
+
+> Landing page, Navbar/Footer, OtherTools cross-links, language switcher placeholder.
+>
+> **4 tasks** · PAPYR-051 — PAPYR-054 · ~13 jam
+
+#### Ditambahkan
+
+| Task | Deskripsi |
+|------|-----------|
+| PAPYR-051 | Landing page — hero, tools grid, privacy section, all Bahasa Indonesia |
+| PAPYR-052 | OtherTools component — cross-link 4 alat lain di setiap tool page |
+| PAPYR-053 | Navbar (sticky, mobile hamburger, active link) + Footer (logo, links) |
+| PAPYR-054 | Language switcher placeholder di Footer (Indonesia active, English disabled) |
+
+#### Catatan Teknis
+
+- **Navbar**: Sticky with backdrop blur, 5 nav links + CTA, mobile hamburger with XIcon toggle, active link via `usePathname()`
+- **Footer**: Logo + copyright, 4 placeholder links, LanguageSwitcher dropdown with click-outside-to-close
+- **OtherTools**: Reusable component filtering current tool, 2-column grid, used on all 5 tool pages
+- **Landing**: Hero with pill badge, H1 "Alat PDF yang langsung bekerja.", 5 tool cards, privacy section
+
+---
+
 ### M06 — PDF to Image
 
 > Konversi halaman PDF ke gambar PNG berkualitas tinggi — page range selector, PyMuPDF rendering, single/ZIP download.
