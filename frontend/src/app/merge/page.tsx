@@ -370,6 +370,9 @@ export default function MergePage() {
         <p className="text-base text-slate-500">
           Gabungkan beberapa file PDF menjadi satu.
         </p>
+        <p className="mt-2 text-sm text-slate-400 max-w-md">
+          Satukan scan KTP, ijazah, dan dokumen lainnya jadi satu file untuk keperluan lamaran kerja atau pendaftaran online.
+        </p>
       </div>
 
       {/* Done state */}

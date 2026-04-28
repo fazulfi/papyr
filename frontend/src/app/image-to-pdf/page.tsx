@@ -463,6 +463,9 @@ export default function ImageToPdfPage() {
         <p className="text-base text-slate-500">
           Ubah foto atau gambar menjadi file PDF.
         </p>
+        <p className="mt-2 text-sm text-slate-400 max-w-md">
+          Jadikan foto KTP, bukti transfer, atau hasil scan jadi PDF rapi untuk dikirim lewat email atau di-upload ke formulir online.
+        </p>
       </div>
 
       {/* Done state */}

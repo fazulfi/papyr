@@ -274,6 +274,9 @@ export default function PdfToImagePage() {
         <p className="text-base text-slate-500">
           Ubah halaman PDF menjadi gambar PNG berkualitas tinggi.
         </p>
+        <p className="mt-2 text-sm text-slate-400 max-w-md">
+          Konversi slide presentasi, sertifikat, atau halaman dokumen jadi gambar untuk di-share di media sosial atau grup WhatsApp.
+        </p>
       </div>
 
       {/* Done state */}

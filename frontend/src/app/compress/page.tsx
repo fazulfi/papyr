@@ -66,6 +66,9 @@ export default function CompressPage() {
         <p className="text-base text-slate-500">
           Perkecil ukuran PDF tanpa mengurangi kualitas.
         </p>
+        <p className="mt-2 text-sm text-slate-400 max-w-md">
+          Cocok untuk kirim dokumen lewat WhatsApp, email kantor, atau upload ke portal pemerintah yang ada batas ukuran file.
+        </p>
       </div>
 
       {/* Uploader */}

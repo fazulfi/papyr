@@ -267,6 +267,9 @@ export default function SplitPage() {
         <p className="text-base text-slate-500">
           Ambil halaman tertentu dari dokumen PDF.
         </p>
+        <p className="mt-2 text-sm text-slate-400 max-w-md">
+          Ambil halaman yang kamu butuhkan dari laporan, skripsi, atau e-book tanpa perlu download ulang seluruh file.
+        </p>
       </div>
 
       {/* Done state */}
