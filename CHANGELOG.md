@@ -11,9 +11,9 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 
 ### M07 — Landing Page + SEO
 
-> Landing page, Navbar/Footer, OtherTools cross-links, language switcher placeholder.
+> Landing page, Navbar/Footer, OtherTools cross-links, language switcher, SEO copy, metadata, sitemap, robots.txt.
 >
-> **4 tasks** · PAPYR-051 — PAPYR-054 · ~13 jam
+> **10 tasks** · PAPYR-051 — PAPYR-060 · ~25 jam
 
 #### Ditambahkan
 
@@ -23,6 +23,12 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 | PAPYR-052 | OtherTools component — cross-link 4 alat lain di setiap tool page |
 | PAPYR-053 | Navbar (sticky, mobile hamburger, active link) + Footer (logo, links) |
 | PAPYR-054 | Language switcher placeholder di Footer (Indonesia active, English disabled) |
+| PAPYR-055 | Landing page copy — sudah diimplementasi di PAPYR-051 |
+| PAPYR-056 | Tool page copy — paragraf Indonesian use cases (WhatsApp, email, kantor) |
+| PAPYR-057 | Meta title + description untuk semua 6 halaman via layout.tsx per tool |
+| PAPYR-058 | Sitemap.xml via Next.js built-in `sitemap.ts` (6 URL) |
+| PAPYR-059 | Robots.txt via Next.js built-in `robots.ts` |
+| PAPYR-060 | Google Search Console — manual task (instruksi disediakan) |
 
 #### Catatan Teknis
 
@@ -30,6 +36,9 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 - **Footer**: Logo + copyright, 4 placeholder links, LanguageSwitcher dropdown with click-outside-to-close
 - **OtherTools**: Reusable component filtering current tool, 2-column grid, used on all 5 tool pages
 - **Landing**: Hero with pill badge, H1 "Alat PDF yang langsung bekerja.", 5 tool cards, privacy section
+- **Metadata**: Tool pages are `"use client"` — metadata exported via separate `layout.tsx` per directory. Root layout uses title template `"%s | Papyr"`.
+- **Sitemap**: Next.js App Router `sitemap.ts` convention, 6 URLs (home + 5 tools), base URL `https://papyr.site`
+- **Robots**: Next.js App Router `robots.ts` convention, allow all, sitemap reference
 
 ---
 
