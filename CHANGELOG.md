@@ -9,6 +9,32 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 
 ## [Unreleased]
 
+### M08 — Analytics & Monitoring
+
+> Vercel Analytics + Speed Insights, custom event tracking (task_started, task_completed, task_failed).
+>
+> **5 tasks** · PAPYR-061 — PAPYR-065 · ~6 jam
+
+#### Ditambahkan
+
+| Task | Deskripsi |
+|------|-----------|
+| PAPYR-061 | Install `@vercel/analytics` + `@vercel/speed-insights`, tambah ke layout.tsx |
+| PAPYR-062 | Enable Analytics + Speed Insights di Vercel dashboard (manual) |
+| PAPYR-063 | Custom event `task_started` — fire saat user klik tombol proses di semua 5 tool |
+| PAPYR-064 | Custom event `task_completed` — fire saat hasil siap (state "done") |
+| PAPYR-065 | Custom event `task_failed` — fire saat error ditampilkan, dengan error type |
+
+#### Catatan Teknis
+
+- **Deviasi dari spec:** Menggunakan Vercel Analytics bukan Plausible — gratis, terintegrasi langsung dengan Vercel deployment
+- **Analytics wrapper:** `frontend/src/lib/analytics.ts` — thin wrapper dengan `trackTaskStarted()`, `trackTaskCompleted()`, `trackTaskFailed()` menggunakan `track()` dari `@vercel/analytics`
+- **PDFUploader:** Ditambah prop `toolName` untuk identifikasi tool (default `"compress"`)
+- **Error types:** `invalid_file`, `rate_limit`, `server_error` — error message di-truncate ke 200 karakter
+- **Coverage:** 6 file di-edit — PDFUploader.tsx (compress), merge/page.tsx, split/page.tsx, image-to-pdf/page.tsx, pdf-to-image/page.tsx
+
+---
+
 ### M07 — Landing Page + SEO
 
 > Landing page, Navbar/Footer, OtherTools cross-links, language switcher, SEO copy, metadata, sitemap, robots.txt.
