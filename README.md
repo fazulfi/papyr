@@ -37,9 +37,9 @@
 
 <br />
 
-> **Status: MVP 0.5 — Dalam Pengembangan Aktif**
+> **Status: MVP 0.6 — Dalam Pengembangan Aktif**
 >
-> Milestone 1–5 selesai (Setup · Compress · Merge · Split · Image to PDF). Lanjut ke Milestone 6 (PDF to Image).
+> Milestone 1–6 selesai (Setup · Compress · Merge · Split · Image to PDF · PDF to Image). Lanjut ke Milestone 7 (Landing Page + SEO).
 
 ---
 
@@ -168,7 +168,7 @@
 | M03 | Merge PDF | Client-side pdf-lib, drag-reorder | PAPYR-022 — 028 | ✅ Selesai |
 | M04 | Split PDF | Page picker, client-side extraction | PAPYR-029 — 035 | ✅ Selesai |
 | M05 | Image to PDF | Multi-image upload, ordering, fallback | PAPYR-036 — 042 | ✅ Selesai |
-| M06 | PDF to Image | Page selection, PyMuPDF rendering | PAPYR-043 — 049 | ⏳ Deploy pending |
+| M06 | PDF to Image | Page selection, PyMuPDF rendering | PAPYR-043 — 050 | ✅ Selesai |
 | M07 | Landing Page + SEO | Hero, tool pages, meta tags, sitemap | — | ⏳ |
 | M08 | Analytics | Plausible integration, event tracking | — | ⏳ |
 | M09 | Cleanup & Privacy | Cron auto-delete, security hardening | — | ⏳ |

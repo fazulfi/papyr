@@ -9,30 +9,36 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 
 ## [Unreleased]
 
-### M06 — PDF to Image (In Progress)
+### M06 — PDF to Image
 
 > Konversi halaman PDF ke gambar PNG berkualitas tinggi — page range selector, PyMuPDF rendering, single/ZIP download.
 >
-> **7 tasks** · PAPYR-043 — PAPYR-049 · ~16 jam
+> **8 tasks** · PAPYR-043 — PAPYR-050 · ~19 jam
 
 #### Ditambahkan
 
 **Backend**
 
-| Task | Deskripsi |
-|------|-----------|
-| PAPYR-043 | Endpoint `POST /api/pdf-to-image` dengan validasi PDF (MIME, extension, magic bytes, size) |
-| PAPYR-044 | Service `rasterize_pages()` — PyMuPDF rendering ke PNG (150 DPI default) |
-| PAPYR-045 | ZIP packaging untuk multi-page output (`page_N.png` naming) |
-| PAPYR-046 | R2 upload + signed URL + temp file cleanup dengan try/finally |
+| Task | Deskripsi | Commit |
+|------|-----------|--------|
+| PAPYR-043 | Endpoint `POST /api/pdf-to-image` dengan validasi PDF (MIME, extension, magic bytes, size) | [`c833088`][c-c833088] |
+| PAPYR-044 | Service `rasterize_pages()` — PyMuPDF rendering ke PNG (150 DPI default) | [`b542048`][c-b542048] |
+| PAPYR-045 | ZIP packaging untuk multi-page output (`page_N.png` naming) | [`b542048`][c-b542048] |
+| PAPYR-046 | R2 upload + signed URL + temp file cleanup dengan try/finally | [`c833088`][c-c833088] |
 
 **Frontend**
 
-| Task | Deskripsi |
-|------|-----------|
-| PAPYR-047 | Halaman `/pdf-to-image` — upload zone, PDF info, page range input |
-| PAPYR-048 | POST FormData ke backend, processing state dengan shimmer bar |
-| PAPYR-049 | Download single PNG atau ZIP, success state, reset flow |
+| Task | Deskripsi | Commit |
+|------|-----------|--------|
+| PAPYR-047 | Halaman `/pdf-to-image` — upload zone, PDF info, page range input | [`954cba4`][c-954cba4] |
+| PAPYR-048 | POST FormData ke backend, processing state dengan shimmer bar | [`954cba4`][c-954cba4] |
+| PAPYR-049 | Download single PNG atau ZIP, success state, reset flow | [`954cba4`][c-954cba4] |
+
+**Testing**
+
+| Task | Deskripsi | Commit |
+|------|-----------|--------|
+| PAPYR-050 | Test PDF to Image — 7 skenario manual + fixture generator | [`e21a9c3`][c-e21a9c3] |
 
 #### Catatan Teknis
 
@@ -256,6 +262,11 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 ---
 
 <!-- Commit reference links -->
+[c-b542048]: https://github.com/fazulfi/papyr/commit/b542048
+[c-c833088]: https://github.com/fazulfi/papyr/commit/c833088
+[c-954cba4]: https://github.com/fazulfi/papyr/commit/954cba4
+[c-e21a9c3]: https://github.com/fazulfi/papyr/commit/e21a9c3
+[c-2c74c51]: https://github.com/fazulfi/papyr/commit/2c74c51
 [c-9eb310e]: https://github.com/fazulfi/papyr/commit/9eb310e
 [c-7bd8d8c]: https://github.com/fazulfi/papyr/commit/7bd8d8c
 [c-86e9898]: https://github.com/fazulfi/papyr/commit/86e9898
