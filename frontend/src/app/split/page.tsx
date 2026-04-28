@@ -5,6 +5,7 @@ import { formatFileSize } from "@/lib/format";
 import { limits } from "@/lib/config";
 import { getPDFPageCount, splitPDF, downloadPDF } from "@/lib/pdfUtils";
 import PageRangeInput from "@/components/PageRangeInput";
+import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
@@ -205,16 +206,18 @@ export default function SplitPage() {
 
     setSplitState("processing");
     setErrorMessage("");
+    trackTaskStarted("split");
 
     try {
       const result = await splitPDF(file, selectedPages);
       setSplitData(result);
       setSplitState("done");
+      trackTaskCompleted("split");
     } catch (err) {
-      setErrorMessage(
-        err instanceof Error ? err.message : "Gagal memisahkan PDF. Silakan coba lagi.",
-      );
+      const msg = err instanceof Error ? err.message : "Gagal memisahkan PDF. Silakan coba lagi.";
+      setErrorMessage(msg);
       setSplitState("error");
+      trackTaskFailed("split", "server_error");
     }
   }, [file, selectedPages]);
 

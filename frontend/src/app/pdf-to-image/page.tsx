@@ -5,6 +5,7 @@ import { formatFileSize } from "@/lib/format";
 import { config, limits } from "@/lib/config";
 import { getPDFPageCount } from "@/lib/pdfUtils";
 import PageRangeInput from "@/components/PageRangeInput";
+import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
@@ -207,6 +208,7 @@ export default function PdfToImagePage() {
 
     setConvertState("processing");
     setErrorMessage("");
+    trackTaskStarted("pdf-to-image");
 
     try {
       const formData = new FormData();
@@ -227,11 +229,12 @@ export default function PdfToImagePage() {
       const data: ConvertResult = await response.json();
       setResult(data);
       setConvertState("done");
+      trackTaskCompleted("pdf-to-image");
     } catch (err) {
-      setErrorMessage(
-        err instanceof Error ? err.message : "Gagal mengubah PDF ke gambar. Silakan coba lagi.",
-      );
+      const msg = err instanceof Error ? err.message : "Gagal mengubah PDF ke gambar. Silakan coba lagi.";
+      setErrorMessage(msg);
       setConvertState("error");
+      trackTaskFailed("pdf-to-image", "server_error");
     }
   }, [file, selectedPages, rangeRaw]);
 

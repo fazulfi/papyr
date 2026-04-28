@@ -2,6 +2,8 @@
 
 import { useState, useRef, useCallback } from "react";
 import { formatFileSize, formatPercent } from "@/lib/format";
+import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
+import type { ToolName } from "@/lib/analytics";
 
 /* ── Types ── */
 
@@ -16,6 +18,7 @@ type UploadState = "idle" | "uploading" | "processing" | "done" | "error";
 
 interface PDFUploaderProps {
   endpoint: string;
+  toolName?: ToolName;
   maxSizeMB?: number;
   accept?: string;
   onUploadComplete?: (result: CompressResult) => void;
@@ -95,6 +98,7 @@ function AlertIcon() {
 
 export default function PDFUploader({
   endpoint,
+  toolName = "compress",
   maxSizeMB = 20,
   accept = "application/pdf",
   onUploadComplete,
@@ -168,6 +172,7 @@ export default function PDFUploader({
             const data: CompressResult = JSON.parse(xhr.responseText);
             setResult(data);
             setState("done");
+            trackTaskCompleted(toolName);
             onUploadComplete?.(data);
           } catch {
             handleError("Gagal memproses respons server.", file, isRetry);
@@ -175,6 +180,7 @@ export default function PDFUploader({
         } else if (xhr.status === 429) {
           setErrorMessage("Terlalu banyak permintaan. Coba lagi dalam 1 menit.");
           setState("error");
+          trackTaskFailed(toolName, "rate_limit");
         } else if (xhr.status >= 400 && xhr.status < 500) {
           // Client/validation error — no retry
           try {
@@ -184,6 +190,7 @@ export default function PDFUploader({
             setErrorMessage("File terlalu besar untuk diproses.");
           }
           setState("error");
+          trackTaskFailed(toolName, "server_error");
         } else {
           // Server error — retry eligible
           handleError("Gagal memproses file. Silakan coba lagi.", file, isRetry);
@@ -210,8 +217,9 @@ export default function PDFUploader({
 
       setState("uploading");
       setProgress(0);
+      if (!isRetry) trackTaskStarted(toolName);
     },
-    [endpoint, onUploadComplete],
+    [endpoint, onUploadComplete, toolName],
   );
 
   const handleError = useCallback(
@@ -228,6 +236,7 @@ export default function PDFUploader({
         // Second failure — show error
         setErrorMessage(message);
         setState("error");
+        trackTaskFailed(toolName, "server_error");
       }
     },
     [uploadFile],
@@ -243,6 +252,7 @@ export default function PDFUploader({
         setFileSize(file.size);
         setErrorMessage(validationError);
         setState("error");
+        trackTaskFailed(toolName, "invalid_file");
         return;
       }
 

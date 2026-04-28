@@ -21,6 +21,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { formatFileSize } from "@/lib/format";
 import { limits, config } from "@/lib/config";
 import { imagesToPDF, downloadPDF } from "@/lib/pdfUtils";
+import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
@@ -382,6 +383,7 @@ export default function ImageToPdfPage() {
 
     setPageState("processing");
     setErrorMessage("");
+    trackTaskStarted("image-to-pdf");
 
     const files = images.map((i) => i.file);
 
@@ -417,11 +419,12 @@ export default function ImageToPdfPage() {
         setImageCount(images.length);
         setPageState("done");
       }
+      trackTaskCompleted("image-to-pdf");
     } catch (err) {
-      setErrorMessage(
-        err instanceof Error ? err.message : "Gagal membuat PDF. Silakan coba lagi.",
-      );
+      const msg = err instanceof Error ? err.message : "Gagal membuat PDF. Silakan coba lagi.";
+      setErrorMessage(msg);
       setPageState("error");
+      trackTaskFailed("image-to-pdf", "server_error");
     }
   }, [images, totalSize]);
 

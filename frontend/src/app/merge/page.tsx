@@ -21,6 +21,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { formatFileSize } from "@/lib/format";
 import { limits } from "@/lib/config";
 import { mergePDFs, downloadPDF } from "@/lib/pdfUtils";
+import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
@@ -327,16 +328,18 @@ export default function MergePage() {
 
     setMergeState("processing");
     setErrorMessage("");
+    trackTaskStarted("merge");
 
     try {
       const result = await mergePDFs(files.map((f) => f.file));
       setMergedData(result);
       setMergeState("done");
+      trackTaskCompleted("merge");
     } catch (err) {
-      setErrorMessage(
-        err instanceof Error ? err.message : "Gagal menggabungkan PDF. Silakan coba lagi.",
-      );
+      const msg = err instanceof Error ? err.message : "Gagal menggabungkan PDF. Silakan coba lagi.";
+      setErrorMessage(msg);
       setMergeState("error");
+      trackTaskFailed("merge", "server_error");
     }
   }, [files]);
 
