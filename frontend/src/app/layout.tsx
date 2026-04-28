@@ -10,9 +10,18 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Papyr — Alat PDF Gratis untuk Indonesia",
+  title: {
+    default: "Papyr — Alat PDF Gratis untuk Indonesia",
+    template: "%s | Papyr",
+  },
   description:
-    "Compress, merge, split, dan konversi PDF dengan mudah. Gratis, cepat, dan menjaga privasi.",
+    "Kompres, gabungkan, pisahkan, dan konversi PDF dengan mudah. Gratis, tanpa akun, dan menjaga privasi. Dibuat untuk pengguna Indonesia.",
+  metadataBase: new URL("https://mypapyr.com"),
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    siteName: "Papyr",
+  },
 };
 
 export default function RootLayout({
