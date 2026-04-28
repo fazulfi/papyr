@@ -9,9 +9,36 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 
 ## [Unreleased]
 
-### Akan Datang
+### M06 — PDF to Image (In Progress)
 
-- **M06: PDF to Image** — Page selection, PyMuPDF rendering, download gambar (PAPYR-043 — PAPYR-049)
+> Konversi halaman PDF ke gambar PNG berkualitas tinggi — page range selector, PyMuPDF rendering, single/ZIP download.
+>
+> **7 tasks** · PAPYR-043 — PAPYR-049 · ~16 jam
+
+#### Ditambahkan
+
+**Backend**
+
+| Task | Deskripsi |
+|------|-----------|
+| PAPYR-043 | Endpoint `POST /api/pdf-to-image` dengan validasi PDF (MIME, extension, magic bytes, size) |
+| PAPYR-044 | Service `rasterize_pages()` — PyMuPDF rendering ke PNG (150 DPI default) |
+| PAPYR-045 | ZIP packaging untuk multi-page output (`page_N.png` naming) |
+| PAPYR-046 | R2 upload + signed URL + temp file cleanup dengan try/finally |
+
+**Frontend**
+
+| Task | Deskripsi |
+|------|-----------|
+| PAPYR-047 | Halaman `/pdf-to-image` — upload zone, PDF info, page range input |
+| PAPYR-048 | POST FormData ke backend, processing state dengan shimmer bar |
+| PAPYR-049 | Download single PNG atau ZIP, success state, reset flow |
+
+#### Catatan Teknis
+
+- **Processing**: Selalu server-side (PyMuPDF) — rasterisasi PDF membutuhkan rendering engine.
+- **Page range**: Reuse `PageRangeInput` component dari split page, backend juga parse format yang sama.
+- **Output**: 1 halaman → PNG langsung, 2+ halaman → ZIP berisi `page_1.png`, `page_2.png`, dst.
 
 ---
 

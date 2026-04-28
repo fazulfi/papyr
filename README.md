@@ -64,7 +64,7 @@
 | 📎 | **Merge PDF** | Gabungkan beberapa PDF jadi satu dokumen dengan drag-reorder | Client (pdf-lib) |
 | ✂️ | **Split PDF** | Pisahkan halaman tertentu dari PDF dengan page range selector | Client (pdf-lib) |
 | 🖼️ | **Image to PDF** | Konversi JPG/PNG ke PDF — multi-image, drag-reorder, auto-fallback | Client + Server |
-| 📸 | **PDF to Image** | Ekspor halaman PDF ke gambar berkualitas tinggi | 🔜 M06 |
+| 📸 | **PDF to Image** | Ekspor halaman PDF ke gambar PNG berkualitas tinggi | Server (PyMuPDF) |
 
 ### Kenapa Papyr?
 
@@ -117,6 +117,7 @@
 | **Merge** | Client (pdf-lib) | Client (pdf-lib) |
 | **Split** | Client (pdf-lib) | Client (pdf-lib) |
 | **Image to PDF** | Client (pdf-lib) | Server (PyMuPDF) |
+| **PDF to Image** | Server (PyMuPDF) | Server (PyMuPDF) |
 
 > File kecil diproses langsung di browser — **zero upload, zero latency, zero privacy risk.**
 
@@ -167,7 +168,7 @@
 | M03 | Merge PDF | Client-side pdf-lib, drag-reorder | PAPYR-022 — 028 | ✅ Selesai |
 | M04 | Split PDF | Page picker, client-side extraction | PAPYR-029 — 035 | ✅ Selesai |
 | M05 | Image to PDF | Multi-image upload, ordering, fallback | PAPYR-036 — 042 | ✅ Selesai |
-| M06 | PDF to Image | Page selection, PyMuPDF rendering | PAPYR-043 — 049 | ⏳ Next |
+| M06 | PDF to Image | Page selection, PyMuPDF rendering | PAPYR-043 — 049 | ⏳ Deploy pending |
 | M07 | Landing Page + SEO | Hero, tool pages, meta tags, sitemap | — | ⏳ |
 | M08 | Analytics | Plausible integration, event tracking | — | ⏳ |
 | M09 | Cleanup & Privacy | Cron auto-delete, security hardening | — | ⏳ |
@@ -264,7 +265,8 @@ papyr/
 │       │   ├── compress/      # /compress — PDF compression
 │       │   ├── merge/         # /merge — PDF merge
 │       │   ├── split/         # /split — PDF split
-│       │   └── image-to-pdf/  # /image-to-pdf — Image conversion
+│       │   ├── image-to-pdf/  # /image-to-pdf — Image conversion
+│       │   └── pdf-to-image/  # /pdf-to-image — PDF to image
 │       ├── components/        # Reusable UI components
 │       │   ├── PDFUploader.tsx
 │       │   ├── SortableFileList.tsx
@@ -274,10 +276,12 @@ papyr/
 │           └── pdfUtils.ts    # pdf-lib operations
 ├── backend/                   # FastAPI server (Railway)
 │   ├── routers/               # API route handlers
-│   │   └── connectivity.py    # Health & connectivity tests
+│   │   ├── connectivity.py    # Health & connectivity tests
+│   │   └── pdf_to_image.py   # PDF to image conversion
 │   ├── services/              # Business logic
 │   │   ├── compress.py        # Ghostscript compression
-│   │   └── image_to_pdf.py    # PyMuPDF image conversion
+│   │   ├── image_to_pdf.py    # PyMuPDF image conversion
+│   │   └── pdf_to_image_service.py  # PDF rasterization
 │   ├── utils/
 │   │   ├── config.py          # Validated env config (singleton)
 │   │   └── r2.py              # Cloudflare R2 helpers
