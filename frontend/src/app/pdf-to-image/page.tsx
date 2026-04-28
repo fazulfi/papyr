@@ -5,6 +5,7 @@ import { formatFileSize } from "@/lib/format";
 import { config, limits } from "@/lib/config";
 import { getPDFPageCount } from "@/lib/pdfUtils";
 import PageRangeInput from "@/components/PageRangeInput";
+import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
 
@@ -484,6 +485,9 @@ export default function PdfToImagePage() {
               File kamu otomatis dihapus setelah 1 jam. Kami tidak pernah menyimpan dokumenmu.
             </p>
           </div>
+
+          {/* Other tools */}
+          <OtherTools currentTool="/pdf-to-image" />
         </div>
       )}
     </div>

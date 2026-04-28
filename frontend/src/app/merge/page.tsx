@@ -21,6 +21,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { formatFileSize } from "@/lib/format";
 import { limits } from "@/lib/config";
 import { mergePDFs, downloadPDF } from "@/lib/pdfUtils";
+import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
 
@@ -575,8 +576,11 @@ export default function MergePage() {
                   Semua proses berjalan di browser. File tidak pernah dikirim ke server kami.
                 </p>
               </div>
-            </>
+             </>
           )}
+
+          {/* Other tools */}
+          <OtherTools currentTool="/merge" />
         </div>
       )}
     </div>

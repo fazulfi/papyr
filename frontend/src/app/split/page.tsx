@@ -5,6 +5,7 @@ import { formatFileSize } from "@/lib/format";
 import { limits } from "@/lib/config";
 import { getPDFPageCount, splitPDF, downloadPDF } from "@/lib/pdfUtils";
 import PageRangeInput from "@/components/PageRangeInput";
+import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
 
@@ -477,6 +478,9 @@ export default function SplitPage() {
               Semua proses berjalan di browser. File tidak pernah dikirim ke server kami.
             </p>
           </div>
+
+          {/* Other tools */}
+          <OtherTools currentTool="/split" />
         </div>
       )}
     </div>

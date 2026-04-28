@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import PDFUploader from "@/components/PDFUploader";
+import OtherTools from "@/components/OtherTools";
 import { config } from "@/lib/config";
 
 /* ── Inline SVG Icons ── */
@@ -99,6 +100,7 @@ export default function CompressPage() {
           </div>
         </div>
       )}
+      <OtherTools currentHref="/compress" />
     </div>
   );
 }

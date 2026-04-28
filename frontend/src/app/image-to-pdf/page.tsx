@@ -21,6 +21,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { formatFileSize } from "@/lib/format";
 import { limits, config } from "@/lib/config";
 import { imagesToPDF, downloadPDF } from "@/lib/pdfUtils";
+import OtherTools from "@/components/OtherTools";
 
 /* ── Types ── */
 
@@ -662,8 +663,11 @@ export default function ImageToPdfPage() {
                   dan otomatis dihapus dalam 1 jam.
                 </p>
               </div>
-            </>
+             </>
           )}
+
+          {/* Other tools */}
+          <OtherTools currentTool="/image-to-pdf" />
         </div>
       )}
     </div>
