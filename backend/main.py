@@ -1,3 +1,7 @@
+import asyncio
+import logging
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -11,17 +15,51 @@ from routers.image_to_pdf import router as image_to_pdf_router
 from routers.pdf_to_image import router as pdf_to_image_router
 from utils.config import settings
 from utils.logging_config import setup_logging
+from utils.cleanup import cleanup_expired_files, CLEANUP_INTERVAL_SECONDS
 
 # --- Structured Logging ---
 setup_logging()
 
+logger = logging.getLogger(__name__)
+
 # --- Rate Limiter ---
 limiter = Limiter(key_func=get_remote_address)
+
+
+# --- Background Cleanup Task ---
+async def _cleanup_loop():
+    """Background loop: jalankan cleanup setiap 30 menit."""
+    while True:
+        await asyncio.sleep(CLEANUP_INTERVAL_SECONDS)
+        try:
+            # Jalankan sync function di thread pool agar tidak block event loop
+            loop = asyncio.get_running_loop()
+            await loop.run_in_executor(None, cleanup_expired_files)
+        except Exception as e:
+            logger.error("Cleanup loop error: %s", str(e))
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """App lifespan: start cleanup cron on startup, cancel on shutdown."""
+    task = asyncio.create_task(_cleanup_loop())
+    logger.info(
+        "Cleanup cron started (interval: %ds)", CLEANUP_INTERVAL_SECONDS
+    )
+    yield
+    task.cancel()
+    try:
+        await task
+    except asyncio.CancelledError:
+        pass
+    logger.info("Cleanup cron stopped")
+
 
 app = FastAPI(
     title="Papyr API",
     description="Backend API untuk Papyr — Alat PDF Gratis untuk Indonesia",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 app.state.limiter = limiter
