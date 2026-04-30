@@ -13,7 +13,7 @@ export default function PrivacyPage() {
         Kebijakan Privasi
       </h1>
       <p className="mt-2 text-sm text-slate-400">
-        Terakhir diperbarui: Mei 2025
+        Terakhir diperbarui: April 2026
       </p>
 
       <div className="mt-8 space-y-8 text-[15px] leading-relaxed text-slate-600">
