@@ -152,8 +152,11 @@ async def compress_endpoint(
             content_type="application/pdf",
         )
 
-        # Generate signed URL (1 jam)
-        download_url = generate_signed_url(r2_result["key"], expiry_seconds=3600)
+        # Generate signed URL (1 jam) — force download, bukan inline
+        dl_name = f"compressed_{file.filename}" if file.filename else "compressed.pdf"
+        download_url = generate_signed_url(
+            r2_result["key"], expiry_seconds=3600, download_filename=dl_name
+        )
 
         # Hitung persentase penghematan
         original_size = result["original_size"]

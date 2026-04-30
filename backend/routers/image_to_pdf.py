@@ -162,8 +162,10 @@ async def image_to_pdf_endpoint(
             content_type="application/pdf",
         )
 
-        # Generate signed URL (1 jam)
-        download_url = generate_signed_url(r2_result["key"], expiry_seconds=3600)
+        # Generate signed URL (1 jam) — force download, bukan inline
+        download_url = generate_signed_url(
+            r2_result["key"], expiry_seconds=3600, download_filename="images.pdf"
+        )
 
         duration_ms = int((time.time() - start_time) * 1000)
         log_task_event(

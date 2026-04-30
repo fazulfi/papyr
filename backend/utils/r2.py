@@ -95,13 +95,19 @@ def upload_file(
     }
 
 
-def generate_signed_url(object_key: str, expiry_seconds: int | None = None) -> str:
+def generate_signed_url(
+    object_key: str,
+    expiry_seconds: int | None = None,
+    download_filename: str | None = None,
+) -> str:
     """
     Generate a pre-signed GET URL for downloading a file from R2.
 
     Args:
         object_key: The R2 object key.
         expiry_seconds: URL validity in seconds. Defaults to SIGNED_URL_EXPIRY_SECONDS.
+        download_filename: If provided, forces browser to download (not inline)
+                          by setting Content-Disposition: attachment.
 
     Returns:
         Pre-signed URL string.
@@ -111,10 +117,17 @@ def generate_signed_url(object_key: str, expiry_seconds: int | None = None) -> s
     if expiry_seconds is None:
         expiry_seconds = SIGNED_URL_EXPIRY_SECONDS
 
+    params: dict = {"Bucket": settings.r2_bucket_name, "Key": object_key}
+
+    if download_filename:
+        params["ResponseContentDisposition"] = (
+            f'attachment; filename="{download_filename}"'
+        )
+
     try:
         url = client.generate_presigned_url(
             "get_object",
-            Params={"Bucket": settings.r2_bucket_name, "Key": object_key},
+            Params=params,
             ExpiresIn=expiry_seconds,
         )
     except ClientError as e:
