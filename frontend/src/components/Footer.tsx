@@ -82,7 +82,7 @@ function LanguageSwitcher() {
 /* ── Footer Links ── */
 
 const FOOTER_LINKS = [
-  { href: "#", label: "Privasi" },
+  { href: "/privacy", label: "Privasi" },
   { href: "#", label: "Syarat" },
   { href: "#", label: "Kontak" },
   { href: "#", label: "Blog" },
