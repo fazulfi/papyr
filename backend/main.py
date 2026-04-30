@@ -98,4 +98,10 @@ app.include_router(pdf_to_image_router)
 
 @app.get("/health")
 async def health_check():
-    return {"status": "ok"}
+    from datetime import datetime, timezone
+
+    return {
+        "status": "ok",
+        "version": app.version,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
