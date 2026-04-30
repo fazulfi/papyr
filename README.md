@@ -31,15 +31,15 @@
     <img src="https://img.shields.io/badge/license-proprietary-1E3A5F?style=flat-square" alt="License" />
   </a>
   <a href="https://github.com/fazulfi/papyr">
-    <img src="https://img.shields.io/badge/version-0.5.0--alpha.1-blue?style=flat-square" alt="Version" />
+    <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="Version" />
   </a>
 </div>
 
 <br />
 
-> **Status: MVP 0.8 — Dalam Pengembangan Aktif**
+> **Status: MVP 1.0 — Soft Launch 🚀**
 >
-> Milestone 1–8 selesai (Setup · Compress · Merge · Split · Image to PDF · PDF to Image · Landing Page + SEO · Analytics). Lanjut ke Milestone 9 (Monitoring).
+> Semua 10 milestone selesai (Setup · Compress · Merge · Split · Image to PDF · PDF to Image · Landing Page + SEO · Analytics · Privacy & Cleanup · Testing & Launch). Live di [mypapyr.com](https://mypapyr.com).
 
 ---
 
@@ -171,8 +171,8 @@
 | M06 | PDF to Image | Page selection, PyMuPDF rendering | PAPYR-043 — 050 | ✅ Selesai |
 | M07 | Landing Page + SEO | Hero, navbar, footer, copy, meta, sitemap | PAPYR-051 — 060 | ✅ Selesai |
 | M08 | Analytics | Vercel Analytics, custom events (started/completed/failed) | PAPYR-061 — 065 | ✅ Selesai |
-| M09 | Cleanup & Privacy | Cron auto-delete, security hardening | — | ⏳ |
-| M10 | Testing + Launch | E2E tests, soft launch, monitoring | — | ⏳ |
+| M09 | Cleanup & Privacy | R2 lifecycle, cron auto-delete, privacy page, signed URL | PAPYR-068 — 079 | ✅ Selesai |
+| M10 | Testing + Launch | Full flow tests, edge cases, FAQ, OG image, deploy check, launch | PAPYR-080 — 084 | ✅ Selesai |
 
 > 📅 Target: 8–12 minggu @ 5–10 jam/minggu · Lihat [CHANGELOG.md](CHANGELOG.md) untuk detail per milestone.
 

@@ -7,7 +7,67 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 
 ---
 
-## [Unreleased]
+## [1.0.0] — 2026-04-30
+
+> 🚀 **MVP 1.0 — Soft Launch**
+>
+> Semua 10 milestone selesai. 84 tasks (PAPYR-001 — PAPYR-084). Live di [mypapyr.com](https://mypapyr.com).
+
+### M10 — Final Testing + Soft Launch
+
+> Deploy check, FAQ page, OG image, launch tweet.
+>
+> **5 tasks** · PAPYR-080 — PAPYR-084
+
+#### Ditambahkan
+
+| Task | Deskripsi |
+|------|-----------|
+| PAPYR-080 | Final deploy check — 11 URL verified, CORS, HTTPS, API tested |
+| PAPYR-081 | FAQ page — 8 pertanyaan dengan accordion UI, linked dari Footer |
+| PAPYR-082 | OG image + Twitter Card — dynamic `ImageResponse` via `opengraph-image.tsx` |
+| PAPYR-083 | Custom domain — mypapyr.com live via A record → Vercel |
+| PAPYR-084 | Launch tweet finalized — pre-launch checklist verified |
+
+#### Catatan Teknis
+
+- **FAQ:** Accordion CSS grid-rows transition, single-open behavior, 8 items Bahasa Indonesia
+- **OG Image:** Next.js file-based `opengraph-image.tsx` + `twitter-image.tsx` (1200×630, gradient navy→accent)
+- **Deploy check:** 11 URLs all 200, compress API tested, 0 open bugs
+
+---
+
+### M09 — Cleanup & Privacy
+
+> R2 lifecycle, cron auto-delete, privacy page, signed URL security, Railway monitoring.
+>
+> **12 tasks** · PAPYR-068 — PAPYR-079
+
+#### Ditambahkan
+
+| Task | Deskripsi |
+|------|-----------|
+| PAPYR-068 | R2 lifecycle rule verified active (storage auto-cleanup) |
+| PAPYR-069 | Cleanup cron — `cleanup.py` with `list_expired_objects()` + `cleanup_expired_files()` |
+| PAPYR-070 | Structured cleanup logging (cleanup_started, cleanup_completed, cleanup_failed_item) |
+| PAPYR-071 | PrivacyNotice component — always-visible, contextual per processing model |
+| PAPYR-072 | Privacy policy page — `/privacy`, Bahasa Indonesia, linked from Footer |
+| PAPYR-073 | Auto-delete verification — upload → cleanup → verify deletion |
+| PAPYR-074 | Signed URL verification — expiry 3600s, UUID key, 403 on guessing |
+| PAPYR-075 | Full flow API tests — 4/4 passed (compress, image-to-pdf, pdf-to-image) |
+| PAPYR-076 | Mobile browser testing — responsive code audit |
+| PAPYR-077 | Indonesian test files — KTP scan, laporan kantor, tugas kuliah |
+| PAPYR-078 | Edge case tests — 13/13 passed, 2 bugs found and fixed (#75, #76) |
+| PAPYR-079 | Railway monitoring — `/health` endpoint, alerts, cron-job.org ping |
+
+#### Catatan Teknis
+
+- **Cleanup cron:** `asyncio.create_task(_cleanup_loop())` in FastAPI lifespan, runs every 30 min
+- **PrivacyNotice:** 3 variants — `server` (auto-delete 1 jam), `client` (never leaves device), `hybrid` (small=browser, large=server)
+- **Bug fixes:** #75 (fake PDF → 400 not 500), #76 (password-protected PDF → 400)
+- **Structured logging:** JSON formatter, `log_task_event()` with event_data dict
+
+---
 
 ### M08 — Analytics & Monitoring
 
