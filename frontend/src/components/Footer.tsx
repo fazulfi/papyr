@@ -83,9 +83,9 @@ function LanguageSwitcher() {
 
 const FOOTER_LINKS = [
   { href: "/privacy", label: "Privasi" },
+  { href: "/faq", label: "FAQ" },
   { href: "#", label: "Syarat" },
   { href: "#", label: "Kontak" },
-  { href: "#", label: "Blog" },
 ];
 
 /* ── Footer Component ── */
