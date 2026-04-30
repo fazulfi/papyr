@@ -8,6 +8,7 @@ konversi ke PDF via PyMuPDF, upload ke R2, return signed download URL.
 import logging
 import os
 import tempfile
+import time
 from typing import List
 
 import fitz  # PyMuPDF
@@ -16,6 +17,7 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 
 from utils.config import settings
+from utils.logging_config import log_task_event
 from utils.r2 import upload_file, generate_signed_url
 
 limiter = Limiter(key_func=get_remote_address)
@@ -112,6 +114,8 @@ async def image_to_pdf_endpoint(
     # Buat PDF dari gambar menggunakan PyMuPDF
     output_path = None
     temp_paths: list[str] = []
+    input_size = sum(len(img_bytes) for _, img_bytes in image_data)
+    start_time = time.time()
 
     try:
         doc = fitz.open()
@@ -161,11 +165,15 @@ async def image_to_pdf_endpoint(
         # Generate signed URL (1 jam)
         download_url = generate_signed_url(r2_result["key"], expiry_seconds=3600)
 
-        logger.info(
-            "Image-to-PDF OK: images=%d pdf_size=%d key=%s",
-            len(image_data),
-            len(pdf_bytes),
-            r2_result["key"],
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_completed",
+            tool="image-to-pdf",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=True,
+            image_count=len(image_data),
         )
 
         return {
@@ -173,6 +181,32 @@ async def image_to_pdf_endpoint(
             "image_count": len(image_data),
             "pdf_size": len(pdf_bytes),
         }
+
+    except HTTPException:
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_failed",
+            tool="image-to-pdf",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=False,
+            error="validation_error",
+        )
+        raise
+
+    except Exception as exc:
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_failed",
+            tool="image-to-pdf",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=False,
+            error=type(exc).__name__,
+        )
+        raise HTTPException(status_code=500, detail="Gagal memproses file. Silakan coba lagi.")
 
     finally:
         # Cleanup semua temp files
@@ -182,4 +216,4 @@ async def image_to_pdf_endpoint(
                 try:
                     os.remove(path)
                 except OSError:
-                    logger.warning("Gagal hapus temp file: %s", path)
+                    logger.warning("Gagal hapus temp file")

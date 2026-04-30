@@ -8,12 +8,14 @@ upload ke R2, dan return signed download URL.
 import logging
 import os
 import tempfile
+import time
 
 from fastapi import APIRouter, File, Request, UploadFile, HTTPException, Query
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
 from utils.config import settings
+from utils.logging_config import log_task_event
 from services.compress_service import compress_pdf
 from utils.r2 import upload_file, generate_signed_url
 
@@ -93,6 +95,8 @@ async def compress_endpoint(
     # Simpan ke temp file untuk Ghostscript
     input_path = None
     output_path = None
+    input_size = len(file_bytes)
+    start_time = time.time()
 
     try:
         # Tulis input ke temp
@@ -125,12 +129,15 @@ async def compress_endpoint(
         compressed_size = result["compressed_size"]
         saved_percent = round((1 - compressed_size / original_size) * 100) if original_size > 0 else 0
 
-        logger.info(
-            "Compress OK: original=%d compressed=%d saved=%d%% key=%s",
-            original_size,
-            compressed_size,
-            saved_percent,
-            r2_result["key"],
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_completed",
+            tool="compress",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=True,
+            saved_percent=saved_percent,
         )
 
         return {
@@ -140,6 +147,32 @@ async def compress_endpoint(
             "saved_percent": saved_percent,
         }
 
+    except HTTPException:
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_failed",
+            tool="compress",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=False,
+            error="validation_error",
+        )
+        raise
+
+    except Exception as exc:
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_failed",
+            tool="compress",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=False,
+            error=type(exc).__name__,
+        )
+        raise HTTPException(status_code=500, detail="Gagal memproses file. Silakan coba lagi.")
+
     finally:
         # Cleanup temp files — selalu bersihkan
         for path in (input_path, output_path):
@@ -147,4 +180,4 @@ async def compress_endpoint(
                 try:
                     os.remove(path)
                 except OSError:
-                    logger.warning("Gagal hapus temp file: %s", path)
+                    logger.warning("Gagal hapus temp file")

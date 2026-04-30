@@ -8,6 +8,7 @@ rasterisasi via PyMuPDF, upload ke R2, return signed download URL.
 import logging
 import os
 import tempfile
+import time
 
 from fastapi import APIRouter, File, Form, Request, UploadFile, HTTPException
 from slowapi import Limiter
@@ -16,6 +17,7 @@ from slowapi.util import get_remote_address
 import fitz  # PyMuPDF — untuk mendapatkan total halaman saat validasi
 
 from utils.config import settings
+from utils.logging_config import log_task_event
 from utils.r2 import upload_file, generate_signed_url
 from services.pdf_to_image_service import (
     parse_page_range,
@@ -111,6 +113,8 @@ async def pdf_to_image_endpoint(
     input_path = None
     output_paths: list[str] = []
     package_path = None
+    input_size = len(file_bytes)
+    start_time = time.time()
 
     try:
         # Tulis input ke temp
@@ -167,12 +171,16 @@ async def pdf_to_image_endpoint(
         # Generate signed URL (1 jam)
         download_url = generate_signed_url(r2_result["key"], expiry_seconds=3600)
 
-        logger.info(
-            "PDF-to-Image OK: pages=%d type=%s size=%d key=%s",
-            len(page_list),
-            file_type,
-            len(output_bytes),
-            r2_result["key"],
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_completed",
+            tool="pdf-to-image",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=True,
+            page_count=len(page_list),
+            output_type=file_type,
         )
 
         return {
@@ -180,6 +188,32 @@ async def pdf_to_image_endpoint(
             "file_type": file_type,
             "page_count": len(page_list),
         }
+
+    except HTTPException:
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_failed",
+            tool="pdf-to-image",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=False,
+            error="validation_error",
+        )
+        raise
+
+    except Exception as exc:
+        duration_ms = int((time.time() - start_time) * 1000)
+        log_task_event(
+            logger,
+            event="task_failed",
+            tool="pdf-to-image",
+            duration_ms=duration_ms,
+            input_size_bytes=input_size,
+            success=False,
+            error=type(exc).__name__,
+        )
+        raise HTTPException(status_code=500, detail="Gagal memproses file. Silakan coba lagi.")
 
     finally:
         # Cleanup semua temp files
@@ -193,4 +227,4 @@ async def pdf_to_image_endpoint(
                 try:
                     os.remove(path)
                 except OSError:
-                    logger.warning("Gagal hapus temp file: %s", path)
+                    logger.warning("Gagal hapus temp file")
