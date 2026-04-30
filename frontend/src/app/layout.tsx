@@ -23,6 +23,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     siteName: "Papyr",
+    title: "Papyr — Alat PDF Gratis untuk Indonesia",
+    description:
+      "Kompres, gabungkan, pisahkan, dan konversi PDF dengan mudah. Gratis, tanpa akun, dan menjaga privasi.",
+    url: "https://mypapyr.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Papyr — Alat PDF Gratis untuk Indonesia",
+    description:
+      "Kompres, gabungkan, pisahkan, dan konversi PDF. Gratis, tanpa akun, auto-hapus 1 jam.",
   },
 };
 
