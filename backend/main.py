@@ -10,6 +10,10 @@ from routers.compress import router as compress_router
 from routers.image_to_pdf import router as image_to_pdf_router
 from routers.pdf_to_image import router as pdf_to_image_router
 from utils.config import settings
+from utils.logging_config import setup_logging
+
+# --- Structured Logging ---
+setup_logging()
 
 # --- Rate Limiter ---
 limiter = Limiter(key_func=get_remote_address)
