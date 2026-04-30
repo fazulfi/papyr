@@ -1,7 +1,7 @@
 <div align="center">
   <h1>📄 Papyr</h1>
   <p><strong>Alat PDF gratis, cepat, dan privasi-first untuk Indonesia.</strong></p>
-  <p>Compress · Merge · Split · Image to PDF · PDF to Image — langsung dari browser, tanpa login.</p>
+  <p>Compress · Merge · Split · Rotate · Image to PDF · PDF to Image — langsung dari browser, tanpa login.</p>
 
   <br />
 
@@ -31,15 +31,15 @@
     <img src="https://img.shields.io/badge/license-proprietary-1E3A5F?style=flat-square" alt="License" />
   </a>
   <a href="https://github.com/fazulfi/papyr">
-    <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="Version" />
+    <img src="https://img.shields.io/badge/version-1.1.0-blue?style=flat-square" alt="Version" />
   </a>
 </div>
 
 <br />
 
-> **Status: MVP 1.0 — Soft Launch 🚀**
+> **Status: MVP 1.1 — Tool Expansion**
 >
-> Semua 10 milestone selesai (Setup · Compress · Merge · Split · Image to PDF · PDF to Image · Landing Page + SEO · Analytics · Privacy & Cleanup · Testing & Launch). Live di [mypapyr.com](https://mypapyr.com).
+> Milestone 1–11 selesai. Lanjut ke Milestone 12 (Protect PDF). Live di [mypapyr.com](https://mypapyr.com).
 
 ---
 
@@ -65,6 +65,7 @@
 | ✂️ | **Split PDF** | Pisahkan halaman tertentu dari PDF dengan page range selector | Client (pdf-lib) |
 | 🖼️ | **Image to PDF** | Konversi JPG/PNG ke PDF — multi-image, drag-reorder, auto-fallback | Client + Server |
 | 📸 | **PDF to Image** | Ekspor halaman PDF ke gambar PNG berkualitas tinggi | Server (PyMuPDF) |
+| 🔄 | **Rotate PDF** | Putar halaman PDF per halaman atau semua sekaligus | Client (pdf-lib) |
 
 ### Kenapa Papyr?
 
@@ -116,6 +117,7 @@
 | **Compress** | Server (Ghostscript) | Server (Ghostscript) |
 | **Merge** | Client (pdf-lib) | Client (pdf-lib) |
 | **Split** | Client (pdf-lib) | Client (pdf-lib) |
+| **Rotate** | Client (pdf-lib) | Client (pdf-lib) |
 | **Image to PDF** | Client (pdf-lib) | Server (PyMuPDF) |
 | **PDF to Image** | Server (PyMuPDF) | Server (PyMuPDF) |
 
@@ -137,7 +139,7 @@
 | Layer | Teknologi | Keterangan |
 |-------|-----------|------------|
 | **Frontend** | Next.js 16, TypeScript, Tailwind v4 | SSR + static, DM Sans font, design tokens |
-| **Client PDF** | pdf-lib, @dnd-kit | Merge, split, image-to-PDF di browser |
+| **Client PDF** | pdf-lib, @dnd-kit | Merge, split, rotate, image-to-PDF di browser |
 | **Backend API** | FastAPI (Python 3.11) | Compress, image-to-PDF fallback, PDF-to-image |
 | **Server PDF** | PyMuPDF, Ghostscript | Rendering & compression berkualitas tinggi |
 | **Storage** | Cloudflare R2 | Object storage, auto-delete 24h, signed URLs |
@@ -173,6 +175,7 @@
 | M08 | Analytics | Vercel Analytics, custom events (started/completed/failed) | PAPYR-061 — 065 | ✅ Selesai |
 | M09 | Cleanup & Privacy | R2 lifecycle, cron auto-delete, privacy page, signed URL | PAPYR-068 — 079 | ✅ Selesai |
 | M10 | Testing + Launch | Full flow tests, edge cases, FAQ, OG image, deploy check, launch | PAPYR-080 — 084 | ✅ Selesai |
+| M11 | Rotate PDF | Client-side page rotation, per-page + global | PAPYR-085 — 089 | ✅ Selesai |
 
 > 📅 Target: 8–12 minggu @ 5–10 jam/minggu · Lihat [CHANGELOG.md](CHANGELOG.md) untuk detail per milestone.
 
@@ -267,7 +270,8 @@ papyr/
 │       │   ├── split/         # /split — PDF split (+ layout.tsx metadata)
 │       │   ├── image-to-pdf/  # /image-to-pdf — Image conversion (+ layout.tsx metadata)
 │       │   ├── pdf-to-image/  # /pdf-to-image — PDF to image (+ layout.tsx metadata)
-│       │   ├── sitemap.ts     # Auto-generated sitemap.xml (6 URLs)
+│       │   ├── rotate/        # /rotate — PDF rotation (+ layout.tsx metadata)
+│       │   ├── sitemap.ts     # Auto-generated sitemap.xml (7 URLs)
 │       │   └── robots.ts      # Auto-generated robots.txt
 │       ├── components/        # Reusable UI components
 │       │   ├── Navbar.tsx     # Sticky nav, mobile hamburger

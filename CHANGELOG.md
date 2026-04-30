@@ -7,6 +7,34 @@ Proyek ini menggunakan [Semantic Versioning](https://semver.org/lang/id/).
 
 ---
 
+## [1.1.0] — 2026-05-01
+
+> 🔄 **M11 — Rotate PDF**
+>
+> Tool baru: putar halaman PDF per halaman atau semua sekaligus. Client-side via pdf-lib.
+>
+> **5 tasks** · PAPYR-085 — PAPYR-089
+
+#### Ditambahkan
+
+| Task | Deskripsi |
+|------|-----------|
+| PAPYR-085 | `rotatePDF()` + `rotatePDFAllPages()` di pdfUtils.ts — selective + global rotation |
+| PAPYR-086 | Halaman `/rotate` — state machine, page grid, per-page + global rotation controls |
+| PAPYR-087 | Download hasil rotate, analytics tracking (task_started/completed/failed) |
+| PAPYR-088 | Layout SEO metadata, sitemap, navbar, landing TOOLS array, OtherTools integration |
+| PAPYR-089 | Build verification — all routes pass, LSP clean |
+
+#### Catatan Teknis
+
+- **Processing:** 100% client-side via pdf-lib `page.setRotation(degrees(...))` — zero server upload
+- **Rotation:** Additive to existing rotation, normalized to 0/90/180/270 via `((deg % 360) + 360) % 360`
+- **Page grid:** Visual rotation indicator with CSS `transform: rotate(Ndeg)` on thumbnail placeholder
+- **Analytics:** `ToolName` union extended with `"rotate"`, tracking on process start/complete/fail
+- **Integration:** Navbar (6→7 links), OtherTools (5→6 tools), landing TOOLS (5→6 cards), sitemap (6→7 URLs)
+
+---
+
 ## [1.0.0] — 2026-04-30
 
 > 🚀 **MVP 1.0 — Soft Launch**
