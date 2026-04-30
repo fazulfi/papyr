@@ -86,6 +86,24 @@ def _validate_pdf(file: UploadFile, file_bytes: bytes) -> None:
             detail=f'"{filename}" terlalu besar: {actual_mb}MB. Maksimal {max_mb}MB.',
         )
 
+    # Validasi password-protected PDF
+    try:
+        doc = fitz.open(stream=file_bytes, filetype="pdf")
+        is_encrypted = doc.is_encrypted
+        doc.close()
+        if is_encrypted:
+            raise HTTPException(
+                status_code=400,
+                detail="PDF ini dilindungi kata sandi dan tidak dapat diproses.",
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail=f'"{filename}" bukan file PDF yang valid atau file corrupt.',
+        )
+
 
 @router.post("/pdf-to-image")
 @limiter.limit(f"{settings.rate_limit_per_minute}/minute")
