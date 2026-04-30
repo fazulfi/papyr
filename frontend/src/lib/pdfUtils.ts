@@ -1,4 +1,91 @@
-import { PDFDocument, PageSizes } from "pdf-lib";
+import { PDFDocument, PageSizes, degrees } from "pdf-lib";
+
+/* ── Rotate Types & Helpers ── */
+
+/**
+ * Map of 1-indexed page numbers to degrees to add (90, 180, 270).
+ * Example: new Map([[1, 90], [3, 180]]) rotates page 1 by 90° and page 3 by 180°.
+ */
+export type PageRotationMap = Map<number, number>;
+
+/** Normalize any degree value to 0, 90, 180, or 270. */
+const normalizeDegree = (value: number): number => ((value % 360) + 360) % 360;
+
+/**
+ * Rotate specific pages of a PDF by the degrees specified in the map.
+ *
+ * @param file              Source PDF file
+ * @param pageRotationMap   Map of 1-indexed page number → degrees to add (90, 180, 270)
+ * @returns                 Uint8Array of the rotated PDF
+ */
+export async function rotatePDF(
+  file: File,
+  pageRotationMap: PageRotationMap,
+): Promise<Uint8Array> {
+  if (pageRotationMap.size === 0) {
+    throw new Error("Pilih minimal 1 halaman untuk diputar.");
+  }
+
+  const buffer = await file.arrayBuffer();
+
+  let doc: PDFDocument;
+  try {
+    doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
+  } catch {
+    throw new Error(
+      `Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`,
+    );
+  }
+
+  const pages = doc.getPages();
+
+  for (const [pageNum, addDegree] of pageRotationMap) {
+    if (pageNum < 1 || pageNum > pages.length) {
+      throw new Error(
+        `Halaman ${pageNum} melebihi total halaman dokumen (${pages.length}).`,
+      );
+    }
+    const page = pages[pageNum - 1];
+    const current = page.getRotation().angle;
+    page.setRotation(degrees(normalizeDegree(current + addDegree)));
+  }
+
+  return doc.save();
+}
+
+/**
+ * Rotate ALL pages of a PDF by the same degree.
+ *
+ * @param file       Source PDF file
+ * @param addDegree  Degrees to add: 90, 180, or 270
+ * @returns          Uint8Array of the rotated PDF
+ */
+export async function rotatePDFAllPages(
+  file: File,
+  addDegree: number,
+): Promise<Uint8Array> {
+  if (![90, 180, 270].includes(addDegree)) {
+    throw new Error("Derajat rotasi tidak valid. Gunakan 90, 180, atau 270.");
+  }
+
+  const buffer = await file.arrayBuffer();
+
+  let doc: PDFDocument;
+  try {
+    doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
+  } catch {
+    throw new Error(
+      `Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`,
+    );
+  }
+
+  for (const page of doc.getPages()) {
+    const current = page.getRotation().angle;
+    page.setRotation(degrees(normalizeDegree(current + addDegree)));
+  }
+
+  return doc.save();
+}
 
 /**
  * Convert multiple images (JPG/PNG) into a single PDF.

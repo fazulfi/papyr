@@ -9,7 +9,8 @@ export type ToolName =
   | "merge"
   | "split"
   | "image-to-pdf"
-  | "pdf-to-image";
+  | "pdf-to-image"
+  | "rotate";
 
 /* ── Track Helpers ── */
 
