@@ -105,6 +105,15 @@ function PdfToImgIcon() {
   );
 }
 
+function RotateToolIcon() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="23 4 23 10 17 10" />
+      <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
+    </svg>
+  );
+}
+
 /* ── Tools Data ── */
 
 const TOOLS = [
@@ -142,6 +151,13 @@ const TOOLS = [
     icon: <PdfToImgIcon />,
     name: "PDF ke Gambar",
     desc: "Ekspor setiap halaman sebagai gambar resolusi tinggi.",
+  },
+  {
+    id: "rotate",
+    href: "/rotate",
+    icon: <RotateToolIcon />,
+    name: "Putar PDF",
+    desc: "Putar halaman PDF sesuai kebutuhan orientasi.",
   },
 ];
 

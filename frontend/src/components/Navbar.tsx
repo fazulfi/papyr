@@ -40,6 +40,7 @@ const NAV_LINKS = [
   { href: "/compress", label: "Kompres" },
   { href: "/merge", label: "Gabungkan" },
   { href: "/split", label: "Pisahkan" },
+  { href: "/rotate", label: "Putar" },
   { href: "/image-to-pdf", label: "Gambar ke PDF" },
   { href: "/pdf-to-image", label: "PDF ke Gambar" },
 ];

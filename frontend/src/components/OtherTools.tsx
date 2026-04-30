@@ -17,6 +17,7 @@ const ALL_TOOLS = [
   { href: "/compress", name: "Kompres PDF" },
   { href: "/merge", name: "Gabungkan PDF" },
   { href: "/split", name: "Pisahkan PDF" },
+  { href: "/rotate", name: "Putar PDF" },
   { href: "/image-to-pdf", name: "Gambar ke PDF" },
   { href: "/pdf-to-image", name: "PDF ke Gambar" },
 ];

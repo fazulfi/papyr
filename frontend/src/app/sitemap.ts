@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/compress",
     "/merge",
     "/split",
+    "/rotate",
     "/image-to-pdf",
     "/pdf-to-image",
   ];
