@@ -3,6 +3,7 @@
 import { useState } from "react";
 import PDFUploader from "@/components/PDFUploader";
 import OtherTools from "@/components/OtherTools";
+import PrivacyNotice from "@/components/PrivacyNotice";
 import { config } from "@/lib/config";
 
 /* ── Inline SVG Icons ── */
@@ -77,7 +78,10 @@ export default function CompressPage() {
         onStateChange={(state) => setUploaderState(state)}
       />
 
-      {/* Feature badges & Privacy — only visible in idle state */}
+      {/* Privacy notice — always visible */}
+      <PrivacyNotice model="server" />
+
+      {/* Feature badges — only visible in idle state */}
       {uploaderState === "idle" && (
         <div className="animate-fade-up">
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -90,16 +94,6 @@ export default function CompressPage() {
                 <h3 className="text-sm font-semibold text-navy">{f.text}</h3>
               </div>
             ))}
-          </div>
-
-          {/* Privacy notice */}
-          <div className="mt-8 flex items-start justify-center rounded-xl bg-slate-50 p-4 text-sm text-slate-500 border border-slate-100">
-            <span className="mt-0.5 text-slate-400 mr-2 shrink-0">
-              <ShieldIcon size={16} />
-            </span>
-            <p>
-              File kamu otomatis dihapus setelah 1 jam. Kami tidak pernah menyimpan dokumenmu.
-            </p>
           </div>
         </div>
       )}

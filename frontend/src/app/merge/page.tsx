@@ -23,6 +23,7 @@ import { limits } from "@/lib/config";
 import { mergePDFs, downloadPDF } from "@/lib/pdfUtils";
 import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
+import PrivacyNotice from "@/components/PrivacyNotice";
 
 /* ── Types ── */
 
@@ -560,35 +561,26 @@ export default function MergePage() {
 
           {/* Feature badges */}
           {files.length === 0 && (
-            <>
-              <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-                {FEATURES.map((f) => (
-                  <div
-                    key={f.text}
-                    className="flex flex-col items-center rounded-2xl bg-white p-5 text-center border border-slate-100 shadow-sm"
-                  >
-                    <div className="text-accent mb-3">{f.icon}</div>
-                    <h3 className="text-sm font-semibold text-navy">{f.text}</h3>
-                  </div>
-                ))}
-              </div>
-
-              {/* Privacy notice */}
-              <div className="mt-8 flex items-start justify-center rounded-xl bg-slate-50 p-4 text-sm text-slate-500 border border-slate-100">
-                <span className="mt-0.5 text-slate-400 mr-2 shrink-0">
-                  <ShieldIcon size={16} />
-                </span>
-                <p>
-                  Semua proses berjalan di browser. File tidak pernah dikirim ke server kami.
-                </p>
-              </div>
-             </>
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {FEATURES.map((f) => (
+                <div
+                  key={f.text}
+                  className="flex flex-col items-center rounded-2xl bg-white p-5 text-center border border-slate-100 shadow-sm"
+                >
+                  <div className="text-accent mb-3">{f.icon}</div>
+                  <h3 className="text-sm font-semibold text-navy">{f.text}</h3>
+                </div>
+              ))}
+            </div>
           )}
 
           {/* Other tools */}
           <OtherTools currentTool="/merge" />
         </div>
       )}
+
+      {/* Privacy notice — always visible */}
+      <PrivacyNotice model="client" />
     </div>
   );
 }

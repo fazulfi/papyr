@@ -23,6 +23,7 @@ import { limits, config } from "@/lib/config";
 import { imagesToPDF, downloadPDF } from "@/lib/pdfUtils";
 import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
+import PrivacyNotice from "@/components/PrivacyNotice";
 
 /* ── Types ── */
 
@@ -660,15 +661,6 @@ export default function ImageToPdfPage() {
                 ))}
               </div>
 
-              <div className="mt-8 flex items-start justify-center rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500">
-                <span className="mr-2 mt-0.5 shrink-0 text-slate-400">
-                  <ShieldIcon size={16} />
-                </span>
-                <p>
-                  Gambar kecil diproses langsung di browser. File besar dikirim ke server
-                  dan otomatis dihapus dalam 1 jam.
-                </p>
-              </div>
              </>
           )}
 
@@ -676,6 +668,9 @@ export default function ImageToPdfPage() {
           <OtherTools currentTool="/image-to-pdf" />
         </div>
       )}
+
+      {/* Privacy notice — always visible */}
+      <PrivacyNotice model="hybrid" />
     </div>
   );
 }

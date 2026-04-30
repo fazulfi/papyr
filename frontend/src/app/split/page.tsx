@@ -7,6 +7,7 @@ import { getPDFPageCount, splitPDF, downloadPDF } from "@/lib/pdfUtils";
 import PageRangeInput from "@/components/PageRangeInput";
 import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
+import PrivacyNotice from "@/components/PrivacyNotice";
 
 /* ── Types ── */
 
@@ -475,20 +476,13 @@ export default function SplitPage() {
             ))}
           </div>
 
-          {/* Privacy notice */}
-          <div className="mt-8 flex items-start justify-center rounded-xl bg-slate-50 p-4 text-sm text-slate-500 border border-slate-100">
-            <span className="mt-0.5 text-slate-400 mr-2 shrink-0">
-              <ShieldIcon size={16} />
-            </span>
-            <p>
-              Semua proses berjalan di browser. File tidak pernah dikirim ke server kami.
-            </p>
-          </div>
-
           {/* Other tools */}
           <OtherTools currentTool="/split" />
         </div>
       )}
+
+      {/* Privacy notice — always visible */}
+      <PrivacyNotice model="client" />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { getPDFPageCount } from "@/lib/pdfUtils";
 import PageRangeInput from "@/components/PageRangeInput";
 import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import OtherTools from "@/components/OtherTools";
+import PrivacyNotice from "@/components/PrivacyNotice";
 
 /* ── Types ── */
 
@@ -482,20 +483,13 @@ export default function PdfToImagePage() {
             ))}
           </div>
 
-          {/* Privacy notice */}
-          <div className="mt-8 flex items-start justify-center rounded-xl bg-slate-50 p-4 text-sm text-slate-500 border border-slate-100">
-            <span className="mt-0.5 text-slate-400 mr-2 shrink-0">
-              <ShieldIcon size={16} />
-            </span>
-            <p>
-              File kamu otomatis dihapus setelah 1 jam. Kami tidak pernah menyimpan dokumenmu.
-            </p>
-          </div>
-
           {/* Other tools */}
           <OtherTools currentTool="/pdf-to-image" />
         </div>
       )}
+
+      {/* Privacy notice — always visible */}
+      <PrivacyNotice model="server" />
     </div>
   );
 }
