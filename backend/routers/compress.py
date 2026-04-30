@@ -10,6 +10,7 @@ import os
 import tempfile
 import time
 
+import fitz  # PyMuPDF — untuk deteksi password-protected PDF
 from fastapi import APIRouter, File, Request, UploadFile, HTTPException, Query
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -28,12 +29,25 @@ router = APIRouter(prefix="/api", tags=["compress"])
 ALLOWED_MIME_TYPES = {"application/pdf"}
 ALLOWED_EXTENSIONS = {".pdf"}
 
+# Magic bytes untuk PDF
+_PDF_MAGIC = b"%PDF"
+
 
 def _validate_pdf(file: UploadFile, file_bytes: bytes) -> None:
     """
-    Validasi file PDF: MIME type, ekstensi, dan ukuran.
+    Validasi file PDF: kosong, MIME type, ekstensi, magic bytes, ukuran, dan password.
     Raises HTTPException(400) jika tidak valid.
     """
+    filename = file.filename or "unknown"
+
+    # Validasi file tidak kosong
+    size_bytes = len(file_bytes)
+    if size_bytes == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="File kosong. Silakan upload file PDF yang valid.",
+        )
+
     # Validasi MIME type
     if file.content_type not in ALLOWED_MIME_TYPES:
         raise HTTPException(
@@ -42,7 +56,6 @@ def _validate_pdf(file: UploadFile, file_bytes: bytes) -> None:
         )
 
     # Validasi ekstensi
-    filename = file.filename or ""
     ext = ""
     if "." in filename:
         ext = "." + filename.rsplit(".", 1)[-1].lower()
@@ -52,8 +65,14 @@ def _validate_pdf(file: UploadFile, file_bytes: bytes) -> None:
             detail=f"Ekstensi file tidak valid: '{ext}'. Hanya file .pdf yang diterima.",
         )
 
+    # Validasi magic bytes — file harus benar-benar PDF
+    if file_bytes[:4] != _PDF_MAGIC:
+        raise HTTPException(
+            status_code=400,
+            detail=f'"{filename}" bukan file PDF yang valid. Konten file tidak sesuai format PDF.',
+        )
+
     # Validasi ukuran
-    size_bytes = len(file_bytes)
     if size_bytes > settings.max_upload_size_bytes:
         max_mb = settings.max_upload_size_mb
         actual_mb = round(size_bytes / (1024 * 1024), 1)
@@ -62,11 +81,23 @@ def _validate_pdf(file: UploadFile, file_bytes: bytes) -> None:
             detail=f"Ukuran file terlalu besar: {actual_mb}MB. Maksimal {max_mb}MB.",
         )
 
-    # Validasi file tidak kosong
-    if size_bytes == 0:
+    # Validasi password-protected PDF
+    try:
+        doc = fitz.open(stream=file_bytes, filetype="pdf")
+        is_encrypted = doc.is_encrypted
+        doc.close()
+        if is_encrypted:
+            raise HTTPException(
+                status_code=400,
+                detail="PDF ini dilindungi kata sandi dan tidak dapat diproses.",
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        # Jika fitz gagal membuka file, berarti file corrupt
         raise HTTPException(
             status_code=400,
-            detail="File kosong. Silakan upload file PDF yang valid.",
+            detail=f'"{filename}" bukan file PDF yang valid atau file corrupt.',
         )
 
 
