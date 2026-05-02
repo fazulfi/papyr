@@ -88,12 +88,28 @@ export async function rotatePDFAllPages(
 }
 
 /**
- * Convert multiple images (JPG/PNG) into a single PDF.
+ * Convert a WebP file to PNG bytes using an offscreen canvas.
+ * Required because pdf-lib does not natively support WebP embedding.
+ */
+async function webpToPng(file: File): Promise<Uint8Array> {
+  const bitmap = await createImageBitmap(file);
+  const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas 2D context tidak tersedia.");
+  ctx.drawImage(bitmap, 0, 0);
+  bitmap.close();
+  const blob = await canvas.convertToBlob({ type: "image/png" });
+  const buffer = await blob.arrayBuffer();
+  return new Uint8Array(buffer);
+}
+
+/**
+ * Convert multiple images (JPG/PNG/WEBP) into a single PDF.
  *
  * Each image becomes one page sized to fit the image dimensions.
  * Runs entirely client-side using pdf-lib.
  *
- * @param files  Array of image Files (JPG or PNG)
+ * @param files  Array of image Files (JPG, PNG, or WEBP)
  * @returns      Uint8Array of the resulting PDF
  */
 export async function imagesToPDF(files: File[]): Promise<Uint8Array> {
@@ -104,20 +120,23 @@ export async function imagesToPDF(files: File[]): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
 
   for (const file of files) {
-    const buffer = await file.arrayBuffer();
-    const bytes = new Uint8Array(buffer);
-
     const type = file.type.toLowerCase();
     let image;
 
     try {
       if (type === "image/png") {
+        const bytes = new Uint8Array(await file.arrayBuffer());
         image = await doc.embedPng(bytes);
       } else if (type === "image/jpeg" || type === "image/jpg") {
+        const bytes = new Uint8Array(await file.arrayBuffer());
         image = await doc.embedJpg(bytes);
+      } else if (type === "image/webp") {
+        // Convert WebP to PNG via canvas, then embed
+        const pngBytes = await webpToPng(file);
+        image = await doc.embedPng(pngBytes);
       } else {
         throw new Error(
-          `"${file.name}" bukan format yang didukung. Hanya JPG dan PNG yang diterima.`,
+          `"${file.name}" bukan format yang didukung. Hanya JPG, PNG, dan WEBP yang diterima.`,
         );
       }
     } catch (err) {

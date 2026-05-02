@@ -26,13 +26,15 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["image-to-pdf"])
 
-ALLOWED_MIME_TYPES = {"image/jpeg", "image/png"}
-ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png"}
+ALLOWED_MIME_TYPES = {"image/jpeg", "image/png", "image/webp"}
+ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
 
 
 # Magic bytes for image format detection
 _JPEG_MAGIC = b"\xff\xd8\xff"
 _PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
+_WEBP_RIFF = b"RIFF"
+_WEBP_MAGIC = b"WEBP"
 
 
 def _validate_image(file: UploadFile, file_bytes: bytes) -> None:
@@ -54,7 +56,7 @@ def _validate_image(file: UploadFile, file_bytes: bytes) -> None:
     if file.content_type not in ALLOWED_MIME_TYPES:
         raise HTTPException(
             status_code=400,
-            detail=f'"{filename}" bukan format yang didukung. Hanya JPG dan PNG.',
+            detail=f'"{filename}" bukan format yang didukung. Hanya JPG, PNG, dan WEBP.',
         )
 
     # Validasi ekstensi
@@ -64,16 +66,21 @@ def _validate_image(file: UploadFile, file_bytes: bytes) -> None:
     if ext not in ALLOWED_EXTENSIONS:
         raise HTTPException(
             status_code=400,
-            detail=f'"{filename}" ekstensi tidak valid. Hanya .jpg, .jpeg, .png.',
+            detail=f'"{filename}" ekstensi tidak valid. Hanya .jpg, .jpeg, .png, .webp.',
         )
 
     # Validasi magic bytes — file harus benar-benar gambar, bukan text/binary lain
     is_jpeg = file_bytes[:3] == _JPEG_MAGIC
     is_png = file_bytes[:8] == _PNG_MAGIC
-    if not (is_jpeg or is_png):
+    is_webp = (
+        len(file_bytes) >= 12
+        and file_bytes[:4] == _WEBP_RIFF
+        and file_bytes[8:12] == _WEBP_MAGIC
+    )
+    if not (is_jpeg or is_png or is_webp):
         raise HTTPException(
             status_code=400,
-            detail=f'"{filename}" bukan file gambar yang valid. Konten file tidak sesuai format JPG/PNG.',
+            detail=f'"{filename}" bukan file gambar yang valid. Konten file tidak sesuai format JPG/PNG/WEBP.',
         )
 
     # Validasi ukuran
@@ -122,7 +129,13 @@ async def image_to_pdf_endpoint(
 
         for idx, (filename, img_bytes) in enumerate(image_data):
             # Simpan gambar ke temp file (PyMuPDF butuh path atau bytes)
-            suffix = ".png" if filename.lower().endswith(".png") else ".jpg"
+            lower_name = filename.lower()
+            if lower_name.endswith(".png"):
+                suffix = ".png"
+            elif lower_name.endswith(".webp"):
+                suffix = ".webp"
+            else:
+                suffix = ".jpg"
             fd, temp_path = tempfile.mkstemp(suffix=suffix, prefix="papyr_img_")
             os.close(fd)
             temp_paths.append(temp_path)

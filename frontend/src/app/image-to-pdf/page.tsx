@@ -37,8 +37,8 @@ type PageState = "idle" | "processing" | "done" | "error";
 
 /* ── Constants ── */
 
-const ALLOWED_TYPES = new Set(["image/jpeg", "image/png"]);
-const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png"]);
+const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 /** Client-side threshold: below this total size, process in browser */
 const CLIENT_THRESHOLD_BYTES = 3 * 1024 * 1024; // 3MB
 
@@ -46,6 +46,9 @@ const CLIENT_THRESHOLD_BYTES = 3 * 1024 * 1024; // 3MB
 const JPEG_MAGIC = [0xff, 0xd8, 0xff];
 /** PNG magic bytes: 89 50 4E 47 0D 0A 1A 0A */
 const PNG_MAGIC = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+/** WebP magic bytes: RIFF....WEBP (bytes 0-3 = RIFF, bytes 8-11 = WEBP) */
+const RIFF_MAGIC = [0x52, 0x49, 0x46, 0x46]; // "RIFF"
+const WEBP_MAGIC = [0x57, 0x45, 0x42, 0x50]; // "WEBP"
 
 /** Read first N bytes of a File */
 function readFileHeader(file: File, bytes: number): Promise<Uint8Array> {
@@ -57,11 +60,15 @@ function readFileHeader(file: File, bytes: number): Promise<Uint8Array> {
   });
 }
 
-/** Check if file header matches JPEG or PNG magic bytes */
+/** Check if file header matches JPEG, PNG, or WebP magic bytes */
 function isValidImageHeader(header: Uint8Array): boolean {
   const isJpeg = JPEG_MAGIC.every((b, i) => header[i] === b);
   const isPng = PNG_MAGIC.every((b, i) => header[i] === b);
-  return isJpeg || isPng;
+  const isWebp =
+    header.length >= 12 &&
+    RIFF_MAGIC.every((b, i) => header[i] === b) &&
+    WEBP_MAGIC.every((b, i) => header[i + 8] === b);
+  return isJpeg || isPng || isWebp;
 }
 
 /* ── Inline SVG Icons ── */
@@ -301,7 +308,7 @@ export default function ImageToPdfPage() {
       if (!ALLOWED_TYPES.has(file.type)) {
         const ext = getExtension(file.name);
         if (!ALLOWED_EXTENSIONS.has(ext)) {
-          errors.push(`"${file.name}" bukan format yang didukung. Hanya JPG dan PNG.`);
+          errors.push(`"${file.name}" bukan format yang didukung. Hanya JPG, PNG, dan WEBP.`);
           continue;
         }
       }
@@ -316,7 +323,7 @@ export default function ImageToPdfPage() {
 
       // Validate magic bytes — catches fake files with wrong extension
       try {
-        const header = await readFileHeader(file, 8);
+        const header = await readFileHeader(file, 12);
         if (!isValidImageHeader(header)) {
           errors.push(`"${file.name}" bukan file gambar yang valid.`);
           continue;
@@ -574,7 +581,7 @@ export default function ImageToPdfPage() {
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/jpeg,image/png"
+              accept="image/jpeg,image/png,image/webp"
               multiple
               className="hidden"
               onChange={(e) => {
@@ -593,7 +600,7 @@ export default function ImageToPdfPage() {
                 : "Tambah gambar lagi"}
             </p>
             <p className="text-xs text-slate-400">
-              Maks {limits.maxUploadMB}MB per file · JPG, PNG
+              Maks {limits.maxUploadMB}MB per file · JPG, PNG, WEBP
             </p>
           </div>
 
