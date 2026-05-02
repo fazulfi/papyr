@@ -12,9 +12,6 @@ export const config = {
   /** Base URL for the FastAPI backend */
   apiUrl: clean(process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"),
 
-  /** Plausible Analytics domain (kosong = analytics nonaktif) */
-  plausibleDomain: clean(process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? ""),
-
   /** Public site URL */
   siteUrl: clean(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
 
