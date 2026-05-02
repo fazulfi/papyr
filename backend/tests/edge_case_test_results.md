@@ -1,25 +1,25 @@
 # PAPYR-078 — Edge Case Test Results
 
-**Tanggal:** 2026-04-30 13:24
-**Total tests:** 13 (11 passed, 2 failed)
+**Tanggal:** 2026-04-30 13:45
+**Total tests:** 13 (13 passed, 0 failed)
 
 ## Results
 
 | # | Test Case | Status | HTTP | Detail | Waktu |
 |---|-----------|--------|------|--------|-------|
-| 1 | compress: empty file (0 bytes) | ✅ | 400 | File kosong. Silakan upload file PDF yang valid. | 1779ms |
-| 2 | compress: fake PDF (JPEG renamed to .pdf) | ❌ | 500 | Gagal memproses file. Silakan coba lagi. | 793ms |
-| 3 | compress: password-protected PDF | ❌ | 200 | {'download_url': 'https://4061cf40c14de3c97cd7af53 | 1437ms |
-| 4 | compress: tiny PDF (1 page, <10KB) | ✅ | 200 | {'download_url': 'https://4061cf40c14de3c97cd7af53 | 1482ms |
-| 5 | pdf-to-image: empty file | ✅ | 400 | "empty.pdf" kosong. Silakan upload file PDF yang v | 724ms |
-| 6 | pdf-to-image: fake PDF (JPEG content) | ✅ | 400 | "fake.pdf" bukan file PDF yang valid. Konten file  | 739ms |
-| 7 | pdf-to-image: password-protected PDF | ✅ | 500 | Gagal memproses file. Silakan coba lagi. | 577ms |
-| 8 | pdf-to-image: tiny PDF (1 page) | ✅ | 200 | {'download_url': 'https://4061cf40c14de3c97cd7af53 | 1387ms |
-| 9 | pdf-to-image: invalid page '0' | ✅ | 400 | Halaman 0 di luar jangkauan. PDF ini memiliki 1 ha | 700ms |
-| 10 | pdf-to-image: out-of-bounds page '99' | ✅ | 400 | Halaman 99 di luar jangkauan. PDF ini memiliki 1 h | 540ms |
-| 11 | image-to-pdf: empty file | ✅ | 400 | "empty.png" kosong. Silakan upload gambar yang val | 718ms |
-| 12 | image-to-pdf: PDF instead of image | ✅ | 400 | "document.pdf" bukan format yang didukung. Hanya J | 714ms |
-| 13 | image-to-pdf: small valid PNG | ✅ | 200 | {'download_url': 'https://4061cf40c14de3c97cd7af53 | 1418ms |
+| 1 | compress: empty file (0 bytes) | ✅ | 400 | File kosong. Silakan upload file PDF yang valid. | 787ms |
+| 2 | compress: fake PDF (JPEG renamed to .pdf) | ✅ | 400 | "fake.pdf" bukan file PDF yang valid. Konten file  | 765ms |
+| 3 | compress: password-protected PDF | ✅ | 400 | PDF ini dilindungi kata sandi dan tidak dapat dipr | 833ms |
+| 4 | compress: tiny PDF (1 page, <10KB) | ✅ | 200 | {'download_url': 'https://4061cf40c14de3c97cd7af53 | 1564ms |
+| 5 | pdf-to-image: empty file | ✅ | 400 | "empty.pdf" kosong. Silakan upload file PDF yang v | 782ms |
+| 6 | pdf-to-image: fake PDF (JPEG content) | ✅ | 400 | "fake.pdf" bukan file PDF yang valid. Konten file  | 1769ms |
+| 7 | pdf-to-image: password-protected PDF | ✅ | 400 | PDF ini dilindungi kata sandi dan tidak dapat dipr | 767ms |
+| 8 | pdf-to-image: tiny PDF (1 page) | ✅ | 200 | {'download_url': 'https://4061cf40c14de3c97cd7af53 | 1457ms |
+| 9 | pdf-to-image: invalid page '0' | ✅ | 400 | Halaman 0 di luar jangkauan. PDF ini memiliki 1 ha | 549ms |
+| 10 | pdf-to-image: out-of-bounds page '99' | ✅ | 400 | Halaman 99 di luar jangkauan. PDF ini memiliki 1 h | 743ms |
+| 11 | image-to-pdf: empty file | ✅ | 400 | "empty.png" kosong. Silakan upload gambar yang val | 767ms |
+| 12 | image-to-pdf: PDF instead of image | ✅ | 400 | "document.pdf" bukan format yang didukung. Hanya J | 797ms |
+| 13 | image-to-pdf: small valid PNG | ✅ | 200 | {'download_url': 'https://4061cf40c14de3c97cd7af53 | 1391ms |
 
 ## Edge Cases Tested
 
