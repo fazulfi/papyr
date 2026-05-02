@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+.vite-node/
 
 # next.js
 /.next/
