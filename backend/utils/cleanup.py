@@ -117,22 +117,34 @@ def cleanup_expired_files() -> dict:
 
     duration_ms = int((time.time() - start_time) * 1000)
 
-    # Log cleanup completed
-    log_level = logging.INFO if failed == 0 else logging.WARNING
-    logger.log(
-        log_level,
-        "cleanup_completed",
-        extra={
-            "event_data": {
-                "event": "cleanup_completed",
-                "scanned": total_scanned,
-                "deleted": deleted,
-                "failed": failed,
-                "duration_ms": duration_ms,
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            }
-        },
-    )
+    # Log cleanup_success or cleanup_failure per PRD analytics spec
+    if failed == 0:
+        logger.info(
+            "cleanup_success",
+            extra={
+                "event_data": {
+                    "event": "cleanup_success",
+                    "scanned": total_scanned,
+                    "deleted": deleted,
+                    "duration_ms": duration_ms,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+            },
+        )
+    else:
+        logger.warning(
+            "cleanup_failure",
+            extra={
+                "event_data": {
+                    "event": "cleanup_failure",
+                    "scanned": total_scanned,
+                    "deleted": deleted,
+                    "failed": failed,
+                    "duration_ms": duration_ms,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+            },
+        )
 
     return {
         "scanned": total_scanned,
