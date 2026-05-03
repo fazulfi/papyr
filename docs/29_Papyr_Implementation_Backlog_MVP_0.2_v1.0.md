@@ -31,7 +31,7 @@
 |-------|---------|-----------|---------|
 | 1.0 | Mei 2026 | Initial draft — backlog lengkap M12–M20 | Muhammad Fa'iz Zulfikar |
 | 1.1 | Mei 2026 | Tambah M21 OpenClaw AI Agent (25 tasks, PAPYR-179—203), update total ke 114 tasks ~263 jam | AI Agent (OpenCode/Sisyphus) |
-| 1.2 | Mei 2026 | Tambah M22 Admin Dashboard (Phase 2F), 15 tasks (PAPYR-204—218), update total ke 129 tasks ~298 jam | AI Agent (OpenCode/Sisyphus) |
+| 1.2 | Mei 2026 | Tambah M22 Admin Dashboard (Fase 2F), 15 tasks (PAPYR-204—218), update total ke 129 tasks ~298 jam | AI Agent (OpenCode/Sisyphus) |
 | 1.3 | Mei 2026 | Tambah tasks Social Media/Twitter (PAPYR-219—224) ke M21, expand reporting tasks, update total ke 135 tasks ~318 jam | AI Agent (OpenCode/Sisyphus) |
 
 ---
@@ -754,11 +754,11 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 
 ---
 
-### Milestone 21 — OpenClaw AI Agent (Phase 2E)
+### Milestone 21 — OpenClaw AI Agent (Fase 2E)
 
 **Fase:** 2E — OpenClaw
 **Estimasi:** ~100 jam
-**Dependensi:** Phase 2D complete (product stable)
+**Dependensi:** Fase 2D complete (product stable)
 **Deployment:** HostData.id VPS (dedicated)
 **Dokumen Lengkap:** PPR-CLAW-001 (30_Papyr_OpenClaw_v1.0.md)
 
@@ -818,7 +818,7 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 
 ---
 
-### M22: Admin Dashboard (Phase 2F — Dashboard) — 15 tasks | 35 jam | Minggu 25–28
+### M22: Admin Dashboard (Fase 2F — Dashboard) — 15 tasks | 35 jam | Minggu 25–28
 
 **Deskripsi:** Unified admin panel di `/admin` route dalam existing Next.js app. Mencakup semua operational monitoring termasuk OpenClaw. 10 modul: OpenClaw Monitoring, Analytics Overview, Server Health, Security Scan, SEO & Competitor Intel, Revenue/Billing (placeholder), System Logs, Backup Status, User Management (placeholder), Settings.
 
@@ -891,7 +891,7 @@ Response 500: { "error": "Internal server error", "detail": "..." }
                     │                    MVP 0.2 DEPENDENCY GRAPH                  │
                     └─────────────────────────────────────────────────────────────┘
 
-    PHASE 2A                PHASE 2B                PHASE 2C                PHASE 2D
+    Fase 2A                Fase 2B                Fase 2C                Fase 2D
     Security                Enhancement             Conversion              Quality
     ────────                ───────────             ──────────              ───────
 
@@ -985,7 +985,7 @@ Response 500: { "error": "Internal server error", "detail": "..." }
 
 ## Urutan Pengerjaan (Rekomendasi)
 
-### Sprint 1 (Minggu 1–3): Phase 2A — Security Tools
+### Sprint 1 (Minggu 1–3): Fase 2A — Security Tools
 
 ```
 M12 (Protect PDF) → M13 (Unlock PDF)
@@ -997,18 +997,18 @@ M12 (Protect PDF) → M13 (Unlock PDF)
 - M13 reuse logic dari M12, jadi sangat efisien dikerjakan berurutan
 - Quick wins untuk momentum awal MVP 0.2
 
-### Sprint 2 (Minggu 3–7): Phase 2B — Document Enhancement
+### Sprint 2 (Minggu 3–7): Fase 2B — Document Enhancement
 
 ```
 M14 (Watermark) ──parallel──► M15 (Sign PDF)
 ```
 
 **Rationale:** M14 dan M15 bisa dikerjakan paralel (tidak ada dependency). Tapi jika solo dev, kerjakan M14 dulu karena:
-- M14 hybrid (client + server) — good transition dari Phase 2A
+- M14 hybrid (client + server) — good transition dari Fase 2A
 - M15 100% client-side — fresh challenge, lebih complex (canvas + drag-drop)
 - M15 paling complex di MVP 0.2 (24 jam), butuh fokus penuh
 
-### Sprint 3 (Minggu 7–13): Phase 2C — Document Conversion
+### Sprint 3 (Minggu 7–13): Fase 2C — Document Conversion
 
 ```
 M16 (PDF-to-Word) → M17 (OCR) → M18 (PDF-to-Excel)
@@ -1020,7 +1020,7 @@ M16 (PDF-to-Word) → M17 (OCR) → M18 (PDF-to-Excel)
 - M18 paling akhir karena depends on both M16 dan M17
 - Phase ini paling heavy (69 jam total) — butuh fokus dan patience
 
-### Sprint 4 (Minggu 13–15): Phase 2D — Cross-cutting Quality
+### Sprint 4 (Minggu 13–15): Fase 2D — Cross-cutting Quality
 
 ```
 M19 (E2E + Code Quality) → M20 (Performance + Monitoring + SEO)
@@ -1054,10 +1054,10 @@ Phase:   ├── 2A ──┤├──── 2B ────────┤├
 
 | Checkpoint | Minggu | Deliverable | Review Criteria |
 |-----------|--------|-------------|-----------------|
-| CP1 | 3 | Phase 2A selesai | 2 tools live, 12+ tests pass |
-| CP2 | 7 | Phase 2B selesai | 4 tools live, preview features work |
+| CP1 | 3 | Fase 2A selesai | 2 tools live, 12+ tests pass |
+| CP2 | 7 | Fase 2B selesai | 4 tools live, preview features work |
 | CP3 | 9 | M16 selesai | LibreOffice working, async pattern proven |
-| CP4 | 13 | Phase 2C selesai | 7 tools live, Docker optimized |
+| CP4 | 13 | Fase 2C selesai | 7 tools live, Docker optimized |
 | CP5 | 15 | MVP 0.2 complete | All 13 tools, E2E pass, monitoring active |
 
 ---
@@ -1082,10 +1082,10 @@ Phase:   ├── 2A ──┤├──── 2B ────────┤├
 
 | Fase | Jam | Minggu (@10 jam/minggu) |
 |------|-----|------------------------|
-| Phase 2A (Security) | 30 jam | 3 minggu |
-| Phase 2B (Enhancement) | 44 jam | 4.5 minggu |
-| Phase 2C (Conversion) | 69 jam | 7 minggu |
-| Phase 2D (Quality) | 20 jam | 2 minggu |
+| Fase 2A (Security) | 30 jam | 3 minggu |
+| Fase 2B (Enhancement) | 44 jam | 4.5 minggu |
+| Fase 2C (Conversion) | 69 jam | 7 minggu |
+| Fase 2D (Quality) | 20 jam | 2 minggu |
 | **Total** | **163 jam** | **~16 minggu** |
 
 ### Infrastruktur Tambahan

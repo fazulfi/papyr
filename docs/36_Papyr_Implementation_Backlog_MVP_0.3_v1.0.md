@@ -890,7 +890,7 @@ Response 429: { "error": "Terlalu banyak feedback. Coba lagi nanti." }
                     |                    MVP 0.3 DEPENDENCY GRAPH                  |
                     +-------------------------------------------------------------+
 
-    PHASE 3A                PHASE 3B                PHASE 3C
+    Fase 3A                Fase 3B                Fase 3C
     Critical UX             UX Enhancement          Performance
     ----------              --------------          -----------
 
@@ -927,7 +927,7 @@ Response 429: { "error": "Terlalu banyak feedback. Coba lagi nanti." }
                                                        v
                                                    +-------+
                                                    |  M36  |
-    PHASE 3D                PHASE 3E               |Prefetch
+    Fase 3D                Fase 3E               |Prefetch
     Interaction             Growth                  +---+---+
     -----------             ------                     |
                                                        v
@@ -1001,18 +1001,18 @@ Response 429: { "error": "Terlalu banyak feedback. Coba lagi nanti." }
 
 ## Urutan Pengerjaan (Rekomendasi)
 
-### Sprint 1 (Minggu 1–5): Phase 3A — Critical UX
+### Sprint 1 (Minggu 1–5): Fase 3A — Critical UX
 
 ```
 M23 (i18n) -> M24 (Error Boundary) -> M25 (Progress) -> M26 (Rate Limit)
 ```
 
-**Rationale:** Phase 3A harus pertama karena:
+**Rationale:** Fase 3A harus pertama karena:
 - i18n (M23) mengubah semua text di app — harus selesai sebelum fitur lain yang tambah text
 - Error handling (M24) dan progress (M25) adalah UX dasar yang dibutuhkan semua fitur lain
 - Rate limit feedback (M26) melengkapi error handling
 
-### Sprint 2 (Minggu 5–11): Phase 3B — UX Enhancement
+### Sprint 2 (Minggu 5–11): Fase 3B — UX Enhancement
 
 ```
 M27 (Dark Mode) -> M28 (a11y) -> M29 (Preview) -> M30 (Onboarding) -> M31 (Comparison)
@@ -1020,7 +1020,7 @@ M27 (Dark Mode) -> M28 (a11y) -> M29 (Preview) -> M30 (Onboarding) -> M31 (Compa
 
 **Rationale:** Dark mode dulu karena a11y audit perlu check kedua mode. Preview dan onboarding bisa parallel tapi sequential lebih aman untuk solo dev.
 
-### Sprint 3 (Minggu 11–15): Phase 3C — Performance
+### Sprint 3 (Minggu 11–15): Fase 3C — Performance
 
 ```
 M32 (PWA) -> M33 (Worker) -> M34 (Lazy Load) -> M35 (Images) -> M36 (Prefetch) -> M37 (Cache)
@@ -1028,15 +1028,15 @@ M32 (PWA) -> M33 (Worker) -> M34 (Lazy Load) -> M35 (Images) -> M36 (Prefetch) -
 
 **Rationale:** PWA extend service worker dari M24. Worker harus sebelum lazy loading. Image dan prefetch bisa parallel. Cache terakhir (config-level).
 
-### Sprint 4 (Minggu 15–19): Phase 3D — Interaction
+### Sprint 4 (Minggu 15–19): Fase 3D — Interaction
 
 ```
 M38 (Drag Drop) | M39 (Keyboard) | M40 (History) | M41 (Changelog) | M42 (Undo)
 ```
 
-**Rationale:** Semua milestone di Phase 3D independent. Bisa dikerjakan dalam urutan apapun. Prioritaskan M38 dan M39 (high impact).
+**Rationale:** Semua milestone di Fase 3D independent. Bisa dikerjakan dalam urutan apapun. Prioritaskan M38 dan M39 (high impact).
 
-### Sprint 5 (Minggu 19–21): Phase 3E — Growth
+### Sprint 5 (Minggu 19–21): Fase 3E — Growth
 
 ```
 M43 (Social Proof) -> M44 (Feedback) -> M45 (Recommendation)
@@ -1052,11 +1052,11 @@ M43 (Social Proof) -> M44 (Feedback) -> M45 (Recommendation)
 
 | Fase | Jam | Minggu (@10 jam/minggu) |
 |------|-----|------------------------|
-| Phase 3A (Critical UX) | 40 jam | 4 minggu |
-| Phase 3B (UX Enhancement) | 50 jam | 5 minggu |
-| Phase 3C (Performance) | 35 jam | 3.5 minggu |
-| Phase 3D (Interaction) | 30 jam | 3 minggu |
-| Phase 3E (Growth) | 15 jam | 1.5 minggu |
+| Fase 3A (Critical UX) | 40 jam | 4 minggu |
+| Fase 3B (UX Enhancement) | 50 jam | 5 minggu |
+| Fase 3C (Performance) | 35 jam | 3.5 minggu |
+| Fase 3D (Interaction) | 30 jam | 3 minggu |
+| Fase 3E (Growth) | 15 jam | 1.5 minggu |
 | **Total** | **~170 jam** | **~17 minggu** |
 
 ### Infrastruktur Tambahan

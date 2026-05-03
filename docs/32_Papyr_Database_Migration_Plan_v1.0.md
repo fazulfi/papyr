@@ -77,7 +77,7 @@ MVP 0.3 memperkenalkan fitur-fitur yang membutuhkan persistent storage:
 - **Payment/Subscription (M26)**: Integrasi Midtrans/Xendit, manajemen langganan Pro (Rp 19.900/bulan)
 - **API Key Management (M27)**: Pembuatan dan manajemen API key untuk akses programmatic
 
-Selain itu, Phase 2E (M21) akan meluncurkan OpenClaw, sebuah AI agent platform yang membutuhkan 15+ tabel untuk operasinya.
+Selain itu, Fase 2E (M21) akan meluncurkan OpenClaw, sebuah AI agent platform yang membutuhkan 15+ tabel untuk operasinya.
 
 ### Tujuan Dokumen
 
@@ -372,7 +372,7 @@ Untuk DDL lengkap, constraint, index, dan relasi antar tabel, lihat:
 
 Migrasi dilakukan secara bertahap mengikuti milestone MVP 0.3. Setiap phase menambahkan tabel baru tanpa mengubah tabel yang sudah ada (additive-only approach).
 
-### Phase 1: Foundation (MVP 0.3, Milestone M23)
+### Fase 1: Foundation (MVP 0.3, Milestone M23)
 
 **Tujuan**: Setup PostgreSQL dan tabel dasar untuk autentikasi.
 
@@ -388,7 +388,7 @@ Langkah-langkah:
 
 **Validasi**: User registration dan login berfungsi end-to-end.
 
-### Phase 2: Usage Tracking (MVP 0.3, Milestone M25)
+### Fase 2: Usage Tracking (MVP 0.3, Milestone M25)
 
 **Tujuan**: Pencatatan penggunaan tool untuk enforce rate limit.
 
@@ -399,7 +399,7 @@ Langkah-langkah:
 
 **Validasi**: Rate limit 5x/hari per tool untuk plan free_login berfungsi.
 
-### Phase 3: Subscriptions (MVP 0.3, Milestone M26)
+### Fase 3: Subscriptions (MVP 0.3, Milestone M26)
 
 **Tujuan**: Manajemen langganan dan integrasi payment gateway.
 
@@ -410,7 +410,7 @@ Langkah-langkah:
 
 **Validasi**: Pembayaran Pro (Rp 19.900/bulan) tercatat dan plan user terupdate otomatis.
 
-### Phase 4: API Keys (MVP 0.3, Milestone M27)
+### Fase 4: API Keys (MVP 0.3, Milestone M27)
 
 **Tujuan**: Akses programmatic via API key.
 
@@ -421,7 +421,7 @@ Langkah-langkah:
 
 **Validasi**: API key dapat dibuat, digunakan, dan di-revoke.
 
-### Phase 5: OpenClaw (Phase 2E, Milestone M21)
+### Fase 5: OpenClaw (Fase 2E, Milestone M21)
 
 **Tujuan**: Setup schema openclaw untuk AI agent platform.
 
@@ -502,9 +502,9 @@ export const users = pgTable('users', {
 
 ### Keputusan
 
-Untuk Phase 1-4 (Papyr), gunakan **raw SQL**. Sederhana, tidak ada dependency tambahan, mudah di-review.
+Untuk Fase 1-4 (Papyr), gunakan **raw SQL**. Sederhana, tidak ada dependency tambahan, mudah di-review.
 
-Untuk Phase 5 (OpenClaw), evaluasi ulang apakah Drizzle ORM lebih cocok mengingat codebase TypeScript.
+Untuk Fase 5 (OpenClaw), evaluasi ulang apakah Drizzle ORM lebih cocok mengingat codebase TypeScript.
 
 ---
 
@@ -819,7 +819,7 @@ Untuk kasus-kasus ini, **restore dari backup** adalah satu-satunya opsi yang ama
 ```
 2026
 │
-├── M23 (Milestone 23) ─── Phase 1: PostgreSQL Setup + Users + Sessions
+├── M23 (Milestone 23) ─── Fase 1: PostgreSQL Setup + Users + Sessions
 │   ├── Week 1: Install PostgreSQL, konfigurasi, setup PgBouncer
 │   ├── Week 2: Create schema, run migrations 001-002
 │   └── Week 3: Integration testing, auth flow validation
@@ -827,20 +827,20 @@ Untuk kasus-kasus ini, **restore dari backup** adalah satu-satunya opsi yang ama
 ├── M24 (Milestone 24) ─── (Tidak ada migration, menggunakan tabel existing)
 │   └── User Dashboard menggunakan tabel users yang sudah ada
 │
-├── M25 (Milestone 25) ─── Phase 2: Usage Tracking
+├── M25 (Milestone 25) ─── Fase 2: Usage Tracking
 │   ├── Week 1: Run migration 003
 │   └── Week 2: Rate limit implementation + testing
 │
-├── M26 (Milestone 26) ─── Phase 3: Subscriptions
+├── M26 (Milestone 26) ─── Fase 3: Subscriptions
 │   ├── Week 1: Run migration 004
 │   ├── Week 2: Payment gateway integration
 │   └── Week 3: End-to-end payment flow testing
 │
-├── M27 (Milestone 27) ─── Phase 4: API Keys
+├── M27 (Milestone 27) ─── Fase 4: API Keys
 │   ├── Week 1: Run migration 005
 │   └── Week 2: API key generation + validation testing
 │
-└── Phase 2E, M21 ──────── Phase 5: OpenClaw Schema
+└── Fase 2E, M21 ──────── Fase 5: OpenClaw Schema
     ├── Week 1: Create openclaw schema, install pgvector
     ├── Week 2: Run migrations 006-020
     └── Week 3: Integration testing dengan OpenClaw agent
@@ -850,11 +850,11 @@ Untuk kasus-kasus ini, **restore dari backup** adalah satu-satunya opsi yang ama
 
 | Phase   | Milestone | Durasi Estimasi | Dependencies              |
 |---------|-----------|-----------------|---------------------------|
-| Phase 1 | M23       | 3 minggu        | VPS ready, domain ready   |
-| Phase 2 | M25       | 2 minggu        | Phase 1 selesai           |
-| Phase 3 | M26       | 3 minggu        | Phase 2 selesai, Midtrans |
-| Phase 4 | M27       | 2 minggu        | Phase 1 selesai           |
-| Phase 5 | 2E-M21    | 3 minggu        | Phase 1 selesai           |
+| Fase 1 | M23       | 3 minggu        | VPS ready, domain ready   |
+| Fase 2 | M25       | 2 minggu        | Fase 1 selesai           |
+| Fase 3 | M26       | 3 minggu        | Fase 2 selesai, Midtrans |
+| Fase 4 | M27       | 2 minggu        | Fase 1 selesai           |
+| Fase 5 | 2E-M21    | 3 minggu        | Fase 1 selesai           |
 
 ---
 

@@ -69,7 +69,7 @@ DRP ini mencakup seluruh layanan yang mendukung operasional Papyr:
 - **File Storage** (Cloudflare R2) — penyimpanan file sementara
 - **DNS/Domain** (Hostinger) — resolusi domain mypapyr.com
 - **Git Repository & CI/CD** (GitHub) — kode sumber dan deployment pipeline
-- **VPS** (HostData.id) — OpenClaw dan PostgreSQL (Phase 2E)
+- **VPS** (HostData.id) — OpenClaw dan PostgreSQL (Fase 2E)
 
 ### 1.3 Target RTO/RPO Global
 
@@ -108,7 +108,7 @@ Catatan: Target di atas berlaku untuk layanan inti (frontend + backend). Layanan
 
 | Service | Provider | Tier/Biaya | Criticality | Planned State | Fungsi |
 |---|---|---|---|---|---|
-| OpenClaw VPS | HostData.id | VPS | MEDIUM | Planned (Phase 2E) | AI operations agent, monitoring, auto-fix |
+| OpenClaw VPS | HostData.id | VPS | MEDIUM | Planned (Fase 2E) | AI operations agent, monitoring, auto-fix |
 | Database | PostgreSQL on HostData.id | Self-hosted | MEDIUM | Planned (MVP 0.3) | User data, analytics, tool usage history |
 
 ### 2.3 Dependency Map
@@ -266,7 +266,7 @@ Tidak ada kebutuhan backup untuk R2. File yang tersimpan adalah hasil proses sem
 | **Recovery** | pg_restore dari dump terakhir |
 | **Verifikasi** | Weekly automated restore test ke staging database |
 
-### 4.4 OpenClaw Data (Future, Phase 2E)
+### 4.4 OpenClaw Data (Future, Fase 2E)
 
 | Aspek | Detail |
 |---|---|

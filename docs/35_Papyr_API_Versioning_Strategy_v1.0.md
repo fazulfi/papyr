@@ -164,7 +164,7 @@ Semua endpoint baru langsung menggunakan prefix `/api/v1/`:
 | POST | `/api/v1/pdf-to-excel` | M18 | Konversi PDF ke Excel |
 | GET | `/api/v1/health` | M11 | Health check |
 
-### 3.3 Admin Endpoints (Phase 2F)
+### 3.3 Admin Endpoints (Fase 2F)
 
 Endpoint admin bersifat internal dan tidak memerlukan versioning:
 

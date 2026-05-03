@@ -35,9 +35,9 @@ mypapyr.com
 |-----------|-------------|------------------------------|----------------------------------------------------------------------------------------|
 | 1.0       | Juni 2025   | AI Agent (OpenCode/Sisyphus) | Draft awal — Product Roadmap lengkap mencakup MVP 0.1 (completed) hingga Fase 3 (planned) |
 | 2.0       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Major upgrade — Roadmap philosophy & prioritization framework, feature classification labels, sub-phase breakdown MVP 0.2, UI safety rules, detailed per-feature specs, gate conditions diperkuat |
-| 2.1       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2E — OpenClaw AI Agent (M21) sebagai sub-fase baru MVP 0.2, 10 fungsi otonom, deployment HostData.id VPS |
-| 2.2       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2F — Admin Dashboard (M22) sebagai unified admin panel, renumber milestones |
-| 2.3       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Update Phase 2E — OpenClaw expanded ke 10 fungsi, reporting diperluas, autonomy policy 100% |
+| 2.1       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Fase 2E — OpenClaw AI Agent (M21) sebagai sub-fase baru MVP 0.2, 10 fungsi otonom, deployment HostData.id VPS |
+| 2.2       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Fase 2F — Admin Dashboard (M22) sebagai unified admin panel, renumber milestones |
+| 2.3       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Update Fase 2E — OpenClaw expanded ke 10 fungsi, reporting diperluas, autonomy policy 100% |
 | 3.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete rewrite — Ekspansi 5 fase ke 7 fase, 114 fitur terklasifikasi, MVP 0.3 Foundation & UX Polish (baru), MVP 0.4 Auth + Monetization (baru), Fase 2-5 expanded, LLM strategy enowxAI + OpenRouter + 9Router |
 | 4.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete expansion — 7 fase ke 12 fase, 114 fitur ke 238 fitur. Tambah Fase 6 (Platform & Marketplace), Fase 7 (Enterprise & B2B), Fase 8 (AI Agent Swarm + Autonomy), Fase 9 (Moonshots & Future). Fase 5 diperluas dengan 8 OpenClaw agent baru. |
 
@@ -303,36 +303,36 @@ Fase 6           Fase 7           Fase 8           Fase 9
 
 | **#**  | **Milestone**            | **Sub-fase** | **Estimasi** | **Label** | **Status**  |
 |--------|--------------------------|--------------|--------------|-----------|-------------|
-| M12    | Protect PDF              | Phase 2A     | 8-12 jam     | 🟢        | 📋 Planned  |
-| M13    | Unlock PDF               | Phase 2A     | 8-12 jam     | 🟢        | 📋 Planned  |
-| M14    | Watermark PDF            | Phase 2B     | 10-15 jam    | 🟢        | 📋 Planned  |
-| M15    | Sign PDF                 | Phase 2B     | 15-20 jam    | 🟡        | 📋 Planned  |
-| M16    | PDF-to-Word              | Phase 2C     | 15-20 jam    | 🟡        | 📋 Planned  |
-| M17    | OCR                      | Phase 2C     | 20-30 jam    | 🟡        | 📋 Planned  |
-| M18    | PDF-to-Excel             | Phase 2C     | 15-20 jam    | 🟡        | 📋 Planned  |
-| M19-20 | Cross-cutting Quality    | Phase 2D     | 20-30 jam    | 🟢        | 📋 Planned  |
-| M21    | OpenClaw AI Agent        | Phase 2E     | 100-140 jam  | 🟡        | 📋 Planned  |
-| M22    | Admin Dashboard          | Phase 2F     | 30-40 jam    | 🟢        | 📋 Planned  |
+| M12    | Protect PDF              | Fase 2A     | 8-12 jam     | 🟢        | 📋 Planned  |
+| M13    | Unlock PDF               | Fase 2A     | 8-12 jam     | 🟢        | 📋 Planned  |
+| M14    | Watermark PDF            | Fase 2B     | 10-15 jam    | 🟢        | 📋 Planned  |
+| M15    | Sign PDF                 | Fase 2B     | 15-20 jam    | 🟡        | 📋 Planned  |
+| M16    | PDF-to-Word              | Fase 2C     | 15-20 jam    | 🟡        | 📋 Planned  |
+| M17    | OCR                      | Fase 2C     | 20-30 jam    | 🟡        | 📋 Planned  |
+| M18    | PDF-to-Excel             | Fase 2C     | 15-20 jam    | 🟡        | 📋 Planned  |
+| M19-20 | Cross-cutting Quality    | Fase 2D     | 20-30 jam    | 🟢        | 📋 Planned  |
+| M21    | OpenClaw AI Agent        | Fase 2E     | 100-140 jam  | 🟡        | 📋 Planned  |
+| M22    | Admin Dashboard          | Fase 2F     | 30-40 jam    | 🟢        | 📋 Planned  |
 
 #### MVP 0.3 (M23-M35) — PLANNED
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
-| M23    | Critical UX Bundle       | Phase 3A     | i18n, Error Boundary, Progress, Rate Limit   | 🟢        | 📋 Planned  |
-| M24-M27| UX Enhancement           | Phase 3B     | Dark Mode, a11y, PDF Preview, Onboarding, Compression | 🟢🟡 | 📋 Planned |
-| M28-M30| Performance              | Phase 3C     | PWA, Web Worker, Lazy Load, Image, Prefetch, Edge Cache | 🟢🟡 | 📋 Planned |
-| M31-M33| Interaction              | Phase 3D     | DnD, Shortcuts, History, Changelog, Undo     | 🟢🟡     | 📋 Planned  |
-| M34-M35| Growth Foundation        | Phase 3E     | Social Proof, Feedback, Recommendation       | 🔵🟣     | 📋 Planned  |
+| M23    | Critical UX Bundle       | Fase 3A     | i18n, Error Boundary, Progress, Rate Limit   | 🟢        | 📋 Planned  |
+| M24-M27| UX Enhancement           | Fase 3B     | Dark Mode, a11y, PDF Preview, Onboarding, Compression | 🟢🟡 | 📋 Planned |
+| M28-M30| Performance              | Fase 3C     | PWA, Web Worker, Lazy Load, Image, Prefetch, Edge Cache | 🟢🟡 | 📋 Planned |
+| M31-M33| Interaction              | Fase 3D     | DnD, Shortcuts, History, Changelog, Undo     | 🟢🟡     | 📋 Planned  |
+| M34-M35| Growth Foundation        | Fase 3E     | Social Proof, Feedback, Recommendation       | 🔵🟣     | 📋 Planned  |
 
 #### MVP 0.4 (M36-M45) — PLANNED
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
-| M36    | Auth & Payment           | Phase 4A     | Auth, Paywall, Quota, Payment                | 🟢🟡🔵   | 📋 Planned  |
-| M37-M38| API & Pro                | Phase 4B     | API Key, Batch, Share Link, Resumable Upload | 🟢🟡     | 📋 Planned  |
-| M39    | Growth & Engagement      | Phase 4C     | Referral, Gamification                       | 🔵🟣     | 📋 Planned  |
-| M40-M41| Advanced PDF             | Phase 4D     | Page Reorder, Metadata, Flatten              | 🟢        | 📋 Planned  |
-| M42-M45| Admin Upgrades           | Phase 4E     | WebSocket, Heatmap, Cost, Flags, Alerts      | 🟡🔴     | 📋 Planned  |
+| M36    | Auth & Payment           | Fase 4A     | Auth, Paywall, Quota, Payment                | 🟢🟡🔵   | 📋 Planned  |
+| M37-M38| API & Pro                | Fase 4B     | API Key, Batch, Share Link, Resumable Upload | 🟢🟡     | 📋 Planned  |
+| M39    | Growth & Engagement      | Fase 4C     | Referral, Gamification                       | 🔵🟣     | 📋 Planned  |
+| M40-M41| Advanced PDF             | Fase 4D     | Page Reorder, Metadata, Flatten              | 🟢        | 📋 Planned  |
+| M42-M45| Admin Upgrades           | Fase 4E     | WebSocket, Heatmap, Cost, Flags, Alerts      | 🟡🔴     | 📋 Planned  |
 
 #### Fase 2 (M46-M55) — VISI
 
@@ -500,14 +500,14 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 | **Sub-fase** | **Milestone** | **Fitur**                                    | **Label** | **Estimasi**    |
 |--------------|---------------|----------------------------------------------|-----------|--------------------|
-| Phase 2A     | M12, M13      | Protect PDF, Unlock PDF                      | 🟢🟢     | 16-24 jam       |
-| Phase 2B     | M14, M15      | Watermark PDF, Sign PDF                      | 🟢🟡     | 25-35 jam       |
-| Phase 2C     | M16, M17, M18 | PDF-to-Word, OCR, PDF-to-Excel              | 🟡🟡🟡   | 50-70 jam       |
-| Phase 2D     | M19, M20      | E2E Testing, Formatting, Perf, Monitoring, SEO, Analytics | 🟢🟢 | 20-30 jam |
-| Phase 2E     | M21           | OpenClaw AI Agent (10 fungsi otonom)         | 🟡        | 100-140 jam     |
-| Phase 2F     | M22           | Admin Dashboard (10 modul)                   | 🟢        | 30-40 jam       |
+| Fase 2A     | M12, M13      | Protect PDF, Unlock PDF                      | 🟢🟢     | 16-24 jam       |
+| Fase 2B     | M14, M15      | Watermark PDF, Sign PDF                      | 🟢🟡     | 25-35 jam       |
+| Fase 2C     | M16, M17, M18 | PDF-to-Word, OCR, PDF-to-Excel              | 🟡🟡🟡   | 50-70 jam       |
+| Fase 2D     | M19, M20      | E2E Testing, Formatting, Perf, Monitoring, SEO, Analytics | 🟢🟢 | 20-30 jam |
+| Fase 2E     | M21           | OpenClaw AI Agent (10 fungsi otonom)         | 🟡        | 100-140 jam     |
+| Fase 2F     | M22           | Admin Dashboard (10 modul)                   | 🟢        | 30-40 jam       |
 
-### 7.3 Phase 2A — Security Tools (M12 + M13) 🟢
+### 7.3 Fase 2A — Security Tools (M12 + M13) 🟢
 
 #### M12 — Protect PDF (Password Protection)
 
@@ -545,7 +545,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 - PDF tidak terproteksi → ditolak
 - File auto-delete 60 menit
 
-### 7.4 Phase 2B — Document Enhancement (M14 + M15) 🟢/🟡
+### 7.4 Fase 2B — Document Enhancement (M14 + M15) 🟢/🟡
 
 #### M14 — Watermark PDF 🟢
 
@@ -582,7 +582,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 - Canvas + drag berfungsi mobile touch
 - Ini visual signature, BUKAN cryptographic digital signature
 
-### 7.5 Phase 2C — Document Conversion (M16 + M17 + M18) 🟡
+### 7.5 Fase 2C — Document Conversion (M16 + M17 + M18) 🟡
 
 #### M16 — PDF-to-Word 🟡
 
@@ -614,7 +614,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | **Route**              | /pdf-to-excel                                                 |
 | **Estimasi**           | 15-20 jam                                                     |
 
-### 7.6 Phase 2D — Cross-cutting Quality 🟢
+### 7.6 Fase 2D — Cross-cutting Quality 🟢
 
 | **Item**                    | **Deskripsi**                                                    | **Estimasi** |
 |-----------------------------|------------------------------------------------------------------|--------------||
@@ -625,7 +625,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | SEO Update                  | Meta tags, sitemap 13+ URLs, OG images, JSON-LD per tool baru.   | 3-5 jam      |
 | Analytics Update            | Event tracking (started/completed/failed) untuk 7 tool baru.     | 1-2 jam      |
 
-### 7.7 Phase 2E — OpenClaw AI Agent (M21) 🟡
+### 7.7 Fase 2E — OpenClaw AI Agent (M21) 🟡
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
@@ -651,7 +651,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 9     | Analytics Intelligence  | Prasasti    | Mingguan          |
 | 10    | Social Media (Twitter)  | Kicau       | Harian            |
 
-### 7.8 Phase 2F — Admin Dashboard (M22) 🟢
+### 7.8 Fase 2F — Admin Dashboard (M22) 🟢
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
@@ -677,12 +677,12 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 ### 7.9 Rilis Incremental
 
-- Phase 2A selesai → deploy (8 tools live)
-- Phase 2B selesai → deploy (10 tools live)
-- Phase 2C selesai → deploy (13 tools live)
-- Phase 2D selesai → deploy (quality hardened)
-- Phase 2E selesai → deploy OpenClaw (autonomous operations active)
-- Phase 2F selesai → deploy Admin Dashboard (unified monitoring active)
+- Fase 2A selesai → deploy (8 tools live)
+- Fase 2B selesai → deploy (10 tools live)
+- Fase 2C selesai → deploy (13 tools live)
+- Fase 2D selesai → deploy (quality hardened)
+- Fase 2E selesai → deploy OpenClaw (autonomous operations active)
+- Fase 2F selesai → deploy Admin Dashboard (unified monitoring active)
 
 ---
 
@@ -698,7 +698,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | **Milestone**          | M23-M35                                                       |
 | **Estimasi Total**     | 135-185 jam                                                   |
 
-### 8.2 Phase 3A — Critical UX (4 fitur)
+### 8.2 Fase 3A — Critical UX (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -707,7 +707,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 3     | Progress Indicator           | 🟢        | Progress bar real-time semua tools. Persentase upload.            |
 | 4     | Rate Limit Feedback 429      | 🟢        | UI feedback HTTP 429. Countdown timer Retry-After.                |
 
-### 8.3 Phase 3B — UX Enhancement (5 fitur)
+### 8.3 Fase 3B — UX Enhancement (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -717,7 +717,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 8     | Onboarding Tour              | 🟢        | Tour interaktif first-time visitors. 3-5 langkah.                |
 | 9     | Compression Comparison       | 🟢        | Visual perbandingan ukuran before/after.                          |
 
-### 8.4 Phase 3C — Performance (6 fitur)
+### 8.4 Fase 3C — Performance (6 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -728,7 +728,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 14    | Prefetch on Hover            | 🟢        | Prefetch tool page saat hover grid. Navigasi < 100ms.             |
 | 15    | Edge Caching (Cloudflare)    | 🟢        | Edge caching static + API. Cache-hit > 80%. TTFB < 200ms ID.     |
 
-### 8.5 Phase 3D — Interaction (5 fitur)
+### 8.5 Fase 3D — Interaction (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -738,7 +738,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 19    | Changelog Page (/changelog)  | 🟢        | Halaman publik riwayat perubahan. Badge "Baru" < 7 hari.         |
 | 20    | Undo/Redo                    | 🟡        | Undo/redo client-side ops. Command pattern. Max 20 history.       |
 
-### 8.6 Phase 3E — Growth Foundation (3 fitur)
+### 8.6 Fase 3E — Growth Foundation (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -825,28 +825,28 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 | **Sub-fase** | **Fitur** | **Estimasi Min** | **Estimasi Max** | **Kompleksitas** |
 |--------------|-----------|------------------|------------------|------------------|
-| Phase 3A     | 4 fitur   | 21 jam           | 33 jam           | Low-Medium       |
-| Phase 3B     | 5 fitur   | 34 jam           | 52 jam           | Medium           |
-| Phase 3C     | 6 fitur   | 28 jam           | 43 jam           | Medium           |
-| Phase 3D     | 5 fitur   | 25 jam           | 38 jam           | Medium-High      |
-| Phase 3E     | 3 fitur   | 15 jam           | 23 jam           | Low-Medium       |
+| Fase 3A     | 4 fitur   | 21 jam           | 33 jam           | Low-Medium       |
+| Fase 3B     | 5 fitur   | 34 jam           | 52 jam           | Medium           |
+| Fase 3C     | 6 fitur   | 28 jam           | 43 jam           | Medium           |
+| Fase 3D     | 5 fitur   | 25 jam           | 38 jam           | Medium-High      |
+| Fase 3E     | 3 fitur   | 15 jam           | 23 jam           | Low-Medium       |
 | **Total**    | **23**    | **123 jam**      | **189 jam**      | —                |
 
 ### 8.9 Dependensi Internal MVP 0.3
 
 ```
-Phase 3A (Critical UX) ──────────────────────────────────────────────────────────────
+Fase 3A (Critical UX) ──────────────────────────────────────────────────────────────
     │
-    ├──► Phase 3B (UX Enhancement) ── depends on: i18n strings ready
+    ├──► Fase 3B (UX Enhancement) ── depends on: i18n strings ready
     │         │
-    │         └──► Phase 3E (Growth) ── depends on: feedback widget needs a11y
+    │         └──► Fase 3E (Growth) ── depends on: feedback widget needs a11y
     │
-    ├──► Phase 3C (Performance) ── depends on: error boundary for SW failures
+    ├──► Fase 3C (Performance) ── depends on: error boundary for SW failures
     │
-    └──► Phase 3D (Interaction) ── depends on: progress indicator for undo feedback
+    └──► Fase 3D (Interaction) ── depends on: progress indicator for undo feedback
 ```
 
-Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan error handling harus tersedia sebelum fitur lain dibangun.
+Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan error handling harus tersedia sebelum fitur lain dibangun.
 
 ---
 
@@ -870,7 +870,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Free (Dengan Login)**     | Gratis                                 | + OCR 5x/hari, PDF-to-Word 5x/hari, PDF-to-Excel 3x/hari   |
 | **Pro**                     | Rp 19.900/bulan (Rp 149.000/tahun)    | Unlimited semua, batch, 100 MB, priority queue, API access   |
 
-### 9.3 Phase 4A — Auth & Payment (4 fitur)
+### 9.3 Fase 4A — Auth & Payment (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -879,7 +879,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 3     | Usage Quota Tracker          | 🟢        | Tracking per user/tool/hari. Rate limiting per tier.              |
 | 4     | Payment Integration          | 🟡        | Bank transfer, e-wallet (GoPay, OVO, DANA), CC. Midtrans/Xendit. |
 
-### 9.4 Phase 4B — API & Pro Features (4 fitur)
+### 9.4 Fase 4B — API & Pro Features (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -888,14 +888,14 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 7     | Share Result Link            | 🟢        | Shareable link hasil processing. Valid 24 jam. Optional password.  |
 | 8     | Streaming Upload (Resumable) | 🟡        | Resumable upload file besar. Chunk 5MB. Retry otomatis.           |
 
-### 9.5 Phase 4C — Growth & Engagement (2 fitur)
+### 9.5 Fase 4C — Growth & Engagement (2 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
 | 9     | Referral System              | 🔵        | Unique link per user. 1 bulan Pro gratis per 5 referral.          |
 | 10    | Achievement/Gamification     | 🟣        | Badge milestones. 10+ achievements. Notification unlock.          |
 
-### 9.6 Phase 4D — Advanced PDF (3 fitur)
+### 9.6 Fase 4D — Advanced PDF (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -903,7 +903,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 12    | PDF Metadata Editor          | 🟢        | Edit title, author, subject, keywords. Client-side pdf-lib.       |
 | 13    | Flatten PDF                  | 🟢        | Flatten forms + annotations → static. Finalisasi dokumen.         |
 
-### 9.7 Phase 4E — Admin Upgrades (5 fitur)
+### 9.7 Fase 4E — Admin Upgrades (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1000,7 +1000,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | OpenRouter     | Fallback #1      | Model per fitur (cost-optimized)   | Fallback saat enowxAI unavailable               |
 | 9Router        | Fallback #2      | Auto-routes ke cheapest available  | Final fallback, 3-tier routing                  |
 
-### 10.3 Phase F2A — AI Intelligence (5 fitur)
+### 10.3 Fase F2A — AI Intelligence (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1010,7 +1010,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 4     | AI Table Extraction          | 🟣        | Deteksi tabel via AI vision. Lebih akurat dari camelot.           |
 | 5     | AI Document Classification   | 🟣        | Klasifikasi otomatis 10+ tipe dokumen. Confidence score.          |
 
-### 10.4 Phase F2B — AI Enhancement (9 fitur)
+### 10.4 Fase F2B — AI Enhancement (9 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1024,13 +1024,13 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 13    | AI Accessibility Checker     | 🟡        | Analisis PDF aksesibilitas. Laporan + saran. PDF/UA check.        |
 | 14    | AI OCR Enhancement (Handwriting) | 🟣    | OCR tulisan tangan via AI vision. Akurasi > Tesseract.            |
 
-### 10.5 Phase F2C — AI Automation (1 fitur)
+### 10.5 Fase F2C — AI Automation (1 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
 | 15    | AI Workflow Builder           | ⚪        | Visual drag-drop workflow builder. Gabungkan tools dalam pipeline. |
 
-### 10.6 Phase F2D — AI OpenClaw Upgrades (7 fitur)
+### 10.6 Fase F2D — AI OpenClaw Upgrades (7 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1101,7 +1101,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Milestone**          | M56-M65                                                       |
 | **Estimasi Total**     | 215-295 jam                                                   |
 
-### 11.2 Phase F3A — AI Intelligence Advanced (4 fitur)
+### 11.2 Fase F3A — AI Intelligence Advanced (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1110,7 +1110,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 3     | AI Resume Parser             | 🟡        | Parsing CV/resume: nama, kontak, pendidikan, pengalaman, skills.  |
 | 4     | AI Legal Document Analyzer   | 🟣        | Analisis dokumen hukum: klausul penting, risiko, tanggal kritis.  |
 
-### 11.3 Phase F3B — AI Content Generation (6 fitur)
+### 11.3 Fase F3B — AI Content Generation (6 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1121,7 +1121,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 9     | AI Proposal Generator        | 🟡        | Generate proposal bisnis dari brief. Struktur standar Indonesia.  |
 | 10    | AI Slide to PDF              | 🟡        | Konversi presentasi (PPTX) ke PDF dengan layout terjaga.          |
 
-### 11.4 Phase F3C — AI Automation Advanced (3 fitur)
+### 11.4 Fase F3C — AI Automation Advanced (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1129,7 +1129,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 12    | AI Template Matching         | 🟣        | AI mencocokkan dokumen dengan template yang sesuai. Auto-fill.    |
 | 13    | AI Document Comparison       | 🟡        | Bandingkan 2 PDF menggunakan AI: highlight perbedaan konten.      |
 
-### 11.5 Phase F3D — Advanced PDF (5 fitur)
+### 11.5 Fase F3D — Advanced PDF (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1139,7 +1139,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 17    | PDF Redaction                | 🔴        | Redact (hapus permanen) area sensitif dari PDF. Irreversible.     |
 | 18    | PDF/A Conversion             | 🔴        | Konversi PDF ke PDF/A format (archival). Compliance ISO 19005.    |
 
-### 11.6 Phase F3E — Integrations (4 fitur)
+### 11.6 Fase F3E — Integrations (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1202,7 +1202,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Milestone**          | M66-M72                                                       |
 | **Estimasi Total**     | 145-200 jam                                                   |
 
-### 12.2 Phase F4A — Indonesia-Specific AI (6 fitur)
+### 12.2 Fase F4A — Indonesia-Specific AI (6 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1213,7 +1213,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 5     | AI Akta Notaris Parser       | 🟣        | Parsing akta notaris: pihak-pihak, objek, tanggal, nomor akta.   |
 | 6     | AI Bilingual Document        | 🔴        | Generate dokumen bilingual (ID + EN) side-by-side.                |
 
-### 12.3 Phase F4B — Enterprise (3 fitur)
+### 12.3 Fase F4B — Enterprise (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1221,7 +1221,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 8     | White-label API              | 🟡        | API yang bisa di-rebrand oleh partner. Custom domain.             |
 | 9     | Invoice Generator            | 🟢        | Generate invoice PDF dari data. Template Indonesia (faktur pajak).|
 
-### 12.4 Phase F4C — Admin Advanced (3 fitur)
+### 12.4 Fase F4C — Admin Advanced (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1229,7 +1229,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 11    | A/B Testing Engine           | 🔴        | Engine A/B testing built-in. Statistical significance calculator. |
 | 12    | SEO Dashboard (GSC)          | 🔴        | Integrasi Google Search Console. Rankings, impressions, clicks.   |
 
-### 12.5 Phase F4D — OpenClaw Advanced (2 fitur)
+### 12.5 Fase F4D — OpenClaw Advanced (2 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1293,14 +1293,14 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Milestone**          | M73-M86                                                       |
 | **Estimasi Total**     | 200-280 jam                                                   |
 
-### 13.2 Phase F5A — Messaging Bots (2 fitur)
+### 13.2 Fase F5A — Messaging Bots (2 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
 | 1     | WhatsApp Bot                 | 🟡        | Bot WhatsApp untuk processing PDF. Business API. User-facing.     |
 | 2     | Telegram Bot (User-facing)   | 🟡        | Bot Telegram publik untuk users. Inline keyboard menu.            |
 
-### 13.3 Phase F5B — Developer Tools (3 fitur)
+### 13.3 Fase F5B — Developer Tools (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1308,7 +1308,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 4     | AI Email Attachment Processor | 🟣       | Auto-process PDF attachments dari email. Forward → classify → process. |
 | 5     | AI Scheduled Processing      | 🟡        | Schedule recurring PDF processing. Cron-like interface.            |
 
-### 13.4 Phase F5C — OpenClaw Ecosystem (5 fitur)
+### 13.4 Fase F5C — OpenClaw Ecosystem (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1318,7 +1318,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 9     | AI Pricing Optimizer         | 🔵        | AI analisis conversion data dan recommend pricing adjustments.    |
 | 10    | AI Performance Tuner         | ⚪        | AI otomatis tune infrastructure parameters.                       |
 
-### 13.5 Phase F5D — Growth (4 fitur)
+### 13.5 Fase F5D — Growth (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
 |-------|------------------------------|-----------|------------------------------------------------------------------|
@@ -1327,7 +1327,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 13    | Haptic Feedback              | 🟢        | Haptic feedback di mobile saat processing selesai atau error.     |
 | 14    | Voice Command                | 🟡        | Voice command untuk hands-free operation. Speech-to-text + intent.|
 
-### 13.6 Phase F5E — OpenClaw Agent Expansion (4 fitur) ✨ BARU v4.0
+### 13.6 Fase F5E — OpenClaw Agent Expansion (4 fitur) ✨ BARU v4.0
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1336,7 +1336,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 17    | Outreach Agent               | 🟡        | Otomatis identifikasi dan hubungi potential partners, influencers, media. Personalized outreach templates. | M81 |
 | 18    | Revenue Optimizer Agent      | ⚪        | Analisis revenue streams, identifikasi peluang upsell, optimasi pricing secara otonom. A/B test pricing. | M82 |
 
-### 13.7 Phase F5F — OpenClaw Specialist Agents (4 fitur) ✨ BARU v4.0
+### 13.7 Fase F5F — OpenClaw Specialist Agents (4 fitur) ✨ BARU v4.0
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1482,7 +1482,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Milestone**          | M87-M98                                                       |
 | **Estimasi Total**     | 350-500 jam                                                   |
 
-### 14.2 Phase F6A — Platform Core (5 fitur)
+### 14.2 Fase F6A — Platform Core (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1492,7 +1492,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 4     | Desktop App (Electron/Tauri) | 🟡        | Aplikasi desktop native. Offline processing penuh. Auto-update. Integrasi OS (right-click menu, file associations). | M89 |
 | 5     | Mobile App (React Native/Flutter) | 🟡   | Aplikasi mobile native. Camera scan → PDF. Offline tools. Push notifications. Biometric auth. | M89 |
 
-### 14.3 Phase F6B — Creator Economy (4 fitur)
+### 14.3 Fase F6B — Creator Economy (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1501,7 +1501,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 8     | Freelancer Marketplace       | 🔵        | Platform menghubungkan freelancer document specialist dengan klien. Escrow payment. Rating system. | M91 |
 | 9     | Courses & Certification      | 🟢        | Program sertifikasi "Papyr Certified Professional". Online exam. Digital badge. LinkedIn integration. | M92 |
 
-### 14.4 Phase F6C — Revenue & Community (4 fitur)
+### 14.4 Fase F6C — Revenue & Community (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1510,7 +1510,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 12    | Pay-per-Use API              | 🟡        | API pricing model pay-per-use selain subscription. Metered billing. Usage dashboard. Auto-topup. | M94 |
 | 13    | Affiliate Network            | 🔵        | Ekspansi affiliate program menjadi network. Multi-tier commission. Affiliate dashboard advanced. | M95 |
 
-### 14.5 Phase F6D — Platform Ecosystem (12 fitur)
+### 14.5 Fase F6D — Platform Ecosystem (12 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1627,7 +1627,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Milestone**          | M99-M108                                                      |
 | **Estimasi Total**     | 400-600 jam                                                   |
 
-### 15.2 Phase F7A — Government & Compliance (3 fitur)
+### 15.2 Fase F7A — Government & Compliance (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1635,7 +1635,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 2     | Enterprise Console           | 🟡        | Admin console enterprise. Multi-tenant management. User provisioning. Usage analytics per department. Billing center. | M99 |
 | 3     | Compliance Dashboard         | 🔴        | Dashboard compliance real-time. UU PDP, ISO 27001, SOC 2 tracking. Audit readiness score. Gap analysis. | M100 |
 
-### 15.3 Phase F7B — Workflow & Security (3 fitur)
+### 15.3 Fase F7B — Workflow & Security (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1643,7 +1643,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 5     | Secure Room (Encrypted Collaboration) | 🔴 | Ruang kolaborasi terenkripsi end-to-end. Document sharing, commenting, versioning dalam environment aman. Zero-knowledge. | M101 |
 | 6     | Audit Trail                  | 🟡        | Audit trail lengkap semua aktivitas. Who did what, when, where. Immutable log. Export untuk compliance. Retention policy. | M102 |
 
-### 15.4 Phase F7C — Enterprise Infrastructure (3 fitur)
+### 15.4 Fase F7C — Enterprise Infrastructure (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1651,7 +1651,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 8     | Enterprise Self-Hosted       | 🔴        | Deployment on-premise/private cloud. Docker + Kubernetes. Air-gapped support. Custom configuration. | M103 |
 | 9     | Vertical Solutions           | ⚪        | Solusi vertikal per industri: Legal, Healthcare, Real Estate, HR, Accounting, Construction, Education. Pre-configured workflows + templates. | M104 |
 
-### 15.5 Phase F7D — Collaboration (4 fitur)
+### 15.5 Fase F7D — Collaboration (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1660,7 +1660,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 12    | Team Management              | 🟢        | Team management lengkap. Invite, roles, permissions, groups. Activity feed. Team analytics. | M106 |
 | 13    | SSO/SAML                     | 🔴        | Single Sign-On via SAML 2.0, OpenID Connect. Integration dengan Azure AD, Okta, Google Workspace. | M106 |
 
-### 15.6 Phase F7E — Enterprise Services (7 fitur)
+### 15.6 Fase F7E — Enterprise Services (7 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1766,7 +1766,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Milestone**          | M109-M118                                                     |
 | **Estimasi Total**     | 500-700 jam                                                   |
 
-### 16.2 Phase F8A — AI Workflow (3 fitur)
+### 16.2 Fase F8A — AI Workflow (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1774,7 +1774,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 2     | AI PDF Agent (Conversational Multi-step) | 🟣 | Agent conversational yang bisa melakukan multi-step PDF operations. "Ambil halaman 3-5, compress, lalu watermark dengan logo saya." Chain of actions. | M109 |
 | 3     | Bulk Intelligence (Batch AI Processing) | 🟡 | Batch AI processing untuk ratusan dokumen. Classify, extract, transform secara paralel. Progress tracking. Error handling per file. | M110 |
 
-### 16.3 Phase F8B — AI Document Intelligence (4 fitur)
+### 16.3 Fase F8B — AI Document Intelligence (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1783,7 +1783,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 6     | Style Transfer (Document Styling) | ⚪   | Transfer visual style dari satu dokumen ke dokumen lain. "Buat laporan ini terlihat seperti template A." AI-powered layout matching. | M112 |
 | 7     | Document Understanding Graph | ⚪        | Knowledge graph dari dokumen. Relasi antar entitas, timeline events, cross-document references. Visual graph explorer. | M112 |
 
-### 16.4 Phase F8C — AI Predictive (3 fitur)
+### 16.4 Fase F8C — AI Predictive (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1791,7 +1791,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 9     | Quality Score (Document Quality Assessment) | ⚪ | AI assess kualitas dokumen: readability, formatting consistency, accessibility, print-readiness. Score 0-100 + improvement suggestions. | M113 |
 | 10    | Multi-Modal Input (Voice, Image, Text → PDF) | 🟡 | Input multi-modal untuk PDF creation. Dikte via voice, foto whiteboard, text notes — semua bisa jadi PDF terstruktur. | M114 |
 
-### 16.5 Phase F8D — OpenClaw Swarm Core (3 fitur)
+### 16.5 Fase F8D — OpenClaw Swarm Core (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1799,7 +1799,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 12    | OpenClaw Multi-Project Management | 🟣   | OpenClaw mengelola multiple projects/products secara simultan. Resource allocation, priority balancing, cross-project insights. | M115 |
 | 13    | OpenClaw Memory System (Persistent Context) | 🔵 | Persistent memory system untuk agents. Long-term context, learned preferences, historical decisions. Forgetting mechanism untuk privacy. | M116 |
 
-### 16.6 Phase F8E — OpenClaw Autonomy (7 fitur)
+### 16.6 Fase F8E — OpenClaw Autonomy (7 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1949,7 +1949,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Milestone**          | M119-M145                                                     |
 | **Estimasi Total**     | 1000-1500 jam                                                 |
 
-### 17.2 Phase F9A — Knowledge & Compliance (3 fitur)
+### 17.2 Fase F9A — Knowledge & Compliance (3 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1957,7 +1957,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 2     | Compliance Engine            | 🔴        | Engine compliance otomatis. Check dokumen terhadap regulasi (UU PDP, GDPR, ISO). Auto-flag violations. Remediation suggestions. | M120 |
 | 3     | Regulatory Radar             | 🔴        | Monitor perubahan regulasi real-time. Alert dampak ke operasi. Suggest policy updates. Indonesia + ASEAN coverage. | M121 |
 
-### 17.3 Phase F9B — Indonesia Government Deep (5 fitur)
+### 17.3 Fase F9B — Indonesia Government Deep (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1967,7 +1967,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 7     | Surat Dinas Generator        | 🟢        | Generator surat dinas pemerintah. 50+ template standar. Nomor surat otomatis. Kop surat. Disposisi. | M124 |
 | 8     | UMKM Document Suite          | 🟢        | Suite dokumen lengkap untuk UMKM. SIUP, NIB, NPWP, invoice, kwitansi, surat jalan, PO. One-stop solution. | M125 |
 
-### 17.4 Phase F9C — Security & Trust (5 fitur)
+### 17.4 Fase F9C — Security & Trust (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1977,7 +1977,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 12    | Stamp/Seal Digital           | 🔴        | Stempel dan cap digital resmi. Integrasi dengan PSrE. Verifiable digital stamps. Organization-level seals. | M127 |
 | 13    | Document Insurance           | 🔴        | Asuransi dokumen digital. Guarantee keaslian, recovery jika hilang. Partnership dengan asuransi. | M128 |
 
-### 17.5 Phase F9D — API & OpenClaw Future (5 fitur)
+### 17.5 Fase F9D — API & OpenClaw Future (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1987,7 +1987,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 17    | OpenClaw Partnership Agent   | 🟣        | Agent khusus manage partnerships end-to-end. Discovery, outreach, negotiation support, relationship maintenance. | M131 |
 | 18    | OpenClaw Autonomous Hiring   | ⚪        | Agent yang bisa identify, evaluate, dan onboard freelance contributors. Task assignment, quality review, payment. | M131 |
 
-### 17.6 Phase F9E — AI Frontier (4 fitur)
+### 17.6 Fase F9E — AI Frontier (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -1996,7 +1996,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 21    | Network Effect Platform      | 🔵        | Platform dengan network effects. Semakin banyak user, semakin baik AI (shared templates, collective intelligence). | M133 |
 | 22    | Indonesia Document Standard  | ⚪        | Propose dan establish standar dokumen digital Indonesia. Working group, RFC process, government adoption. | M134 |
 
-### 17.7 Phase F9F — Next-Gen Interface (5 fitur)
+### 17.7 Fase F9F — Next-Gen Interface (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -2006,7 +2006,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 26    | Smart Printer Integration    | 🟡        | Integrasi dengan smart printers. Print-from-Papyr, scan-to-Papyr. Driver/plugin untuk major printer brands. | M136 |
 | 27    | NFC Tag Documents            | 🟣        | NFC tags pada dokumen fisik yang link ke versi digital. Tap phone → view/verify document. Anti-counterfeit. | M137 |
 
-### 17.8 Phase F9G — Social Impact (5 fitur)
+### 17.8 Fase F9G — Social Impact (5 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -2016,7 +2016,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 31    | Open Data Initiative         | ⚪        | Kontribusi ke open data Indonesia. Anonymized document statistics, format trends, usage patterns. Public API. | M139 |
 | 32    | Green Computing              | 🟣        | Minimize carbon footprint. Green hosting, efficient algorithms, carbon offset. Sustainability report. | M140 |
 
-### 17.9 Phase F9H — Analytics & Intelligence (4 fitur)
+### 17.9 Fase F9H — Analytics & Intelligence (4 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -2025,14 +2025,14 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 35    | Industry Reports             | 🔵        | Generate industry reports tentang document management trends di Indonesia. Monetizable content. | M142 |
 | 36    | Document Health Score        | 🟡        | Health score per dokumen: accessibility, size efficiency, metadata completeness, security level. Improvement tips. | M143 |
 
-### 17.10 Phase F9I — Agent Specialists (2 fitur)
+### 17.10 Fase F9I — Agent Specialists (2 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
 | 37    | Financial Controller Agent   | 🟣        | Agent khusus financial management. Budget tracking, cost optimization, revenue forecasting, invoice management. | M144 |
 | 38    | Incident Commander Agent     | ⚪        | Agent khusus incident management. Auto-detect incidents, coordinate response, communicate status, post-mortem. | M144 |
 
-### 17.11 Phase F9J — Integrations & Devices (11 fitur)
+### 17.11 Fase F9J — Integrations & Devices (11 fitur)
 
 | **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
 |-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
@@ -2047,7 +2047,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | 47    | Offline-First Architecture   | 🟡        | Full offline-first architecture. Semua tools offline. Sync saat online. Conflict resolution. | M145 |
 | 48    | Personal AI Assistant        | 🟣        | Personal AI assistant untuk document management. Learns preferences, proactive suggestions, automated workflows. | M145 |
 
-> **Catatan:** Neural PDF (AI-native format) tercakup dalam fitur #20 "Custom Document Format" di Phase F9E.
+> **Catatan:** Neural PDF (AI-native format) tercakup dalam fitur #20 "Custom Document Format" di Fase F9E.
 
 ### 17.12 Acceptance Criteria Fase 9 (Detail)
 
@@ -2152,7 +2152,7 @@ Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan e
 | **Fitur** | **Risk Level** | **Key Risk** | **Mitigation** |
 |-----------|---------------|--------------|----------------|
 | Blockchain Verification | Medium | Adoption uncertainty | Start with optional, prove value first |
-| Zero-Knowledge Processing | High | Technical complexity | Research phase first, prototype before commit |
+| Zero-Knowledge Processing | High | Technical complexity | Research fase first, prototype before commit |
 | Scanner Box (Hardware) | High | Manufacturing complexity | Software-first, hardware as enhancement |
 | e-Meterai Partnership | Medium | Regulatory dependency | Multiple aggregator relationships |
 | Proprietary AI Models | High | Training data quality | Rigorous curation, human validation |
@@ -2210,17 +2210,17 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 │       ▼ [GATE: live & stabil ✅]                                                            │
 │                                                                                             │
 │  MVP 0.2 (CURRENT) 🔄                                                                       │
-│  Phase 2A → 2B → 2C → 2D → 2E (M21) → 2F (M22)                                           │
+│  Fase 2A → 2B → 2C → 2D → 2E (M21) → 2F (M22)                                           │
 │       │                                                                                     │
 │       ▼ [GATE: semua tool berfungsi + OpenClaw aktif]                                       │
 │                                                                                             │
 │  MVP 0.3 (PLANNED) 📋                                                                       │
-│  Phase 3A → 3B → 3C → 3D → 3E                                                             │
+│  Fase 3A → 3B → 3C → 3D → 3E                                                             │
 │       │                                                                                     │
 │       ▼ [GATE: ≥ 10K tasks/mo OR ≥ 5K MAU]                                                 │
 │                                                                                             │
 │  MVP 0.4 (PLANNED) 📋                                                                       │
-│  Phase 4A → 4B → 4C → 4D → 4E                                                             │
+│  Fase 4A → 4B → 4C → 4D → 4E                                                             │
 │       │                                                                                     │
 │       ▼ [GATE: revenue > Rp 0]                                                             │
 │                                                                                             │
@@ -2257,19 +2257,19 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 19.2 Cross-Phase Dependencies
+### 19.2 Cross-Fase Dependencies
 
 | **Fitur (Source)** | **Depends On** | **Alasan** |
 |--------------------|----------------|------------|
 | MVP 0.3 i18n | MVP 0.2 complete | Semua tool harus ada sebelum translate strings |
-| MVP 0.3 PWA | MVP 0.2 Phase 2D (Perf) | Performance baseline harus tercapai dulu |
+| MVP 0.3 PWA | MVP 0.2 Fase 2D (Perf) | Performance baseline harus tercapai dulu |
 | MVP 0.4 Auth | MVP 0.3 complete | UX polish harus selesai sebelum login flow |
 | MVP 0.4 Payment | MVP 0.4 Auth | Payment membutuhkan user accounts |
 | MVP 0.4 API Key | MVP 0.4 Payment | API access = Pro feature |
 | Fase 2 AI features | MVP 0.4 Payment | Revenue validation required |
-| Fase 2 AI OpenClaw | MVP 0.2 Phase 2E | Existing OpenClaw harus stable |
+| Fase 2 AI OpenClaw | MVP 0.2 Fase 2E | Existing OpenClaw harus stable |
 | Fase 3 Integrations | MVP 0.4 Auth | OAuth flow membutuhkan user accounts |
-| Fase 3 PDF/A | MVP 0.2 Phase 2C | Ghostscript harus sudah di-setup |
+| Fase 3 PDF/A | MVP 0.2 Fase 2C | Ghostscript harus sudah di-setup |
 | Fase 4 e-Meterai | Fase 3 complete | Regulatory assessment membutuhkan stable product |
 | Fase 4 Enterprise | MVP 0.4 Auth + Payment | Multi-tenant membutuhkan auth + billing |
 | Fase 5 WhatsApp Bot | Fase 4 complete | Bot membutuhkan semua tools + AI available |
@@ -2527,8 +2527,8 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | PPR-PC-001     | Project Charter                        | Scope, deliverables, stakeholders, budget constraints             |
 | PPR-PP-001     | Project Plan                           | WBS detail, resource allocation, timeline operasional             |
 | PPR-GTM-001    | Go-To-Market Strategy                  | Launch strategy, marketing channels, user acquisition plan        |
-| PPR-CLAW-001   | OpenClaw AI Agent                      | Phase 2E spec, 10 autonomous functions, deployment architecture   |
-| PPR-ADM-001    | Admin Dashboard Spec                   | Phase 2F spec, 10 admin modules, unified monitoring panel         |
+| PPR-CLAW-001   | OpenClaw AI Agent                      | Fase 2E spec, 10 autonomous functions, deployment architecture   |
+| PPR-ADM-001    | Admin Dashboard Spec                   | Fase 2F spec, 10 admin modules, unified monitoring panel         |
 
 ### 23.2 Mapping Roadmap ke Dokumen
 
@@ -2551,8 +2551,8 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 
 | **Fase** | **Sub-fase** | **Fitur Count** | **Verified** |
 |----------|--------------|-----------------|--------------|
-| MVP 0.3  | Phase 3A-3E  | 23              | ✅           |
-| MVP 0.4  | Phase 4A-4E  | 18              | ✅           |
+| MVP 0.3  | Fase 3A-3E  | 23              | ✅           |
+| MVP 0.4  | Fase 4A-4E  | 18              | ✅           |
 | Fase 2   | F2A-F2D      | 22              | ✅           |
 | Fase 3   | F3A-F3E      | 22              | ✅           |
 | Fase 4   | F4A-F4D      | 14              | ✅           |
@@ -2577,17 +2577,17 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 
 | **Fase** | **Sub-fase** | **Fitur Count** | **Verified** |
 |----------|--------------|-----------------|--------------|
-| MVP 0.3  | Phase 3A     | 4               | ✅           |
-| MVP 0.3  | Phase 3B     | 5               | ✅           |
-| MVP 0.3  | Phase 3C     | 6               | ✅           |
-| MVP 0.3  | Phase 3D     | 5               | ✅           |
-| MVP 0.3  | Phase 3E     | 3               | ✅           |
+| MVP 0.3  | Fase 3A     | 4               | ✅           |
+| MVP 0.3  | Fase 3B     | 5               | ✅           |
+| MVP 0.3  | Fase 3C     | 6               | ✅           |
+| MVP 0.3  | Fase 3D     | 5               | ✅           |
+| MVP 0.3  | Fase 3E     | 3               | ✅           |
 | **MVP 0.3 Total** | | **23**          | ✅           |
-| MVP 0.4  | Phase 4A     | 4               | ✅           |
-| MVP 0.4  | Phase 4B     | 4               | ✅           |
-| MVP 0.4  | Phase 4C     | 2               | ✅           |
-| MVP 0.4  | Phase 4D     | 3               | ✅           |
-| MVP 0.4  | Phase 4E     | 5               | ✅           |
+| MVP 0.4  | Fase 4A     | 4               | ✅           |
+| MVP 0.4  | Fase 4B     | 4               | ✅           |
+| MVP 0.4  | Fase 4C     | 2               | ✅           |
+| MVP 0.4  | Fase 4D     | 3               | ✅           |
+| MVP 0.4  | Fase 4E     | 5               | ✅           |
 | **MVP 0.4 Total** | | **18**          | ✅           |
 | Fase 2   | F2A          | 5               | ✅           |
 | Fase 2   | F2B          | 9               | ✅           |

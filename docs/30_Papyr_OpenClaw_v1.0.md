@@ -10,7 +10,7 @@
 | **ID Dokumen**      | PPR-CLAW-001                                 |
 | **Versi**           | 1.1                                          |
 | **Status**          | Draft                                        |
-| **Fase**            | Phase 2 (MVP 0.2)                            |
+| **Fase**            | Fase 2 (MVP 0.2)                            |
 | **Tanggal Dibuat**  | Juli 2025                                    |
 | **Terakhir Diubah** | Juli 2025                                    |
 | **Penulis**         | Muhammad Fa'iz Zulfikar                      |
@@ -24,7 +24,7 @@
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                |
 |-----------|-------------|------------------------------|------------------------------------------------------------------------------|
-| 1.0       | Juli 2025   | Muhammad Fa'iz Zulfikar      | Draft awal — Spesifikasi lengkap OpenClaw untuk Papyr Phase 2 (MVP 0.2)     |
+| 1.0       | Juli 2025   | Muhammad Fa'iz Zulfikar      | Draft awal — Spesifikasi lengkap OpenClaw untuk Papyr Fase 2 (MVP 0.2)     |
 | 1.1       | Juli 2025   | Muhammad Fa'iz Zulfikar      | Major update — tambah fungsi ke-10 (Social Media/Twitter), expand reporting ke quarterly/yearly, update autonomy policy (100% autonomous), update incident response policy, update reporting schedule ke end-of-period, tambah Playwright browser automation untuk Twitter |
 
 ---
@@ -136,13 +136,13 @@ OpenClaw adalah:
 | Health Endpoint (/health) | Running | PPR-MON-001 |
 | enowxAI API | Available | External |
 | Google Search Console | Available | External |
-| Blog System (mypapyr.com/blog) | Belum — dibangun Phase 2 | PPR-RM-001 |
+| Blog System (mypapyr.com/blog) | Belum — dibangun Fase 2 | PPR-RM-001 |
 
 ### 1.6 Keputusan Founder (Immutable)
 
 Keputusan-keputusan berikut dibuat oleh founder dan HARUS diikuti secara persis:
 
-1. **Fase:** Phase 2 (MVP 0.2)
+1. **Fase:** Fase 2 (MVP 0.2)
 2. **Visibilitas:** 100% internal, private repo
 3. **Budget:** Fleksibel, selama worth it
 4. **Storage:** Cloudflare R2 (existing) + R2 bucket terpisah untuk backup/reports OpenClaw
@@ -151,7 +151,7 @@ Keputusan-keputusan berikut dibuat oleh founder dan HARUS diikuti secara persis:
 7. **Approval Gate:** TIDAK ADA. 100% otonom. Untuk incident, auto-fix safe actions lalu lapor hasilnya.
 8. **Komunikasi:** Telegram bot (@PapyrOpsBot) + Web dashboard (/admin/openclaw) + CLI + Pasif
 9. **Bahasa Laporan:** Bahasa Indonesia
-10. **Blog:** Dibangun Phase 2, OpenClaw sebagai content creator utama
+10. **Blog:** Dibangun Fase 2, OpenClaw sebagai content creator utama
 11. **Data Access:** Internal API + Vercel Analytics API (read-only)
 12. **Monitoring:** OpenClaw monitor Railway + Vercel + R2 langsung via API
 13. **Persona:** Multi-persona per fungsi (10 persona bertema kertas/dokumen)
@@ -6544,7 +6544,7 @@ VPS_SSH_KEY_PATH=/root/.ssh/id_ed25519
 VPS_HEALTH_URL=http://localhost:4200/health
 
 # ============================================================
-# GOOGLE SEARCH CONSOLE (optional, Phase 2+)
+# GOOGLE SEARCH CONSOLE (optional, Fase 2+)
 # ============================================================
 # GSC_SERVICE_ACCOUNT_KEY=REDACTED_JSON_BASE64
 # GSC_SITE_URL=https://mypapyr.com
@@ -7945,4 +7945,4 @@ Dokumen ini adalah spesifikasi otoritatif untuk OpenClaw Papyr. Semua implementa
 
 ---
 
-*Generated for Papyr Phase 2 — MVP 0.2*
+*Generated for Papyr Fase 2 — MVP 0.2*
