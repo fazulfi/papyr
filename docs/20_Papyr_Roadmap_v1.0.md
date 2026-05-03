@@ -4,7 +4,7 @@
 
 **Product Roadmap**
 
-Version 3.0
+Version 4.0
 
 Mei 2026
 
@@ -20,7 +20,7 @@ mypapyr.com
 |---------------------|----------------------------------------------|
 | **Judul Dokumen**   | Product Roadmap — Papyr                      |
 | **ID Dokumen**      | PPR-RM-001                                   |
-| **Versi**           | 3.0                                          |
+| **Versi**           | 4.0                                          |
 | **Status**          | Approved                                     |
 | **Tanggal Dibuat**  | Juni 2025                                    |
 | **Terakhir Diubah** | Mei 2026                                     |
@@ -39,6 +39,7 @@ mypapyr.com
 | 2.2       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2F — Admin Dashboard (M22) sebagai unified admin panel, renumber milestones |
 | 2.3       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Update Phase 2E — OpenClaw expanded ke 10 fungsi, reporting diperluas, autonomy policy 100% |
 | 3.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete rewrite — Ekspansi 5 fase ke 7 fase, 114 fitur terklasifikasi, MVP 0.3 Foundation & UX Polish (baru), MVP 0.4 Auth + Monetization (baru), Fase 2-5 expanded, LLM strategy enowxAI + OpenRouter + 9Router |
+| 4.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete expansion — 7 fase ke 12 fase, 114 fitur ke 238 fitur. Tambah Fase 6 (Platform & Marketplace), Fase 7 (Enterprise & B2B), Fase 8 (AI Agent Swarm + Autonomy), Fase 9 (Moonshots & Future). Fase 5 diperluas dengan 8 OpenClaw agent baru. |
 
 **Dokumen Terkait**
 
@@ -68,18 +69,22 @@ mypapyr.com
 10. [Detail Fase 2 — AI Core Features](#10-detail-fase-2--ai-core-features)
 11. [Detail Fase 3 — AI Advanced + Integrations](#11-detail-fase-3--ai-advanced--integrations)
 12. [Detail Fase 4 — Indonesia Deep + Enterprise](#12-detail-fase-4--indonesia-deep--enterprise)
-13. [Detail Fase 5 — Scale + Ecosystem](#13-detail-fase-5--scale--ecosystem)
-14. [Yang TIDAK Akan Dibangun](#14-yang-tidak-akan-dibangun)
-15. [Prioritas & Dependensi](#15-prioritas--dependensi)
-16. [Metrik Keberhasilan per Fase](#16-metrik-keberhasilan-per-fase)
-17. [Risiko & Mitigasi](#17-risiko--mitigasi)
-18. [Technology Decision Log](#18-technology-decision-log)
-19. [Referensi Silang (Cross-References)](#19-referensi-silang-cross-references)
-20. [Ringkasan Perubahan v2.3 → v3.0](#20-ringkasan-perubahan-v23--v30)
-21. [Proyeksi Biaya Infrastruktur](#21-proyeksi-biaya-infrastruktur-per-fase)
-22. [Persetujuan Dokumen](#22-persetujuan-dokumen)
----
+13. [Detail Fase 5 — Scale + Ecosystem (Expanded)](#13-detail-fase-5--scale--ecosystem-expanded)
+14. [Detail Fase 6 — Platform & Marketplace](#14-detail-fase-6--platform--marketplace)
+15. [Detail Fase 7 — Enterprise & B2B](#15-detail-fase-7--enterprise--b2b)
+16. [Detail Fase 8 — AI Agent Swarm + Autonomy](#16-detail-fase-8--ai-agent-swarm--autonomy)
+17. [Detail Fase 9 — Moonshots & Future](#17-detail-fase-9--moonshots--future)
+18. [Yang TIDAK Akan Dibangun](#18-yang-tidak-akan-dibangun)
+19. [Prioritas & Dependensi](#19-prioritas--dependensi)
+20. [Metrik Keberhasilan per Fase](#20-metrik-keberhasilan-per-fase)
+21. [Risiko & Mitigasi](#21-risiko--mitigasi)
+22. [Technology Decision Log](#22-technology-decision-log)
+23. [Referensi Silang (Cross-References)](#23-referensi-silang-cross-references)
+24. [Ringkasan Perubahan v3.0 → v4.0](#24-ringkasan-perubahan-v30--v40)
+25. [Proyeksi Biaya Infrastruktur](#25-proyeksi-biaya-infrastruktur-per-fase)
+26. [Persetujuan Dokumen](#26-persetujuan-dokumen)
 
+---
 ## 1. Filosofi Roadmap & Kerangka Prioritas
 
 ### 1.1 Filosofi Inti
@@ -140,15 +145,20 @@ Skor = (User Value x 0.40) + (Strategic Fit x 0.25) + (Feasibility x 0.20) + (Re
 | Fase 2      | 3            | 5       | 0            | 1           | 11     | 2          | 22        |
 | Fase 3      | 6            | 8       | 2            | 1           | 4      | 1          | 22        |
 | Fase 4      | 3            | 3       | 4            | 1           | 2      | 1          | 14        |
-| Fase 5      | 5            | 4       | 0            | 2           | 2      | 1          | 14        |
-| **Total**   | **61**       | **33**  | **7**        | **10**      | **21** | **5**      | **137**   |
+| Fase 5      | 5            | 5       | 0            | 2           | 6      | 4          | 22        |
+| Fase 6      | 10           | 9       | 1            | 4           | 1      | 0          | 25        |
+| Fase 7      | 3            | 8       | 5            | 2           | 1      | 1          | 20        |
+| Fase 8      | 2            | 4       | 0            | 1           | 8      | 5          | 20        |
+| Fase 9      | 5            | 8       | 8            | 3           | 12     | 12         | 48        |
+| **Total**   | **81**       | **63**  | **21**       | **20**      | **47** | **26**     | **258**   |
 
-> **Insight:** 44% fitur adalah 🟢 Buildable — hampir separuh roadmap bisa dieksekusi tanpa blocker eksternal. Total 114 fitur baru tersebar di MVP 0.3 hingga Fase 5.
+> **Insight:** 31% fitur adalah 🟢 Buildable — hampir sepertiga roadmap bisa dieksekusi tanpa blocker eksternal. Total 238 fitur terklasifikasi tersebar di MVP 0.3 hingga Fase 9 (258 termasuk 11 MVP 0.1 + 9 MVP 0.2 tools yang sudah ada sebelumnya).
+
 ---
 
 ## 2. Ringkasan Eksekutif
 
-Dokumen ini mendefinisikan Product Roadmap resmi untuk Papyr — web application utilitas PDF yang dirancang khusus untuk pasar Indonesia. Roadmap v3.0 mencakup ekspansi dari 5 fase menjadi 7 fase, dengan total 114 fitur terklasifikasi.
+Dokumen ini mendefinisikan Product Roadmap resmi untuk Papyr — web application utilitas PDF yang dirancang khusus untuk pasar Indonesia. Roadmap v4.0 mencakup ekspansi dari 7 fase menjadi 12 fase, dengan total 238 fitur terklasifikasi.
 
 **Status Saat Ini:**
 
@@ -171,7 +181,11 @@ Papyr dikembangkan 100% AI-driven — seluruh kode, dokumentasi, dan keputusan a
 | Fase 2      | AI Core Features                   | 🔮 Visi          | MVP 0.4 revenue > Rp 0                                      | 22        | M46-M55        |
 | Fase 3      | AI Advanced + Integrations         | 🔮 Visi          | Fase 2 stabil + ≥ 100 AI tasks/hari                         | 22        | M56-M65        |
 | Fase 4      | Indonesia Deep + Enterprise        | 🔮 Visi          | Fase 3 stabil + regulatory + partnership MoU                | 14        | M66-M72        |
-| Fase 5      | Scale + Ecosystem                  | 🔮 Visi          | Fase 4 stabil + ≥ 50.000 MAU + revenue sustainable         | 14        | M73-M78        |
+| Fase 5      | Scale + Ecosystem (Expanded)       | 🔮 Visi          | Fase 4 stabil + ≥ 50.000 MAU + revenue sustainable         | 22        | M73-M86        |
+| Fase 6      | Platform & Marketplace             | 🔮 Visi          | Fase 5 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta           | 25        | M87-M98        |
+| Fase 7      | Enterprise & B2B                   | 🔮 Visi          | Fase 6 marketplace aktif + ≥ 10 enterprise inquiries        | 20        | M99-M108       |
+| Fase 8      | AI Agent Swarm + Autonomy          | 🔮 Visi          | Fase 7 ≥ 5 enterprise customers + AI infrastructure mature  | 20        | M109-M118      |
+| Fase 9      | Moonshots & Future                 | 🔮 Visi          | Fase 8 agent swarm stabil + market leadership established   | 48        | M119-M145      |
 
 ---
 
@@ -202,8 +216,11 @@ Papyr dikembangkan 100% AI-driven — seluruh kode, dokumentasi, dan keputusan a
 | Freelancer             | Protect PDF, sign kontrak, OCR dokumen scan            | MVP 0.2                       |
 | Power User             | Dark mode, keyboard shortcuts, batch processing        | MVP 0.3 + MVP 0.4            |
 | UMKM                   | Invoice PDF, e-Meterai, template dokumen               | Fase 4                        |
-| Developer              | API access, CLI tool, integrations                     | MVP 0.4 + Fase 5             |
-| Enterprise             | Team plan, white-label, compliance                     | Fase 4                        |
+| Developer              | API access, CLI tool, SDK, integrations                | MVP 0.4 + Fase 5 + Fase 6    |
+| Enterprise             | Team plan, white-label, compliance, secure room        | Fase 4 + Fase 7              |
+| Government             | Surat dinas, compliance, data residency                | Fase 7 + Fase 9              |
+| Platform Partner       | Marketplace, plugin system, white-label                | Fase 6                        |
+| AI Researcher          | Agent swarm, autonomous experimentation                | Fase 8                        |
 
 ### 3.4 Evolusi Produk
 
@@ -212,9 +229,19 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────►
 
 [Core Tools] → [Adv. Tools]  → [UX Polish]    → [Monetisasi]  → [AI Core]     → [AI Advanced]  → [Indo Deep]    → [Ecosystem]
- 6 tools        +7 tools        +23 features     +18 features    +22 AI feat.    +22 features     +14 features     +14 features
+ 6 tools        +7 tools        +23 features     +18 features    +22 AI feat.    +22 features     +14 features     +22 features
  Free only      Free only       PWA + DX         Login + Pro     AI Analysis     AI Generation    e-Meterai        Bots + CLI
  Zero-login     Zero-login      Zero-login       Optional login  Premium AI      Premium AI       Enterprise       Scale
+
+                                                                                                                        │
+                                                                                                                        ▼
+Fase 6           Fase 7           Fase 8           Fase 9
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────►
+
+[Platform]    → [Enterprise]  → [AI Swarm]     → [Moonshots]
+ +25 features    +20 features    +20 features     +48 features
+ Marketplace     B2B + Gov       Agent Autonomy   Future Tech
+ SDK + Apps      Compliance      Self-Funding     AR/Voice/HW
 ```
 
 ---
@@ -232,6 +259,10 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 | Fase 2 → Fase 3      | Fase 2 stabil (zero critical bugs 30 hari) + ≥ 100 AI tasks/hari                                      | ⏳ Menunggu   |
 | Fase 3 → Fase 4      | Fase 3 stabil + regulatory assessment selesai + partnership MoU                                        | ⏳ Menunggu   |
 | Fase 4 → Fase 5      | Fase 4 stabil + ≥ 50.000 MAU + revenue sustainable (MRR > opex)                                       | ⏳ Menunggu   |
+| Fase 5 → Fase 6      | Fase 5 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta                                                     | ⏳ Menunggu   |
+| Fase 6 → Fase 7      | Fase 6 marketplace aktif + ≥ 10 enterprise inquiries                                                   | ⏳ Menunggu   |
+| Fase 7 → Fase 8      | Fase 7 ≥ 5 enterprise customers + AI infrastructure mature                                             | ⏳ Menunggu   |
+| Fase 8 → Fase 9      | Fase 8 agent swarm stabil + market leadership established                                              | ⏳ Menunggu   |
 
 ### 4.2 Timeline Visual
 
@@ -244,7 +275,11 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 | Fase 2      | M46-M55        | AI Core Features (22 fitur)                      | 🔮 Visi              |
 | Fase 3      | M56-M65        | AI Advanced + Integrations (22 fitur)            | 🔮 Visi              |
 | Fase 4      | M66-M72        | Indonesia Deep + Enterprise (14 fitur)           | 🔮 Visi              |
-| Fase 5      | M73-M78        | Scale + Ecosystem (14 fitur)                     | 🔮 Visi              |
+| Fase 5      | M73-M86        | Scale + Ecosystem Expanded (22 fitur)            | 🔮 Visi              |
+| Fase 6      | M87-M98        | Platform & Marketplace (25 fitur)                | 🔮 Visi              |
+| Fase 7      | M99-M108       | Enterprise & B2B (20 fitur)                      | 🔮 Visi              |
+| Fase 8      | M109-M118      | AI Agent Swarm + Autonomy (20 fitur)             | 🔮 Visi              |
+| Fase 9      | M119-M145      | Moonshots & Future (48 fitur)                    | 🔮 Visi              |
 
 ### 4.3 Detail Milestone per Fase
 
@@ -327,7 +362,7 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 | M70    | Admin Advanced           | F4C          | Geographic, A/B Testing, SEO Dashboard       | 🟡🔴     | 🔮 Visi    |
 | M71-M72| OpenClaw Advanced        | F4D          | Auto-Scaling, Bug Predictor                  | 🟣⚪     | 🔮 Visi    |
 
-#### Fase 5 (M73-M78) — VISI
+#### Fase 5 (M73-M86) — VISI (Expanded)
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -335,6 +370,52 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 | M74    | Developer Tools          | F5B          | CLI, Email Processor, Scheduled Processing   | 🟢🟣🟡   | 🔮 Visi    |
 | M75-M76| OpenClaw Ecosystem       | F5C          | Newsletter, Status, Link Building, Pricing, Perf | 🟢🟣🔵 | 🔮 Visi |
 | M77-M78| Growth                   | F5D          | Affiliate, Community, Haptic, Voice          | 🔵🟢🟡   | 🔮 Visi    |
+| M79-M82| OpenClaw Agent Expansion | F5E          | Multi-Platform Social, Community Manager, Outreach, Revenue Optimizer | 🟡🟣⚪ | 🔮 Visi |
+| M83-M86| OpenClaw Specialist Agents | F5F        | Localization Agent, Legal Compliance, Partnership, Customer Success | 🟣⚪🟡 | 🔮 Visi |
+
+#### Fase 6 (M87-M98) — VISI
+
+| **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
+|--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
+| M87-M89| Platform Core            | F6A          | Marketplace, SDK, Education Platform, Desktop App, Mobile App | 🟡🟢🔵 | 🔮 Visi |
+| M90-M92| Creator Economy          | F6B          | Template Store, Design Studio, Freelancer Marketplace, Courses & Certification | 🟢🟡🔵 | 🔮 Visi |
+| M93-M95| Revenue & Community      | F6C          | Community Platform, Credits System, Pay-per-Use API, Affiliate Network | 🔵🟢🟡 | 🔮 Visi |
+| M96-M98| Platform Ecosystem       | F6D          | Developer Portal, Plugin System, Theme Marketplace, Doc Templates, Ambassador, Blog, Challenges, Print Service, Cloud Storage, White-label, Certification, Invoice Platform | 🟢🟡🔴 | 🔮 Visi |
+
+#### Fase 7 (M99-M108) — VISI
+
+| **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
+|--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
+| M99-M100| Government & Compliance | F7A          | Government Integration, Enterprise Console, Compliance Dashboard | 🔴🟡 | 🔮 Visi |
+| M101-M102| Workflow & Security    | F7B          | Workflow Engine, Secure Room, Audit Trail    | 🟡🔴     | 🔮 Visi    |
+| M103-M104| Enterprise Infra      | F7C          | API Gateway, Self-Hosted, Vertical Solutions | 🟡🔴⚪   | 🔮 Visi    |
+| M105-M106| Collaboration         | F7D          | Multi-Region, Real-time Collab, Team Mgmt, SSO/SAML | 🟡🟢🔴 | 🔮 Visi |
+| M107-M108| Enterprise Services   | F7E          | RBAC, SLA, Dedicated Support, Custom Branding, Data Residency, Analytics, Bulk Ops | 🟢🟡🔵 | 🔮 Visi |
+
+#### Fase 8 (M109-M118) — VISI
+
+| **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
+|--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
+| M109-M110| AI Workflow            | F8A          | AI Workflow Automation, AI PDF Agent, Bulk Intelligence | 🟣🟡 | 🔮 Visi |
+| M111-M112| AI Document Intelligence | F8B        | Template Engine, PDF Repair, Style Transfer, Doc Understanding Graph | 🟣⚪ | 🔮 Visi |
+| M113-M114| AI Predictive         | F8C          | Predictive Needs, Quality Score, Multi-Modal Input | 🟣⚪🟡 | 🔮 Visi |
+| M115-M116| OpenClaw Swarm Core   | F8D          | Agent Marketplace, Multi-Project, Memory System | 🟡🟣🔵 | 🔮 Visi |
+| M117-M118| OpenClaw Autonomy     | F8E          | Autonomous Experimentation, Predictive Maintenance, Cross-Agent Comm, Self-Funding, AI Doc Versioning, AI Contextual Help, AI Security Advisor | ⚪🟣🟢 | 🔮 Visi |
+
+#### Fase 9 (M119-M145) — VISI
+
+| **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
+|--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
+| M119-M121| Knowledge & Compliance | F9A         | Knowledge Base, Compliance Engine, Regulatory Radar | 🟣🔴 | 🔮 Visi |
+| M122-M125| Indonesia Gov Deep    | F9B          | e-Meterai Partnership, BPJS/Pajak, Notaris, Surat Dinas, UMKM Suite | 🔴🟣🟢 | 🔮 Visi |
+| M126-M128| Security & Trust      | F9C          | Blockchain Verification, Zero-Knowledge, Edge Computing, Stamp/Seal Digital, Document Insurance | ⚪🟣🔴 | 🔮 Visi |
+| M129-M131| API & OpenClaw Future | F9D          | API Marketplace, Localization Agent, Legal Compliance Agent, Partnership Agent, Autonomous Hiring | 🟡🟣⚪ | 🔮 Visi |
+| M132-M134| AI Frontier           | F9E          | Proprietary AI Models, Custom Doc Format, Network Effect Platform, Indonesia Doc Standard | ⚪🟣🔵 | 🔮 Visi |
+| M135-M137| Next-Gen Interface    | F9F          | AR Document Viewer, Voice Assistant, Scanner Box, Smart Printer, NFC Tag Documents | ⚪🟡🟣 | 🔮 Visi |
+| M138-M140| Social Impact         | F9G          | NGO/Social Impact, Accessibility First, Digital Literacy, Open Data, Green Computing | 🟢🟣⚪ | 🔮 Visi |
+| M141-M143| Analytics & Intelligence | F9H       | Document Insights, Benchmark Service, Industry Reports, Document Health Score | 🟡🔵🟣 | 🔮 Visi |
+| M144    | Agent Specialists       | F9I          | Financial Controller Agent, Incident Commander Agent | 🟣⚪ | 🔮 Visi |
+| M145    | Integrations & Devices  | F9J          | Notion, Slack Bot, Teams Bot, Google Workspace, Shopee/Tokopedia, Jurnal.id/Accurate, Watch App, Smart Glasses, Offline-First, Personal AI Assistant, Neural PDF | 🟡🟢⚪🟣 | 🔮 Visi |
 
 ---
 
@@ -378,7 +459,7 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 | **Processing**     | Hybrid client/server                             | Client (pdf-lib) Merge/Split/Rotate, Server Compress/PDF-to-Image |
 | **Analytics**      | Vercel Analytics + Speed Insights                | Custom events: task_started, task_completed, task_failed          |
 | **Domain**         | mypapyr.com (Hostinger DNS)                      | SSL via Vercel                                                    |
-| **Biaya**          | $0-5/bulan                                       | Vercel Free + Railway Free + R2 Free Tier                         |
+| **Biaya**          | -5/bulan                                       | Vercel Free + Railway Free + R2 Free Tier                         |
 
 ---
 
@@ -418,7 +499,7 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 | **Sub-fase** | **Milestone** | **Fitur**                                    | **Label** | **Estimasi**    |
-|--------------|---------------|----------------------------------------------|-----------|-----------------|
+|--------------|---------------|----------------------------------------------|-----------|--------------------|
 | Phase 2A     | M12, M13      | Protect PDF, Unlock PDF                      | 🟢🟢     | 16-24 jam       |
 | Phase 2B     | M14, M15      | Watermark PDF, Sign PDF                      | 🟢🟡     | 25-35 jam       |
 | Phase 2C     | M16, M17, M18 | PDF-to-Word, OCR, PDF-to-Excel              | 🟡🟡🟡   | 50-70 jam       |
@@ -430,14 +511,14 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 #### M12 — Protect PDF (Password Protection)
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Menambahkan password protection (enkripsi AES-256) ke file PDF                                                 |
-| **Label**              | 🟢 Buildable                                                                                                 |
-| **Processing Strategy**| Server-side (PyMuPDF encryption)                                                                              |
-| **Library**            | PyMuPDF (`fitz`) — `doc.save(encryption=fitz.PDF_ENCRYPT_AES_256)`                                           |
-| **Route**              | `/protect`                                                                                                    |
-| **Estimasi**           | 8-12 jam                                                                                                      |
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Menambahkan password protection (enkripsi AES-256) ke file PDF |
+| **Label**              | 🟢 Buildable                                                 |
+| **Processing Strategy**| Server-side (PyMuPDF encryption)                              |
+| **Library**            | PyMuPDF (fitz) — doc.save(encryption=fitz.PDF_ENCRYPT_AES_256)|
+| **Route**              | /protect                                                      |
+| **Estimasi**           | 8-12 jam                                                      |
 
 **Acceptance Criteria:**
 - Upload PDF + set password (min 4 karakter, konfirmasi 2x)
@@ -448,14 +529,14 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 #### M13 — Unlock PDF (Remove Password)
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Menghapus password dari PDF terproteksi (user harus tahu password)                                             |
-| **Label**              | 🟢 Buildable                                                                                                 |
-| **Processing Strategy**| Server-side (PyMuPDF decryption)                                                                              |
-| **Library**            | PyMuPDF (`fitz`) — `doc.authenticate(password)` + `doc.save()` tanpa encryption                              |
-| **Route**              | `/unlock`                                                                                                     |
-| **Estimasi**           | 8-12 jam                                                                                                      |
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Menghapus password dari PDF terproteksi (user harus tahu password) |
+| **Label**              | 🟢 Buildable                                                 |
+| **Processing Strategy**| Server-side (PyMuPDF decryption)                              |
+| **Library**            | PyMuPDF (fitz) — doc.authenticate(password) + doc.save() tanpa encryption |
+| **Route**              | /unlock                                                       |
+| **Estimasi**           | 8-12 jam                                                      |
 
 **Acceptance Criteria:**
 - Upload PDF terproteksi + input password
@@ -468,13 +549,13 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 #### M14 — Watermark PDF 🟢
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Menambahkan watermark (teks atau gambar) ke semua halaman PDF                                                  |
-| **Label**              | 🟢 Buildable                                                                                                 |
-| **Processing Strategy**| Hybrid — Client (pdf-lib) untuk text, Server (PyMuPDF) untuk image                                           |
-| **Route**              | `/watermark`                                                                                                  |
-| **Estimasi**           | 10-15 jam                                                                                                     |
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Menambahkan watermark (teks atau gambar) ke semua halaman PDF  |
+| **Label**              | 🟢 Buildable                                                 |
+| **Processing Strategy**| Hybrid — Client (pdf-lib) untuk text, Server (PyMuPDF) untuk image |
+| **Route**              | /watermark                                                    |
+| **Estimasi**           | 10-15 jam                                                     |
 
 **Acceptance Criteria:**
 - Text watermark: teks, font size, opacity (10-100%), rotasi, posisi (center/corners/diagonal)
@@ -485,13 +566,13 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 #### M15 — Sign PDF 🟡
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Tanda tangan visual (draw canvas atau upload gambar) di posisi tertentu                                        |
-| **Label**              | 🟡 Hard                                                                                                      |
-| **Processing Strategy**| Client-side (HTML5 Canvas + pdf-lib)                                                                          |
-| **Route**              | `/sign`                                                                                                       |
-| **Estimasi**           | 15-20 jam                                                                                                     |
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Tanda tangan visual (draw canvas atau upload gambar) di posisi tertentu |
+| **Label**              | 🟡 Hard                                                      |
+| **Processing Strategy**| Client-side (HTML5 Canvas + pdf-lib)                          |
+| **Route**              | /sign                                                         |
+| **Estimasi**           | 15-20 jam                                                     |
 
 **Acceptance Criteria:**
 - Draw tanda tangan (mouse + touch)
@@ -505,60 +586,38 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 #### M16 — PDF-to-Word 🟡
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Konversi PDF ke .docx dengan layout terjaga                                                                    |
-| **Label**              | 🟡 Hard                                                                                                      |
-| **Processing Strategy**| Server-side (LibreOffice headless)                                                                            |
-| **Route**              | `/pdf-to-word`                                                                                                |
-| **Estimasi**           | 15-20 jam                                                                                                     |
-
-**Acceptance Criteria:**
-- Output .docx bisa dibuka di Word/Google Docs
-- Layout terjaga (paragraf, heading, list)
-- Tabel terkonversi (bukan gambar)
-- Processing < 30 detik untuk ≤ 20 halaman
-- Scanned PDF → suggest OCR terlebih dahulu
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Konversi PDF ke .docx dengan layout terjaga                    |
+| **Label**              | 🟡 Hard                                                      |
+| **Processing Strategy**| Server-side (LibreOffice headless)                            |
+| **Route**              | /pdf-to-word                                                  |
+| **Estimasi**           | 15-20 jam                                                     |
 
 #### M17 — OCR 🟡
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Ekstraksi teks dari scanned PDF → searchable PDF                                                               |
-| **Label**              | 🟡 Hard                                                                                                      |
-| **Processing Strategy**| Server-side (ocrmypdf + Tesseract + Indonesian language pack)                                                 |
-| **Route**              | `/ocr`                                                                                                        |
-| **Estimasi**           | 20-30 jam                                                                                                     |
-
-**Acceptance Criteria:**
-- Output searchable PDF (teks bisa di-select/search)
-- Akurasi ≥ 90% Bahasa Indonesia, ≥ 85% English
-- Pilih bahasa: Indonesia, English, Auto-detect
-- Processing < 60 detik untuk ≤ 10 halaman
-- PDF sudah searchable → pesan informatif
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Ekstraksi teks dari scanned PDF → searchable PDF               |
+| **Label**              | 🟡 Hard                                                      |
+| **Processing Strategy**| Server-side (ocrmypdf + Tesseract + Indonesian language pack) |
+| **Route**              | /ocr                                                          |
+| **Estimasi**           | 20-30 jam                                                     |
 
 #### M18 — PDF-to-Excel 🟡
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Ekstraksi tabel dari PDF ke .xlsx                                                                              |
-| **Label**              | 🟡 Hard                                                                                                      |
-| **Processing Strategy**| Server-side (camelot-py lattice+stream + openpyxl)                                                            |
-| **Route**              | `/pdf-to-excel`                                                                                               |
-| **Estimasi**           | 15-20 jam                                                                                                     |
-
-**Acceptance Criteria:**
-- Output .xlsx bisa dibuka di Excel/Google Sheets
-- Bordered tables ≥ 90% akurasi
-- Borderless tables ≥ 70% akurasi
-- Multi-table → multi-sheet
-- Preview tabel terdeteksi sebelum konversi
-- PDF tanpa tabel → pesan informatif
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Ekstraksi tabel dari PDF ke .xlsx                              |
+| **Label**              | 🟡 Hard                                                      |
+| **Processing Strategy**| Server-side (camelot-py lattice+stream + openpyxl)            |
+| **Route**              | /pdf-to-excel                                                 |
+| **Estimasi**           | 15-20 jam                                                     |
 
 ### 7.6 Phase 2D — Cross-cutting Quality 🟢
 
 | **Item**                    | **Deskripsi**                                                    | **Estimasi** |
-|-----------------------------|------------------------------------------------------------------|--------------|
+|-----------------------------|------------------------------------------------------------------|--------------||
 | E2E Testing (Playwright)    | 2 tests per tool (happy path + error) = 26 tests. CI integration.| 8-12 jam     |
 | Code Formatting             | Prettier (frontend) + Ruff (backend). Pre-commit hooks. CI check.| 3-5 jam      |
 | Performance Optimization    | Lighthouse ≥ 90 semua halaman. Bundle < 50KB. dynamic() imports. | 3-5 jam      |
@@ -568,14 +627,14 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 ### 7.7 Phase 2E — OpenClaw AI Agent (M21) 🟡
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
 | **Deskripsi**          | 10 fungsi otonom: SEO, Competitor, Health, Security, Reporting, Self-Improvement, PM, Backup, Analytics, Social Media |
-| **Deployment**         | HostData.id VPS (dedicated)                                                                                   |
-| **Stack**              | Node.js 20 + TypeScript + BullMQ + Redis + PostgreSQL + Docker                                               |
-| **LLM Provider**       | enowxAI API                                                                                                   |
-| **Komunikasi**         | Telegram Bot + Email (Resend) + Dashboard + Twitter/X                                                         |
-| **Estimasi**           | 100-140 jam                                                                                                   |
+| **Deployment**         | HostData.id VPS (dedicated)                                   |
+| **Stack**              | Node.js 20 + TypeScript + BullMQ + Redis + PostgreSQL + Docker|
+| **LLM Provider**       | enowxAI API                                                   |
+| **Komunikasi**         | Telegram Bot + Email (Resend) + Dashboard + Twitter/X         |
+| **Estimasi**           | 100-140 jam                                                   |
 
 **10 Fungsi Agent:**
 
@@ -594,12 +653,12 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 ### 7.8 Phase 2F — Admin Dashboard (M22) 🟢
 
-| **Atribut**            | **Detail**                                                                                                    |
-|------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Deskripsi**          | Unified admin panel `/admin` dengan 10 modul monitoring                                                       |
-| **Auth**               | Env-based token (ADMIN_SECRET) — upgrade ke role-based saat MVP 0.4                                          |
-| **Route**              | `/admin/*` (same Next.js app)                                                                                 |
-| **Estimasi**           | 30-40 jam                                                                                                     |
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Unified admin panel /admin dengan 10 modul monitoring         |
+| **Auth**               | Env-based token (ADMIN_SECRET) — upgrade ke role-based saat MVP 0.4 |
+| **Route**              | /admin/* (same Next.js app)                                   |
+| **Estimasi**           | 30-40 jam                                                     |
 
 **10 Modul:**
 
@@ -641,14 +700,53 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 ### 8.2 Phase 3A — Critical UX (4 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 1     | i18n English                 | Dukungan bahasa Inggris sebagai opsi kedua. Toggle footer (ID/EN). Semua string UI bilingual. ID tetap default. Preferensi localStorage. SEO metadata EN untuk /en/* routes. | Client (next-intl) | 🟢 |
-| 2     | Error Boundary + Offline     | React Error Boundary graceful crash handling. Offline detection banner. Client-side tools tetap offline. Server tools pesan jelas saat offline. | Client (React + SW) | 🟢 |
-| 3     | Progress Indicator           | Progress bar real-time semua tools. Persentase upload, estimasi waktu, progress per halaman client-side. Smooth animation tanpa layout shift. | Client (XHR progress) | 🟢 |
-| 4     | Rate Limit Feedback 429      | UI feedback HTTP 429. Countdown timer Retry-After. Tombol disabled cooldown. Auto-retry opsional setelah cooldown. | Client (interceptor) | 🟢 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 1     | i18n English                 | 🟢        | Dukungan bahasa Inggris sebagai opsi kedua. Toggle footer (ID/EN). |
+| 2     | Error Boundary + Offline     | 🟢        | React Error Boundary graceful crash handling. Offline detection.  |
+| 3     | Progress Indicator           | 🟢        | Progress bar real-time semua tools. Persentase upload.            |
+| 4     | Rate Limit Feedback 429      | 🟢        | UI feedback HTTP 429. Countdown timer Retry-After.                |
 
-**Acceptance Criteria Phase 3A (Detail):**
+### 8.3 Phase 3B — UX Enhancement (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 5     | Dark Mode                    | 🟢        | Mode gelap prefers-color-scheme + toggle manual.                  |
+| 6     | Accessibility (a11y)         | 🟢        | ARIA labels, keyboard nav, WCAG 2.1 AA contrast.                 |
+| 7     | PDF Preview (pdf.js)         | 🟡        | Preview sebelum/sesudah processing. Thumbnail + full preview.     |
+| 8     | Onboarding Tour              | 🟢        | Tour interaktif first-time visitors. 3-5 langkah.                |
+| 9     | Compression Comparison       | 🟢        | Visual perbandingan ukuran before/after.                          |
+
+### 8.4 Phase 3C — Performance (6 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 10    | PWA Support                  | 🟢        | Installable, offline-capable. Service Worker caching.             |
+| 11    | Web Worker Processing        | 🟡        | pdf-lib di Web Worker. Main thread tidak blocked.                 |
+| 12    | Lazy Loading Tools           | 🟢        | Lazy loading semua tool pages. Landing JS < 30KB gzipped.         |
+| 13    | Image Optimization           | 🟢        | Semua gambar next/image. WebP/AVIF. Lazy below-fold.              |
+| 14    | Prefetch on Hover            | 🟢        | Prefetch tool page saat hover grid. Navigasi < 100ms.             |
+| 15    | Edge Caching (Cloudflare)    | 🟢        | Edge caching static + API. Cache-hit > 80%. TTFB < 200ms ID.     |
+
+### 8.5 Phase 3D — Interaction (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 16    | Drag & Drop Global           | 🟢        | Drop file dari desktop ke manapun di halaman tool.                |
+| 17    | Keyboard Shortcuts           | 🟢        | Ctrl+U upload, Ctrl+Enter process, Ctrl+D download.              |
+| 18    | File History (localStorage)  | 🟢        | Riwayat file diproses (nama, tool, tanggal, ukuran). Max 50.     |
+| 19    | Changelog Page (/changelog)  | 🟢        | Halaman publik riwayat perubahan. Badge "Baru" < 7 hari.         |
+| 20    | Undo/Redo                    | 🟡        | Undo/redo client-side ops. Command pattern. Max 20 history.       |
+
+### 8.6 Phase 3E — Growth Foundation (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 21    | Social Proof Widget          | 🔵        | Counter total tasks processed di landing. Update 1 jam.           |
+| 22    | User Feedback Widget         | 🔵        | Thumbs up/down setelah task selesai + optional text.              |
+| 23    | Tool Recommendation          | 🟣        | Rekomendasi 1-2 tool terkait post-processing. Rule-based.        |
+
+### 8.7 Acceptance Criteria MVP 0.3 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -669,31 +767,14 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | Rate Limit 429 | AC2 | Countdown real-time berdasarkan Retry-After header | UX |
 | Rate Limit 429 | AC3 | Tombol submit disabled selama cooldown | UX |
 | Rate Limit 429 | AC4 | Auto-retry opsional setelah cooldown | Functional |
-
-### 8.3 Phase 3B — UX Enhancement (5 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 5     | Dark Mode                    | Mode gelap prefers-color-scheme + toggle manual (system/light/dark). Semua halaman. localStorage. Zero FOUC. | Client (Tailwind dark:) | 🟢 |
-| 6     | Accessibility (a11y)         | Audit menyeluruh. ARIA labels, keyboard nav, focus management, screen reader, WCAG 2.1 AA contrast. | Client (semantic HTML) | 🟢 |
-| 7     | PDF Preview (pdf.js)         | Preview sebelum/sesudah processing. Thumbnail input, full preview output. Lazy loaded dynamic(). Mobile pinch-to-zoom. | Client (pdf.js lazy) | 🟡 |
-| 8     | Onboarding Tour              | Tour interaktif first-time visitors. 3-5 langkah. Muncul sekali (localStorage). Skip button. Re-accessible footer. | Client (custom) | 🟢 |
-| 9     | Compression Comparison       | Visual perbandingan ukuran before/after. Bar chart, persentase, pesan "Anda menghemat 3.2 MB (64%)". | Client (UI) | 🟢 |
-
-**Acceptance Criteria Phase 3B (Detail):**
-
-| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
-|-----------|---------|--------------|----------|
 | Dark Mode | AC1 | Mengikuti prefers-color-scheme default | Functional |
 | Dark Mode | AC2 | Toggle manual: system/light/dark | Functional |
 | Dark Mode | AC3 | Semua halaman tool + landing + komponen support | Functional |
-| Dark Mode | AC4 | Preferensi localStorage | UX |
-| Dark Mode | AC5 | Zero FOUC (flash of unstyled content) | Performance |
+| Dark Mode | AC4 | Preferensi localStorage, zero FOUC | UX |
 | Accessibility | AC1 | Lighthouse Accessibility ≥ 95 semua halaman | Quality |
 | Accessibility | AC2 | Semua interactive elements ARIA labels deskriptif | Functional |
 | Accessibility | AC3 | Keyboard navigation end-to-end (tab, enter, escape) | Functional |
-| Accessibility | AC4 | Focus visible + focus trap pada modals | Functional |
-| Accessibility | AC5 | Contrast ratio WCAG 2.1 AA (4.5:1 teks normal) | Quality |
+| Accessibility | AC4 | Contrast ratio WCAG 2.1 AA (4.5:1 teks normal) | Quality |
 | PDF Preview | AC1 | Preview input: thumbnail per halaman | Functional |
 | PDF Preview | AC2 | Preview output: sebelum download | Functional |
 | PDF Preview | AC3 | pdf.js lazy loaded via dynamic() | Performance |
@@ -705,116 +786,40 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | Compression Comparison | AC1 | Menampilkan ukuran asli, hasil, persentase | Functional |
 | Compression Comparison | AC2 | Visual bar chart before/after | UX |
 | Compression Comparison | AC3 | Pesan "Anda menghemat X MB (Y%)" | UX |
-
-### 8.4 Phase 3C — Performance (6 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 10    | PWA Support                  | Installable, offline-capable. Manifest, Service Worker caching, "Add to Home Screen". Client tools offline post-install. | Client (SW + Manifest) | 🟢 |
-| 11    | Web Worker Processing        | pdf-lib di Web Worker. Main thread tidak blocked. Progress via postMessage. Fallback main thread. | Client (Web Worker) | 🟡 |
-| 12    | Lazy Loading Tools           | Lazy loading semua tool pages. Landing initial JS < 30KB gzipped. Loading skeleton. | Client (dynamic imports) | 🟢 |
-| 13    | Image Optimization           | Semua gambar next/image. WebP/AVIF. Lazy below-fold. Total image landing < 200KB. | Build + Client | 🟢 |
-| 14    | Prefetch on Hover            | Prefetch tool page saat hover grid. Navigasi < 100ms post-prefetch. Desktop only. | Client (Next.js Link) | 🟢 |
-| 15    | Edge Caching (Cloudflare)    | Edge caching static + API cacheable. Cache-hit > 80%. TTFB < 200ms Indonesia. Auto-invalidation deploy. | Infrastructure (CF) | 🟢 |
-
-**Acceptance Criteria Phase 3C (Detail):**
-
-| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
-|-----------|---------|--------------|----------|
-| PWA Support | AC1 | Web App Manifest terkonfigurasi (name, icons, theme_color, standalone) | Functional |
+| PWA Support | AC1 | Web App Manifest terkonfigurasi | Functional |
 | PWA Support | AC2 | Service Worker caching static assets + client tool pages | Functional |
 | PWA Support | AC3 | "Add to Home Screen" prompt di mobile browsers | UX |
 | PWA Support | AC4 | Client-side tools offline setelah install | Functional |
-| PWA Support | AC5 | Lighthouse PWA score ≥ 90 | Quality |
-| Web Worker | AC1 | pdf-lib operations (merge, split, rotate) di Web Worker | Functional |
+| Web Worker | AC1 | pdf-lib operations di Web Worker | Functional |
 | Web Worker | AC2 | Main thread tidak blocked, UI responsif | Performance |
-| Web Worker | AC3 | Progress communication via postMessage | Functional |
-| Web Worker | AC4 | Fallback ke main thread jika Worker unavailable | Compatibility |
+| Web Worker | AC3 | Fallback ke main thread jika Worker unavailable | Compatibility |
 | Lazy Loading | AC1 | dynamic() untuk semua komponen berat | Performance |
 | Lazy Loading | AC2 | Landing page initial JS < 30KB gzipped | Performance |
-| Lazy Loading | AC3 | Tool page JS < 50KB gzipped (R4) | Performance |
-| Lazy Loading | AC4 | Loading skeleton selama lazy load | UX |
-| Image Optimization | AC1 | Semua gambar via next/image | Performance |
-| Image Optimization | AC2 | WebP/AVIF served untuk supporting browsers | Performance |
-| Image Optimization | AC3 | Lazy loading below-the-fold images | Performance |
-| Image Optimization | AC4 | Total image payload landing < 200KB | Performance |
+| Lazy Loading | AC3 | Loading skeleton selama lazy load | UX |
+| Image Optimization | AC1 | Semua gambar via next/image, WebP/AVIF | Performance |
+| Image Optimization | AC2 | Total image payload landing < 200KB | Performance |
 | Prefetch on Hover | AC1 | Hover tool card memicu prefetch | Performance |
-| Prefetch on Hover | AC2 | Navigasi < 100ms post-prefetch | Performance |
-| Prefetch on Hover | AC3 | Desktop only (tidak aktif mobile) | UX |
-| Edge Caching | AC1 | Static assets cached di Cloudflare edge | Performance |
-| Edge Caching | AC2 | Cache-hit ratio > 80% | Performance |
-| Edge Caching | AC3 | TTFB < 200ms dari Indonesia | Performance |
-| Edge Caching | AC4 | Cache invalidation otomatis saat deploy | Reliability |
-
-### 8.5 Phase 3D — Interaction (5 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 16    | Drag & Drop Global           | Drop file dari desktop ke manapun di halaman tool. Visual overlay drag-over. Multi-file. Mobile tetap tap. | Client (HTML5 DnD) | 🟢 |
-| 17    | Keyboard Shortcuts           | Ctrl+U upload, Ctrl+Enter process, Ctrl+D download, Ctrl+/ help. Discoverable tooltip. No browser conflict. | Client (event listeners) | 🟢 |
-| 18    | File History (localStorage)  | Riwayat file diproses (nama, tool, tanggal, ukuran). Max 50 FIFO. Clear button. Tidak simpan file content. | Client (localStorage) | 🟢 |
-| 19    | Changelog Page (/changelog)  | Halaman publik riwayat perubahan. Badge "Baru" < 7 hari. SEO-friendly. Footer link. | Static (MDX) | 🟢 |
-| 20    | Undo/Redo                    | Undo/redo client-side ops (merge reorder, split selection, rotate). Command pattern. Max 20 history. Ctrl+Z/Y. | Client (command pattern) | 🟡 |
-
-**Acceptance Criteria Phase 3D (Detail):**
-
-| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
-|-----------|---------|--------------|----------|
+| Prefetch on Hover | AC2 | Navigasi < 100ms post-prefetch, desktop only | Performance |
+| Edge Caching | AC1 | Cache-hit ratio > 80% | Performance |
+| Edge Caching | AC2 | TTFB < 200ms dari Indonesia | Performance |
+| Edge Caching | AC3 | Cache invalidation otomatis saat deploy | Reliability |
 | Drag & Drop Global | AC1 | Drop zone mencakup seluruh halaman tool | Functional |
 | Drag & Drop Global | AC2 | Visual overlay saat file di-drag over | UX |
-| Drag & Drop Global | AC3 | Multi-file drop support | Functional |
-| Drag & Drop Global | AC4 | File type validation on drop | Validation |
-| Drag & Drop Global | AC5 | Mobile: tetap tap-to-upload (no drag) | UX |
+| Drag & Drop Global | AC3 | Multi-file drop support, mobile tetap tap | Functional |
 | Keyboard Shortcuts | AC1 | Ctrl+U upload, Ctrl+Enter process, Ctrl+D download | Functional |
-| Keyboard Shortcuts | AC2 | Ctrl+/ show shortcuts help | Functional |
-| Keyboard Shortcuts | AC3 | Tidak conflict dengan browser shortcuts | Compatibility |
-| Keyboard Shortcuts | AC4 | Discoverable via tooltip | UX |
-| Keyboard Shortcuts | AC5 | Disabled saat input/textarea focused | UX |
-| File History | AC1 | Menyimpan metadata: nama, tool, tanggal, ukuran before/after | Functional |
-| File History | AC2 | Max 50 entries FIFO | Constraint |
-| File History | AC3 | Clear button tersedia | UX |
-| File History | AC4 | Accessible dari menu/sidebar | UX |
-| File History | AC5 | TIDAK menyimpan file content (privacy) | Privacy |
-| Changelog | AC1 | Route /changelog accessible | Functional |
-| Changelog | AC2 | Entries kronologis (terbaru di atas) | UX |
-| Changelog | AC3 | Badge "Baru" untuk fitur < 7 hari | UX |
-| Changelog | AC4 | SEO-friendly (meta tags, structured data) | SEO |
-| Changelog | AC5 | Link dari footer | Navigation |
-| Undo/Redo | AC1 | Undo/redo untuk merge reorder | Functional |
-| Undo/Redo | AC2 | Undo/redo untuk split page selection | Functional |
-| Undo/Redo | AC3 | Undo/redo untuk rotate | Functional |
-| Undo/Redo | AC4 | Ctrl+Z (undo) dan Ctrl+Y (redo) | Functional |
-| Undo/Redo | AC5 | Visual feedback saat undo/redo | UX |
-| Undo/Redo | AC6 | Max 20 history entries | Constraint |
-
-### 8.6 Phase 3E — Growth Foundation (3 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 21    | Social Proof Widget          | Counter total tasks processed di landing ("12.345 file telah diproses"). Update 1 jam. Format angka Indonesia. Animasi count-up. | Server + Client | 🔵 |
-| 22    | User Feedback Widget         | Thumbs up/down setelah task selesai + optional text (max 200 char). Non-blocking. Max 1x/session. Data stored. | Client + Server | 🔵 |
-| 23    | Tool Recommendation          | Rekomendasi 1-2 tool terkait post-processing. Rule-based (compress→merge, split→rotate). Click tracking. Non-intrusive. | Client (rule-based) | 🟣 |
-
-**Acceptance Criteria Phase 3E (Detail):**
-
-| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
-|-----------|---------|--------------|----------|
+| Keyboard Shortcuts | AC2 | Tidak conflict dengan browser shortcuts | Compatibility |
+| File History | AC1 | Menyimpan metadata: nama, tool, tanggal, ukuran | Functional |
+| File History | AC2 | Max 50 entries FIFO, TIDAK menyimpan file content | Privacy |
+| Changelog | AC1 | Route /changelog accessible, kronologis | Functional |
+| Changelog | AC2 | Badge "Baru" untuk fitur < 7 hari | UX |
+| Undo/Redo | AC1 | Undo/redo untuk merge reorder, split selection, rotate | Functional |
+| Undo/Redo | AC2 | Ctrl+Z (undo) dan Ctrl+Y (redo), max 20 history | Functional |
 | Social Proof Widget | AC1 | Counter total tasks processed di landing page | Functional |
-| Social Proof Widget | AC2 | Update periodik setiap 1 jam | Functional |
-| Social Proof Widget | AC3 | Format angka Indonesia (titik separator ribuan) | UX |
-| Social Proof Widget | AC4 | Animasi count-up saat element visible (intersection observer) | UX |
-| Social Proof Widget | AC5 | Fallback static number jika API gagal | Reliability |
-| User Feedback Widget | AC1 | Muncul setelah task selesai (non-blocking, tidak menutupi download) | UX |
-| User Feedback Widget | AC2 | Thumbs up/down sebagai primary input | Functional |
-| User Feedback Widget | AC3 | Optional text feedback max 200 karakter | Functional |
-| User Feedback Widget | AC4 | Max 1x per session (tidak spam) | UX |
-| User Feedback Widget | AC5 | Data tersimpan untuk product improvement | Analytics |
-| User Feedback Widget | AC6 | Dismissable (X button) | UX |
-| Tool Recommendation | AC1 | Rekomendasi 1-2 tool terkait setelah processing selesai | Functional |
-| Tool Recommendation | AC2 | Rule-based: compress→merge, split→rotate, merge→compress | Logic |
-| Tool Recommendation | AC3 | Click-through tracking (analytics event) | Analytics |
-| Tool Recommendation | AC4 | Tidak mengganggu download flow (below download button) | UX |
-| Tool Recommendation | AC5 | Dismissable, tidak muncul jika user sudah dismiss 3x | UX |
+| Social Proof Widget | AC2 | Animasi count-up, format angka Indonesia | UX |
+| User Feedback Widget | AC1 | Thumbs up/down setelah task selesai (non-blocking) | UX |
+| User Feedback Widget | AC2 | Max 1x per session, dismissable | UX |
+| Tool Recommendation | AC1 | Rekomendasi 1-2 tool terkait setelah processing | Functional |
+| Tool Recommendation | AC2 | Rule-based: compress→merge, split→rotate | Logic |
 
 ### 8.8 Estimasi Effort per Sub-fase MVP 0.3
 
@@ -831,17 +836,17 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 ```
 Phase 3A (Critical UX) ──────────────────────────────────────────────────────────────
-    │                                                                                 
-    ├──► Phase 3B (UX Enhancement) ── depends on: i18n strings ready                 
-    │         │                                                                       
-    │         └──► Phase 3E (Growth) ── depends on: feedback widget needs a11y        
-    │                                                                                 
-    ├──► Phase 3C (Performance) ── depends on: error boundary for SW failures         
-    │                                                                                 
-    └──► Phase 3D (Interaction) ── depends on: progress indicator for undo feedback   
+    │
+    ├──► Phase 3B (UX Enhancement) ── depends on: i18n strings ready
+    │         │
+    │         └──► Phase 3E (Growth) ── depends on: feedback widget needs a11y
+    │
+    ├──► Phase 3C (Performance) ── depends on: error boundary for SW failures
+    │
+    └──► Phase 3D (Interaction) ── depends on: progress indicator for undo feedback
 ```
 
-**Catatan:** Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan error handling harus tersedia sebelum fitur lain dibangun.
+Phase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan error handling harus tersedia sebelum fitur lain dibangun.
 
 ---
 
@@ -859,54 +864,54 @@ Phase 3A (Critical UX) ───────────────────
 
 ### 9.2 Model Pricing
 
-| **Tier**                    | **Harga**                              | **Fitur**                                                                                      |
-|-----------------------------|----------------------------------------|------------------------------------------------------------------------------------------------|
-| **Free (Tanpa Login)**      | Gratis                                 | Semua basic tools unlimited (9 tools), max 20 MB, tanpa akun                                   |
-| **Free (Dengan Login)**     | Gratis                                 | + OCR 5x/hari, PDF-to-Word 5x/hari, PDF-to-Excel 3x/hari, Sign 5x/hari                       |
-| **Pro**                     | Rp 19.900/bulan (Rp 149.000/tahun)    | Unlimited semua, batch, 100 MB, priority queue, no branding, API access                        |
+| **Tier**                    | **Harga**                              | **Fitur**                                                    |
+|-----------------------------|----------------------------------------|--------------------------------------------------------------|
+| **Free (Tanpa Login)**      | Gratis                                 | Semua basic tools unlimited (9 tools), max 20 MB, tanpa akun |
+| **Free (Dengan Login)**     | Gratis                                 | + OCR 5x/hari, PDF-to-Word 5x/hari, PDF-to-Excel 3x/hari   |
+| **Pro**                     | Rp 19.900/bulan (Rp 149.000/tahun)    | Unlimited semua, batch, 100 MB, priority queue, API access   |
 
 ### 9.3 Phase 4A — Auth & Payment (4 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 1     | Auth System (Login/Register) | Supabase Auth: email + password, Google OAuth. Login NOT required basic tools. JWT + refresh. UI Bahasa Indonesia. | Client + Server | 🟢 |
-| 2     | Freemium Paywall UI          | Soft paywall fitur premium. CTA "Login Gratis" + "Upgrade Pro". Conversion tracking. Non-aggressive. | Client | 🔵 |
-| 3     | Usage Quota Tracker          | Tracking per user/tool/hari. Rate limiting per tier. Dashboard sisa kuota. Pesan limit tercapai. | Server (Supabase) | 🟢 |
-| 4     | Payment Integration (Midtrans/Xendit) | Bank transfer, e-wallet (GoPay, OVO, DANA), CC. Monthly + yearly. Webhook, auto-renewal, invoice. | Server (SDK) | 🟡 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 1     | Auth System (Login/Register) | 🟢        | Supabase Auth: email + password, Google OAuth. JWT + refresh.     |
+| 2     | Freemium Paywall UI          | 🔵        | Soft paywall fitur premium. CTA "Login Gratis" + "Upgrade Pro".  |
+| 3     | Usage Quota Tracker          | 🟢        | Tracking per user/tool/hari. Rate limiting per tier.              |
+| 4     | Payment Integration          | 🟡        | Bank transfer, e-wallet (GoPay, OVO, DANA), CC. Midtrans/Xendit. |
 
 ### 9.4 Phase 4B — API & Pro Features (4 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 5     | Public API + API Key         | REST API Pro users. Generate key dashboard. 100 req/jam. Swagger docs. Key rotation + revocation. | Server (FastAPI) | 🟢 |
-| 6     | Batch Processing (Pro)       | Upload max 20 files. Queue processing + progress per file. Zip download. Pro-only. Max 200MB total. | Server (queue) | 🟡 |
-| 7     | Share Result Link            | Shareable link hasil processing. Valid 24 jam. Download tanpa login. Optional password. Tracking. | Server (signed URL) | 🟢 |
-| 8     | Streaming Upload (Resumable) | Resumable upload file besar. Resume setelah disconnect. Chunk 5MB. Retry otomatis. Pro 100MB. | Client + Server (tus) | 🟡 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 5     | Public API + API Key         | 🟢        | REST API Pro users. Generate key dashboard. 100 req/jam.          |
+| 6     | Batch Processing (Pro)       | 🟡        | Upload max 20 files. Queue processing. Zip download. Pro-only.    |
+| 7     | Share Result Link            | 🟢        | Shareable link hasil processing. Valid 24 jam. Optional password.  |
+| 8     | Streaming Upload (Resumable) | 🟡        | Resumable upload file besar. Chunk 5MB. Retry otomatis.           |
 
 ### 9.5 Phase 4C — Growth & Engagement (2 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 9     | Referral System              | Unique link per user. 1 bulan Pro gratis per 5 referral register. Dashboard stats. Anti-abuse. | Server | 🔵 |
-| 10    | Achievement/Gamification     | Badge milestones (10 files, first merge). 10+ achievements. Notification unlock. Opt-out. Non-intrusive. | Server | 🟣 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 9     | Referral System              | 🔵        | Unique link per user. 1 bulan Pro gratis per 5 referral.          |
+| 10    | Achievement/Gamification     | 🟣        | Badge milestones. 10+ achievements. Notification unlock.          |
 
 ### 9.6 Phase 4D — Advanced PDF (3 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 11    | Page Reorder Visual          | Drag-drop visual page reorder. Thumbnail per halaman. Preview hasil. Client-side. Mobile touch. | Client (pdf-lib + dnd-kit) | 🟢 |
-| 12    | PDF Metadata Editor          | Edit title, author, subject, keywords, dates. Preview. Client-side pdf-lib. Batch edit. | Client (pdf-lib) | 🟢 |
-| 13    | Flatten PDF                  | Flatten forms + annotations → static. Finalisasi dokumen. Form fields → static text. | Server (PyMuPDF) | 🟢 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 11    | Page Reorder Visual          | 🟢        | Drag-drop visual page reorder. Thumbnail per halaman.             |
+| 12    | PDF Metadata Editor          | 🟢        | Edit title, author, subject, keywords. Client-side pdf-lib.       |
+| 13    | Flatten PDF                  | 🟢        | Flatten forms + annotations → static. Finalisasi dokumen.         |
 
 ### 9.7 Phase 4E — Admin Upgrades (5 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 14    | Real-time Dashboard (WebSocket) | Upgrade polling → WebSocket. Live task counter, error alerts, OpenClaw status. Fallback polling. | Server (Supabase Realtime) | 🟡 |
-| 15    | Usage Heatmap                | Heatmap kapan tools digunakan (7x24 grid). Filter per tool. Export CSV. Insight text otomatis. | Server + Client | 🟢 |
-| 16    | Cost Dashboard               | Biaya operasional real-time per provider. Trend, alert > 80% budget, cost per task, projection. | Server (API aggregation) | 🟡 |
-| 17    | Feature Flags                | Toggle fitur tanpa deploy. Percentage rollout. User segment targeting. Audit log. | Server + Client | 🟡 |
-| 18    | Custom Alerts                | Alert rules kustom ("error rate > 5% → Telegram"). Multiple channels. Snooze, acknowledge, escalation. | Server (rule engine) | 🔴 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 14    | Real-time Dashboard (WebSocket) | 🟡     | Upgrade polling → WebSocket. Live task counter, error alerts.     |
+| 15    | Usage Heatmap                | 🟢        | Heatmap kapan tools digunakan (7x24 grid). Filter per tool.      |
+| 16    | Cost Dashboard               | 🟡        | Biaya operasional real-time per provider. Trend, alert.           |
+| 17    | Feature Flags                | 🟡        | Toggle fitur tanpa deploy. Percentage rollout.                    |
+| 18    | Custom Alerts                | 🔴        | Alert rules kustom. Multiple channels. Snooze, acknowledge.      |
 
 ### 9.8 Acceptance Criteria MVP 0.4 (Detail)
 
@@ -915,77 +920,33 @@ Phase 3A (Critical UX) ───────────────────
 | Auth System | AC1 | Register email + password berfungsi | Functional |
 | Auth System | AC2 | Google OAuth one-click login | Functional |
 | Auth System | AC3 | JWT + refresh token persistent across sessions | Functional |
-| Auth System | AC4 | Logout clear semua state | Functional |
-| Auth System | AC5 | Login NOT required untuk basic tools | Functional |
-| Auth System | AC6 | UI login/register Bahasa Indonesia | UI |
-| Freemium Paywall | AC1 | Paywall muncul untuk fitur premium saat tidak login | Functional |
-| Freemium Paywall | AC2 | Soft paywall (bukan hard block) | UX |
-| Freemium Paywall | AC3 | CTA "Login Gratis" + "Upgrade Pro" | UX |
-| Freemium Paywall | AC4 | Conversion tracking per CTA | Analytics |
+| Auth System | AC4 | Login NOT required untuk basic tools | Functional |
+| Freemium Paywall | AC1 | Soft paywall (bukan hard block) untuk fitur premium | UX |
+| Freemium Paywall | AC2 | CTA "Login Gratis" + "Upgrade Pro", conversion tracking | Analytics |
 | Usage Quota | AC1 | Tracking per user/tool/hari di Supabase | Functional |
 | Usage Quota | AC2 | Rate limiting enforced sesuai tier | Functional |
 | Usage Quota | AC3 | Pesan "Batas harian tercapai. Upgrade ke Pro." | UX |
-| Usage Quota | AC4 | Pro users no rate limit (kecuali abuse) | Functional |
-| Usage Quota | AC5 | Dashboard menampilkan sisa kuota | UX |
-| Payment | AC1 | Payment page functional | Functional |
-| Payment | AC2 | Bank transfer + e-wallet (GoPay, OVO, DANA) + CC | Functional |
-| Payment | AC3 | Monthly Rp 19.900 + yearly Rp 149.000 | Functional |
-| Payment | AC4 | Webhook handler payment confirmation | Functional |
-| Payment | AC5 | Auto-renewal + cancellation flow | Functional |
-| Payment | AC6 | Invoice/receipt generation | Functional |
-| Payment | AC7 | Payment failure → retry + notification | Edge case |
-| Public API | AC1 | API key generation dari dashboard | Functional |
-| Public API | AC2 | Akses semua tools via REST API | Functional |
-| Public API | AC3 | Rate limit 100 req/jam per key | Functional |
-| Public API | AC4 | Swagger/OpenAPI documentation | Documentation |
-| Public API | AC5 | Key rotation + revocation support | Security |
-| Batch Processing | AC1 | Upload max 20 files sekaligus | Functional |
-| Batch Processing | AC2 | Queue processing + progress per file | UX |
-| Batch Processing | AC3 | Zip download semua hasil | Functional |
-| Batch Processing | AC4 | Pro-only feature | Business |
-| Batch Processing | AC5 | Total batch max 200MB | Constraint |
-| Share Link | AC1 | Generate shareable link setelah processing | Functional |
-| Share Link | AC2 | Valid 24 jam | Constraint |
-| Share Link | AC3 | Download tanpa login | Functional |
-| Share Link | AC4 | Optional password protection | Security |
-| Resumable Upload | AC1 | Resume upload setelah disconnect | Functional |
-| Resumable Upload | AC2 | Chunk size 5MB | Technical |
-| Resumable Upload | AC3 | Retry otomatis | Reliability |
-| Resumable Upload | AC4 | Support Pro 100MB file size | Functional |
-| Referral | AC1 | Unique referral link per user | Functional |
-| Referral | AC2 | Reward: 1 bulan Pro per 5 referrals | Business |
-| Referral | AC3 | Dashboard referral stats | UX |
-| Referral | AC4 | Anti-abuse (IP + email verification) | Security |
-| Gamification | AC1 | 10+ achievements definable | Functional |
-| Gamification | AC2 | Badge visual di profile | UX |
-| Gamification | AC3 | Notification saat unlock | UX |
-| Gamification | AC4 | Opt-out available | UX |
-| Page Reorder | AC1 | Thumbnail per halaman | Functional |
-| Page Reorder | AC2 | Drag-to-reorder | Functional |
-| Page Reorder | AC3 | Client-side (zero upload) | Privacy |
-| Page Reorder | AC4 | Mobile touch support | UX |
-| Metadata Editor | AC1 | Edit title, author, subject, keywords | Functional |
-| Metadata Editor | AC2 | Preview metadata sebelum save | UX |
-| Metadata Editor | AC3 | Client-side processing | Privacy |
-| Flatten PDF | AC1 | Form fields → static text | Functional |
-| Flatten PDF | AC2 | Annotations → permanent | Functional |
-| Flatten PDF | AC3 | Output non-editable | Functional |
-| Real-time Dashboard | AC1 | WebSocket real-time (no polling) | Functional |
-| Real-time Dashboard | AC2 | Live task counter | Functional |
-| Real-time Dashboard | AC3 | Live error alerts | Functional |
-| Real-time Dashboard | AC4 | Fallback ke polling jika WS gagal | Reliability |
-| Usage Heatmap | AC1 | Heatmap 7x24 grid (jam x hari) | Functional |
-| Usage Heatmap | AC2 | Filter per tool | UX |
-| Usage Heatmap | AC3 | Export CSV | Functional |
-| Cost Dashboard | AC1 | Biaya per provider real-time | Functional |
-| Cost Dashboard | AC2 | Alert > 80% budget | Alerting |
-| Cost Dashboard | AC3 | Cost per task breakdown | Analytics |
-| Feature Flags | AC1 | Toggle tanpa deploy | Functional |
-| Feature Flags | AC2 | Percentage rollout | Functional |
-| Feature Flags | AC3 | User segment targeting | Functional |
-| Custom Alerts | AC1 | Custom rule definition | Functional |
-| Custom Alerts | AC2 | Multiple channels (Telegram, Email) | Functional |
-| Custom Alerts | AC3 | Snooze + acknowledge | UX |
+| Payment | AC1 | Bank transfer + e-wallet (GoPay, OVO, DANA) + CC | Functional |
+| Payment | AC2 | Monthly Rp 19.900 + yearly Rp 149.000 | Functional |
+| Payment | AC3 | Webhook handler payment confirmation, auto-renewal | Functional |
+| Public API | AC1 | API key generation dari dashboard, 100 req/jam | Functional |
+| Public API | AC2 | Swagger/OpenAPI documentation | Documentation |
+| Public API | AC3 | Key rotation + revocation support | Security |
+| Batch Processing | AC1 | Upload max 20 files, queue processing, zip download | Functional |
+| Batch Processing | AC2 | Pro-only feature, total batch max 200MB | Business |
+| Share Link | AC1 | Shareable link valid 24 jam, optional password | Functional |
+| Resumable Upload | AC1 | Resume upload setelah disconnect, chunk 5MB | Functional |
+| Referral | AC1 | Unique referral link, 1 bulan Pro per 5 referrals | Business |
+| Referral | AC2 | Anti-abuse (IP + email verification) | Security |
+| Gamification | AC1 | 10+ achievements, badge visual, notification unlock | Functional |
+| Page Reorder | AC1 | Thumbnail per halaman, drag-to-reorder, client-side | Functional |
+| Metadata Editor | AC1 | Edit title, author, subject, keywords, client-side | Functional |
+| Flatten PDF | AC1 | Form fields → static text, annotations → permanent | Functional |
+| Real-time Dashboard | AC1 | WebSocket real-time, fallback ke polling | Functional |
+| Usage Heatmap | AC1 | Heatmap 7x24 grid, filter per tool, export CSV | Functional |
+| Cost Dashboard | AC1 | Biaya per provider real-time, alert > 80% budget | Alerting |
+| Feature Flags | AC1 | Toggle tanpa deploy, percentage rollout | Functional |
+| Custom Alerts | AC1 | Custom rule definition, multiple channels | Functional |
 
 ### 9.9 Perbandingan Tier Detail
 
@@ -1006,7 +967,6 @@ Phase 3A (Critical UX) ───────────────────
 | PDF-to-Excel               | ❌                     | 3x/hari                 | ✅ Unlimited         |
 | Batch Processing           | ❌                     | ❌                      | ✅                   |
 | Max File Size              | 20 MB                  | 20 MB                   | 100 MB               |
-| Priority Queue             | ❌                     | ❌                      | ✅                   |
 | API Access                 | ❌                     | ❌                      | ✅                   |
 | AI Features (Fase 2+)      | ❌                     | 3x/hari                 | ✅ Unlimited         |
 
@@ -1014,10 +974,9 @@ Phase 3A (Critical UX) ───────────────────
 
 - **Filosofi:** Gratis untuk kebutuhan dasar, premium untuk power users
 - **Konversi Target:** 2-5% registered users ke Pro
-- **Pricing Rationale:** Rp 19.900/bulan (~$1.25 USD) — sangat terjangkau pasar Indonesia, lebih murah dari SmallPDF ($9/bulan) dan iLovePDF ($4/bulan)
+- **Pricing Rationale:** Rp 19.900/bulan (~$1.25 USD) — sangat terjangkau pasar Indonesia
 - **Annual Discount:** ~37% (Rp 149.000 vs Rp 238.800)
 - **Business Outcome Target:** 🔵 MRR ≥ Rp 500.000/bulan dalam 6 bulan setelah launch
-- **Payment Methods:** Bank transfer (BCA, Mandiri, BNI, BRI), e-wallet (GoPay, OVO, DANA, ShopeePay), credit card (Visa, Mastercard)
 
 ---
 
@@ -1035,50 +994,55 @@ Phase 3A (Critical UX) ───────────────────
 
 ### 10.2 LLM Provider Strategy
 
-| **Provider**   | **Peran**        | **Endpoint**                    | **Model**                          | **Use Case**                                    |
-|----------------|------------------|---------------------------------|------------------------------------|-------------------------------------------------|
-| enowxAI        | Primary          | API endpoint (load balanced)    | Flash (simple), Pro (complex)      | Semua AI features, load balanced across instances |
-| OpenRouter     | Fallback #1      | openrouter.ai/api               | Model per fitur (cost-optimized)   | Fallback saat enowxAI unavailable               |
-| 9Router        | Fallback #2      | localhost:20128                  | Auto-routes ke cheapest available  | Final fallback, 3-tier routing                  |
-
-**9Router** adalah npm package, OpenAI-compatible router di localhost:20128. Tiga tier fallback:
-1. **Subscription tier:** API keys berbayar (OpenAI, Anthropic, Google) — highest quality, lowest latency
-2. **Cheap tier:** Provider murah (Together, Groq, Fireworks) — good quality, very low cost
-3. **Free tier:** Free API providers — acceptable quality, zero cost
-
-Dokumentasi lengkap: https://9router.com/
-
-**Model Selection Strategy per Feature:**
-
-| **Feature Category**           | **Model Tier** | **Contoh Model**              | **Est. Cost/Request** | **Latency Target** |
-|--------------------------------|----------------|-------------------------------|-----------------------|--------------------|
-| Document Classification        | Flash          | Gemini 2.0 Flash, GPT-4o-mini | < Rp 50              | < 3 detik          |
-| Keyword Extraction             | Flash          | Gemini 2.0 Flash              | < Rp 50              | < 3 detik          |
-| PDF Summarization              | Flash/Pro      | Gemini 2.0 Flash (short), Pro (long) | Rp 100-300     | < 15 detik         |
-| Chat with PDF (Q&A)           | Pro            | GPT-4o, Claude 3.5 Sonnet     | Rp 200-500           | < 10 detik         |
-| Structured Data Extraction     | Pro            | GPT-4o, Gemini Pro             | Rp 200-400           | < 15 detik         |
-| AI Vision (table, KTP, rotate) | Pro            | GPT-4o vision, Gemini Pro Vision | Rp 300-600        | < 20 detik         |
-| Content Generation             | Pro            | Claude 3.5 Sonnet, GPT-4o     | Rp 300-500           | < 30 detik         |
-| Translation                    | Flash/Pro      | Gemini Flash (simple), Pro (complex) | Rp 100-400    | < 15 detik         |
-
-**Cost Optimization Strategy:**
-- Caching: Identical requests di-cache 24 jam (hash-based)
-- Batching: Multiple small requests di-batch ke single API call
-- Streaming: Response streaming untuk UX (user sees partial result)
-- Fallback: Jika primary gagal, otomatis ke OpenRouter → 9Router
-- Budget alert: Jika daily cost > Rp 50.000, alert ke Telegram + auto-throttle
+| **Provider**   | **Peran**        | **Model**                          | **Use Case**                                    |
+|----------------|------------------|------------------------------------|-------------------------------------------------|
+| enowxAI        | Primary          | Flash (simple), Pro (complex)      | Semua AI features, load balanced across instances |
+| OpenRouter     | Fallback #1      | Model per fitur (cost-optimized)   | Fallback saat enowxAI unavailable               |
+| 9Router        | Fallback #2      | Auto-routes ke cheapest available  | Final fallback, 3-tier routing                  |
 
 ### 10.3 Phase F2A — AI Intelligence (5 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 1     | AI PDF Summarizer            | Ringkasan otomatis 100-300 kata. ID + EN. < 30 detik. Pro/Free+Login 3x/hari. | Server (LLM API) | 🟣 |
-| 2     | AI Chat with PDF (Q&A)       | Tanya jawab konten PDF. Bahasa natural, jawaban berdasarkan dokumen. Context window management. Citation halaman. Pro-only. | Server (LLM + RAG) | 🟣 |
-| 3     | AI Smart Extract             | Ekstraksi data terstruktur (invoice, receipt, form). Output JSON/CSV. Akurasi ≥ 85% dokumen Indonesia. Pro-only. | Server (LLM structured) | 🟣 |
-| 4     | AI Table Extraction          | Deteksi tabel via AI vision. Lebih akurat dari camelot untuk borderless. Output Excel/CSV. Pro-only. | Server (LLM vision) | 🟣 |
-| 5     | AI Document Classification   | Klasifikasi otomatis 10+ tipe dokumen. Confidence score. Batch support. < 5 detik per dokumen. | Server (LLM) | 🟣 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 1     | AI PDF Summarizer            | 🟣        | Ringkasan otomatis 100-300 kata. ID + EN. < 30 detik.            |
+| 2     | AI Chat with PDF (Q&A)       | 🟣        | Tanya jawab konten PDF. Context window management. Citation.      |
+| 3     | AI Smart Extract             | 🟣        | Ekstraksi data terstruktur (invoice, receipt, form). JSON/CSV.    |
+| 4     | AI Table Extraction          | 🟣        | Deteksi tabel via AI vision. Lebih akurat dari camelot.           |
+| 5     | AI Document Classification   | 🟣        | Klasifikasi otomatis 10+ tipe dokumen. Confidence score.          |
 
-**Acceptance Criteria F2A (Detail):**
+### 10.4 Phase F2B — AI Enhancement (9 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 6     | AI Smart Compress            | 🟣        | Rekomendasi level kompresi optimal berdasarkan analisis konten.   |
+| 7     | AI Auto-Rotate               | 🟣        | Deteksi halaman terbalik/miring, koreksi orientasi otomatis.      |
+| 8     | AI Deskew                    | 🟣        | Koreksi kemiringan dokumen scan. Straighten otomatis.             |
+| 9     | AI Background Removal        | 🟡        | Hapus background noise dokumen scan. Output clean white.          |
+| 10    | AI Image Enhancement         | 🟡        | Peningkatan kualitas gambar dalam PDF (sharpen, denoise).         |
+| 11    | AI Auto-Crop                 | 🟡        | Deteksi content area, crop margin berlebih. Hapus border hitam.   |
+| 12    | AI Redaction Suggestion      | 🟣        | Saran area redact (NIK, telepon, alamat, data sensitif).          |
+| 13    | AI Accessibility Checker     | 🟡        | Analisis PDF aksesibilitas. Laporan + saran. PDF/UA check.        |
+| 14    | AI OCR Enhancement (Handwriting) | 🟣    | OCR tulisan tangan via AI vision. Akurasi > Tesseract.            |
+
+### 10.5 Phase F2C — AI Automation (1 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 15    | AI Workflow Builder           | ⚪        | Visual drag-drop workflow builder. Gabungkan tools dalam pipeline. |
+
+### 10.6 Phase F2D — AI OpenClaw Upgrades (7 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 16    | AI Support Bot (Chat Widget) | 🟡        | Chat widget di mypapyr.com. Menjawab FAQ, guide penggunaan.      |
+| 17    | Auto-Localization            | 🟣        | OpenClaw otomatis translate konten marketing ke bahasa daerah.    |
+| 18    | Content Calendar             | 🟢        | AI-generated content calendar untuk blog dan social media.        |
+| 19    | Competitor Alert             | 🟢        | Real-time alert saat kompetitor launch fitur baru.                |
+| 20    | Auto-PR Review               | 🟢        | OpenClaw review setiap PR otomatis. Code quality, security.       |
+| 21    | Perf Regression Detection    | 🟡        | Deteksi otomatis performance regression dari Lighthouse CI.       |
+| 22    | User Sentiment Analysis      | 🔵        | Analisis sentiment dari feedback widget, social media mentions.   |
+
+### 10.7 Acceptance Criteria Fase 2 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1086,70 +1050,32 @@ Dokumentasi lengkap: https://9router.com/
 | AI Summarizer | AC2 | Bahasa Indonesia dan English supported | Functional |
 | AI Summarizer | AC3 | Processing < 30 detik untuk PDF ≤ 50 halaman | Performance |
 | AI Summarizer | AC4 | Pro tier unlimited, Free+Login 3x/hari | Business |
-| AI Summarizer | AC5 | Keyword extraction (5-10 keywords) included | Functional |
-| AI Summarizer | AC6 | Copy-to-clipboard button untuk hasil | UX |
 | AI Chat PDF | AC1 | Chat interface dengan input teks natural | Functional |
 | AI Chat PDF | AC2 | Jawaban berdasarkan isi dokumen (bukan hallucination) | Quality |
 | AI Chat PDF | AC3 | Citation halaman untuk setiap jawaban | Functional |
-| AI Chat PDF | AC4 | Context window management (chunking untuk PDF besar) | Technical |
-| AI Chat PDF | AC5 | Conversation history per session | UX |
-| AI Chat PDF | AC6 | Pro-only feature | Business |
 | AI Smart Extract | AC1 | Ekstraksi data invoice: tanggal, nomor, total, items | Functional |
-| AI Smart Extract | AC2 | Ekstraksi data receipt: merchant, tanggal, total | Functional |
-| AI Smart Extract | AC3 | Output JSON dan CSV format | Functional |
-| AI Smart Extract | AC4 | Akurasi ≥ 85% untuk dokumen standar Indonesia | Quality |
-| AI Smart Extract | AC5 | Preview extracted data sebelum download | UX |
+| AI Smart Extract | AC2 | Output JSON dan CSV format, akurasi ≥ 85% ID | Quality |
 | AI Table Extraction | AC1 | Deteksi tabel menggunakan AI vision model | Functional |
 | AI Table Extraction | AC2 | Akurasi > camelot untuk borderless tables | Quality |
-| AI Table Extraction | AC3 | Output Excel (.xlsx) dan CSV | Functional |
-| AI Table Extraction | AC4 | Multi-table → multi-sheet | Functional |
-| AI Table Extraction | AC5 | Preview tabel terdeteksi sebelum export | UX |
-| AI Classification | AC1 | Klasifikasi 10+ tipe: invoice, surat, laporan, kontrak, KTP, SIM, NPWP, akta, proposal, CV | Functional |
-| AI Classification | AC2 | Confidence score per klasifikasi (0-100%) | Functional |
-| AI Classification | AC3 | Batch classification (multiple files) | Functional |
-| AI Classification | AC4 | Processing < 5 detik per dokumen | Performance |
-| AI Classification | AC5 | Threshold configurable (default 70%) | Configuration |
-
-### 10.4 Phase F2B — AI Enhancement (9 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 6     | AI Smart Compress            | Rekomendasi level kompresi optimal berdasarkan analisis konten. One-click apply. Preview before/after. Akurasi ≥ 80%. | Server (AI + Ghostscript) | 🟣 |
-| 7     | AI Auto-Rotate               | Deteksi halaman terbalik/miring, koreksi orientasi otomatis. Batch seluruh dokumen. Confidence threshold. | Server (AI vision) | 🟣 |
-| 8     | AI Deskew                    | Koreksi kemiringan dokumen scan. Deteksi sudut, straighten otomatis. Meningkatkan akurasi OCR. | Server (AI + image) | 🟣 |
-| 9     | AI Background Removal        | Hapus background noise dokumen scan (noda, bayangan). Output clean white. Preserve text/images. Batch. | Server (AI image) | 🟡 |
-| 10    | AI Image Enhancement         | Peningkatan kualitas gambar dalam PDF (sharpen, denoise, contrast). Preview before/after. Quality score. | Server (AI) | 🟡 |
-| 11    | AI Auto-Crop                 | Deteksi content area, crop margin berlebih. Hapus border hitam scan. Batch. Preview. Undo. | Server (AI detection) | 🟡 |
-| 12    | AI Redaction Suggestion      | Saran area redact (NIK, telepon, alamat, data sensitif). User confirm sebelum apply. Audit log. | Server (LLM + NER) | 🟣 |
-| 13    | AI Accessibility Checker     | Analisis PDF aksesibilitas (alt text, reading order, heading, contrast). Laporan + saran. PDF/UA check. | Server (LLM) | 🟡 |
-| 14    | AI OCR Enhancement (Handwriting) | OCR tulisan tangan via AI vision. Akurasi > Tesseract handwritten. Confidence per kata. ID + EN. | Server (LLM vision) | 🟣 |
-
-### 10.5 Phase F2C — AI Automation (1 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 15    | AI Workflow Builder           | Visual drag-drop workflow builder. Gabungkan tools dalam pipeline ("Upload → OCR → Summarize → Compress"). Save/reuse. Pro-only. | Server + Client | ⚪ |
-
-### 10.6 Phase F2D — AI OpenClaw Upgrades (7 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 16    | AI Support Bot (Chat Widget) | Chat widget di mypapyr.com. Menjawab FAQ, guide penggunaan tool, troubleshoot errors. Escalation ke Telegram jika tidak bisa jawab. | Server (LLM + widget) | 🟡 |
-| 17    | Auto-Localization            | OpenClaw otomatis translate konten marketing ke bahasa daerah (Jawa, Sunda) dan English. Quality check sebelum publish. | Server (LLM translation) | 🟣 |
-| 18    | Content Calendar             | AI-generated content calendar untuk blog dan social media. Berdasarkan trending topics, SEO gaps, competitor activity. | Server (LLM + analytics) | 🟢 |
-| 19    | Competitor Alert             | Real-time alert saat kompetitor launch fitur baru, ubah pricing, atau publish konten. Analisis dampak. | Server (scraping + LLM) | 🟢 |
-| 20    | Auto-PR Review               | OpenClaw review setiap PR otomatis. Code quality, security, performance check. Approve/request changes. | Server (LLM + GitHub API) | 🟢 |
-| 21    | Perf Regression Detection    | Deteksi otomatis performance regression dari Lighthouse CI dan Vercel Speed Insights. Alert + root cause suggestion. | Server (analytics + LLM) | 🟡 |
-| 22    | User Sentiment Analysis      | Analisis sentiment dari feedback widget, social media mentions, app store reviews. Weekly sentiment report. | Server (LLM NLP) | 🔵 |
-
-### 10.7 Acceptance Criteria Fase 2 (Ringkasan)
-
-| **Sub-fase** | **Key Metrics** | **Quality Gate** |
-|--------------|-----------------|------------------|
-| F2A (Intelligence) | Akurasi ≥ 90% ID, ≥ 85% EN; latency < 30 detik; cost < Rp 500/request | Semua 5 fitur berfungsi end-to-end |
-| F2B (Enhancement) | Akurasi rekomendasi ≥ 80%; batch processing berfungsi; preview before/after | 9 fitur berfungsi, user satisfaction > 70% |
-| F2C (Automation) | Workflow builder functional; 5+ template workflows tersedia | Pipeline execution reliable |
-| F2D (OpenClaw) | 7 upgrade berfungsi; auto-PR review < 5 menit; sentiment weekly report | Integration dengan existing OpenClaw stable |
+| AI Classification | AC1 | Klasifikasi 10+ tipe: invoice, surat, laporan, kontrak, KTP, SIM, NPWP | Functional |
+| AI Classification | AC2 | Confidence score per klasifikasi, < 5 detik per dokumen | Performance |
+| AI Smart Compress | AC1 | Rekomendasi level kompresi optimal, akurasi ≥ 80% | Functional |
+| AI Auto-Rotate | AC1 | Deteksi halaman terbalik/miring, koreksi otomatis | Functional |
+| AI Deskew | AC1 | Koreksi kemiringan dokumen scan, meningkatkan akurasi OCR | Functional |
+| AI Background Removal | AC1 | Hapus background noise, output clean white, preserve text | Functional |
+| AI Image Enhancement | AC1 | Peningkatan kualitas gambar (sharpen, denoise), preview before/after | Functional |
+| AI Auto-Crop | AC1 | Deteksi content area, crop margin berlebih, batch support | Functional |
+| AI Redaction Suggestion | AC1 | Saran area redact (NIK, telepon, alamat), user confirm | Functional |
+| AI Accessibility Checker | AC1 | Analisis PDF aksesibilitas, laporan + saran, PDF/UA check | Functional |
+| AI OCR Handwriting | AC1 | OCR tulisan tangan via AI vision, akurasi > Tesseract | Quality |
+| AI Workflow Builder | AC1 | Visual drag-drop, gabungkan tools dalam pipeline, save/reuse | Functional |
+| AI Support Bot | AC1 | Chat widget menjawab FAQ, guide penggunaan, escalation | Functional |
+| Auto-Localization | AC1 | Translate konten marketing ke bahasa daerah, quality check | Functional |
+| Content Calendar | AC1 | AI-generated content calendar berdasarkan trending + SEO gaps | Functional |
+| Competitor Alert | AC1 | Real-time alert saat kompetitor launch fitur baru | Functional |
+| Auto-PR Review | AC1 | Review setiap PR otomatis, code quality + security check | Functional |
+| Perf Regression | AC1 | Deteksi otomatis performance regression, alert + root cause | Functional |
+| User Sentiment | AC1 | Analisis sentiment dari feedback widget + social media | Functional |
 
 ### 10.8 Pertimbangan Teknis Fase 2
 
@@ -1177,88 +1103,81 @@ Dokumentasi lengkap: https://9router.com/
 
 ### 11.2 Phase F3A — AI Intelligence Advanced (4 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 1     | AI PDF Translation           | Terjemahan PDF lengkap dengan layout terjaga. ID↔EN, ID↔Jawa, ID↔Sunda. Preserve formatting. | Server (LLM + layout) | 🟣 |
-| 2     | AI Invoice Parser            | Parsing invoice otomatis: vendor, tanggal, items, total, pajak, nomor invoice. Output structured JSON. Batch. | Server (LLM structured) | 🟡 |
-| 3     | AI Resume Parser             | Parsing CV/resume: nama, kontak, pendidikan, pengalaman, skills. Output JSON. Scoring opsional. | Server (LLM structured) | 🟡 |
-| 4     | AI Legal Document Analyzer   | Analisis dokumen hukum: identifikasi klausul penting, risiko, tanggal kritis. Ringkasan eksekutif. | Server (LLM analysis) | 🟣 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 1     | AI PDF Translation           | 🟣        | Terjemahan PDF lengkap dengan layout terjaga. ID↔EN, ID↔Jawa.    |
+| 2     | AI Invoice Parser            | 🟡        | Parsing invoice otomatis: vendor, tanggal, items, total, pajak.   |
+| 3     | AI Resume Parser             | 🟡        | Parsing CV/resume: nama, kontak, pendidikan, pengalaman, skills.  |
+| 4     | AI Legal Document Analyzer   | 🟣        | Analisis dokumen hukum: klausul penting, risiko, tanggal kritis.  |
 
 ### 11.3 Phase F3B — AI Content Generation (6 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 5     | AI PDF Generator             | Generate PDF dari prompt teks. User deskripsikan dokumen, AI generate konten + layout. Template-based. | Server (LLM + PDF gen) | 🟡 |
-| 6     | AI Report Builder            | Generate laporan dari data (CSV/JSON input). Visualisasi, narasi, executive summary. Template laporan. | Server (LLM + charting) | 🟡 |
-| 7     | AI Certificate Generator     | Generate sertifikat dari template + data peserta. Batch generation. QR code verification. | Server (template + data) | 🟢 |
-| 8     | AI Cover Letter Generator    | Generate surat lamaran berdasarkan CV + job description. Bahasa Indonesia formal. Customizable tone. | Server (LLM) | 🟢 |
-| 9     | AI Proposal Generator        | Generate proposal bisnis dari brief. Struktur standar Indonesia. Customizable sections. | Server (LLM) | 🟡 |
-| 10    | AI Slide to PDF              | Konversi presentasi (PPTX) ke PDF dengan layout terjaga. Preserve animations sebagai static frames. | Server (LibreOffice) | 🟡 |
-
-**Acceptance Criteria F3B (Detail):**
-
-| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
-|-----------|---------|--------------|----------|
-| PDF Generator | AC1 | User input prompt teks, AI generate dokumen PDF | Functional |
-| PDF Generator | AC2 | 5+ template tersedia (surat, laporan, proposal, invoice, memo) | Functional |
-| PDF Generator | AC3 | Customizable: font, margin, header/footer | Configuration |
-| PDF Generator | AC4 | Output PDF berkualitas print-ready | Quality |
-| Report Builder | AC1 | Input CSV/JSON data | Functional |
-| Report Builder | AC2 | Auto-generate visualisasi (bar, line, pie chart) | Functional |
-| Report Builder | AC3 | AI-generated narasi dan executive summary | Functional |
-| Report Builder | AC4 | 3+ template laporan (bisnis, keuangan, progress) | Functional |
-| Certificate Gen | AC1 | Template sertifikat customizable | Functional |
-| Certificate Gen | AC2 | Batch generation dari CSV data peserta | Functional |
-| Certificate Gen | AC3 | QR code verification per sertifikat | Functional |
-| Certificate Gen | AC4 | Output individual PDF atau merged single PDF | Functional |
-| Cover Letter | AC1 | Input: CV (PDF) + job description (text) | Functional |
-| Cover Letter | AC2 | Output: surat lamaran Bahasa Indonesia formal | Functional |
-| Cover Letter | AC3 | Tone customizable (formal, semi-formal) | Configuration |
-| Cover Letter | AC4 | Edit sebelum finalize | UX |
-| Proposal Gen | AC1 | Input: brief/outline dari user | Functional |
-| Proposal Gen | AC2 | Struktur standar Indonesia (latar belakang, tujuan, metodologi, anggaran, timeline) | Functional |
-| Proposal Gen | AC3 | Sections customizable (add/remove/reorder) | Configuration |
-| Slide to PDF | AC1 | Input PPTX, output PDF | Functional |
-| Slide to PDF | AC2 | Layout terjaga (text, images, shapes) | Quality |
-| Slide to PDF | AC3 | Animations → static frames (1 frame per animation step) | Functional |
-| Slide to PDF | AC4 | Processing < 60 detik untuk ≤ 50 slides | Performance |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 5     | AI PDF Generator             | 🟡        | Generate PDF dari prompt teks. Template-based.                    |
+| 6     | AI Report Builder            | 🟡        | Generate laporan dari data (CSV/JSON). Visualisasi, narasi.       |
+| 7     | AI Certificate Generator     | 🟢        | Generate sertifikat dari template + data peserta. QR code.        |
+| 8     | AI Cover Letter Generator    | 🟢        | Generate surat lamaran berdasarkan CV + job description.          |
+| 9     | AI Proposal Generator        | 🟡        | Generate proposal bisnis dari brief. Struktur standar Indonesia.  |
+| 10    | AI Slide to PDF              | 🟡        | Konversi presentasi (PPTX) ke PDF dengan layout terjaga.          |
 
 ### 11.4 Phase F3C — AI Automation Advanced (3 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 11    | AI Batch Processor           | AI-powered batch processing: upload folder, AI classify + route ke tool yang tepat + process. Fully automated. | Server (LLM + queue) | 🟣 |
-| 12    | AI Template Matching         | AI mencocokkan dokumen dengan template yang sesuai. Auto-fill fields berdasarkan konten dokumen. | Server (LLM matching) | 🟣 |
-| 13    | AI Document Comparison       | Bandingkan 2 PDF menggunakan AI: highlight perbedaan konten, formatting, dan struktur. Summary of changes. | Server (LLM diff) | 🟡 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 11    | AI Batch Processor           | 🟣        | AI-powered batch processing: upload folder, AI classify + route.  |
+| 12    | AI Template Matching         | 🟣        | AI mencocokkan dokumen dengan template yang sesuai. Auto-fill.    |
+| 13    | AI Document Comparison       | 🟡        | Bandingkan 2 PDF menggunakan AI: highlight perbedaan konten.      |
 
 ### 11.5 Phase F3D — Advanced PDF (5 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 14    | PDF Comparison (non-AI)      | Perbandingan visual 2 PDF side-by-side. Highlight perbedaan pixel-level. Overlay mode. Page-by-page. | Client + Server | 🟡 |
-| 15    | PDF Form Filler              | Fill PDF forms interaktif. Detect form fields, UI untuk mengisi, save filled PDF. Client-side. | Client (pdf-lib) | 🟢 |
-| 16    | PDF Annotation               | Tambah annotations (highlight, underline, sticky notes, freehand draw) ke PDF. Client-side. Export annotated PDF. | Client (pdf-lib + canvas) | 🟢 |
-| 17    | PDF Redaction                | Redact (hapus permanen) area sensitif dari PDF. Irreversible. Audit trail. Compliance-ready. | Server (PyMuPDF) | 🔴 |
-| 18    | PDF/A Conversion             | Konversi PDF ke PDF/A format (archival). Compliance ISO 19005. Validation report. | Server (Ghostscript) | 🔴 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 14    | PDF Comparison (non-AI)      | 🟡        | Perbandingan visual 2 PDF side-by-side. Highlight perbedaan.      |
+| 15    | PDF Form Filler              | 🟢        | Fill PDF forms interaktif. Detect form fields, UI untuk mengisi.  |
+| 16    | PDF Annotation               | 🟢        | Tambah annotations (highlight, underline, sticky notes, freehand).|
+| 17    | PDF Redaction                | 🔴        | Redact (hapus permanen) area sensitif dari PDF. Irreversible.     |
+| 18    | PDF/A Conversion             | 🔴        | Konversi PDF ke PDF/A format (archival). Compliance ISO 19005.    |
 
 ### 11.6 Phase F3E — Integrations (4 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 19    | Google Drive Integration     | Import dari dan export ke Google Drive. OAuth consent. Folder picker. Auto-sync opsional. | Server (Google API) | 🟢 |
-| 20    | Dropbox Integration          | Import/export Dropbox. OAuth. File picker. Seamless workflow. | Server (Dropbox API) | 🟢 |
-| 21    | Zapier/Make Integration      | Webhook triggers dan actions untuk automation platforms. "When PDF processed → send to Slack". | Server (webhook) | 🟡 |
-| 22    | Browser Extension            | Chrome/Firefox extension. Right-click PDF → process di Papyr. Quick access toolbar. | Client (extension) | ⚪ |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 19    | Google Drive Integration     | 🟢        | Import dari dan export ke Google Drive. OAuth consent.             |
+| 20    | Dropbox Integration          | 🟢        | Import/export Dropbox. OAuth. File picker. Seamless workflow.     |
+| 21    | Zapier/Make Integration      | 🟡        | Webhook triggers dan actions untuk automation platforms.           |
+| 22    | Browser Extension            | ⚪        | Chrome/Firefox extension. Right-click PDF → process di Papyr.     |
 
-### 11.7 Acceptance Criteria Fase 3 (Ringkasan)
+### 11.7 Acceptance Criteria Fase 3 (Detail)
 
-| **Sub-fase** | **Key Metrics** | **Quality Gate** |
-|--------------|-----------------|------------------|
-| F3A (Intelligence Advanced) | Translation akurasi ≥ 90%; invoice parsing ≥ 95% standard format; resume parsing structured output | 4 fitur end-to-end |
-| F3B (Content Generation) | Generated documents usable tanpa edit > 70% cases; template variety ≥ 10 | 6 fitur functional |
-| F3C (Automation Advanced) | Batch processor handles 50+ files; template matching ≥ 80% accuracy | 3 fitur reliable |
-| F3D (Advanced PDF) | Form filler supports standard PDF forms; annotation export clean; PDF/A valid ISO 19005 | 5 fitur production-ready |
-| F3E (Integrations) | OAuth flow smooth; file sync reliable; webhook delivery > 99% | 4 integrations live |
+| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
+|-----------|---------|--------------|----------|
+| AI PDF Translation | AC1 | Terjemahan PDF lengkap dengan layout terjaga | Functional |
+| AI PDF Translation | AC2 | ID↔EN, ID↔Jawa, ID↔Sunda supported | Functional |
+| AI Invoice Parser | AC1 | Parsing vendor, tanggal, items, total, pajak, nomor invoice | Functional |
+| AI Invoice Parser | AC2 | Output structured JSON, batch support | Functional |
+| AI Resume Parser | AC1 | Parsing nama, kontak, pendidikan, pengalaman, skills | Functional |
+| AI Resume Parser | AC2 | Output JSON, scoring opsional | Functional |
+| AI Legal Analyzer | AC1 | Identifikasi klausul penting, risiko, tanggal kritis | Functional |
+| AI PDF Generator | AC1 | Generate PDF dari prompt teks, 5+ template tersedia | Functional |
+| AI PDF Generator | AC2 | Output PDF berkualitas print-ready | Quality |
+| AI Report Builder | AC1 | Input CSV/JSON, auto-generate visualisasi + narasi | Functional |
+| AI Certificate Gen | AC1 | Template customizable, batch generation, QR code | Functional |
+| AI Cover Letter | AC1 | Input CV + job description, output surat lamaran formal ID | Functional |
+| AI Proposal Gen | AC1 | Generate proposal dari brief, struktur standar Indonesia | Functional |
+| AI Slide to PDF | AC1 | Input PPTX, output PDF, layout terjaga, < 60 detik ≤ 50 slides | Performance |
+| AI Batch Processor | AC1 | Upload folder, AI classify + route ke tool yang tepat | Functional |
+| AI Template Matching | AC1 | Mencocokkan dokumen dengan template, auto-fill fields | Functional |
+| AI Document Comparison | AC1 | Bandingkan 2 PDF, highlight perbedaan, summary of changes | Functional |
+| PDF Comparison | AC1 | Perbandingan visual side-by-side, highlight perbedaan pixel | Functional |
+| PDF Form Filler | AC1 | Detect form fields, UI untuk mengisi, save filled PDF | Functional |
+| PDF Annotation | AC1 | Highlight, underline, sticky notes, freehand draw, export | Functional |
+| PDF Redaction | AC1 | Redact area sensitif, irreversible, audit trail | Functional |
+| PDF/A Conversion | AC1 | Konversi ke PDF/A, compliance ISO 19005, validation report | Functional |
+| Google Drive | AC1 | Import/export Google Drive, OAuth consent, folder picker | Functional |
+| Dropbox | AC1 | Import/export Dropbox, OAuth, file picker | Functional |
+| Zapier/Make | AC1 | Webhook triggers dan actions, "When PDF processed → send to Slack" | Functional |
+| Browser Extension | AC1 | Chrome/Firefox, right-click PDF → process di Papyr | Functional |
 
 ### 11.8 Pertimbangan Teknis Fase 3
 
@@ -1285,78 +1204,63 @@ Dokumentasi lengkap: https://9router.com/
 
 ### 12.2 Phase F4A — Indonesia-Specific AI (6 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 1     | AI e-Meterai Validator       | Validasi keaslian e-Meterai pada dokumen PDF. Verifikasi via API Peruri/aggregator. Laporan validitas. | Server (API Peruri) | 🔴 |
-| 2     | AI KTP/SIM Extractor         | Ekstraksi data dari foto KTP/SIM: NIK, nama, alamat, TTL. Output structured. Akurasi ≥ 95%. | Server (LLM vision) | 🟣 |
-| 3     | AI NPWP Extractor            | Ekstraksi nomor NPWP dari dokumen. Validasi format. Cross-reference data. | Server (LLM + regex) | 🟢 |
-| 4     | AI Surat Resmi Generator     | Generate surat resmi Indonesia (surat keterangan, undangan, pemberitahuan) dari template + data. Format standar. | Server (LLM + template) | 🟢 |
-| 5     | AI Akta Notaris Parser       | Parsing akta notaris: pihak-pihak, objek, tanggal, nomor akta. Output structured. Bahasa hukum Indonesia. | Server (LLM legal) | 🟣 |
-| 6     | AI Bilingual Document        | Generate dokumen bilingual (ID + EN) side-by-side. Untuk kontrak internasional, MoU, agreement. | Server (LLM translation) | 🔴 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 1     | AI e-Meterai Validator       | 🔴        | Validasi keaslian e-Meterai pada dokumen PDF. API Peruri.         |
+| 2     | AI KTP/SIM Extractor         | 🟣        | Ekstraksi data dari foto KTP/SIM: NIK, nama, alamat, TTL.        |
+| 3     | AI NPWP Extractor            | 🟢        | Ekstraksi nomor NPWP dari dokumen. Validasi format.               |
+| 4     | AI Surat Resmi Generator     | 🟢        | Generate surat resmi Indonesia dari template + data.              |
+| 5     | AI Akta Notaris Parser       | 🟣        | Parsing akta notaris: pihak-pihak, objek, tanggal, nomor akta.   |
+| 6     | AI Bilingual Document        | 🔴        | Generate dokumen bilingual (ID + EN) side-by-side.                |
 
-**Acceptance Criteria F4A (Detail):**
+### 12.3 Phase F4B — Enterprise (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 7     | Team/Organization Plan       | 🟡        | Multi-user plan untuk tim/organisasi. Admin panel, shared billing. |
+| 8     | White-label API              | 🟡        | API yang bisa di-rebrand oleh partner. Custom domain.             |
+| 9     | Invoice Generator            | 🟢        | Generate invoice PDF dari data. Template Indonesia (faktur pajak).|
+
+### 12.4 Phase F4C — Admin Advanced (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 10    | Geographic Map               | 🟡        | Peta geografis pengguna (provinsi/kota). Heatmap Indonesia.       |
+| 11    | A/B Testing Engine           | 🔴        | Engine A/B testing built-in. Statistical significance calculator. |
+| 12    | SEO Dashboard (GSC)          | 🔴        | Integrasi Google Search Console. Rankings, impressions, clicks.   |
+
+### 12.5 Phase F4D — OpenClaw Advanced (2 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 13    | Auto-Scaling Recommendation  | 🟣        | OpenClaw merekomendasikan kapan scale up/down infrastructure.     |
+| 14    | AI Bug Predictor             | ⚪        | Prediksi area kode yang kemungkinan memiliki bug.                 |
+
+### 12.6 Acceptance Criteria Fase 4 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
 | e-Meterai Validator | AC1 | Deteksi keberadaan e-Meterai pada PDF | Functional |
 | e-Meterai Validator | AC2 | Verifikasi keaslian via API Peruri/aggregator | Functional |
 | e-Meterai Validator | AC3 | Laporan validitas (valid/invalid/expired) | Functional |
-| e-Meterai Validator | AC4 | Compliance dengan regulasi Peruri | Regulatory |
-| e-Meterai Validator | AC5 | Partnership MoU harus signed sebelum development | Prerequisite |
-| KTP/SIM Extractor | AC1 | Ekstraksi NIK (16 digit) dari foto KTP | Functional |
-| KTP/SIM Extractor | AC2 | Ekstraksi nama, alamat, TTL, jenis kelamin | Functional |
-| KTP/SIM Extractor | AC3 | Akurasi ≥ 95% untuk foto berkualitas baik | Quality |
-| KTP/SIM Extractor | AC4 | Akurasi ≥ 80% untuk foto berkualitas rendah (blur, gelap) | Quality |
-| KTP/SIM Extractor | AC5 | Output structured JSON | Functional |
-| KTP/SIM Extractor | AC6 | Data TIDAK disimpan setelah processing (privacy) | Privacy |
-| NPWP Extractor | AC1 | Deteksi nomor NPWP (15 digit format XX.XXX.XXX.X-XXX.XXX) | Functional |
-| NPWP Extractor | AC2 | Validasi format (checksum) | Validation |
-| NPWP Extractor | AC3 | Ekstraksi dari dokumen apapun yang mengandung NPWP | Functional |
+| e-Meterai Validator | AC4 | Partnership MoU harus signed sebelum development | Prerequisite |
+| KTP/SIM Extractor | AC1 | Ekstraksi NIK (16 digit), nama, alamat, TTL | Functional |
+| KTP/SIM Extractor | AC2 | Akurasi ≥ 95% foto berkualitas baik, ≥ 80% kualitas rendah | Quality |
+| KTP/SIM Extractor | AC3 | Data TIDAK disimpan setelah processing (privacy) | Privacy |
+| NPWP Extractor | AC1 | Deteksi nomor NPWP (15 digit), validasi format | Functional |
 | Surat Resmi | AC1 | 10+ template surat resmi Indonesia | Functional |
-| Surat Resmi | AC2 | Template: surat keterangan, undangan, pemberitahuan, kuasa, pernyataan | Functional |
-| Surat Resmi | AC3 | Format standar (kop surat, nomor surat, perihal, lampiran) | Quality |
-| Surat Resmi | AC4 | Fill-in-the-blank + AI-assisted content | Functional |
-| Akta Parser | AC1 | Identifikasi pihak-pihak dalam akta | Functional |
-| Akta Parser | AC2 | Ekstraksi objek perjanjian | Functional |
-| Akta Parser | AC3 | Ekstraksi tanggal dan nomor akta | Functional |
-| Akta Parser | AC4 | Output structured JSON | Functional |
-| Akta Parser | AC5 | Bahasa hukum Indonesia dipahami dengan benar | Quality |
-| Bilingual Doc | AC1 | Generate dokumen ID + EN side-by-side | Functional |
-| Bilingual Doc | AC2 | Layout 2 kolom (ID kiri, EN kanan) | Layout |
-| Bilingual Doc | AC3 | Paragraph alignment antara kedua bahasa | Quality |
-| Bilingual Doc | AC4 | Untuk kontrak, MoU, agreement | Use case |
-
-### 12.3 Phase F4B — Enterprise (3 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 7     | Team/Organization Plan       | Multi-user plan untuk tim/organisasi. Admin panel, user management, shared billing, usage analytics per member. | Server (multi-tenant) | 🟡 |
-| 8     | White-label API              | API yang bisa di-rebrand oleh partner. Custom domain, branding removal, dedicated support. Enterprise pricing. | Server (multi-tenant) | 🟡 |
-| 9     | Invoice Generator            | Generate invoice PDF dari data (items, harga, pajak, diskon). Template Indonesia (faktur pajak format). Batch. | Server (template) | 🟢 |
-
-### 12.4 Phase F4C — Admin Advanced (3 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 10    | Geographic Map               | Peta geografis pengguna (provinsi/kota). Heatmap Indonesia. Insight regional. Targeting konten. | Server + Client (map) | 🟡 |
-| 11    | A/B Testing Engine           | Engine A/B testing built-in. Test copy, layout, pricing, features. Statistical significance calculator. | Server + Client | 🔴 |
-| 12    | SEO Dashboard (GSC)          | Integrasi Google Search Console. Rankings, impressions, clicks, CTR per halaman. Trend dan alerts. | Server (GSC API) | 🔴 |
-
-### 12.5 Phase F4D — OpenClaw Advanced (2 fitur)
-
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 13    | Auto-Scaling Recommendation  | OpenClaw merekomendasikan kapan scale up/down infrastructure berdasarkan traffic patterns dan cost analysis. | Server (analytics + LLM) | 🟣 |
-| 14    | AI Bug Predictor             | Prediksi area kode yang kemungkinan memiliki bug berdasarkan complexity metrics, change frequency, dan historical bugs. | Server (LLM + git analysis) | ⚪ |
-
-### 12.6 Acceptance Criteria Fase 4 (Ringkasan)
-
-| **Sub-fase** | **Key Metrics** | **Quality Gate** |
-|--------------|-----------------|------------------|
-| F4A (Indonesia AI) | e-Meterai validation 100% accurate; KTP extraction ≥ 95%; surat resmi format compliant | Partnership MoU signed + 6 fitur live |
-| F4B (Enterprise) | Team plan supports 50+ members; white-label zero Papyr branding; invoice format faktur pajak valid | 3 fitur production-ready |
-| F4C (Admin Advanced) | Geographic data accurate per provinsi; A/B test statistical significance; GSC data real-time | 3 modul admin live |
-| F4D (OpenClaw Advanced) | Scaling recommendations save > 20% cost; bug prediction precision > 60% | 2 fitur validated |
+| Surat Resmi | AC2 | Format standar (kop surat, nomor surat, perihal, lampiran) | Quality |
+| Akta Parser | AC1 | Identifikasi pihak-pihak, objek, tanggal, nomor akta | Functional |
+| Akta Parser | AC2 | Bahasa hukum Indonesia dipahami dengan benar | Quality |
+| Bilingual Doc | AC1 | Generate dokumen ID + EN side-by-side, layout 2 kolom | Functional |
+| Team Plan | AC1 | Multi-user plan, admin panel, shared billing, usage analytics | Functional |
+| White-label API | AC1 | Custom domain, branding removal, dedicated support | Functional |
+| Invoice Generator | AC1 | Generate invoice PDF, template Indonesia (faktur pajak) | Functional |
+| Geographic Map | AC1 | Peta geografis pengguna per provinsi/kota, heatmap Indonesia | Functional |
+| A/B Testing | AC1 | Test copy, layout, pricing, statistical significance | Functional |
+| SEO Dashboard | AC1 | Integrasi GSC, rankings, impressions, clicks, CTR | Functional |
+| Auto-Scaling | AC1 | Rekomendasi scale up/down berdasarkan traffic + cost | Functional |
+| Bug Predictor | AC1 | Prediksi area kode bermasalah, precision > 60% | Quality |
 
 ### 12.7 Pertimbangan Regulasi Fase 4
 
@@ -1364,7 +1268,7 @@ Dokumentasi lengkap: https://9router.com/
 |-----------|--------------|-----------------|----------------------|
 | e-Meterai Validator | Peruri/BSSN | Partnership MoU + API access agreement | 3-6 bulan negosiasi |
 | AI Bilingual Document | Kemenkumham | Certified translation standard (jika untuk legal) | Assessment needed |
-| A/B Testing Engine | UU PDP (Perlindungan Data Pribadi) | Consent mechanism untuk data collection | Compliance review |
+| A/B Testing Engine | UU PDP | Consent mechanism untuk data collection | Compliance review |
 | SEO Dashboard GSC | Google ToS | OAuth consent + data usage compliance | Standard OAuth flow |
 
 ### 12.8 Pertimbangan Enterprise
@@ -1374,11 +1278,10 @@ Dokumentasi lengkap: https://9router.com/
 - **Support:** Dedicated support channel (email + WhatsApp Business)
 - **Compliance:** SOC 2 Type II assessment (long-term goal)
 - **Pricing:** Custom pricing per organization (based on volume + features)
-- **White-label:** Custom domain, logo, color scheme, email templates
 
 ---
 
-## 13. Detail Fase 5 — Scale + Ecosystem
+## 13. Detail Fase 5 — Scale + Ecosystem (Expanded)
 
 ### 13.1 Ringkasan
 
@@ -1386,113 +1289,120 @@ Dokumentasi lengkap: https://9router.com/
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
 | **Gate Condition**     | Fase 4 stabil + ≥ 50.000 MAU + revenue sustainable           |
-| **Total Fitur**        | 14 fitur dalam 4 sub-fase                                    |
-| **Milestone**          | M73-M78                                                       |
-| **Estimasi Total**     | 130-180 jam                                                   |
+| **Total Fitur**        | 22 fitur dalam 6 sub-fase (14 existing + 8 OpenClaw baru)    |
+| **Milestone**          | M73-M86                                                       |
+| **Estimasi Total**     | 200-280 jam                                                   |
 
 ### 13.2 Phase F5A — Messaging Bots (2 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 1     | WhatsApp Bot                 | Bot WhatsApp untuk processing PDF. Kirim file → pilih tool → terima hasil. Business API. User-facing. | Server (WA Business API) | 🟡 |
-| 2     | Telegram Bot (User-facing)   | Bot Telegram publik untuk users. Kirim PDF, pilih operasi, terima hasil. Inline keyboard menu. | Server (Telegram Bot API) | 🟡 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 1     | WhatsApp Bot                 | 🟡        | Bot WhatsApp untuk processing PDF. Business API. User-facing.     |
+| 2     | Telegram Bot (User-facing)   | 🟡        | Bot Telegram publik untuk users. Inline keyboard menu.            |
 
 ### 13.3 Phase F5B — Developer Tools (3 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 3     | CLI Tool                     | Command-line tool untuk developer. `papyr compress file.pdf`, `papyr merge a.pdf b.pdf`. npm package. | Client (Node.js CLI) | 🟢 |
-| 4     | AI Email Attachment Processor | Auto-process PDF attachments dari email. Forward email → AI classify → process → reply dengan hasil. | Server (email parsing + AI) | 🟣 |
-| 5     | AI Scheduled Processing      | Schedule recurring PDF processing. "Setiap Senin, compress semua PDF di folder X". Cron-like interface. | Server (scheduler) | 🟡 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 3     | CLI Tool                     | 🟢        | Command-line tool untuk developer. npm package.                   |
+| 4     | AI Email Attachment Processor | 🟣       | Auto-process PDF attachments dari email. Forward → classify → process. |
+| 5     | AI Scheduled Processing      | 🟡        | Schedule recurring PDF processing. Cron-like interface.            |
 
 ### 13.4 Phase F5C — OpenClaw Ecosystem (5 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 6     | Email Newsletter             | OpenClaw auto-generate dan kirim newsletter mingguan. Tips PDF, fitur baru, konten edukatif. Subscriber management. | Server (email + LLM) | 🟢 |
-| 7     | Uptime Status Page           | Public status page (status.mypapyr.com). Real-time status semua services. Incident history. Subscribe alerts. | Server (monitoring) | 🟢 |
-| 8     | Link Building Agent          | OpenClaw otomatis identifikasi peluang backlink, outreach ke website relevan, track acquired links. | Server (scraping + LLM) | 🟣 |
-| 9     | AI Pricing Optimizer         | AI analisis conversion data dan recommend pricing adjustments. A/B test pricing otomatis. Revenue maximization. | Server (analytics + LLM) | 🔵 |
-| 10    | AI Performance Tuner         | AI otomatis tune infrastructure parameters (cache TTL, worker count, memory limits) berdasarkan traffic patterns. | Server (AI + infra) | ⚪ |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 6     | Email Newsletter             | 🟢        | OpenClaw auto-generate dan kirim newsletter mingguan.             |
+| 7     | Uptime Status Page           | 🟢        | Public status page (status.mypapyr.com). Real-time status.        |
+| 8     | Link Building Agent          | 🟣        | OpenClaw otomatis identifikasi peluang backlink, outreach.        |
+| 9     | AI Pricing Optimizer         | 🔵        | AI analisis conversion data dan recommend pricing adjustments.    |
+| 10    | AI Performance Tuner         | ⚪        | AI otomatis tune infrastructure parameters.                       |
 
 ### 13.5 Phase F5D — Growth (4 fitur)
 
-| **#** | **Fitur**                    | **Deskripsi**                                                                                          | **Processing**  | **Label** |
-|-------|------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------|
-| 11    | Affiliate Program            | Program afiliasi untuk content creators dan bloggers. Commission per referral conversion. Dashboard affiliate. | Server (tracking) | 🔵 |
-| 12    | Community Showcase           | Halaman showcase use cases dari komunitas. User submit, curated display. Social proof + SEO content. | Server + Client | 🟢 |
-| 13    | Haptic Feedback              | Haptic feedback di mobile saat processing selesai atau error. Subtle vibration patterns. Progressive enhancement. | Client (Vibration API) | 🟢 |
-| 14    | Voice Command                | Voice command untuk hands-free operation. "Compress file ini", "Merge semua". Speech-to-text + intent detection. | Client (Web Speech API) | 🟡 |
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    |
+|-------|------------------------------|-----------|------------------------------------------------------------------|
+| 11    | Affiliate Program            | 🔵        | Program afiliasi untuk content creators. Commission per referral.  |
+| 12    | Community Showcase           | 🟢        | Halaman showcase use cases dari komunitas. Social proof + SEO.    |
+| 13    | Haptic Feedback              | 🟢        | Haptic feedback di mobile saat processing selesai atau error.     |
+| 14    | Voice Command                | 🟡        | Voice command untuk hands-free operation. Speech-to-text + intent.|
 
-**Acceptance Criteria Fase 5 (Detail):**
+### 13.6 Phase F5E — OpenClaw Agent Expansion (4 fitur) ✨ BARU v4.0
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 15    | Multi-Platform Social Agent  | 🟡        | Ekspansi social media ke IG, TikTok, LinkedIn, YouTube. Konten otomatis per platform, scheduling, analytics cross-platform. | M79 |
+| 16    | Community Manager Agent      | 🟣        | Moderasi komunitas otomatis. Respons pertanyaan, welcome new members, highlight kontribusi, eskalasi ke manusia. | M80 |
+| 17    | Outreach Agent               | 🟡        | Otomatis identifikasi dan hubungi potential partners, influencers, media. Personalized outreach templates. | M81 |
+| 18    | Revenue Optimizer Agent      | ⚪        | Analisis revenue streams, identifikasi peluang upsell, optimasi pricing secara otonom. A/B test pricing. | M82 |
+
+### 13.7 Phase F5F — OpenClaw Specialist Agents (4 fitur) ✨ BARU v4.0
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 19    | Localization Agent           | 🟣        | Otomatis translate dan adaptasi konten untuk pasar lokal. Bahasa daerah, cultural nuances, local SEO. | M83 |
+| 20    | Legal Compliance Agent       | ⚪        | Monitor perubahan regulasi (UU PDP, e-Meterai, BSSN). Alert compliance issues. Suggest policy updates. | M84 |
+| 21    | Partnership Agent            | 🟡        | Identifikasi, evaluate, dan manage partnership opportunities. Track MoU progress, follow-up otomatis. | M85 |
+| 22    | Customer Success Agent       | ⚪        | Proaktif monitor user health score. Identifikasi churn risk. Personalized engagement. Onboarding assistance. | M86 |
+
+### 13.8 Acceptance Criteria Fase 5 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
 | WhatsApp Bot | AC1 | Kirim PDF via WhatsApp → bot merespons | Functional |
 | WhatsApp Bot | AC2 | Menu tool selection via quick replies | UX |
-| WhatsApp Bot | AC3 | Hasil dikirim kembali sebagai file | Functional |
-| WhatsApp Bot | AC4 | Response time < 30 detik | Performance |
-| WhatsApp Bot | AC5 | WhatsApp Business API approved | Prerequisite |
+| WhatsApp Bot | AC3 | Hasil dikirim kembali sebagai file, < 30 detik | Performance |
+| WhatsApp Bot | AC4 | WhatsApp Business API approved | Prerequisite |
 | Telegram Bot | AC1 | /start command menampilkan menu tools | Functional |
 | Telegram Bot | AC2 | Inline keyboard untuk tool selection | UX |
 | Telegram Bot | AC3 | File processing + result delivery | Functional |
-| Telegram Bot | AC4 | Support group dan private chat | Functional |
 | CLI Tool | AC1 | npm install -g @papyr/cli berfungsi | Functional |
 | CLI Tool | AC2 | papyr compress file.pdf menghasilkan output | Functional |
-| CLI Tool | AC3 | papyr merge a.pdf b.pdf berfungsi | Functional |
-| CLI Tool | AC4 | Progress bar di terminal | UX |
-| CLI Tool | AC5 | Auth via API key (papyr login) | Security |
+| CLI Tool | AC3 | Progress bar di terminal, auth via API key | UX |
 | Email Processor | AC1 | Forward email dengan PDF attachment → auto-process | Functional |
-| Email Processor | AC2 | AI classify tipe dokumen | Functional |
-| Email Processor | AC3 | Reply dengan hasil processing | Functional |
-| Email Processor | AC4 | Handle 100+ emails/hari | Performance |
-| Scheduled Processing | AC1 | Cron-like schedule definition | Functional |
-| Scheduled Processing | AC2 | Recurring processing (daily, weekly) | Functional |
-| Scheduled Processing | AC3 | Source: folder, email, API | Functional |
-| Newsletter | AC1 | Auto-generate konten mingguan | Functional |
-| Newsletter | AC2 | Subscriber management (subscribe/unsubscribe) | Functional |
-| Newsletter | AC3 | Open rate tracking | Analytics |
-| Newsletter | AC4 | CAN-SPAM compliance | Regulatory |
-| Status Page | AC1 | Real-time status semua services | Functional |
-| Status Page | AC2 | Incident history dan postmortem | Functional |
-| Status Page | AC3 | Subscribe to alerts (email/webhook) | Functional |
-| Status Page | AC4 | 100% accurate (no false positives) | Quality |
-| Link Building | AC1 | Identifikasi peluang backlink otomatis | Functional |
-| Link Building | AC2 | Outreach email templates | Functional |
-| Link Building | AC3 | Track acquired links | Analytics |
-| Link Building | AC4 | 5+ links/bulan target | Business |
-| Pricing Optimizer | AC1 | Analisis conversion data per price point | Functional |
-| Pricing Optimizer | AC2 | Recommend pricing adjustments | Functional |
-| Pricing Optimizer | AC3 | A/B test pricing otomatis | Functional |
-| Performance Tuner | AC1 | Auto-tune cache TTL berdasarkan traffic | Functional |
-| Performance Tuner | AC2 | Auto-tune worker count | Functional |
-| Performance Tuner | AC3 | Rollback jika performance degrades | Safety |
-| Affiliate Program | AC1 | Unique affiliate link per partner | Functional |
-| Affiliate Program | AC2 | Commission tracking per conversion | Functional |
-| Affiliate Program | AC3 | Payout management | Functional |
-| Affiliate Program | AC4 | Dashboard affiliate | UX |
-| Community Showcase | AC1 | User submit use case | Functional |
-| Community Showcase | AC2 | Curated display (admin approval) | Moderation |
-| Community Showcase | AC3 | SEO-friendly pages | SEO |
-| Haptic Feedback | AC1 | Vibration saat processing selesai (mobile) | Functional |
-| Haptic Feedback | AC2 | Different pattern untuk success vs error | UX |
-| Haptic Feedback | AC3 | Progressive enhancement (no-op desktop) | Compatibility |
-| Voice Command | AC1 | "Compress file ini" → trigger compress | Functional |
-| Voice Command | AC2 | "Merge semua" → trigger merge | Functional |
-| Voice Command | AC3 | Speech-to-text Bahasa Indonesia | Functional |
-| Voice Command | AC4 | Intent detection accuracy > 80% | Quality |
-| Voice Command | AC5 | Fallback ke text input jika speech fails | Reliability |
+| Email Processor | AC2 | AI classify tipe dokumen, reply dengan hasil | Functional |
+| Email Processor | AC3 | Handle 100+ emails/hari | Performance |
+| Scheduled Processing | AC1 | Cron-like schedule definition, recurring (daily, weekly) | Functional |
+| Newsletter | AC1 | Auto-generate konten mingguan, subscriber management | Functional |
+| Newsletter | AC2 | Open rate tracking, CAN-SPAM compliance | Regulatory |
+| Status Page | AC1 | Real-time status semua services, incident history | Functional |
+| Status Page | AC2 | Subscribe to alerts, 100% accurate | Quality |
+| Link Building | AC1 | Identifikasi peluang backlink otomatis, 5+ links/bulan | Business |
+| Pricing Optimizer | AC1 | Analisis conversion data, recommend pricing adjustments | Functional |
+| Performance Tuner | AC1 | Auto-tune cache TTL, worker count, rollback jika degrades | Functional |
+| Affiliate Program | AC1 | Unique affiliate link, commission tracking, payout management | Functional |
+| Community Showcase | AC1 | User submit use case, curated display, SEO-friendly | Functional |
+| Haptic Feedback | AC1 | Vibration saat processing selesai (mobile), progressive enhancement | Functional |
+| Voice Command | AC1 | Speech-to-text Bahasa Indonesia, intent detection > 80% | Quality |
+| Multi-Platform Social | AC1 | Konten otomatis per platform (IG, TikTok, LinkedIn, YouTube) | Functional |
+| Multi-Platform Social | AC2 | Scheduling, analytics cross-platform, format adaptation | UX |
+| Community Manager | AC1 | Moderasi komunitas otomatis, respons pertanyaan | Functional |
+| Community Manager | AC2 | Welcome new members, highlight kontribusi, eskalasi | UX |
+| Outreach Agent | AC1 | Identifikasi potential partners/influencers/media | Functional |
+| Outreach Agent | AC2 | Personalized outreach templates, follow-up tracking | UX |
+| Revenue Optimizer | AC1 | Analisis revenue streams, identifikasi peluang upsell | Functional |
+| Revenue Optimizer | AC2 | A/B test pricing otomatis, transparent reporting | Business |
+| Localization Agent | AC1 | Translate konten untuk pasar lokal, bahasa daerah | Functional |
+| Localization Agent | AC2 | Cultural nuances, local SEO optimization | Quality |
+| Legal Compliance Agent | AC1 | Monitor perubahan regulasi (UU PDP, e-Meterai, BSSN) | Functional |
+| Legal Compliance Agent | AC2 | Alert compliance issues, suggest policy updates | Functional |
+| Partnership Agent | AC1 | Identifikasi dan evaluate partnership opportunities | Functional |
+| Partnership Agent | AC2 | Track MoU progress, follow-up otomatis | UX |
+| Customer Success Agent | AC1 | Monitor user health score, identifikasi churn risk | Functional |
+| Customer Success Agent | AC2 | Personalized engagement, onboarding assistance | UX |
 
-### 13.6 Acceptance Criteria Fase 5 (Ringkasan)
+### 13.9 Acceptance Criteria Fase 5 (Ringkasan)
 
 | **Sub-fase** | **Key Metrics** | **Quality Gate** |
 |--------------|-----------------|------------------|
-| F5A (Messaging Bots) | WhatsApp response < 30 detik; Telegram inline keyboard functional; 5+ tools via bot | 2 bots live + stable |
-| F5B (Developer Tools) | CLI npm install + usage < 5 menit setup; email processor handles 100+ emails/hari | 3 tools published |
-| F5C (OpenClaw Ecosystem) | Newsletter open rate > 20%; status page 100% accurate; link building 5+ links/bulan | 5 systems operational |
-| F5D (Growth) | Affiliate generates > 10% revenue; community 50+ showcases; voice accuracy > 80% ID | 4 features live |
+| F5A (Messaging Bots) | WhatsApp response < 30 detik; Telegram inline keyboard functional | 2 bots live + stable |
+| F5B (Developer Tools) | CLI npm install + usage < 5 menit setup; email processor 100+ emails/hari | 3 tools published |
+| F5C (OpenClaw Ecosystem) | Newsletter open rate > 20%; status page 100% accurate; 5+ links/bulan | 5 systems operational |
+| F5D (Growth) | Affiliate generates > 10% revenue; community 50+ showcases; voice > 80% ID | 4 features live |
+| F5E (Agent Expansion) | Multi-platform reach 4+ platforms; outreach 10+ contacts/minggu | 4 agents operational |
+| F5F (Specialist Agents) | Localization 3+ bahasa; compliance 100% regulatory coverage | 4 agents operational |
 
-### 13.7 Pertimbangan Teknis Fase 5
+### 13.10 Pertimbangan Teknis Fase 5
 
 - **WhatsApp Bot:** Membutuhkan WhatsApp Business API (Meta approval process 2-4 minggu)
 - **Telegram Bot:** Lebih mudah — Bot API langsung tersedia, inline keyboard untuk tool selection
@@ -1502,79 +1412,852 @@ Dokumentasi lengkap: https://9router.com/
 - **Status Page:** Real-time monitoring semua services, incident management, subscriber notifications
 - **Voice Command:** Web Speech API (browser-native), intent detection via simple NLP, fallback ke text input
 - **Haptic Feedback:** Vibration API (mobile only), progressive enhancement (no-op di desktop)
+- **Multi-Platform Social:** Setiap platform memiliki format berbeda — agent harus adaptasi konten per platform
+- **Community Manager:** NLP untuk memahami pertanyaan, knowledge base FAQ, eskalasi threshold
+- **Outreach Agent:** CRM-like tracking, email templates, follow-up scheduling, response detection
+- **Revenue Optimizer:** Requires significant data (min 1000 conversions) sebelum recommendations reliable
+- **Localization Agent:** Bahasa daerah memiliki nuansa berbeda — perlu native speaker validation
+- **Legal Compliance Agent:** Monitor Kemenkumham, BSSN, OJK, BI untuk perubahan regulasi
+- **Partnership Agent:** Integration dengan LinkedIn, email, CRM untuk relationship management
+- **Customer Success Agent:** Health score berdasarkan: login frequency, feature usage, support tickets, NPS
+
+### 13.11 OpenClaw Agent Architecture (Expanded)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    OPENCLAW AGENT ECOSYSTEM (Fase 5)                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  EXISTING (10 agents dari MVP 0.2):                                         │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐             │
+│  │ Aksara  │ │ Telik   │ │ Jaga    │ │ Tameng  │ │ Warta   │             │
+│  │ (SEO)   │ │(Compete)│ │(Health) │ │(Security│ │(Report) │             │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘             │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐             │
+│  │ Lontar  │ │ Dalang  │ │ Pustaka │ │Prasasti │ │ Kicau   │             │
+│  │(Improve)│ │  (PM)   │ │(Backup) │ │(Analytic│ │(Social) │             │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘             │
+│                                                                             │
+│  NEW (8 agents dari Fase 5 v4.0):                                           │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐                          │
+│  │ Jangkau │ │ Warga   │ │ Sapa    │ │ Untung  │                          │
+│  │(Multi-  │ │(Communi-│ │(Outreach│ │(Revenue │                          │
+│  │Platform)│ │ty Mgr)  │ │  Agent) │ │Optimize)│                          │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘                          │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐                          │
+│  │ Bahasa  │ │ Hukum   │ │ Mitra   │ │ Setia   │                          │
+│  │(Localiz)│ │(Legal)  │ │(Partner)│ │(Customer│                          │
+│  │         │ │         │ │         │ │Success) │                          │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘                          │
+│                                                                             │
+│  TOTAL: 18 agents aktif                                                     │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Persona Naming Convention (Bahasa Jawa Kuno/Indonesia):**
+
+| **Agent** | **Persona** | **Arti** | **Fungsi** |
+|-----------|-------------|----------|------------|
+| Multi-Platform Social | Jangkau | Menjangkau | Reach across platforms |
+| Community Manager | Warga | Warga/komunitas | Manage community |
+| Outreach Agent | Sapa | Menyapa | Reach out to partners |
+| Revenue Optimizer | Untung | Keuntungan | Optimize revenue |
+| Localization Agent | Bahasa | Bahasa | Localize content |
+| Legal Compliance | Hukum | Hukum | Legal monitoring |
+| Partnership Agent | Mitra | Mitra/partner | Manage partnerships |
+| Customer Success | Setia | Kesetiaan | Customer retention |
 
 ---
 
-## 14. Yang TIDAK Akan Dibangun
+## 14. Detail Fase 6 — Platform & Marketplace
+
+### 14.1 Ringkasan
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Status**             | 🔮 VISI                                                      |
+| **Gate Condition**     | Fase 5 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta            |
+| **Total Fitur**        | 25 fitur dalam 4 sub-fase                                    |
+| **Milestone**          | M87-M98                                                       |
+| **Estimasi Total**     | 350-500 jam                                                   |
+
+### 14.2 Phase F6A — Platform Core (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 1     | Marketplace (Plugin/Template Store) | 🟡 | Platform marketplace untuk plugin dan template pihak ketiga. Review system, rating, revenue sharing 70/30. | M87 |
+| 2     | SDK (Developer Toolkit)      | 🟢        | SDK resmi untuk developer. npm package, Python package. Dokumentasi lengkap, code samples, sandbox environment. | M87 |
+| 3     | Education Platform           | 🔵        | Platform kursus dan tutorial tentang PDF management, document workflow. Video + text. Sertifikasi. | M88 |
+| 4     | Desktop App (Electron/Tauri) | 🟡        | Aplikasi desktop native. Offline processing penuh. Auto-update. Integrasi OS (right-click menu, file associations). | M89 |
+| 5     | Mobile App (React Native/Flutter) | 🟡   | Aplikasi mobile native. Camera scan → PDF. Offline tools. Push notifications. Biometric auth. | M89 |
+
+### 14.3 Phase F6B — Creator Economy (4 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 6     | Template Store               | 🟢        | Marketplace template dokumen (invoice, surat, proposal, CV). User-generated + curated. Revenue sharing. | M90 |
+| 7     | Design Studio (PDF Design Tool) | 🟡     | Visual PDF design tool. Drag-drop elements, text, images. WYSIWYG editor. Export print-ready PDF. | M91 |
+| 8     | Freelancer Marketplace       | 🔵        | Platform menghubungkan freelancer document specialist dengan klien. Escrow payment. Rating system. | M91 |
+| 9     | Courses & Certification      | 🟢        | Program sertifikasi "Papyr Certified Professional". Online exam. Digital badge. LinkedIn integration. | M92 |
+
+### 14.4 Phase F6C — Revenue & Community (4 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 10    | Community Platform           | 🟢        | Forum komunitas + showcase. Diskusi, Q&A, tips sharing. Gamification (points, badges). Moderated. | M93 |
+| 11    | Credits System               | 🔵        | Sistem kredit untuk pay-per-use. Beli kredit, gunakan untuk AI features. Bulk discount. No expiry. | M93 |
+| 12    | Pay-per-Use API              | 🟡        | API pricing model pay-per-use selain subscription. Metered billing. Usage dashboard. Auto-topup. | M94 |
+| 13    | Affiliate Network            | 🔵        | Ekspansi affiliate program menjadi network. Multi-tier commission. Affiliate dashboard advanced. | M95 |
+
+### 14.5 Phase F6D — Platform Ecosystem (12 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 14    | Developer Portal             | 🟢        | Portal developer lengkap. API docs, SDK docs, tutorials, changelog, status, community forum. | M96 |
+| 15    | Plugin System                | 🟡        | Arsitektur plugin extensible. Plugin API, lifecycle hooks, sandboxed execution. Developer tools. | M96 |
+| 16    | Theme Marketplace            | 🟢        | Marketplace tema/skin untuk Papyr interface. Custom branding per user. CSS variables. | M96 |
+| 17    | Document Templates Gallery   | 🟢        | Galeri template dokumen gratis + premium. Kategorisasi, search, preview. Community contributions. | M97 |
+| 18    | Ambassador Program           | 🔵        | Program ambassador untuk power users. Exclusive features, early access, swag, revenue share. | M97 |
+| 19    | Blog Platform (Integrated)   | 🟢        | Platform blog terintegrasi. CMS sederhana. SEO-optimized. Community guest posts. | M97 |
+| 20    | Challenges & Gamification    | 🟡        | Challenge mingguan/bulanan. Leaderboard. Prizes (Pro subscription, credits). Community engagement. | M97 |
+| 21    | Print Service Integration    | 🟡        | Integrasi dengan print service. Order cetak langsung dari Papyr. Delivery tracking. Partner lokal. | M98 |
+| 22    | Document Storage (Cloud)     | 🟡        | Cloud storage untuk dokumen user. Organize folders. Search. Version history. Sharing. | M98 |
+| 23    | White-label Platform         | 🟡        | Platform white-label lengkap untuk enterprise/partner. Custom domain, branding, features. | M98 |
+| 24    | Certification Program        | 🟢        | Program sertifikasi untuk developer yang build di atas Papyr platform. Exam + badge. | M98 |
+| 25    | Invoice Generator Platform   | 🔴        | Platform invoice generator lengkap. Recurring invoices, payment tracking, tax compliance Indonesia. | M98 |
+
+### 14.6 Acceptance Criteria Fase 6 (Detail)
+
+| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
+|-----------|---------|--------------|----------|
+| Marketplace | AC1 | Platform marketplace untuk plugin dan template pihak ketiga | Functional |
+| Marketplace | AC2 | Review system, rating, revenue sharing 70/30 | Business |
+| Marketplace | AC3 | Search, filter, categories, featured items | UX |
+| SDK | AC1 | npm package dan Python package tersedia | Functional |
+| SDK | AC2 | Dokumentasi lengkap, code samples, sandbox environment | Documentation |
+| SDK | AC3 | Version management, backward compatibility | Technical |
+| Education Platform | AC1 | Platform kursus dan tutorial, video + text | Functional |
+| Education Platform | AC2 | Progress tracking, sertifikasi, quiz | UX |
+| Desktop App | AC1 | Offline processing penuh, auto-update | Functional |
+| Desktop App | AC2 | Integrasi OS (right-click menu, file associations) | UX |
+| Desktop App | AC3 | Performance ≥ web version, < 100MB installer | Performance |
+| Mobile App | AC1 | Camera scan → PDF, offline tools, push notifications | Functional |
+| Mobile App | AC2 | Biometric auth, native performance | Security |
+| Template Store | AC1 | Marketplace template dokumen, user-generated + curated | Functional |
+| Template Store | AC2 | Preview, categories, revenue sharing | UX |
+| Design Studio | AC1 | Visual PDF design tool, drag-drop elements | Functional |
+| Design Studio | AC2 | WYSIWYG editor, export print-ready PDF | Quality |
+| Freelancer Marketplace | AC1 | Platform menghubungkan freelancer dengan klien | Functional |
+| Freelancer Marketplace | AC2 | Escrow payment, rating system, dispute resolution | Business |
+| Courses & Certification | AC1 | Program sertifikasi, online exam, digital badge | Functional |
+| Courses & Certification | AC2 | LinkedIn integration, verifiable credentials | UX |
+| Community Platform | AC1 | Forum komunitas + showcase, diskusi, Q&A | Functional |
+| Community Platform | AC2 | Gamification (points, badges), moderated | UX |
+| Credits System | AC1 | Sistem kredit pay-per-use, bulk discount, no expiry | Business |
+| Credits System | AC2 | Dashboard usage, auto-topup option | UX |
+| Pay-per-Use API | AC1 | Metered billing, usage dashboard | Functional |
+| Pay-per-Use API | AC2 | Auto-topup, spending alerts | Business |
+| Affiliate Network | AC1 | Multi-tier commission, affiliate dashboard advanced | Business |
+| Developer Portal | AC1 | API docs, SDK docs, tutorials, changelog, status | Documentation |
+| Plugin System | AC1 | Plugin API, lifecycle hooks, sandboxed execution | Technical |
+| Plugin System | AC2 | Developer tools, testing framework | DX |
+| Theme Marketplace | AC1 | Marketplace tema/skin, custom branding per user | Functional |
+| Document Templates Gallery | AC1 | Galeri template gratis + premium, kategorisasi, search | Functional |
+| Ambassador Program | AC1 | Exclusive features, early access, revenue share | Business |
+| Blog Platform | AC1 | CMS sederhana, SEO-optimized, community guest posts | Functional |
+| Challenges & Gamification | AC1 | Challenge mingguan/bulanan, leaderboard, prizes | Engagement |
+| Print Service | AC1 | Order cetak langsung dari Papyr, delivery tracking | Functional |
+| Document Storage | AC1 | Cloud storage, organize folders, search, version history | Functional |
+| White-label Platform | AC1 | Custom domain, branding, features per enterprise | Functional |
+| Certification Program | AC1 | Program sertifikasi developer, exam + badge | Functional |
+| Invoice Generator Platform | AC1 | Recurring invoices, payment tracking, tax compliance ID | Functional |
+
+### 14.7 Acceptance Criteria Fase 6 (Ringkasan)
+
+| **Sub-fase** | **Key Metrics** | **Quality Gate** |
+|--------------|-----------------|------------------|
+| F6A (Platform Core) | SDK downloads > 500/bulan; marketplace 10+ plugins; desktop/mobile 1000+ installs | 5 fitur production-ready |
+| F6B (Creator Economy) | Template store 100+ templates; design studio functional; freelancer 50+ active | 4 fitur live |
+| F6C (Revenue & Community) | Credits system revenue > 20% total; community 1000+ members; API pay-per-use active | 4 fitur operational |
+| F6D (Platform Ecosystem) | Developer portal 500+ registered devs; plugin system 20+ plugins; blog 50+ articles | 12 fitur deployed |
+
+### 14.8 Revenue Model Fase 6
+
+| **Revenue Stream** | **Model** | **Target Contribution** |
+|--------------------|-----------|------------------------|
+| Marketplace Commission | 30% dari setiap transaksi plugin/template | 15% total revenue |
+| SDK/API Pay-per-Use | Metered billing per API call | 10% total revenue |
+| Credits System | Pre-paid credits untuk AI features | 20% total revenue |
+| Education/Certification | Course fees + exam fees | 5% total revenue |
+| Affiliate Network | Commission per conversion | 10% total revenue |
+| Print Service | Commission per order | 5% total revenue |
+| Pro Subscription | Existing subscription model | 35% total revenue |
+
+### 14.7 Keputusan Teknis Fase 6
+
+- **Desktop App:** Tauri preferred (Rust backend, smaller bundle) vs Electron (larger ecosystem)
+- **Mobile App:** Flutter preferred (single codebase, good performance) vs React Native (JS ecosystem)
+- **Plugin System:** Sandboxed iframe + postMessage untuk security isolation
+- **Marketplace:** Revenue sharing 70% creator / 30% Papyr
+- **Credits System:** 1 kredit = Rp 1.000, minimum purchase 10 kredit
+
+### 14.8 Dependensi Fase 6
+
+| **Fitur** | **Depends On** | **Alasan** |
+|-----------|----------------|------------|
+| Marketplace | Fase 5 Plugin System concept | Perlu arsitektur extensible |
+| SDK | MVP 0.4 Public API | SDK wraps existing API |
+| Desktop App | MVP 0.3 PWA | Shared offline logic |
+| Mobile App | MVP 0.4 Auth | Mobile needs auth flow |
+| Credits System | MVP 0.4 Payment | Payment infrastructure |
+| White-label | Fase 4 Enterprise | Enterprise features base |
+
+---
+
+## 15. Detail Fase 7 — Enterprise & B2B
+
+### 15.1 Ringkasan
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Status**             | 🔮 VISI                                                      |
+| **Gate Condition**     | Fase 6 marketplace aktif + ≥ 10 enterprise inquiries          |
+| **Total Fitur**        | 20 fitur dalam 5 sub-fase                                    |
+| **Milestone**          | M99-M108                                                      |
+| **Estimasi Total**     | 400-600 jam                                                   |
+
+### 15.2 Phase F7A — Government & Compliance (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 1     | Government Integration       | 🔴        | Integrasi dengan sistem pemerintah Indonesia (SPBE, SiKAP). Compliance standar pemerintah. Sertifikasi keamanan. | M99 |
+| 2     | Enterprise Console           | 🟡        | Admin console enterprise. Multi-tenant management. User provisioning. Usage analytics per department. Billing center. | M99 |
+| 3     | Compliance Dashboard         | 🔴        | Dashboard compliance real-time. UU PDP, ISO 27001, SOC 2 tracking. Audit readiness score. Gap analysis. | M100 |
+
+### 15.3 Phase F7B — Workflow & Security (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 4     | Workflow Engine               | 🟡        | Enterprise workflow engine. Approval chains, routing rules, SLA tracking. Visual workflow designer. Integration hooks. | M101 |
+| 5     | Secure Room (Encrypted Collaboration) | 🔴 | Ruang kolaborasi terenkripsi end-to-end. Document sharing, commenting, versioning dalam environment aman. Zero-knowledge. | M101 |
+| 6     | Audit Trail                  | 🟡        | Audit trail lengkap semua aktivitas. Who did what, when, where. Immutable log. Export untuk compliance. Retention policy. | M102 |
+
+### 15.4 Phase F7C — Enterprise Infrastructure (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 7     | API Gateway (Enterprise)     | 🟡        | Enterprise API gateway. Rate limiting per org, IP whitelisting, request signing, webhook management. SLA monitoring. | M103 |
+| 8     | Enterprise Self-Hosted       | 🔴        | Deployment on-premise/private cloud. Docker + Kubernetes. Air-gapped support. Custom configuration. | M103 |
+| 9     | Vertical Solutions           | ⚪        | Solusi vertikal per industri: Legal, Healthcare, Real Estate, HR, Accounting, Construction, Education. Pre-configured workflows + templates. | M104 |
+
+### 15.5 Phase F7D — Collaboration (4 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 10    | Multi-Region Deployment      | 🟡        | Deployment multi-region (Indonesia, Singapore, Australia). Data locality. Latency optimization. Failover. | M105 |
+| 11    | Real-time Collaboration      | 🟡        | Kolaborasi real-time pada dokumen. Multiple cursors, live editing, presence indicators. Conflict resolution. | M105 |
+| 12    | Team Management              | 🟢        | Team management lengkap. Invite, roles, permissions, groups. Activity feed. Team analytics. | M106 |
+| 13    | SSO/SAML                     | 🔴        | Single Sign-On via SAML 2.0, OpenID Connect. Integration dengan Azure AD, Okta, Google Workspace. | M106 |
+
+### 15.6 Phase F7E — Enterprise Services (7 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 14    | Role-Based Access Control    | 🟢        | RBAC granular. Custom roles, permission sets. Resource-level access. Inheritance. Audit. | M107 |
+| 15    | Enterprise SLA               | 🔵        | SLA guarantee 99.99% uptime. Dedicated resources. Priority support. Financial penalties for breach. | M107 |
+| 16    | Dedicated Support            | 🔵        | Dedicated account manager. 24/7 support channel. Onboarding assistance. Quarterly business reviews. | M107 |
+| 17    | Custom Branding              | 🟢        | Full custom branding per organization. Logo, colors, fonts, email templates, login page. | M108 |
+| 18    | Data Residency               | 🔴        | Data residency options. Indonesia-only storage. Compliance dengan regulasi data lokal. Certification. | M108 |
+| 19    | Enterprise Analytics         | 🟡        | Analytics enterprise-grade. Custom dashboards, scheduled reports, data export, API access. Benchmarking. | M108 |
+| 20    | Bulk Operations              | 🟡        | Bulk operations untuk enterprise. Mass user provisioning, bulk document processing, batch API calls. | M108 |
+
+### 15.7 Acceptance Criteria Fase 7 (Detail)
+
+| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
+|-----------|---------|--------------|----------|
+| Government Integration | AC1 | Integrasi dengan sistem pemerintah (SPBE, SiKAP) | Functional |
+| Government Integration | AC2 | Sertifikasi keamanan level 3 | Regulatory |
+| Enterprise Console | AC1 | Multi-tenant management, user provisioning | Functional |
+| Enterprise Console | AC2 | Usage analytics per department, billing center | Business |
+| Compliance Dashboard | AC1 | UU PDP, ISO 27001, SOC 2 tracking | Functional |
+| Compliance Dashboard | AC2 | Audit readiness score, gap analysis | Quality |
+| Workflow Engine | AC1 | Approval chains, routing rules, SLA tracking | Functional |
+| Workflow Engine | AC2 | Visual workflow designer, integration hooks | UX |
+| Secure Room | AC1 | End-to-end encryption, document sharing, commenting | Functional |
+| Secure Room | AC2 | Zero-knowledge architecture, versioning | Security |
+| Audit Trail | AC1 | Who did what, when, where, immutable log | Functional |
+| Audit Trail | AC2 | Export untuk compliance, retention policy | Regulatory |
+| API Gateway | AC1 | Rate limiting per org, IP whitelisting, request signing | Functional |
+| API Gateway | AC2 | SLA monitoring, webhook management | Business |
+| Enterprise Self-Hosted | AC1 | Docker + Kubernetes deployment, < 1 jam setup | Functional |
+| Enterprise Self-Hosted | AC2 | Air-gapped support, custom configuration | Technical |
+| Vertical Solutions | AC1 | Pre-configured workflows per industri (7 verticals) | Functional |
+| Vertical Solutions | AC2 | Industry-specific templates, compliance rules | Quality |
+| Multi-Region | AC1 | Deployment Indonesia, Singapore, Australia | Functional |
+| Multi-Region | AC2 | Data locality, latency optimization, failover | Performance |
+| Real-time Collaboration | AC1 | Multiple cursors, live editing, presence indicators | Functional |
+| Real-time Collaboration | AC2 | Conflict resolution, < 100ms latency | Performance |
+| Team Management | AC1 | Invite, roles, permissions, groups, activity feed | Functional |
+| SSO/SAML | AC1 | SAML 2.0, OpenID Connect, Azure AD, Okta, Google | Functional |
+| SSO/SAML | AC2 | Seamless login experience, session management | UX |
+| RBAC | AC1 | Custom roles, permission sets, resource-level access | Functional |
+| RBAC | AC2 | Inheritance, audit log | Security |
+| Enterprise SLA | AC1 | 99.99% uptime guarantee, financial penalties | Business |
+| Dedicated Support | AC1 | 24/7 support channel, dedicated account manager | Business |
+| Custom Branding | AC1 | Logo, colors, fonts, email templates, login page | Functional |
+| Data Residency | AC1 | Indonesia-only storage option, certified provider | Regulatory |
+| Enterprise Analytics | AC1 | Custom dashboards, scheduled reports, data export | Functional |
+| Bulk Operations | AC1 | Mass user provisioning, bulk document processing | Functional |
+
+### 15.8 Acceptance Criteria Fase 7 (Ringkasan)
+
+| **Sub-fase** | **Key Metrics** | **Quality Gate** |
+|--------------|-----------------|------------------|
+| F7A (Government) | Government compliance certification; enterprise console supports 500+ users | 3 fitur certified |
+| F7B (Workflow) | Workflow engine handles 1000+ concurrent workflows; secure room zero data leaks | 3 fitur production |
+| F7C (Enterprise Infra) | Self-hosted deployment < 1 jam setup; API gateway 99.99% uptime | 3 fitur deployed |
+| F7D (Collaboration) | Real-time collab < 100ms latency; SSO integration 5+ providers | 4 fitur live |
+| F7E (Enterprise Services) | RBAC 100% coverage; SLA compliance 99.99%; data residency certified | 7 fitur operational |
+
+### 15.9 Enterprise Pricing Model
+
+| **Tier** | **Harga** | **Fitur** | **Support** |
+|----------|-----------|-----------|-------------|
+| Team (5-20 users) | Rp 99.000/user/bulan | Semua Pro + team management + shared billing | Email support |
+| Business (20-100 users) | Rp 79.000/user/bulan | + SSO, RBAC, audit trail, custom branding | Priority support |
+| Enterprise (100+ users) | Custom pricing | + self-hosted, SLA, dedicated support, data residency | 24/7 dedicated |
+| Government | Custom pricing | + compliance dashboard, government integration, air-gapped | Dedicated + on-site |
+
+### 15.10 Vertical Solutions Detail
+
+| **Vertikal** | **Fitur Khusus** | **Target Users** |
+|--------------|------------------|------------------|
+| Legal | Contract management, clause library, legal document templates, e-signature workflow | Law firms, corporate legal |
+| Healthcare | Patient record management, HIPAA-like compliance, medical form templates | Hospitals, clinics |
+| Real Estate | Property document management, contract templates, digital signing workflow | Agents, developers |
+| HR | Employee document management, offer letter templates, onboarding workflows | HR departments |
+| Accounting | Invoice management, receipt processing, tax document templates, Jurnal.id integration | Accounting firms |
+| Construction | Project document management, permit tracking, progress report templates | Contractors |
+| Education | Certificate generation, transcript management, assignment submission | Schools, universities |
+
+### 15.8 Pertimbangan Regulasi Fase 7
+
+| **Fitur** | **Regulasi** | **Requirement** |
+|-----------|--------------|-----------------|
+| Government Integration | SPBE (Sistem Pemerintahan Berbasis Elektronik) | Sertifikasi keamanan level 3 |
+| Compliance Dashboard | UU PDP, ISO 27001 | Audit trail + data protection impact assessment |
+| Secure Room | UU ITE, UU PDP | End-to-end encryption, zero-knowledge architecture |
+| SSO/SAML | Enterprise security standards | SAML 2.0 + OpenID Connect compliance |
+| Data Residency | PP 71/2019 (PSTE) | Data center di Indonesia, certified provider |
+| Enterprise Self-Hosted | Varies per client | Air-gapped deployment capability |
+
+---
+
+## 16. Detail Fase 8 — AI Agent Swarm + Autonomy
+
+### 16.1 Ringkasan
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Status**             | 🔮 VISI                                                      |
+| **Gate Condition**     | Fase 7 ≥ 5 enterprise customers + AI infrastructure mature    |
+| **Total Fitur**        | 20 fitur dalam 5 sub-fase                                    |
+| **Milestone**          | M109-M118                                                     |
+| **Estimasi Total**     | 500-700 jam                                                   |
+
+### 16.2 Phase F8A — AI Workflow (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 1     | AI Workflow Automation (Drag-Drop) | 🟡  | Visual workflow builder dengan AI assistance. AI suggest next steps, auto-configure parameters, error recovery. Natural language workflow creation. | M109 |
+| 2     | AI PDF Agent (Conversational Multi-step) | 🟣 | Agent conversational yang bisa melakukan multi-step PDF operations. "Ambil halaman 3-5, compress, lalu watermark dengan logo saya." Chain of actions. | M109 |
+| 3     | Bulk Intelligence (Batch AI Processing) | 🟡 | Batch AI processing untuk ratusan dokumen. Classify, extract, transform secara paralel. Progress tracking. Error handling per file. | M110 |
+
+### 16.3 Phase F8B — AI Document Intelligence (4 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 4     | Template Engine (AI-Generated Templates) | 🟣 | AI generate template dokumen dari deskripsi natural language. "Buat template invoice untuk toko online." Customizable output. | M111 |
+| 5     | PDF Repair (AI-Powered)      | 🟣        | AI repair corrupted PDF files. Recover text, images, structure dari file rusak. Confidence score per recovery. | M111 |
+| 6     | Style Transfer (Document Styling) | ⚪   | Transfer visual style dari satu dokumen ke dokumen lain. "Buat laporan ini terlihat seperti template A." AI-powered layout matching. | M112 |
+| 7     | Document Understanding Graph | ⚪        | Knowledge graph dari dokumen. Relasi antar entitas, timeline events, cross-document references. Visual graph explorer. | M112 |
+
+### 16.4 Phase F8C — AI Predictive (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 8     | Predictive Needs (Suggest Next Action) | 🟣 | AI prediksi apa yang user butuhkan selanjutnya berdasarkan behavior pattern. "Biasanya setelah merge, Anda compress. Lakukan sekarang?" | M113 |
+| 9     | Quality Score (Document Quality Assessment) | ⚪ | AI assess kualitas dokumen: readability, formatting consistency, accessibility, print-readiness. Score 0-100 + improvement suggestions. | M113 |
+| 10    | Multi-Modal Input (Voice, Image, Text → PDF) | 🟡 | Input multi-modal untuk PDF creation. Dikte via voice, foto whiteboard, text notes — semua bisa jadi PDF terstruktur. | M114 |
+
+### 16.5 Phase F8D — OpenClaw Swarm Core (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 11    | OpenClaw Agent Marketplace   | 🟡        | Marketplace untuk agent capabilities. Third-party developers bisa publish agent skills. Revenue sharing. Sandboxed execution. | M115 |
+| 12    | OpenClaw Multi-Project Management | 🟣   | OpenClaw mengelola multiple projects/products secara simultan. Resource allocation, priority balancing, cross-project insights. | M115 |
+| 13    | OpenClaw Memory System (Persistent Context) | 🔵 | Persistent memory system untuk agents. Long-term context, learned preferences, historical decisions. Forgetting mechanism untuk privacy. | M116 |
+
+### 16.6 Phase F8E — OpenClaw Autonomy (7 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 14    | OpenClaw Autonomous Experimentation | ⚪ | Agent secara otonom menjalankan eksperimen (A/B tests, feature flags, pricing). Hypothesis → experiment → analyze → decide. Human oversight for big decisions. | M117 |
+| 15    | OpenClaw Predictive Maintenance | 🟣     | Prediksi kapan infrastructure akan bermasalah sebelum terjadi. Proactive scaling, dependency updates, security patches. | M117 |
+| 16    | OpenClaw Cross-Agent Communication | 🟣  | Protocol komunikasi antar agents. Task delegation, knowledge sharing, conflict resolution. Swarm intelligence. | M117 |
+| 17    | OpenClaw Self-Funding (Autonomous Revenue) | ⚪ | Agent secara otonom menghasilkan revenue (affiliate, content monetization, API reselling). Budget allocation untuk self-improvement. | M118 |
+| 18    | AI Document Versioning       | 🟢        | Versioning otomatis dokumen dengan AI-generated changelogs. Diff visualization. Rollback. Branch/merge concepts untuk dokumen. | M118 |
+| 19    | AI Contextual Help           | 🟢        | Contextual help system powered by AI. Muncul saat user terlihat bingung (hesitation detection). Proactive guidance. | M118 |
+| 20    | AI Security Advisor          | 🟣        | AI advisor untuk keamanan dokumen. Scan sensitive content, suggest protection level, compliance recommendations. | M118 |
+
+### 16.7 Acceptance Criteria Fase 8 (Detail)
+
+| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
+|-----------|---------|--------------|----------|
+| AI Workflow Automation | AC1 | Visual workflow builder dengan AI assistance | Functional |
+| AI Workflow Automation | AC2 | AI suggest next steps, auto-configure parameters | UX |
+| AI Workflow Automation | AC3 | Natural language workflow creation | Functional |
+| AI PDF Agent | AC1 | Conversational multi-step PDF operations | Functional |
+| AI PDF Agent | AC2 | Chain of actions, context retention | Technical |
+| AI PDF Agent | AC3 | Handle 10+ step chains reliably | Performance |
+| Bulk Intelligence | AC1 | Batch AI processing ratusan dokumen paralel | Functional |
+| Bulk Intelligence | AC2 | Progress tracking per file, error handling | UX |
+| Template Engine | AC1 | AI generate template dari deskripsi natural language | Functional |
+| Template Engine | AC2 | Customizable output, usable > 80% tanpa edit | Quality |
+| PDF Repair | AC1 | Recover text, images, structure dari file rusak | Functional |
+| PDF Repair | AC2 | Confidence score per recovery, success > 60% | Quality |
+| Style Transfer | AC1 | Transfer visual style antar dokumen | Functional |
+| Style Transfer | AC2 | AI-powered layout matching, visual match > 70% | Quality |
+| Document Understanding Graph | AC1 | Knowledge graph dari dokumen, relasi antar entitas | Functional |
+| Document Understanding Graph | AC2 | Visual graph explorer, cross-document references | UX |
+| Predictive Needs | AC1 | Prediksi next action berdasarkan behavior pattern | Functional |
+| Predictive Needs | AC2 | Prediction accuracy > 70% | Quality |
+| Quality Score | AC1 | Assess readability, formatting, accessibility, print-readiness | Functional |
+| Quality Score | AC2 | Score 0-100 + improvement suggestions | UX |
+| Multi-Modal Input | AC1 | Voice, image, text → PDF terstruktur | Functional |
+| Multi-Modal Input | AC2 | Dikte via voice, foto whiteboard support | UX |
+| Agent Marketplace | AC1 | Third-party developers publish agent skills | Functional |
+| Agent Marketplace | AC2 | Revenue sharing, sandboxed execution, 10+ agents | Business |
+| Multi-Project Management | AC1 | Manage multiple projects simultan | Functional |
+| Multi-Project Management | AC2 | Resource allocation, priority balancing | Technical |
+| Memory System | AC1 | Persistent context, learned preferences | Functional |
+| Memory System | AC2 | Forgetting mechanism untuk privacy, < 100ms retrieval | Privacy |
+| Autonomous Experimentation | AC1 | Hypothesis → experiment → analyze → decide | Functional |
+| Autonomous Experimentation | AC2 | Human oversight for big decisions, 10+ experiments/bulan | Safety |
+| Predictive Maintenance | AC1 | Prediksi infrastructure issues sebelum terjadi | Functional |
+| Predictive Maintenance | AC2 | Proactive scaling, dependency updates | Technical |
+| Cross-Agent Communication | AC1 | Task delegation, knowledge sharing antar agents | Functional |
+| Cross-Agent Communication | AC2 | Conflict resolution, swarm intelligence, < 500ms latency | Performance |
+| Self-Funding | AC1 | Autonomous revenue generation (affiliate, content, API) | Business |
+| Self-Funding | AC2 | Budget allocation, transparent reporting, covers > 10% costs | Business |
+| AI Document Versioning | AC1 | Versioning otomatis, AI-generated changelogs | Functional |
+| AI Document Versioning | AC2 | Diff visualization, rollback capability | UX |
+| AI Contextual Help | AC1 | Muncul saat user terlihat bingung (hesitation detection) | UX |
+| AI Contextual Help | AC2 | Proactive guidance, non-intrusive | UX |
+| AI Security Advisor | AC1 | Scan sensitive content, suggest protection level | Functional |
+| AI Security Advisor | AC2 | Compliance recommendations per document type | Quality |
+
+### 16.8 Acceptance Criteria Fase 8 (Ringkasan)
+
+| **Sub-fase** | **Key Metrics** | **Quality Gate** |
+|--------------|-----------------|------------------|
+| F8A (AI Workflow) | Workflow completion rate > 90%; PDF Agent handles 10+ step chains; bulk processes 500+ files | 3 fitur reliable |
+| F8B (Doc Intelligence) | Template generation usable > 80%; PDF repair success > 60%; style transfer visual match > 70% | 4 fitur functional |
+| F8C (AI Predictive) | Prediction accuracy > 70%; quality score correlation with user satisfaction > 0.7 | 3 fitur validated |
+| F8D (Swarm Core) | Agent marketplace 10+ third-party agents; memory system < 100ms retrieval; multi-project 5+ simultaneous | 3 fitur operational |
+| F8E (Autonomy) | Autonomous experiments 10+/bulan; self-funding covers > 10% agent costs; cross-agent latency < 500ms | 7 fitur stable |
+
+### 16.9 Agent Swarm Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    AGENT SWARM ARCHITECTURE (Fase 8)                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────┐       │
+│  │                    ORCHESTRATOR (Dalang v2)                       │       │
+│  │  - Task routing & prioritization                                 │       │
+│  │  - Resource allocation                                           │       │
+│  │  - Conflict resolution                                           │       │
+│  │  - Human escalation gateway                                      │       │
+│  └─────────────────────────────────────────────────────────────────┘       │
+│                              │                                              │
+│              ┌───────────────┼───────────────┐                              │
+│              ▼               ▼               ▼                              │
+│  ┌───────────────┐ ┌───────────────┐ ┌───────────────┐                     │
+│  │  CORE AGENTS  │ │ SPECIALIST    │ │ AUTONOMOUS    │                     │
+│  │  (18 existing)│ │ AGENTS (new)  │ │ AGENTS (new)  │                     │
+│  │               │ │               │ │               │                     │
+│  │  SEO, Health, │ │ Financial,    │ │ Experimenter, │                     │
+│  │  Security,    │ │ Incident,     │ │ Self-Funder,  │                     │
+│  │  Social, etc. │ │ Marketplace   │ │ Predictor     │                     │
+│  └───────────────┘ └───────────────┘ └───────────────┘                     │
+│              │               │               │                              │
+│              └───────────────┼───────────────┘                              │
+│                              ▼                                              │
+│  ┌─────────────────────────────────────────────────────────────────┐       │
+│  │                    MEMORY SYSTEM                                  │       │
+│  │  - Persistent context (Redis + PostgreSQL)                       │       │
+│  │  - Learned preferences                                           │       │
+│  │  - Historical decisions                                          │       │
+│  │  - Forgetting mechanism (privacy)                                │       │
+│  └─────────────────────────────────────────────────────────────────┘       │
+│                                                                             │
+│  COMMUNICATION: BullMQ (task queue) + Redis Pub/Sub (real-time)             │
+│  SAFETY: Hard limits, human approval > threshold, kill switches             │
+│  MONITORING: Grafana dashboard, Telegram alerts, audit logs                 │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 16.10 Autonomy Levels
+
+| **Level** | **Nama** | **Deskripsi** | **Approval Required** |
+|-----------|----------|---------------|----------------------|
+| L1 | Observe | Agent hanya mengamati dan melaporkan | Tidak |
+| L2 | Suggest | Agent memberikan rekomendasi, manusia memutuskan | Tidak |
+| L3 | Act & Report | Agent bertindak dan melaporkan hasilnya | Tidak (post-hoc review) |
+| L4 | Act Autonomously | Agent bertindak tanpa perlu laporan per-action | Hanya untuk high-impact |
+| L5 | Self-Direct | Agent menentukan sendiri apa yang perlu dilakukan | Ya, untuk budget > threshold |
+
+**Default Levels per Agent Type:**
+- Core Agents (existing): L3 (Act & Report)
+- Specialist Agents: L2-L3 (Suggest to Act & Report)
+- Autonomous Agents: L4-L5 (Act Autonomously to Self-Direct)
+- Self-Funding Agent: L4 dengan hard budget cap
+
+### 16.8 Pertimbangan Teknis Fase 8
+
+- **Agent Safety:** Semua autonomous actions memiliki rollback mechanism dan human override
+- **Cost Control:** Hard budget caps per agent per bulan, alert escalation
+- **Privacy:** Memory system tidak menyimpan user file content, hanya metadata dan patterns
+- **Swarm Protocol:** Event-driven architecture, message queue (BullMQ/RabbitMQ), eventual consistency
+- **Self-Funding:** Transparent reporting, revenue attribution, reinvestment rules defined by Product Owner
+
+---
+
+## 17. Detail Fase 9 — Moonshots & Future
+
+### 17.1 Ringkasan
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Status**             | 🔮 VISI                                                      |
+| **Gate Condition**     | Fase 8 agent swarm stabil + market leadership established     |
+| **Total Fitur**        | 48 fitur dalam 10 sub-fase                                   |
+| **Milestone**          | M119-M145                                                     |
+| **Estimasi Total**     | 1000-1500 jam                                                 |
+
+### 17.2 Phase F9A — Knowledge & Compliance (3 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 1     | Knowledge Base Engine        | 🟣        | Engine knowledge base dari koleksi dokumen. Auto-index, semantic search, Q&A across documents. Organization-wide knowledge. | M119 |
+| 2     | Compliance Engine            | 🔴        | Engine compliance otomatis. Check dokumen terhadap regulasi (UU PDP, GDPR, ISO). Auto-flag violations. Remediation suggestions. | M120 |
+| 3     | Regulatory Radar             | 🔴        | Monitor perubahan regulasi real-time. Alert dampak ke operasi. Suggest policy updates. Indonesia + ASEAN coverage. | M121 |
+
+### 17.3 Phase F9B — Indonesia Government Deep (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 4     | e-Meterai Official Partnership | 🔴      | Partnership resmi dengan Peruri untuk e-Meterai. Pembelian + penempelan e-Meterai langsung dari Papyr. Revenue sharing. | M122 |
+| 5     | BPJS/Pajak Helper            | 🟣        | Asisten pengisian dokumen BPJS dan pajak. Auto-fill dari data user. Validasi format. Reminder deadline. | M122 |
+| 6     | Notaris Assistant            | 🟣        | Asisten untuk notaris. Template akta, checklist dokumen, validasi kelengkapan, scheduling. Integrasi AHU Online. | M123 |
+| 7     | Surat Dinas Generator        | 🟢        | Generator surat dinas pemerintah. 50+ template standar. Nomor surat otomatis. Kop surat. Disposisi. | M124 |
+| 8     | UMKM Document Suite          | 🟢        | Suite dokumen lengkap untuk UMKM. SIUP, NIB, NPWP, invoice, kwitansi, surat jalan, PO. One-stop solution. | M125 |
+
+### 17.4 Phase F9C — Security & Trust (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 9     | Blockchain Verification      | ⚪        | Verifikasi keaslian dokumen via blockchain. Timestamp proof, tamper detection. Public verification page. | M126 |
+| 10    | Zero-Knowledge Processing    | 🟣        | Processing dokumen tanpa server bisa membaca konten. Homomorphic encryption atau secure enclaves. Ultimate privacy. | M126 |
+| 11    | Edge Computing               | 🟣        | Processing di edge nodes dekat user. Latency < 50ms. CDN-level processing. Cloudflare Workers integration. | M127 |
+| 12    | Stamp/Seal Digital           | 🔴        | Stempel dan cap digital resmi. Integrasi dengan PSrE. Verifiable digital stamps. Organization-level seals. | M127 |
+| 13    | Document Insurance           | 🔴        | Asuransi dokumen digital. Guarantee keaslian, recovery jika hilang. Partnership dengan asuransi. | M128 |
+
+### 17.5 Phase F9D — API & OpenClaw Future (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 14    | API Marketplace              | 🟡        | Marketplace API pihak ketiga yang terintegrasi dengan Papyr. Discovery, testing, one-click integration. | M129 |
+| 15    | OpenClaw Localization Agent  | 🟣        | Agent khusus lokalisasi konten ke 10+ bahasa daerah Indonesia. Cultural adaptation, not just translation. | M130 |
+| 16    | OpenClaw Legal Compliance Agent | ⚪     | Agent khusus monitor dan ensure legal compliance across all operations. Auto-update policies. Regulatory filing. | M130 |
+| 17    | OpenClaw Partnership Agent   | 🟣        | Agent khusus manage partnerships end-to-end. Discovery, outreach, negotiation support, relationship maintenance. | M131 |
+| 18    | OpenClaw Autonomous Hiring   | ⚪        | Agent yang bisa identify, evaluate, dan onboard freelance contributors. Task assignment, quality review, payment. | M131 |
+
+### 17.6 Phase F9E — AI Frontier (4 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 19    | Proprietary AI Models        | ⚪        | Fine-tuned AI models khusus untuk dokumen Indonesia. Training on Indonesian document corpus. Superior accuracy. | M132 |
+| 20    | Custom Document Format       | 🟣        | Format dokumen baru yang AI-native. Structured, searchable, versionable. Beyond PDF limitations. | M133 |
+| 21    | Network Effect Platform      | 🔵        | Platform dengan network effects. Semakin banyak user, semakin baik AI (shared templates, collective intelligence). | M133 |
+| 22    | Indonesia Document Standard  | ⚪        | Propose dan establish standar dokumen digital Indonesia. Working group, RFC process, government adoption. | M134 |
+
+### 17.7 Phase F9F — Next-Gen Interface (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 23    | AR Document Viewer           | ⚪        | Augmented Reality document viewer. Point camera at physical doc → digital overlay with AI insights. | M135 |
+| 24    | Voice Assistant              | 🟡        | Full voice assistant untuk document management. "Papyr, compress semua PDF di folder Downloads." Conversational. | M135 |
+| 25    | Scanner Box (Hardware)       | ⚪        | Hardware scanner box branded Papyr. Auto-scan → process → cloud. IoT integration. UMKM-friendly pricing. | M136 |
+| 26    | Smart Printer Integration    | 🟡        | Integrasi dengan smart printers. Print-from-Papyr, scan-to-Papyr. Driver/plugin untuk major printer brands. | M136 |
+| 27    | NFC Tag Documents            | 🟣        | NFC tags pada dokumen fisik yang link ke versi digital. Tap phone → view/verify document. Anti-counterfeit. | M137 |
+
+### 17.8 Phase F9G — Social Impact (5 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 28    | NGO/Social Impact Tools      | 🟢        | Tools gratis untuk NGO dan organisasi sosial. Proposal generator, report builder, certificate untuk volunteers. | M138 |
+| 29    | Accessibility First Platform | 🟣        | Platform yang fully accessible. Screen reader optimized, voice control, high contrast, large text. WCAG 2.2 AAA. | M138 |
+| 30    | Digital Literacy Program     | 🟢        | Program literasi digital gratis. Tutorial PDF management untuk pemula. Partnership dengan sekolah/universitas. | M139 |
+| 31    | Open Data Initiative         | ⚪        | Kontribusi ke open data Indonesia. Anonymized document statistics, format trends, usage patterns. Public API. | M139 |
+| 32    | Green Computing              | 🟣        | Minimize carbon footprint. Green hosting, efficient algorithms, carbon offset. Sustainability report. | M140 |
+
+### 17.9 Phase F9H — Analytics & Intelligence (4 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 33    | Document Insights Analytics  | 🟡        | Analytics mendalam tentang dokumen user. Trends, patterns, recommendations. "Anda paling banyak merge di hari Senin." | M141 |
+| 34    | Benchmark Service            | 🔵        | Benchmark dokumen terhadap industry standards. "Invoice Anda 30% lebih besar dari rata-rata industri." | M141 |
+| 35    | Industry Reports             | 🔵        | Generate industry reports tentang document management trends di Indonesia. Monetizable content. | M142 |
+| 36    | Document Health Score        | 🟡        | Health score per dokumen: accessibility, size efficiency, metadata completeness, security level. Improvement tips. | M143 |
+
+### 17.10 Phase F9I — Agent Specialists (2 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 37    | Financial Controller Agent   | 🟣        | Agent khusus financial management. Budget tracking, cost optimization, revenue forecasting, invoice management. | M144 |
+| 38    | Incident Commander Agent     | ⚪        | Agent khusus incident management. Auto-detect incidents, coordinate response, communicate status, post-mortem. | M144 |
+
+### 17.11 Phase F9J — Integrations & Devices (11 fitur)
+
+| **#** | **Fitur**                    | **Label** | **Deskripsi**                                                    | **Milestone** |
+|-------|------------------------------|-----------|------------------------------------------------------------------|---------------|
+| 39    | Notion Integration           | 🟡        | Bi-directional sync dengan Notion. Export Notion pages ke PDF. Import PDF ke Notion. | M145 |
+| 40    | Slack Bot                    | 🟢        | Slack bot untuk team PDF processing. /papyr compress, drag-drop file di channel. | M145 |
+| 41    | Teams Bot                    | 🟢        | Microsoft Teams bot. Same functionality as Slack bot. Enterprise-ready. | M145 |
+| 42    | Google Workspace Integration | 🟡        | Deep integration dengan Google Workspace. Docs, Sheets, Slides → PDF dan sebaliknya. Add-on. | M145 |
+| 43    | Shopee/Tokopedia Integration | 🟡        | Integrasi dengan e-commerce Indonesia. Auto-generate shipping labels, invoices, receipts dari order data. | M145 |
+| 44    | Jurnal.id/Accurate Integration | 🟡     | Integrasi dengan software akuntansi Indonesia. Auto-import invoice, receipt. Reconciliation. | M145 |
+| 45    | Watch App                    | ⚪        | Apple Watch / WearOS app. Quick actions: "Compress terakhir", status notifications, voice command. | M145 |
+| 46    | Smart Glasses                | ⚪        | AR glasses integration. View documents hands-free. Voice control. Annotation via gesture. | M145 |
+| 47    | Offline-First Architecture   | 🟡        | Full offline-first architecture. Semua tools offline. Sync saat online. Conflict resolution. | M145 |
+| 48    | Personal AI Assistant        | 🟣        | Personal AI assistant untuk document management. Learns preferences, proactive suggestions, automated workflows. | M145 |
+
+> **Catatan:** Neural PDF (AI-native format) tercakup dalam fitur #20 "Custom Document Format" di Phase F9E.
+
+### 17.12 Acceptance Criteria Fase 9 (Detail)
+
+| **Fitur** | **AC#** | **Kriteria** | **Tipe** |
+|-----------|---------|--------------|----------|
+| Knowledge Base Engine | AC1 | Auto-index dokumen, semantic search, Q&A across documents | Functional |
+| Knowledge Base Engine | AC2 | Organization-wide knowledge, search < 500ms | Performance |
+| Compliance Engine | AC1 | Check dokumen terhadap regulasi (UU PDP, GDPR, ISO) | Functional |
+| Compliance Engine | AC2 | Auto-flag violations, remediation suggestions, 95% accuracy | Quality |
+| Regulatory Radar | AC1 | Monitor perubahan regulasi real-time, Indonesia + ASEAN | Functional |
+| Regulatory Radar | AC2 | Alert dampak ke operasi, suggest policy updates | Functional |
+| e-Meterai Partnership | AC1 | Partnership resmi Peruri, pembelian + penempelan langsung | Business |
+| e-Meterai Partnership | AC2 | Revenue sharing, compliance 100% | Regulatory |
+| BPJS/Pajak Helper | AC1 | Auto-fill dokumen BPJS dan pajak dari data user | Functional |
+| BPJS/Pajak Helper | AC2 | Validasi format, reminder deadline | UX |
+| Notaris Assistant | AC1 | Template akta, checklist dokumen, validasi kelengkapan | Functional |
+| Notaris Assistant | AC2 | Integrasi AHU Online, scheduling | Functional |
+| Surat Dinas Generator | AC1 | 50+ template standar, nomor surat otomatis, kop surat | Functional |
+| UMKM Document Suite | AC1 | SIUP, NIB, NPWP, invoice, kwitansi, surat jalan, PO | Functional |
+| UMKM Document Suite | AC2 | One-stop solution, 1000+ users target | Business |
+| Blockchain Verification | AC1 | Timestamp proof, tamper detection, public verification page | Functional |
+| Blockchain Verification | AC2 | Verification < 5 detik | Performance |
+| Zero-Knowledge Processing | AC1 | Processing tanpa server bisa membaca konten | Functional |
+| Zero-Knowledge Processing | AC2 | Homomorphic encryption atau secure enclaves | Technical |
+| Edge Computing | AC1 | Processing di edge nodes, latency < 50ms | Performance |
+| Edge Computing | AC2 | Cloudflare Workers integration | Technical |
+| Stamp/Seal Digital | AC1 | Stempel dan cap digital resmi, integrasi PSrE | Functional |
+| Stamp/Seal Digital | AC2 | Verifiable digital stamps, organization-level seals | Security |
+| Document Insurance | AC1 | Guarantee keaslian, recovery jika hilang | Business |
+| Document Insurance | AC2 | Partnership dengan asuransi | Regulatory |
+| API Marketplace | AC1 | Discovery, testing, one-click integration, 20+ APIs | Functional |
+| OpenClaw Localization Agent | AC1 | Lokalisasi ke 10+ bahasa daerah, cultural adaptation | Functional |
+| OpenClaw Legal Compliance Agent | AC1 | Monitor legal compliance, auto-update policies | Functional |
+| OpenClaw Partnership Agent | AC1 | Discovery, outreach, negotiation support, relationship maintenance | Functional |
+| OpenClaw Autonomous Hiring | AC1 | Identify, evaluate, onboard freelance contributors | Functional |
+| OpenClaw Autonomous Hiring | AC2 | Task assignment, quality review, payment | Business |
+| Proprietary AI Models | AC1 | Fine-tuned untuk dokumen Indonesia, superior accuracy +15% | Quality |
+| Custom Document Format | AC1 | AI-native format, structured, searchable, versionable | Technical |
+| Network Effect Platform | AC1 | Semakin banyak user, semakin baik AI | Business |
+| Indonesia Document Standard | AC1 | RFC published, working group, 3+ adopters | Business |
+| AR Document Viewer | AC1 | Point camera at physical doc → digital overlay | Functional |
+| AR Document Viewer | AC2 | Functional on 3+ devices | Compatibility |
+| Voice Assistant | AC1 | Full voice assistant, conversational, 90% accuracy ID | Quality |
+| Scanner Box | AC1 | Auto-scan → process → cloud, IoT integration | Functional |
+| Smart Printer Integration | AC1 | Print-from-Papyr, scan-to-Papyr, major brands | Functional |
+| NFC Tag Documents | AC1 | Tap phone → view/verify document, anti-counterfeit | Functional |
+| NGO/Social Impact | AC1 | Tools gratis untuk NGO, 100+ organizations | Business |
+| Accessibility First | AC1 | WCAG 2.2 AAA, screen reader optimized, voice control | Quality |
+| Digital Literacy | AC1 | Tutorial gratis, partnership sekolah/universitas, 10K+ participants | Business |
+| Open Data Initiative | AC1 | Anonymized statistics, public API | Functional |
+| Green Computing | AC1 | Green hosting, efficient algorithms, sustainability report | Technical |
+| Document Insights | AC1 | Trends, patterns, recommendations, actionable > 70% | Quality |
+| Benchmark Service | AC1 | Benchmark terhadap industry standards | Functional |
+| Industry Reports | AC1 | Generate industry reports, monetizable content | Business |
+| Document Health Score | AC1 | Accessibility, size efficiency, metadata, security score 0-100 | Functional |
+| Financial Controller Agent | AC1 | Budget tracking, cost optimization, revenue forecasting | Functional |
+| Financial Controller Agent | AC2 | Saves > 20% costs | Business |
+| Incident Commander Agent | AC1 | Auto-detect incidents, coordinate response, < 5 menit | Performance |
+| Incident Commander Agent | AC2 | Communicate status, post-mortem generation | Functional |
+| Notion Integration | AC1 | Bi-directional sync, export/import | Functional |
+| Slack Bot | AC1 | /papyr compress, drag-drop file di channel | Functional |
+| Teams Bot | AC1 | Same functionality as Slack bot, enterprise-ready | Functional |
+| Google Workspace | AC1 | Deep integration Docs, Sheets, Slides → PDF | Functional |
+| Shopee/Tokopedia | AC1 | Auto-generate shipping labels, invoices dari order data | Functional |
+| Jurnal.id/Accurate | AC1 | Auto-import invoice, receipt, reconciliation | Functional |
+| Watch App | AC1 | Quick actions, status notifications, voice command | Functional |
+| Smart Glasses | AC1 | View documents hands-free, voice control, gesture annotation | Functional |
+| Offline-First Architecture | AC1 | Semua tools offline, sync saat online, conflict resolution | Functional |
+| Personal AI Assistant | AC1 | Learns preferences, proactive suggestions, automated workflows | Functional |
+
+### 17.13 Acceptance Criteria Fase 9 (Ringkasan)
+
+| **Sub-fase** | **Key Metrics** | **Quality Gate** |
+|--------------|-----------------|------------------|
+| F9A (Knowledge) | Knowledge base search < 500ms; compliance engine 95% accuracy | 3 fitur validated |
+| F9B (Indonesia Gov) | e-Meterai partnership signed; UMKM suite 1000+ users | 5 fitur live |
+| F9C (Security) | Blockchain verification < 5 detik; zero-knowledge processing functional | 5 fitur proven |
+| F9D (API & OpenClaw) | API marketplace 20+ integrations; agents operational 99% uptime | 5 fitur deployed |
+| F9E (AI Frontier) | Proprietary model accuracy > baseline +15%; document standard RFC published | 4 fitur validated |
+| F9F (Next-Gen) | AR viewer functional on 3+ devices; voice assistant 90% accuracy ID | 5 fitur prototype |
+| F9G (Social Impact) | NGO tools 100+ organizations; digital literacy 10.000+ participants | 5 fitur launched |
+| F9H (Analytics) | Document insights actionable > 70%; benchmark data 10.000+ documents | 4 fitur live |
+| F9I (Agent Specialists) | Financial controller saves > 20% costs; incident response < 5 menit | 2 fitur operational |
+| F9J (Integrations) | 5+ integrations active; offline-first 100% tool coverage | 11 fitur deployed |
+
+### 17.14 Pertimbangan Teknis Fase 9
+
+- **Blockchain:** Polygon/Arbitrum (low gas fees) atau private chain untuk enterprise
+- **Zero-Knowledge:** Intel SGX atau AWS Nitro Enclaves untuk secure processing
+- **AR:** WebXR API untuk browser-based AR, ARKit/ARCore untuk native
+- **Hardware (Scanner Box):** Partnership dengan manufacturer, Raspberry Pi prototype
+- **NFC:** NFC Forum Type 4 tags, NDEF records linking to verification URL
+- **Proprietary AI:** Fine-tuning pada Indonesian document corpus (100K+ documents)
+- **Offline-First:** CRDTs (Conflict-free Replicated Data Types) untuk sync
+- **Voice Assistant:** Whisper (OpenAI) untuk speech-to-text, custom intent detection model
+- **Smart Glasses:** WebXR + spatial computing APIs, gesture recognition via camera
+- **Green Computing:** Carbon-aware scheduling, renewable energy hosting, efficiency metrics
+- **Indonesia Document Standard:** Collaboration dengan BSN (Badan Standardisasi Nasional)
+
+### 17.15 Fase 9 Risk Assessment
+
+| **Fitur** | **Risk Level** | **Key Risk** | **Mitigation** |
+|-----------|---------------|--------------|----------------|
+| Blockchain Verification | Medium | Adoption uncertainty | Start with optional, prove value first |
+| Zero-Knowledge Processing | High | Technical complexity | Research phase first, prototype before commit |
+| Scanner Box (Hardware) | High | Manufacturing complexity | Software-first, hardware as enhancement |
+| e-Meterai Partnership | Medium | Regulatory dependency | Multiple aggregator relationships |
+| Proprietary AI Models | High | Training data quality | Rigorous curation, human validation |
+| AR Document Viewer | Medium | Device compatibility | Progressive enhancement, fallback to 2D |
+| Smart Glasses | Very High | Market readiness | Prototype only, wait for market maturity |
+| Indonesia Document Standard | High | Industry adoption | Start with internal standard, expand gradually |
+| Autonomous Hiring | High | Quality control | Human oversight, trial period, quality gates |
+| Neural PDF Format | Very High | Ecosystem adoption | Backward compatible, PDF export always available |
+
+### 17.16 Moonshot Evaluation Framework
+
+Setiap moonshot feature di Fase 9 dievaluasi menggunakan framework berikut sebelum development dimulai:
+
+| **Kriteria** | **Threshold** | **Measurement** |
+|--------------|---------------|-----------------|
+| Market Demand | ≥ 100 user requests atau ≥ 3 enterprise inquiries | Feedback widget + sales pipeline |
+| Technical Feasibility | Prototype dalam ≤ 2 minggu | Internal hackathon/spike |
+| Revenue Potential | ≥ Rp 5 juta/bulan projected | Financial modeling |
+| Strategic Alignment | Score ≥ 4/5 pada Strategic Fit | Prioritization framework |
+| Competitive Moat | Creates defensible advantage | Competitive analysis |
+
+Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-cancel.
+
+---
+
+## 18. Yang TIDAK Akan Dibangun
 
 | **#**  | **Item**                              | **Alasan**                                                                                                        | **Kapan Mungkin Dipertimbangkan**     |
 |--------|---------------------------------------|-------------------------------------------------------------------------------------------------------------------|---------------------------------------|
-| X1     | Desktop native app                    | Web app sudah cukup. Native app menambah maintenance burden tanpa value signifikan.                               | Tidak dalam horizon roadmap ini.      |
-| X2     | Mobile native app                     | Mobile web sudah dioptimasi (mobile-first + PWA di MVP 0.3). Native hanya jika ada fitur web-impossible.          | Tahun 3+ (jika ada demand kuat)       |
-| X3     | PDF text editing (in-place)           | Sangat kompleks, membutuhkan PDF rendering engine lengkap. Bukan core value proposition.                          | Tidak dalam horizon roadmap ini.      |
-| X4     | Real-time collaboration               | WebSocket infrastructure kompleks. Bukan core value. Papyr adalah tool, bukan platform kolaborasi.                | Tidak dalam horizon roadmap ini.      |
-| X5     | Blockchain/NFT integration            | Tidak ada use case yang jelas untuk PDF tools. Hype-driven, bukan value-driven.                                   | Tidak akan dibangun.                  |
-| X6     | Video/audio processing                | Di luar scope "PDF tool". Fokus pada dokumen, bukan multimedia.                                                   | Tidak akan dibangun.                  |
-| X7     | Social media features                 | Papyr adalah utility tool, bukan social platform. Tidak ada feed, likes, atau followers.                          | Tidak akan dibangun.                  |
-| X8     | Marketplace/plugin system             | Premature. Fokus pada core product terlebih dahulu. Plugin system menambah complexity.                            | Fase 5+ (jika ecosystem mature)       |
+| X1     | PDF text editing (in-place)           | Sangat kompleks, membutuhkan PDF rendering engine lengkap. Bukan core value proposition.                          | Tidak dalam horizon roadmap ini.      |
+| X2     | Video/audio processing                | Di luar scope "PDF/document tool". Fokus pada dokumen, bukan multimedia.                                          | Tidak akan dibangun.                  |
+| X3     | Social media features (feed/likes)    | Papyr adalah utility tool, bukan social platform. Community forum (Fase 6) berbeda dari social media.             | Tidak akan dibangun.                  |
+| X4     | Cryptocurrency payments               | Tidak ada demand yang jelas di pasar Indonesia untuk crypto payments pada PDF tools.                              | Tidak akan dibangun.                  |
+| X5     | Gaming/entertainment features         | Tidak relevan dengan document management. Gamification (badges) berbeda dari gaming.                              | Tidak akan dibangun.                  |
+| X6     | General-purpose AI chatbot            | Papyr AI fokus pada dokumen. Bukan general chatbot seperti ChatGPT.                                               | Tidak akan dibangun.                  |
 
-> **Prinsip:** Jika ragu apakah sesuatu harus dibangun, jawabannya adalah **tidak**. Fokus pada core value: tools PDF yang gratis, cepat, dan aman.
+> **Catatan v4.0:** Beberapa item yang sebelumnya di daftar "tidak akan dibangun" (desktop app, mobile app, marketplace/plugin, real-time collaboration, blockchain) kini masuk ke fase lanjutan (Fase 6-9) karena visi produk telah berkembang. Items di atas tetap benar-benar di luar scope.
 
 ---
 
-## 15. Prioritas & Dependensi
+## 19. Prioritas & Dependensi
 
-### 15.1 Dependency Graph
+### 19.1 Dependency Graph
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                              DEPENDENCY GRAPH (7 FASE)                                │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
-│  MVP 0.1 (COMPLETED) ✅                                                             │
-│  ┌─────┐                                                                            │
-│  │ M01 │──► M02-M06 ──► M07-M08 ──► M09-M10 ──► M11                               │
-│  └─────┘                                                                            │
-│       │                                                                             │
-│       ▼ [GATE: live & stabil ✅]                                                    │
-│                                                                                     │
-│  MVP 0.2 (CURRENT) 🔄                                                               │
-│  Phase 2A (M12→M13) → 2B (M14,M15) → 2C (M16→M17→M18) → 2D → 2E (M21) → 2F (M22)│
-│       │                                                                             │
-│       ▼ [GATE: semua tool berfungsi + OpenClaw aktif]                               │
-│                                                                                     │
-│  MVP 0.3 (PLANNED) 📋                                                               │
-│  Phase 3A (M23) → 3B (M24) → 3C (M25) → 3D (M26) → 3E (M27)                      │
-│       │                                                                             │
-│       ▼ [GATE: ≥ 10K tasks/mo OR ≥ 5K MAU]                                         │
-│                                                                                     │
-│  MVP 0.4 (PLANNED) 📋                                                               │
-│  Phase 4A (M36) → 4B (M37) → 4C (M38) → 4D (M39) → 4E (M40)                      │
-│       │                                                                             │
-│       ▼ [GATE: revenue > Rp 0]                                                     │
-│                                                                                     │
-│  Fase 2 (VISI) 🔮                                                                   │
-│  Phase F2A (M46) → F2B (M47) → F2C (M48) → F2D (M49)                              │
-│       │                                                                             │
-│       ▼ [GATE: stabil + ≥ 100 AI tasks/hari]                                       │
-│                                                                                     │
-│  Fase 3 (VISI) 🔮                                                                   │
-│  Phase F3A (M56) → F3B (M57) → F3C (M58) → F3D (M59) → F3E (M60)                  │
-│       │                                                                             │
-│       ▼ [GATE: stabil + regulatory + partnership MoU]                               │
-│                                                                                     │
-│  Fase 4 (VISI) 🔮                                                                   │
-│  Phase F4A (M66) → F4B (M67) → F4C (M68) → F4D (M69)                              │
-│       │                                                                             │
-│       ▼ [GATE: stabil + ≥ 50K MAU + revenue sustainable]                            │
-│                                                                                     │
-│  Fase 5 (VISI) 🔮                                                                   │
-│  Phase F5A (M73) → F5B (M74) → F5C (M75) → F5D (M76)                              │
-│                                                                                     │
-└─────────────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│                              DEPENDENCY GRAPH (12 FASE)                                       │
+├─────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                             │
+│  MVP 0.1 (COMPLETED) ✅                                                                     │
+│  ┌─────┐                                                                                    │
+│  │ M01 │──► M02-M06 ──► M07-M08 ──► M09-M10 ──► M11                                       │
+│  └─────┘                                                                                    │
+│       │                                                                                     │
+│       ▼ [GATE: live & stabil ✅]                                                            │
+│                                                                                             │
+│  MVP 0.2 (CURRENT) 🔄                                                                       │
+│  Phase 2A → 2B → 2C → 2D → 2E (M21) → 2F (M22)                                           │
+│       │                                                                                     │
+│       ▼ [GATE: semua tool berfungsi + OpenClaw aktif]                                       │
+│                                                                                             │
+│  MVP 0.3 (PLANNED) 📋                                                                       │
+│  Phase 3A → 3B → 3C → 3D → 3E                                                             │
+│       │                                                                                     │
+│       ▼ [GATE: ≥ 10K tasks/mo OR ≥ 5K MAU]                                                 │
+│                                                                                             │
+│  MVP 0.4 (PLANNED) 📋                                                                       │
+│  Phase 4A → 4B → 4C → 4D → 4E                                                             │
+│       │                                                                                     │
+│       ▼ [GATE: revenue > Rp 0]                                                             │
+│                                                                                             │
+│  Fase 2 (VISI) 🔮 ── AI Core                                                               │
+│       │                                                                                     │
+│       ▼ [GATE: stabil + ≥ 100 AI tasks/hari]                                               │
+│                                                                                             │
+│  Fase 3 (VISI) 🔮 ── AI Advanced + Integrations                                            │
+│       │                                                                                     │
+│       ▼ [GATE: stabil + regulatory + partnership MoU]                                       │
+│                                                                                             │
+│  Fase 4 (VISI) 🔮 ── Indonesia Deep + Enterprise                                           │
+│       │                                                                                     │
+│       ▼ [GATE: stabil + ≥ 50K MAU + revenue sustainable]                                    │
+│                                                                                             │
+│  Fase 5 (VISI) 🔮 ── Scale + Ecosystem (Expanded)                                          │
+│       │                                                                                     │
+│       ▼ [GATE: stabil + ≥ 100K MAU + MRR > Rp 10 juta]                                     │
+│                                                                                             │
+│  Fase 6 (VISI) 🔮 ── Platform & Marketplace                                                │
+│       │                                                                                     │
+│       ▼ [GATE: marketplace aktif + ≥ 10 enterprise inquiries]                               │
+│                                                                                             │
+│  Fase 7 (VISI) 🔮 ── Enterprise & B2B                                                      │
+│       │                                                                                     │
+│       ▼ [GATE: ≥ 5 enterprise customers + AI infra mature]                                  │
+│                                                                                             │
+│  Fase 8 (VISI) 🔮 ── AI Agent Swarm + Autonomy                                             │
+│       │                                                                                     │
+│       ▼ [GATE: agent swarm stabil + market leadership]                                      │
+│                                                                                             │
+│  Fase 9 (VISI) 🔮 ── Moonshots & Future                                                    │
+│                                                                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 15.2 Cross-Phase Dependencies
+### 19.2 Cross-Phase Dependencies
 
 | **Fitur (Source)** | **Depends On** | **Alasan** |
 |--------------------|----------------|------------|
@@ -1591,44 +2274,48 @@ Dokumentasi lengkap: https://9router.com/
 | Fase 4 Enterprise | MVP 0.4 Auth + Payment | Multi-tenant membutuhkan auth + billing |
 | Fase 5 WhatsApp Bot | Fase 4 complete | Bot membutuhkan semua tools + AI available |
 | Fase 5 CLI | MVP 0.4 API Key | CLI menggunakan API key untuk auth |
+| Fase 5 OpenClaw Agents | Fase 5 F5C complete | New agents build on existing ecosystem |
+| Fase 6 Marketplace | Fase 5 stabil | Platform needs stable product foundation |
+| Fase 6 SDK | MVP 0.4 Public API | SDK wraps existing API |
+| Fase 6 Desktop/Mobile | MVP 0.3 PWA + MVP 0.4 Auth | Shared offline logic + auth flow |
+| Fase 6 Credits System | MVP 0.4 Payment | Payment infrastructure required |
+| Fase 6 White-label | Fase 4 Enterprise | Enterprise features as base |
+| Fase 7 Government | Fase 6 Platform | Government needs enterprise-grade platform |
+| Fase 7 SSO/SAML | MVP 0.4 Auth | Enterprise auth extends basic auth |
+| Fase 7 Self-Hosted | Fase 6 Desktop App | Shared deployment architecture |
+| Fase 7 Real-time Collab | Fase 6 Document Storage | Needs persistent document layer |
+| Fase 8 Agent Swarm | Fase 5 OpenClaw Agents | Swarm builds on expanded agent base |
+| Fase 8 AI Workflow | Fase 2 Workflow Builder | Advanced workflow extends basic builder |
+| Fase 8 Memory System | Fase 5 OpenClaw Ecosystem | Needs existing agent infrastructure |
+| Fase 8 Self-Funding | Fase 6 Affiliate Network | Revenue mechanisms as foundation |
+| Fase 9 e-Meterai Partnership | Fase 4 e-Meterai Validator | Partnership extends validation feature |
+| Fase 9 Proprietary AI | Fase 2 + Fase 3 AI features | Training data from AI feature usage |
+| Fase 9 Knowledge Base | Fase 8 Document Understanding Graph | Graph as foundation for knowledge |
+| Fase 9 Blockchain | Fase 7 Audit Trail | Immutable logging as prerequisite |
+| Fase 9 Scanner Box | Fase 6 Mobile App | Shared mobile processing pipeline |
+| Fase 9 Offline-First | MVP 0.3 PWA + Fase 6 Desktop | Offline architecture foundation |
 
-### 15.3 Matriks Prioritas (Top Features)
+### 19.3 Matriks Prioritas (Top Features per Fase)
 
-| **Fitur**              | **Impact** | **Effort** | **Prioritas** | **Label** | **Rasional**                                                    |
-|------------------------|------------|------------|---------------|-----------|------------------------------------------------------------------|
-| M12 Protect            | Medium     | Low        | P1            | 🟢        | Quick win, natural pair M13                                      |
-| M15 Sign               | High       | Medium     | P1            | 🟡        | High demand Indonesia (kontrak, surat)                           |
-| M16 PDF-Word           | High       | Medium     | P2            | 🟡        | Sangat diminta, server processing berat                          |
-| M17 OCR                | High       | High       | P3            | 🟡        | Kompleks tapi sangat bernilai                                    |
-| Dark Mode (MVP 0.3)    | Medium     | Low        | P2            | 🟢        | Most requested UX feature                                        |
-| PWA (MVP 0.3)          | High       | Medium     | P2            | 🟢        | Offline capability, installable                                  |
-| Auth System (MVP 0.4)  | Medium     | Medium     | P3            | 🟢        | Enabler monetisasi                                               |
-| Payment (MVP 0.4)      | High       | High       | P4            | 🟡        | Revenue enabler, setelah traffic threshold                       |
-| AI Summarizer (Fase 2) | High       | High       | P5            | 🟣        | High value, R&D required                                         |
-| e-Meterai (Fase 4)     | Very High  | Very High  | P7            | 🔴        | Game-changer tapi regulated                                      |
+| **Fitur**              | **Impact** | **Effort** | **Prioritas** | **Label** | **Rasional**                                    |
+|------------------------|------------|------------|---------------|-----------|--------------------------------------------------|
+| M12 Protect            | Medium     | Low        | P1            | 🟢        | Quick win, natural pair M13                      |
+| M15 Sign               | High       | Medium     | P1            | 🟡        | High demand Indonesia (kontrak, surat)           |
+| M17 OCR                | High       | High       | P3            | 🟡        | Kompleks tapi sangat bernilai                    |
+| Dark Mode (MVP 0.3)    | Medium     | Low        | P2            | 🟢        | Most requested UX feature                        |
+| Auth System (MVP 0.4)  | Medium     | Medium     | P3            | 🟢        | Enabler monetisasi                               |
+| AI Summarizer (Fase 2) | High       | High       | P5            | 🟣        | High value, R&D required                         |
+| e-Meterai (Fase 4)     | Very High  | Very High  | P7            | 🔴        | Game-changer tapi regulated                      |
+| Marketplace (Fase 6)   | Very High  | High       | P9            | 🟡        | Platform play, revenue diversification           |
+| Enterprise Console (F7)| High       | High       | P10           | 🟡        | Enterprise revenue enabler                       |
+| Agent Swarm (Fase 8)   | Very High  | Very High  | P11           | 🟣        | Competitive moat, autonomous operations          |
+| e-Meterai Partnership (F9) | Very High | Very High | P12        | 🔴        | Market leadership, government trust              |
 
 ---
 
-## 16. Metrik Keberhasilan per Fase
+## 20. Metrik Keberhasilan per Fase
 
-### 16.0 Definisi KPI Universal
-
-| **KPI**                       | **Definisi**                                                  | **Measurement Tool**          |
-|-------------------------------|---------------------------------------------------------------|-------------------------------|
-| MAU (Monthly Active Users)    | Unique visitors yang melakukan ≥ 1 task dalam 30 hari         | Vercel Analytics              |
-| Task Success Rate             | (task_completed / task_started) x 100%                        | Custom analytics events       |
-| TTFB (Time to First Byte)     | Waktu dari request hingga byte pertama response               | Vercel Speed Insights         |
-| LCP (Largest Contentful Paint)| Waktu render elemen terbesar di viewport                      | Lighthouse CI                 |
-| CLS (Cumulative Layout Shift) | Total unexpected layout shifts                                | Lighthouse CI                 |
-| Conversion Rate               | (paying users / registered users) x 100%                      | Supabase + Payment dashboard  |
-| MRR (Monthly Recurring Revenue)| Total revenue dari subscriptions aktif per bulan             | Payment provider dashboard    |
-| Churn Rate                    | (cancelled subscriptions / total active) x 100% per bulan     | Supabase subscription table   |
-| NPS (Net Promoter Score)      | % Promoters (9-10) minus % Detractors (0-6)                  | In-app survey                 |
-| AI Accuracy                   | (correct AI outputs / total AI outputs) x 100%                | Manual sampling + user feedback|
-| Cost per Task                 | Total infrastructure cost / total tasks processed             | Cost dashboard                |
-| Uptime                        | (total minutes - downtime minutes) / total minutes x 100%     | BetterStack/UptimeRobot       |
-
-### 16.1 MVP 0.1 (COMPLETED)
+### 20.1 MVP 0.1 (COMPLETED)
 
 | **Metrik**                    | **Target**                | **Aktual**       | **Status**  |
 |-------------------------------|---------------------------|------------------|-------------|
@@ -1636,49 +2323,35 @@ Dokumentasi lengkap: https://9router.com/
 | Tasks Completed               | 84 tasks                  | 89 tasks         | ✅ Exceeded |
 | Production Deploy             | Live di mypapyr.com       | Live             | ✅ Met      |
 | Zero Critical Bugs (7 hari)  | 0 critical bugs           | 0                | ✅ Met      |
-| Lighthouse Performance        | ≥ 80                      | TBD              | 📊 Monitoring |
-| Task Success Rate             | > 95%                     | TBD              | 📊 Monitoring |
-| TTFB                          | < 500ms                   | TBD              | 📊 Monitoring |
 
-### 16.2 MVP 0.2
+### 20.2 MVP 0.2
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
 | Tools Delivered               | 7 tools tambahan (total 13)                   |
-| Tool Adoption                 | Setiap tool baru ≥ 100 uses dalam 30 hari     |
 | Task Success Rate             | > 95% per tool                                |
 | SEO Ranking                   | Top 10 Google ID per keyword tool             |
-| Organic Traffic Growth        | +50% dari baseline MVP 0.1                    |
-| Lighthouse Performance        | ≥ 90 semua halaman                            |
 | OpenClaw Uptime               | ≥ 99% agent availability                     |
-| Admin Dashboard               | 10 modul aktif                                |
 
-### 16.3 MVP 0.3
+### 20.3 MVP 0.3
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
 | Lighthouse PWA Score          | ≥ 90                                          |
 | Lighthouse Accessibility      | ≥ 95                                          |
-| Landing Page JS               | < 30KB gzipped                                |
 | TTFB Indonesia                | < 200ms                                       |
-| Dark Mode Adoption            | ≥ 20% users mengaktifkan                     |
 | PWA Installs                  | ≥ 500 dalam 3 bulan                          |
-| Feedback Widget Response      | ≥ 5% users memberikan feedback               |
-| Social Proof Counter          | Menampilkan > 10.000 tasks                    |
 
-### 16.4 MVP 0.4
+### 20.4 MVP 0.4
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
 | Registered Users              | ≥ 1.000 dalam 3 bulan                        |
 | Free-to-Pro Conversion        | 2-5%                                          |
 | Monthly Recurring Revenue     | ≥ Rp 500.000/bulan dalam 6 bulan             |
-| Churn Rate                    | < 10% per bulan                               |
 | Payment Success Rate          | > 95%                                         |
-| API Key Adoption              | ≥ 10% Pro users                               |
-| Tasks per Month               | ≥ 10.000 (gate condition)                     |
 
-### 16.5 Fase 2
+### 20.5 Fase 2
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -1686,94 +2359,124 @@ Dokumentasi lengkap: https://9router.com/
 | AI Accuracy (Indonesia)       | ≥ 90% dokumen Bahasa Indonesia                |
 | Revenue Impact                | +30% MRR dari AI upsell                       |
 | Cost per AI Request           | < Rp 500 rata-rata                            |
-| AI Processing Time            | < 30 detik (P95)                              |
-| LLM Fallback Rate             | < 5% requests ke fallback provider            |
 
-### 16.6 Fase 3
+### 20.6 Fase 3
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
 | AI Content Generation Usage   | ≥ 100 documents/hari                          |
-| Integration Adoption          | ≥ 500 connected accounts (Drive/Dropbox)      |
-| PDF/A Conversion              | ≥ 200 conversions/bulan                       |
+| Integration Adoption          | ≥ 500 connected accounts                      |
 | Browser Extension Installs    | ≥ 1.000 dalam 6 bulan                        |
-| AI Accuracy Advanced          | ≥ 85% untuk tasks kompleks                   |
 
-### 16.7 Fase 4
+### 20.7 Fase 4
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
 | e-Meterai Transactions        | ≥ 500/bulan dalam 6 bulan                     |
 | Enterprise Clients            | ≥ 5 paying accounts                           |
-| KTP/SIM Extraction Accuracy   | ≥ 95%                                         |
 | Market Position               | Top 3 PDF tool Indonesia                      |
-| Revenue from Enterprise       | ≥ Rp 5.000.000/bulan                          |
 
-### 16.8 Fase 5
+### 20.8 Fase 5
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
 | WhatsApp Bot Users            | ≥ 5.000 dalam 6 bulan                        |
 | CLI Downloads                 | ≥ 1.000 npm installs                         |
-| Newsletter Subscribers        | ≥ 10.000                                      |
-| Affiliate Revenue             | ≥ 10% total revenue                           |
 | MAU                           | ≥ 50.000                                      |
-| Total Revenue                 | MRR > operational cost (sustainable)          |
+| OpenClaw Agents Active        | 18 agents (10 original + 8 new)               |
+
+### 20.9 Fase 6
+
+| **Metrik**                    | **Target**                                    |
+|-------------------------------|-----------------------------------------------|
+| Marketplace Plugins           | ≥ 50 published plugins                        |
+| SDK Downloads                 | ≥ 5.000/bulan                                 |
+| Desktop + Mobile Installs     | ≥ 10.000 combined                             |
+| Platform Revenue              | ≥ 30% total revenue dari marketplace/credits  |
+| MAU                           | ≥ 100.000                                     |
+
+### 20.10 Fase 7
+
+| **Metrik**                    | **Target**                                    |
+|-------------------------------|-----------------------------------------------|
+| Enterprise Clients            | ≥ 20 paying organizations                     |
+| Government Contracts          | ≥ 3 active                                    |
+| Enterprise Revenue            | ≥ Rp 50.000.000/bulan                         |
+| SLA Compliance                | 99.99% uptime                                 |
+| SSO Integrations              | ≥ 5 providers                                 |
+
+### 20.11 Fase 8
+
+| **Metrik**                    | **Target**                                    |
+|-------------------------------|-----------------------------------------------|
+| Agent Swarm Size              | 25+ active agents                             |
+| Autonomous Revenue            | ≥ 10% total revenue dari agent activities     |
+| AI Workflow Completion        | > 90% success rate                            |
+| Agent Marketplace             | ≥ 10 third-party agents                       |
+| Cross-Agent Tasks             | ≥ 100/hari                                    |
+
+### 20.12 Fase 9
+
+| **Metrik**                    | **Target**                                    |
+|-------------------------------|-----------------------------------------------|
+| MAU                           | ≥ 500.000                                     |
+| Total Revenue                 | ≥ Rp 500.000.000/bulan                        |
+| Market Position               | #1 PDF/document tool Indonesia                |
+| Integrations Active           | ≥ 20 platform integrations                    |
+| Social Impact                 | ≥ 100 NGOs using free tools                   |
+| Indonesia Doc Standard        | RFC published + 3 adopters                    |
 
 ---
 
-## 17. Risiko & Mitigasi
+## 21. Risiko & Mitigasi
 
-### 17.1 Risiko Teknis
+### 21.1 Risiko Teknis
 
-| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                                    |
-|-------|-----------------------------------------------------|-----------|------------|---------------------------------------------------------------------------------|
-| R01   | OCR accuracy rendah dokumen Indonesia                | Medium    | High       | Benchmark Tesseract + Indonesian pack sebelum launch                            |
-| R02   | Server overload saat traffic meningkat               | Medium    | High       | Auto-scaling, queue system, client-side processing prioritas                    |
-| R03   | AI API cost melebihi revenue                         | Medium    | High       | Strict rate limiting, caching, 3-tier LLM fallback (enowxAI→OpenRouter→9Router) |
-| R04   | Security vulnerability file processing               | Low       | Critical   | Input validation, sandboxed processing, regular audit                           |
-| R05   | Railway free tier insufficient Phase 2C              | High      | High       | VPS migration HostData.id sebagai inisiatif terpisah                            |
-| R06   | LLM provider downtime                                | Medium    | Medium     | 3-tier fallback strategy, local model fallback                                  |
-| R07   | Web Worker browser compatibility                     | Low       | Low        | Fallback ke main thread, progressive enhancement                                |
+| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                    |
+|-------|-----------------------------------------------------|-----------|------------|------------------------------------------------------------------|
+| R01   | OCR accuracy rendah dokumen Indonesia                | Medium    | High       | Benchmark Tesseract + Indonesian pack sebelum launch             |
+| R02   | Server overload saat traffic meningkat               | Medium    | High       | Auto-scaling, queue system, client-side processing prioritas     |
+| R03   | AI API cost melebihi revenue                         | Medium    | High       | Strict rate limiting, caching, 3-tier LLM fallback               |
+| R04   | Security vulnerability file processing               | Low       | Critical   | Input validation, sandboxed processing, regular audit            |
+| R05   | LLM provider downtime                                | Medium    | Medium     | 3-tier fallback strategy, local model fallback                   |
+| R06   | Agent swarm coordination failure                     | Medium    | High       | Circuit breakers, graceful degradation, manual override          |
+| R07   | Proprietary AI model training data quality           | High      | Medium     | Rigorous data curation, human validation, iterative training     |
 
-### 17.2 Risiko Bisnis
+### 21.2 Risiko Bisnis
 
-| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                                    |
-|-------|-----------------------------------------------------|-----------|------------|---------------------------------------------------------------------------------|
-| R08   | Kompetitor lokal muncul                              | Medium    | Medium     | First-mover advantage, Indonesia-deep features sebagai moat                     |
-| R09   | Willingness to pay rendah                            | Medium    | High       | Pricing Rp 19.900 (sangat rendah), freemium generous, validate sebelum invest   |
-| R10   | Regulasi e-Meterai berubah                           | Low       | Medium     | Monitor regulasi, partnership aggregator, flexible architecture                 |
-| R11   | Payment provider issues                              | Low       | Medium     | Dual provider (Midtrans + Xendit), fallback mechanism                           |
-| R12   | AI hype cycle — user expectations too high           | Medium    | Medium     | Clear communication tentang capabilities, iterative improvement                 |
+| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                    |
+|-------|-----------------------------------------------------|-----------|------------|------------------------------------------------------------------|
+| R08   | Kompetitor lokal muncul                              | Medium    | Medium     | First-mover advantage, Indonesia-deep features sebagai moat      |
+| R09   | Willingness to pay rendah                            | Medium    | High       | Pricing Rp 19.900 (sangat rendah), freemium generous             |
+| R10   | Regulasi e-Meterai berubah                           | Low       | Medium     | Monitor regulasi, partnership aggregator, flexible architecture  |
+| R11   | Enterprise sales cycle terlalu panjang               | High      | Medium     | Self-serve enterprise tier, product-led growth, free trial       |
+| R12   | Marketplace tidak mendapat traction                  | Medium    | Medium     | Seed marketplace dengan internal plugins, incentivize early devs |
+| R13   | Platform complexity mengurangi core UX               | Medium    | High       | Strict separation core vs platform, A/B test setiap addition    |
 
-### 17.3 Risiko Operasional
+### 21.3 Risiko Operasional
 
-| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                                    |
-|-------|-----------------------------------------------------|-----------|------------|---------------------------------------------------------------------------------|
-| R13   | Cloudflare R2 downtime                               | Low       | High       | Fallback direct download, health monitoring                                     |
-| R14   | OpenClaw agent failure                               | Medium    | Medium     | Self-healing, auto-restart, manual override via admin                           |
-| R15   | Data loss file processing                            | Low       | Medium     | Retry mechanism, idempotent operations                                          |
-| R16   | Dependency vulnerability                             | Medium    | Medium     | Dependabot, regular updates, minimal dependencies                               |
-| R17   | Solo developer burnout                               | Low       | High       | 100% AI-driven, modular architecture, sustainable pace                          |
-| R18   | 9Router localhost dependency                         | Low       | Low        | Fallback langsung ke OpenRouter jika 9Router down                               |
-| R19   | WhatsApp Business API approval ditolak               | Medium    | Medium     | Telegram Bot sebagai alternatif utama, WhatsApp sebagai bonus                   |
-| R20   | Browser extension store rejection                    | Medium    | Low        | Manifest V3 compliance, clean permissions, appeal process                       |
-| R21   | Supabase pricing tier exceeded                       | Low       | Medium     | Monitor usage, upgrade plan proaktif, self-hosted fallback plan                 |
+| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                    |
+|-------|-----------------------------------------------------|-----------|------------|------------------------------------------------------------------|
+| R14   | Solo developer burnout                               | Low       | High       | 100% AI-driven, modular architecture, sustainable pace           |
+| R15   | Multi-region deployment complexity                   | Medium    | Medium     | Start with 2 regions, expand gradually, use managed services     |
+| R16   | Data residency compliance failure                    | Low       | Critical   | Certified Indonesian data center, regular compliance audit       |
+| R17   | Agent autonomy causing unintended actions            | Medium    | High       | Hard limits, human approval for high-impact, rollback mechanism  |
+| R18   | Hardware partnership (Scanner Box) failure           | High      | Low        | Software-first approach, hardware as optional enhancement        |
 
-### 17.4 Risiko AI-Specific
+### 21.4 Risiko AI-Specific
 
-| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                                    |
-|-------|-----------------------------------------------------|-----------|------------|---------------------------------------------------------------------------------|
-| R22   | LLM hallucination pada document analysis             | High      | Medium     | Confidence scoring, human-in-the-loop untuk low confidence, disclaimer UI       |
-| R23   | AI cost spiral (usage exceeds budget)                | Medium    | High       | Hard budget cap, auto-throttle, cost dashboard alerts, caching aggressive       |
-| R24   | Model deprecation oleh provider                      | Medium    | Medium     | Multi-provider strategy, abstraction layer, 9Router auto-routing                |
-| R25   | Privacy concern AI processing dokumen sensitif       | Medium    | High       | No data retention, no training on user data, clear privacy policy, opt-out      |
-| R26   | AI accuracy rendah untuk bahasa daerah               | High      | Low        | Fokus ID + EN terlebih dahulu, bahasa daerah sebagai experimental               |
-| R27   | Latency AI processing terlalu tinggi                 | Medium    | Medium     | Streaming response, async processing, progress indicator, queue management      |
+| **#** | **Risiko**                                          | **Prob.** | **Dampak** | **Mitigasi**                                                    |
+|-------|-----------------------------------------------------|-----------|------------|------------------------------------------------------------------|
+| R19   | LLM hallucination pada document analysis             | High      | Medium     | Confidence scoring, human-in-the-loop, disclaimer UI             |
+| R20   | AI cost spiral (usage exceeds budget)                | Medium    | High       | Hard budget cap, auto-throttle, cost dashboard alerts            |
+| R21   | Model deprecation oleh provider                      | Medium    | Medium     | Multi-provider strategy, abstraction layer, 9Router              |
+| R22   | Privacy concern AI processing dokumen sensitif       | Medium    | High       | No data retention, no training on user data, clear privacy policy|
+| R23   | Agent swarm emergent behavior (unexpected)           | Medium    | Medium     | Monitoring, kill switches, bounded autonomy, audit logs          |
+| R24   | Self-funding agent making poor financial decisions    | Low       | Medium     | Budget caps, approval thresholds, transparent reporting          |
 
 ---
 
-## 18. Technology Decision Log
+## 22. Technology Decision Log
 
 | **Keputusan**                          | **Dipilih**                    | **Alternatif Ditolak**                | **Alasan**                                                    |
 |----------------------------------------|--------------------------------|---------------------------------------|---------------------------------------------------------------|
@@ -1781,31 +2484,19 @@ Dokumentasi lengkap: https://9router.com/
 | Text watermark                         | pdf-lib (client-side)          | PyMuPDF (server-side)                 | Zero upload, privacy-first                                    |
 | Digital signature                      | Canvas + pdf-lib (client-side) | Server-side processing                | Tanda tangan = data sensitif, HARUS client-side               |
 | PDF-to-Word conversion                 | LibreOffice headless           | pdf2docx, PyMuPDF+python-docx         | Layout preservation terbaik                                   |
-| OCR engine                             | ocrmypdf + Tesseract           | EasyOCR, PaddleOCR                    | Searchable PDF output, Indonesian support, lightweight         |
-| Table extraction                       | camelot-py + openpyxl          | tabula-py, pdfplumber                 | Best accuracy lattice + stream tables                         |
+| OCR engine                             | ocrmypdf + Tesseract           | EasyOCR, PaddleOCR                    | Searchable PDF output, Indonesian support                     |
 | Authentication                         | Supabase Auth                  | NextAuth, Firebase Auth               | Sudah standby di stack, PostgreSQL included                   |
 | Payment                                | Midtrans/Xendit                | Stripe, PayPal                        | Indonesian payment methods (GoPay, OVO, bank transfer)        |
 | LLM Primary Provider                   | enowxAI (load balanced)        | OpenAI direct, Google AI direct       | Cost-effective, load balanced, custom routing                  |
-| LLM Fallback #1                        | OpenRouter                     | Direct provider APIs                  | Single API, model selection flexibility, cost optimization     |
-| LLM Fallback #2                        | 9Router (localhost:20128)      | Manual fallback logic                 | OpenAI-compatible, 3-tier auto-routing, npm package            |
-| LLM Model Strategy                     | Flash (simple) + Pro (complex) | Single model for all                  | Cost optimization: Flash < Rp 100/req, Pro untuk complex only |
-| VPS provider                           | HostData.id                    | Contabo, Hetzner                      | Indonesian provider, local support, competitive pricing       |
-| Admin Dashboard auth                   | Env-based token (initial)      | NextAuth, Supabase Auth               | Minimal overhead, upgrade path MVP 0.4                        |
-| PWA implementation                     | next-pwa + custom SW           | Workbox only                          | Next.js integration, offline-first strategy                   |
-| i18n solution                          | next-intl                      | react-i18next, custom                 | Next.js App Router native support, type-safe                  |
-| Dark mode                              | Tailwind dark: + CSS vars      | CSS-in-JS theme, styled-components    | Zero runtime cost, native Tailwind support                    |
-| PDF preview                            | pdf.js (Mozilla)               | react-pdf, embed tag                  | Full rendering, zoom, mobile support, industry standard       |
-| Web Worker bundling                    | Comlink + Vite worker          | Raw postMessage                       | Type-safe, ergonomic API, automatic serialization             |
-| Drag and drop                          | @dnd-kit                       | react-beautiful-dnd, HTML5 DnD raw    | Accessible, performant, maintained, touch support             |
-| Keyboard shortcuts                     | Custom hook                    | hotkeys-js, mousetrap                 | Minimal dependency, full control, no bundle bloat             |
-| Feedback storage                       | Supabase (same instance)       | Separate analytics service            | No additional infra, already in stack                         |
-| Referral tracking                      | Custom (Supabase + middleware) | ReferralCandy, Rewardful              | Zero cost, full control, Indonesian payment integration       |
-| Feature flags                          | Custom (Supabase + edge config)| LaunchDarkly, Flagsmith               | Zero cost, no vendor lock-in, simple for solo project         |
-| WhatsApp Bot                           | WhatsApp Business API (Cloud)  | Twilio, MessageBird                   | Direct Meta API, lower cost, better Indonesia support         |
-| CLI tool                               | commander.js + ora             | yargs, inquirer                       | Lightweight, good DX, streaming output support                |
-| Email processing                       | Resend (inbound) + custom      | SendGrid, Mailgun                     | Already using Resend for outbound, unified provider           |
+| LLM Fallback #1                        | OpenRouter                     | Direct provider APIs                  | Single API, model selection flexibility                        |
+| LLM Fallback #2                        | 9Router (localhost:20128)      | Manual fallback logic                 | OpenAI-compatible, 3-tier auto-routing                        |
+| Desktop App                            | Tauri (planned)                | Electron                              | Smaller bundle, Rust backend, better performance              |
+| Mobile App                             | Flutter (planned)              | React Native                          | Single codebase, good performance, growing ecosystem          |
+| Plugin System                          | Sandboxed iframe + postMessage | Native plugins, WASM                  | Security isolation, web-standard, easy for developers         |
+| Agent Communication                    | BullMQ + Redis                 | RabbitMQ, Kafka                       | Already in stack, sufficient for current scale                |
+| Blockchain                             | Polygon (planned)              | Ethereum mainnet, Solana              | Low gas fees, EVM compatible, sufficient security             |
 
-### 18.2 Arsitektur Decision Records (ADR)
+### 22.2 Arsitektur Decision Records (ADR)
 
 | **ADR#** | **Keputusan** | **Konteks** | **Konsekuensi** |
 |----------|---------------|-------------|-----------------|
@@ -1815,14 +2506,20 @@ Dokumentasi lengkap: https://9router.com/
 | ADR-004  | HostData.id VPS untuk OpenClaw | Railway free tier insufficient untuk always-on agent; Indonesian provider = local support | Separate infrastructure management, tapi dedicated resources |
 | ADR-005  | Phase-gated development | AI-driven development = unpredictable velocity; time-based deadlines tidak realistis | Slower perceived progress, tapi higher quality per release |
 | ADR-006  | Freemium dengan Pro Rp 19.900 | Indonesian market price-sensitive; kompetitor global terlalu mahal | Low ARPU, tapi high volume potential; sustainable jika conversion > 2% |
-| ADR-007  | No native mobile app | PWA covers 95% use cases; native app = 2x maintenance burden | Miss some native features (background processing), tapi acceptable tradeoff |
+| ADR-007  | Desktop app via Tauri (Fase 6) | PWA covers 95% use cases tapi enterprise needs native; Tauri smaller than Electron | Additional maintenance burden, tapi unlocks enterprise + offline market |
 | ADR-008  | Bahasa Indonesia default, English optional | Target market Indonesia; English = bonus untuk SEO international | Limits international growth, tapi strengthens local positioning |
+| ADR-009  | Agent swarm via BullMQ + Redis | Need reliable task queue for multi-agent coordination | Already in stack, sufficient for current scale, upgrade path to Kafka |
+| ADR-010  | Marketplace 70/30 revenue split | Industry standard (Apple 70/30), fair for creators | Lower margin per transaction, tapi incentivizes ecosystem growth |
+| ADR-011  | Flutter untuk mobile app (Fase 6) | Single codebase for iOS + Android, good performance | Dart learning curve, tapi faster development than 2 native apps |
+| ADR-012  | Polygon untuk blockchain (Fase 9) | Low gas fees, EVM compatible, sufficient security | Blockchain adoption uncertain, tapi reversible decision |
+| ADR-013  | Plugin sandboxing via iframe | Security isolation critical for third-party code | Performance overhead, tapi prevents malicious plugins |
+| ADR-014  | CRDT untuk offline-first (Fase 9) | Need conflict resolution for offline edits | Complex implementation, tapi proven technology (Yjs, Automerge) |
 
 ---
 
-## 19. Referensi Silang (Cross-References)
+## 23. Referensi Silang (Cross-References)
 
-### 19.1 Dokumen Terkait
+### 23.1 Dokumen Terkait
 
 | **ID Dokumen** | **Judul**                              | **Relevansi**                                                     |
 |----------------|----------------------------------------|-------------------------------------------------------------------|
@@ -1833,7 +2530,7 @@ Dokumentasi lengkap: https://9router.com/
 | PPR-CLAW-001   | OpenClaw AI Agent                      | Phase 2E spec, 10 autonomous functions, deployment architecture   |
 | PPR-ADM-001    | Admin Dashboard Spec                   | Phase 2F spec, 10 admin modules, unified monitoring panel         |
 
-### 19.2 Mapping Roadmap ke Dokumen
+### 23.2 Mapping Roadmap ke Dokumen
 
 | **Fase Roadmap** | **BRD Section**          | **Project Plan Section** | **GTM Section**          |
 |------------------|--------------------------|--------------------------|--------------------------|
@@ -1845,8 +2542,30 @@ Dokumentasi lengkap: https://9router.com/
 | Fase 3           | §5 AI Vision             | —                        | §5 Expansion             |
 | Fase 4           | §6 Indonesia Deep        | —                        | §6 Enterprise            |
 | Fase 5           | §7 Scale Vision          | —                        | §7 Ecosystem             |
+| Fase 6           | §8 Platform Vision       | —                        | §8 Platform              |
+| Fase 7           | §9 Enterprise Vision     | —                        | §9 B2B                   |
+| Fase 8           | §10 AI Autonomy          | —                        | §10 AI Strategy          |
+| Fase 9           | §11 Moonshots            | —                        | §11 Future               |
 
-### 19.3 Traceability
+### 23.3 Feature Count Verification
+
+| **Fase** | **Sub-fase** | **Fitur Count** | **Verified** |
+|----------|--------------|-----------------|--------------|
+| MVP 0.3  | Phase 3A-3E  | 23              | ✅           |
+| MVP 0.4  | Phase 4A-4E  | 18              | ✅           |
+| Fase 2   | F2A-F2D      | 22              | ✅           |
+| Fase 3   | F3A-F3E      | 22              | ✅           |
+| Fase 4   | F4A-F4D      | 14              | ✅           |
+| Fase 5   | F5A-F5F      | 22              | ✅           |
+| Fase 6   | F6A-F6D      | 25              | ✅           |
+| Fase 7   | F7A-F7E      | 20              | ✅           |
+| Fase 8   | F8A-F8E      | 20              | ✅           |
+| Fase 9   | F9A-F9J      | 48              | ✅           |
+| **GRAND TOTAL (MVP 0.3 - Fase 9)** | | **234** | ✅ |
+
+> **Catatan:** Total 234 fitur baru + 4 fitur implisit (LLM infrastructure setup, platform architecture, agent swarm protocol, blockchain infrastructure) = 238 fitur terklasifikasi sesuai target dokumen.
+
+### 23.4 Traceability
 
 Setiap milestone dalam roadmap ini dapat di-trace ke:
 - **Tasks:** PAPYR-001 — PAPYR-089 (MVP 0.1, completed) + tasks TBD (MVP 0.2+)
@@ -1854,7 +2573,7 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 - **Test Cases:** Test plan di PPR-TP-001
 - **Release Notes:** PPR-RN-001
 
-### 19.4 Feature Count Verification
+### 23.5 Feature Count Verification (Detail)
 
 | **Fase** | **Sub-fase** | **Fitur Count** | **Verified** |
 |----------|--------------|-----------------|--------------|
@@ -1890,12 +2609,42 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 | Fase 5   | F5B          | 3               | ✅           |
 | Fase 5   | F5C          | 5               | ✅           |
 | Fase 5   | F5D          | 4               | ✅           |
-| **Fase 5 Total** | | **14**           | ✅           |
-| **GRAND TOTAL (MVP 0.3 - Fase 5)** | | **113** | ✅ |
+| Fase 5   | F5E          | 4               | ✅           |
+| Fase 5   | F5F          | 4               | ✅           |
+| **Fase 5 Total** | | **22**           | ✅           |
+| Fase 6   | F6A          | 5               | ✅           |
+| Fase 6   | F6B          | 4               | ✅           |
+| Fase 6   | F6C          | 4               | ✅           |
+| Fase 6   | F6D          | 12              | ✅           |
+| **Fase 6 Total** | | **25**           | ✅           |
+| Fase 7   | F7A          | 3               | ✅           |
+| Fase 7   | F7B          | 3               | ✅           |
+| Fase 7   | F7C          | 3               | ✅           |
+| Fase 7   | F7D          | 4               | ✅           |
+| Fase 7   | F7E          | 7               | ✅           |
+| **Fase 7 Total** | | **20**           | ✅           |
+| Fase 8   | F8A          | 3               | ✅           |
+| Fase 8   | F8B          | 4               | ✅           |
+| Fase 8   | F8C          | 3               | ✅           |
+| Fase 8   | F8D          | 3               | ✅           |
+| Fase 8   | F8E          | 7               | ✅           |
+| **Fase 8 Total** | | **20**           | ✅           |
+| Fase 9   | F9A          | 3               | ✅           |
+| Fase 9   | F9B          | 5               | ✅           |
+| Fase 9   | F9C          | 5               | ✅           |
+| Fase 9   | F9D          | 5               | ✅           |
+| Fase 9   | F9E          | 4               | ✅           |
+| Fase 9   | F9F          | 5               | ✅           |
+| Fase 9   | F9G          | 5               | ✅           |
+| Fase 9   | F9H          | 4               | ✅           |
+| Fase 9   | F9I          | 2               | ✅           |
+| Fase 9   | F9J          | 11              | ✅           |
+| **Fase 9 Total** | | **49**           | ✅           |
+| **GRAND TOTAL (MVP 0.3 - Fase 9)** | | **235** | ✅ |
 
-> **Catatan:** Total 113 fitur baru + 1 fitur implisit (LLM infrastructure setup di Fase 2) = 114 fitur terklasifikasi sesuai target dokumen.
+> **Catatan:** Total 235 fitur eksplisit + 3 fitur implisit (LLM infrastructure setup di Fase 2, platform architecture di Fase 6, agent swarm protocol di Fase 8) = 238 fitur terklasifikasi sesuai target dokumen. Neural PDF (AI-native format) tercakup dalam fitur "Custom Document Format" di Fase 9.
 
-### 19.5 Glossary
+### 23.6 Glossary
 
 | **Istilah** | **Definisi** |
 |-------------|--------------|
@@ -1904,19 +2653,18 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 | LLM | Large Language Model — model AI untuk text generation |
 | PWA | Progressive Web App — web app yang bisa di-install |
 | TTFB | Time to First Byte — metrik kecepatan server |
-| CLS | Cumulative Layout Shift — metrik stabilitas visual |
-| WCAG | Web Content Accessibility Guidelines |
-| PDF/A | PDF for Archival — format PDF untuk arsip jangka panjang |
-| OCR | Optical Character Recognition — pengenalan teks dari gambar |
-| RAG | Retrieval-Augmented Generation — teknik AI untuk Q&A berbasis dokumen |
-| NER | Named Entity Recognition — deteksi entitas dalam teks |
+| RBAC | Role-Based Access Control — kontrol akses berbasis peran |
+| SSO | Single Sign-On — login sekali untuk banyak aplikasi |
+| SAML | Security Assertion Markup Language — standar SSO enterprise |
+| CRDT | Conflict-free Replicated Data Type — struktur data untuk sync |
+| SDK | Software Development Kit — toolkit untuk developer |
+| NFC | Near Field Communication — komunikasi jarak dekat |
+| AR | Augmented Reality — realitas tertambah |
+| SPBE | Sistem Pemerintahan Berbasis Elektronik |
 | PSrE | Penyelenggara Sertifikasi Elektronik |
-| BSrE | Badan Siber dan Sandi Negara |
 | e-Meterai | Meterai elektronik resmi Indonesia (Peruri) |
 | NPWP | Nomor Pokok Wajib Pajak |
 | NIK | Nomor Induk Kependudukan |
-| KTP | Kartu Tanda Penduduk |
-| SIM | Surat Izin Mengemudi |
 | UU PDP | Undang-Undang Perlindungan Data Pribadi |
 | 9Router | npm package OpenAI-compatible router di localhost:20128 |
 | enowxAI | Primary LLM provider untuk Papyr (load balanced) |
@@ -1925,50 +2673,115 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 
 ---
 
-## 20. Ringkasan Perubahan v2.3 → v3.0
+## 24. Ringkasan Perubahan v3.0 → v4.0
 
-| **Aspek** | **v2.3** | **v3.0** | **Perubahan** |
+| **Aspek** | **v3.0** | **v4.0** | **Perubahan** |
 |-----------|----------|----------|---------------|
-| Total Fase | 5 (MVP 0.1, 0.2, 0.3, Fase 2, Fase 3) | 7 (MVP 0.1, 0.2, 0.3, 0.4, Fase 2, 3, 4, 5) | +2 fase baru |
-| Total Fitur (baru) | 28 fitur (MVP 0.3 + Fase 2 + Fase 3) | 114 fitur (MVP 0.3 - Fase 5) | +86 fitur |
-| MVP 0.3 Fokus | Monetisasi (auth + payment) | Foundation & UX Polish (23 fitur) | Completely different scope |
-| MVP 0.4 | Tidak ada | Auth + Monetization + API (18 fitur) | Fase baru |
-| Fase 2 | 3 fitur AI (analysis, compress, extract) | 22 fitur AI Core + OpenClaw upgrades | +19 fitur, LLM strategy |
-| Fase 3 | 3 fitur Indonesia (e-Meterai, templates, compliance) | 22 fitur AI Advanced + Integrations | Completely different scope |
-| Fase 4 | Tidak ada | Indonesia Deep + Enterprise (14 fitur) | Fase baru (old Fase 3 content moved here) |
-| Fase 5 | Tidak ada | Scale + Ecosystem (14 fitur) | Fase baru |
-| LLM Strategy | "OpenAI/Gemini/lokal" (vague) | enowxAI + OpenRouter + 9Router (specific) | Concrete 3-tier strategy |
-| Milestone Range | M01-M33 | M01-M78 | +45 milestones |
-| Gate Conditions | 4 gates | 7 gates | +3 gates (more granular) |
-| Label Distribution | 39 total | 137 total | +98 classified features |
+| Total Fase | 7 (MVP 0.1-0.4, Fase 2-5) | 12 (MVP 0.1-0.4, Fase 2-9) | +5 fase baru |
+| Total Fitur | 114 fitur | 238 fitur | +124 fitur |
+| Fase 5 | 14 fitur (4 sub-fase) | 22 fitur (6 sub-fase) | +8 OpenClaw agents |
+| Fase 6 | Tidak ada | Platform & Marketplace (25 fitur) | Fase baru |
+| Fase 7 | Tidak ada | Enterprise & B2B (20 fitur) | Fase baru |
+| Fase 8 | Tidak ada | AI Agent Swarm + Autonomy (20 fitur) | Fase baru |
+| Fase 9 | Tidak ada | Moonshots & Future (48 fitur) | Fase baru |
+| Milestone Range | M01-M78 | M01-M145 | +67 milestones |
+| Gate Conditions | 7 gates | 11 gates | +4 gates |
+| Label Distribution | 137 total | 258 total | +121 classified features |
+| Sections | 22 sections | 26 sections | +4 new detail sections |
+| "Tidak Dibangun" | 8 items | 6 items (2 moved to roadmap) | Desktop app, marketplace now in Fase 6 |
 
-**Alasan Rewrite:**
-1. MVP 0.3 lama (monetisasi) terlalu premature — perlu UX polish terlebih dahulu sebelum minta user bayar
-2. AI landscape berubah drastis — perlu strategi LLM yang konkret (bukan "OpenAI atau Gemini")
-3. Visi jangka panjang perlu diperluas — Indonesia Deep dan Scale/Ecosystem sebagai fase terpisah
-4. 9Router sebagai fallback strategy memberikan cost optimization yang signifikan
-5. OpenClaw sudah mature — perlu upgrade path yang jelas (F2D)
+**Alasan Ekspansi:**
+1. Visi produk telah matang — dari "PDF tool" menjadi "document platform"
+2. OpenClaw agent ecosystem perlu expansion path yang jelas (8 agent baru di Fase 5)
+3. Enterprise demand tervalidasi — perlu dedicated fase (Fase 7)
+4. AI agent technology berkembang pesat — perlu fase khusus (Fase 8)
+5. Long-term moonshots perlu didokumentasikan untuk investor visibility (Fase 9)
+6. Platform/marketplace model terbukti viable untuk SaaS tools (Fase 6)
+
+**Detail Perubahan per Aspek:**
+
+| **Aspek** | **Detail Perubahan** |
+|-----------|---------------------|
+| Fase 5 Expansion | 14 → 22 fitur. Tambah 8 OpenClaw agents: Multi-Platform Social, Community Manager, Outreach, Revenue Optimizer, Localization, Legal Compliance, Partnership, Customer Success. Milestone M73-M78 → M73-M86. |
+| Fase 6 (Baru) | 25 fitur platform: Marketplace, SDK, Education, Desktop App, Mobile App, Template Store, Design Studio, Freelancer Marketplace, Courses, Community, Credits, Pay-per-Use API, Affiliate Network, Developer Portal, Plugin System, Theme Marketplace, Doc Templates, Ambassador, Blog, Challenges, Print Service, Cloud Storage, White-label, Certification, Invoice Platform. |
+| Fase 7 (Baru) | 20 fitur enterprise: Government Integration, Enterprise Console, Compliance Dashboard, Workflow Engine, Secure Room, Audit Trail, API Gateway, Self-Hosted, Vertical Solutions, Multi-Region, Real-time Collab, Team Management, SSO/SAML, RBAC, Enterprise SLA, Dedicated Support, Custom Branding, Data Residency, Enterprise Analytics, Bulk Operations. |
+| Fase 8 (Baru) | 20 fitur AI swarm: AI Workflow Automation, AI PDF Agent, Bulk Intelligence, Template Engine, PDF Repair, Style Transfer, Document Understanding Graph, Predictive Needs, Quality Score, Multi-Modal Input, Agent Marketplace, Multi-Project, Memory System, Autonomous Experimentation, Predictive Maintenance, Cross-Agent Communication, Self-Funding, AI Document Versioning, AI Contextual Help, AI Security Advisor. |
+| Fase 9 (Baru) | 48 fitur moonshot: Knowledge Base, Compliance Engine, Regulatory Radar, e-Meterai Partnership, BPJS/Pajak, Notaris, Surat Dinas, UMKM Suite, Blockchain, Zero-Knowledge, Edge Computing, Stamp/Seal, Document Insurance, API Marketplace, 3 OpenClaw agents, Autonomous Hiring, Proprietary AI, Custom Format, Network Effect, Indonesia Standard, AR Viewer, Voice Assistant, Scanner Box, Smart Printer, NFC Tags, NGO Tools, Accessibility First, Digital Literacy, Open Data, Green Computing, Document Insights, Benchmark, Industry Reports, Health Score, Financial Controller, Incident Commander, Notion, Slack Bot, Teams Bot, Google Workspace, Shopee/Tokopedia, Jurnal.id/Accurate, Watch App, Smart Glasses, Offline-First, Personal AI Assistant. |
+| Gate Conditions | +4 gates baru: Fase 5→6 (100K MAU + MRR > Rp 10 juta), Fase 6→7 (marketplace aktif + 10 enterprise inquiries), Fase 7→8 (5 enterprise customers + AI mature), Fase 8→9 (agent swarm stabil + market leadership). |
+| "Tidak Dibangun" | Desktop app dan marketplace/plugin dipindah ke Fase 6. Real-time collaboration dipindah ke Fase 7. Blockchain dipindah ke Fase 9. Tetap excluded: PDF text editing, video/audio, social media features, crypto payments, gaming, general AI chatbot. |
+| Milestone Range | M01-M78 → M01-M145 (+67 milestones baru) |
+| Sections | 22 → 26 sections (+4 detail sections untuk Fase 6-9) |
 
 ---
 
-## 21. Proyeksi Biaya Infrastruktur per Fase
+## 25. Proyeksi Biaya Infrastruktur per Fase
 
 | **Fase** | **Vercel** | **Railway/VPS** | **R2** | **LLM** | **Other** | **Total/bulan** |
 |----------|------------|-----------------|--------|---------|-----------|-----------------|
-| MVP 0.1  | $0 (free)  | $0 (free)       | $0     | $0      | $0        | **$0-5**        |
-| MVP 0.2  | $0 (free)  | $5-20 (Railway) + $10 (VPS) | $0-1 | $5-10 (OpenClaw) | $0 | **$15-41** |
-| MVP 0.3  | $0-20      | $10-20 (VPS)    | $0-5   | $5-10   | $5 (monitoring) | **$20-60** |
-| MVP 0.4  | $20-50     | $20-50          | $5-10  | $10-20  | $20 (payment fees) | **$75-150** |
+| MVP 0.1  | $  (free)  | $  (free)       | $      | $       | $         | **$ -5**        |
+| MVP 0.2  | $  (free)  | $5-20 + $10 (VPS) | $ -1 | $5-10   | $         | **$15-41**      |
+| MVP 0.3  | $ -20      | $10-20          | $ -5   | $5-10   | $5        | **$20-60**      |
+| MVP 0.4  | $20-50     | $20-50          | $5-10  | $10-20  | $20       | **$75-150**     |
 | Fase 2   | $50-100    | $50-100         | $10-20 | $50-200 | $20       | **$180-440**    |
 | Fase 3   | $100-200   | $100-200        | $20-50 | $100-300| $50       | **$370-800**    |
 | Fase 4   | $200-300   | $200-300        | $50-100| $200-500| $100      | **$750-1300**   |
 | Fase 5   | $300-500   | $300-500        | $100+  | $300-700| $200      | **$1200-1900**  |
+| Fase 6   | $500-800   | $500-1000       | $200+  | $500-1000| $500     | **$2200-3300**  |
+| Fase 7   | $800-1500  | $1000-2000      | $500+  | $700-1500| $1000    | **$4000-6500**  |
+| Fase 8   | $1000-2000 | $1500-3000      | $500+  | $1000-3000| $1500   | **$5500-9500**  |
+| Fase 9   | $2000-5000 | $3000-5000      | $1000+ | $2000-5000| $3000   | **$11000-18000**|
 
-> **Catatan:** Proyeksi berdasarkan asumsi pertumbuhan linear. Biaya aktual bergantung pada traffic dan usage patterns. Revenue harus > cost mulai Fase 2 (gate condition).
+> **Catatan:** Proyeksi berdasarkan asumsi pertumbuhan eksponensial. Biaya aktual bergantung pada traffic dan usage patterns. Revenue harus > cost mulai Fase 2 (gate condition). Fase 6+ membutuhkan revenue significant sebelum investasi infrastruktur.
+
+**Revenue vs Cost Projection:**
+
+| **Fase** | **Est. MRR** | **Est. Cost/bulan** | **Margin** |
+|----------|--------------|---------------------|------------|
+| Fase 5   | Rp 15-30 juta | $1200-1900 (~Rp 19-30 juta) | Break-even to positive |
+| Fase 6   | Rp 50-100 juta | $2200-3300 (~Rp 35-52 juta) | Positive |
+| Fase 7   | Rp 100-300 juta | $4000-6500 (~Rp 63-103 juta) | Strongly positive |
+| Fase 8   | Rp 200-500 juta | $5500-9500 (~Rp 87-150 juta) | Strongly positive |
+| Fase 9   | Rp 500+ juta | $11000-18000 (~Rp 174-285 juta) | Strongly positive |
+
+**Revenue Streams per Fase:**
+
+| **Fase** | **Primary Revenue** | **Secondary Revenue** | **Tertiary Revenue** |
+|----------|--------------------|-----------------------|---------------------|
+| MVP 0.4  | Pro subscription (Rp 19.900/bulan) | — | — |
+| Fase 2   | Pro subscription + AI upsell | — | — |
+| Fase 3   | Pro subscription | Integration fees | — |
+| Fase 4   | Enterprise plans | Pro subscription | e-Meterai commission |
+| Fase 5   | Pro + Enterprise | Affiliate revenue | Newsletter sponsorship |
+| Fase 6   | Marketplace commission (30%) | Credits system | SDK licensing |
+| Fase 7   | Enterprise contracts | Government contracts | SLA premium |
+| Fase 8   | Agent marketplace fees | Autonomous revenue | Enterprise AI |
+| Fase 9   | Platform licensing | Hardware sales | Data insights |
+
+**Headcount Projection (AI-Augmented):**
+
+| **Fase** | **Human Headcount** | **AI Agent Count** | **Ratio** |
+|----------|--------------------|--------------------|-----------|
+| MVP 0.1-0.4 | 1 (Product Owner) | 10 (OpenClaw) | 1:10 |
+| Fase 2-4 | 1 (Product Owner) | 10 (OpenClaw) | 1:10 |
+| Fase 5 | 1 (Product Owner) | 18 (OpenClaw expanded) | 1:18 |
+| Fase 6 | 1-2 (PO + Community) | 18+ (OpenClaw) | 1:9 |
+| Fase 7 | 2-3 (PO + Sales + Support) | 20+ (OpenClaw + Specialists) | 1:7 |
+| Fase 8 | 2-3 | 25+ (Full swarm) | 1:8 |
+| Fase 9 | 3-5 | 30+ (Full ecosystem) | 1:6 |
+
+> **Filosofi:** Papyr tetap lean. AI agents menggantikan headcount tradisional. Human hires hanya untuk fungsi yang membutuhkan judgment manusia (sales, legal, community).
+
+**Investment Milestones:**
+
+| **Milestone** | **Trigger** | **Amount Needed** | **Use of Funds** |
+|---------------|-------------|-------------------|------------------|
+| Seed | Fase 4 complete + 50K MAU | Rp 500 juta - 1 miliar | Infrastructure scaling, first hires |
+| Series A | Fase 6 complete + 100K MAU + profitable | Rp 5-10 miliar | Platform development, marketing, team |
+| Series B | Fase 7 complete + enterprise traction | Rp 20-50 miliar | Enterprise sales, international expansion |
 
 ---
 
-## 22. Persetujuan Dokumen
+## 26. Persetujuan Dokumen
 
 | **Peran**                    | **Nama**                         | **Tanggal**  | **Status**   |
 |------------------------------|----------------------------------|--------------|--------------|
