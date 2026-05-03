@@ -839,7 +839,7 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 **Estimasi:** ~100 jam
 **Dependensi:** Fase 2D complete (product stable)
 **Deployment:** HostData.id VPS (dedicated)
-**Dokumen Lengkap:** PPR-CLAW-001 (30_Papyr_OpenClaw_v1.0.md)
+**Dokumen Lengkap:** PPR-CLAW-001 (29_Papyr_OpenClaw_v1.0.md)
 
 | ID | Layer | Task | Deskripsi | Jam |
 |----|-------|------|-----------|-----|
