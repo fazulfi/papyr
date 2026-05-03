@@ -146,7 +146,7 @@
 | **Hosting** | Vercel + Railway | Frontend edge-global, backend containerized |
 | **Domain** | Hostinger | mypapyr.com, DNS management via API |
 | **Analytics** | Vercel Analytics + Speed Insights | Web analytics + performance monitoring |
-| **Database** | Supabase | Standby — aktif di MVP 0.2 |
+| **Database** | Supabase | Standby — aktif di Fase 2 |
 
 ---
 

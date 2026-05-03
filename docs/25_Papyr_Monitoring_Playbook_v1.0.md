@@ -1046,7 +1046,7 @@ sentry_sdk.init(
 │              MONITORING MATURITY ROADMAP — PAPYR                 │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  FASE 1 (Sekarang)          FASE 2 (Bulan Depan)               │
+│  FASE 1 (Sekarang)          Fase 5 (Bulan Depan)               │
 │  ─────────────────          ──────────────────────              │
 │  ✅ Platform-native          □ BetterStack uptime               │
 │     dashboards               □ Telegram alerts                  │
@@ -1054,7 +1054,7 @@ sentry_sdk.init(
 │  ✅ Manual daily checks      □ Public status page               │
 │  ✅ Health check endpoint                                       │
 │                                                                  │
-│  FASE 3 (Quarter Depan)     FASE 4 (Saat Revenue)              │
+│  Fase 6 (Quarter Depan)     Fase 7 (Saat Revenue)              │
 │  ───────────────────────    ──────────────────────              │
 │  □ Centralized logging       □ Synthetic monitoring             │
 │    (BetterStack Logs)        □ Custom Grafana dashboard         │
@@ -1070,9 +1070,9 @@ sentry_sdk.init(
 | Fase | Tools | Biaya/Bulan | Catatan |
 |---|---|---|---|
 | Fase 1 (Current) | Platform-native only | $0 | Sudah termasuk di Vercel Free + Railway $5 |
-| Fase 2 | + BetterStack + Telegram | $0 | Free tier cukup untuk traffic saat ini |
-| Fase 3 | + Sentry + BetterStack Logs | $0 | Free tier cukup hingga ~10K events/bulan |
-| Fase 4 | + Grafana Cloud + Synthetic | $0–$25 | Upgrade saat traffic > 50K visits/bulan |
+| Fase 5 | + BetterStack + Telegram | $0 | Free tier cukup untuk traffic saat ini |
+| Fase 6 | + Sentry + BetterStack Logs | $0 | Free tier cukup hingga ~10K events/bulan |
+| Fase 7 | + Grafana Cloud + Synthetic | $0–$25 | Upgrade saat traffic > 50K visits/bulan |
 
 ---
 

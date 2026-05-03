@@ -31,7 +31,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                        |
 |-----------|-------------|------------------------------|----------------------------------------------------------------------|
-| 1.0       | Juni 2026   | Muhammad Fa’iz Zulfikar      | Draft awal — Deployment Runbook lengkap untuk arsitektur MVP 0.1     |
+| 1.0       | Juni 2026   | Muhammad Fa’iz Zulfikar      | Draft awal — Deployment Runbook lengkap untuk arsitektur Fase 1     |
 
 **Referensi Silang**
 
@@ -179,8 +179,8 @@ Semua variabel berikut harus dikonfigurasi di Railway project settings. Referens
 | `MAX_UPLOAD_SIZE_MB` | Tidak | `20` | Batas upload file dalam MB |
 | `FILE_RETENTION_MINUTES` | Tidak | `60` | Durasi retensi file sebelum auto-delete (menit) |
 | `RATE_LIMIT_PER_MINUTE` | Tidak | `10` | Rate limit per IP per menit |
-| `SUPABASE_URL` | Tidak | `""` | Supabase project URL (standby — MVP 0.2) |
-| `SUPABASE_ANON_KEY` | Tidak | `""` | Supabase anonymous key (standby — MVP 0.2) |
+| `SUPABASE_URL` | Tidak | `""` | Supabase project URL (standby — Fase 2) |
+| `SUPABASE_ANON_KEY` | Tidak | `""` | Supabase anonymous key (standby — Fase 2) |
 | `SENTRY_DSN` | Tidak | `""` | Sentry DSN untuk error tracking (opsional) |
 
 ### 3.3 Environment Variables — Frontend (Vercel)

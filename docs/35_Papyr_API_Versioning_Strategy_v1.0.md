@@ -35,7 +35,7 @@ Versi 1.0 | Juni 2026
 
 | Versi | Tanggal | Penulis | Perubahan |
 |-------|---------|---------|-----------|
-| 1.0 | 2026-06-03 | OpenCode AI Agent (Sisyphus) | Dokumen awal, strategi versioning untuk MVP 0.2 |
+| 1.0 | 2026-06-03 | OpenCode AI Agent (Sisyphus) | Dokumen awal, strategi versioning untuk Fase 2 |
 
 ---
 
@@ -49,7 +49,7 @@ Versi 1.0 | Juni 2026
 6. [Implementasi Frontend](#6-implementasi-frontend)
 7. [Kebijakan Deprecation](#7-kebijakan-deprecation)
 8. [Kapan Membuat v2](#8-kapan-membuat-v2)
-9. [Versioning untuk Pro API (MVP 0.3)](#9-versioning-untuk-pro-api-mvp-03)
+9. [Versioning untuk Pro API (Fase 3)](#9-versioning-untuk-pro-api-mvp-03)
 10. [Testing Strategy](#10-testing-strategy)
 11. [Dokumentasi API](#11-dokumentasi-api)
 12. [Risiko dan Mitigasi](#12-risiko-dan-mitigasi)
@@ -63,11 +63,11 @@ Versi 1.0 | Juni 2026
 
 API versioning adalah kontrak antara backend dan semua client yang mengonsumsinya. Tanpa versioning yang jelas, setiap perubahan pada response format atau endpoint behavior berpotensi merusak integrasi yang sudah berjalan.
 
-Papyr saat ini memiliki 4 endpoint tanpa versi eksplisit. Dengan MVP 0.2 yang menambahkan 7 tool baru (M12 sampai M18), dan MVP 0.3 yang memperkenalkan autentikasi serta Pro tier, kita membutuhkan fondasi versioning sejak sekarang. Menambahkan versioning belakangan jauh lebih menyakitkan daripada memulainya dari awal.
+Papyr saat ini memiliki 4 endpoint tanpa versi eksplisit. Dengan Fase 2 yang menambahkan 7 tool baru (M12 sampai M18), dan Fase 3 yang memperkenalkan autentikasi serta Pro tier, kita membutuhkan fondasi versioning sejak sekarang. Menambahkan versioning belakangan jauh lebih menyakitkan daripada memulainya dari awal.
 
 ### 1.2 Kapan Mulai
 
-**Sekarang. MVP 0.2.**
+**Sekarang. Fase 2.**
 
 Alasannya sederhana: kita belum punya pengguna eksternal yang bergantung pada endpoint lama. Biaya migrasi saat ini mendekati nol. Menunda berarti menumpuk utang teknis yang harus dibayar nanti dengan bunga.
 
@@ -126,7 +126,7 @@ GET /api/compress?version=1
 | **ID** | ADR-005 |
 | **Judul** | Strategi API Versioning |
 | **Status** | Accepted |
-| **Konteks** | Papyr akan berkembang dari 4 endpoint menjadi 11+ endpoint di MVP 0.2, dan menambahkan autentikasi di MVP 0.3. Perlu mekanisme versioning yang jelas. |
+| **Konteks** | Papyr akan berkembang dari 4 endpoint menjadi 11+ endpoint di Fase 2, dan menambahkan autentikasi di Fase 3. Perlu mekanisme versioning yang jelas. |
 | **Keputusan** | Menggunakan URL path versioning dengan format `/api/v{N}/resource` |
 | **Konsekuensi** | URL lebih panjang, tapi eksplisit. Routing lebih mudah dikonfigurasi. Setiap versi bisa di-deploy dan di-test secara independen. |
 | **Alternatif** | Header versioning (terlalu kompleks), query param (masalah caching) |
@@ -137,7 +137,7 @@ GET /api/compress?version=1
 
 ### 3.1 Endpoint Saat Ini (Tanpa Versi)
 
-Endpoint yang sudah ada di MVP 0.1:
+Endpoint yang sudah ada di Fase 1:
 
 | Method | Path | Fungsi |
 |--------|------|--------|
@@ -146,7 +146,7 @@ Endpoint yang sudah ada di MVP 0.1:
 | POST | `/api/pdf-to-image` | Konversi PDF ke gambar |
 | GET | `/api/health` | Health check |
 
-### 3.2 Endpoint Baru dengan Versi (MVP 0.2)
+### 3.2 Endpoint Baru dengan Versi (Fase 2)
 
 Semua endpoint baru langsung menggunakan prefix `/api/v1/`:
 
@@ -184,9 +184,9 @@ Alasan tanpa versi: endpoint admin hanya diakses oleh dashboard internal yang ki
 
 #### Fase 1: Tambah Endpoint Berversi (Minggu 1-2)
 
-Semua endpoint baru MVP 0.2 langsung dibuat dengan prefix `/api/v1/`. Endpoint lama tetap berfungsi tanpa perubahan.
+Semua endpoint baru Fase 2 langsung dibuat dengan prefix `/api/v1/`. Endpoint lama tetap berfungsi tanpa perubahan.
 
-#### Fase 2: Redirect untuk Backward Compatibility (Minggu 3)
+#### Fase 5: Redirect untuk Backward Compatibility (Minggu 3)
 
 Tambahkan redirect 301 dari endpoint lama ke endpoint baru:
 
@@ -197,7 +197,7 @@ Tambahkan redirect 301 dari endpoint lama ke endpoint baru:
 /api/health        → 301 → /api/v1/health
 ```
 
-#### Fase 3: Deprecation Notice (Bulan 2-3)
+#### Fase 6: Deprecation Notice (Bulan 2-3)
 
 Endpoint lama tetap berfungsi tapi mengembalikan header deprecation:
 
@@ -207,7 +207,7 @@ Deprecation: true
 Link: </api/v1/compress>; rel="successor-version"
 ```
 
-#### Fase 4: Penghapusan Endpoint Lama (Bulan 6)
+#### Fase 7: Penghapusan Endpoint Lama (Bulan 6)
 
 Endpoint tanpa versi dihapus sepenuhnya. Semua request ke path lama mendapat response 410 Gone.
 
@@ -216,13 +216,13 @@ Endpoint tanpa versi dihapus sepenuhnya. Semua request ke path lama mendapat res
 | Fase | Mulai | Selesai | Aksi |
 |------|-------|---------|------|
 | Fase 1 | 2026-06-03 | 2026-06-17 | Deploy endpoint `/api/v1/*` |
-| Fase 2 | 2026-06-17 | 2026-06-24 | Aktifkan redirect 301 |
-| Fase 3 | 2026-07-01 | 2026-09-01 | Deprecation header aktif |
-| Fase 4 | 2026-12-01 | 2026-12-01 | Hapus endpoint lama |
+| Fase 5 | 2026-06-17 | 2026-06-24 | Aktifkan redirect 301 |
+| Fase 6 | 2026-07-01 | 2026-09-01 | Deprecation header aktif |
+| Fase 7 | 2026-12-01 | 2026-12-01 | Hapus endpoint lama |
 
 ### 4.3 Catatan Penting
 
-Karena Papyr saat ini belum memiliki pengguna eksternal, timeline di atas bersifat konservatif. Dalam praktiknya, Fase 1 dan 2 bisa dilakukan bersamaan. Fase 4 bisa dipercepat jika analytics menunjukkan zero traffic ke endpoint lama.
+Karena Papyr saat ini belum memiliki pengguna eksternal, timeline di atas bersifat konservatif. Dalam praktiknya, Fase 1 dan 2 bisa dilakukan bersamaan. Fase 7 bisa dipercepat jika analytics menunjukkan zero traffic ke endpoint lama.
 
 ---
 
@@ -550,12 +550,12 @@ v2 hanya dibuat ketika kontrak v1 harus dipatahkan. Bukan karena ingin "versi ba
 | Ubah format response secara fundamental | JSON → streaming chunks | Ya |
 | Hapus field yang sudah ada | Hilangkan `filename` dari response | Ya |
 | Ubah tipe data field | `size: "1024"` → `size: 1024` | Ya |
-| Ubah model autentikasi | Cookie → API key (MVP 0.3) | Mungkin |
+| Ubah model autentikasi | Cookie → API key (Fase 3) | Mungkin |
 | Ubah error format | `{error: string}` → `{errors: [{code, msg}]}` | Ya |
 
-### 8.3 Skenario MVP 0.3
+### 8.3 Skenario Fase 3
 
-MVP 0.3 memperkenalkan autentikasi dan Pro tier. Pertanyaannya: apakah ini memerlukan v2?
+Fase 3 memperkenalkan autentikasi dan Pro tier. Pertanyaannya: apakah ini memerlukan v2?
 
 **Jawaban: Tidak, jika diimplementasikan dengan benar.**
 
@@ -576,7 +576,7 @@ v2 hanya diperlukan jika kita memutuskan bahwa SEMUA endpoint wajib auth, yang a
 
 ---
 
-## §9 Versioning untuk Pro API (MVP 0.3)
+## §9 Versioning untuk Pro API (Fase 3)
 
 ### 9.1 Arsitektur Pro Tier
 

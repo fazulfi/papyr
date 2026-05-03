@@ -31,7 +31,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                |
 |-----------|-------------|------------------------------|------------------------------------------------------------------------------|
-| 1.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Draft awal — Test Plan lengkap untuk scope MVP 0.1 (6 tool + security + cleanup + analytics) |
+| 1.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Draft awal — Test Plan lengkap untuk scope Fase 1 (6 tool + security + cleanup + analytics) |
 
 ---
 
@@ -64,7 +64,7 @@ mypapyr.com
 
 ### 1.1 Tujuan
 
-Dokumen ini mendefinisikan strategi, lingkup, test case, dan kriteria pengujian untuk Papyr MVP 0.1. Tujuan utama adalah memastikan bahwa seluruh 6 tool PDF (Compress, Merge, Split, Image-to-PDF, PDF-to-Image, Rotate) beserta fitur pendukung (security, cleanup, analytics) berfungsi sesuai spesifikasi yang didefinisikan dalam BRD (PPR-BRD-001) dan SRS (PPR-SRS-001).
+Dokumen ini mendefinisikan strategi, lingkup, test case, dan kriteria pengujian untuk Papyr Fase 1. Tujuan utama adalah memastikan bahwa seluruh 6 tool PDF (Compress, Merge, Split, Image-to-PDF, PDF-to-Image, Rotate) beserta fitur pendukung (security, cleanup, analytics) berfungsi sesuai spesifikasi yang didefinisikan dalam BRD (PPR-BRD-001) dan SRS (PPR-SRS-001).
 
 Test Plan ini mencakup pengujian otomatis (unit test + integration test) dan pengujian manual (QA playbook) yang dijalankan sebelum dan sesudah soft launch di mypapyr.com.
 
@@ -85,7 +85,7 @@ Dokumen ini mencakup:
 |----------------|------------------------------------------|-----------|
 | PPR-BRD-001    | Business Requirements Document           | 1.0       |
 | PPR-SRS-001    | Software Requirements Specification      | 1.0       |
-| —              | Papyr QA + Soft Launch Playbook          | MVP 0.1   |
+| —              | Papyr QA + Soft Launch Playbook          | Fase 1   |
 | —              | Vitest Configuration                     | —         |
 | —              | Pytest Configuration (conftest.py)       | —         |
 
@@ -142,7 +142,7 @@ Manual testing mengikuti QA Playbook (blueprint/Papyr_QA_SoftLaunch.md) yang men
 
 | **Tipe Pengujian**          | **Status**                                                                                    |
 |-----------------------------|-----------------------------------------------------------------------------------------------|
-| End-to-End (E2E) Browser    | Belum ada framework (Playwright/Cypress). Dicatat sebagai gap untuk MVP 0.2.                  |
+| End-to-End (E2E) Browser    | Belum ada framework (Playwright/Cypress). Dicatat sebagai gap untuk Fase 2.                  |
 | Load/Performance Testing    | Belum diimplementasi. Target NFR-015 (100 concurrent users) belum divalidasi secara otomatis. |
 | Penetration Testing         | Belum dilakukan. Keamanan divalidasi melalui unit test validasi file dan rate limit.          |
 | Visual Regression Testing   | Belum ada. UI divalidasi secara manual di mobile dan desktop.                                 |
@@ -170,12 +170,12 @@ Manual testing mengikuti QA Playbook (blueprint/Papyr_QA_SoftLaunch.md) yang men
 
 | **Kategori**                  | **Alasan**                                                          |
 |-------------------------------|---------------------------------------------------------------------|
-| E2E Browser Testing           | Belum ada framework E2E. Direncanakan untuk MVP 0.2.                |
+| E2E Browser Testing           | Belum ada framework E2E. Direncanakan untuk Fase 2.                |
 | Load/Stress Testing           | Infrastruktur free-tier; load testing direncanakan setelah scaling. |
-| Penetration Testing           | Memerlukan tools dan expertise khusus. Direncanakan untuk MVP 0.3.  |
-| Accessibility Testing (a11y)  | Belum diprioritaskan di MVP 0.1.                                    |
+| Penetration Testing           | Memerlukan tools dan expertise khusus. Direncanakan untuk Fase 3.  |
+| Accessibility Testing (a11y)  | Belum diprioritaskan di Fase 1.                                    |
 | Cross-Browser Compatibility   | Hanya divalidasi manual di Chrome (desktop + Android).              |
-| Fitur MVP 0.2                 | Protect PDF, Unlock PDF, Watermark, Sign PDF, PDF-to-Word, OCR.    |
+| Fitur Fase 2                 | Protect PDF, Unlock PDF, Watermark, Sign PDF, PDF-to-Word, OCR.    |
 
 ---
 
@@ -511,7 +511,7 @@ Pengujian dianggap selesai dan produk siap launch jika:
 
 ### 8.3 Target Coverage
 
-| **Metrik** | **Target MVP 0.1** | **Target MVP 0.2** |
+| **Metrik** | **Target Fase 1** | **Target Fase 2** |
 |------------|-------------------|-------------------|
 | Unit Test Pass Rate | 100% | 100% |
 | Code Coverage (Backend) | > 70% | > 80% |
@@ -527,14 +527,14 @@ Pengujian dianggap selesai dan produk siap launch jika:
 | **Fase** | **Aktivitas** | **Durasi** | **Penanggung Jawab** | **Status** |
 |----------|--------------|-----------|---------------------|------------|
 | Fase 1 | Setup test environment (Vitest + Pytest) | 1 hari | AI Agent | Selesai |
-| Fase 2 | Penulisan unit test frontend (pdfUtils, analytics, config) | 2 hari | AI Agent | Selesai |
-| Fase 3 | Penulisan integration test backend (compress, image-to-pdf, pdf-to-image) | 3 hari | AI Agent | Selesai |
-| Fase 4 | Penulisan service unit test (parse_page_range, get_size_bucket) | 1 hari | AI Agent | Selesai |
-| Fase 5 | QA Internal — manual testing semua tool di lokal | 2 hari | Product Owner + AI Agent | Selesai |
-| Fase 6 | QA Internal — manual testing di staging (mypapyr.com) | 1 hari | Product Owner | Selesai |
-| Fase 7 | Friend Testing (3-5 tester eksternal) | 3-5 hari | Product Owner | Selesai |
-| Fase 8 | Bug fixing berdasarkan hasil friend testing | 2-3 hari | AI Agent | Selesai |
-| Fase 9 | Regression testing setelah bug fix | 1 hari | AI Agent | Selesai |
+| Fase 5 | Penulisan unit test frontend (pdfUtils, analytics, config) | 2 hari | AI Agent | Selesai |
+| Fase 6 | Penulisan integration test backend (compress, image-to-pdf, pdf-to-image) | 3 hari | AI Agent | Selesai |
+| Fase 7 | Penulisan service unit test (parse_page_range, get_size_bucket) | 1 hari | AI Agent | Selesai |
+| Fase 8 | QA Internal — manual testing semua tool di lokal | 2 hari | Product Owner + AI Agent | Selesai |
+| Fase 9 | QA Internal — manual testing di staging (mypapyr.com) | 1 hari | Product Owner | Selesai |
+| Fase 10 | Friend Testing (3-5 tester eksternal) | 3-5 hari | Product Owner | Selesai |
+| Fase 11 | Bug fixing berdasarkan hasil friend testing | 2-3 hari | AI Agent | Selesai |
+| Fase 12 | Regression testing setelah bug fix | 1 hari | AI Agent | Selesai |
 | Fase 10 | Go/No-Go review dan soft launch | 1 hari | Product Owner | Selesai |
 
 **Total Estimasi:** 15-20 hari kerja (termasuk buffer untuk bug fixing)
@@ -545,20 +545,20 @@ Pengujian dianggap selesai dan produk siap launch jika:
 
 | **Risk ID** | **Risiko** | **Probabilitas** | **Dampak** | **Mitigasi** |
 |-------------|-----------|------------------|-----------|-------------|
-| TST-RSK-001 | Tidak ada E2E testing — bug UI/UX lolos ke production | Medium | Medium | Kompensasi dengan manual testing menyeluruh + friend testing. Tambahkan Playwright di MVP 0.2. |
+| TST-RSK-001 | Tidak ada E2E testing — bug UI/UX lolos ke production | Medium | Medium | Kompensasi dengan manual testing menyeluruh + friend testing. Tambahkan Playwright di Fase 2. |
 | TST-RSK-002 | Mock terlalu banyak — integration test tidak menangkap bug real | Medium | Medium | Tambahkan smoke test di staging yang menggunakan real R2 dan Ghostscript. |
 | TST-RSK-003 | Tidak ada load testing — performa degradasi saat traffic tinggi | Low | High | Monitor Railway metrics. Set alert untuk response time > 5 detik. Tambahkan load test setelah scaling. |
 | TST-RSK-004 | Solo tester bias — blind spot pada UX issues | Medium | Medium | Friend testing dengan 3-5 orang non-teknis. Feedback form terstruktur. |
 | TST-RSK-005 | Test flakiness pada async operations | Low | Low | Gunakan `pytest-asyncio` dengan proper async fixtures. Retry flaky tests 1x. |
 | TST-RSK-006 | Ghostscript/PyMuPDF version mismatch antara test dan production | Low | High | Pin versi di `requirements.txt` dan `Dockerfile`. Smoke test di staging sebelum deploy. |
-| TST-RSK-007 | Client-side tests tidak cover semua browser | Medium | Medium | Fokus pada Chrome (80%+ market share Indonesia). Tambahkan cross-browser testing di MVP 0.2. |
+| TST-RSK-007 | Client-side tests tidak cover semua browser | Medium | Medium | Fokus pada Chrome (80%+ market share Indonesia). Tambahkan cross-browser testing di Fase 2. |
 | TST-RSK-008 | File test data tidak representatif | Low | Medium | Gunakan real PDF samples dari berbagai sumber (scan, digital, mixed content) untuk manual testing. |
 
 ---
 
 ## 11. Persetujuan Dokumen
 
-Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Test Plan ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan strategi dan lingkup pengujian untuk Papyr MVP 0.1.
+Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Test Plan ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan strategi dan lingkup pengujian untuk Papyr Fase 1.
 
 |                   |                              |               |            |
 |:------------------|:-----------------------------|:--------------|:-----------|

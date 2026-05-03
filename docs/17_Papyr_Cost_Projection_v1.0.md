@@ -125,7 +125,7 @@ Kurs ini digunakan untuk konsistensi. Kurs aktual dapat bervariasi +/-5%.
 | Mobile vs Desktop | 70:30 | Sesuai demografi Indonesia |
 | Peak hours | 19:00-23:00 WIB | Mahasiswa mengerjakan tugas malam hari |
 
-### 2.4 Asumsi Pricing (Roadmap — MVP 0.3+)
+### 2.4 Asumsi Pricing (Roadmap — Fase 3+)
 
 | Plan | Harga | Billing | Efektif Bulanan |
 |------|-------|---------|-----------------|
@@ -701,19 +701,19 @@ Fase 1 — Managed Services (Bulan 1-8)
 ├── Cloudflare R2 Free Tier (storage)
 └── Total: ~$6-9/bulan
 
-Fase 2 — Hybrid (Bulan 9-12)
+Fase 5 — Hybrid (Bulan 9-12)
 ├── Vercel Free Tier (frontend — tetap)
 ├── VPS Self-Hosted (backend — migrasi dari Railway)
 ├── Cloudflare R2 (storage — mungkin mulai bayar)
 └── Total: ~$9-12/bulan
 
-Fase 3 — Full Self-Hosted (Bulan 12+)
+Fase 6 — Full Self-Hosted (Bulan 12+)
 ├── VPS #1: Frontend + Backend (all-in-one)
 ├── Cloudflare CDN (free tier, caching static assets)
 ├── Cloudflare R2 (storage)
 └── Total: ~$10-20/bulan
 
-Fase 4 — Multi-Node (jika traffic > 100K tasks/hari)
+Fase 7 — Multi-Node (jika traffic > 100K tasks/hari)
 ├── VPS #1: Frontend (Next.js SSR)
 ├── VPS #2: Backend (FastAPI + Ghostscript)
 ├── Cloudflare CDN + R2

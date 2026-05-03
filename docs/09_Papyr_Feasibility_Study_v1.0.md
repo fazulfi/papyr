@@ -187,7 +187,7 @@ Pengguna (Browser)
 | **Tier** | **Harga** | **Fitur** | **Target Aktivasi** |
 |----------|-----------|-----------|---------------------|
 | **Free (Tanpa Login)** | Rp 0 | Semua tool dasar unlimited, max 20MB/file | Aktif sekarang |
-| **Free (Dengan Login)** | Rp 0 | + OCR 5x/hari, PDF-to-Word 5x/hari | MVP 0.3 |
+| **Free (Dengan Login)** | Rp 0 | + OCR 5x/hari, PDF-to-Word 5x/hari | Fase 3 |
 | **Pro** | Rp 19.900/bulan atau Rp 149.000/tahun | Unlimited semua tool, batch processing, 100MB file, API access, priority processing | Setelah 10.000+ monthly active tasks |
 
 **Payment Gateway (Planned):** Midtrans atau Xendit — mendukung GoPay, OVO, DANA, bank transfer, kartu kredit/debit.
@@ -278,9 +278,9 @@ Pengguna (Browser)
 | **Fase** | **Strategi** | **Channel** | **Target** |
 |----------|--------------|-------------|------------|
 | Fase 1 (Sekarang) | Soft launch + validasi | Circle personal, komunitas mahasiswa, Twitter/X, Reddit r/indonesia | 100-500 users |
-| Fase 2 (Bulan 2-6) | SEO organic growth | Google Search (keyword ID), blog content | 2.000-30.000 monthly visits |
-| Fase 3 (Bulan 6-12) | Community + word-of-mouth | Forum, grup WhatsApp, komunitas tech | 30.000-100.000 monthly visits |
-| Fase 4 (Bulan 12+) | Monetisasi + expansion | Pro tier launch, B2B outreach | 100.000+ monthly visits |
+| Fase 5 (Bulan 2-6) | SEO organic growth | Google Search (keyword ID), blog content | 2.000-30.000 monthly visits |
+| Fase 6 (Bulan 6-12) | Community + word-of-mouth | Forum, grup WhatsApp, komunitas tech | 30.000-100.000 monthly visits |
+| Fase 7 (Bulan 12+) | Monetisasi + expansion | Pro tier launch, B2B outreach | 100.000+ monthly visits |
 
 ### 4.6 SEO Opportunity
 

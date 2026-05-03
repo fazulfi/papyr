@@ -31,7 +31,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                |
 |-----------|-------------|------------------------------|--------------------------------------------------------------|
-| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — BRD lengkap untuk scope MVP 0.1 + pricing model |
+| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — BRD lengkap untuk scope Fase 1 + pricing model |
 
 ---
 
@@ -84,8 +84,8 @@ Saat ini Papyr sudah live di mypapyr.com dengan 6 tool aktif (Compress, Merge, S
 ### Referensi Go-to-Market Strategy
 
 - **Fase 1 (Soft Launch):** Distribusi ke circle personal, komunitas mahasiswa, dan forum Indonesia (Twitter/X, Reddit r/indonesia)
-- **Fase 2 (SEO Growth):** Organic acquisition melalui konten SEO berbahasa Indonesia yang menargetkan keyword "compress PDF", "gabung PDF", "convert gambar ke PDF"
-- **Fase 3 (Monetisasi):** Introduksi tier Pro setelah mencapai 10.000+ monthly active tasks
+- **Fase 5 (SEO Growth):** Organic acquisition melalui konten SEO berbahasa Indonesia yang menargetkan keyword "compress PDF", "gabung PDF", "convert gambar ke PDF"
+- **Fase 6 (Monetisasi):** Introduksi tier Pro setelah mencapai 10.000+ monthly active tasks
 - **Paid Acquisition:** Tidak direncanakan untuk fase awal (self-funded constraint)
 
 ---
@@ -120,7 +120,7 @@ Solusi yang ada di pasar saat ini: (1) dioptimalkan untuk pasar global, bukan In
 
 **4. Project Scope**
 
-**4.1 In Scope — MVP 0.1 (Saat Ini Live)**
+**4.1 In Scope — Fase 1 (Saat Ini Live)**
 
 | **Modul**          | **Fitur**                                                                                                    | **Prioritas** | **Processing** |
 |--------------------|--------------------------------------------------------------------------------------------------------------|---------------|----------------|
@@ -137,7 +137,7 @@ Solusi yang ada di pasar saat ini: (1) dioptimalkan untuk pasar global, bukan In
 | Analytics          | Event tracking: task_started, task_completed, task_failed, device_category. Vercel Analytics.                | P1            | Client         |
 | Auto-Retry         | Retry otomatis 1x pada kegagalan task sebelum menampilkan error ke pengguna.                                 | P2            | Client         |
 
-**4.2 In Scope — MVP 0.2 (Roadmap Berikutnya)**
+**4.2 In Scope — Fase 2 (Roadmap Berikutnya)**
 
 | **Modul**          | **Fitur**                                                          | **Prioritas** |
 |--------------------|--------------------------------------------------------------------|---------------|
@@ -151,11 +151,11 @@ Solusi yang ada di pasar saat ini: (1) dioptimalkan untuk pasar global, bukan In
 
 **4.3 Out of Scope**
 
-- Login / registrasi pengguna (hingga MVP 0.3)
+- Login / registrasi pengguna (hingga Fase 3)
 - Dashboard pengguna
-- Payment / subscription (hingga MVP 0.3)
-- AI-powered features (Fase 2)
-- e-Meterai integration (Fase 3)
+- Payment / subscription (hingga Fase 3)
+- AI-powered features (Fase 5)
+- e-Meterai integration (Fase 6)
 - Native mobile application (iOS/Android)
 - Offline mode
 - PDF editing (text/image manipulation)
@@ -234,7 +234,7 @@ Solusi yang ada di pasar saat ini: (1) dioptimalkan untuk pasar global, bukan In
 | **Rule ID** | **Aturan**                          | **Detail**                                                                                                                                     |
 |-------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | BR-009      | Rate Limit per IP                   | Maksimum 10 request per menit per IP address. Pesan error 429 dalam Bahasa Indonesia.                                                          |
-| BR-010      | No Authentication Required          | Semua tool MVP 0.1 dapat diakses tanpa login. Rate limit berbasis IP saja.                                                                     |
+| BR-010      | No Authentication Required          | Semua tool Fase 1 dapat diakses tanpa login. Rate limit berbasis IP saja.                                                                     |
 
 **7.3 Aturan Bisnis & Monetisasi (Roadmap)**
 
@@ -379,9 +379,9 @@ Spesifikasi fungsional detail didokumentasikan dalam Software Requirements Speci
 
 **10.2 Constraints**
 
-- MVP 0.1 hanya mendukung Bahasa Indonesia — English ditambahkan di MVP 0.2.
+- Fase 1 hanya mendukung Bahasa Indonesia — English ditambahkan di Fase 2.
 
-- Tidak ada login/registrasi di MVP 0.1 — semua akses anonim.
+- Tidak ada login/registrasi di Fase 1 — semua akses anonim.
 
 - Maksimum upload 20MB per file — limitasi dari infrastruktur free/low-cost.
 

@@ -48,7 +48,7 @@ mypapyr.com
 
 ## 1. Tujuan dan Ruang Lingkup
 
-Dokumen ini mencatat seluruh keputusan arsitektur signifikan yang diambil selama pengembangan Papyr MVP 0.1 hingga v1.1. Setiap ADR menjelaskan konteks, keputusan, alternatif yang dipertimbangkan, dan konsekuensi dari keputusan tersebut.
+Dokumen ini mencatat seluruh keputusan arsitektur signifikan yang diambil selama pengembangan Papyr Fase 1 hingga v1.1. Setiap ADR menjelaskan konteks, keputusan, alternatif yang dipertimbangkan, dan konsekuensi dari keputusan tersebut.
 
 ADR bersifat permanen — keputusan yang sudah tidak berlaku tetap dicatat dengan status **Superseded** atau **Deprecated** untuk traceability. Nomor ADR tidak pernah digunakan ulang.
 
@@ -104,7 +104,7 @@ Kompetitor seperti iLovePDF membatasi 5-10MB di free tier. Memberikan batas lebi
 
 ### Keputusan
 
-Maksimum upload size untuk free tier MVP 0.1 adalah **20MB per file**. Batas ini diterapkan di dua layer:
+Maksimum upload size untuk free tier Fase 1 adalah **20MB per file**. Batas ini diterapkan di dua layer:
 - Frontend: validasi client-side sebelum upload (`limits.maxUploadBytes = 20 * 1024 * 1024`)
 - Backend: validasi server-side di FastAPI endpoint
 
@@ -129,7 +129,7 @@ Maksimum upload size untuk free tier MVP 0.1 adalah **20MB per file**. Batas ini
 - Perlu monitoring ketat terhadap cost per task
 
 **Netral:**
-- Jika cost mulai tidak aman, bisa diturunkan ke 10MB di MVP 0.2 tanpa breaking change
+- Jika cost mulai tidak aman, bisa diturunkan ke 10MB di Fase 2 tanpa breaking change
 
 ---
 
@@ -172,7 +172,7 @@ Ghostscript diinstall sebagai system dependency di Docker container (`apt-get in
 
 **Negatif:**
 - Setiap compress request membutuhkan server (tidak bisa client-side)
-- Ghostscript berat di CPU — resource paling mahal di MVP 0.1
+- Ghostscript berat di CPU — resource paling mahal di Fase 1
 - Menambah ukuran Docker image (~50MB untuk Ghostscript)
 - Perlu rate limiting ketat untuk mencegah abuse
 
@@ -321,7 +321,7 @@ Membangun bilingual dari awal mempersulit copywriting, menambah scope, dan mempe
 
 Landing page dan semua tool page menggunakan **Bahasa Indonesia sebagai bahasa default**. Semua copy, error message, dan UI text ditulis dalam Bahasa Indonesia yang natural dan mudah dipahami.
 
-English menyusul di MVP 0.2 atau Bulan 3-4 setelah validasi product-market fit.
+English menyusul di Fase 2 atau Bulan 3-4 setelah validasi product-market fit.
 
 Implementasi:
 - Language switcher placeholder di Footer (Indonesia active, English disabled)
@@ -560,7 +560,7 @@ Fungsi yang diimplementasi:
 - `ignoreEncryption: true` diperlukan untuk handle PDF dengan permission flags
 
 **Netral:**
-- Library ini cukup untuk semua kebutuhan client-side MVP 0.1 dan 0.2
+- Library ini cukup untuk semua kebutuhan client-side Fase 1 dan 0.2
 
 ---
 

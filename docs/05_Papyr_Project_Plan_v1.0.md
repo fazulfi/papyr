@@ -33,7 +33,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                      |
 |-----------|-------------|------------------------------|--------------------|
-| 1.0       | Mei 2026    | Muhammad Fa’iz Zulfikar      | Draft awal — Project Plan lengkap mencakup MVP 0.1 (completed) + MVP 0.2 (planned) |
+| 1.0       | Mei 2026    | Muhammad Fa’iz Zulfikar      | Draft awal — Project Plan lengkap mencakup Fase 1 (completed) + Fase 2 (planned) |
 
 **Dokumen Terkait**
 
@@ -58,13 +58,13 @@ Dokumen ini berfungsi sebagai panduan operasional utama yang menghubungkan visi 
 
 Project Plan ini mencakup:
 
-- **MVP 0.1 (M01–M10):** 84 tasks — COMPLETED (April 2026)
+- **Fase 1 (M01–M10):** 84 tasks — COMPLETED (April 2026)
 
 - **M11 Rotate PDF:** 5 tasks — COMPLETED (Mei 2026)
 
-- **MVP 0.2 (M12–M18):** Tool Expansion — PLANNED (timeline fleksibel)
+- **Fase 2 (M12–M18):** Tool Expansion — PLANNED (timeline fleksibel)
 
-- **MVP 0.3:** Monetisasi — FUTURE (setelah gate condition terpenuhi)
+- **Fase 3:** Monetisasi — FUTURE (setelah gate condition terpenuhi)
 
 ### 1.3 Referensi
 
@@ -176,35 +176,35 @@ Papyr dikembangkan dengan model **100% AI-driven development** — sebuah pendek
 
 | **Kode** | **Milestone** | **Tasks** | **Estimasi** | **Fase** | **Status** |
 |----------|---|---|---|---|---|
-| M01 | Project Setup | 10 | 14 jam | MVP 0.1 | Completed |
-| M02 | Compress PDF | 11 | 27 jam | MVP 0.1 | Completed |
-| M03 | Merge PDF | 7 | 15 jam | MVP 0.1 | Completed |
-| M04 | Split PDF | 7 | 15 jam | MVP 0.1 | Completed |
-| M05 | Image to PDF | 7 | 18 jam | MVP 0.1 | Completed |
-| M06 | PDF to Image | 8 | 19 jam | MVP 0.1 | Completed |
-| M07 | Landing Page + SEO | 10 | 25 jam | MVP 0.1 | Completed |
-| M08 | Analytics | 7 | 10 jam | MVP 0.1 | Completed |
-| M09 | Cleanup & Privacy | 7 | 11 jam | MVP 0.1 | Completed |
-| M10 | Final Testing + Launch | 10 | 22 jam | MVP 0.1 | Completed |
-| M11 | Rotate PDF | 5 | ~8 jam | MVP 0.2 | Completed |
-| M12 | Protect PDF | ~7 | ~15 jam | MVP 0.2 | Planned |
-| M13 | Unlock PDF | ~7 | ~12 jam | MVP 0.2 | Planned |
-| M14 | Watermark PDF | ~7 | ~18 jam | MVP 0.2 | Planned |
-| M15 | Sign PDF | ~8 | ~20 jam | MVP 0.2 | Planned |
-| M16 | PDF to Word | ~7 | ~18 jam | MVP 0.2 | Planned |
-| M17 | OCR | ~8 | ~22 jam | MVP 0.2 | Planned |
-| M18 | Integration + Polish | ~5 | ~15 jam | MVP 0.2 | Planned |
+| M01 | Project Setup | 10 | 14 jam | Fase 1 | Completed |
+| M02 | Compress PDF | 11 | 27 jam | Fase 1 | Completed |
+| M03 | Merge PDF | 7 | 15 jam | Fase 1 | Completed |
+| M04 | Split PDF | 7 | 15 jam | Fase 1 | Completed |
+| M05 | Image to PDF | 7 | 18 jam | Fase 1 | Completed |
+| M06 | PDF to Image | 8 | 19 jam | Fase 1 | Completed |
+| M07 | Landing Page + SEO | 10 | 25 jam | Fase 1 | Completed |
+| M08 | Analytics | 7 | 10 jam | Fase 1 | Completed |
+| M09 | Cleanup & Privacy | 7 | 11 jam | Fase 1 | Completed |
+| M10 | Final Testing + Launch | 10 | 22 jam | Fase 1 | Completed |
+| M11 | Rotate PDF | 5 | ~8 jam | Fase 2 | Completed |
+| M12 | Protect PDF | ~7 | ~15 jam | Fase 2 | Planned |
+| M13 | Unlock PDF | ~7 | ~12 jam | Fase 2 | Planned |
+| M14 | Watermark PDF | ~7 | ~18 jam | Fase 2 | Planned |
+| M15 | Sign PDF | ~8 | ~20 jam | Fase 2 | Planned |
+| M16 | PDF to Word | ~7 | ~18 jam | Fase 2 | Planned |
+| M17 | OCR | ~8 | ~22 jam | Fase 2 | Planned |
+| M18 | Integration + Polish | ~5 | ~15 jam | Fase 2 | Planned |
 
 **Ringkasan Per Fase:**
 
 | **Fase** | **Milestones** | **Total Tasks** | **Total Estimasi** | **Status** |
 |---|---|---|---|---|
-| MVP 0.1 | M01–M10 | 84 tasks | ~176 jam | Completed |
+| Fase 1 | M01–M10 | 84 tasks | ~176 jam | Completed |
 | M11 (Rotate) | M11 | 5 tasks | ~8 jam | Completed |
-| MVP 0.2 | M12–M18 | ~49 tasks | ~120 jam | Planned |
+| Fase 2 | M12–M18 | ~49 tasks | ~120 jam | Planned |
 | **TOTAL** | **18** | **~138 tasks** | **~304 jam** | |
 
-### 3.2 MVP 0.1 — Core Utility (COMPLETED)
+### 3.2 Fase 1 — Core Utility (COMPLETED)
 
 **Periode Aktual:** April 2026 (Minggu 1–12)
 
@@ -212,7 +212,7 @@ Papyr dikembangkan dengan model **100% AI-driven development** — sebuah pendek
 
 **Versi Rilis:** v1.0.0
 
-MVP 0.1 mencakup fondasi lengkap platform Papyr dengan 6 tool PDF aktif (Compress, Merge, Split, Rotate, Image-to-PDF, PDF-to-Image) beserta infrastruktur pendukung (landing page, SEO, analytics, privacy, security).
+Fase 1 mencakup fondasi lengkap platform Papyr dengan 6 tool PDF aktif (Compress, Merge, Split, Rotate, Image-to-PDF, PDF-to-Image) beserta infrastruktur pendukung (landing page, SEO, analytics, privacy, security).
 
 Seluruh 84 tasks telah diselesaikan dan di-deploy ke production di mypapyr.com.
 
@@ -226,7 +226,7 @@ Seluruh 84 tasks telah diselesaikan dan di-deploy ke production di mypapyr.com.
 
 Tool ke-6 yang menambahkan kemampuan rotasi halaman PDF secara client-side menggunakan pdf-lib. Mendukung rotasi per halaman dan global (semua halaman sekaligus).
 
-### 3.4 MVP 0.2 — Tool Expansion (PLANNED)
+### 3.4 Fase 2 — Tool Expansion (PLANNED)
 
 **Periode Target:** Fleksibel (Mei–Agustus 2026, tanpa hard deadline)
 
@@ -234,7 +234,7 @@ Tool ke-6 yang menambahkan kemampuan rotasi halaman PDF secara client-side mengg
 
 **Estimasi Total:** ~49 tasks, ~120 jam
 
-MVP 0.2 berfokus pada ekspansi tool untuk memperluas coverage SEO dan meningkatkan value proposition. Timeline bersifat fleksibel — selesai berdasarkan kualitas, bukan tekanan waktu.
+Fase 2 berfokus pada ekspansi tool untuk memperluas coverage SEO dan meningkatkan value proposition. Timeline bersifat fleksibel — selesai berdasarkan kualitas, bukan tekanan waktu.
 
 | **Milestone** | **Tool** | **Processing** | **Estimasi Tasks** | **Estimasi Jam** |
 |---|---|---|---|---|
@@ -250,7 +250,7 @@ MVP 0.2 berfokus pada ekspansi tool untuk memperluas coverage SEO dan meningkatk
 
 ## 4. Work Breakdown Structure (WBS)
 
-### 4.1 MVP 0.1 — Completed Tasks (PAPYR-001 to PAPYR-084)
+### 4.1 Fase 1 — Completed Tasks (PAPYR-001 to PAPYR-084)
 
 #### M01: Project Setup (10 tasks, 14 jam)
 
@@ -396,7 +396,7 @@ MVP 0.2 berfokus pada ekspansi tool untuk memperluas coverage SEO dan meningkatk
 | PAPYR-088 | M11 | SEO metadata, sitemap, navbar, landing update | P1 | Completed | PAPYR-086 |
 | PAPYR-089 | M11 | Build verification — all routes pass, LSP clean | P1 | Completed | PAPYR-088 |
 
-### 4.3 MVP 0.2 — Planned Tasks (M12–M18)
+### 4.3 Fase 2 — Planned Tasks (M12–M18)
 
 #### M12: Protect PDF (~7 tasks, ~15 jam)
 
@@ -491,10 +491,10 @@ MVP 0.2 berfokus pada ekspansi tool untuk memperluas coverage SEO dan meningkatk
 | **Fase** | **Periode** | **Durasi** | **Status** |
 |---|---|---|---|
 | Inisiasi & Setup | April 2026 | 1 minggu | Completed |
-| MVP 0.1 Dev | April 2026 | ~2 minggu | Completed |
+| Fase 1 Dev | April 2026 | ~2 minggu | Completed |
 | Soft Launch | April 2026 | Ongoing | Active |
 | M11 Rotate PDF | Mei 2026 | ~2 hari | Completed |
-| MVP 0.2 Dev | Mei–Agustus 2026 | Fleksibel | Planned |
+| Fase 2 Dev | Mei–Agustus 2026 | Fleksibel | Planned |
 | SEO Growth | Q3–Q4 2026 | Ongoing | Planned |
 | Monetisasi (Pro) | Q4 2026+ | 4–6 minggu | Planned |
 
@@ -510,7 +510,7 @@ MVP 0.2 berfokus pada ekspansi tool untuk memperluas coverage SEO dan meningkatk
 
 ```
 
-MVP 0.1     [====================] COMPLETED
+Fase 1     [====================] COMPLETED
 
  M01        [===]
 
@@ -534,7 +534,7 @@ MVP 0.1     [====================] COMPLETED
 
 M11 Rotate                       [==] COMPLETED
 
-MVP 0.2                               [- - - - - - - - - - - - - - - - - - - -] FLEKSIBEL
+Fase 2                               [- - - - - - - - - - - - - - - - - - - -] FLEKSIBEL
 
  M12                                  [- - - -]
 
@@ -558,11 +558,11 @@ LEGENDA:
 
 ### 5.3 Catatan Timeline
 
-- **MVP 0.1** diselesaikan dalam ~2 minggu development aktual (April 2026), lebih cepat dari estimasi 12 minggu karena intensitas development yang tinggi dengan AI agent.
+- **Fase 1** diselesaikan dalam ~2 minggu development aktual (April 2026), lebih cepat dari estimasi 12 minggu karena intensitas development yang tinggi dengan AI agent.
 
-- **MVP 0.2** tidak memiliki hard deadline. Setiap milestone diselesaikan berdasarkan kualitas dan ketersediaan waktu Product Owner.
+- **Fase 2** tidak memiliki hard deadline. Setiap milestone diselesaikan berdasarkan kualitas dan ketersediaan waktu Product Owner.
 
-- **MVP 0.3 (Monetisasi)** hanya dimulai setelah gate condition terpenuhi: 100+ MAU dan 20+ returning users.
+- **Fase 3 (Monetisasi)** hanya dimulai setelah gate condition terpenuhi: 100+ MAU dan 20+ returning users.
 
 - Pace development dibatasi 5–10 jam/minggu untuk sustainability jangka panjang.
 
@@ -669,10 +669,10 @@ Setiap milestone dianggap selesai jika memenuhi SEMUA kriteria berikut:
 
 | **Fase** | **Kriteria Tambahan** |
 |---|---|
-| MVP 0.1 (M01–M10) | 6 tool berfungsi penuh, landing page live, SEO infrastructure aktif, analytics tracking, privacy compliance |
+| Fase 1 (M01–M10) | 6 tool berfungsi penuh, landing page live, SEO infrastructure aktif, analytics tracking, privacy compliance |
 | M11 (Rotate) | Tool rotate berfungsi client-side, terintegrasi dengan navbar/landing/sitemap |
-| MVP 0.2 (M12–M18) | 12 tool berfungsi penuh, semua tool terintegrasi di landing page, regression test passed |
-| MVP 0.3 (Monetisasi) | Payment gateway aktif, user auth berfungsi, Pro tier accessible |
+| Fase 2 (M12–M18) | 12 tool berfungsi penuh, semua tool terintegrasi di landing page, regression test passed |
+| Fase 3 (Monetisasi) | Payment gateway aktif, user auth berfungsi, Pro tier accessible |
 
 ### 8.3 Metrik Keberhasilan Produk (Ref: PPR-BRD-001)
 

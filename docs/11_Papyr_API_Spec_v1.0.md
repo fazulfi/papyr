@@ -33,7 +33,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**             | **Deskripsi**                                                          |
 |-----------|-------------|-------------------------|------------------------------------------------------------------------|
-| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar | Draft awal — API Spec lengkap untuk seluruh endpoint backend MVP 0.1   |
+| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar | Draft awal — API Spec lengkap untuk seluruh endpoint backend Fase 1   |
 
 **Referensi Silang**
 
@@ -163,7 +163,7 @@ Semua error response menggunakan format konsisten:
 | **Parameter** | **Nilai** |
 |---------------|-----------|
 | API Version   | `0.1.0`   |
-| Versioning    | Belum menggunakan URL versioning (akan ditambahkan di MVP 0.2) |
+| Versioning    | Belum menggunakan URL versioning (akan ditambahkan di Fase 2) |
 
 ---
 
@@ -829,7 +829,7 @@ curl -X POST https://papyr-production.up.railway.app/api/compress \
 | **Aspek**                  | **Status**                                                |
 |----------------------------|-----------------------------------------------------------|
 | Autentikasi                | Tidak diperlukan (public API)                             |
-| API Key                    | Tidak ada (akan ditambahkan di Pro tier, MVP 0.3)         |
+| API Key                    | Tidak ada (akan ditambahkan di Pro tier, Fase 3)         |
 | OAuth / JWT                | Tidak ada                                                 |
 | Session management         | Tidak ada — stateless                                     |
 
@@ -895,7 +895,7 @@ Validasi tambahan:
 
 ## 9. Persetujuan Dokumen
 
-Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau API Specification ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan spesifikasi teknis API untuk Papyr Backend MVP 0.1.
+Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau API Specification ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan spesifikasi teknis API untuk Papyr Backend Fase 1.
 
 |                   |                              |                  |             |
 |:------------------|:-----------------------------|:-----------------|:------------|

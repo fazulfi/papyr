@@ -33,7 +33,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                |
 |-----------|-------------|------------------------------|------------------------------------------------------------------------------|
-| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — TDD lengkap untuk arsitektur teknis MVP 0.1 (6 tool, live)      |
+| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — TDD lengkap untuk arsitektur teknis Fase 1 (6 tool, live)      |
 
 **Referensi Silang Dokumen**
 
@@ -76,7 +76,7 @@ Dokumen ini ditujukan untuk:
 
 ### 1.2 Ruang Lingkup
 
-TDD ini mencakup desain teknis untuk **MVP 0.1** yang saat ini live di mypapyr.com, meliputi:
+TDD ini mencakup desain teknis untuk **Fase 1** yang saat ini live di mypapyr.com, meliputi:
 
 - Arsitektur frontend (Next.js 16, Vercel)
 - Arsitektur backend (FastAPI, Railway)
@@ -85,16 +85,16 @@ TDD ini mencakup desain teknis untuk **MVP 0.1** yang saat ini live di mypapyr.c
 - Sistem keamanan, monitoring, dan deployment
 
 Tidak termasuk dalam scope dokumen ini:
-- Fitur MVP 0.2 (Protect PDF, Unlock PDF, Watermark, Sign, PDF-to-Word, OCR)
-- Sistem autentikasi dan payment (MVP 0.3)
-- AI-powered features (Fase 2)
+- Fitur Fase 2 (Protect PDF, Unlock PDF, Watermark, Sign, PDF-to-Word, OCR)
+- Sistem autentikasi dan payment (Fase 3)
+- AI-powered features (Fase 5)
 
 ### 1.3 Referensi
 
 | **Dokumen**                        | **Lokasi**                                          |
 |------------------------------------|-----------------------------------------------------|
 | BRD v1.0                           | `docs/01_Papyr_BRD_v1.0.md`                        |
-| Technical Architecture MVP 0.1     | `blueprint/Papyr_TechArch_MVP_0.1.md`               |
+| Technical Architecture Fase 1     | `blueprint/Papyr_TechArch_MVP_0.1.md`               |
 | ADR v1.0                           | `docs/14_Papyr_ADR_v1.0.md`                        |
 | Frontend Config                    | `frontend/src/lib/config.ts`                        |
 | Backend Config                     | `backend/utils/config.py`                           |
@@ -1154,7 +1154,7 @@ Tabel berikut memetakan setiap ADR (PPR-ADR-001) ke bagian TDD yang relevan:
 
 ## 12. Persetujuan Dokumen
 
-Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Technical Design Document ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan desain teknis untuk Papyr MVP 0.1.
+Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Technical Design Document ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan desain teknis untuk Papyr Fase 1.
 
 |                   |                              |                   |             |
 |:------------------|:-----------------------------|:------------------|:------------|

@@ -383,7 +383,7 @@ Fondasi ini menentukan seluruh arsitektur produk ke depan. Keputusan yang dibuat
 | PAPYR-002    | Infrastruktur    | Next.js 16 + TypeScript + Tailwind CSS v4 + DM Sans font                  | Frontend framework                |
 | PAPYR-003    | Infrastruktur    | FastAPI backend + health check `GET /health`                               | Backend API foundation            |
 | PAPYR-004    | Infrastruktur    | Cloudflare R2 helpers: upload, signed URL, delete                          | Object storage layer              |
-| PAPYR-005    | Infrastruktur    | Supabase project (standby untuk MVP 0.2)                                   | Database readiness                |
+| PAPYR-005    | Infrastruktur    | Supabase project (standby untuk Fase 2)                                   | Database readiness                |
 | PAPYR-006    | Infrastruktur    | Centralized typed config (`config.ts` + `config.py`)                       | Configuration management          |
 | PAPYR-007    | Keamanan         | CORS tightening — GET/POST/OPTIONS, header whitelist                       | API security                      |
 | PAPYR-008    | Infrastruktur    | Deploy frontend ke Vercel dengan GitHub auto-deploy                        | CI/CD pipeline                    |

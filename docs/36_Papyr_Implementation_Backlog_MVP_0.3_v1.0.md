@@ -1,6 +1,6 @@
 # **Papyr**
 
-## Implementation Backlog — MVP 0.3
+## Implementation Backlog — Fase 3
 
 ### Alat PDF Gratis, Cepat, dan Privasi-First untuk Indonesia
 
@@ -18,7 +18,7 @@
 | **Tanggal** | Mei 2026 |
 | **Penulis** | Muhammad Fa'iz Zulfikar |
 | **Reviewer** | — |
-| **Scope** | MVP 0.3 (M23–M45) |
+| **Scope** | Fase 3 (M23–M45) |
 | **Total Tasks** | 149 tasks (PAPYR-225 — PAPYR-373) |
 | **Estimasi Total** | ~170 jam |
 | **Model Pengembangan** | 100% AI-driven |
@@ -37,8 +37,8 @@
 
 | Kode | Dokumen | Keterangan |
 |------|---------|------------|
-| PPR-IB-001 | Papyr Implementation Backlog MVP 0.1 | Backlog M01–M11 (89 tasks, selesai) |
-| PPR-IB-002 | Papyr Implementation Backlog MVP 0.2 | Backlog M12–M22 (135 tasks, in progress) |
+| PPR-IB-001 | Papyr Implementation Backlog Fase 1 | Backlog M01–M11 (89 tasks, selesai) |
+| PPR-IB-002 | Papyr Implementation Backlog Fase 2 | Backlog M12–M22 (135 tasks, in progress) |
 | PPR-BRD-001 | Papyr BRD v1.0 | Business Requirements Document |
 | PPR-SRS-001 | Papyr SRS v1.0 | Software Requirements Specification |
 | PPR-TDD-001 | Papyr TDD v1.0 | Technical Design Document |
@@ -49,14 +49,14 @@
 
 ---
 
-## Konteks MVP 0.3
+## Konteks Fase 3
 
-### Status Saat Ini (Post-MVP 0.2)
+### Status Saat Ini (Post-Fase 2)
 
 | Aspek | Detail |
 |-------|--------|
 | **Versi** | v2.0.0 |
-| **Tools live** | 13 (6 MVP 0.1 + 7 MVP 0.2) |
+| **Tools live** | 13 (6 Fase 1 + 7 Fase 2) |
 | **Tasks selesai** | 224 (PAPYR-001 — PAPYR-224) |
 | **Stack** | Next.js 16 (Vercel) + FastAPI (Railway) + Cloudflare R2 |
 | **Tests** | 23 vitest + 34 pytest + 29 Playwright E2E |
@@ -70,7 +70,7 @@
 | **AI Agent** | OpenClaw (9 agents aktif) |
 | **Domain** | mypapyr.com (Hostinger DNS → Vercel) |
 
-### Target MVP 0.3
+### Target Fase 3
 
 - **Fokus:** Foundation & UX Polish (bukan fitur tool baru)
 - **i18n:** English support (next-intl), language switcher
@@ -81,7 +81,7 @@
 - **Total fitur baru:** 23 enhancements
 - **Target release:** v3.0.0
 
-### Filosofi MVP 0.3
+### Filosofi Fase 3
 
 | Prinsip | Penjelasan |
 |---------|------------|
@@ -128,7 +128,7 @@
 
 ## GitHub Labels yang Disarankan
 
-### Labels Baru untuk MVP 0.3
+### Labels Baru untuk Fase 3
 
 | Label | Warna | Kegunaan |
 |-------|-------|----------|
@@ -161,7 +161,7 @@
 | `phase:3D` | #059669 | Interaction |
 | `phase:3E` | #F59E0B | Growth Foundation |
 
-### Labels Existing (dari MVP 0.1 & 0.2)
+### Labels Existing (dari Fase 1 & 0.2)
 
 | Label | Warna | Kegunaan |
 |-------|-------|----------|
@@ -887,7 +887,7 @@ Response 429: { "error": "Terlalu banyak feedback. Coba lagi nanti." }
 
 ```
                     +-------------------------------------------------------------+
-                    |                    MVP 0.3 DEPENDENCY GRAPH                  |
+                    |                    Fase 3 DEPENDENCY GRAPH                  |
                     +-------------------------------------------------------------+
 
     Fase 3A                Fase 3B                Fase 3C
@@ -1066,7 +1066,7 @@ M43 (Social Proof) -> M44 (Feedback) -> M45 (Recommendation)
 | Vercel (existing) | Free tier | Frontend hosting, edge CDN |
 | Railway (existing) | ~$5/bulan | Backend API |
 | Cloudflare (existing) | Free tier | R2 storage + CDN |
-| **Tidak ada biaya tambahan** | **$0** | MVP 0.3 murni frontend/UX work |
+| **Tidak ada biaya tambahan** | **$0** | Fase 3 murni frontend/UX work |
 
 ### Task Distribution Summary
 
@@ -1079,7 +1079,7 @@ M43 (Social Proof) -> M44 (Feedback) -> M45 (Recommendation)
 | Design | 3 | 4 jam | 2% |
 | **Total** | **148** | **~170 jam** | **100%** |
 
-> MVP 0.3 sangat frontend-heavy (76%). Ini sesuai dengan fokus "UX Polish" — hampir semua pekerjaan di sisi client.
+> Fase 3 sangat frontend-heavy (76%). Ini sesuai dengan fokus "UX Polish" — hampir semua pekerjaan di sisi client.
 
 ---
 
@@ -1240,9 +1240,9 @@ Estimated total: ~300 keys per locale
 
 ## Catatan Penutup
 
-### Definition of Done — MVP 0.3
+### Definition of Done — Fase 3
 
-MVP 0.3 dianggap **SELESAI** ketika:
+Fase 3 dianggap **SELESAI** ketika:
 
 1. ✅ i18n berfungsi (ID + EN) dengan language switcher
 2. ✅ Dark mode berfungsi dengan system preference detection
@@ -1268,7 +1268,7 @@ MVP 0.3 dianggap **SELESAI** ketika:
 - **Accessible:** WCAG 2.1 AA compliance sebagai minimum standard
 - **Performance budget:** LCP < 1.5s, FID < 50ms, CLS < 0.05
 
-### Risk Register MVP 0.3
+### Risk Register Fase 3
 
 | Risk | Impact | Probability | Mitigation |
 |------|--------|-------------|------------|
@@ -1286,6 +1286,6 @@ MVP 0.3 dianggap **SELESAI** ketika:
 
 ---
 
-*Dokumen ini adalah living document dan akan di-update seiring progress pengerjaan MVP 0.3.*
+*Dokumen ini adalah living document dan akan di-update seiring progress pengerjaan Fase 3.*
 
 *Hak cipta © 2026 Muhammad Fa'iz Zulfikar. All rights reserved.*

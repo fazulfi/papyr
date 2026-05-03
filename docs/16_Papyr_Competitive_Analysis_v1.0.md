@@ -495,7 +495,7 @@ Legend: ✅ Ya | ❌ Tidak | 🔄 Sebagian | 📋 Planned
 | W1 | Tool count sangat sedikit | 6 tool vs 25-60+ tool kompetitor | Roadmap agresif: 12-15 tool dalam 6 bulan |
 | W2 | Zero brand awareness | Produk baru, belum dikenal siapapun | SEO + community seeding + content marketing |
 | W3 | Solo developer | Kapasitas development terbatas, single point of failure | AI-assisted development, prioritas kualitas |
-| W4 | Tidak ada fitur advanced | Belum ada OCR, edit, sign, AI features | Prioritas di MVP 0.2 dan 0.3 |
+| W4 | Tidak ada fitur advanced | Belum ada OCR, edit, sign, AI features | Prioritas di Fase 2 dan 0.3 |
 | W5 | Tidak ada offline mode | Membutuhkan internet untuk semua operasi | Client-side tools sudah minimal bandwidth |
 | W6 | Tidak ada social proof | Belum ada testimonial, review, atau case study | Collect feedback dari early users |
 | W7 | File size limit 20MB | Lebih kecil dari beberapa kompetitor | Cukup untuk 90%+ use case target user |

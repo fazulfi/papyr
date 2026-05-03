@@ -35,7 +35,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                                  |
 |-----------|-------------|------------------------------|------------------------------------------------------------------------------------------------|
-| 1.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Draft awal - SRS lengkap untuk scope MVP 0.1 mencakup 6 tool PDF, keamanan, dan infrastruktur |
+| 1.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Draft awal - SRS lengkap untuk scope Fase 1 mencakup 6 tool PDF, keamanan, dan infrastruktur |
 
 ---
 
@@ -66,14 +66,14 @@ Dokumen ini ditujukan untuk:
 
 ### 1.2 Ruang Lingkup
 
-SRS ini mencakup seluruh kebutuhan untuk **Papyr MVP 0.1** yang saat ini live di mypapyr.com, meliputi:
+SRS ini mencakup seluruh kebutuhan untuk **Papyr Fase 1** yang saat ini live di mypapyr.com, meliputi:
 
 - **6 tool PDF aktif**: Compress, Merge, Split, Image-to-PDF, PDF-to-Image, Rotate.
 - **Infrastruktur pendukung**: Landing page, navigasi, analytics, cleanup otomatis, dan keamanan.
 - **Arsitektur hybrid**: Operasi client-side (pdf-lib di browser) dan server-side (Ghostscript + PyMuPDF di FastAPI).
 - **Integrasi penyimpanan**: Cloudflare R2 dengan signed URL dan auto-delete.
 
-Fitur yang berada di luar scope MVP 0.1 (Protect PDF, Unlock PDF, Watermark, Sign PDF, PDF-to-Word, OCR, multi-language) **tidak** tercakup dalam dokumen ini dan akan didokumentasikan dalam revisi SRS berikutnya.
+Fitur yang berada di luar scope Fase 1 (Protect PDF, Unlock PDF, Watermark, Sign PDF, PDF-to-Word, OCR, multi-language) **tidak** tercakup dalam dokumen ini dan akan didokumentasikan dalam revisi SRS berikutnya.
 
 ### 1.3 Definisi, Akronim, dan Singkatan
 
@@ -202,7 +202,7 @@ Semua persona mengharapkan: antarmuka Bahasa Indonesia, proses cepat (<1 menit),
 | **ID**  | **Batasan**                                                                                          |
 |---------|------------------------------------------------------------------------------------------------------|
 | CON-001 | Maksimum upload 20MB per file - limitasi infrastruktur free/low-cost.                                |
-| CON-002 | MVP 0.1 hanya mendukung Bahasa Indonesia - English ditambahkan di MVP 0.2.                           |
+| CON-002 | Fase 1 hanya mendukung Bahasa Indonesia - English ditambahkan di Fase 2.                           |
 | CON-003 | Tidak ada login/registrasi - semua akses anonim, rate limit berbasis IP.                             |
 | CON-004 | Tidak ada batch processing - satu file per operasi (kecuali merge dan image-to-pdf).                 |
 | CON-005 | Tidak ada offline mode - koneksi internet diperlukan untuk semua operasi.                            |
@@ -1140,7 +1140,7 @@ Tidak ada kebutuhan antarmuka hardware khusus. Aplikasi berjalan sepenuhnya di b
 
 ## 7. Persetujuan Dokumen
 
-Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Software Requirements Specification ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan kebutuhan fungsional dan non-fungsional untuk Papyr MVP 0.1.
+Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Software Requirements Specification ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan kebutuhan fungsional dan non-fungsional untuk Papyr Fase 1.
 
 |                   |                              |                  |            |
 |:------------------|:-----------------------------|:-----------------|:-----------|

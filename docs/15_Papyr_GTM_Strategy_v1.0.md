@@ -560,7 +560,7 @@ Bulan 1─────3        Bulan 4─────────9        Bulan 
 | 4 | Content marketing starts | 4+ blog articles published, social media consistent |
 | 5 | Community outreach | 5+ komunitas reached, word-of-mouth growing |
 | 6 | SEO traction | 1.000+ organic visitors/bulan, 3+ keyword page 1 |
-| 7 | Tool expansion (MVP 0.2) | Protect PDF, Unlock PDF, Watermark live |
+| 7 | Tool expansion (Fase 2) | Protect PDF, Unlock PDF, Watermark live |
 | 8 | Brand recognition | "Papyr" mulai dikenal di circle target |
 | 9 | Growth acceleration | 2.000+ organic visitors/bulan, 5.000 tasks/bulan |
 | 10 | Monetization prep | Login system, payment gateway implemented |

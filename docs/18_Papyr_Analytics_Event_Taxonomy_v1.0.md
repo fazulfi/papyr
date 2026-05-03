@@ -1,4 +1,4 @@
-﻿**Papyr**
+**Papyr**
 
 *Tool PDF gratis, cepat, dan aman untuk Indonesia.*
 
@@ -33,7 +33,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                      |
 |-----------|-------------|------------------------------|------------------------------------------------------------------------------------|
-| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — Taxonomy lengkap untuk event analytics MVP 0.1 + proposed future events |
+| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — Taxonomy lengkap untuk event analytics Fase 1 + proposed future events |
 
 ---
 
@@ -73,8 +73,8 @@ Dokumen ini mendefinisikan taxonomy lengkap untuk seluruh analytics event yang d
 
 Dokumen ini mencakup:
 
-- **Event yang sudah diimplementasikan** (MVP 0.1) — task lifecycle events di frontend via Vercel Analytics dan structured log events di backend.
-- **Event yang direncanakan** (MVP 0.2+) — file operations, navigation, engagement, monetization, dan performance events.
+- **Event yang sudah diimplementasikan** (Fase 1) — task lifecycle events di frontend via Vercel Analytics dan structured log events di backend.
+- **Event yang direncanakan** (Fase 2+) — file operations, navigation, engagement, monetization, dan performance events.
 
 ### 1.3 Prinsip Analytics Papyr
 
@@ -550,7 +550,7 @@ log_task_event(
 
 ## 7. Katalog Event — File Operations (Planned)
 
-**Status: PLANNED — Target MVP 0.2**
+**Status: PLANNED — Target Fase 2**
 
 Kategori ini mencakup event terkait upload dan download file yang memberikan insight tentang perilaku pengguna dan performa transfer file.
 
@@ -711,7 +711,7 @@ Kategori ini mencakup event terkait upload dan download file yang memberikan ins
 
 ## 8. Katalog Event — Navigation & Engagement (Planned)
 
-**Status: PLANNED — Target MVP 0.2**
+**Status: PLANNED — Target Fase 2**
 
 Kategori ini memberikan insight tentang bagaimana pengguna menavigasi dan berinteraksi dengan Papyr.
 
@@ -901,7 +901,7 @@ Kategori ini memberikan insight tentang bagaimana pengguna menavigasi dan berint
 
 ## 9. Katalog Event — Error & Recovery (Planned)
 
-**Status: PLANNED — Target MVP 0.2**
+**Status: PLANNED — Target Fase 2**
 
 Kategori ini melacak error yang dialami pengguna dan mekanisme recovery yang digunakan.
 
@@ -1040,7 +1040,7 @@ Kategori ini melacak error yang dialami pengguna dan mekanisme recovery yang dig
 
 ## 10. Katalog Event — Monetization (Planned)
 
-**Status: PLANNED — Target MVP 0.3**
+**Status: PLANNED — Target Fase 3**
 
 Kategori ini melacak interaksi pengguna dengan fitur monetisasi dan upgrade flow.
 
@@ -1223,7 +1223,7 @@ Kategori ini melacak interaksi pengguna dengan fitur monetisasi dan upgrade flow
 
 ## 11. Katalog Event — User Preferences (Planned)
 
-**Status: PLANNED — Target MVP 0.2**
+**Status: PLANNED — Target Fase 2**
 
 Kategori ini melacak preferensi dan pengaturan yang dipilih pengguna.
 
@@ -1326,7 +1326,7 @@ Kategori ini melacak preferensi dan pengaturan yang dipilih pengguna.
 
 ## 12. Katalog Event — Performance & Infrastructure (Planned)
 
-**Status: PLANNED — Target MVP 0.2**
+**Status: PLANNED — Target Fase 2**
 
 Kategori ini melacak metrik performa dan kesehatan infrastruktur untuk monitoring proaktif.
 
@@ -1595,7 +1595,7 @@ Kategori ini melacak metrik performa dan kesehatan infrastruktur untuk monitorin
 
 ## 15. Roadmap Implementasi
 
-### 15.1 Fase 1 — MVP 0.1 (SELESAI)
+### 15.1 Fase 1 — Fase 1 (SELESAI)
 
 | **Event**                 | **Layer**   | **Status**      | **Tanggal**   |
 |---------------------------|-------------|-----------------|---------------|
@@ -1610,7 +1610,7 @@ Kategori ini melacak metrik performa dan kesehatan infrastruktur untuk monitorin
 | `task_completed` (backend)| Backend     | Implemented     | April 2026    |
 | `task_failed` (backend)   | Backend     | Implemented     | April 2026    |
 
-### 15.2 Fase 2 — MVP 0.2 (Target: Q3 2026)
+### 15.2 Fase 5 — Fase 2 (Target: Q3 2026)
 
 | **Event**                     | **Layer**   | **Prioritas** | **Effort**    |
 |-------------------------------|-------------|---------------|---------------|
@@ -1632,7 +1632,7 @@ Kategori ini melacak metrik performa dan kesehatan infrastruktur untuk monitorin
 | `perf_client_processing`      | Frontend    | P3            | Medium        |
 | `health_check_failed`         | Backend     | P1            | Low           |
 
-### 15.3 Fase 3 — MVP 0.3 (Target: Q4 2026)
+### 15.3 Fase 6 — Fase 3 (Target: Q4 2026)
 
 | **Event**                     | **Layer**   | **Prioritas** | **Effort**    |
 |-------------------------------|-------------|---------------|---------------|
@@ -1659,8 +1659,8 @@ Kategori ini melacak metrik performa dan kesehatan infrastruktur untuk monitorin
 |-----------------------------------|-------------|
 | Total event yang didefinisikan    | 43          |
 | Event sudah diimplementasikan     | 10          |
-| Event planned (Fase 2)            | 17          |
-| Event planned (Fase 3)            | 16          |
+| Event planned (Fase 5)            | 17          |
+| Event planned (Fase 6)            | 16          |
 | Kategori event                    | 8           |
 | Platform analytics aktif          | 4           |
 

@@ -33,13 +33,13 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                          |
 |-----------|-------------|------------------------------|----------------------------------------------------------------------------------------|
-| 1.0       | Juni 2025   | AI Agent (OpenCode/Sisyphus) | Draft awal — Product Roadmap lengkap mencakup MVP 0.1 (completed) hingga Fase 3 (planned) |
-| 2.0       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Major upgrade — Roadmap philosophy & prioritization framework, feature classification labels, sub-phase breakdown MVP 0.2, UI safety rules, detailed per-feature specs, gate conditions diperkuat |
-| 2.1       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Fase 2E — OpenClaw AI Agent (M21) sebagai sub-fase baru MVP 0.2, 10 fungsi otonom, deployment HostData.id VPS |
+| 1.0       | Juni 2025   | AI Agent (OpenCode/Sisyphus) | Draft awal — Product Roadmap lengkap mencakup Fase 1 (completed) hingga Fase 6 (planned) |
+| 2.0       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Major upgrade — Roadmap philosophy & prioritization framework, feature classification labels, sub-phase breakdown Fase 2, UI safety rules, detailed per-feature specs, gate conditions diperkuat |
+| 2.1       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Fase 2E — OpenClaw AI Agent (M21) sebagai sub-fase baru Fase 2, 10 fungsi otonom, deployment HostData.id VPS |
 | 2.2       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Fase 2F — Admin Dashboard (M22) sebagai unified admin panel, renumber milestones |
 | 2.3       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Update Fase 2E — OpenClaw expanded ke 10 fungsi, reporting diperluas, autonomy policy 100% |
-| 3.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete rewrite — Ekspansi 5 fase ke 7 fase, 114 fitur terklasifikasi, MVP 0.3 Foundation & UX Polish (baru), MVP 0.4 Auth + Monetization (baru), Fase 2-5 expanded, LLM strategy enowxAI + OpenRouter + 9Router |
-| 4.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete expansion — 7 fase ke 12 fase, 114 fitur ke 238 fitur. Tambah Fase 6 (Platform & Marketplace), Fase 7 (Enterprise & B2B), Fase 8 (AI Agent Swarm + Autonomy), Fase 9 (Moonshots & Future). Fase 5 diperluas dengan 8 OpenClaw agent baru. |
+| 3.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete rewrite — Ekspansi 5 fase ke 7 fase, 114 fitur terklasifikasi, Fase 3 Foundation & UX Polish (baru), Fase 4 Auth + Monetization (baru), Fase 5-5 expanded, LLM strategy enowxAI + OpenRouter + 9Router |
+| 4.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete expansion — 7 fase ke 12 fase, 114 fitur ke 238 fitur. Tambah Fase 9 (Platform & Marketplace), Fase 10 (Enterprise & B2B), Fase 11 (AI Agent Swarm + Autonomy), Fase 12 (Moonshots & Future). Fase 8 diperluas dengan 8 OpenClaw agent baru. |
 
 **Dokumen Terkait**
 
@@ -51,7 +51,7 @@ mypapyr.com
 | PPR-GTM-001    | Go-To-Market Strategy — Papyr          | Approved    |
 | PPR-CLAW-001   | OpenClaw AI Agent — Papyr              | Approved    |
 | PPR-ADM-001    | Admin Dashboard Spec — Papyr           | Approved    |
-| PPR-IB-002     | Implementation Backlog MVP 0.2 — Papyr | Draft       |
+| PPR-IB-002     | Implementation Backlog Fase 2 — Papyr | Draft       |
 
 ---
 
@@ -61,19 +61,19 @@ mypapyr.com
 2. [Ringkasan Eksekutif](#2-ringkasan-eksekutif)
 3. [Visi Produk](#3-visi-produk)
 4. [Fase & Timeline](#4-fase--timeline)
-5. [Detail MVP 0.1 — Core Tools & Launch (COMPLETED)](#5-detail-mvp-01--core-tools--launch-completed)
+5. [Detail Fase 1 — Core Tools & Launch (COMPLETED)](#5-detail-mvp-01--core-tools--launch-completed)
 6. [UI Safety Rules — Aturan Sebelum Membangun Fitur Baru](#6-ui-safety-rules--aturan-sebelum-membangun-fitur-baru)
-7. [Detail MVP 0.2 — Tool Expansion + Infrastructure](#7-detail-mvp-02--tool-expansion--infrastructure)
-8. [Detail MVP 0.3 — Foundation & UX Polish](#8-detail-mvp-03--foundation--ux-polish)
-9. [Detail MVP 0.4 — Auth + Monetization + API](#9-detail-mvp-04--auth--monetization--api)
-10. [Detail Fase 2 — AI Core Features](#10-detail-fase-2--ai-core-features)
-11. [Detail Fase 3 — AI Advanced + Integrations](#11-detail-fase-3--ai-advanced--integrations)
-12. [Detail Fase 4 — Indonesia Deep + Enterprise](#12-detail-fase-4--indonesia-deep--enterprise)
-13. [Detail Fase 5 — Scale + Ecosystem (Expanded)](#13-detail-fase-5--scale--ecosystem-expanded)
-14. [Detail Fase 6 — Platform & Marketplace](#14-detail-fase-6--platform--marketplace)
-15. [Detail Fase 7 — Enterprise & B2B](#15-detail-fase-7--enterprise--b2b)
-16. [Detail Fase 8 — AI Agent Swarm + Autonomy](#16-detail-fase-8--ai-agent-swarm--autonomy)
-17. [Detail Fase 9 — Moonshots & Future](#17-detail-fase-9--moonshots--future)
+7. [Detail Fase 2 — Tool Expansion + Infrastructure](#7-detail-mvp-02--tool-expansion--infrastructure)
+8. [Detail Fase 3 — Foundation & UX Polish](#8-detail-mvp-03--foundation--ux-polish)
+9. [Detail Fase 4 — Auth + Monetization + API](#9-detail-mvp-04--auth--monetization--api)
+10. [Detail Fase 5 — AI Core Features](#10-detail-fase-2--ai-core-features)
+11. [Detail Fase 6 — AI Advanced + Integrations](#11-detail-fase-3--ai-advanced--integrations)
+12. [Detail Fase 7 — Indonesia Deep + Enterprise](#12-detail-fase-4--indonesia-deep--enterprise)
+13. [Detail Fase 8 — Scale + Ecosystem (Expanded)](#13-detail-fase-5--scale--ecosystem-expanded)
+14. [Detail Fase 9 — Platform & Marketplace](#14-detail-fase-6--platform--marketplace)
+15. [Detail Fase 10 — Enterprise & B2B](#15-detail-fase-7--enterprise--b2b)
+16. [Detail Fase 11 — AI Agent Swarm + Autonomy](#16-detail-fase-8--ai-agent-swarm--autonomy)
+17. [Detail Fase 12 — Moonshots & Future](#17-detail-fase-9--moonshots--future)
 18. [Yang TIDAK Akan Dibangun](#18-yang-tidak-akan-dibangun)
 19. [Prioritas & Dependensi](#19-prioritas--dependensi)
 20. [Metrik Keberhasilan per Fase](#20-metrik-keberhasilan-per-fase)
@@ -138,21 +138,21 @@ Skor = (User Value x 0.40) + (Strategic Fit x 0.25) + (Feasibility x 0.20) + (Re
 
 | **Fase**    | 🟢 Buildable | 🟡 Hard | 🔴 Regulated | 🔵 Business | 🟣 R&D | ⚪ Moonshot | **Total** |
 |-------------|--------------|---------|--------------|-------------|--------|------------|-----------|
-| MVP 0.1     | 11           | 0       | 0            | 0           | 0      | 0          | 11        |
-| MVP 0.2     | 10           | 3       | 0            | 0           | 0      | 0          | 13        |
-| MVP 0.3     | 16           | 4       | 0            | 2           | 1      | 0          | 23        |
-| MVP 0.4     | 7            | 6       | 1            | 3           | 1      | 0          | 18        |
-| Fase 2      | 3            | 5       | 0            | 1           | 11     | 2          | 22        |
-| Fase 3      | 6            | 8       | 2            | 1           | 4      | 1          | 22        |
-| Fase 4      | 3            | 3       | 4            | 1           | 2      | 1          | 14        |
-| Fase 5      | 5            | 5       | 0            | 2           | 6      | 4          | 22        |
-| Fase 6      | 10           | 9       | 1            | 4           | 1      | 0          | 25        |
-| Fase 7      | 3            | 8       | 5            | 2           | 1      | 1          | 20        |
-| Fase 8      | 2            | 4       | 0            | 1           | 8      | 5          | 20        |
-| Fase 9      | 5            | 8       | 8            | 3           | 12     | 12         | 48        |
+| Fase 1     | 11           | 0       | 0            | 0           | 0      | 0          | 11        |
+| Fase 2     | 10           | 3       | 0            | 0           | 0      | 0          | 13        |
+| Fase 3     | 16           | 4       | 0            | 2           | 1      | 0          | 23        |
+| Fase 4     | 7            | 6       | 1            | 3           | 1      | 0          | 18        |
+| Fase 5      | 3            | 5       | 0            | 1           | 11     | 2          | 22        |
+| Fase 6      | 6            | 8       | 2            | 1           | 4      | 1          | 22        |
+| Fase 7      | 3            | 3       | 4            | 1           | 2      | 1          | 14        |
+| Fase 8      | 5            | 5       | 0            | 2           | 6      | 4          | 22        |
+| Fase 9      | 10           | 9       | 1            | 4           | 1      | 0          | 25        |
+| Fase 10      | 3            | 8       | 5            | 2           | 1      | 1          | 20        |
+| Fase 11      | 2            | 4       | 0            | 1           | 8      | 5          | 20        |
+| Fase 12      | 5            | 8       | 8            | 3           | 12     | 12         | 48        |
 | **Total**   | **81**       | **63**  | **21**       | **20**      | **47** | **26**     | **258**   |
 
-> **Insight:** 31% fitur adalah 🟢 Buildable — hampir sepertiga roadmap bisa dieksekusi tanpa blocker eksternal. Total 238 fitur terklasifikasi tersebar di MVP 0.3 hingga Fase 9 (258 termasuk 11 MVP 0.1 + 9 MVP 0.2 tools yang sudah ada sebelumnya).
+> **Insight:** 31% fitur adalah 🟢 Buildable — hampir sepertiga roadmap bisa dieksekusi tanpa blocker eksternal. Total 238 fitur terklasifikasi tersebar di Fase 3 hingga Fase 12 (258 termasuk 11 Fase 1 + 9 Fase 2 tools yang sudah ada sebelumnya).
 
 ---
 
@@ -162,9 +162,9 @@ Dokumen ini mendefinisikan Product Roadmap resmi untuk Papyr — web application
 
 **Status Saat Ini:**
 
-- **MVP 0.1** telah selesai sepenuhnya (v1.0.0 + v1.1.0) dengan 11 milestone dan 89 tasks terselesaikan.
+- **Fase 1** telah selesai sepenuhnya (v1.0.0 + v1.1.0) dengan 11 milestone dan 89 tasks terselesaikan.
 - **Papyr live** di [mypapyr.com](https://mypapyr.com) dengan 6 tool aktif: Compress, Merge, Split, Rotate, Image-to-PDF, dan PDF-to-Image.
-- **Fase selanjutnya** adalah MVP 0.2 (Tool Expansion + Infrastructure) — gate condition sudah terpenuhi.
+- **Fase selanjutnya** adalah Fase 2 (Tool Expansion + Infrastructure) — gate condition sudah terpenuhi.
 
 **Model Pengembangan:**
 
@@ -174,18 +174,18 @@ Papyr dikembangkan 100% AI-driven — seluruh kode, dokumentasi, dan keputusan a
 
 | **Fase**    | **Fokus**                          | **Status**       | **Gate**                                                    | **Fitur** | **Milestone**  |
 |-------------|------------------------------------|------------------|-------------------------------------------------------------|-----------|----------------|
-| MVP 0.1     | Core Tools + Launch                | ✅ Selesai       | —                                                           | 11        | M01-M11        |
-| MVP 0.2     | Tool Expansion + Infrastructure    | 🔄 Selanjutnya   | MVP 0.1 live & stabil ✅                                    | 13        | M12-M22        |
-| MVP 0.3     | Foundation & UX Polish             | 📋 Direncanakan  | MVP 0.2 semua tool berfungsi + OpenClaw aktif               | 23        | M23-M35        |
-| MVP 0.4     | Auth + Monetization + API          | 📋 Direncanakan  | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU                      | 18        | M36-M45        |
-| Fase 2      | AI Core Features                   | 🔮 Visi          | MVP 0.4 revenue > Rp 0                                      | 22        | M46-M55        |
-| Fase 3      | AI Advanced + Integrations         | 🔮 Visi          | Fase 2 stabil + ≥ 100 AI tasks/hari                         | 22        | M56-M65        |
-| Fase 4      | Indonesia Deep + Enterprise        | 🔮 Visi          | Fase 3 stabil + regulatory + partnership MoU                | 14        | M66-M72        |
-| Fase 5      | Scale + Ecosystem (Expanded)       | 🔮 Visi          | Fase 4 stabil + ≥ 50.000 MAU + revenue sustainable         | 22        | M73-M86        |
-| Fase 6      | Platform & Marketplace             | 🔮 Visi          | Fase 5 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta           | 25        | M87-M98        |
-| Fase 7      | Enterprise & B2B                   | 🔮 Visi          | Fase 6 marketplace aktif + ≥ 10 enterprise inquiries        | 20        | M99-M108       |
-| Fase 8      | AI Agent Swarm + Autonomy          | 🔮 Visi          | Fase 7 ≥ 5 enterprise customers + AI infrastructure mature  | 20        | M109-M118      |
-| Fase 9      | Moonshots & Future                 | 🔮 Visi          | Fase 8 agent swarm stabil + market leadership established   | 48        | M119-M145      |
+| Fase 1     | Core Tools + Launch                | ✅ Selesai       | —                                                           | 11        | M01-M11        |
+| Fase 2     | Tool Expansion + Infrastructure    | 🔄 Selanjutnya   | Fase 1 live & stabil ✅                                    | 13        | M12-M22        |
+| Fase 3     | Foundation & UX Polish             | 📋 Direncanakan  | Fase 2 semua tool berfungsi + OpenClaw aktif               | 23        | M23-M35        |
+| Fase 4     | Auth + Monetization + API          | 📋 Direncanakan  | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU                      | 18        | M36-M45        |
+| Fase 5      | AI Core Features                   | 🔮 Visi          | Fase 4 revenue > Rp 0                                      | 22        | M46-M55        |
+| Fase 6      | AI Advanced + Integrations         | 🔮 Visi          | Fase 5 stabil + ≥ 100 AI tasks/hari                         | 22        | M56-M65        |
+| Fase 7      | Indonesia Deep + Enterprise        | 🔮 Visi          | Fase 6 stabil + regulatory + partnership MoU                | 14        | M66-M72        |
+| Fase 8      | Scale + Ecosystem (Expanded)       | 🔮 Visi          | Fase 7 stabil + ≥ 50.000 MAU + revenue sustainable         | 22        | M73-M86        |
+| Fase 9      | Platform & Marketplace             | 🔮 Visi          | Fase 8 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta           | 25        | M87-M98        |
+| Fase 10      | Enterprise & B2B                   | 🔮 Visi          | Fase 9 marketplace aktif + ≥ 10 enterprise inquiries        | 20        | M99-M108       |
+| Fase 11      | AI Agent Swarm + Autonomy          | 🔮 Visi          | Fase 10 ≥ 5 enterprise customers + AI infrastructure mature  | 20        | M109-M118      |
+| Fase 12      | Moonshots & Future                 | 🔮 Visi          | Fase 11 agent swarm stabil + market leadership established   | 48        | M119-M145      |
 
 ---
 
@@ -211,21 +211,21 @@ Papyr dikembangkan 100% AI-driven — seluruh kode, dokumentasi, dan keputusan a
 
 | **Segmen**             | **Kebutuhan Utama**                                    | **Fase Relevan**              |
 |------------------------|--------------------------------------------------------|-------------------------------|
-| Mahasiswa              | Compress tugas, merge dokumen, convert gambar          | MVP 0.1 (tersedia)            |
-| Pekerja Kantoran       | Merge laporan, split dokumen, watermark, sign          | MVP 0.2                       |
-| Freelancer             | Protect PDF, sign kontrak, OCR dokumen scan            | MVP 0.2                       |
-| Power User             | Dark mode, keyboard shortcuts, batch processing        | MVP 0.3 + MVP 0.4            |
-| UMKM                   | Invoice PDF, e-Meterai, template dokumen               | Fase 4                        |
-| Developer              | API access, CLI tool, SDK, integrations                | MVP 0.4 + Fase 5 + Fase 6    |
-| Enterprise             | Team plan, white-label, compliance, secure room        | Fase 4 + Fase 7              |
-| Government             | Surat dinas, compliance, data residency                | Fase 7 + Fase 9              |
-| Platform Partner       | Marketplace, plugin system, white-label                | Fase 6                        |
-| AI Researcher          | Agent swarm, autonomous experimentation                | Fase 8                        |
+| Mahasiswa              | Compress tugas, merge dokumen, convert gambar          | Fase 1 (tersedia)            |
+| Pekerja Kantoran       | Merge laporan, split dokumen, watermark, sign          | Fase 2                       |
+| Freelancer             | Protect PDF, sign kontrak, OCR dokumen scan            | Fase 2                       |
+| Power User             | Dark mode, keyboard shortcuts, batch processing        | Fase 3 + Fase 4            |
+| UMKM                   | Invoice PDF, e-Meterai, template dokumen               | Fase 7                        |
+| Developer              | API access, CLI tool, SDK, integrations                | Fase 4 + Fase 8 + Fase 9    |
+| Enterprise             | Team plan, white-label, compliance, secure room        | Fase 7 + Fase 10              |
+| Government             | Surat dinas, compliance, data residency                | Fase 10 + Fase 12              |
+| Platform Partner       | Marketplace, plugin system, white-label                | Fase 9                        |
+| AI Researcher          | Agent swarm, autonomous experimentation                | Fase 11                        |
 
 ### 3.4 Evolusi Produk
 
 ```
-MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2           Fase 3           Fase 4           Fase 5
+Fase 1        Fase 2          Fase 3           Fase 4          Fase 5           Fase 6           Fase 7           Fase 8
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────►
 
 [Core Tools] → [Adv. Tools]  → [UX Polish]    → [Monetisasi]  → [AI Core]     → [AI Advanced]  → [Indo Deep]    → [Ecosystem]
@@ -235,7 +235,7 @@ MVP 0.1        MVP 0.2          MVP 0.3           MVP 0.4          Fase 2       
 
                                                                                                                         │
                                                                                                                         ▼
-Fase 6           Fase 7           Fase 8           Fase 9
+Fase 9           Fase 10           Fase 11           Fase 12
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────►
 
 [Platform]    → [Enterprise]  → [AI Swarm]     → [Moonshots]
@@ -252,38 +252,38 @@ Fase 6           Fase 7           Fase 8           Fase 9
 
 | **Transisi**          | **Gate Condition**                                                                                     | **Status**    |
 |-----------------------|--------------------------------------------------------------------------------------------------------|---------------|
-| MVP 0.1 → MVP 0.2    | MVP 0.1 live & stabil, semua 6 tool berfungsi, zero critical bugs 7 hari                              | ✅ TERPENUHI  |
-| MVP 0.2 → MVP 0.3    | MVP 0.2 semua tool berfungsi (13 tools) + OpenClaw aktif stabil 14 hari                                | ⏳ Menunggu   |
-| MVP 0.3 → MVP 0.4    | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU (Vercel Analytics)                                              | ⏳ Menunggu   |
-| MVP 0.4 → Fase 2     | MVP 0.4 revenue > Rp 0 (minimal 1 paying customer)                                                    | ⏳ Menunggu   |
-| Fase 2 → Fase 3      | Fase 2 stabil (zero critical bugs 30 hari) + ≥ 100 AI tasks/hari                                      | ⏳ Menunggu   |
-| Fase 3 → Fase 4      | Fase 3 stabil + regulatory assessment selesai + partnership MoU                                        | ⏳ Menunggu   |
-| Fase 4 → Fase 5      | Fase 4 stabil + ≥ 50.000 MAU + revenue sustainable (MRR > opex)                                       | ⏳ Menunggu   |
-| Fase 5 → Fase 6      | Fase 5 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta                                                     | ⏳ Menunggu   |
-| Fase 6 → Fase 7      | Fase 6 marketplace aktif + ≥ 10 enterprise inquiries                                                   | ⏳ Menunggu   |
-| Fase 7 → Fase 8      | Fase 7 ≥ 5 enterprise customers + AI infrastructure mature                                             | ⏳ Menunggu   |
-| Fase 8 → Fase 9      | Fase 8 agent swarm stabil + market leadership established                                              | ⏳ Menunggu   |
+| Fase 1 → Fase 2    | Fase 1 live & stabil, semua 6 tool berfungsi, zero critical bugs 7 hari                              | ✅ TERPENUHI  |
+| Fase 2 → Fase 3    | Fase 2 semua tool berfungsi (13 tools) + OpenClaw aktif stabil 14 hari                                | ⏳ Menunggu   |
+| Fase 3 → Fase 4    | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU (Vercel Analytics)                                              | ⏳ Menunggu   |
+| Fase 4 → Fase 5     | Fase 4 revenue > Rp 0 (minimal 1 paying customer)                                                    | ⏳ Menunggu   |
+| Fase 5 → Fase 6      | Fase 5 stabil (zero critical bugs 30 hari) + ≥ 100 AI tasks/hari                                      | ⏳ Menunggu   |
+| Fase 6 → Fase 7      | Fase 6 stabil + regulatory assessment selesai + partnership MoU                                        | ⏳ Menunggu   |
+| Fase 7 → Fase 8      | Fase 7 stabil + ≥ 50.000 MAU + revenue sustainable (MRR > opex)                                       | ⏳ Menunggu   |
+| Fase 8 → Fase 9      | Fase 8 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta                                                     | ⏳ Menunggu   |
+| Fase 9 → Fase 10      | Fase 9 marketplace aktif + ≥ 10 enterprise inquiries                                                   | ⏳ Menunggu   |
+| Fase 10 → Fase 11      | Fase 10 ≥ 5 enterprise customers + AI infrastructure mature                                             | ⏳ Menunggu   |
+| Fase 11 → Fase 12      | Fase 11 agent swarm stabil + market leadership established                                              | ⏳ Menunggu   |
 
 ### 4.2 Timeline Visual
 
 | **Fase**    | **Milestone**  | **Deskripsi**                                    | **Status**           |
 |-------------|----------------|--------------------------------------------------|----------------------|
-| MVP 0.1     | M01-M11        | Core 6 tools + Landing + SEO + Launch            | ✅ Selesai           |
-| MVP 0.2     | M12-M22        | 7 tool + cross-cutting + OpenClaw + Admin        | 🔄 Selanjutnya       |
-| MVP 0.3     | M23-M35        | Foundation & UX Polish (23 fitur)                | 📋 Direncanakan      |
-| MVP 0.4     | M36-M45        | Auth + Monetization + API (18 fitur)             | 📋 Direncanakan      |
-| Fase 2      | M46-M55        | AI Core Features (22 fitur)                      | 🔮 Visi              |
-| Fase 3      | M56-M65        | AI Advanced + Integrations (22 fitur)            | 🔮 Visi              |
-| Fase 4      | M66-M72        | Indonesia Deep + Enterprise (14 fitur)           | 🔮 Visi              |
-| Fase 5      | M73-M86        | Scale + Ecosystem Expanded (22 fitur)            | 🔮 Visi              |
-| Fase 6      | M87-M98        | Platform & Marketplace (25 fitur)                | 🔮 Visi              |
-| Fase 7      | M99-M108       | Enterprise & B2B (20 fitur)                      | 🔮 Visi              |
-| Fase 8      | M109-M118      | AI Agent Swarm + Autonomy (20 fitur)             | 🔮 Visi              |
-| Fase 9      | M119-M145      | Moonshots & Future (48 fitur)                    | 🔮 Visi              |
+| Fase 1     | M01-M11        | Core 6 tools + Landing + SEO + Launch            | ✅ Selesai           |
+| Fase 2     | M12-M22        | 7 tool + cross-cutting + OpenClaw + Admin        | 🔄 Selanjutnya       |
+| Fase 3     | M23-M35        | Foundation & UX Polish (23 fitur)                | 📋 Direncanakan      |
+| Fase 4     | M36-M45        | Auth + Monetization + API (18 fitur)             | 📋 Direncanakan      |
+| Fase 5      | M46-M55        | AI Core Features (22 fitur)                      | 🔮 Visi              |
+| Fase 6      | M56-M65        | AI Advanced + Integrations (22 fitur)            | 🔮 Visi              |
+| Fase 7      | M66-M72        | Indonesia Deep + Enterprise (14 fitur)           | 🔮 Visi              |
+| Fase 8      | M73-M86        | Scale + Ecosystem Expanded (22 fitur)            | 🔮 Visi              |
+| Fase 9      | M87-M98        | Platform & Marketplace (25 fitur)                | 🔮 Visi              |
+| Fase 10      | M99-M108       | Enterprise & B2B (20 fitur)                      | 🔮 Visi              |
+| Fase 11      | M109-M118      | AI Agent Swarm + Autonomy (20 fitur)             | 🔮 Visi              |
+| Fase 12      | M119-M145      | Moonshots & Future (48 fitur)                    | 🔮 Visi              |
 
 ### 4.3 Detail Milestone per Fase
 
-#### MVP 0.1 (M01-M11) — COMPLETED
+#### Fase 1 (M01-M11) — COMPLETED
 
 | **#**  | **Milestone**            | **Sub-fase** | **Estimasi** | **Label** | **Status**  |
 |--------|--------------------------|--------------|--------------|-----------|-------------|
@@ -299,7 +299,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M10    | Testing + Launch         | —            | 8-12 jam     | 🟢        | ✅ Selesai  |
 | M11    | Rotate PDF               | —            | 5-8 jam      | 🟢        | ✅ Selesai  |
 
-#### MVP 0.2 (M12-M22) — CURRENT
+#### Fase 2 (M12-M22) — CURRENT
 
 | **#**  | **Milestone**            | **Sub-fase** | **Estimasi** | **Label** | **Status**  |
 |--------|--------------------------|--------------|--------------|-----------|-------------|
@@ -314,7 +314,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M21    | OpenClaw AI Agent        | Fase 2E     | 100-140 jam  | 🟡        | 📋 Planned  |
 | M22    | Admin Dashboard          | Fase 2F     | 30-40 jam    | 🟢        | 📋 Planned  |
 
-#### MVP 0.3 (M23-M35) — PLANNED
+#### Fase 3 (M23-M35) — PLANNED
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -324,7 +324,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M31-M33| Interaction              | Fase 3D     | DnD, Shortcuts, History, Changelog, Undo     | 🟢🟡     | 📋 Planned  |
 | M34-M35| Growth Foundation        | Fase 3E     | Social Proof, Feedback, Recommendation       | 🔵🟣     | 📋 Planned  |
 
-#### MVP 0.4 (M36-M45) — PLANNED
+#### Fase 4 (M36-M45) — PLANNED
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -334,7 +334,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M40-M41| Advanced PDF             | Fase 4D     | Page Reorder, Metadata, Flatten              | 🟢        | 📋 Planned  |
 | M42-M45| Admin Upgrades           | Fase 4E     | WebSocket, Heatmap, Cost, Flags, Alerts      | 🟡🔴     | 📋 Planned  |
 
-#### Fase 2 (M46-M55) — VISI
+#### Fase 5 (M46-M55) — VISI
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -343,7 +343,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M51    | AI Automation            | F2C          | Workflow Builder                             | ⚪        | 🔮 Visi    |
 | M52-M55| AI OpenClaw Upgrades     | F2D          | Support Bot, Localization, Calendar, etc     | 🟢🟡🔵   | 🔮 Visi    |
 
-#### Fase 3 (M56-M65) — VISI
+#### Fase 6 (M56-M65) — VISI
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -353,7 +353,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M61-M62| Advanced PDF             | F3D          | Comparison, Form Fill, Annotation, Redact, PDF/A | 🟢🔴 | 🔮 Visi    |
 | M63-M65| Integrations             | F3E          | Google Drive, Dropbox, Zapier, Extension     | 🟢🟡⚪   | 🔮 Visi    |
 
-#### Fase 4 (M66-M72) — VISI
+#### Fase 7 (M66-M72) — VISI
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -362,7 +362,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M70    | Admin Advanced           | F4C          | Geographic, A/B Testing, SEO Dashboard       | 🟡🔴     | 🔮 Visi    |
 | M71-M72| OpenClaw Advanced        | F4D          | Auto-Scaling, Bug Predictor                  | 🟣⚪     | 🔮 Visi    |
 
-#### Fase 5 (M73-M86) — VISI (Expanded)
+#### Fase 8 (M73-M86) — VISI (Expanded)
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -373,7 +373,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M79-M82| OpenClaw Agent Expansion | F5E          | Multi-Platform Social, Community Manager, Outreach, Revenue Optimizer | 🟡🟣⚪ | 🔮 Visi |
 | M83-M86| OpenClaw Specialist Agents | F5F        | Localization Agent, Legal Compliance, Partnership, Customer Success | 🟣⚪🟡 | 🔮 Visi |
 
-#### Fase 6 (M87-M98) — VISI
+#### Fase 9 (M87-M98) — VISI
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -382,7 +382,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M93-M95| Revenue & Community      | F6C          | Community Platform, Credits System, Pay-per-Use API, Affiliate Network | 🔵🟢🟡 | 🔮 Visi |
 | M96-M98| Platform Ecosystem       | F6D          | Developer Portal, Plugin System, Theme Marketplace, Doc Templates, Ambassador, Blog, Challenges, Print Service, Cloud Storage, White-label, Certification, Invoice Platform | 🟢🟡🔴 | 🔮 Visi |
 
-#### Fase 7 (M99-M108) — VISI
+#### Fase 10 (M99-M108) — VISI
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -392,7 +392,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M105-M106| Collaboration         | F7D          | Multi-Region, Real-time Collab, Team Mgmt, SSO/SAML | 🟡🟢🔴 | 🔮 Visi |
 | M107-M108| Enterprise Services   | F7E          | RBAC, SLA, Dedicated Support, Custom Branding, Data Residency, Analytics, Bulk Ops | 🟢🟡🔵 | 🔮 Visi |
 
-#### Fase 8 (M109-M118) — VISI
+#### Fase 11 (M109-M118) — VISI
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -402,7 +402,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 | M115-M116| OpenClaw Swarm Core   | F8D          | Agent Marketplace, Multi-Project, Memory System | 🟡🟣🔵 | 🔮 Visi |
 | M117-M118| OpenClaw Autonomy     | F8E          | Autonomous Experimentation, Predictive Maintenance, Cross-Agent Comm, Self-Funding, AI Doc Versioning, AI Contextual Help, AI Security Advisor | ⚪🟣🟢 | 🔮 Visi |
 
-#### Fase 9 (M119-M145) — VISI
+#### Fase 12 (M119-M145) — VISI
 
 | **#**  | **Milestone**            | **Sub-fase** | **Fitur**                                    | **Label** | **Status**  |
 |--------|--------------------------|--------------|----------------------------------------------|-----------|-------------|
@@ -419,7 +419,7 @@ Fase 6           Fase 7           Fase 8           Fase 9
 
 ---
 
-## 5. Detail MVP 0.1 — Core Tools & Launch (COMPLETED)
+## 5. Detail Fase 1 — Core Tools & Launch (COMPLETED)
 
 ### 5.1 Ringkasan
 
@@ -482,21 +482,21 @@ Fase 6           Fase 7           Fase 8           Fase 9
 
 ---
 
-## 7. Detail MVP 0.2 — Tool Expansion + Infrastructure
+## 7. Detail Fase 2 — Tool Expansion + Infrastructure
 
 ### 7.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔄 NEXT — Selanjutnya dikerjakan                             |
-| **Gate Condition**     | MVP 0.1 live & stabil ✅ TERPENUHI                           |
+| **Gate Condition**     | Fase 1 live & stabil ✅ TERPENUHI                           |
 | **Total Milestone**    | M12-M18 (tools) + 2D (quality) + 2E (OpenClaw) + 2F (Admin) |
 | **Estimasi Total**     | 261-369 jam                                                   |
 | **Hasil Akhir**        | 13 tools total + autonomous ops + unified admin               |
 
 ### 7.2 Struktur Sub-fase
 
-MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
+Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 | **Sub-fase** | **Milestone** | **Fitur**                                    | **Label** | **Estimasi**    |
 |--------------|---------------|----------------------------------------------|-----------|--------------------|
@@ -656,7 +656,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Deskripsi**          | Unified admin panel /admin dengan 10 modul monitoring         |
-| **Auth**               | Env-based token (ADMIN_SECRET) — upgrade ke role-based saat MVP 0.4 |
+| **Auth**               | Env-based token (ADMIN_SECRET) — upgrade ke role-based saat Fase 4 |
 | **Route**              | /admin/* (same Next.js app)                                   |
 | **Estimasi**           | 30-40 jam                                                     |
 
@@ -669,10 +669,10 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 3     | Server Health                | Railway uptime, Vercel status, R2 usage, response times          |
 | 4     | Security Scan Results        | Dependency audit, CVE alerts, scan history                       |
 | 5     | SEO & Competitor Intel       | Rankings, competitor changes, content pipeline                   |
-| 6     | Revenue/Billing (Placeholder)| Aktif saat MVP 0.4                                               |
+| 6     | Revenue/Billing (Placeholder)| Aktif saat Fase 4                                               |
 | 7     | System Logs & Errors         | Error logs, rate limit hits, failed tasks                        |
 | 8     | Backup Status                | Backup status, restore history, storage usage                    |
-| 9     | User Management (Placeholder)| Aktif saat MVP 0.4                                               |
+| 9     | User Management (Placeholder)| Aktif saat Fase 4                                               |
 | 10    | Settings                     | System config, notification preferences, API keys                |
 
 ### 7.9 Rilis Incremental
@@ -686,14 +686,14 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 ---
 
-## 8. Detail MVP 0.3 — Foundation & UX Polish
+## 8. Detail Fase 3 — Foundation & UX Polish
 
 ### 8.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 📋 PLANNED                                                   |
-| **Gate Condition**     | MVP 0.2 semua tool berfungsi + OpenClaw aktif dan stabil      |
+| **Gate Condition**     | Fase 2 semua tool berfungsi + OpenClaw aktif dan stabil      |
 | **Total Fitur**        | 23 fitur dalam 5 sub-fase                                    |
 | **Milestone**          | M23-M35                                                       |
 | **Estimasi Total**     | 135-185 jam                                                   |
@@ -746,7 +746,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 22    | User Feedback Widget         | 🔵        | Thumbs up/down setelah task selesai + optional text.              |
 | 23    | Tool Recommendation          | 🟣        | Rekomendasi 1-2 tool terkait post-processing. Rule-based.        |
 
-### 8.7 Acceptance Criteria MVP 0.3 (Detail)
+### 8.7 Acceptance Criteria Fase 3 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -821,7 +821,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | Tool Recommendation | AC1 | Rekomendasi 1-2 tool terkait setelah processing | Functional |
 | Tool Recommendation | AC2 | Rule-based: compress→merge, split→rotate | Logic |
 
-### 8.8 Estimasi Effort per Sub-fase MVP 0.3
+### 8.8 Estimasi Effort per Sub-fase Fase 3
 
 | **Sub-fase** | **Fitur** | **Estimasi Min** | **Estimasi Max** | **Kompleksitas** |
 |--------------|-----------|------------------|------------------|------------------|
@@ -832,7 +832,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | Fase 3E     | 3 fitur   | 15 jam           | 23 jam           | Low-Medium       |
 | **Total**    | **23**    | **123 jam**      | **189 jam**      | —                |
 
-### 8.9 Dependensi Internal MVP 0.3
+### 8.9 Dependensi Internal Fase 3
 
 ```
 Fase 3A (Critical UX) ──────────────────────────────────────────────────────────────
@@ -850,7 +850,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 9. Detail MVP 0.4 — Auth + Monetization + API
+## 9. Detail Fase 4 — Auth + Monetization + API
 
 ### 9.1 Ringkasan
 
@@ -913,7 +913,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 17    | Feature Flags                | 🟡        | Toggle fitur tanpa deploy. Percentage rollout.                    |
 | 18    | Custom Alerts                | 🔴        | Alert rules kustom. Multiple channels. Snooze, acknowledge.      |
 
-### 9.8 Acceptance Criteria MVP 0.4 (Detail)
+### 9.8 Acceptance Criteria Fase 4 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -968,7 +968,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Batch Processing           | ❌                     | ❌                      | ✅                   |
 | Max File Size              | 20 MB                  | 20 MB                   | 100 MB               |
 | API Access                 | ❌                     | ❌                      | ✅                   |
-| AI Features (Fase 2+)      | ❌                     | 3x/hari                 | ✅ Unlimited         |
+| AI Features (Fase 5+)      | ❌                     | 3x/hari                 | ✅ Unlimited         |
 
 ### 9.10 Strategi Monetisasi
 
@@ -980,14 +980,14 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 10. Detail Fase 2 — AI Core Features
+## 10. Detail Fase 5 — AI Core Features
 
 ### 10.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | MVP 0.4 revenue > Rp 0 (validated willingness to pay)         |
+| **Gate Condition**     | Fase 4 revenue > Rp 0 (validated willingness to pay)         |
 | **Total Fitur**        | 22 fitur dalam 4 sub-fase                                    |
 | **Milestone**          | M46-M55                                                       |
 | **Estimasi Total**     | 230-320 jam                                                   |
@@ -1042,7 +1042,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 21    | Perf Regression Detection    | 🟡        | Deteksi otomatis performance regression dari Lighthouse CI.       |
 | 22    | User Sentiment Analysis      | 🔵        | Analisis sentiment dari feedback widget, social media mentions.   |
 
-### 10.7 Acceptance Criteria Fase 2 (Detail)
+### 10.7 Acceptance Criteria Fase 5 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1077,10 +1077,10 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Perf Regression | AC1 | Deteksi otomatis performance regression, alert + root cause | Functional |
 | User Sentiment | AC1 | Analisis sentiment dari feedback widget + social media | Functional |
 
-### 10.8 Pertimbangan Teknis Fase 2
+### 10.8 Pertimbangan Teknis Fase 5
 
 - **Privacy:** AI processing tetap menghormati privacy-first — file auto-delete setelah processing, tidak ada data retention untuk training
-- **Cost:** API calls AI memiliki biaya per request — strict monitoring via Cost Dashboard (MVP 0.4)
+- **Cost:** API calls AI memiliki biaya per request — strict monitoring via Cost Dashboard (Fase 4)
 - **Accuracy:** Validasi akurasi untuk dokumen Bahasa Indonesia sebelum rilis publik (benchmark dataset)
 - **Latency:** AI processing membutuhkan waktu lebih lama — progress indicator wajib, async processing untuk tasks > 30 detik
 - **Fallback:** Jika semua LLM providers down, graceful degradation ke non-AI alternatives
@@ -1089,14 +1089,14 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 11. Detail Fase 3 — AI Advanced + Integrations
+## 11. Detail Fase 6 — AI Advanced + Integrations
 
 ### 11.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | Fase 2 stabil + ≥ 100 AI tasks/hari                          |
+| **Gate Condition**     | Fase 5 stabil + ≥ 100 AI tasks/hari                          |
 | **Total Fitur**        | 22 fitur dalam 5 sub-fase                                    |
 | **Milestone**          | M56-M65                                                       |
 | **Estimasi Total**     | 215-295 jam                                                   |
@@ -1148,7 +1148,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 21    | Zapier/Make Integration      | 🟡        | Webhook triggers dan actions untuk automation platforms.           |
 | 22    | Browser Extension            | ⚪        | Chrome/Firefox extension. Right-click PDF → process di Papyr.     |
 
-### 11.7 Acceptance Criteria Fase 3 (Detail)
+### 11.7 Acceptance Criteria Fase 6 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1179,7 +1179,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Zapier/Make | AC1 | Webhook triggers dan actions, "When PDF processed → send to Slack" | Functional |
 | Browser Extension | AC1 | Chrome/Firefox, right-click PDF → process di Papyr | Functional |
 
-### 11.8 Pertimbangan Teknis Fase 3
+### 11.8 Pertimbangan Teknis Fase 6
 
 - **AI Translation:** Layout preservation adalah challenge utama — perlu custom rendering pipeline
 - **Content Generation:** Template system harus extensible — user bisa create custom templates
@@ -1190,14 +1190,14 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 12. Detail Fase 4 — Indonesia Deep + Enterprise
+## 12. Detail Fase 7 — Indonesia Deep + Enterprise
 
 ### 12.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | Fase 3 stabil + regulatory assessment + partnership MoU       |
+| **Gate Condition**     | Fase 6 stabil + regulatory assessment + partnership MoU       |
 | **Total Fitur**        | 14 fitur dalam 4 sub-fase                                    |
 | **Milestone**          | M66-M72                                                       |
 | **Estimasi Total**     | 145-200 jam                                                   |
@@ -1236,7 +1236,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 13    | Auto-Scaling Recommendation  | 🟣        | OpenClaw merekomendasikan kapan scale up/down infrastructure.     |
 | 14    | AI Bug Predictor             | ⚪        | Prediksi area kode yang kemungkinan memiliki bug.                 |
 
-### 12.6 Acceptance Criteria Fase 4 (Detail)
+### 12.6 Acceptance Criteria Fase 7 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1262,7 +1262,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Auto-Scaling | AC1 | Rekomendasi scale up/down berdasarkan traffic + cost | Functional |
 | Bug Predictor | AC1 | Prediksi area kode bermasalah, precision > 60% | Quality |
 
-### 12.7 Pertimbangan Regulasi Fase 4
+### 12.7 Pertimbangan Regulasi Fase 7
 
 | **Fitur** | **Regulasi** | **Requirement** | **Timeline Estimate** |
 |-----------|--------------|-----------------|----------------------|
@@ -1281,14 +1281,14 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 13. Detail Fase 5 — Scale + Ecosystem (Expanded)
+## 13. Detail Fase 8 — Scale + Ecosystem (Expanded)
 
 ### 13.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | Fase 4 stabil + ≥ 50.000 MAU + revenue sustainable           |
+| **Gate Condition**     | Fase 7 stabil + ≥ 50.000 MAU + revenue sustainable           |
 | **Total Fitur**        | 22 fitur dalam 6 sub-fase (14 existing + 8 OpenClaw baru)    |
 | **Milestone**          | M73-M86                                                       |
 | **Estimasi Total**     | 200-280 jam                                                   |
@@ -1345,7 +1345,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 21    | Partnership Agent            | 🟡        | Identifikasi, evaluate, dan manage partnership opportunities. Track MoU progress, follow-up otomatis. | M85 |
 | 22    | Customer Success Agent       | ⚪        | Proaktif monitor user health score. Identifikasi churn risk. Personalized engagement. Onboarding assistance. | M86 |
 
-### 13.8 Acceptance Criteria Fase 5 (Detail)
+### 13.8 Acceptance Criteria Fase 8 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1391,7 +1391,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Customer Success Agent | AC1 | Monitor user health score, identifikasi churn risk | Functional |
 | Customer Success Agent | AC2 | Personalized engagement, onboarding assistance | UX |
 
-### 13.9 Acceptance Criteria Fase 5 (Ringkasan)
+### 13.9 Acceptance Criteria Fase 8 (Ringkasan)
 
 | **Sub-fase** | **Key Metrics** | **Quality Gate** |
 |--------------|-----------------|------------------|
@@ -1402,7 +1402,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | F5E (Agent Expansion) | Multi-platform reach 4+ platforms; outreach 10+ contacts/minggu | 4 agents operational |
 | F5F (Specialist Agents) | Localization 3+ bahasa; compliance 100% regulatory coverage | 4 agents operational |
 
-### 13.10 Pertimbangan Teknis Fase 5
+### 13.10 Pertimbangan Teknis Fase 8
 
 - **WhatsApp Bot:** Membutuhkan WhatsApp Business API (Meta approval process 2-4 minggu)
 - **Telegram Bot:** Lebih mudah — Bot API langsung tersedia, inline keyboard untuk tool selection
@@ -1425,10 +1425,10 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    OPENCLAW AGENT ECOSYSTEM (Fase 5)                          │
+│                    OPENCLAW AGENT ECOSYSTEM (Fase 8)                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  EXISTING (10 agents dari MVP 0.2):                                         │
+│  EXISTING (10 agents dari Fase 2):                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐             │
 │  │ Aksara  │ │ Telik   │ │ Jaga    │ │ Tameng  │ │ Warta   │             │
 │  │ (SEO)   │ │(Compete)│ │(Health) │ │(Security│ │(Report) │             │
@@ -1438,7 +1438,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 │  │(Improve)│ │  (PM)   │ │(Backup) │ │(Analytic│ │(Social) │             │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘             │
 │                                                                             │
-│  NEW (8 agents dari Fase 5 v4.0):                                           │
+│  NEW (8 agents dari Fase 8 v4.0):                                           │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐                          │
 │  │ Jangkau │ │ Warga   │ │ Sapa    │ │ Untung  │                          │
 │  │(Multi-  │ │(Communi-│ │(Outreach│ │(Revenue │                          │
@@ -1470,14 +1470,14 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 14. Detail Fase 6 — Platform & Marketplace
+## 14. Detail Fase 9 — Platform & Marketplace
 
 ### 14.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | Fase 5 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta            |
+| **Gate Condition**     | Fase 8 stabil + ≥ 100.000 MAU + MRR > Rp 10 juta            |
 | **Total Fitur**        | 25 fitur dalam 4 sub-fase                                    |
 | **Milestone**          | M87-M98                                                       |
 | **Estimasi Total**     | 350-500 jam                                                   |
@@ -1527,7 +1527,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 24    | Certification Program        | 🟢        | Program sertifikasi untuk developer yang build di atas Papyr platform. Exam + badge. | M98 |
 | 25    | Invoice Generator Platform   | 🔴        | Platform invoice generator lengkap. Recurring invoices, payment tracking, tax compliance Indonesia. | M98 |
 
-### 14.6 Acceptance Criteria Fase 6 (Detail)
+### 14.6 Acceptance Criteria Fase 9 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1573,7 +1573,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Certification Program | AC1 | Program sertifikasi developer, exam + badge | Functional |
 | Invoice Generator Platform | AC1 | Recurring invoices, payment tracking, tax compliance ID | Functional |
 
-### 14.7 Acceptance Criteria Fase 6 (Ringkasan)
+### 14.7 Acceptance Criteria Fase 9 (Ringkasan)
 
 | **Sub-fase** | **Key Metrics** | **Quality Gate** |
 |--------------|-----------------|------------------|
@@ -1582,7 +1582,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | F6C (Revenue & Community) | Credits system revenue > 20% total; community 1000+ members; API pay-per-use active | 4 fitur operational |
 | F6D (Platform Ecosystem) | Developer portal 500+ registered devs; plugin system 20+ plugins; blog 50+ articles | 12 fitur deployed |
 
-### 14.8 Revenue Model Fase 6
+### 14.8 Revenue Model Fase 9
 
 | **Revenue Stream** | **Model** | **Target Contribution** |
 |--------------------|-----------|------------------------|
@@ -1594,7 +1594,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Print Service | Commission per order | 5% total revenue |
 | Pro Subscription | Existing subscription model | 35% total revenue |
 
-### 14.7 Keputusan Teknis Fase 6
+### 14.7 Keputusan Teknis Fase 9
 
 - **Desktop App:** Tauri preferred (Rust backend, smaller bundle) vs Electron (larger ecosystem)
 - **Mobile App:** Flutter preferred (single codebase, good performance) vs React Native (JS ecosystem)
@@ -1602,27 +1602,27 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 - **Marketplace:** Revenue sharing 70% creator / 30% Papyr
 - **Credits System:** 1 kredit = Rp 1.000, minimum purchase 10 kredit
 
-### 14.8 Dependensi Fase 6
+### 14.8 Dependensi Fase 9
 
 | **Fitur** | **Depends On** | **Alasan** |
 |-----------|----------------|------------|
-| Marketplace | Fase 5 Plugin System concept | Perlu arsitektur extensible |
-| SDK | MVP 0.4 Public API | SDK wraps existing API |
-| Desktop App | MVP 0.3 PWA | Shared offline logic |
-| Mobile App | MVP 0.4 Auth | Mobile needs auth flow |
-| Credits System | MVP 0.4 Payment | Payment infrastructure |
-| White-label | Fase 4 Enterprise | Enterprise features base |
+| Marketplace | Fase 8 Plugin System concept | Perlu arsitektur extensible |
+| SDK | Fase 4 Public API | SDK wraps existing API |
+| Desktop App | Fase 3 PWA | Shared offline logic |
+| Mobile App | Fase 4 Auth | Mobile needs auth flow |
+| Credits System | Fase 4 Payment | Payment infrastructure |
+| White-label | Fase 7 Enterprise | Enterprise features base |
 
 ---
 
-## 15. Detail Fase 7 — Enterprise & B2B
+## 15. Detail Fase 10 — Enterprise & B2B
 
 ### 15.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | Fase 6 marketplace aktif + ≥ 10 enterprise inquiries          |
+| **Gate Condition**     | Fase 9 marketplace aktif + ≥ 10 enterprise inquiries          |
 | **Total Fitur**        | 20 fitur dalam 5 sub-fase                                    |
 | **Milestone**          | M99-M108                                                      |
 | **Estimasi Total**     | 400-600 jam                                                   |
@@ -1672,7 +1672,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 19    | Enterprise Analytics         | 🟡        | Analytics enterprise-grade. Custom dashboards, scheduled reports, data export, API access. Benchmarking. | M108 |
 | 20    | Bulk Operations              | 🟡        | Bulk operations untuk enterprise. Mass user provisioning, bulk document processing, batch API calls. | M108 |
 
-### 15.7 Acceptance Criteria Fase 7 (Detail)
+### 15.7 Acceptance Criteria Fase 10 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1710,7 +1710,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Enterprise Analytics | AC1 | Custom dashboards, scheduled reports, data export | Functional |
 | Bulk Operations | AC1 | Mass user provisioning, bulk document processing | Functional |
 
-### 15.8 Acceptance Criteria Fase 7 (Ringkasan)
+### 15.8 Acceptance Criteria Fase 10 (Ringkasan)
 
 | **Sub-fase** | **Key Metrics** | **Quality Gate** |
 |--------------|-----------------|------------------|
@@ -1741,7 +1741,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Construction | Project document management, permit tracking, progress report templates | Contractors |
 | Education | Certificate generation, transcript management, assignment submission | Schools, universities |
 
-### 15.8 Pertimbangan Regulasi Fase 7
+### 15.8 Pertimbangan Regulasi Fase 10
 
 | **Fitur** | **Regulasi** | **Requirement** |
 |-----------|--------------|-----------------|
@@ -1754,14 +1754,14 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 16. Detail Fase 8 — AI Agent Swarm + Autonomy
+## 16. Detail Fase 11 — AI Agent Swarm + Autonomy
 
 ### 16.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | Fase 7 ≥ 5 enterprise customers + AI infrastructure mature    |
+| **Gate Condition**     | Fase 10 ≥ 5 enterprise customers + AI infrastructure mature    |
 | **Total Fitur**        | 20 fitur dalam 5 sub-fase                                    |
 | **Milestone**          | M109-M118                                                     |
 | **Estimasi Total**     | 500-700 jam                                                   |
@@ -1811,7 +1811,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | 19    | AI Contextual Help           | 🟢        | Contextual help system powered by AI. Muncul saat user terlihat bingung (hesitation detection). Proactive guidance. | M118 |
 | 20    | AI Security Advisor          | 🟣        | AI advisor untuk keamanan dokumen. Scan sensitive content, suggest protection level, compliance recommendations. | M118 |
 
-### 16.7 Acceptance Criteria Fase 8 (Detail)
+### 16.7 Acceptance Criteria Fase 11 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -1858,7 +1858,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | AI Security Advisor | AC1 | Scan sensitive content, suggest protection level | Functional |
 | AI Security Advisor | AC2 | Compliance recommendations per document type | Quality |
 
-### 16.8 Acceptance Criteria Fase 8 (Ringkasan)
+### 16.8 Acceptance Criteria Fase 11 (Ringkasan)
 
 | **Sub-fase** | **Key Metrics** | **Quality Gate** |
 |--------------|-----------------|------------------|
@@ -1872,7 +1872,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    AGENT SWARM ARCHITECTURE (Fase 8)                          │
+│                    AGENT SWARM ARCHITECTURE (Fase 11)                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  ┌─────────────────────────────────────────────────────────────────┐       │
@@ -1927,7 +1927,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 - Autonomous Agents: L4-L5 (Act Autonomously to Self-Direct)
 - Self-Funding Agent: L4 dengan hard budget cap
 
-### 16.8 Pertimbangan Teknis Fase 8
+### 16.8 Pertimbangan Teknis Fase 11
 
 - **Agent Safety:** Semua autonomous actions memiliki rollback mechanism dan human override
 - **Cost Control:** Hard budget caps per agent per bulan, alert escalation
@@ -1937,14 +1937,14 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ---
 
-## 17. Detail Fase 9 — Moonshots & Future
+## 17. Detail Fase 12 — Moonshots & Future
 
 ### 17.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔮 VISI                                                      |
-| **Gate Condition**     | Fase 8 agent swarm stabil + market leadership established     |
+| **Gate Condition**     | Fase 11 agent swarm stabil + market leadership established     |
 | **Total Fitur**        | 48 fitur dalam 10 sub-fase                                   |
 | **Milestone**          | M119-M145                                                     |
 | **Estimasi Total**     | 1000-1500 jam                                                 |
@@ -2049,7 +2049,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 > **Catatan:** Neural PDF (AI-native format) tercakup dalam fitur #20 "Custom Document Format" di Fase F9E.
 
-### 17.12 Acceptance Criteria Fase 9 (Detail)
+### 17.12 Acceptance Criteria Fase 12 (Detail)
 
 | **Fitur** | **AC#** | **Kriteria** | **Tipe** |
 |-----------|---------|--------------|----------|
@@ -2118,7 +2118,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | Offline-First Architecture | AC1 | Semua tools offline, sync saat online, conflict resolution | Functional |
 | Personal AI Assistant | AC1 | Learns preferences, proactive suggestions, automated workflows | Functional |
 
-### 17.13 Acceptance Criteria Fase 9 (Ringkasan)
+### 17.13 Acceptance Criteria Fase 12 (Ringkasan)
 
 | **Sub-fase** | **Key Metrics** | **Quality Gate** |
 |--------------|-----------------|------------------|
@@ -2133,7 +2133,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 | F9I (Agent Specialists) | Financial controller saves > 20% costs; incident response < 5 menit | 2 fitur operational |
 | F9J (Integrations) | 5+ integrations active; offline-first 100% tool coverage | 11 fitur deployed |
 
-### 17.14 Pertimbangan Teknis Fase 9
+### 17.14 Pertimbangan Teknis Fase 12
 
 - **Blockchain:** Polygon/Arbitrum (low gas fees) atau private chain untuk enterprise
 - **Zero-Knowledge:** Intel SGX atau AWS Nitro Enclaves untuk secure processing
@@ -2147,7 +2147,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 - **Green Computing:** Carbon-aware scheduling, renewable energy hosting, efficiency metrics
 - **Indonesia Document Standard:** Collaboration dengan BSN (Badan Standardisasi Nasional)
 
-### 17.15 Fase 9 Risk Assessment
+### 17.15 Fase 12 Risk Assessment
 
 | **Fitur** | **Risk Level** | **Key Risk** | **Mitigation** |
 |-----------|---------------|--------------|----------------|
@@ -2164,7 +2164,7 @@ Fase 3A adalah prerequisite untuk semua sub-fase lain karena i18n strings dan er
 
 ### 17.16 Moonshot Evaluation Framework
 
-Setiap moonshot feature di Fase 9 dievaluasi menggunakan framework berikut sebelum development dimulai:
+Setiap moonshot feature di Fase 12 dievaluasi menggunakan framework berikut sebelum development dimulai:
 
 | **Kriteria** | **Threshold** | **Measurement** |
 |--------------|---------------|-----------------|
@@ -2184,12 +2184,12 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 |--------|---------------------------------------|-------------------------------------------------------------------------------------------------------------------|---------------------------------------|
 | X1     | PDF text editing (in-place)           | Sangat kompleks, membutuhkan PDF rendering engine lengkap. Bukan core value proposition.                          | Tidak dalam horizon roadmap ini.      |
 | X2     | Video/audio processing                | Di luar scope "PDF/document tool". Fokus pada dokumen, bukan multimedia.                                          | Tidak akan dibangun.                  |
-| X3     | Social media features (feed/likes)    | Papyr adalah utility tool, bukan social platform. Community forum (Fase 6) berbeda dari social media.             | Tidak akan dibangun.                  |
+| X3     | Social media features (feed/likes)    | Papyr adalah utility tool, bukan social platform. Community forum (Fase 9) berbeda dari social media.             | Tidak akan dibangun.                  |
 | X4     | Cryptocurrency payments               | Tidak ada demand yang jelas di pasar Indonesia untuk crypto payments pada PDF tools.                              | Tidak akan dibangun.                  |
 | X5     | Gaming/entertainment features         | Tidak relevan dengan document management. Gamification (badges) berbeda dari gaming.                              | Tidak akan dibangun.                  |
 | X6     | General-purpose AI chatbot            | Papyr AI fokus pada dokumen. Bukan general chatbot seperti ChatGPT.                                               | Tidak akan dibangun.                  |
 
-> **Catatan v4.0:** Beberapa item yang sebelumnya di daftar "tidak akan dibangun" (desktop app, mobile app, marketplace/plugin, real-time collaboration, blockchain) kini masuk ke fase lanjutan (Fase 6-9) karena visi produk telah berkembang. Items di atas tetap benar-benar di luar scope.
+> **Catatan v4.0:** Beberapa item yang sebelumnya di daftar "tidak akan dibangun" (desktop app, mobile app, marketplace/plugin, real-time collaboration, blockchain) kini masuk ke fase lanjutan (Fase 9-9) karena visi produk telah berkembang. Items di atas tetap benar-benar di luar scope.
 
 ---
 
@@ -2202,57 +2202,57 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 │                              DEPENDENCY GRAPH (12 FASE)                                       │
 ├─────────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                             │
-│  MVP 0.1 (COMPLETED) ✅                                                                     │
+│  Fase 1 (COMPLETED) ✅                                                                     │
 │  ┌─────┐                                                                                    │
 │  │ M01 │──► M02-M06 ──► M07-M08 ──► M09-M10 ──► M11                                       │
 │  └─────┘                                                                                    │
 │       │                                                                                     │
 │       ▼ [GATE: live & stabil ✅]                                                            │
 │                                                                                             │
-│  MVP 0.2 (CURRENT) 🔄                                                                       │
+│  Fase 2 (CURRENT) 🔄                                                                       │
 │  Fase 2A → 2B → 2C → 2D → 2E (M21) → 2F (M22)                                           │
 │       │                                                                                     │
 │       ▼ [GATE: semua tool berfungsi + OpenClaw aktif]                                       │
 │                                                                                             │
-│  MVP 0.3 (PLANNED) 📋                                                                       │
+│  Fase 3 (PLANNED) 📋                                                                       │
 │  Fase 3A → 3B → 3C → 3D → 3E                                                             │
 │       │                                                                                     │
 │       ▼ [GATE: ≥ 10K tasks/mo OR ≥ 5K MAU]                                                 │
 │                                                                                             │
-│  MVP 0.4 (PLANNED) 📋                                                                       │
+│  Fase 4 (PLANNED) 📋                                                                       │
 │  Fase 4A → 4B → 4C → 4D → 4E                                                             │
 │       │                                                                                     │
 │       ▼ [GATE: revenue > Rp 0]                                                             │
 │                                                                                             │
-│  Fase 2 (VISI) 🔮 ── AI Core                                                               │
+│  Fase 5 (VISI) 🔮 ── AI Core                                                               │
 │       │                                                                                     │
 │       ▼ [GATE: stabil + ≥ 100 AI tasks/hari]                                               │
 │                                                                                             │
-│  Fase 3 (VISI) 🔮 ── AI Advanced + Integrations                                            │
+│  Fase 6 (VISI) 🔮 ── AI Advanced + Integrations                                            │
 │       │                                                                                     │
 │       ▼ [GATE: stabil + regulatory + partnership MoU]                                       │
 │                                                                                             │
-│  Fase 4 (VISI) 🔮 ── Indonesia Deep + Enterprise                                           │
+│  Fase 7 (VISI) 🔮 ── Indonesia Deep + Enterprise                                           │
 │       │                                                                                     │
 │       ▼ [GATE: stabil + ≥ 50K MAU + revenue sustainable]                                    │
 │                                                                                             │
-│  Fase 5 (VISI) 🔮 ── Scale + Ecosystem (Expanded)                                          │
+│  Fase 8 (VISI) 🔮 ── Scale + Ecosystem (Expanded)                                          │
 │       │                                                                                     │
 │       ▼ [GATE: stabil + ≥ 100K MAU + MRR > Rp 10 juta]                                     │
 │                                                                                             │
-│  Fase 6 (VISI) 🔮 ── Platform & Marketplace                                                │
+│  Fase 9 (VISI) 🔮 ── Platform & Marketplace                                                │
 │       │                                                                                     │
 │       ▼ [GATE: marketplace aktif + ≥ 10 enterprise inquiries]                               │
 │                                                                                             │
-│  Fase 7 (VISI) 🔮 ── Enterprise & B2B                                                      │
+│  Fase 10 (VISI) 🔮 ── Enterprise & B2B                                                      │
 │       │                                                                                     │
 │       ▼ [GATE: ≥ 5 enterprise customers + AI infra mature]                                  │
 │                                                                                             │
-│  Fase 8 (VISI) 🔮 ── AI Agent Swarm + Autonomy                                             │
+│  Fase 11 (VISI) 🔮 ── AI Agent Swarm + Autonomy                                             │
 │       │                                                                                     │
 │       ▼ [GATE: agent swarm stabil + market leadership]                                      │
 │                                                                                             │
-│  Fase 9 (VISI) 🔮 ── Moonshots & Future                                                    │
+│  Fase 12 (VISI) 🔮 ── Moonshots & Future                                                    │
 │                                                                                             │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -2261,39 +2261,39 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 
 | **Fitur (Source)** | **Depends On** | **Alasan** |
 |--------------------|----------------|------------|
-| MVP 0.3 i18n | MVP 0.2 complete | Semua tool harus ada sebelum translate strings |
-| MVP 0.3 PWA | MVP 0.2 Fase 2D (Perf) | Performance baseline harus tercapai dulu |
-| MVP 0.4 Auth | MVP 0.3 complete | UX polish harus selesai sebelum login flow |
-| MVP 0.4 Payment | MVP 0.4 Auth | Payment membutuhkan user accounts |
-| MVP 0.4 API Key | MVP 0.4 Payment | API access = Pro feature |
-| Fase 2 AI features | MVP 0.4 Payment | Revenue validation required |
-| Fase 2 AI OpenClaw | MVP 0.2 Fase 2E | Existing OpenClaw harus stable |
-| Fase 3 Integrations | MVP 0.4 Auth | OAuth flow membutuhkan user accounts |
-| Fase 3 PDF/A | MVP 0.2 Fase 2C | Ghostscript harus sudah di-setup |
-| Fase 4 e-Meterai | Fase 3 complete | Regulatory assessment membutuhkan stable product |
-| Fase 4 Enterprise | MVP 0.4 Auth + Payment | Multi-tenant membutuhkan auth + billing |
-| Fase 5 WhatsApp Bot | Fase 4 complete | Bot membutuhkan semua tools + AI available |
-| Fase 5 CLI | MVP 0.4 API Key | CLI menggunakan API key untuk auth |
-| Fase 5 OpenClaw Agents | Fase 5 F5C complete | New agents build on existing ecosystem |
-| Fase 6 Marketplace | Fase 5 stabil | Platform needs stable product foundation |
-| Fase 6 SDK | MVP 0.4 Public API | SDK wraps existing API |
-| Fase 6 Desktop/Mobile | MVP 0.3 PWA + MVP 0.4 Auth | Shared offline logic + auth flow |
-| Fase 6 Credits System | MVP 0.4 Payment | Payment infrastructure required |
-| Fase 6 White-label | Fase 4 Enterprise | Enterprise features as base |
-| Fase 7 Government | Fase 6 Platform | Government needs enterprise-grade platform |
-| Fase 7 SSO/SAML | MVP 0.4 Auth | Enterprise auth extends basic auth |
-| Fase 7 Self-Hosted | Fase 6 Desktop App | Shared deployment architecture |
-| Fase 7 Real-time Collab | Fase 6 Document Storage | Needs persistent document layer |
-| Fase 8 Agent Swarm | Fase 5 OpenClaw Agents | Swarm builds on expanded agent base |
-| Fase 8 AI Workflow | Fase 2 Workflow Builder | Advanced workflow extends basic builder |
-| Fase 8 Memory System | Fase 5 OpenClaw Ecosystem | Needs existing agent infrastructure |
-| Fase 8 Self-Funding | Fase 6 Affiliate Network | Revenue mechanisms as foundation |
-| Fase 9 e-Meterai Partnership | Fase 4 e-Meterai Validator | Partnership extends validation feature |
-| Fase 9 Proprietary AI | Fase 2 + Fase 3 AI features | Training data from AI feature usage |
-| Fase 9 Knowledge Base | Fase 8 Document Understanding Graph | Graph as foundation for knowledge |
-| Fase 9 Blockchain | Fase 7 Audit Trail | Immutable logging as prerequisite |
-| Fase 9 Scanner Box | Fase 6 Mobile App | Shared mobile processing pipeline |
-| Fase 9 Offline-First | MVP 0.3 PWA + Fase 6 Desktop | Offline architecture foundation |
+| Fase 3 i18n | Fase 2 complete | Semua tool harus ada sebelum translate strings |
+| Fase 3 PWA | Fase 2 Fase 2D (Perf) | Performance baseline harus tercapai dulu |
+| Fase 4 Auth | Fase 3 complete | UX polish harus selesai sebelum login flow |
+| Fase 4 Payment | Fase 4 Auth | Payment membutuhkan user accounts |
+| Fase 4 API Key | Fase 4 Payment | API access = Pro feature |
+| Fase 5 AI features | Fase 4 Payment | Revenue validation required |
+| Fase 5 AI OpenClaw | Fase 2 Fase 2E | Existing OpenClaw harus stable |
+| Fase 6 Integrations | Fase 4 Auth | OAuth flow membutuhkan user accounts |
+| Fase 6 PDF/A | Fase 2 Fase 2C | Ghostscript harus sudah di-setup |
+| Fase 7 e-Meterai | Fase 6 complete | Regulatory assessment membutuhkan stable product |
+| Fase 7 Enterprise | Fase 4 Auth + Payment | Multi-tenant membutuhkan auth + billing |
+| Fase 8 WhatsApp Bot | Fase 7 complete | Bot membutuhkan semua tools + AI available |
+| Fase 8 CLI | Fase 4 API Key | CLI menggunakan API key untuk auth |
+| Fase 8 OpenClaw Agents | Fase 8 F5C complete | New agents build on existing ecosystem |
+| Fase 9 Marketplace | Fase 8 stabil | Platform needs stable product foundation |
+| Fase 9 SDK | Fase 4 Public API | SDK wraps existing API |
+| Fase 9 Desktop/Mobile | Fase 3 PWA + Fase 4 Auth | Shared offline logic + auth flow |
+| Fase 9 Credits System | Fase 4 Payment | Payment infrastructure required |
+| Fase 9 White-label | Fase 7 Enterprise | Enterprise features as base |
+| Fase 10 Government | Fase 9 Platform | Government needs enterprise-grade platform |
+| Fase 10 SSO/SAML | Fase 4 Auth | Enterprise auth extends basic auth |
+| Fase 10 Self-Hosted | Fase 9 Desktop App | Shared deployment architecture |
+| Fase 10 Real-time Collab | Fase 9 Document Storage | Needs persistent document layer |
+| Fase 11 Agent Swarm | Fase 8 OpenClaw Agents | Swarm builds on expanded agent base |
+| Fase 11 AI Workflow | Fase 5 Workflow Builder | Advanced workflow extends basic builder |
+| Fase 11 Memory System | Fase 8 OpenClaw Ecosystem | Needs existing agent infrastructure |
+| Fase 11 Self-Funding | Fase 9 Affiliate Network | Revenue mechanisms as foundation |
+| Fase 12 e-Meterai Partnership | Fase 7 e-Meterai Validator | Partnership extends validation feature |
+| Fase 12 Proprietary AI | Fase 5 + Fase 6 AI features | Training data from AI feature usage |
+| Fase 12 Knowledge Base | Fase 11 Document Understanding Graph | Graph as foundation for knowledge |
+| Fase 12 Blockchain | Fase 10 Audit Trail | Immutable logging as prerequisite |
+| Fase 12 Scanner Box | Fase 9 Mobile App | Shared mobile processing pipeline |
+| Fase 12 Offline-First | Fase 3 PWA + Fase 9 Desktop | Offline architecture foundation |
 
 ### 19.3 Matriks Prioritas (Top Features per Fase)
 
@@ -2302,20 +2302,20 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | M12 Protect            | Medium     | Low        | P1            | 🟢        | Quick win, natural pair M13                      |
 | M15 Sign               | High       | Medium     | P1            | 🟡        | High demand Indonesia (kontrak, surat)           |
 | M17 OCR                | High       | High       | P3            | 🟡        | Kompleks tapi sangat bernilai                    |
-| Dark Mode (MVP 0.3)    | Medium     | Low        | P2            | 🟢        | Most requested UX feature                        |
-| Auth System (MVP 0.4)  | Medium     | Medium     | P3            | 🟢        | Enabler monetisasi                               |
-| AI Summarizer (Fase 2) | High       | High       | P5            | 🟣        | High value, R&D required                         |
-| e-Meterai (Fase 4)     | Very High  | Very High  | P7            | 🔴        | Game-changer tapi regulated                      |
-| Marketplace (Fase 6)   | Very High  | High       | P9            | 🟡        | Platform play, revenue diversification           |
+| Dark Mode (Fase 3)    | Medium     | Low        | P2            | 🟢        | Most requested UX feature                        |
+| Auth System (Fase 4)  | Medium     | Medium     | P3            | 🟢        | Enabler monetisasi                               |
+| AI Summarizer (Fase 5) | High       | High       | P5            | 🟣        | High value, R&D required                         |
+| e-Meterai (Fase 7)     | Very High  | Very High  | P7            | 🔴        | Game-changer tapi regulated                      |
+| Marketplace (Fase 9)   | Very High  | High       | P9            | 🟡        | Platform play, revenue diversification           |
 | Enterprise Console (F7)| High       | High       | P10           | 🟡        | Enterprise revenue enabler                       |
-| Agent Swarm (Fase 8)   | Very High  | Very High  | P11           | 🟣        | Competitive moat, autonomous operations          |
+| Agent Swarm (Fase 11)   | Very High  | Very High  | P11           | 🟣        | Competitive moat, autonomous operations          |
 | e-Meterai Partnership (F9) | Very High | Very High | P12        | 🔴        | Market leadership, government trust              |
 
 ---
 
 ## 20. Metrik Keberhasilan per Fase
 
-### 20.1 MVP 0.1 (COMPLETED)
+### 20.1 Fase 1 (COMPLETED)
 
 | **Metrik**                    | **Target**                | **Aktual**       | **Status**  |
 |-------------------------------|---------------------------|------------------|-------------|
@@ -2324,7 +2324,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | Production Deploy             | Live di mypapyr.com       | Live             | ✅ Met      |
 | Zero Critical Bugs (7 hari)  | 0 critical bugs           | 0                | ✅ Met      |
 
-### 20.2 MVP 0.2
+### 20.2 Fase 2
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2333,7 +2333,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | SEO Ranking                   | Top 10 Google ID per keyword tool             |
 | OpenClaw Uptime               | ≥ 99% agent availability                     |
 
-### 20.3 MVP 0.3
+### 20.3 Fase 3
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2342,7 +2342,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | TTFB Indonesia                | < 200ms                                       |
 | PWA Installs                  | ≥ 500 dalam 3 bulan                          |
 
-### 20.4 MVP 0.4
+### 20.4 Fase 4
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2351,7 +2351,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | Monthly Recurring Revenue     | ≥ Rp 500.000/bulan dalam 6 bulan             |
 | Payment Success Rate          | > 95%                                         |
 
-### 20.5 Fase 2
+### 20.5 Fase 5
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2360,7 +2360,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | Revenue Impact                | +30% MRR dari AI upsell                       |
 | Cost per AI Request           | < Rp 500 rata-rata                            |
 
-### 20.6 Fase 3
+### 20.6 Fase 6
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2368,7 +2368,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | Integration Adoption          | ≥ 500 connected accounts                      |
 | Browser Extension Installs    | ≥ 1.000 dalam 6 bulan                        |
 
-### 20.7 Fase 4
+### 20.7 Fase 7
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2376,7 +2376,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | Enterprise Clients            | ≥ 5 paying accounts                           |
 | Market Position               | Top 3 PDF tool Indonesia                      |
 
-### 20.8 Fase 5
+### 20.8 Fase 8
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2385,7 +2385,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | MAU                           | ≥ 50.000                                      |
 | OpenClaw Agents Active        | 18 agents (10 original + 8 new)               |
 
-### 20.9 Fase 6
+### 20.9 Fase 9
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2395,7 +2395,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | Platform Revenue              | ≥ 30% total revenue dari marketplace/credits  |
 | MAU                           | ≥ 100.000                                     |
 
-### 20.10 Fase 7
+### 20.10 Fase 10
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2405,7 +2405,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | SLA Compliance                | 99.99% uptime                                 |
 | SSO Integrations              | ≥ 5 providers                                 |
 
-### 20.11 Fase 8
+### 20.11 Fase 11
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2415,7 +2415,7 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | Agent Marketplace             | ≥ 10 third-party agents                       |
 | Cross-Agent Tasks             | ≥ 100/hari                                    |
 
-### 20.12 Fase 9
+### 20.12 Fase 12
 
 | **Metrik**                    | **Target**                                    |
 |-------------------------------|-----------------------------------------------|
@@ -2506,14 +2506,14 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 | ADR-004  | HostData.id VPS untuk OpenClaw | Railway free tier insufficient untuk always-on agent; Indonesian provider = local support | Separate infrastructure management, tapi dedicated resources |
 | ADR-005  | Phase-gated development | AI-driven development = unpredictable velocity; time-based deadlines tidak realistis | Slower perceived progress, tapi higher quality per release |
 | ADR-006  | Freemium dengan Pro Rp 19.900 | Indonesian market price-sensitive; kompetitor global terlalu mahal | Low ARPU, tapi high volume potential; sustainable jika conversion > 2% |
-| ADR-007  | Desktop app via Tauri (Fase 6) | PWA covers 95% use cases tapi enterprise needs native; Tauri smaller than Electron | Additional maintenance burden, tapi unlocks enterprise + offline market |
+| ADR-007  | Desktop app via Tauri (Fase 9) | PWA covers 95% use cases tapi enterprise needs native; Tauri smaller than Electron | Additional maintenance burden, tapi unlocks enterprise + offline market |
 | ADR-008  | Bahasa Indonesia default, English optional | Target market Indonesia; English = bonus untuk SEO international | Limits international growth, tapi strengthens local positioning |
 | ADR-009  | Agent swarm via BullMQ + Redis | Need reliable task queue for multi-agent coordination | Already in stack, sufficient for current scale, upgrade path to Kafka |
 | ADR-010  | Marketplace 70/30 revenue split | Industry standard (Apple 70/30), fair for creators | Lower margin per transaction, tapi incentivizes ecosystem growth |
-| ADR-011  | Flutter untuk mobile app (Fase 6) | Single codebase for iOS + Android, good performance | Dart learning curve, tapi faster development than 2 native apps |
-| ADR-012  | Polygon untuk blockchain (Fase 9) | Low gas fees, EVM compatible, sufficient security | Blockchain adoption uncertain, tapi reversible decision |
+| ADR-011  | Flutter untuk mobile app (Fase 9) | Single codebase for iOS + Android, good performance | Dart learning curve, tapi faster development than 2 native apps |
+| ADR-012  | Polygon untuk blockchain (Fase 12) | Low gas fees, EVM compatible, sufficient security | Blockchain adoption uncertain, tapi reversible decision |
 | ADR-013  | Plugin sandboxing via iframe | Security isolation critical for third-party code | Performance overhead, tapi prevents malicious plugins |
-| ADR-014  | CRDT untuk offline-first (Fase 9) | Need conflict resolution for offline edits | Complex implementation, tapi proven technology (Yjs, Automerge) |
+| ADR-014  | CRDT untuk offline-first (Fase 12) | Need conflict resolution for offline edits | Complex implementation, tapi proven technology (Yjs, Automerge) |
 
 ---
 
@@ -2534,41 +2534,41 @@ Moonshot yang tidak memenuhi ≥ 3 dari 5 kriteria akan di-deprioritize atau di-
 
 | **Fase Roadmap** | **BRD Section**          | **Project Plan Section** | **GTM Section**          |
 |------------------|--------------------------|--------------------------|--------------------------|
-| MVP 0.1          | §3 Functional Req        | §3 WBS (M01-M11)        | §2 Launch Strategy       |
-| MVP 0.2          | §3.2 Future Req          | §3 WBS (M12-M22)        | §3 Growth Strategy       |
-| MVP 0.3          | §3.3 UX Requirements     | §4 Resource Plan         | §3 Growth Strategy       |
-| MVP 0.4          | §4 Business Model        | §4 Resource Plan         | §4 Monetization          |
-| Fase 2           | §5 AI Vision             | —                        | §5 Expansion             |
-| Fase 3           | §5 AI Vision             | —                        | §5 Expansion             |
-| Fase 4           | §6 Indonesia Deep        | —                        | §6 Enterprise            |
-| Fase 5           | §7 Scale Vision          | —                        | §7 Ecosystem             |
-| Fase 6           | §8 Platform Vision       | —                        | §8 Platform              |
-| Fase 7           | §9 Enterprise Vision     | —                        | §9 B2B                   |
-| Fase 8           | §10 AI Autonomy          | —                        | §10 AI Strategy          |
-| Fase 9           | §11 Moonshots            | —                        | §11 Future               |
+| Fase 1          | §3 Functional Req        | §3 WBS (M01-M11)        | §2 Launch Strategy       |
+| Fase 2          | §3.2 Future Req          | §3 WBS (M12-M22)        | §3 Growth Strategy       |
+| Fase 3          | §3.3 UX Requirements     | §4 Resource Plan         | §3 Growth Strategy       |
+| Fase 4          | §4 Business Model        | §4 Resource Plan         | §4 Monetization          |
+| Fase 5           | §5 AI Vision             | —                        | §5 Expansion             |
+| Fase 6           | §5 AI Vision             | —                        | §5 Expansion             |
+| Fase 7           | §6 Indonesia Deep        | —                        | §6 Enterprise            |
+| Fase 8           | §7 Scale Vision          | —                        | §7 Ecosystem             |
+| Fase 9           | §8 Platform Vision       | —                        | §8 Platform              |
+| Fase 10           | §9 Enterprise Vision     | —                        | §9 B2B                   |
+| Fase 11           | §10 AI Autonomy          | —                        | §10 AI Strategy          |
+| Fase 12           | §11 Moonshots            | —                        | §11 Future               |
 
 ### 23.3 Feature Count Verification
 
 | **Fase** | **Sub-fase** | **Fitur Count** | **Verified** |
 |----------|--------------|-----------------|--------------|
-| MVP 0.3  | Fase 3A-3E  | 23              | ✅           |
-| MVP 0.4  | Fase 4A-4E  | 18              | ✅           |
-| Fase 2   | F2A-F2D      | 22              | ✅           |
-| Fase 3   | F3A-F3E      | 22              | ✅           |
-| Fase 4   | F4A-F4D      | 14              | ✅           |
-| Fase 5   | F5A-F5F      | 22              | ✅           |
-| Fase 6   | F6A-F6D      | 25              | ✅           |
-| Fase 7   | F7A-F7E      | 20              | ✅           |
-| Fase 8   | F8A-F8E      | 20              | ✅           |
-| Fase 9   | F9A-F9J      | 48              | ✅           |
-| **GRAND TOTAL (MVP 0.3 - Fase 9)** | | **234** | ✅ |
+| Fase 3  | Fase 3A-3E  | 23              | ✅           |
+| Fase 4  | Fase 4A-4E  | 18              | ✅           |
+| Fase 5   | F2A-F2D      | 22              | ✅           |
+| Fase 6   | F3A-F3E      | 22              | ✅           |
+| Fase 7   | F4A-F4D      | 14              | ✅           |
+| Fase 8   | F5A-F5F      | 22              | ✅           |
+| Fase 9   | F6A-F6D      | 25              | ✅           |
+| Fase 10   | F7A-F7E      | 20              | ✅           |
+| Fase 11   | F8A-F8E      | 20              | ✅           |
+| Fase 12   | F9A-F9J      | 48              | ✅           |
+| **GRAND TOTAL (Fase 3 - Fase 12)** | | **234** | ✅ |
 
 > **Catatan:** Total 234 fitur baru + 4 fitur implisit (LLM infrastructure setup, platform architecture, agent swarm protocol, blockchain infrastructure) = 238 fitur terklasifikasi sesuai target dokumen.
 
 ### 23.4 Traceability
 
 Setiap milestone dalam roadmap ini dapat di-trace ke:
-- **Tasks:** PAPYR-001 — PAPYR-089 (MVP 0.1, completed) + tasks TBD (MVP 0.2+)
+- **Tasks:** PAPYR-001 — PAPYR-089 (Fase 1, completed) + tasks TBD (Fase 2+)
 - **Requirements:** Functional requirements di PPR-BRD-001
 - **Test Cases:** Test plan di PPR-TP-001
 - **Release Notes:** PPR-RN-001
@@ -2577,72 +2577,72 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 
 | **Fase** | **Sub-fase** | **Fitur Count** | **Verified** |
 |----------|--------------|-----------------|--------------|
-| MVP 0.3  | Fase 3A     | 4               | ✅           |
-| MVP 0.3  | Fase 3B     | 5               | ✅           |
-| MVP 0.3  | Fase 3C     | 6               | ✅           |
-| MVP 0.3  | Fase 3D     | 5               | ✅           |
-| MVP 0.3  | Fase 3E     | 3               | ✅           |
-| **MVP 0.3 Total** | | **23**          | ✅           |
-| MVP 0.4  | Fase 4A     | 4               | ✅           |
-| MVP 0.4  | Fase 4B     | 4               | ✅           |
-| MVP 0.4  | Fase 4C     | 2               | ✅           |
-| MVP 0.4  | Fase 4D     | 3               | ✅           |
-| MVP 0.4  | Fase 4E     | 5               | ✅           |
-| **MVP 0.4 Total** | | **18**          | ✅           |
-| Fase 2   | F2A          | 5               | ✅           |
-| Fase 2   | F2B          | 9               | ✅           |
-| Fase 2   | F2C          | 1               | ✅           |
-| Fase 2   | F2D          | 7               | ✅           |
-| **Fase 2 Total** | | **22**           | ✅           |
-| Fase 3   | F3A          | 4               | ✅           |
-| Fase 3   | F3B          | 6               | ✅           |
-| Fase 3   | F3C          | 3               | ✅           |
-| Fase 3   | F3D          | 5               | ✅           |
-| Fase 3   | F3E          | 4               | ✅           |
-| **Fase 3 Total** | | **22**           | ✅           |
-| Fase 4   | F4A          | 6               | ✅           |
-| Fase 4   | F4B          | 3               | ✅           |
-| Fase 4   | F4C          | 3               | ✅           |
-| Fase 4   | F4D          | 2               | ✅           |
-| **Fase 4 Total** | | **14**           | ✅           |
-| Fase 5   | F5A          | 2               | ✅           |
-| Fase 5   | F5B          | 3               | ✅           |
-| Fase 5   | F5C          | 5               | ✅           |
-| Fase 5   | F5D          | 4               | ✅           |
-| Fase 5   | F5E          | 4               | ✅           |
-| Fase 5   | F5F          | 4               | ✅           |
+| Fase 3  | Fase 3A     | 4               | ✅           |
+| Fase 3  | Fase 3B     | 5               | ✅           |
+| Fase 3  | Fase 3C     | 6               | ✅           |
+| Fase 3  | Fase 3D     | 5               | ✅           |
+| Fase 3  | Fase 3E     | 3               | ✅           |
+| **Fase 3 Total** | | **23**          | ✅           |
+| Fase 4  | Fase 4A     | 4               | ✅           |
+| Fase 4  | Fase 4B     | 4               | ✅           |
+| Fase 4  | Fase 4C     | 2               | ✅           |
+| Fase 4  | Fase 4D     | 3               | ✅           |
+| Fase 4  | Fase 4E     | 5               | ✅           |
+| **Fase 4 Total** | | **18**          | ✅           |
+| Fase 5   | F2A          | 5               | ✅           |
+| Fase 5   | F2B          | 9               | ✅           |
+| Fase 5   | F2C          | 1               | ✅           |
+| Fase 5   | F2D          | 7               | ✅           |
 | **Fase 5 Total** | | **22**           | ✅           |
-| Fase 6   | F6A          | 5               | ✅           |
-| Fase 6   | F6B          | 4               | ✅           |
-| Fase 6   | F6C          | 4               | ✅           |
-| Fase 6   | F6D          | 12              | ✅           |
-| **Fase 6 Total** | | **25**           | ✅           |
-| Fase 7   | F7A          | 3               | ✅           |
-| Fase 7   | F7B          | 3               | ✅           |
-| Fase 7   | F7C          | 3               | ✅           |
-| Fase 7   | F7D          | 4               | ✅           |
-| Fase 7   | F7E          | 7               | ✅           |
-| **Fase 7 Total** | | **20**           | ✅           |
-| Fase 8   | F8A          | 3               | ✅           |
-| Fase 8   | F8B          | 4               | ✅           |
-| Fase 8   | F8C          | 3               | ✅           |
-| Fase 8   | F8D          | 3               | ✅           |
-| Fase 8   | F8E          | 7               | ✅           |
-| **Fase 8 Total** | | **20**           | ✅           |
-| Fase 9   | F9A          | 3               | ✅           |
-| Fase 9   | F9B          | 5               | ✅           |
-| Fase 9   | F9C          | 5               | ✅           |
-| Fase 9   | F9D          | 5               | ✅           |
-| Fase 9   | F9E          | 4               | ✅           |
-| Fase 9   | F9F          | 5               | ✅           |
-| Fase 9   | F9G          | 5               | ✅           |
-| Fase 9   | F9H          | 4               | ✅           |
-| Fase 9   | F9I          | 2               | ✅           |
-| Fase 9   | F9J          | 11              | ✅           |
-| **Fase 9 Total** | | **49**           | ✅           |
-| **GRAND TOTAL (MVP 0.3 - Fase 9)** | | **235** | ✅ |
+| Fase 6   | F3A          | 4               | ✅           |
+| Fase 6   | F3B          | 6               | ✅           |
+| Fase 6   | F3C          | 3               | ✅           |
+| Fase 6   | F3D          | 5               | ✅           |
+| Fase 6   | F3E          | 4               | ✅           |
+| **Fase 6 Total** | | **22**           | ✅           |
+| Fase 7   | F4A          | 6               | ✅           |
+| Fase 7   | F4B          | 3               | ✅           |
+| Fase 7   | F4C          | 3               | ✅           |
+| Fase 7   | F4D          | 2               | ✅           |
+| **Fase 7 Total** | | **14**           | ✅           |
+| Fase 8   | F5A          | 2               | ✅           |
+| Fase 8   | F5B          | 3               | ✅           |
+| Fase 8   | F5C          | 5               | ✅           |
+| Fase 8   | F5D          | 4               | ✅           |
+| Fase 8   | F5E          | 4               | ✅           |
+| Fase 8   | F5F          | 4               | ✅           |
+| **Fase 8 Total** | | **22**           | ✅           |
+| Fase 9   | F6A          | 5               | ✅           |
+| Fase 9   | F6B          | 4               | ✅           |
+| Fase 9   | F6C          | 4               | ✅           |
+| Fase 9   | F6D          | 12              | ✅           |
+| **Fase 9 Total** | | **25**           | ✅           |
+| Fase 10   | F7A          | 3               | ✅           |
+| Fase 10   | F7B          | 3               | ✅           |
+| Fase 10   | F7C          | 3               | ✅           |
+| Fase 10   | F7D          | 4               | ✅           |
+| Fase 10   | F7E          | 7               | ✅           |
+| **Fase 10 Total** | | **20**           | ✅           |
+| Fase 11   | F8A          | 3               | ✅           |
+| Fase 11   | F8B          | 4               | ✅           |
+| Fase 11   | F8C          | 3               | ✅           |
+| Fase 11   | F8D          | 3               | ✅           |
+| Fase 11   | F8E          | 7               | ✅           |
+| **Fase 11 Total** | | **20**           | ✅           |
+| Fase 12   | F9A          | 3               | ✅           |
+| Fase 12   | F9B          | 5               | ✅           |
+| Fase 12   | F9C          | 5               | ✅           |
+| Fase 12   | F9D          | 5               | ✅           |
+| Fase 12   | F9E          | 4               | ✅           |
+| Fase 12   | F9F          | 5               | ✅           |
+| Fase 12   | F9G          | 5               | ✅           |
+| Fase 12   | F9H          | 4               | ✅           |
+| Fase 12   | F9I          | 2               | ✅           |
+| Fase 12   | F9J          | 11              | ✅           |
+| **Fase 12 Total** | | **49**           | ✅           |
+| **GRAND TOTAL (Fase 3 - Fase 12)** | | **235** | ✅ |
 
-> **Catatan:** Total 235 fitur eksplisit + 3 fitur implisit (LLM infrastructure setup di Fase 2, platform architecture di Fase 6, agent swarm protocol di Fase 8) = 238 fitur terklasifikasi sesuai target dokumen. Neural PDF (AI-native format) tercakup dalam fitur "Custom Document Format" di Fase 9.
+> **Catatan:** Total 235 fitur eksplisit + 3 fitur implisit (LLM infrastructure setup di Fase 5, platform architecture di Fase 9, agent swarm protocol di Fase 11) = 238 fitur terklasifikasi sesuai target dokumen. Neural PDF (AI-native format) tercakup dalam fitur "Custom Document Format" di Fase 12.
 
 ### 23.6 Glossary
 
@@ -2677,40 +2677,40 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 
 | **Aspek** | **v3.0** | **v4.0** | **Perubahan** |
 |-----------|----------|----------|---------------|
-| Total Fase | 7 (MVP 0.1-0.4, Fase 2-5) | 12 (MVP 0.1-0.4, Fase 2-9) | +5 fase baru |
+| Total Fase | 7 (Fase 1-0.4, Fase 5-5) | 12 (Fase 1-0.4, Fase 5-9) | +5 fase baru |
 | Total Fitur | 114 fitur | 238 fitur | +124 fitur |
-| Fase 5 | 14 fitur (4 sub-fase) | 22 fitur (6 sub-fase) | +8 OpenClaw agents |
-| Fase 6 | Tidak ada | Platform & Marketplace (25 fitur) | Fase baru |
-| Fase 7 | Tidak ada | Enterprise & B2B (20 fitur) | Fase baru |
-| Fase 8 | Tidak ada | AI Agent Swarm + Autonomy (20 fitur) | Fase baru |
-| Fase 9 | Tidak ada | Moonshots & Future (48 fitur) | Fase baru |
+| Fase 8 | 14 fitur (4 sub-fase) | 22 fitur (6 sub-fase) | +8 OpenClaw agents |
+| Fase 9 | Tidak ada | Platform & Marketplace (25 fitur) | Fase baru |
+| Fase 10 | Tidak ada | Enterprise & B2B (20 fitur) | Fase baru |
+| Fase 11 | Tidak ada | AI Agent Swarm + Autonomy (20 fitur) | Fase baru |
+| Fase 12 | Tidak ada | Moonshots & Future (48 fitur) | Fase baru |
 | Milestone Range | M01-M78 | M01-M145 | +67 milestones |
 | Gate Conditions | 7 gates | 11 gates | +4 gates |
 | Label Distribution | 137 total | 258 total | +121 classified features |
 | Sections | 22 sections | 26 sections | +4 new detail sections |
-| "Tidak Dibangun" | 8 items | 6 items (2 moved to roadmap) | Desktop app, marketplace now in Fase 6 |
+| "Tidak Dibangun" | 8 items | 6 items (2 moved to roadmap) | Desktop app, marketplace now in Fase 9 |
 
 **Alasan Ekspansi:**
 1. Visi produk telah matang — dari "PDF tool" menjadi "document platform"
-2. OpenClaw agent ecosystem perlu expansion path yang jelas (8 agent baru di Fase 5)
-3. Enterprise demand tervalidasi — perlu dedicated fase (Fase 7)
-4. AI agent technology berkembang pesat — perlu fase khusus (Fase 8)
-5. Long-term moonshots perlu didokumentasikan untuk investor visibility (Fase 9)
-6. Platform/marketplace model terbukti viable untuk SaaS tools (Fase 6)
+2. OpenClaw agent ecosystem perlu expansion path yang jelas (8 agent baru di Fase 8)
+3. Enterprise demand tervalidasi — perlu dedicated fase (Fase 10)
+4. AI agent technology berkembang pesat — perlu fase khusus (Fase 11)
+5. Long-term moonshots perlu didokumentasikan untuk investor visibility (Fase 12)
+6. Platform/marketplace model terbukti viable untuk SaaS tools (Fase 9)
 
 **Detail Perubahan per Aspek:**
 
 | **Aspek** | **Detail Perubahan** |
 |-----------|---------------------|
-| Fase 5 Expansion | 14 → 22 fitur. Tambah 8 OpenClaw agents: Multi-Platform Social, Community Manager, Outreach, Revenue Optimizer, Localization, Legal Compliance, Partnership, Customer Success. Milestone M73-M78 → M73-M86. |
-| Fase 6 (Baru) | 25 fitur platform: Marketplace, SDK, Education, Desktop App, Mobile App, Template Store, Design Studio, Freelancer Marketplace, Courses, Community, Credits, Pay-per-Use API, Affiliate Network, Developer Portal, Plugin System, Theme Marketplace, Doc Templates, Ambassador, Blog, Challenges, Print Service, Cloud Storage, White-label, Certification, Invoice Platform. |
-| Fase 7 (Baru) | 20 fitur enterprise: Government Integration, Enterprise Console, Compliance Dashboard, Workflow Engine, Secure Room, Audit Trail, API Gateway, Self-Hosted, Vertical Solutions, Multi-Region, Real-time Collab, Team Management, SSO/SAML, RBAC, Enterprise SLA, Dedicated Support, Custom Branding, Data Residency, Enterprise Analytics, Bulk Operations. |
-| Fase 8 (Baru) | 20 fitur AI swarm: AI Workflow Automation, AI PDF Agent, Bulk Intelligence, Template Engine, PDF Repair, Style Transfer, Document Understanding Graph, Predictive Needs, Quality Score, Multi-Modal Input, Agent Marketplace, Multi-Project, Memory System, Autonomous Experimentation, Predictive Maintenance, Cross-Agent Communication, Self-Funding, AI Document Versioning, AI Contextual Help, AI Security Advisor. |
-| Fase 9 (Baru) | 48 fitur moonshot: Knowledge Base, Compliance Engine, Regulatory Radar, e-Meterai Partnership, BPJS/Pajak, Notaris, Surat Dinas, UMKM Suite, Blockchain, Zero-Knowledge, Edge Computing, Stamp/Seal, Document Insurance, API Marketplace, 3 OpenClaw agents, Autonomous Hiring, Proprietary AI, Custom Format, Network Effect, Indonesia Standard, AR Viewer, Voice Assistant, Scanner Box, Smart Printer, NFC Tags, NGO Tools, Accessibility First, Digital Literacy, Open Data, Green Computing, Document Insights, Benchmark, Industry Reports, Health Score, Financial Controller, Incident Commander, Notion, Slack Bot, Teams Bot, Google Workspace, Shopee/Tokopedia, Jurnal.id/Accurate, Watch App, Smart Glasses, Offline-First, Personal AI Assistant. |
-| Gate Conditions | +4 gates baru: Fase 5→6 (100K MAU + MRR > Rp 10 juta), Fase 6→7 (marketplace aktif + 10 enterprise inquiries), Fase 7→8 (5 enterprise customers + AI mature), Fase 8→9 (agent swarm stabil + market leadership). |
-| "Tidak Dibangun" | Desktop app dan marketplace/plugin dipindah ke Fase 6. Real-time collaboration dipindah ke Fase 7. Blockchain dipindah ke Fase 9. Tetap excluded: PDF text editing, video/audio, social media features, crypto payments, gaming, general AI chatbot. |
+| Fase 8 Expansion | 14 → 22 fitur. Tambah 8 OpenClaw agents: Multi-Platform Social, Community Manager, Outreach, Revenue Optimizer, Localization, Legal Compliance, Partnership, Customer Success. Milestone M73-M78 → M73-M86. |
+| Fase 9 (Baru) | 25 fitur platform: Marketplace, SDK, Education, Desktop App, Mobile App, Template Store, Design Studio, Freelancer Marketplace, Courses, Community, Credits, Pay-per-Use API, Affiliate Network, Developer Portal, Plugin System, Theme Marketplace, Doc Templates, Ambassador, Blog, Challenges, Print Service, Cloud Storage, White-label, Certification, Invoice Platform. |
+| Fase 10 (Baru) | 20 fitur enterprise: Government Integration, Enterprise Console, Compliance Dashboard, Workflow Engine, Secure Room, Audit Trail, API Gateway, Self-Hosted, Vertical Solutions, Multi-Region, Real-time Collab, Team Management, SSO/SAML, RBAC, Enterprise SLA, Dedicated Support, Custom Branding, Data Residency, Enterprise Analytics, Bulk Operations. |
+| Fase 11 (Baru) | 20 fitur AI swarm: AI Workflow Automation, AI PDF Agent, Bulk Intelligence, Template Engine, PDF Repair, Style Transfer, Document Understanding Graph, Predictive Needs, Quality Score, Multi-Modal Input, Agent Marketplace, Multi-Project, Memory System, Autonomous Experimentation, Predictive Maintenance, Cross-Agent Communication, Self-Funding, AI Document Versioning, AI Contextual Help, AI Security Advisor. |
+| Fase 12 (Baru) | 48 fitur moonshot: Knowledge Base, Compliance Engine, Regulatory Radar, e-Meterai Partnership, BPJS/Pajak, Notaris, Surat Dinas, UMKM Suite, Blockchain, Zero-Knowledge, Edge Computing, Stamp/Seal, Document Insurance, API Marketplace, 3 OpenClaw agents, Autonomous Hiring, Proprietary AI, Custom Format, Network Effect, Indonesia Standard, AR Viewer, Voice Assistant, Scanner Box, Smart Printer, NFC Tags, NGO Tools, Accessibility First, Digital Literacy, Open Data, Green Computing, Document Insights, Benchmark, Industry Reports, Health Score, Financial Controller, Incident Commander, Notion, Slack Bot, Teams Bot, Google Workspace, Shopee/Tokopedia, Jurnal.id/Accurate, Watch App, Smart Glasses, Offline-First, Personal AI Assistant. |
+| Gate Conditions | +4 gates baru: Fase 8→6 (100K MAU + MRR > Rp 10 juta), Fase 9→7 (marketplace aktif + 10 enterprise inquiries), Fase 10→8 (5 enterprise customers + AI mature), Fase 11→9 (agent swarm stabil + market leadership). |
+| "Tidak Dibangun" | Desktop app dan marketplace/plugin dipindah ke Fase 9. Real-time collaboration dipindah ke Fase 10. Blockchain dipindah ke Fase 12. Tetap excluded: PDF text editing, video/audio, social media features, crypto payments, gaming, general AI chatbot. |
 | Milestone Range | M01-M78 → M01-M145 (+67 milestones baru) |
-| Sections | 22 → 26 sections (+4 detail sections untuk Fase 6-9) |
+| Sections | 22 → 26 sections (+4 detail sections untuk Fase 9-9) |
 
 ---
 
@@ -2718,56 +2718,56 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 
 | **Fase** | **Vercel** | **Railway/VPS** | **R2** | **LLM** | **Other** | **Total/bulan** |
 |----------|------------|-----------------|--------|---------|-----------|-----------------|
-| MVP 0.1  | $  (free)  | $  (free)       | $      | $       | $         | **$ -5**        |
-| MVP 0.2  | $  (free)  | $5-20 + $10 (VPS) | $ -1 | $5-10   | $         | **$15-41**      |
-| MVP 0.3  | $ -20      | $10-20          | $ -5   | $5-10   | $5        | **$20-60**      |
-| MVP 0.4  | $20-50     | $20-50          | $5-10  | $10-20  | $20       | **$75-150**     |
-| Fase 2   | $50-100    | $50-100         | $10-20 | $50-200 | $20       | **$180-440**    |
-| Fase 3   | $100-200   | $100-200        | $20-50 | $100-300| $50       | **$370-800**    |
-| Fase 4   | $200-300   | $200-300        | $50-100| $200-500| $100      | **$750-1300**   |
-| Fase 5   | $300-500   | $300-500        | $100+  | $300-700| $200      | **$1200-1900**  |
-| Fase 6   | $500-800   | $500-1000       | $200+  | $500-1000| $500     | **$2200-3300**  |
-| Fase 7   | $800-1500  | $1000-2000      | $500+  | $700-1500| $1000    | **$4000-6500**  |
-| Fase 8   | $1000-2000 | $1500-3000      | $500+  | $1000-3000| $1500   | **$5500-9500**  |
-| Fase 9   | $2000-5000 | $3000-5000      | $1000+ | $2000-5000| $3000   | **$11000-18000**|
+| Fase 1  | $  (free)  | $  (free)       | $      | $       | $         | **$ -5**        |
+| Fase 2  | $  (free)  | $5-20 + $10 (VPS) | $ -1 | $5-10   | $         | **$15-41**      |
+| Fase 3  | $ -20      | $10-20          | $ -5   | $5-10   | $5        | **$20-60**      |
+| Fase 4  | $20-50     | $20-50          | $5-10  | $10-20  | $20       | **$75-150**     |
+| Fase 5   | $50-100    | $50-100         | $10-20 | $50-200 | $20       | **$180-440**    |
+| Fase 6   | $100-200   | $100-200        | $20-50 | $100-300| $50       | **$370-800**    |
+| Fase 7   | $200-300   | $200-300        | $50-100| $200-500| $100      | **$750-1300**   |
+| Fase 8   | $300-500   | $300-500        | $100+  | $300-700| $200      | **$1200-1900**  |
+| Fase 9   | $500-800   | $500-1000       | $200+  | $500-1000| $500     | **$2200-3300**  |
+| Fase 10   | $800-1500  | $1000-2000      | $500+  | $700-1500| $1000    | **$4000-6500**  |
+| Fase 11   | $1000-2000 | $1500-3000      | $500+  | $1000-3000| $1500   | **$5500-9500**  |
+| Fase 12   | $2000-5000 | $3000-5000      | $1000+ | $2000-5000| $3000   | **$11000-18000**|
 
-> **Catatan:** Proyeksi berdasarkan asumsi pertumbuhan eksponensial. Biaya aktual bergantung pada traffic dan usage patterns. Revenue harus > cost mulai Fase 2 (gate condition). Fase 6+ membutuhkan revenue significant sebelum investasi infrastruktur.
+> **Catatan:** Proyeksi berdasarkan asumsi pertumbuhan eksponensial. Biaya aktual bergantung pada traffic dan usage patterns. Revenue harus > cost mulai Fase 5 (gate condition). Fase 9+ membutuhkan revenue significant sebelum investasi infrastruktur.
 
 **Revenue vs Cost Projection:**
 
 | **Fase** | **Est. MRR** | **Est. Cost/bulan** | **Margin** |
 |----------|--------------|---------------------|------------|
-| Fase 5   | Rp 15-30 juta | $1200-1900 (~Rp 19-30 juta) | Break-even to positive |
-| Fase 6   | Rp 50-100 juta | $2200-3300 (~Rp 35-52 juta) | Positive |
-| Fase 7   | Rp 100-300 juta | $4000-6500 (~Rp 63-103 juta) | Strongly positive |
-| Fase 8   | Rp 200-500 juta | $5500-9500 (~Rp 87-150 juta) | Strongly positive |
-| Fase 9   | Rp 500+ juta | $11000-18000 (~Rp 174-285 juta) | Strongly positive |
+| Fase 8   | Rp 15-30 juta | $1200-1900 (~Rp 19-30 juta) | Break-even to positive |
+| Fase 9   | Rp 50-100 juta | $2200-3300 (~Rp 35-52 juta) | Positive |
+| Fase 10   | Rp 100-300 juta | $4000-6500 (~Rp 63-103 juta) | Strongly positive |
+| Fase 11   | Rp 200-500 juta | $5500-9500 (~Rp 87-150 juta) | Strongly positive |
+| Fase 12   | Rp 500+ juta | $11000-18000 (~Rp 174-285 juta) | Strongly positive |
 
 **Revenue Streams per Fase:**
 
 | **Fase** | **Primary Revenue** | **Secondary Revenue** | **Tertiary Revenue** |
 |----------|--------------------|-----------------------|---------------------|
-| MVP 0.4  | Pro subscription (Rp 19.900/bulan) | — | — |
-| Fase 2   | Pro subscription + AI upsell | — | — |
-| Fase 3   | Pro subscription | Integration fees | — |
-| Fase 4   | Enterprise plans | Pro subscription | e-Meterai commission |
-| Fase 5   | Pro + Enterprise | Affiliate revenue | Newsletter sponsorship |
-| Fase 6   | Marketplace commission (30%) | Credits system | SDK licensing |
-| Fase 7   | Enterprise contracts | Government contracts | SLA premium |
-| Fase 8   | Agent marketplace fees | Autonomous revenue | Enterprise AI |
-| Fase 9   | Platform licensing | Hardware sales | Data insights |
+| Fase 4  | Pro subscription (Rp 19.900/bulan) | — | — |
+| Fase 5   | Pro subscription + AI upsell | — | — |
+| Fase 6   | Pro subscription | Integration fees | — |
+| Fase 7   | Enterprise plans | Pro subscription | e-Meterai commission |
+| Fase 8   | Pro + Enterprise | Affiliate revenue | Newsletter sponsorship |
+| Fase 9   | Marketplace commission (30%) | Credits system | SDK licensing |
+| Fase 10   | Enterprise contracts | Government contracts | SLA premium |
+| Fase 11   | Agent marketplace fees | Autonomous revenue | Enterprise AI |
+| Fase 12   | Platform licensing | Hardware sales | Data insights |
 
 **Headcount Projection (AI-Augmented):**
 
 | **Fase** | **Human Headcount** | **AI Agent Count** | **Ratio** |
 |----------|--------------------|--------------------|-----------|
-| MVP 0.1-0.4 | 1 (Product Owner) | 10 (OpenClaw) | 1:10 |
-| Fase 2-4 | 1 (Product Owner) | 10 (OpenClaw) | 1:10 |
-| Fase 5 | 1 (Product Owner) | 18 (OpenClaw expanded) | 1:18 |
-| Fase 6 | 1-2 (PO + Community) | 18+ (OpenClaw) | 1:9 |
-| Fase 7 | 2-3 (PO + Sales + Support) | 20+ (OpenClaw + Specialists) | 1:7 |
-| Fase 8 | 2-3 | 25+ (Full swarm) | 1:8 |
-| Fase 9 | 3-5 | 30+ (Full ecosystem) | 1:6 |
+| Fase 1-0.4 | 1 (Product Owner) | 10 (OpenClaw) | 1:10 |
+| Fase 5-4 | 1 (Product Owner) | 10 (OpenClaw) | 1:10 |
+| Fase 8 | 1 (Product Owner) | 18 (OpenClaw expanded) | 1:18 |
+| Fase 9 | 1-2 (PO + Community) | 18+ (OpenClaw) | 1:9 |
+| Fase 10 | 2-3 (PO + Sales + Support) | 20+ (OpenClaw + Specialists) | 1:7 |
+| Fase 11 | 2-3 | 25+ (Full swarm) | 1:8 |
+| Fase 12 | 3-5 | 30+ (Full ecosystem) | 1:6 |
 
 > **Filosofi:** Papyr tetap lean. AI agents menggantikan headcount tradisional. Human hires hanya untuk fungsi yang membutuhkan judgment manusia (sales, legal, community).
 
@@ -2775,9 +2775,9 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 
 | **Milestone** | **Trigger** | **Amount Needed** | **Use of Funds** |
 |---------------|-------------|-------------------|------------------|
-| Seed | Fase 4 complete + 50K MAU | Rp 500 juta - 1 miliar | Infrastructure scaling, first hires |
-| Series A | Fase 6 complete + 100K MAU + profitable | Rp 5-10 miliar | Platform development, marketing, team |
-| Series B | Fase 7 complete + enterprise traction | Rp 20-50 miliar | Enterprise sales, international expansion |
+| Seed | Fase 7 complete + 50K MAU | Rp 500 juta - 1 miliar | Infrastructure scaling, first hires |
+| Series A | Fase 9 complete + 100K MAU + profitable | Rp 5-10 miliar | Platform development, marketing, team |
+| Series B | Fase 10 complete + enterprise traction | Rp 20-50 miliar | Enterprise sales, international expansion |
 
 ---
 

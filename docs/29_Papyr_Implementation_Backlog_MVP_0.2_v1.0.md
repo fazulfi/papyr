@@ -1,6 +1,6 @@
 # **Papyr**
 
-## Implementation Backlog — MVP 0.2
+## Implementation Backlog — Fase 2
 
 ### Alat PDF Gratis, Cepat, dan Privasi-First untuk Indonesia
 
@@ -18,7 +18,7 @@
 | **Tanggal** | Mei 2026 |
 | **Penulis** | Muhammad Fa'iz Zulfikar |
 | **Reviewer** | — |
-| **Scope** | MVP 0.2 (M12–M22) |
+| **Scope** | Fase 2 (M12–M22) |
 | **Total Tasks** | 135 tasks (PAPYR-090 — PAPYR-224) |
 | **Estimasi Total** | ~318 jam |
 | **Model Pengembangan** | 100% AI-driven |
@@ -40,7 +40,7 @@
 
 | Kode | Dokumen | Keterangan |
 |------|---------|------------|
-| PPR-IB-001 | Papyr Implementation Backlog MVP 0.1 | Backlog M01–M11 (89 tasks, selesai) |
+| PPR-IB-001 | Papyr Implementation Backlog Fase 1 | Backlog M01–M11 (89 tasks, selesai) |
 | PPR-BRD-001 | Papyr BRD v1.0 | Business Requirements Document |
 | PPR-SRS-001 | Papyr SRS v1.0 | Software Requirements Specification |
 | PPR-TDD-001 | Papyr TDD v1.0 | Technical Design Document |
@@ -51,9 +51,9 @@
 
 ---
 
-## Konteks MVP 0.2
+## Konteks Fase 2
 
-### Status Saat Ini (Post-MVP 0.1)
+### Status Saat Ini (Post-Fase 1)
 
 | Aspek | Detail |
 |-------|--------|
@@ -69,16 +69,16 @@
 | **Analytics** | Vercel Analytics (task_started/completed/failed + device_category) |
 | **Domain** | mypapyr.com (Hostinger DNS → Vercel) |
 
-### Target MVP 0.2
+### Target Fase 2
 
 - **7 tools baru:** Protect PDF, Unlock PDF, Watermark PDF, Sign PDF, PDF-to-Word, OCR, PDF-to-Excel
 - **E2E testing:** Playwright untuk semua 13 tools
 - **Performance & monitoring:** Lighthouse optimization, uptime monitoring, SEO update
 - **Admin Dashboard:** Unified admin panel (/admin) untuk monitoring semua operasional
-- **Total tools setelah MVP 0.2:** 13 tools
+- **Total tools setelah Fase 2:** 13 tools
 - **Target release:** v2.0.0
 
-### Processing Strategy MVP 0.2
+### Processing Strategy Fase 2
 
 | Tool Baru | Processing | Library | Alasan |
 |-----------|-----------|---------|--------|
@@ -117,7 +117,7 @@
 
 ## GitHub Labels yang Disarankan
 
-### Labels Baru untuk MVP 0.2
+### Labels Baru untuk Fase 2
 
 | Label | Warna | Kegunaan |
 |-------|-------|----------|
@@ -143,7 +143,7 @@
 | `priority:low` | #6B7280 | Nice-to-have, bisa ditunda |
 | `agent:kicau` | #1DA1F2 | Social Media agent tasks |
 
-### Labels Existing (dari MVP 0.1)
+### Labels Existing (dari Fase 1)
 
 | Label | Warna | Kegunaan |
 |-------|-------|----------|
@@ -703,7 +703,7 @@ jobs:
 | PAPYR-175 | **SEO/Content** | **Generate OG images untuk 7 tools baru** | Buat OG image (1200x630) untuk setiap tool baru: protect, unlock, watermark, sign, pdf-to-word, ocr, pdf-to-excel. Consistent branding: Papyr logo + tool name + tagline. Simpan di public/og/. | **1h** |
 | PAPYR-176 | **Frontend** | **Update analytics event taxonomy** | Verify semua 13 tools track events: task_started, task_completed, task_failed. Tambahkan props: tool_name, file_size_mb, processing_time_ms, device_category. Update analytics.ts helper. | **0.5h** |
 | PAPYR-177 | **Frontend** | **Update Navbar + Footer untuk 13 tools** | Update Navbar dropdown/menu: tampilkan semua 13 tools grouped by category (Security, Enhancement, Conversion, Basic). Update Footer tool links. Mobile hamburger menu update. | **1h** |
-| PAPYR-178 | **Deploy** | **Final deploy + smoke test MVP 0.2** | Deploy semua changes ke production (Vercel + Railway). Smoke test: setiap tool accessible, health check OK, monitoring active, sitemap valid. Tag release v2.0.0. Update README roadmap. | **1h** |
+| PAPYR-178 | **Deploy** | **Final deploy + smoke test Fase 2** | Deploy semua changes ke production (Vercel + Railway). Smoke test: setiap tool accessible, health check OK, monitoring active, sitemap valid. Tag release v2.0.0. Update README roadmap. | **1h** |
 
 **Acceptance Criteria M20:**
 - [ ] Lighthouse score: Performance >90, Accessibility >95, SEO >95
@@ -845,8 +845,8 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 | PAPYR-210 | **Frontend** | **Build SEO & Competitor page** | Keyword rankings table (position, change, URL), competitor comparison cards, content pipeline status dari Aksara agent, recent articles list. Data dari OpenClaw Aksara + Telik agents. | **2h** |
 | PAPYR-211 | **Frontend** | **Build System Logs page** | Error log viewer dengan filters (severity, tool, date range), rate limit hits counter, failed tasks table, cleanup stats. Pagination, search, export CSV. | **3h** |
 | PAPYR-212 | **Frontend** | **Build Backup Status page** | Backup history table (date, size, status), last successful backup highlight, restore test results, storage usage breakdown (R2, git bundle, env). Data dari OpenClaw Pustaka agent. | **2h** |
-| PAPYR-213 | **Frontend** | **Build Revenue/Billing placeholder page** | Placeholder UI dengan "Coming in MVP 0.3" banner. Mock revenue chart, subscriber count placeholder, payment history skeleton. Clearly indicate placeholder status. | **1h** |
-| PAPYR-214 | **Frontend** | **Build User Management placeholder page** | Placeholder UI dengan "Coming in MVP 0.3" banner. Mock user table, role badges, invite button (disabled). Clearly indicate placeholder status. | **1h** |
+| PAPYR-213 | **Frontend** | **Build Revenue/Billing placeholder page** | Placeholder UI dengan "Coming in Fase 3" banner. Mock revenue chart, subscriber count placeholder, payment history skeleton. Clearly indicate placeholder status. | **1h** |
+| PAPYR-214 | **Frontend** | **Build User Management placeholder page** | Placeholder UI dengan "Coming in Fase 3" banner. Mock user table, role badges, invite button (disabled). Clearly indicate placeholder status. | **1h** |
 | PAPYR-215 | **Frontend** | **Build Settings page** | System config display (read-only), notification preferences (Telegram/Email toggles), ADMIN_SECRET rotation form, API endpoint config display, environment info. | **2h** |
 | PAPYR-216 | **Backend** | **Create admin API routes** | Buat `/api/admin/*` endpoints: openclaw/status, openclaw/logs, openclaw/trigger, analytics/overview, health, security/scans, logs, backups. Auth middleware (ADMIN_SECRET check). Error handling + rate limiting. | **3h** |
 | PAPYR-217 | **Frontend** | **Admin SEO exclusion** | Tambahkan `/admin` ke sitemap exclusion, robots.txt disallow `/admin`, add noindex meta tag di admin layout. Pastikan admin pages tidak ter-index search engine. | **1h** |
@@ -858,7 +858,7 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 - [ ] OpenClaw agent status updates via polling (interval 30 detik)
 - [ ] Analytics charts menampilkan real data dari Vercel Analytics API
 - [ ] Server health menampilkan live status Railway/Vercel/R2
-- [ ] Placeholder pages clearly indicate "Coming in MVP 0.3"
+- [ ] Placeholder pages clearly indicate "Coming in Fase 3"
 - [ ] `/admin` excluded dari sitemap dan robots.txt
 - [ ] Auth middleware reject unauthorized access dengan 401
 - [ ] UI match existing Papyr design (DM Sans, Tailwind, same color palette)
@@ -888,7 +888,7 @@ Response 500: { "error": "Internal server error", "detail": "..." }
 
 ```
                     ┌─────────────────────────────────────────────────────────────┐
-                    │                    MVP 0.2 DEPENDENCY GRAPH                  │
+                    │                    Fase 2 DEPENDENCY GRAPH                  │
                     └─────────────────────────────────────────────────────────────┘
 
     Fase 2A                Fase 2B                Fase 2C                Fase 2D
@@ -995,7 +995,7 @@ M12 (Protect PDF) → M13 (Unlock PDF)
 - Complexity rendah-sedang (familiar pattern: upload → process → download)
 - Reuse pattern yang sudah ada dari Compress (server-side processing + R2)
 - M13 reuse logic dari M12, jadi sangat efisien dikerjakan berurutan
-- Quick wins untuk momentum awal MVP 0.2
+- Quick wins untuk momentum awal Fase 2
 
 ### Sprint 2 (Minggu 3–7): Fase 2B — Document Enhancement
 
@@ -1006,7 +1006,7 @@ M14 (Watermark) ──parallel──► M15 (Sign PDF)
 **Rationale:** M14 dan M15 bisa dikerjakan paralel (tidak ada dependency). Tapi jika solo dev, kerjakan M14 dulu karena:
 - M14 hybrid (client + server) — good transition dari Fase 2A
 - M15 100% client-side — fresh challenge, lebih complex (canvas + drag-drop)
-- M15 paling complex di MVP 0.2 (24 jam), butuh fokus penuh
+- M15 paling complex di Fase 2 (24 jam), butuh fokus penuh
 
 ### Sprint 3 (Minggu 7–13): Fase 2C — Document Conversion
 
@@ -1030,7 +1030,7 @@ M19 (E2E + Code Quality) → M20 (Performance + Monitoring + SEO)
 - M19 butuh semua 13 tools selesai untuk full E2E coverage
 - M20 butuh M19 pass (CI/CD green) sebelum final deploy
 - SEO update di M20 butuh semua tool pages exist
-- M20 = final polish sebelum "MVP 0.2 Complete" tag
+- M20 = final polish sebelum "Fase 2 Complete" tag
 
 ### Timeline Visual
 
@@ -1058,7 +1058,7 @@ Phase:   ├── 2A ──┤├──── 2B ────────┤├
 | CP2 | 7 | Fase 2B selesai | 4 tools live, preview features work |
 | CP3 | 9 | M16 selesai | LibreOffice working, async pattern proven |
 | CP4 | 13 | Fase 2C selesai | 7 tools live, Docker optimized |
-| CP5 | 15 | MVP 0.2 complete | All 13 tools, E2E pass, monitoring active |
+| CP5 | 15 | Fase 2 complete | All 13 tools, E2E pass, monitoring active |
 
 ---
 
@@ -1190,9 +1190,9 @@ Buat Project board dengan columns: Backlog → In Progress → Review → Done. 
 
 ## Catatan Penutup
 
-### Definition of Done — MVP 0.2
+### Definition of Done — Fase 2
 
-MVP 0.2 dianggap **SELESAI** ketika:
+Fase 2 dianggap **SELESAI** ketika:
 
 1. ✅ Semua 13 tools berfungsi di production (mypapyr.com)
 2. ✅ E2E tests pass untuk semua tools di CI
@@ -1217,7 +1217,7 @@ MVP 0.2 dianggap **SELESAI** ketika:
 
 ## Reusable Components & Patterns
 
-### Komponen yang Bisa Di-reuse dari MVP 0.1
+### Komponen yang Bisa Di-reuse dari Fase 1
 
 | Komponen | Lokasi | Dipakai di M... |
 |----------|--------|-----------------|
@@ -1229,7 +1229,7 @@ MVP 0.2 dianggap **SELESAI** ketika:
 | `r2.py` | `utils/r2.py` | M12, M13, M14, M16, M17, M18 |
 | Rate limiter | `main.py` middleware | Semua backend endpoints |
 
-### Pattern Baru yang Diperkenalkan di MVP 0.2
+### Pattern Baru yang Diperkenalkan di Fase 2
 
 | Pattern | Milestone | Reused di |
 |---------|-----------|-----------|
@@ -1378,6 +1378,6 @@ frontend/
 
 ---
 
-*Dokumen ini adalah living document dan akan di-update seiring progress pengerjaan MVP 0.2.*
+*Dokumen ini adalah living document dan akan di-update seiring progress pengerjaan Fase 2.*
 
 *Hak cipta © 2026 Muhammad Fa'iz Zulfikar. All rights reserved.*

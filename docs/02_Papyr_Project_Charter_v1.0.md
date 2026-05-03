@@ -33,7 +33,7 @@ mypapyr.com
 
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                              |
 |-----------|-------------|------------------------------|----------------------------------------------------------------------------|
-| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — Project Charter lengkap untuk Papyr MVP 0.1 dan roadmap awal  |
+| 1.0       | Mei 2026    | Muhammad Fa'iz Zulfikar      | Draft awal — Project Charter lengkap untuk Papyr Fase 1 dan roadmap awal  |
 
 ---
 
@@ -52,7 +52,7 @@ Proyek ini diinisiasi sebagai respons terhadap gap yang signifikan di pasar: tid
 | **Nama Produk**      | Papyr                                                         |
 | **Tagline**          | Tool PDF gratis, cepat, dan aman untuk Indonesia              |
 | **Domain**           | mypapyr.com (LIVE)                                            |
-| **Versi Saat Ini**   | v1.1.0 (MVP 0.1 — 6 tool aktif)                              |
+| **Versi Saat Ini**   | v1.1.0 (Fase 1 — 6 tool aktif)                              |
 | **Tipe Produk**      | Web Application (SaaS — Freemium)                             |
 | **Kategori**         | Productivity / Utility / Document Management                  |
 | **Target Pasar**     | Indonesia (primer), Southeast Asia (ekspansi masa depan)      |
@@ -99,13 +99,13 @@ Papyr hadir untuk mengisi gap ini dengan value proposition yang jelas:
 2. **Measurable:** Mencapai 5.000 tasks processed dalam 3 bulan pertama setelah soft launch.
 3. **Achievable:** Dikembangkan oleh solo founder + AI agent dengan budget $0-5/bulan menggunakan free/low-cost infrastructure.
 4. **Relevant:** Menjawab kebutuhan nyata pengguna Indonesia akan tool PDF yang cepat, gratis, dan berbahasa Indonesia.
-5. **Time-bound:** MVP 0.1 selesai dalam 2 minggu development, soft launch April 2026.
+5. **Time-bound:** Fase 1 selesai dalam 2 minggu development, soft launch April 2026.
 
 ---
 
 ## 3. Project Scope
 
-### 3.1 In Scope — MVP 0.1 (Delivered)
+### 3.1 In Scope — Fase 1 (Delivered)
 
 | **Modul**          | **Fitur**                                                                          | **Processing** |
 |--------------------|------------------------------------------------------------------------------------|----------------|
@@ -121,7 +121,7 @@ Papyr hadir untuk mengisi gap ini dengan value proposition yang jelas:
 | Security           | MIME + extension + magic bytes validation, rate limit, CORS, signed URLs.           | Server         |
 | Analytics          | Event tracking: task_started, task_completed, task_failed. Vercel Analytics.       | Client         |
 
-### 3.2 In Scope — MVP 0.2 (Roadmap Berikutnya)
+### 3.2 In Scope — Fase 2 (Roadmap Berikutnya)
 
 | **Modul**          | **Fitur**                                              |
 |--------------------|--------------------------------------------------------|
@@ -135,11 +135,11 @@ Papyr hadir untuk mengisi gap ini dengan value proposition yang jelas:
 
 ### 3.3 Out of Scope
 
-- Login / registrasi pengguna (hingga MVP 0.3)
+- Login / registrasi pengguna (hingga Fase 3)
 - Dashboard pengguna
-- Payment / subscription (hingga MVP 0.3)
-- AI-powered features (Fase 2)
-- e-Meterai integration (Fase 3)
+- Payment / subscription (hingga Fase 3)
+- AI-powered features (Fase 5)
+- e-Meterai integration (Fase 6)
 - Native mobile application (iOS/Android)
 - Offline mode
 - PDF editing (text/image manipulation)
@@ -188,9 +188,9 @@ Papyr hadir untuk mengisi gap ini dengan value proposition yang jelas:
 | **Fase**           | **Periode**          | **Durasi**    | **Status**    |
 |--------------------|----------------------|---------------|---------------|
 | Inisiasi & Setup   | April 2026           | 1 minggu      | Completed     |
-| MVP 0.1 Dev        | April 2026           | ~2 minggu     | Completed     |
+| Fase 1 Dev        | April 2026           | ~2 minggu     | Completed     |
 | Soft Launch        | April 2026           | Ongoing       | Active        |
-| MVP 0.2 Dev        | Fleksibel            | No deadline   | Planned       |
+| Fase 2 Dev        | Fleksibel            | No deadline   | Planned       |
 | SEO Growth         | Q3-Q4 2026           | Ongoing       | Planned       |
 | Monetisasi (Pro)   | Q4 2026              | 4-6 minggu    | Planned       |
 
@@ -221,7 +221,7 @@ Papyr hadir untuk mengisi gap ini dengan value proposition yang jelas:
 
 - **Development model:** 100% AI-driven — AI agent (OpenCode/Sisyphus) mengeksekusi seluruh coding, testing, dan documentation. Founder memberikan instruksi dan approval.
 - **Sprint cycle:** Continuous delivery, milestone-based tracking
-- **MVP 0.2 timeline:** Fleksibel, tanpa hard deadline. Selesai berdasarkan kualitas, bukan waktu.
+- **Fase 2 timeline:** Fleksibel, tanpa hard deadline. Selesai berdasarkan kualitas, bukan waktu.
 
 ---
 
@@ -350,8 +350,8 @@ Papyr beroperasi dengan model **100% AI-driven development**:
 |-------|----------------------------------------------------------------------------------------------------------|
 | C-1   | Budget infrastruktur sangat terbatas: $0-5/bulan (self-funded, no external investment).                   |
 | C-2   | Solo developer + AI agent — kapasitas development terbatas, prioritas kualitas over kuantitas.            |
-| C-3   | MVP 0.1 hanya mendukung Bahasa Indonesia — English ditambahkan di MVP 0.2.                               |
-| C-4   | Tidak ada login/registrasi di MVP 0.1 — semua akses anonim.                                              |
+| C-3   | Fase 1 hanya mendukung Bahasa Indonesia — English ditambahkan di Fase 2.                               |
+| C-4   | Tidak ada login/registrasi di Fase 1 — semua akses anonim.                                              |
 | C-5   | Maksimum upload 20MB per file — limitasi dari infrastruktur free/low-cost.                               |
 | C-6   | Tidak ada batch processing di MVP — satu file per operasi (kecuali merge dan image-to-pdf).              |
 | C-7   | Tidak ada offline mode — koneksi internet diperlukan untuk semua operasi.                                |
@@ -417,8 +417,8 @@ Papyr beroperasi dengan model **100% AI-driven development**:
 | **Fase**   | **Strategi**                                                                          | **Timeline**     |
 |------------|----------------------------------------------------------------------------------------|------------------|
 | Fase 1     | **Soft Launch** — Distribusi ke circle personal, komunitas mahasiswa, forum Indonesia  | April-Mei 2026   |
-| Fase 2     | **SEO Growth** — Organic acquisition via konten SEO berbahasa Indonesia                | Q3-Q4 2026       |
-| Fase 3     | **Monetisasi** — Introduksi tier Pro setelah 10.000+ monthly active tasks             | Q4 2026+         |
+| Fase 5     | **SEO Growth** — Organic acquisition via konten SEO berbahasa Indonesia                | Q3-Q4 2026       |
+| Fase 6     | **Monetisasi** — Introduksi tier Pro setelah 10.000+ monthly active tasks             | Q4 2026+         |
 
 ### 11.2 Target Keywords (SEO)
 

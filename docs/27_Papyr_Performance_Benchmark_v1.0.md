@@ -633,10 +633,10 @@ Total estimasi: ~6–9s (cold start)
 | **Fase** | **Timeline**     | **Optimasi**                    | **Expected Impact**                        |
 |----------|------------------|---------------------------------|--------------------------------------------|
 | Fase 1   | Juli 2025        | O-01 (keep-alive), O-04 (preconnect) | Eliminasi cold start, -200ms first req |
-| Fase 2   | Agustus 2025     | O-02 (Web Workers), O-03 (streaming) | UI responsif, progress visibility      |
-| Fase 3   | Q4 2025          | O-05 (Asia region), O-07 (image opt) | -150ms RTT, -30% upload size           |
-| Fase 4   | 2026             | O-06 (SSE), O-08 (lazy load)   | Perceived speed improvement                |
-| Fase 5   | 2026–2027        | O-09 (WASM), O-10 (SW), O-11 (Edge) | Transformational performance gain      |
+| Fase 5   | Agustus 2025     | O-02 (Web Workers), O-03 (streaming) | UI responsif, progress visibility      |
+| Fase 6   | Q4 2025          | O-05 (Asia region), O-07 (image opt) | -150ms RTT, -30% upload size           |
+| Fase 7   | 2026             | O-06 (SSE), O-08 (lazy load)   | Perceived speed improvement                |
+| Fase 8   | 2026–2027        | O-09 (WASM), O-10 (SW), O-11 (Edge) | Transformational performance gain      |
 
 ---
 

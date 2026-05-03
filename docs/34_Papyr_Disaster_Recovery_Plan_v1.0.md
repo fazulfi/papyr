@@ -109,7 +109,7 @@ Catatan: Target di atas berlaku untuk layanan inti (frontend + backend). Layanan
 | Service | Provider | Tier/Biaya | Criticality | Planned State | Fungsi |
 |---|---|---|---|---|---|
 | OpenClaw VPS | HostData.id | VPS | MEDIUM | Planned (Fase 2E) | AI operations agent, monitoring, auto-fix |
-| Database | PostgreSQL on HostData.id | Self-hosted | MEDIUM | Planned (MVP 0.3) | User data, analytics, tool usage history |
+| Database | PostgreSQL on HostData.id | Self-hosted | MEDIUM | Planned (Fase 3) | User data, analytics, tool usage history |
 
 ### 2.3 Dependency Map
 
@@ -255,7 +255,7 @@ Git bersifat distributed. Setiap clone adalah full backup. Selama minimal satu c
 
 Tidak ada kebutuhan backup untuk R2. File yang tersimpan adalah hasil proses sementara yang akan dihapus otomatis.
 
-### 4.3 Database PostgreSQL (Future, MVP 0.3)
+### 4.3 Database PostgreSQL (Future, Fase 3)
 
 | Aspek | Detail |
 |---|---|
@@ -719,7 +719,7 @@ STEP 4: Jika VPS Tidak Accessible
 | R6 | No real-time monitoring (pre-OpenClaw) | HIGH | MEDIUM | Prioritaskan setup OpenClaw. Sementara: manual check + Vercel Analytics. |
 | R7 | Credential exposure via git | LOW | HIGH | .env di .gitignore. GitHub secret scanning aktif. Rotate keys berkala. |
 
-### 11.2 Risiko Future (Post MVP 0.3)
+### 11.2 Risiko Future (Post Fase 3)
 
 | # | Risiko | Likelihood | Impact | Mitigasi |
 |---|---|---|---|---|

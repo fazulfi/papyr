@@ -598,7 +598,7 @@ Peninjauan SLA di luar jadwal rutin akan dilakukan jika terjadi salah satu kondi
 
 ## 10. Persetujuan Dokumen
 
-Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Service Level Agreement ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan komitmen tingkat layanan untuk Papyr MVP 0.1.
+Dengan menandatangani di bawah ini, approver mengkonfirmasi bahwa mereka telah meninjau Service Level Agreement ini dan menyetujui bahwa dokumen ini secara akurat merepresentasikan komitmen tingkat layanan untuk Papyr Fase 1.
 
 | **Peran**         | **Nama**                     | **Tanda Tangan** | **Tanggal** |
 |:------------------|:-----------------------------|:-----------------|:------------|

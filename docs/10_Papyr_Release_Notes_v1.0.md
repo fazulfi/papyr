@@ -50,7 +50,7 @@ mypapyr.com
 
 1. [Pendahuluan](#1-pendahuluan)
 2. [Ringkasan Rilis](#2-ringkasan-rilis)
-3. [Rilis v1.0.0 — MVP 0.1 (Initial Release)](#3-rilis-v100--mvp-01-initial-release)
+3. [Rilis v1.0.0 — Fase 1 (Initial Release)](#3-rilis-v100--mvp-01-initial-release)
 4. [Rilis v1.1.0 — Tool Expansion (Rotate PDF)](#4-rilis-v110--tool-expansion-rotate-pdf)
 5. [Rilis v1.1.1 — Audit Fixes](#5-rilis-v111--audit-fixes)
 6. [Rencana Rilis Mendatang](#6-rencana-rilis-mendatang)
@@ -70,7 +70,7 @@ Dokumen ini mencatat seluruh rilis produk Papyr secara kronologis, mencakup fitu
 
 Release Notes ini mencakup:
 
-- **v1.0.0** — MVP 0.1 Soft Launch (10 milestone, 84 tasks)
+- **v1.0.0** — Fase 1 Soft Launch (10 milestone, 84 tasks)
 - **v1.1.0** — Tool Expansion: Rotate PDF (1 milestone, 5 tasks)
 - **v1.1.1** — Audit Fixes (perbaikan pasca-audit)
 - Rencana rilis mendatang (roadmap v1.2.0+)
@@ -102,7 +102,7 @@ Release Notes ini mencakup:
 
 ---
 
-## 3. Rilis v1.0.0 — MVP 0.1 (Initial Release)
+## 3. Rilis v1.0.0 — Fase 1 (Initial Release)
 
 **Tanggal Rilis:** 2026-04-30
 
@@ -182,7 +182,7 @@ Rilis pertama Papyr sebagai MVP (Minimum Viable Product) yang mencakup 5 tool PD
 | PAPYR-002    | Next.js 16 + TypeScript + Tailwind CSS v4 + DM Sans font      |
 | PAPYR-003    | FastAPI backend + health check `GET /health`                   |
 | PAPYR-004    | Cloudflare R2 helpers: upload, signed URL, delete              |
-| PAPYR-005    | Supabase project (standby untuk MVP 0.2)                       |
+| PAPYR-005    | Supabase project (standby untuk Fase 2)                       |
 | PAPYR-006    | Centralized typed config (`config.ts` + `config.py`)           |
 | PAPYR-007    | CORS tightening — GET/POST/OPTIONS, header whitelist           |
 | PAPYR-008    | Deploy frontend ke Vercel dengan GitHub auto-deploy            |
