@@ -18,9 +18,9 @@
 | **Tanggal** | Mei 2026 |
 | **Penulis** | Muhammad Fa'iz Zulfikar |
 | **Reviewer** | — |
-| **Scope** | MVP 0.2 (M12–M20) |
-| **Total Tasks** | 89 tasks (PAPYR-090 — PAPYR-178) |
-| **Estimasi Total** | ~163 jam |
+| **Scope** | MVP 0.2 (M12–M22) |
+| **Total Tasks** | 129 tasks (PAPYR-090 — PAPYR-218) |
+| **Estimasi Total** | ~298 jam |
 | **Model Pengembangan** | 100% AI-driven |
 
 ---
@@ -31,6 +31,7 @@
 |-------|---------|-----------|---------|
 | 1.0 | Mei 2026 | Initial draft — backlog lengkap M12–M20 | Muhammad Fa'iz Zulfikar |
 | 1.1 | Mei 2026 | Tambah M21 OpenClaw AI Agent (25 tasks, PAPYR-179—203), update total ke 114 tasks ~263 jam | AI Agent (OpenCode/Sisyphus) |
+| 1.2 | Mei 2026 | Tambah M22 Admin Dashboard (Phase 2F), 15 tasks (PAPYR-204—218), update total ke 129 tasks ~298 jam | AI Agent (OpenCode/Sisyphus) |
 
 ---
 
@@ -72,6 +73,7 @@
 - **7 tools baru:** Protect PDF, Unlock PDF, Watermark PDF, Sign PDF, PDF-to-Word, OCR, PDF-to-Excel
 - **E2E testing:** Playwright untuk semua 13 tools
 - **Performance & monitoring:** Lighthouse optimization, uptime monitoring, SEO update
+- **Admin Dashboard:** Unified admin panel (/admin) untuk monitoring semua operasional
 - **Total tools setelah MVP 0.2:** 13 tools
 - **Target release:** v2.0.0
 
@@ -87,6 +89,7 @@
 | PDF-to-Word | Server | LibreOffice headless | Heavy conversion, butuh full office suite |
 | OCR | Server | ocrmypdf + Tesseract | ML-based text recognition |
 | PDF-to-Excel | Server | camelot + openpyxl | Table detection butuh CV library |
+| Admin Dashboard | Client (SSR) | Next.js App Router | Bagian dari frontend app, SSR untuk data fetching |
 
 ---
 
@@ -104,9 +107,10 @@
 | M19 | **E2E Testing + Code Quality** | 2D — Quality | Minggu 13–14 | 10 | 12 jam |
 | M20 | **Performance, Monitoring & SEO** | 2D — Quality | Minggu 14–15 | 10 | 8 jam |
 | M21 | **OpenClaw AI Agent** | 2E — OpenClaw | Minggu 16–25 | 25 | 100 jam |
-| **TOTAL** | **10 Milestones** | **5 Fase** | **Minggu 1–25** | **114 tasks** | **~263 jam** |
+| M22 | **Admin Dashboard** | 2F — Dashboard | Minggu 25–28 | 15 | 35 jam |
+| **TOTAL** | **11 Milestones** | **6 Fase** | **Minggu 1–28** | **129 tasks** | **~298 jam** |
 
-> ~263 jam total ÷ 10 jam/minggu = sekitar 26–27 minggu. Realistis untuk 100% AI-driven development.
+> ~298 jam total ÷ 10 jam/minggu = sekitar 29–30 minggu. Realistis untuk 100% AI-driven development.
 
 ---
 
@@ -125,10 +129,14 @@
 | `milestone:M18` | #E5E7EB | PDF-to-Excel |
 | `milestone:M19` | #E5E7EB | E2E Testing + Code Quality |
 | `milestone:M20` | #E5E7EB | Performance, Monitoring & SEO |
+| `milestone:M21` | #E5E7EB | OpenClaw AI Agent |
+| `milestone:M22` | #E5E7EB | Admin Dashboard |
 | `phase:2A` | #DC2626 | Security Tools |
 | `phase:2B` | #7C3AED | Document Enhancement |
 | `phase:2C` | #0891B2 | Document Conversion |
 | `phase:2D` | #059669 | Cross-cutting Quality |
+| `phase:2E` | #6366F1 | OpenClaw AI Agent |
+| `phase:2F` | #EC4899 | Admin Dashboard |
 | `priority:high` | #DC2626 | Blocking atau critical path |
 | `priority:medium` | #F59E0B | Penting tapi tidak blocking |
 | `priority:low` | #6B7280 | Nice-to-have, bisa ditunda |
@@ -797,6 +805,72 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 
 ---
 
+### M22: Admin Dashboard (Phase 2F — Dashboard) — 15 tasks | 35 jam | Minggu 25–28
+
+**Deskripsi:** Unified admin panel di `/admin` route dalam existing Next.js app. Mencakup semua operational monitoring termasuk OpenClaw. 10 modul: OpenClaw Monitoring, Analytics Overview, Server Health, Security Scan, SEO & Competitor Intel, Revenue/Billing (placeholder), System Logs, Backup Status, User Management (placeholder), Settings.
+
+**Ringkasan:**
+
+| Field | Detail |
+|-------|--------|
+| Milestone | M22 |
+| Nama | Admin Dashboard |
+| Fase | 2F — Dashboard |
+| Estimasi | 35 jam |
+| Tasks | 15 tasks |
+| Dependensi | M21 (OpenClaw API ready) |
+| Label | 🟢 Buildable |
+
+| ID | Layer | Task | Deskripsi | Jam |
+|----|-------|------|-----------|-----|
+| PAPYR-204 | **Frontend** | **Setup admin route structure + auth middleware** | Buat route group `/admin/*` dengan layout. Middleware auth: cek ADMIN_SECRET env var via cookie/header. Protected routes return 401 jika unauthorized. Setup env variable ADMIN_SECRET. | **3h** |
+| PAPYR-205 | **Frontend** | **Create admin layout (sidebar + header)** | Sidebar navigation dengan 10 modul links, header dengan user info, responsive design. Match existing Papyr style: DM Sans font, Tailwind, same color palette. Collapsible sidebar di mobile. | **3h** |
+| PAPYR-206 | **Frontend** | **Build OpenClaw Monitoring page** | Agent status cards untuk 9 agents (Aksara, Telik, Jaga, Tameng, Warta, Lontar, Dalang, Pustaka, Prasasti). Tampilkan: last run time, success/fail counts, manual trigger buttons, log viewer per agent. Real-time polling. | **4h** |
+| PAPYR-207 | **Frontend** | **Build Analytics Overview page** | Tasks processed chart (daily/weekly/monthly toggle), tool usage breakdown bar chart, device category pie chart, traffic trends line chart. Data dari Vercel Analytics API. | **3h** |
+| PAPYR-208 | **Frontend** | **Build Server Health page** | Railway container status, Vercel deployment status, R2 storage usage (bar), response time graphs (line chart), uptime percentage badges. Auto-refresh setiap 60 detik. | **3h** |
+| PAPYR-209 | **Frontend** | **Build Security Scan page** | Latest scan results summary, CVE alerts list dengan severity badges (critical/high/medium/low), dependency audit history table, severity breakdown donut chart. Data dari OpenClaw Tameng agent. | **2h** |
+| PAPYR-210 | **Frontend** | **Build SEO & Competitor page** | Keyword rankings table (position, change, URL), competitor comparison cards, content pipeline status dari Aksara agent, recent articles list. Data dari OpenClaw Aksara + Telik agents. | **2h** |
+| PAPYR-211 | **Frontend** | **Build System Logs page** | Error log viewer dengan filters (severity, tool, date range), rate limit hits counter, failed tasks table, cleanup stats. Pagination, search, export CSV. | **3h** |
+| PAPYR-212 | **Frontend** | **Build Backup Status page** | Backup history table (date, size, status), last successful backup highlight, restore test results, storage usage breakdown (R2, git bundle, env). Data dari OpenClaw Pustaka agent. | **2h** |
+| PAPYR-213 | **Frontend** | **Build Revenue/Billing placeholder page** | Placeholder UI dengan "Coming in MVP 0.3" banner. Mock revenue chart, subscriber count placeholder, payment history skeleton. Clearly indicate placeholder status. | **1h** |
+| PAPYR-214 | **Frontend** | **Build User Management placeholder page** | Placeholder UI dengan "Coming in MVP 0.3" banner. Mock user table, role badges, invite button (disabled). Clearly indicate placeholder status. | **1h** |
+| PAPYR-215 | **Frontend** | **Build Settings page** | System config display (read-only), notification preferences (Telegram/Email toggles), ADMIN_SECRET rotation form, API endpoint config display, environment info. | **2h** |
+| PAPYR-216 | **Backend** | **Create admin API routes** | Buat `/api/admin/*` endpoints: openclaw/status, openclaw/logs, openclaw/trigger, analytics/overview, health, security/scans, logs, backups. Auth middleware (ADMIN_SECRET check). Error handling + rate limiting. | **3h** |
+| PAPYR-217 | **Frontend** | **Admin SEO exclusion** | Tambahkan `/admin` ke sitemap exclusion, robots.txt disallow `/admin`, add noindex meta tag di admin layout. Pastikan admin pages tidak ter-index search engine. | **1h** |
+| PAPYR-218 | **Testing** | **Unit tests admin auth + API routes** | Vitest/Pytest: test auth middleware (valid token, invalid token, missing token), test API routes return correct data shape, test 401 rejection. Minimal 8 test cases. | **2h** |
+
+**Acceptance Criteria M22:**
+- [ ] Admin dashboard accessible di `/admin` dengan ADMIN_SECRET auth
+- [ ] Semua 10 modul render correctly di desktop dan mobile
+- [ ] OpenClaw agent status updates via polling (interval 30 detik)
+- [ ] Analytics charts menampilkan real data dari Vercel Analytics API
+- [ ] Server health menampilkan live status Railway/Vercel/R2
+- [ ] Placeholder pages clearly indicate "Coming in MVP 0.3"
+- [ ] `/admin` excluded dari sitemap dan robots.txt
+- [ ] Auth middleware reject unauthorized access dengan 401
+- [ ] UI match existing Papyr design (DM Sans, Tailwind, same color palette)
+- [ ] Semua admin API routes punya proper error handling
+
+**API Contract M22:**
+```
+GET /api/admin/openclaw/status     → { agents: [{name, status, lastRun, successCount, failCount}], lastHeartbeat: ... }
+GET /api/admin/openclaw/logs       → { logs: [{agentId, timestamp, level, message}], pagination: {page, total} }
+POST /api/admin/openclaw/trigger   → { agentId, result: "triggered" | "already_running" | "error" }
+GET /api/admin/analytics/overview  → { tasksToday: number, tasksWeek: number, toolBreakdown: {...}, deviceBreakdown: {...} }
+GET /api/admin/health              → { railway: {status, uptime, memory}, vercel: {status, lastDeploy}, r2: {status, usageBytes} }
+GET /api/admin/security/scans      → { scans: [{date, findings, severity}], alerts: [{cve, package, severity}] }
+GET /api/admin/logs                → { errors: [{timestamp, message, tool, severity}], rateLimits: [{ip, count, window}] }
+GET /api/admin/backups             → { backups: [{date, type, size, status}], lastRestore: {date, result} }
+
+Headers (semua endpoint):
+  Authorization: Bearer <ADMIN_SECRET>
+
+Response 401: { "error": "Unauthorized" }
+Response 500: { "error": "Internal server error", "detail": "..." }
+```
+
+---
+
 ## Dependency Graph
 
 ```
@@ -852,6 +926,24 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
                             └───────────┘
 
     ════════════════════════════════════════════════════════════════════════
+    Setelah M20 selesai (product stable):
+    ════════════════════════════════════════════════════════════════════════
+
+                            ┌───────────┐
+                            │    M21    │◄──── depends on M20 (product stable)
+                            │ OpenClaw  │      AI agent system
+                            │ AI Agent  │
+                            └─────┬─────┘
+                                  │
+                                  │ API ready
+                                  ▼
+                            ┌───────────┐
+                            │    M22    │◄──── depends on M21 (OpenClaw API)
+                            │  Admin    │      dashboard consumes agent data
+                            │ Dashboard │
+                            └───────────┘
+
+    ════════════════════════════════════════════════════════════════════════
     LEGEND:
     ──────
     ─────►  Hard dependency (must complete before starting)
@@ -872,6 +964,8 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 | M18 | M17 | OCR needed untuk scanned table PDFs, shared PDF parsing |
 | M19 | M12–M18 | E2E tests butuh semua tools selesai |
 | M20 | M19 | Performance/SEO update setelah semua tools + tests ready |
+| M21 | M20 | OpenClaw butuh product stable sebelum AI agent monitoring |
+| M22 | M21 | Admin Dashboard konsumsi data dari OpenClaw API |
 
 ---
 
@@ -1095,6 +1189,7 @@ MVP 0.2 dianggap **SELESAI** ketika:
 7. ✅ Code terformat (Prettier + Ruff) dan enforced di CI
 8. ✅ Release tagged v2.0.0
 9. ✅ README dan CHANGELOG updated
+10. ✅ Admin dashboard aktif di /admin dengan semua 10 modul
 
 ### Prinsip Pengembangan
 
@@ -1132,6 +1227,10 @@ MVP 0.2 dianggap **SELESAI** ketika:
 | Async task + polling | M16 | M17 |
 | Table preview before convert | M18 | — |
 | E2E test pattern (Playwright) | M19 | — |
+| Admin layout + sidebar | M22 | — |
+| Agent status cards | M22 | — |
+| Chart components (analytics) | M22 | — |
+| Log viewer with filters | M22 | — |
 
 ### Shared Utilities yang Perlu Dibuat
 
@@ -1147,6 +1246,20 @@ backend/
 
 frontend/
 ├── src/
+│   ├── app/
+│   │   └── admin/
+│   │       ├── layout.tsx           ← NEW (M22: admin layout + sidebar + auth)
+│   │       ├── page.tsx             ← NEW (M22: dashboard overview)
+│   │       ├── openclaw/page.tsx    ← NEW (M22: OpenClaw monitoring)
+│   │       ├── analytics/page.tsx   ← NEW (M22: analytics overview)
+│   │       ├── health/page.tsx      ← NEW (M22: server health)
+│   │       ├── security/page.tsx    ← NEW (M22: security scans)
+│   │       ├── seo/page.tsx         ← NEW (M22: SEO & competitor)
+│   │       ├── logs/page.tsx        ← NEW (M22: system logs)
+│   │       ├── backups/page.tsx     ← NEW (M22: backup status)
+│   │       ├── revenue/page.tsx     ← NEW (M22: placeholder)
+│   │       ├── users/page.tsx       ← NEW (M22: placeholder)
+│   │       └── settings/page.tsx    ← NEW (M22: settings)
 │   ├── components/
 │   │   ├── PasswordInput.tsx      ← NEW (M12/M13 shared)
 │   │   ├── PollingProgress.tsx    ← NEW (M16/M17 shared)
@@ -1155,6 +1268,11 @@ frontend/
 │   │   ├── PDFPageViewer.tsx      ← NEW (M15)
 │   │   ├── DragPlacement.tsx      ← NEW (M15)
 │   │   └── TablePreview.tsx       ← NEW (M18)
+│   ├── components/admin/
+│   │   ├── AdminSidebar.tsx       ← NEW (M22)
+│   │   ├── AgentStatusCard.tsx    ← NEW (M22)
+│   │   ├── AnalyticsChart.tsx     ← NEW (M22)
+│   │   └── LogViewer.tsx          ← NEW (M22)
 │   └── hooks/
 │       ├── useAsyncTask.ts        ← NEW (M16/M17 shared polling hook)
 │       └── useSignature.ts        ← NEW (M15 state management)
@@ -1196,6 +1314,7 @@ frontend/
 | PAPYR-159 — PAPYR-168 | M19: E2E + Code Quality | 2D |
 | PAPYR-169 — PAPYR-178 | M20: Performance + SEO | 2D |
 | PAPYR-179 — PAPYR-203 | M21: OpenClaw AI Agent | 2E |
+| PAPYR-204 — PAPYR-218 | M22: Admin Dashboard | 2F |
 
 ---
 
@@ -1241,7 +1360,7 @@ frontend/
 
 ---
 
-> **Next step:** Mulai dari PAPYR-090 (M12: Protect PDF). Bawa dokumen ini ke sesi coding sebagai referensi. Target: 1–2 tasks per sesi coding.
+> **Next step:** Mulai dari PAPYR-090 (M12: Protect PDF). Setelah M21 selesai, lanjut ke M22 (Admin Dashboard, PAPYR-204). Bawa dokumen ini ke sesi coding sebagai referensi. Target: 1–2 tasks per sesi coding.
 
 ---
 

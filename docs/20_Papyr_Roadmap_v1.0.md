@@ -4,7 +4,7 @@
 
 **Product Roadmap**
 
-Version 2.0
+Version 2.2
 
 Juli 2025
 
@@ -20,7 +20,7 @@ mypapyr.com
 |---------------------|----------------------------------------------|
 | **Judul Dokumen**   | Product Roadmap — Papyr                      |
 | **ID Dokumen**      | PPR-RM-001                                   |
-| **Versi**           | 2.0                                          |
+| **Versi**           | 2.2                                          |
 | **Status**          | Approved                                     |
 | **Tanggal Dibuat**  | Juni 2025                                    |
 | **Terakhir Diubah** | Juli 2025                                    |
@@ -36,6 +36,7 @@ mypapyr.com
 | 1.0       | Juni 2025   | AI Agent (OpenCode/Sisyphus) | Draft awal — Product Roadmap lengkap mencakup MVP 0.1 (completed) hingga Fase 3 (planned) |
 | 2.0       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Major upgrade — Roadmap philosophy & prioritization framework, feature classification labels, sub-phase breakdown MVP 0.2, UI safety rules, detailed per-feature specs, gate conditions diperkuat, "What Will NOT Be Built" section, cross-cutting quality items, success metrics dengan target spesifik |
 | 2.1       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2E — OpenClaw AI Agent (M21) sebagai sub-fase baru MVP 0.2, 9 fungsi otonom, deployment HostData.id VPS |
+| 2.2       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2F — Admin Dashboard (M22) sebagai unified admin panel, renumber MVP 0.3/Fase 2/Fase 3 milestones |
 
 **Dokumen Terkait**
 
@@ -46,6 +47,7 @@ mypapyr.com
 | PPR-PP-001     | Project Plan — Papyr                   | Approved    |
 | PPR-GTM-001    | Go-To-Market Strategy — Papyr          | Approved    |
 | PPR-CLAW-001   | OpenClaw AI Agent — Papyr              | Draft       |
+| PPR-ADM-001    | Admin Dashboard Spec — Papyr           | Draft       |
 | PPR-IB-002     | Implementation Backlog MVP 0.2 — Papyr | Draft       |
 
 ---
@@ -141,13 +143,13 @@ Setiap fitur dalam roadmap ini diberi label klasifikasi untuk memberikan gambara
 | **Fase**    | 🟢 Buildable | 🟡 Hard | 🔴 Regulated | 🔵 Business | 🟣 R&D | ⚪ Moonshot | **Total** |
 |-------------|--------------|---------|--------------|-------------|--------|------------|-----------|
 | MVP 0.1     | 11           | 0       | 0            | 0           | 0      | 0          | 11        |
-| MVP 0.2     | 9            | 3       | 0            | 0           | 0      | 0          | 12        |
+| MVP 0.2     | 10           | 3       | 0            | 0           | 0      | 0          | 13        |
 | MVP 0.3     | 4            | 1       | 0            | 2           | 0      | 0          | 7         |
 | Fase 2      | 0            | 1       | 0            | 1           | 2      | 0          | 4         |
 | Fase 3      | 0            | 0       | 2            | 1           | 0      | 1          | 4         |
-| **Total**   | **24**       | **5**   | **2**        | **4**       | **2**  | **1**      | **38**    |
+| **Total**   | **25**       | **5**   | **2**        | **4**       | **2**  | **1**      | **39**    |
 
-> **Insight:** 63% fitur adalah 🟢 Buildable — artinya mayoritas roadmap ini bisa dieksekusi tanpa blocker eksternal. Risiko terbesar ada di Fase 3 (regulated + moonshot).
+> **Insight:** 64% fitur adalah 🟢 Buildable — artinya mayoritas roadmap ini bisa dieksekusi tanpa blocker eksternal. Risiko terbesar ada di Fase 3 (regulated + moonshot).
 
 ---
 
@@ -240,10 +242,10 @@ Setiap transisi antar fase memiliki gate condition yang spesifik dan terukur:
 | **Fase**    | **Milestone**  | **Deskripsi**                          | **Status**           | **Gate Condition**                                    |
 |-------------|----------------|----------------------------------------|----------------------|-------------------------------------------------------|
 | MVP 0.1     | M01–M11        | Core 6 tools + Landing + SEO + Launch  | ✅ Selesai           | —                                                     |
-| MVP 0.2     | M12–M18 + 2D   | 7 tool tambahan + cross-cutting quality| 🔄 Selanjutnya       | MVP 0.1 live & stabil ✅                              |
-| MVP 0.3     | M19–M23        | Login, Pro tier, Payment, API          | 📋 Direncanakan      | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU                |
-| Fase 2      | M24–M26        | AI-powered features                    | 🔮 Visi              | MVP 0.3 revenue > Rp 0 (validated willingness to pay) |
-| Fase 3      | M27–M29        | Indonesia Deep integration             | 🔮 Visi              | Fase 2 stabil + regulatory readiness                  |
+| MVP 0.2     | M12–M18 + 2D + 2E + 2F | 7 tool tambahan + cross-cutting quality + OpenClaw + Admin | 🔄 Selanjutnya | MVP 0.1 live & stabil ✅                              |
+| MVP 0.3     | M23–M27        | Login, Pro tier, Payment, API          | 📋 Direncanakan      | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU                |
+| Fase 2      | M28–M30        | AI-powered features                    | 🔮 Visi              | MVP 0.3 revenue > Rp 0 (validated willingness to pay) |
+| Fase 3      | M31–M33        | Indonesia Deep integration             | 🔮 Visi              | Fase 2 stabil + regulatory readiness                  |
 
 ### 4.3 Detail Timeline per Milestone
 
@@ -269,17 +271,18 @@ Setiap transisi antar fase memiliki gate condition yang spesifik dan terukur:
 | M18    | PDF-to-Excel             | MVP 0.2   | Phase 2C     | 15–20 jam           | M16, M17               | 🟡        | 📋 Planned           |
 | —      | Cross-cutting Quality    | MVP 0.2   | Phase 2D     | 20–30 jam           | M12–M18                | 🟢        | 📋 Planned           |
 | M21    | OpenClaw AI Agent        | MVP 0.2   | Phase 2E     | 80–120 jam          | Phase 2D               | 🟡        | 📋 Planned           |
-| M19    | Authentication           | MVP 0.3   | —            | 15–20 jam           | MVP 0.2 complete       | 🟢        | 📋 Planned           |
-| M20    | User Dashboard           | MVP 0.3   | —            | 10–15 jam           | M19                    | 🟢        | 📋 Planned           |
-| M21    | Usage Tracking           | MVP 0.3   | —            | 10–15 jam           | M19, M20               | 🟢        | 📋 Planned           |
-| M22    | Payment Integration      | MVP 0.3   | —            | 15–20 jam           | M19, M20, M21          | 🟡        | 📋 Planned           |
-| M23    | API Key System           | MVP 0.3   | —            | 8–12 jam            | M22                    | 🟢        | 📋 Planned           |
-| M24    | AI Document Analysis     | Fase 2    | —            | 30–40 jam           | MVP 0.3 complete       | 🟣        | 🔮 Visi              |
-| M25    | Smart Compression        | Fase 2    | —            | 20–30 jam           | M24                    | 🟣        | 🔮 Visi              |
-| M26    | AI Content Extraction    | Fase 2    | —            | 30–40 jam           | M24                    | 🟡        | 🔮 Visi              |
-| M27    | e-Meterai Integration    | Fase 3    | —            | 40–60 jam           | Fase 2 complete        | 🔴        | 🔮 Visi              |
-| M28    | Gov Document Templates   | Fase 3    | —            | 20–30 jam           | M27                    | 🔴        | 🔮 Visi              |
-| M29    | Local Compliance         | Fase 3    | —            | 30–50 jam           | M27, M28               | ⚪        | 🔮 Visi              |
+| M22    | Admin Dashboard          | MVP 0.2   | Phase 2F     | 30–40 jam           | Phase 2E               | 🟢        | 📋 Planned           |
+| M23    | Authentication           | MVP 0.3   | —            | 15–20 jam           | MVP 0.2 complete       | 🟢        | 📋 Planned           |
+| M24    | User Dashboard           | MVP 0.3   | —            | 10–15 jam           | M23                    | 🟢        | 📋 Planned           |
+| M25    | Usage Tracking           | MVP 0.3   | —            | 10–15 jam           | M23, M24               | 🟢        | 📋 Planned           |
+| M26    | Payment Integration      | MVP 0.3   | —            | 15–20 jam           | M23, M24, M25          | 🟡        | 📋 Planned           |
+| M27    | API Key System           | MVP 0.3   | —            | 8–12 jam            | M26                    | 🟢        | 📋 Planned           |
+| M28    | AI Document Analysis     | Fase 2    | —            | 30–40 jam           | MVP 0.3 complete       | 🟣        | 🔮 Visi              |
+| M29    | Smart Compression        | Fase 2    | —            | 20–30 jam           | M28                    | 🟣        | 🔮 Visi              |
+| M30    | AI Content Extraction    | Fase 2    | —            | 30–40 jam           | M28                    | 🟡        | 🔮 Visi              |
+| M31    | e-Meterai Integration    | Fase 3    | —            | 40–60 jam           | Fase 2 complete        | 🔴        | 🔮 Visi              |
+| M32    | Gov Document Templates   | Fase 3    | —            | 20–30 jam           | M31                    | 🔴        | 🔮 Visi              |
+| M33    | Local Compliance         | Fase 3    | —            | 30–50 jam           | M31, M32               | ⚪        | 🔮 Visi              |
 ---
 
 ## 5. Detail MVP 0.1 — Core Tools & Launch (COMPLETED)
@@ -365,14 +368,14 @@ Sebelum membangun fitur apapun di MVP 0.2, aturan berikut **WAJIB** dipatuhi unt
 |------------------------|---------------------------------------------------------------|
 | **Status**             | 🔄 NEXT — Selanjutnya dikerjakan                             |
 | **Gate Condition**     | MVP 0.1 live & stabil ✅ TERPENUHI                           |
-| **Total Milestone**    | 7 tool milestones (M12–M18) + 1 cross-cutting phase (2D)    |
-| **Estimasi Total**     | 111–159 jam (tools) + 20–30 jam (cross-cutting) = 131–189 jam |
+| **Total Milestone**    | 7 tool milestones (M12–M18) + cross-cutting (2D) + OpenClaw (2E) + Admin Dashboard (2F) |
+| **Estimasi Total**     | 111–159 jam (tools) + 20–30 jam (cross-cutting) + 80–120 jam (OpenClaw) + 30–40 jam (Admin) = 241–349 jam |
 | **Pendekatan**         | Sub-phase sequential, rilis incremental per sub-phase         |
-| **Hasil Akhir**        | 13 tools total (6 existing + 7 baru)                         |
+| **Hasil Akhir**        | 13 tools total (6 existing + 7 baru) + autonomous ops + unified admin |
 
 ### 7.2 Struktur Sub-fase
 
-MVP 0.2 dibagi menjadi 5 sub-fase yang dieksekusi secara sequential:
+MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -411,6 +414,13 @@ MVP 0.2 dibagi menjadi 5 sub-fase yang dieksekusi secara sequential:
 │  │ Reporting · Self-Improve · PM ·          │    Stack: Node.js + BullMQ    │
 │  │ Backup · Analytics Intelligence          │    + Redis + PostgreSQL       │
 │  └──────────────────────────────────────────┘                               │
+│       │                                                                     │
+│       ▼                                                                     │
+│  Phase 2F — Admin Dashboard 🟢                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │ M22: Unified Admin Panel (/admin)                                   │    │
+│  │ OpenClaw + Analytics + Health + Security + SEO + Logs + Backup      │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -928,21 +938,90 @@ Phase 2E adalah deployment sistem AI agent otonom (OpenClaw) yang mengelola oper
 
 ---
 
-### 7.8 Urutan Pengerjaan MVP 0.2
+### 7.8 Phase 2F — Admin Dashboard 🟢 Buildable
+
+Phase 2F adalah unified admin panel yang memberikan visibilitas penuh terhadap seluruh operasional Papyr, termasuk monitoring OpenClaw agents, server health, analytics, dan security. Dikerjakan SETELAH Phase 2E selesai karena dashboard membutuhkan OpenClaw API untuk menampilkan data agent.
+
+---
+
+#### 7.8.1 Ringkasan Admin Dashboard
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Milestone**          | M22                                                                                                           |
+| **Deskripsi**          | Unified admin panel di route `/admin` dalam Next.js app yang sama, mencakup 10 modul monitoring               |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Route**              | `/admin/*` (same Next.js frontend app)                                                                        |
+| **Stack**              | Next.js (SSR), shared Tailwind/DM Sans components, same design system                                        |
+| **Auth**               | Env-based token auth (ADMIN_SECRET env var) — upgrade ke role-based saat MVP 0.3 auth tersedia                |
+| **Estimasi**           | 30–40 jam                                                                                                     |
+| **Dependensi**         | Phase 2E (OpenClaw) — dashboard membutuhkan OpenClaw API untuk display agent data                             |
+| **Dokumen Lengkap**    | PPR-ADM-001 (Admin Dashboard Spec)                                                                            |
+
+#### 7.8.2 10 Modul Admin Dashboard
+
+| **#** | **Modul**                    | **Deskripsi**                                                                          |
+|-------|------------------------------|----------------------------------------------------------------------------------------|
+| 1     | OpenClaw Monitoring          | Status semua 9 agent, logs, manual override, SOUL.md editor, CLI access                |
+| 2     | Analytics Overview           | Traffic, tasks processed, tool usage, device breakdown, trends                         |
+| 3     | Server Health Dashboard      | Railway uptime, Vercel status, R2 storage usage, response times                        |
+| 4     | Security Scan Results        | Dependency audit results, CVE alerts, security scan history                            |
+| 5     | SEO & Competitor Intel       | SEO rankings, competitor changes, content pipeline status                              |
+| 6     | Revenue/Billing (Placeholder)| Revenue, subscribers, payment history (aktif saat MVP 0.3)                             |
+| 7     | System Logs & Errors         | Error logs, rate limit hits, failed tasks, cleanup stats                               |
+| 8     | Backup Status                | Backup status, restore history, storage usage                                          |
+| 9     | User Management (Placeholder)| Aktif saat MVP 0.3 auth tersedia                                                       |
+| 10    | Settings                     | System config, notification preferences, API keys                                      |
+
+#### 7.8.3 Detail Teknis
+
+- **Route structure:** `/admin` (overview), `/admin/openclaw`, `/admin/analytics`, `/admin/health`, `/admin/security`, `/admin/seo`, `/admin/billing`, `/admin/logs`, `/admin/backup`, `/admin/users`, `/admin/settings`
+- **Auth mechanism:** Simple env-based token — request header `Authorization: Bearer <ADMIN_SECRET>` atau cookie-based session setelah login di `/admin/login`
+- **Upgrade path:** Saat MVP 0.3 auth (M23) tersedia, admin dashboard akan menggunakan role-based access control
+- **OpenClaw CLI:** Accessible via dashboard — send commands langsung ke OpenClaw agent dari browser
+- **Design:** Same Tailwind v4 + DM Sans design system, responsive (desktop-primary untuk admin, tapi tetap usable di mobile)
+
+#### 7.8.4 Acceptance Criteria
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | Admin panel accessible di `/admin` dengan token auth                                                  | Functional   |
+| AC2   | 10 modul tersedia dan menampilkan data real-time (atau placeholder untuk modul MVP 0.3)               | Functional   |
+| AC3   | OpenClaw agent status visible — running/stopped/error per agent                                       | Functional   |
+| AC4   | Server health metrics (uptime, response time, storage) ditampilkan                                    | Functional   |
+| AC5   | Security scan results dan CVE alerts visible                                                          | Functional   |
+| AC6   | System logs searchable dan filterable                                                                 | Functional   |
+| AC7   | Unauthorized access ke `/admin/*` redirect ke login atau return 401                                   | Security     |
+| AC8   | ADMIN_SECRET env var required — app tidak crash jika tidak di-set (graceful fallback)                 | Security     |
+| AC9   | Dashboard uptime ≥ 99% (self-monitoring)                                                              | Performance  |
+| AC10  | Same design system (Tailwind v4, DM Sans) — konsisten dengan frontend utama                          | UI           |
+
+**Dependencies:**
+
+- Phase 2E (OpenClaw deployed dan API tersedia)
+- OpenClaw CLI interface (sudah dalam OpenClaw spec)
+
+**Estimasi Effort:** 30–40 jam
+
+**Risiko:** Rendah — pure frontend/SSR work dalam stack yang sudah ada. Tidak ada dependency eksternal baru selain OpenClaw API yang sudah di-spec.
+
+---
+
+### 7.9 Urutan Pengerjaan MVP 0.2
 
 ```
-Phase 2A                Phase 2B                Phase 2C                    Phase 2D                Phase 2E
-────────────────────    ────────────────────    ────────────────────────    ────────────────────    ────────────────────
-M12 Protect 🟢          M14 Watermark 🟢        M16 PDF-to-Word 🟡          E2E Testing 🟢          M21 OpenClaw 🟡
-    │                       │                       │                       Prettier+Ruff 🟢        9 AI Functions
-    ▼                       │                       ▼                       Performance 🟢          HostData.id VPS
-M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                  Monitoring 🟢           Node.js+BullMQ
-                                                    │                       SEO Update 🟢           +Redis+PostgreSQL
+Phase 2A                Phase 2B                Phase 2C                    Phase 2D                Phase 2E                Phase 2F
+────────────────────    ────────────────────    ────────────────────────    ────────────────────    ────────────────────    ────────────────────
+M12 Protect 🟢          M14 Watermark 🟢        M16 PDF-to-Word 🟡          E2E Testing 🟢          M21 OpenClaw 🟡         M22 Admin Panel 🟢
+    │                       │                       │                       Prettier+Ruff 🟢        9 AI Functions          10 Modules
+    ▼                       │                       ▼                       Performance 🟢          HostData.id VPS         /admin route
+M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                  Monitoring 🟢           Node.js+BullMQ          Unified monitoring
+                                                    │                       SEO Update 🟢           +Redis+PostgreSQL       Env-based auth
                                                     ▼                       Analytics 🟢
                                                 M18 PDF-to-Excel 🟡
 
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────►
-16-24 jam               25-35 jam               50-70 jam                   20-30 jam               80-120 jam
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────►
+16-24 jam               25-35 jam               50-70 jam                   20-30 jam               80-120 jam              30-40 jam
 ```
 
 **Rasional urutan:**
@@ -951,6 +1030,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 3. **Phase 2C (M16→M17→M18):** Progressive complexity, shared PDF content extraction — heaviest phase
 4. **Phase 2D:** Quality sweep setelah semua tools selesai — ensures production readiness
 5. **Phase 2E (M21):** OpenClaw AI Agent — autonomous operations, deployed setelah product stable
+6. **Phase 2F (M22):** Admin Dashboard — unified monitoring, membutuhkan OpenClaw API yang sudah live
 
 **Rilis Incremental:**
 - Setelah Phase 2A selesai → deploy (8 tools live)
@@ -958,6 +1038,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - Setelah Phase 2C selesai → deploy (13 tools live)
 - Setelah Phase 2D selesai → deploy (quality hardened)
 - Setelah Phase 2E selesai → deploy OpenClaw (autonomous operations active)
+- Setelah Phase 2F selesai → deploy Admin Dashboard (unified monitoring active)
 
 ---
 
@@ -1006,7 +1087,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 
 ### 8.4 Komponen Teknis Monetisasi
 
-#### 8.4.1 M19 — Authentication System 🟢
+#### 8.4.1 M23 — Authentication System 🟢
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
@@ -1028,7 +1109,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 
 ---
 
-#### 8.4.2 M20 — User Dashboard 🟢
+#### 8.4.2 M24 — User Dashboard 🟢
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
@@ -1044,11 +1125,11 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - Account settings: change password, delete account
 - Mobile-first layout (R3)
 
-**Dependencies:** M19 (Authentication)
+**Dependencies:** M23 (Authentication)
 
 ---
 
-#### 8.4.3 M21 — Usage Tracking & Rate Limiting 🟢
+#### 8.4.3 M25 — Usage Tracking & Rate Limiting 🟢
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
@@ -1064,11 +1145,11 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - Pro users → no rate limit (kecuali abuse protection)
 - Anonymous users → basic tools unlimited, advanced tools blocked
 
-**Dependencies:** M19 (Authentication), M20 (Dashboard)
+**Dependencies:** M23 (Authentication), M24 (Dashboard)
 
 ---
 
-#### 8.4.4 M22 — Payment Integration 🟡
+#### 8.4.4 M26 — Payment Integration 🟡
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
@@ -1086,11 +1167,11 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - Invoice/receipt generation
 - Payment failure → retry mechanism + user notification
 
-**Dependencies:** M19, M20, M21
+**Dependencies:** M23, M24, M25
 
 ---
 
-#### 8.4.5 M23 — API Key System 🟢
+#### 8.4.5 M27 — API Key System 🟢
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
@@ -1106,7 +1187,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - API documentation (Swagger/OpenAPI) tersedia
 - Key rotation dan revocation support
 
-**Dependencies:** M22 (Payment — Pro tier must exist)
+**Dependencies:** M26 (Payment — Pro tier must exist)
 
 ### 8.5 Strategi Monetisasi
 
@@ -1133,7 +1214,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 
 ---
 
-#### 9.2.1 M24 — AI Document Analysis 🟣
+#### 9.2.1 M28 — AI Document Analysis 🟣
 
 | **Atribut**            | **Detail**                                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -1157,7 +1238,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 
 ---
 
-#### 9.2.2 M25 — Smart Compression Recommendations 🟣
+#### 9.2.2 M29 — Smart Compression Recommendations 🟣
 
 | **Atribut**            | **Detail**                                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -1173,11 +1254,11 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - One-click apply recommendation
 - Akurasi rekomendasi ≥ 80% (user satisfaction)
 
-**Dependencies:** M24 (shared AI infrastructure)
+**Dependencies:** M28 (shared AI infrastructure)
 
 ---
 
-#### 9.2.3 M26 — AI Content Extraction 🟡
+#### 9.2.3 M30 — AI Content Extraction 🟡
 
 | **Atribut**            | **Detail**                                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -1193,7 +1274,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - Akurasi ≥ 85% untuk dokumen standar Indonesia
 - Hanya tersedia untuk Pro tier
 
-**Dependencies:** M24 (AI infrastructure), M17 (OCR — untuk scanned documents)
+**Dependencies:** M28 (AI infrastructure), M17 (OCR — untuk scanned documents)
 
 ### 9.3 Pertimbangan Teknis Fase 2
 
@@ -1220,7 +1301,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 
 ---
 
-#### 10.2.1 M27 — e-Meterai Integration 🔴
+#### 10.2.1 M31 — e-Meterai Integration 🔴
 
 | **Atribut**            | **Detail**                                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -1243,7 +1324,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 
 ---
 
-#### 10.2.2 M28 — Government Document Templates 🔴
+#### 10.2.2 M32 — Government Document Templates 🔴
 
 | **Atribut**            | **Detail**                                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -1260,11 +1341,11 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - Export ke PDF dengan formatting yang benar
 - Minimal 20 templates tersedia saat launch
 
-**Dependencies:** M27 (e-Meterai — untuk legalisasi template), legal review
+**Dependencies:** M31 (e-Meterai — untuk legalisasi template), legal review
 
 ---
 
-#### 10.2.3 M29 — Local Compliance Features ⚪
+#### 10.2.3 M33 — Local Compliance Features ⚪
 
 | **Atribut**            | **Detail**                                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -1279,7 +1360,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
 - Compliance reporting
 - Enterprise-grade security
 
-**Dependencies:** M27, M28, sertifikasi dari Kominfo/BSrE
+**Dependencies:** M31, M32, sertifikasi dari Kominfo/BSrE
 
 **Risiko:** ⚪ Moonshot — Sertifikasi PSrE membutuhkan investasi signifikan dan timeline yang panjang. Bisa jadi game-changer untuk enterprise market, tapi juga bisa gagal jika regulasi berubah.
 
@@ -1359,26 +1440,38 @@ Bagian ini secara eksplisit mendefinisikan fitur dan produk yang **TIDAK** akan 
 │  │ E2E · Format · Perf · Mon · SEO · An│                                    │
 │  └─────────────────────────────────────┘                                    │
 │           │                                                                 │
+│           ▼                                                                 │
+│  MVP 0.2 — Phase 2E (OpenClaw) 🟡                                           │
+│  ┌─────────────────────────────────────┐                                    │
+│  │ M21 OpenClaw (9 AI Functions)       │                                    │
+│  └─────────────────────────────────────┘                                    │
+│           │                                                                 │
+│           ▼                                                                 │
+│  MVP 0.2 — Phase 2F (Admin Dashboard) 🟢                                    │
+│  ┌─────────────────────────────────────┐                                    │
+│  │ M22 Admin Panel (10 Modules)        │                                    │
+│  └─────────────────────────────────────┘                                    │
+│           │                                                                 │
 │           ▼ [GATE: ≥ 10K tasks/mo OR ≥ 5K MAU]                              │
 │                                                                             │
 │  MVP 0.3 (Monetisasi) 🟢🔵                                                  │
-│  ┌─────────────────────────────────────────────┐                            │
-│  │ M19 Auth → M20 Dashboard → M21 Usage → M22 Pay → M23 API │              │
-│  └─────────────────────────────────────────────┘                            │
+│  ┌─────────────────────────────────────────────────┐                        │
+│  │ M23 Auth → M24 Dashboard → M25 Usage → M26 Pay → M27 API │              │
+│  └─────────────────────────────────────────────────┘                        │
 │           │                                                                 │
 │           ▼ [GATE: revenue > Rp 0]                                          │
 │                                                                             │
 │  Fase 2 (AI Features) 🟣                                                    │
 │  ┌─────────────────────────────────────┐                                    │
-│  │ M24 AI Analysis → M25 Smart Comp    │                                    │
-│  │                 → M26 AI Extract     │                                    │
+│  │ M28 AI Analysis → M29 Smart Comp    │                                    │
+│  │                 → M30 AI Extract     │                                    │
 │  └─────────────────────────────────────┘                                    │
 │           │                                                                 │
 │           ▼ [GATE: stable + regulatory + partnership]                        │
 │                                                                             │
 │  Fase 3 (Indonesia Deep) 🔴⚪                                               │
 │  ┌─────────────────────────────────────┐                                    │
-│  │ M27 e-Meterai → M28 Templates → M29 Compliance │                        │
+│  │ M31 e-Meterai → M32 Templates → M33 Compliance │                        │
 │  └─────────────────────────────────────┘                                    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -1395,10 +1488,11 @@ Bagian ini secara eksplisit mendefinisikan fitur dan produk yang **TIDAK** akan 
 | M16 PDF-Word  | High       | Medium     | P3            | 🟡        | Sangat diminta, tapi butuh server processing yang lebih berat    |
 | M17 OCR       | High       | High       | P3            | 🟡        | Kompleks tapi sangat bernilai untuk scanned documents            |
 | M18 PDF-Excel | Medium     | Medium     | P4            | 🟡        | Niche use case, bergantung pada M16 dan M17                      |
-| M19 Auth      | Medium     | Medium     | P5            | 🟢        | Enabler untuk monetisasi, bukan user-facing value                |
-| M22 Payment   | High       | High       | P5            | 🟡        | Revenue enabler, tapi hanya setelah traffic threshold            |
-| M24 AI        | High       | Very High  | P6            | 🟣        | High value tapi high risk — R&D required                         |
-| M27 e-Meterai | Very High  | Very High  | P7            | 🔴        | Game-changer tapi regulated — timeline unpredictable             |
+| M22 Admin     | Medium     | Medium     | P4            | 🟢        | Unified monitoring, depends on OpenClaw, operational visibility  |
+| M23 Auth      | Medium     | Medium     | P5            | 🟢        | Enabler untuk monetisasi, bukan user-facing value                |
+| M26 Payment   | High       | High       | P5            | 🟡        | Revenue enabler, tapi hanya setelah traffic threshold            |
+| M28 AI        | High       | Very High  | P6            | 🟣        | High value tapi high risk — R&D required                         |
+| M31 e-Meterai | Very High  | Very High  | P7            | 🔴        | Game-changer tapi regulated — timeline unpredictable             |
 
 ---
 
@@ -1428,6 +1522,7 @@ Bagian ini secara eksplisit mendefinisikan fitur dan produk yang **TIDAK** akan 
 | E2E Test Coverage             | 26 tests passing (2 per tool)                 | Playwright CI report                         |
 | Uptime                        | ≥ 99.5%                                       | BetterStack/UptimeRobot                      |
 | Bundle Size                   | < 50KB JS gzipped per tool page               | Bundle analyzer                              |
+| Admin Dashboard Uptime        | ≥ 99%                                         | Self-monitoring                              |
 
 ### 13.3 MVP 0.3 — Monetisasi
 
@@ -1511,13 +1606,15 @@ Bagian ini secara eksplisit mendefinisikan fitur dan produk yang **TIDAK** akan 
 | PPR-PC-001     | Project Charter                        | Scope, deliverables, stakeholders, budget constraints             |
 | PPR-PP-001     | Project Plan                           | WBS detail, resource allocation, timeline operasional             |
 | PPR-GTM-001    | Go-To-Market Strategy                  | Launch strategy, marketing channels, user acquisition plan        |
+| PPR-CLAW-001   | OpenClaw AI Agent                      | Phase 2E spec, 9 autonomous functions, deployment architecture    |
+| PPR-ADM-001    | Admin Dashboard Spec                   | Phase 2F spec, 10 admin modules, unified monitoring panel         |
 
 ### 15.2 Mapping Roadmap ke Dokumen
 
 | **Fase Roadmap** | **BRD Section**          | **Project Plan Section** | **GTM Section**          |
 |------------------|--------------------------|--------------------------|--------------------------|
 | MVP 0.1          | §3 Functional Req        | §3 WBS (M01–M11)        | §2 Launch Strategy       |
-| MVP 0.2          | §3.2 Future Req          | §3 WBS (M12–M18)        | §3 Growth Strategy       |
+| MVP 0.2          | §3.2 Future Req          | §3 WBS (M12–M22)        | §3 Growth Strategy       |
 | MVP 0.3          | §4 Business Model        | §4 Resource Plan         | §4 Monetization          |
 | Fase 2           | §5 Future Vision         | —                        | §5 Expansion             |
 | Fase 3           | §5 Future Vision         | —                        | §5 Expansion             |
@@ -1543,6 +1640,7 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 | Table extraction                       | camelot-py + openpyxl          | tabula-py only, pdfplumber            | Best accuracy untuk lattice + stream tables                   |
 | Authentication                         | Supabase Auth                  | NextAuth, Firebase Auth               | Sudah standby di stack, PostgreSQL included                   |
 | Payment                                | Midtrans/Xendit                | Stripe, PayPal                        | Indonesian payment methods (GoPay, OVO, bank transfer)        |
+| Admin Dashboard auth                   | Env-based token (initial)      | NextAuth, Supabase Auth               | Minimal overhead, no user system needed yet; upgrade path to role-based in MVP 0.3 |
 | VPS provider (future)                  | HostData.id                    | Contabo, Hetzner                      | Indonesian provider, local support, competitive pricing       |
 
 ---
