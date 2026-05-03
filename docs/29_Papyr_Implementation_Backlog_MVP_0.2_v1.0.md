@@ -30,6 +30,7 @@
 | Versi | Tanggal | Perubahan | Penulis |
 |-------|---------|-----------|---------|
 | 1.0 | Mei 2026 | Initial draft — backlog lengkap M12–M20 | Muhammad Fa'iz Zulfikar |
+| 1.1 | Mei 2026 | Tambah M21 OpenClaw AI Agent (25 tasks, PAPYR-179—203), update total ke 114 tasks ~263 jam | AI Agent (OpenCode/Sisyphus) |
 
 ---
 
@@ -44,6 +45,7 @@
 | PPR-RM-001 | Papyr Roadmap v1.0 | Product Roadmap |
 | PPR-API-001 | Papyr API Spec v1.0 | API Specification |
 | PPR-TP-001 | Papyr Test Plan v1.0 | Test Plan & Strategy |
+| PPR-CLAW-001 | Papyr OpenClaw v1.0 | OpenClaw AI Agent Full Specification |
 
 ---
 
@@ -101,9 +103,10 @@
 | M18 | **PDF-to-Excel** | 2C — Conversion | Minggu 11–13 | 10 | 21 jam |
 | M19 | **E2E Testing + Code Quality** | 2D — Quality | Minggu 13–14 | 10 | 12 jam |
 | M20 | **Performance, Monitoring & SEO** | 2D — Quality | Minggu 14–15 | 10 | 8 jam |
-| **TOTAL** | **9 Milestones** | **4 Fase** | **Minggu 1–15** | **89 tasks** | **~163 jam** |
+| M21 | **OpenClaw AI Agent** | 2E — OpenClaw | Minggu 16–25 | 25 | 100 jam |
+| **TOTAL** | **10 Milestones** | **5 Fase** | **Minggu 1–25** | **114 tasks** | **~263 jam** |
 
-> ~163 jam total ÷ 10 jam/minggu = sekitar 15–16 minggu. Realistis untuk solo dev AI-driven 7–12 jam/minggu.
+> ~263 jam total ÷ 10 jam/minggu = sekitar 26–27 minggu. Realistis untuk 100% AI-driven development.
 
 ---
 
@@ -741,6 +744,59 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 
 ---
 
+### Milestone 21 — OpenClaw AI Agent (Phase 2E)
+
+**Fase:** 2E — OpenClaw
+**Estimasi:** ~100 jam
+**Dependensi:** Phase 2D complete (product stable)
+**Deployment:** HostData.id VPS (dedicated)
+**Dokumen Lengkap:** PPR-CLAW-001 (30_Papyr_OpenClaw_v1.0.md)
+
+| ID | Layer | Task | Deskripsi | Jam |
+|----|-------|------|-----------|-----|
+| PAPYR-179 | Infra | Setup VPS & Docker | Provisioning HostData.id VPS, install Docker, Docker Compose, setup networking | 4 |
+| PAPYR-180 | Infra | Setup PostgreSQL + Redis | Docker containers untuk PostgreSQL 16 + Redis 7, schema `openclaw`, initial migration | 4 |
+| PAPYR-181 | Backend | Core Framework | Project scaffold: TypeScript, BullMQ event bus, LLM client (enowxAI), persona manager, decision engine | 8 |
+| PAPYR-182 | Backend | SOUL.md + HEARTBEAT.md | Implementasi SOUL.md parser, HEARTBEAT.md scheduler, persona switching, cron job registration | 6 |
+| PAPYR-183 | Backend | Agent: SEO Pipeline (Aksara) | Keyword research, 4-gate content pipeline, blog publisher, performance tracker | 10 |
+| PAPYR-184 | Backend | Agent: Competitor Monitoring (Telik) | Playwright scraper untuk 5 competitors, change detection, weekly report | 8 |
+| PAPYR-185 | Backend | Agent: Server Health (Jaga) | Railway/Vercel/R2 monitoring, health checks 60s, auto-remediation, alerting | 8 |
+| PAPYR-186 | Backend | Agent: Security Scanning (Tameng) | npm/pip audit, CVE scanner, secret detection, OWASP check, GitHub issue creation | 8 |
+| PAPYR-187 | Backend | Agent: Reporting (Warta) | Daily/weekly/monthly report generation, Telegram + Email distribution, R2 archival | 6 |
+| PAPYR-188 | Backend | Agent: Self-Improvement (Lontar) | Evaluate→Analyze→Hypothesize→Commit→Modify→Monitor→Decide cycle, rollback safety | 8 |
+| PAPYR-189 | Backend | Agent: Project Management (Dalang) | Feedback processing, GitHub issue creation (Octokit), sprint planning, tech debt scan | 6 |
+| PAPYR-190 | Backend | Agent: Backup & Verify (Pustaka) | R2 backup, git bundle, env backup (encrypted), weekly verification, DR testing | 6 |
+| PAPYR-191 | Backend | Agent: Analytics Intelligence (Prasasti) | Vercel Analytics API, anomaly detection (z-score), tool usage analysis, insights report | 8 |
+| PAPYR-192 | Backend | Telegram Bot | grammy bot setup, command handlers, report/alert/approval formats, interactive buttons | 6 |
+| PAPYR-193 | Frontend | Dashboard /admin/openclaw | Next.js admin page, agent status, reports viewer, logs, manual override controls, auth | 8 |
+| PAPYR-194 | Backend | CLI Interface | commander.js CLI, agent management commands, report generation, config commands | 3 |
+| PAPYR-195 | Backend | Error Handling & Resilience | Retry with backoff, circuit breaker, dead letter queue, graceful degradation, alert escalation | 4 |
+| PAPYR-196 | Backend | Email Integration (Resend) | Email report templates (HTML), distribution engine, weekly/monthly email reports | 3 |
+| PAPYR-197 | Infra | CI/CD Pipeline | GitHub Actions: test → build → deploy to VPS, Docker image registry, rolling updates | 4 |
+| PAPYR-198 | Backend | Database Schema & Migrations | 17 tables DDL, Drizzle ORM schema, migration scripts, seed data | 4 |
+| PAPYR-199 | Test | Unit Tests | Vitest unit tests untuk semua 9 agents + core framework, mock strategies | 6 |
+| PAPYR-200 | Test | Integration Tests | testcontainers (PostgreSQL + Redis), full agent cycle tests, BullMQ queue tests | 6 |
+| PAPYR-201 | Test | E2E Tests | Full system test: agent scheduling → execution → reporting → Telegram delivery | 4 |
+| PAPYR-202 | Docs | Documentation Update | Update README, deployment runbook, monitoring playbook, internal ops manual untuk OpenClaw | 3 |
+| PAPYR-203 | Infra | Production Deployment & Verification | Final deploy, health check verification, first daily report, monitoring confirmation | 4 |
+
+**Total: 25 tasks, ~100 jam**
+
+**Acceptance Criteria M21:**
+- [ ] 9 fungsi agent berjalan sesuai jadwal HEARTBEAT.md
+- [ ] Telegram Bot aktif dan responsif terhadap commands
+- [ ] Dashboard /admin/openclaw menampilkan status real-time
+- [ ] Daily report terkirim via Telegram setiap pagi
+- [ ] Health monitoring mendeteksi downtime dalam < 2 menit
+- [ ] Security scan berjalan harian tanpa false positive berlebihan
+- [ ] SEO Pipeline menghasilkan minimal 2 artikel/minggu
+- [ ] Backup berjalan harian dengan weekly verification pass
+- [ ] Total biaya OpenClaw < Rp 150.000/bulan
+- [ ] Unit test coverage ≥ 80% untuk core framework
+- [ ] CI/CD pipeline green dan auto-deploy berfungsi
+
+---
+
 ## Dependency Graph
 
 ```
@@ -1139,6 +1195,7 @@ frontend/
 | PAPYR-149 — PAPYR-158 | M18: PDF-to-Excel | 2C |
 | PAPYR-159 — PAPYR-168 | M19: E2E + Code Quality | 2D |
 | PAPYR-169 — PAPYR-178 | M20: Performance + SEO | 2D |
+| PAPYR-179 — PAPYR-203 | M21: OpenClaw AI Agent | 2E |
 
 ---
 
