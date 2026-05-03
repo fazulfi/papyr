@@ -40,6 +40,7 @@ mypapyr.com
 | 2.3       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Update Fase 2E — OpenClaw expanded ke 10 fungsi, reporting diperluas, autonomy policy 100% |
 | 3.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete rewrite — Ekspansi 5 fase ke 7 fase, 114 fitur terklasifikasi, Fase 3 Foundation & UX Polish (baru), Fase 4 Auth + Monetization (baru), Fase 5-5 expanded, LLM strategy enowxAI + OpenRouter + 9Router |
 | 4.0       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Complete expansion — 7 fase ke 12 fase, 114 fitur ke 238 fitur. Tambah Fase 9 (Platform & Marketplace), Fase 10 (Enterprise & B2B), Fase 11 (AI Agent Swarm + Autonomy), Fase 12 (Moonshots & Future). Fase 8 diperluas dengan 8 OpenClaw agent baru. |
+| 4.1       | Mei 2026    | AI Agent (OpenCode/Sisyphus) | Perkuat acceptance criteria M16-M18 (edge cases, performance targets, output quality). Enforce test coverage ≥ 90% untuk semua milestone Fase 2. |
 
 **Dokumen Terkait**
 
@@ -526,6 +527,7 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 - PDF sudah terproteksi → ditolak dengan pesan jelas
 - File auto-delete 60 menit
 - Mobile-first 375px, JS < 50KB gzipped
+- Test coverage ≥ 90% (backend + frontend unit tests)
 
 #### M13 — Unlock PDF (Remove Password)
 
@@ -544,6 +546,7 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 - Password salah → error "Password salah. Silakan coba lagi."
 - PDF tidak terproteksi → ditolak
 - File auto-delete 60 menit
+- Test coverage ≥ 90% (backend + frontend unit tests)
 
 ### 7.4 Fase 2B — Document Enhancement (M14 + M15) 🟢/🟡
 
@@ -563,6 +566,7 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 - Diterapkan ke SEMUA halaman
 - Text = client-side (zero upload), Image = server-side
 - Preview sebelum apply
+- Test coverage ≥ 90% (backend + frontend unit tests)
 
 #### M15 — Sign PDF 🟡
 
@@ -581,6 +585,7 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 - Seluruh proses client-side (privacy-first)
 - Canvas + drag berfungsi mobile touch
 - Ini visual signature, BUKAN cryptographic digital signature
+- Test coverage ≥ 90% (backend + frontend unit tests)
 
 ### 7.5 Fase 2C — Document Conversion (M16 + M17 + M18) 🟡
 
@@ -591,8 +596,34 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | **Deskripsi**          | Konversi PDF ke .docx dengan layout terjaga                    |
 | **Label**              | 🟡 Hard                                                      |
 | **Processing Strategy**| Server-side (LibreOffice headless)                            |
+| **Library**            | LibreOffice 7.x headless — `libreoffice --headless --convert-to docx` |
 | **Route**              | /pdf-to-word                                                  |
-| **Estimasi**           | 15-20 jam                                                     |
+| **Estimasi**           | 22 jam                                                        |
+
+**Acceptance Criteria:**
+- Upload PDF → async processing → download DOCX
+- Async pattern: POST return 202 + task_id, polling GET /api/status/{task_id}
+- Layout fidelity: paragraf, tabel, gambar terjaga (best effort)
+- Timeout: maks 120 detik per file, pesan jelas jika timeout
+- Limit: maks 20MB, maks 100 halaman
+- Scanned PDF ditolak → suggest OCR terlebih dahulu
+- Password-protected PDF ditolak → suggest Unlock terlebih dahulu
+- File auto-delete 60 menit
+- Mobile-first 375px, JS < 50KB gzipped
+- Test coverage ≥ 90% (12+ backend tests + 8+ frontend tests)
+
+**Edge Cases:**
+- PDF multi-kolom → best effort layout preservation
+- PDF dengan embedded fonts → font substitution
+- PDF dengan form/annotation → preserve sebagai static content
+- Empty PDF → return 400
+- Corrupted PDF → return 400
+
+**Performance Targets:**
+- ≤ 10 detik untuk ≤ 10 halaman
+- ≤ 30 detik untuk 10-50 halaman
+- ≤ 120 detik untuk 50-100 halaman
+- Output DOCX ≤ 3x input PDF size
 
 #### M17 — OCR 🟡
 
@@ -601,18 +632,76 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | **Deskripsi**          | Ekstraksi teks dari scanned PDF → searchable PDF               |
 | **Label**              | 🟡 Hard                                                      |
 | **Processing Strategy**| Server-side (ocrmypdf + Tesseract + Indonesian language pack) |
+| **Library**            | ocrmypdf + Tesseract 5.x (tesseract-ocr-ind + tesseract-ocr-eng) |
 | **Route**              | /ocr                                                          |
-| **Estimasi**           | 20-30 jam                                                     |
+| **Estimasi**           | 26 jam                                                        |
+
+**Acceptance Criteria:**
+- Upload scanned PDF → async processing → download searchable PDF
+- Async pattern: POST return 202 + task_id, polling GET /api/status/{task_id}
+- Support bahasa: Indonesia (ind), English (eng), keduanya (ind+eng)
+- Output: invisible text layer ditambahkan, visual layout preserved
+- PDF sudah ada text layer → skip OCR, return original
+- Mixed PDF (sebagian scan, sebagian teks) → OCR hanya halaman scan
+- Timeout: maks 180 detik per file
+- Limit: maks 20MB, maks 50 halaman
+- Password-protected PDF ditolak
+- File auto-delete 60 menit
+- Mobile-first 375px, JS < 50KB gzipped
+- Test coverage ≥ 90% (12+ backend tests + 8+ frontend tests)
+
+**Edge Cases:**
+- Low quality scan (< 150 DPI) → warn user
+- Rotated/skewed pages → auto-deskew
+- Handwriting → warn "optimal untuk teks cetak"
+- Multi-language document → ind+eng simultaneous
+
+**Performance Targets:**
+- ≤ 5 detik per halaman (average)
+- ≤ 30 detik untuk ≤ 5 halaman
+- ≤ 90 detik untuk 5-20 halaman
+- ≤ 180 detik untuk 20-50 halaman
+- Accuracy ≥ 95% untuk teks cetak berkualitas baik
+- Output size ≤ 1.5x input (optimize=1)
 
 #### M18 — PDF-to-Excel 🟡
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
-| **Deskripsi**          | Ekstraksi tabel dari PDF ke .xlsx                              |
+| **Deskripsi**          | Ekstraksi tabel dari PDF ke .xlsx dengan preview              |
 | **Label**              | 🟡 Hard                                                      |
 | **Processing Strategy**| Server-side (camelot-py lattice+stream + openpyxl)            |
+| **Library**            | camelot-py[cv] + opencv-python-headless + openpyxl            |
 | **Route**              | /pdf-to-excel                                                 |
-| **Estimasi**           | 15-20 jam                                                     |
+| **Estimasi**           | 21 jam                                                        |
+
+**Acceptance Criteria:**
+- Upload PDF → preview tabel terdeteksi → confirm → download XLSX
+- 2 detection mode: lattice (tabel bergaris) dan stream (tabel tanpa garis)
+- Preview endpoint: return first 5 rows per tabel + metadata (rows, cols, accuracy)
+- Multiple tabel → multiple sheets dalam 1 XLSX
+- Auto-width columns, header row bold, number/date detection
+- "Tidak ada tabel" → return 400 dengan pesan informatif
+- Scanned PDF ditolak → suggest OCR terlebih dahulu
+- Password-protected PDF ditolak
+- Limit: maks 20MB, maks 30 halaman
+- File auto-delete 60 menit
+- Mobile-first 375px, JS < 50KB gzipped
+- Test coverage ≥ 90% (14+ backend tests + 8+ frontend tests)
+
+**Edge Cases:**
+- Tabel nested/merged cells → best effort, warn jika accuracy < 70%
+- Tabel sangat besar (>1000 rows) → truncate + warn
+- Tabel tanpa header → auto-generate (Column_1, Column_2, ...)
+- Mixed content (teks + tabel) → extract tabel saja
+- Multiple tabel per halaman → each separate sheet
+
+**Performance Targets:**
+- Preview: ≤ 5 detik untuk ≤ 10 halaman
+- Full conversion: ≤ 15 detik untuk ≤ 10 halaman
+- ≤ 45 detik untuk 10-30 halaman
+- Accuracy ≥ 85% lattice, ≥ 70% stream
+- XLSX readable by MS Excel, Google Sheets, LibreOffice Calc
 
 ### 7.6 Fase 2D — Cross-cutting Quality 🟢
 
@@ -624,6 +713,7 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | Monitoring & Alerting       | Uptime monitoring + Telegram alerts < 5 menit saat downtime.     | 2-3 jam      |
 | SEO Update                  | Meta tags, sitemap 13+ URLs, OG images, JSON-LD per tool baru.   | 3-5 jam      |
 | Analytics Update            | Event tracking (started/completed/failed) untuk 7 tool baru.     | 1-2 jam      |
+| Test Coverage Enforcement   | Coverage report ≥ 90% per tool page. CI fail jika < 90%.         | Included     |
 
 ### 7.7 Fase 2E — OpenClaw AI Agent (M21) 🟡
 
@@ -651,6 +741,9 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 9     | Analytics Intelligence  | Prasasti    | Mingguan          |
 | 10    | Social Media (Twitter)  | Kicau       | Harian            |
 
+**Acceptance Criteria:**
+- Test coverage ≥ 90% (backend + frontend unit tests)
+
 ### 7.8 Fase 2F — Admin Dashboard (M22) 🟢
 
 | **Atribut**            | **Detail**                                                    |
@@ -674,6 +767,9 @@ Fase 2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 | 8     | Backup Status                | Backup status, restore history, storage usage                    |
 | 9     | User Management (Placeholder)| Aktif saat Fase 4                                               |
 | 10    | Settings                     | System config, notification preferences, API keys                |
+
+**Acceptance Criteria:**
+- Test coverage ≥ 90%
 
 ### 7.9 Rilis Incremental
 

@@ -13,14 +13,14 @@
 | Field | Detail |
 |-------|--------|
 | **Kode Dokumen** | PPR-IB-002 |
-| **Versi** | 1.0 |
+| **Versi** | 1.4 |
 | **Status** | Draft |
 | **Tanggal** | Mei 2026 |
 | **Penulis** | Muhammad Fa'iz Zulfikar |
 | **Reviewer** | — |
 | **Scope** | Fase 2 (M12–M22) |
-| **Total Tasks** | 135 tasks (PAPYR-090 — PAPYR-224) |
-| **Estimasi Total** | ~318 jam |
+| **Total Tasks** | 142 tasks (PAPYR-090 — PAPYR-224 + 7 suffix-B tasks) |
+| **Estimasi Total** | ~332 jam |
 | **Model Pengembangan** | 100% AI-driven |
 
 ---
@@ -33,6 +33,7 @@
 | 1.1 | Mei 2026 | Tambah M21 OpenClaw AI Agent (25 tasks, PAPYR-179—203), update total ke 114 tasks ~263 jam | AI Agent (OpenCode/Sisyphus) |
 | 1.2 | Mei 2026 | Tambah M22 Admin Dashboard (Fase 2F), 15 tasks (PAPYR-204—218), update total ke 129 tasks ~298 jam | AI Agent (OpenCode/Sisyphus) |
 | 1.3 | Mei 2026 | Tambah tasks Social Media/Twitter (PAPYR-219—224) ke M21, expand reporting tasks, update total ke 135 tasks ~318 jam | AI Agent (OpenCode/Sisyphus) |
+| 1.4 | 2026-05-03 | Perkuat spec M16-M18 (edge cases, performance targets, output quality). Tambah frontend unit test tasks per milestone. Enforce test coverage ≥ 90% untuk semua milestone M12-M22. Update total ke 142 tasks ~332 jam | AI Agent (OpenCode/Sisyphus) |
 
 ---
 
@@ -98,20 +99,20 @@
 
 | Kode | Milestone | Fase | Periode | Tasks | Estimasi |
 |------|-----------|------|---------|-------|----------|
-| M12 | **Protect PDF (Password Protect)** | 2A — Security | Minggu 1–2 | 9 | 16 jam |
-| M13 | **Unlock PDF (Remove Password)** | 2A — Security | Minggu 2–3 | 8 | 14 jam |
-| M14 | **Watermark PDF** | 2B — Enhancement | Minggu 3–5 | 10 | 20 jam |
-| M15 | **Sign PDF (Digital Signature)** | 2B — Enhancement | Minggu 5–7 | 11 | 24 jam |
-| M16 | **PDF-to-Word** | 2C — Conversion | Minggu 7–9 | 10 | 22 jam |
-| M17 | **OCR (Optical Character Recognition)** | 2C — Conversion | Minggu 9–11 | 11 | 26 jam |
-| M18 | **PDF-to-Excel** | 2C — Conversion | Minggu 11–13 | 10 | 21 jam |
+| M12 | **Protect PDF (Password Protect)** | 2A — Security | Minggu 1–2 | 10 | 18 jam |
+| M13 | **Unlock PDF (Remove Password)** | 2A — Security | Minggu 2–3 | 9 | 16 jam |
+| M14 | **Watermark PDF** | 2B — Enhancement | Minggu 3–5 | 11 | 22 jam |
+| M15 | **Sign PDF (Digital Signature)** | 2B — Enhancement | Minggu 5–7 | 12 | 26 jam |
+| M16 | **PDF-to-Word** | 2C — Conversion | Minggu 7–9 | 11 | 24 jam |
+| M17 | **OCR (Optical Character Recognition)** | 2C — Conversion | Minggu 9–11 | 12 | 28 jam |
+| M18 | **PDF-to-Excel** | 2C — Conversion | Minggu 11–13 | 11 | 23 jam |
 | M19 | **E2E Testing + Code Quality** | 2D — Quality | Minggu 13–14 | 10 | 12 jam |
 | M20 | **Performance, Monitoring & SEO** | 2D — Quality | Minggu 14–15 | 10 | 8 jam |
 | M21 | **OpenClaw AI Agent** | 2E — OpenClaw | Minggu 16–25 | 31 | 120 jam |
 | M22 | **Admin Dashboard** | 2F — Dashboard | Minggu 25–28 | 15 | 35 jam |
-| **TOTAL** | **11 Milestones** | **6 Fase** | **Minggu 1–28** | **135 tasks** | **~318 jam** |
+| **TOTAL** | **11 Milestones** | **6 Fase** | **Minggu 1–28** | **142 tasks** | **~332 jam** |
 
-> ~318 jam total ÷ 10 jam/minggu = sekitar 31–32 minggu. Realistis untuk 100% AI-driven development.
+> ~332 jam total ÷ 10 jam/minggu = sekitar 33–34 minggu. Realistis untuk 100% AI-driven development.
 
 ---
 
@@ -160,7 +161,7 @@
 
 ---
 
-### M12: Protect PDF (Password Protect) — 9 tasks | 16 jam | Minggu 1–2
+### M12: Protect PDF (Password Protect) — 10 tasks | 18 jam | Minggu 1–2
 
 **Deskripsi:** Fitur enkripsi PDF dengan password menggunakan PyMuPDF server-side. User upload PDF, masukkan password, download PDF terproteksi.
 
@@ -169,12 +170,13 @@
 | PAPYR-090 | **Backend** | **Buat endpoint POST /api/protect** | Terima file PDF + password (form-data). Validasi: MIME type application/pdf, ekstensi .pdf, magic bytes %PDF, ukuran maks 20MB, password minimal 4 karakter. Return 400 dengan pesan spesifik jika gagal validasi. | **3h** |
 | PAPYR-091 | **Backend** | **Implementasi enkripsi PDF dengan PyMuPDF** | Gunakan `fitz.open()` lalu `doc.save(encryption=fitz.PDF_ENCRYPT_AES_256, owner_pw=password, user_pw=password)`. Set permission flags: deny print, deny copy (configurable). Handle edge case: PDF sudah terenkripsi (return 409). | **3h** |
 | PAPYR-092 | **Backend** | **Upload hasil protect ke R2 + signed URL** | Simpan output ke R2 dengan UUID filename prefix `protected_`. Return signed URL expire 60 menit. Reuse existing R2 utility dari compress service. | **1h** |
-| PAPYR-093 | **Backend** | **Unit test endpoint protect** | Pytest: test happy path (PDF + valid password), test invalid MIME, test file terlalu besar, test password terlalu pendek (<4 char), test PDF sudah encrypted. Minimal 6 test cases. | **2h** |
+| PAPYR-093 | **Backend** | **Unit test endpoint protect** | Pytest: test happy path (PDF + valid password), test invalid MIME, test file terlalu besar, test password terlalu pendek (<4 char), test PDF sudah encrypted, test empty PDF, test corrupted PDF, test oversized password (>128 chars), test AES-128 vs AES-256 selection. Minimal 10 test cases. | **2h** |
 | PAPYR-094 | **Frontend** | **Buat halaman /protect dengan UI lengkap** | Layout: upload zone (reuse PDFUploader), input password + confirm password, quality selector (AES-128/AES-256), tombol "Proteksi PDF", area hasil download. Mobile-first responsive. Tambahkan privacy notice. | **3h** |
 | PAPYR-095 | **Frontend** | **Password input component dengan validasi** | Component: 2 input fields (password + konfirmasi), show/hide toggle, validasi real-time (min 4 char, match confirmation), strength indicator (weak/medium/strong). Disable tombol proses jika tidak valid. | **2h** |
 | PAPYR-096 | **Frontend** | **Integrasi API + state management protect** | Connect ke POST /api/protect. Handle states: idle → uploading → processing → done → error. Progress indicator saat upload. Auto-retry 1x jika network error. Track analytics event: task_started, task_completed, task_failed dengan tool_name="protect". | **2h** |
 | PAPYR-097 | **SEO/Content** | **Meta tags + sitemap entry untuk /protect** | Title: "Proteksi PDF dengan Password - Papyr", description unik Bahasa Indonesia. Tambahkan URL /protect ke sitemap.ts. Buat layout.tsx dengan metadata. OG image placeholder. | **1h** |
 | PAPYR-098 | **Testing** | **Manual testing protect end-to-end** | Test: upload PDF biasa → protect → download → buka dengan Adobe/browser (harus minta password). Test PDF scan, PDF dengan gambar, PDF besar (15MB). Verify file tidak bisa dibuka tanpa password. | **1h** |
+| PAPYR-098B | **Testing** | **Frontend unit tests /protect** | Vitest: test password validation (min 4 char, match confirmation), test strength indicator, test upload flow, test error states, test analytics events. Minimal 8 test cases. | **2h** |
 
 **Acceptance Criteria M12:**
 - [ ] User bisa upload PDF dan set password (min 4 karakter)
@@ -183,7 +185,8 @@
 - [ ] Signed URL expire dalam 60 menit
 - [ ] Analytics event ter-track (started/completed/failed)
 - [ ] Halaman /protect ter-index di sitemap
-- [ ] 6+ unit tests passing
+- [ ] 10+ backend tests + 8+ frontend tests, coverage ≥ 90%
+- [ ] Test coverage ≥ 90% (backend endpoint + frontend page)
 
 **API Contract M12:**
 ```
@@ -212,7 +215,7 @@ Response 429: { "error": "Rate limit exceeded" }
 
 ---
 
-### M13: Unlock PDF (Remove Password) — 8 tasks | 14 jam | Minggu 2–3
+### M13: Unlock PDF (Remove Password) — 9 tasks | 16 jam | Minggu 2–3
 
 **Deskripsi:** Fitur dekripsi PDF — user upload PDF terenkripsi, masukkan password yang benar, download PDF tanpa proteksi.
 
@@ -222,10 +225,11 @@ Response 429: { "error": "Rate limit exceeded" }
 | PAPYR-100 | **Backend** | **Implementasi dekripsi PDF dengan PyMuPDF** | Gunakan `fitz.open(file, password=password)`. Jika password salah, PyMuPDF raise exception → return 401 "Password salah". Jika berhasil, save tanpa encryption: `doc.save(output, encryption=0)`. | **2h** |
 | PAPYR-101 | **Backend** | **Upload hasil unlock ke R2 + signed URL** | Simpan output ke R2 dengan UUID filename prefix `unlocked_`. Return signed URL expire 60 menit. Reuse R2 utility. | **1h** |
 | PAPYR-102 | **Backend** | **Refactor shared encryption utils** | Extract shared logic antara protect dan unlock ke `services/encryption.py`: validasi PDF, check encrypted status, common error handling. DRY principle. | **2h** |
-| PAPYR-103 | **Backend** | **Unit test endpoint unlock** | Pytest: test happy path (encrypted PDF + correct password), test wrong password (401), test non-encrypted PDF (400), test invalid file, test corrupted PDF. Minimal 6 test cases. | **2h** |
+| PAPYR-103 | **Backend** | **Unit test endpoint unlock** | Pytest: test happy path (encrypted PDF + correct password), test wrong password (401), test non-encrypted PDF (400), test invalid file, test corrupted PDF, test empty PDF, test oversized file, test timeout. Minimal 9 test cases. | **2h** |
 | PAPYR-104 | **Frontend** | **Buat halaman /unlock dengan UI lengkap** | Layout: upload zone, single password input (dengan show/hide toggle), tombol "Hapus Password", area hasil download. Tampilkan status "PDF terenkripsi terdeteksi" setelah upload. Mobile-first. Privacy notice. | **3h** |
 | PAPYR-105 | **Frontend** | **Integrasi API + state management unlock** | Connect ke POST /api/unlock. Handle states + error khusus: "Password salah" (401), "PDF tidak terproteksi" (400). Track analytics events. Auto-retry 1x untuk network error (bukan auth error). | **1h** |
 | PAPYR-106 | **SEO/Content** | **Meta tags + sitemap entry untuk /unlock** | Title: "Hapus Password PDF - Papyr", description Bahasa Indonesia. Tambahkan /unlock ke sitemap.ts. Layout.tsx metadata. OG image placeholder. | **1h** |
+| PAPYR-106B | **Testing** | **Frontend unit tests /unlock** | Vitest: test encrypted detection UI, test password input, test error states (wrong password, not encrypted), test analytics events. Minimal 7 test cases. | **2h** |
 
 **Acceptance Criteria M13:**
 - [ ] User bisa upload encrypted PDF + password → download PDF tanpa proteksi
@@ -233,7 +237,8 @@ Response 429: { "error": "Rate limit exceeded" }
 - [ ] PDF non-encrypted ditolak dengan pesan informatif
 - [ ] Shared encryption logic di-refactor (DRY dengan M12)
 - [ ] Analytics event ter-track
-- [ ] 6+ unit tests passing
+- [ ] 9+ backend tests + 7+ frontend tests, coverage ≥ 90%
+- [ ] Test coverage ≥ 90% (backend endpoint + frontend page)
 - [ ] Halaman /unlock ter-index di sitemap
 
 **API Contract M13:**
@@ -271,7 +276,7 @@ class EncryptionService:
 
 ---
 
-### M14: Watermark PDF — 10 tasks | 20 jam | Minggu 3–5
+### M14: Watermark PDF — 11 tasks | 22 jam | Minggu 3–5
 
 **Deskripsi:** Fitur tambah watermark ke PDF. Text watermark diproses client-side (pdf-lib), image watermark diproses server-side (PyMuPDF). Preview sebelum apply.
 
@@ -283,10 +288,11 @@ class EncryptionService:
 | PAPYR-110 | **Frontend** | **Preview watermark pada halaman pertama PDF** | Render halaman pertama PDF ke canvas (pdf-lib + canvas API). Overlay watermark config di atas preview. Update real-time saat user ubah setting. Ini preview saja, bukan processing final. | **3h** |
 | PAPYR-111 | **Frontend** | **Text watermark processing client-side (pdf-lib)** | Gunakan pdf-lib: iterate semua halaman, `page.drawText()` dengan opacity, rotation, dan posisi sesuai config. Font: Helvetica (built-in pdf-lib). Output: download langsung dari browser. | **3h** |
 | PAPYR-112 | **Backend** | **Buat endpoint POST /api/watermark untuk image watermark** | Terima: PDF file + watermark image + config JSON (opacity, position, scale). Validasi kedua file. Gunakan PyMuPDF: `page.insert_image()` pada setiap halaman dengan rect dan overlay=True. Upload ke R2, return signed URL. | **3h** |
-| PAPYR-113 | **Backend** | **Unit test endpoint watermark** | Pytest: test image watermark happy path, test invalid PDF, test invalid image format, test config validation (opacity out of range, dll). Minimal 5 test cases. | **2h** |
+| PAPYR-113 | **Backend** | **Unit test endpoint watermark** | Pytest: test image watermark happy path, test invalid PDF, test invalid image format, test config validation (opacity out of range, dll), test text watermark client-side, test oversized image, test invalid opacity/rotation values, test empty PDF. Minimal 9 test cases. | **2h** |
 | PAPYR-114 | **Frontend** | **Integrasi API untuk image watermark + fallback** | Jika mode image: upload ke /api/watermark. Handle upload progress untuk 2 files (PDF + image). State management: idle → uploading → processing → done. Track analytics events. | **1h** |
 | PAPYR-115 | **SEO/Content** | **Meta tags + sitemap entry untuk /watermark** | Title: "Tambah Watermark PDF - Papyr", description Bahasa Indonesia. Sitemap entry. Layout.tsx metadata. OG image placeholder. | **1h** |
 | PAPYR-116 | **Testing** | **Manual testing watermark end-to-end** | Test text watermark: berbagai font size, opacity, rotation. Test image watermark: PNG transparent, JPG. Verify watermark muncul di semua halaman. Test PDF landscape dan portrait. | **1h** |
+| PAPYR-116B | **Testing** | **Frontend unit tests /watermark** | Vitest: test text config panel (font size, opacity, rotation, color), test image config panel, test preview rendering, test tab switching, test analytics events. Minimal 8 test cases. | **2h** |
 
 **Acceptance Criteria M14:**
 - [ ] Text watermark diproses 100% client-side (zero upload)
@@ -295,7 +301,8 @@ class EncryptionService:
 - [ ] Watermark muncul di SEMUA halaman PDF
 - [ ] Config lengkap: opacity, rotation, posisi, ukuran, warna
 - [ ] Analytics event ter-track
-- [ ] 5+ unit tests passing
+- [ ] 9+ backend tests + 8+ frontend tests, coverage ≥ 90%
+- [ ] Test coverage ≥ 90% (backend endpoint + frontend page)
 - [ ] Halaman /watermark ter-index di sitemap
 
 **API Contract M14 (Image Watermark Only):**
@@ -335,7 +342,7 @@ interface WatermarkConfig {
 
 ---
 
-### M15: Sign PDF (Digital Signature) — 11 tasks | 24 jam | Minggu 5–7
+### M15: Sign PDF (Digital Signature) — 12 tasks | 26 jam | Minggu 5–7
 
 **Deskripsi:** Fitur tanda tangan digital — user gambar tanda tangan di canvas atau upload gambar signature, lalu drag-and-place pada halaman PDF. 100% client-side.
 
@@ -352,6 +359,7 @@ interface WatermarkConfig {
 | PAPYR-125 | **Frontend** | **Integrasi state management + analytics** | Global state: current signature, placed signatures array [{page, x, y, width, height}], current page. Track analytics: task_started (saat upload PDF), task_completed (saat download). Semua client-side, tidak ada API call. | **1h** |
 | PAPYR-126 | **SEO/Content** | **Meta tags + sitemap entry untuk /sign** | Title: "Tanda Tangani PDF Online - Papyr", description Bahasa Indonesia. Sitemap entry. Layout.tsx metadata. OG image placeholder. | **1h** |
 | PAPYR-127 | **Testing** | **Manual testing sign end-to-end** | Test draw signature + place + download. Test upload signature image. Test multi-page placement. Test pada mobile (touch draw + touch drag). Verify signature muncul di output PDF. | **1h** |
+| PAPYR-127B | **Testing** | **Frontend unit tests /sign** | Vitest: test canvas drawing, test signature upload, test drag-to-place, test resize, test mobile touch, test type mode font selection, test multi-page placement state, test analytics events. Sign is 100% client-side, backend tests N/A. Minimal 10 test cases. | **2h** |
 
 **Acceptance Criteria M15:**
 - [ ] 100% client-side processing (zero upload ke server)
@@ -361,6 +369,8 @@ interface WatermarkConfig {
 - [ ] Touch support untuk mobile (draw + drag)
 - [ ] Output PDF dengan signature embedded (bukan overlay)
 - [ ] Analytics event ter-track
+- [ ] 10+ frontend tests, coverage ≥ 90% (Sign is 100% client-side, backend tests N/A)
+- [ ] Test coverage ≥ 90% (frontend page)
 - [ ] Halaman /sign ter-index di sitemap
 
 **State Management Interface M15:**
@@ -394,7 +404,7 @@ interface SignaturePlacement {
 
 ---
 
-### M16: PDF-to-Word — 10 tasks | 22 jam | Minggu 7–9
+### M16: PDF-to-Word — 11 tasks | 24 jam | Minggu 7–9
 
 **Deskripsi:** Konversi PDF ke DOCX menggunakan LibreOffice headless di server. Heavy processing — perlu queue system untuk file besar.
 
@@ -405,11 +415,12 @@ interface SignaturePlacement {
 | PAPYR-130 | **Backend** | **Implementasi konversi PDF→DOCX dengan LibreOffice** | Gunakan subprocess: `libreoffice --headless --convert-to docx --outdir /tmp/output input.pdf`. Handle timeout (maks 120 detik per file). Parse output filename. Error handling jika conversion gagal. | **3h** |
 | PAPYR-131 | **Backend** | **Async processing dengan background task** | Gunakan FastAPI BackgroundTasks atau asyncio untuk processing. Endpoint return 202 Accepted + task_id. Polling endpoint GET /api/status/{task_id} untuk cek progress. Status: queued → processing → done → failed. | **3h** |
 | PAPYR-132 | **Backend** | **Upload hasil DOCX ke R2 + signed URL** | Simpan output DOCX ke R2 dengan prefix `converted_`. Return signed URL expire 60 menit. Cleanup temp files setelah upload. | **1h** |
-| PAPYR-133 | **Backend** | **Unit test endpoint pdf-to-word** | Pytest: test happy path (simple PDF → DOCX), test file terlalu besar, test PDF dengan banyak halaman (>100), test timeout handling, test invalid file. Minimal 5 test cases. Mock LibreOffice untuk CI. | **2h** |
+| PAPYR-133 | **Backend** | **Unit test endpoint pdf-to-word** | Pytest: test happy path (simple PDF → DOCX), test file terlalu besar, test PDF dengan banyak halaman (>100), test timeout handling, test invalid file, test scanned PDF rejection, test encrypted PDF rejection, test empty PDF, test corrupted PDF, test multi-column layout, test PDF with images, test timeout (mock slow conversion). Minimal 12 test cases. Mock LibreOffice untuk CI. | **2h** |
 | PAPYR-134 | **Frontend** | **Buat halaman /pdf-to-word dengan UI lengkap** | Layout: upload zone, progress indicator (upload → converting → done), estimated time display, download area. Tampilkan warning: "Konversi file besar mungkin memakan waktu 1-2 menit". Mobile-first. | **3h** |
 | PAPYR-135 | **Frontend** | **Polling mechanism untuk async processing** | Poll GET /api/status/{task_id} setiap 3 detik. Update UI: progress bar atau spinner dengan status text. Timeout client-side: 3 menit maks, tampilkan error jika timeout. Handle: task done → show download button. | **2h** |
 | PAPYR-136 | **Frontend** | **Integrasi analytics + error handling** | Track events: task_started, task_completed (dengan duration_ms), task_failed (dengan error_type). Handle edge cases: user close tab saat processing (file tetap tersedia via URL selama 60 menit). | **1h** |
 | PAPYR-137 | **SEO/Content** | **Meta tags + sitemap entry untuk /pdf-to-word** | Title: "Konversi PDF ke Word (DOCX) - Papyr", description Bahasa Indonesia. Sitemap entry. Layout.tsx metadata. OG image placeholder. | **1h** |
+| PAPYR-137B | **Testing** | **Frontend unit tests /pdf-to-word** | Vitest: test polling mechanism (mock fetch), test timeout handling, test progress states (queued→processing→done→failed), test error display, test analytics events. Minimal 8 test cases. | **2h** |
 
 **Acceptance Criteria M16:**
 - [ ] PDF berhasil dikonversi ke DOCX yang bisa dibuka di MS Word/Google Docs
@@ -418,8 +429,24 @@ interface SignaturePlacement {
 - [ ] Limit: maks 20MB, maks 100 halaman
 - [ ] LibreOffice headless terinstall dan berjalan di Railway container
 - [ ] Analytics event ter-track
-- [ ] 5+ unit tests passing
+- [ ] 12+ backend tests + 8+ frontend tests, coverage ≥ 90%
+- [ ] Test coverage ≥ 90% (backend endpoint + frontend page)
 - [ ] Halaman /pdf-to-word ter-index di sitemap
+
+**Edge Cases M16:**
+- PDF with complex layout (multi-column, tables, images) → layout fidelity target: "best effort, tabel dan paragraf terjaga"
+- PDF with embedded fonts → font substitution handling
+- Scanned PDF (no text layer) → return 400 "PDF ini adalah scan, gunakan OCR terlebih dahulu"
+- Password-protected PDF → return 400 "PDF terproteksi, gunakan Unlock terlebih dahulu"
+- PDF with forms/annotations → preserve as static content
+- Empty PDF (0 pages) → return 400
+- Corrupted PDF → return 400 "File PDF rusak"
+
+**Performance Targets M16:**
+- ≤ 10 detik untuk PDF ≤ 10 halaman
+- ≤ 30 detik untuk PDF 10-50 halaman
+- ≤ 120 detik untuk PDF 50-100 halaman (timeout)
+- Output DOCX size ≤ 3x input PDF size
 
 **API Contract M16:**
 ```
@@ -474,7 +501,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ---
 
-### M17: OCR (Optical Character Recognition) — 11 tasks | 26 jam | Minggu 9–11
+### M17: OCR (Optical Character Recognition) — 12 tasks | 28 jam | Minggu 9–11
 
 **Deskripsi:** Tambah text layer ke scanned PDF menggunakan ocrmypdf + Tesseract. Support bahasa Indonesia dan English. Output: searchable PDF.
 
@@ -486,11 +513,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 | PAPYR-141 | **Backend** | **Implementasi OCR dengan ocrmypdf** | Gunakan ocrmypdf Python API: `ocrmypdf.ocr(input, output, language=lang, deskew=True, optimize=1)`. Options: deskew (straighten pages), optimize (reduce output size), skip_text (skip pages yang sudah ada text). Handle timeout 180 detik. | **3h** |
 | PAPYR-142 | **Backend** | **Async processing untuk OCR (reuse M16 pattern)** | Reuse async task pattern dari M16: POST return 202 + task_id, GET /api/status/{task_id} untuk polling. OCR lebih lambat dari PDF-to-Word, timeout 180 detik. | **2h** |
 | PAPYR-143 | **Backend** | **Upload hasil OCR ke R2 + signed URL** | Simpan searchable PDF ke R2 dengan prefix `ocr_`. Return signed URL expire 60 menit. Include metadata: jumlah halaman processed, language used. | **1h** |
-| PAPYR-144 | **Backend** | **Unit test endpoint OCR** | Pytest: test happy path (scanned PDF → searchable PDF), test language selection, test file terlalu besar, test non-PDF file, test already-searchable PDF (skip). Minimal 5 test cases. Gunakan small test PDF fixture. | **2h** |
+| PAPYR-144 | **Backend** | **Unit test endpoint OCR** | Pytest: test happy path (scanned PDF → searchable PDF), test language selection, test file terlalu besar, test non-PDF file, test already-searchable PDF (skip), test mixed PDF (partial OCR), test encrypted PDF rejection, test empty PDF, test corrupted PDF, test language ind only, test language eng only, test language ind+eng, test timeout handling, test DPI quality detection. Minimal 12 test cases. Gunakan small test PDF fixture. | **2h** |
 | PAPYR-145 | **Frontend** | **Buat halaman /ocr dengan UI lengkap** | Layout: upload zone, language selector dropdown (Indonesia/English/Keduanya), info box "OCR mengubah PDF scan menjadi PDF yang bisa dicari teksnya", progress indicator, download area. Warning: "Proses OCR memakan waktu 1-3 menit". | **3h** |
 | PAPYR-146 | **Frontend** | **Polling + progress UI untuk OCR** | Reuse polling mechanism dari M16. Tambahan: estimated time based on page count (tampilkan "Estimasi: ~2 menit untuk 10 halaman"). Progress states: uploading → queued → processing → done/failed. | **2h** |
 | PAPYR-147 | **Frontend** | **Integrasi analytics + error handling OCR** | Track events dengan props: tool_name="ocr", language, page_count, duration_ms. Handle specific errors: timeout (suggest smaller file), language not available, corrupted PDF. | **1h** |
 | PAPYR-148 | **SEO/Content** | **Meta tags + sitemap entry untuk /ocr** | Title: "OCR PDF — Ubah Scan Jadi Teks - Papyr", description Bahasa Indonesia fokus use case: scan dokumen, foto dokumen. Sitemap entry. Layout.tsx metadata. | **1h** |
+| PAPYR-148B | **Testing** | **Frontend unit tests /ocr** | Vitest: test language selector, test polling mechanism, test estimated time calculation, test progress states, test error messages (timeout, low quality), test analytics events. Minimal 8 test cases. | **2h** |
 
 **Acceptance Criteria M17:**
 - [ ] Scanned PDF berhasil dikonversi ke searchable PDF (text bisa di-select/search)
@@ -500,8 +528,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 - [ ] Tesseract + ocrmypdf terinstall dengan language packs
 - [ ] Docker image size teroptimasi (multi-stage build)
 - [ ] Analytics event ter-track
-- [ ] 5+ unit tests passing
+- [ ] 12+ backend tests + 8+ frontend tests, coverage ≥ 90%
+- [ ] Test coverage ≥ 90% (backend endpoint + frontend page)
 - [ ] Halaman /ocr ter-index di sitemap
+
+**Edge Cases M17:**
+- PDF already has text layer → skip OCR, return original with message "PDF sudah memiliki text layer"
+- Mixed PDF (some pages scanned, some text) → OCR only scanned pages (skip_text=True)
+- Very low quality scan (< 150 DPI) → warn user "Kualitas scan rendah, hasil OCR mungkin kurang akurat"
+- Rotated/skewed pages → deskew=True handles this
+- PDF with handwriting → warn "OCR optimal untuk teks cetak, tulisan tangan mungkin kurang akurat"
+- Multi-language document → support ind+eng simultaneous
+- Password-protected PDF → return 400
+- Empty/corrupted PDF → return 400
+
+**Performance Targets M17:**
+- ≤ 5 detik per halaman (average)
+- ≤ 30 detik untuk PDF ≤ 5 halaman
+- ≤ 90 detik untuk PDF 5-20 halaman
+- ≤ 180 detik untuk PDF 20-50 halaman (timeout)
+- OCR accuracy target: ≥ 95% untuk teks cetak berkualitas baik
+
+**Output Quality Spec M17:**
+- Searchable PDF: text selectable, copy-paste works
+- Original visual layout preserved (OCR adds invisible text layer)
+- File size: output ≤ 1.5x input (optimize=1)
 
 **API Contract M17:**
 ```
@@ -547,7 +598,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ---
 
-### M18: PDF-to-Excel — 10 tasks | 21 jam | Minggu 11–13
+### M18: PDF-to-Excel — 11 tasks | 23 jam | Minggu 11–13
 
 **Deskripsi:** Ekstrak tabel dari PDF ke format XLSX menggunakan camelot/tabula-py + openpyxl. Preview tabel yang terdeteksi sebelum download.
 
@@ -559,10 +610,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 | PAPYR-152 | **Backend** | **Konversi tabel ke XLSX dengan openpyxl** | Iterate detected tables, tulis ke Excel workbook. Setiap tabel jadi sheet terpisah (Sheet1_Table1, Sheet1_Table2, dst). Format: auto-width columns, header row bold. Simpan ke temp file. | **3h** |
 | PAPYR-153 | **Backend** | **Endpoint preview: GET /api/pdf-to-excel/preview** | Endpoint terpisah: upload PDF, return JSON preview tabel yang terdeteksi (first 5 rows per table). User bisa review sebelum full conversion. Include: table count, dimensions, sample data. | **2h** |
 | PAPYR-154 | **Backend** | **Upload hasil XLSX ke R2 + signed URL** | Simpan output XLSX ke R2 dengan prefix `table_`. Return signed URL expire 60 menit. Cleanup temp files. | **1h** |
-| PAPYR-155 | **Backend** | **Unit test endpoint pdf-to-excel** | Pytest: test PDF dengan tabel jelas (lattice), test PDF tanpa tabel (return 400), test stream flavor, test page range, test file invalid. Minimal 5 test cases. Gunakan test PDF fixture dengan tabel sederhana. | **2h** |
+| PAPYR-155 | **Backend** | **Unit test endpoint pdf-to-excel** | Pytest: test lattice table (clear borders), test stream table (no borders), test no tables found (400), test scanned PDF rejection, test encrypted PDF rejection, test empty PDF, test corrupted PDF, test multiple tables per page, test merged cells, test large table (>100 rows), test page range filter, test preview endpoint, test number/date preservation, test auto-generated headers. Minimal 14 test cases. Gunakan test PDF fixture dengan tabel sederhana. | **2h** |
 | PAPYR-156 | **Frontend** | **Buat halaman /pdf-to-excel dengan UI lengkap** | Layout: upload zone, preview area (tabel HTML), page range input (optional), tombol "Konversi ke Excel", download area. Info: "Papyr mendeteksi tabel di PDF Anda dan mengekstraknya ke Excel". | **3h** |
 | PAPYR-157 | **Frontend** | **Preview tabel + integrasi API** | Setelah upload: call preview endpoint, tampilkan tabel terdeteksi dalam format HTML table (first 5 rows). User confirm → call full conversion endpoint. Handle: no tables found (tampilkan pesan + suggest OCR dulu jika scanned). Track analytics. | **2h** |
 | PAPYR-158 | **SEO/Content** | **Meta tags + sitemap entry untuk /pdf-to-excel** | Title: "Konversi PDF ke Excel (XLSX) - Papyr", description Bahasa Indonesia fokus use case: laporan keuangan, invoice, data tabel. Sitemap entry. Layout.tsx metadata. | **1h** |
+| PAPYR-158B | **Testing** | **Frontend unit tests /pdf-to-excel** | Vitest: test preview table rendering, test table selection UI, test conversion flow, test error states (no tables, scan PDF), test analytics events. Minimal 8 test cases. | **2h** |
 
 **Acceptance Criteria M18:**
 - [ ] Tabel di PDF berhasil diekstrak ke XLSX yang bisa dibuka di Excel/Google Sheets
@@ -572,8 +624,33 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 - [ ] Handle "no tables found" dengan pesan informatif
 - [ ] Limit: maks 20MB, maks 30 halaman
 - [ ] Analytics event ter-track
-- [ ] 5+ unit tests passing
+- [ ] 14+ backend tests + 8+ frontend tests, coverage ≥ 90%
+- [ ] Test coverage ≥ 90% (backend endpoint + frontend page)
 - [ ] Halaman /pdf-to-excel ter-index di sitemap
+
+**Edge Cases M18:**
+- PDF tanpa tabel → return 400 "Tidak ada tabel terdeteksi"
+- PDF dengan tabel nested/merged cells → best effort, warn jika accuracy < 70%
+- Scanned PDF (no text layer) → return 400 "PDF ini adalah scan, gunakan OCR terlebih dahulu"
+- PDF dengan tabel sangat besar (>1000 rows) → truncate + warn
+- PDF dengan mixed content (teks + tabel) → extract tabel saja
+- Tabel tanpa header → auto-generate header (Column_1, Column_2, ...)
+- Multiple tabel per halaman → each becomes separate sheet
+- Password-protected PDF → return 400
+- Empty/corrupted PDF → return 400
+
+**Performance Targets M18:**
+- Preview: ≤ 5 detik untuk PDF ≤ 10 halaman
+- Full conversion: ≤ 15 detik untuk PDF ≤ 10 halaman
+- ≤ 45 detik untuk PDF 10-30 halaman
+- Accuracy target: ≥ 85% untuk tabel bergaris (lattice), ≥ 70% untuk tabel tanpa garis (stream)
+
+**Output Quality Spec M18:**
+- XLSX readable by MS Excel, Google Sheets, LibreOffice Calc
+- Auto-width columns
+- Header row bold
+- Number detection: angka tetap angka (bukan string)
+- Date detection: format tanggal Indonesia (DD/MM/YYYY) preserved
 
 **API Contract M18:**
 ```
@@ -646,6 +723,7 @@ Response 200:
 - [ ] CI/CD pipeline include: lint check + unit tests + build + E2E tests
 - [ ] Semua tests pass di CI (zero failures)
 - [ ] Screenshot/video artifacts tersimpan saat test gagal
+- [ ] Test coverage report generated, target ≥ 90% per tool page
 
 **Test Coverage Target M19:**
 
@@ -715,6 +793,7 @@ jobs:
 - [ ] Analytics events ter-track untuk semua 13 tools
 - [ ] Navbar/Footer updated untuk 13 tools
 - [ ] Production deploy sukses, smoke test pass
+- [ ] Test coverage ≥ 90% untuk monitoring utilities
 
 **Monitoring Setup Detail:**
 
@@ -808,7 +887,7 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 - [ ] SEO Pipeline menghasilkan minimal 2 artikel/minggu
 - [ ] Backup berjalan harian dengan weekly verification pass
 - [ ] Total biaya OpenClaw < Rp 150.000/bulan
-- [ ] Unit test coverage ≥ 80% untuk core framework
+- [ ] Unit test coverage ≥ 90% untuk core framework
 - [ ] CI/CD pipeline green dan auto-deploy berfungsi
 - [ ] Twitter/X account aktif dengan minimal 3 posts/minggu
 - [ ] Quarterly report terkirim via Telegram + Email (PDF) setiap akhir quarter
@@ -850,7 +929,7 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 | PAPYR-215 | **Frontend** | **Build Settings page** | System config display (read-only), notification preferences (Telegram/Email toggles), ADMIN_SECRET rotation form, API endpoint config display, environment info. | **2h** |
 | PAPYR-216 | **Backend** | **Create admin API routes** | Buat `/api/admin/*` endpoints: openclaw/status, openclaw/logs, openclaw/trigger, analytics/overview, health, security/scans, logs, backups. Auth middleware (ADMIN_SECRET check). Error handling + rate limiting. | **3h** |
 | PAPYR-217 | **Frontend** | **Admin SEO exclusion** | Tambahkan `/admin` ke sitemap exclusion, robots.txt disallow `/admin`, add noindex meta tag di admin layout. Pastikan admin pages tidak ter-index search engine. | **1h** |
-| PAPYR-218 | **Testing** | **Unit tests admin auth + API routes** | Vitest/Pytest: test auth middleware (valid token, invalid token, missing token), test API routes return correct data shape, test 401 rejection. Minimal 8 test cases. | **2h** |
+| PAPYR-218 | **Testing** | **Unit tests admin auth + API routes** | Vitest/Pytest: test auth middleware (valid token, invalid token, missing token), test API routes return correct data shape, test 401 rejection, test rate limiting, test error handling, test each admin endpoint response format. Minimal 12 test cases. | **2h** |
 
 **Acceptance Criteria M22:**
 - [ ] Admin dashboard accessible di `/admin` dengan ADMIN_SECRET auth
@@ -863,6 +942,7 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 - [ ] Auth middleware reject unauthorized access dengan 401
 - [ ] UI match existing Papyr design (DM Sans, Tailwind, same color palette)
 - [ ] Semua admin API routes punya proper error handling
+- [ ] Test coverage ≥ 90% untuk admin routes + auth middleware
 
 **API Contract M22:**
 ```
@@ -1082,11 +1162,11 @@ Phase:   ├── 2A ──┤├──── 2B ────────┤├
 
 | Fase | Jam | Minggu (@10 jam/minggu) |
 |------|-----|------------------------|
-| Fase 2A (Security) | 30 jam | 3 minggu |
-| Fase 2B (Enhancement) | 44 jam | 4.5 minggu |
-| Fase 2C (Conversion) | 69 jam | 7 minggu |
+| Fase 2A (Security) | 34 jam | 3.5 minggu |
+| Fase 2B (Enhancement) | 48 jam | 5 minggu |
+| Fase 2C (Conversion) | 75 jam | 7.5 minggu |
 | Fase 2D (Quality) | 20 jam | 2 minggu |
-| **Total** | **163 jam** | **~16 minggu** |
+| **Total** | **177 jam** | **~18 minggu** |
 
 ### Infrastruktur Tambahan
 
@@ -1117,21 +1197,21 @@ Phase:   ├── 2A ──┤├──── 2B ────────┤├
 
 | Layer | Tasks | Jam | Persentase |
 |-------|-------|-----|-----------|
-| Backend | 30 | 62 jam | 38% |
-| Frontend | 30 | 60 jam | 37% |
-| Infra | 10 | 16 jam | 10% |
-| Testing | 10 | 13 jam | 8% |
-| SEO/Content | 7 | 7.5 jam | 5% |
+| Backend | 30 | 62 jam | 35% |
+| Frontend | 30 | 60 jam | 34% |
+| Infra | 10 | 16 jam | 9% |
+| Testing | 17 | 27 jam | 15% |
+| SEO/Content | 7 | 7.5 jam | 4% |
 | Deploy | 4 | 5 jam | 3% |
-| **Total** | **89** | **163 jam** | **100%** |
+| **Total** | **96** | **177 jam** | **100%** |
 
 ### Per Fase
 
 | Fase | Milestones | Tasks | Jam | Fokus Utama |
 |------|-----------|-------|-----|-------------|
-| 2A — Security | M12, M13 | 17 | 30 jam | Backend (PyMuPDF encryption) |
-| 2B — Enhancement | M14, M15 | 21 | 44 jam | Frontend (canvas, drag-drop, pdf-lib) |
-| 2C — Conversion | M16, M17, M18 | 31 | 69 jam | Infra + Backend (Docker, LibreOffice, Tesseract) |
+| 2A — Security | M12, M13 | 19 | 34 jam | Backend (PyMuPDF encryption) |
+| 2B — Enhancement | M14, M15 | 23 | 48 jam | Frontend (canvas, drag-drop, pdf-lib) |
+| 2C — Conversion | M16, M17, M18 | 34 | 75 jam | Infra + Backend (Docker, LibreOffice, Tesseract) |
 | 2D — Quality | M19, M20 | 20 | 20 jam | Testing + Deploy (Playwright, CI/CD) |
 
 ### New Backend Endpoints Summary
