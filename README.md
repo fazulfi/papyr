@@ -72,7 +72,7 @@
 | | |
 |---|---|
 | 🇮🇩 **Indonesia-first** | UI Bahasa Indonesia, server dekat Asia, UX disesuaikan kebutuhan lokal |
-| 🔒 **Privasi terjaga** | File otomatis dihapus (max 24 jam), tanpa login, tanpa tracking invasif |
+| 🔒 **Privasi terjaga** | File otomatis dihapus dalam 60 menit, tanpa login, tanpa tracking invasif |
 | 📱 **Mobile-first** | Didesain untuk layar HP, bukan desktop-first yang dipaksakan responsive |
 | ⚡ **Cepat** | Operasi ringan diproses di browser (zero upload), berat di server — tanpa antrian |
 | 🆓 **Gratis** | Semua fitur gratis tanpa batas, tanpa watermark, tanpa upsell |
@@ -105,14 +105,14 @@
                                                 │  Object Storage   │
                                                 ├───────────────────┤
                                                 │  Signed URLs      │
-                                                │  Auto-delete 24h  │
+                                                │  Auto-delete 60min│
                                                 │  10 GB/mo free    │
                                                 └───────────────────┘
 ```
 
 ### Processing Strategy
 
-| Operasi | < 5 MB | ≥ 5 MB |
+| Operasi | < 3 MB | ≥ 3 MB |
 |---------|--------|--------|
 | **Compress** | Server (Ghostscript) | Server (Ghostscript) |
 | **Merge** | Client (pdf-lib) | Client (pdf-lib) |
@@ -142,7 +142,7 @@
 | **Client PDF** | pdf-lib, @dnd-kit | Merge, split, rotate, image-to-PDF di browser |
 | **Backend API** | FastAPI (Python 3.11) | Compress, image-to-PDF fallback, PDF-to-image |
 | **Server PDF** | PyMuPDF, Ghostscript | Rendering & compression berkualitas tinggi |
-| **Storage** | Cloudflare R2 | Object storage, auto-delete 24h, signed URLs |
+| **Storage** | Cloudflare R2 | Object storage, auto-delete 60min, signed URLs |
 | **Hosting** | Vercel + Railway | Frontend edge-global, backend containerized |
 | **Domain** | Hostinger | mypapyr.com, DNS management via API |
 | **Analytics** | Vercel Analytics + Speed Insights | Web analytics + performance monitoring |
@@ -172,8 +172,8 @@
 | M05 | Image to PDF | Multi-image upload, ordering, fallback | PAPYR-036 — 042 | ✅ Selesai |
 | M06 | PDF to Image | Page selection, PyMuPDF rendering | PAPYR-043 — 050 | ✅ Selesai |
 | M07 | Landing Page + SEO | Hero, navbar, footer, copy, meta, sitemap | PAPYR-051 — 060 | ✅ Selesai |
-| M08 | Analytics | Vercel Analytics, custom events (started/completed/failed) | PAPYR-061 — 065 | ✅ Selesai |
-| M09 | Cleanup & Privacy | R2 lifecycle, cron auto-delete, privacy page, signed URL | PAPYR-068 — 079 | ✅ Selesai |
+| M08 | Analytics | Vercel Analytics, custom events (started/completed/failed) | PAPYR-061 — 067 | ✅ Selesai |
+| M09 | Cleanup & Privacy | R2 lifecycle, cron auto-delete, privacy page, signed URL | PAPYR-068 — 074 | ✅ Selesai |
 | M10 | Testing + Launch | Full flow tests, edge cases, FAQ, OG image, deploy check, launch | PAPYR-080 — 084 | ✅ Selesai |
 | M11 | Rotate PDF | Client-side page rotation, per-page + global | PAPYR-085 — 089 | ✅ Selesai |
 
@@ -230,7 +230,6 @@ uvicorn main:app --reload       # → http://localhost:8000
 |----------|----------|---------|------------|
 | `NEXT_PUBLIC_API_URL` | ✅ | `http://localhost:8000` | URL backend API |
 | `NEXT_PUBLIC_SITE_URL` | | | URL frontend (untuk meta tags) |
-| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | | | Domain untuk Plausible analytics |
 | `NEXT_PUBLIC_SUPABASE_URL` | | | Supabase project URL (standby) |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | | | Supabase anon key (standby) |
 
