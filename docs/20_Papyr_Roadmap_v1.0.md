@@ -4,7 +4,7 @@
 
 **Product Roadmap**
 
-Version 2.2
+Version 2.3
 
 Juli 2025
 
@@ -20,7 +20,7 @@ mypapyr.com
 |---------------------|----------------------------------------------|
 | **Judul Dokumen**   | Product Roadmap — Papyr                      |
 | **ID Dokumen**      | PPR-RM-001                                   |
-| **Versi**           | 2.2                                          |
+| **Versi**           | 2.3                                          |
 | **Status**          | Approved                                     |
 | **Tanggal Dibuat**  | Juni 2025                                    |
 | **Terakhir Diubah** | Juli 2025                                    |
@@ -35,8 +35,9 @@ mypapyr.com
 |-----------|-------------|------------------------------|----------------------------------------------------------------------------------------|
 | 1.0       | Juni 2025   | AI Agent (OpenCode/Sisyphus) | Draft awal — Product Roadmap lengkap mencakup MVP 0.1 (completed) hingga Fase 3 (planned) |
 | 2.0       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Major upgrade — Roadmap philosophy & prioritization framework, feature classification labels, sub-phase breakdown MVP 0.2, UI safety rules, detailed per-feature specs, gate conditions diperkuat, "What Will NOT Be Built" section, cross-cutting quality items, success metrics dengan target spesifik |
-| 2.1       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2E — OpenClaw AI Agent (M21) sebagai sub-fase baru MVP 0.2, 9 fungsi otonom, deployment HostData.id VPS |
+| 2.1       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2E — OpenClaw AI Agent (M21) sebagai sub-fase baru MVP 0.2, 10 fungsi otonom, deployment HostData.id VPS |
 | 2.2       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Tambah Phase 2F — Admin Dashboard (M22) sebagai unified admin panel, renumber MVP 0.3/Fase 2/Fase 3 milestones |
+| 2.3       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Update Phase 2E — OpenClaw expanded ke 10 fungsi (tambah Social Media/Twitter), reporting diperluas ke quarterly/yearly, autonomy policy 100% tanpa approval gate, incident response auto-fix |
 
 **Dokumen Terkait**
 
@@ -270,7 +271,7 @@ Setiap transisi antar fase memiliki gate condition yang spesifik dan terukur:
 | M17    | OCR                      | MVP 0.2   | Phase 2C     | 20–30 jam           | M01                    | 🟡        | 📋 Planned           |
 | M18    | PDF-to-Excel             | MVP 0.2   | Phase 2C     | 15–20 jam           | M16, M17               | 🟡        | 📋 Planned           |
 | —      | Cross-cutting Quality    | MVP 0.2   | Phase 2D     | 20–30 jam           | M12–M18                | 🟢        | 📋 Planned           |
-| M21    | OpenClaw AI Agent        | MVP 0.2   | Phase 2E     | 80–120 jam          | Phase 2D               | 🟡        | 📋 Planned           |
+| M21    | OpenClaw AI Agent        | MVP 0.2   | Phase 2E     | 100–140 jam         | Phase 2D               | 🟡        | 📋 Planned           |
 | M22    | Admin Dashboard          | MVP 0.2   | Phase 2F     | 30–40 jam           | Phase 2E               | 🟢        | 📋 Planned           |
 | M23    | Authentication           | MVP 0.3   | —            | 15–20 jam           | MVP 0.2 complete       | 🟢        | 📋 Planned           |
 | M24    | User Dashboard           | MVP 0.3   | —            | 10–15 jam           | M23                    | 🟢        | 📋 Planned           |
@@ -369,7 +370,7 @@ Sebelum membangun fitur apapun di MVP 0.2, aturan berikut **WAJIB** dipatuhi unt
 | **Status**             | 🔄 NEXT — Selanjutnya dikerjakan                             |
 | **Gate Condition**     | MVP 0.1 live & stabil ✅ TERPENUHI                           |
 | **Total Milestone**    | 7 tool milestones (M12–M18) + cross-cutting (2D) + OpenClaw (2E) + Admin Dashboard (2F) |
-| **Estimasi Total**     | 111–159 jam (tools) + 20–30 jam (cross-cutting) + 80–120 jam (OpenClaw) + 30–40 jam (Admin) = 241–349 jam |
+| **Estimasi Total**     | 111–159 jam (tools) + 20–30 jam (cross-cutting) + 100–140 jam (OpenClaw) + 30–40 jam (Admin) = 261–369 jam |
 | **Pendekatan**         | Sub-phase sequential, rilis incremental per sub-phase         |
 | **Hasil Akhir**        | 13 tools total (6 existing + 7 baru) + autonomous ops + unified admin |
 
@@ -409,7 +410,7 @@ MVP 0.2 dibagi menjadi 6 sub-fase yang dieksekusi secara sequential:
 │       ▼                                                                     │
 │  Phase 2E — OpenClaw AI Agent 🟡                                            │
 │  ┌──────────────────────────────────────────┐                               │
-│  │ M21: 9 Autonomous Functions              │    Estimasi: 80–120 jam       │
+│  │ M21: 10 Autonomous Functions             │    Estimasi: 100–140 jam      │
 │  │ SEO · Competitor · Health · Security ·   │    Deploy: HostData.id VPS    │
 │  │ Reporting · Self-Improve · PM ·          │    Stack: Node.js + BullMQ    │
 │  │ Backup · Analytics Intelligence          │    + Redis + PostgreSQL       │
@@ -900,17 +901,17 @@ Phase 2E adalah deployment sistem AI agent otonom (OpenClaw) yang mengelola oper
 | **Atribut**            | **Detail**                                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------------------------|
 | **Milestone**          | M21                                                                                                           |
-| **Deskripsi**          | Sistem AI agent otonom dengan 9 fungsi: SEO Pipeline, Competitor Monitoring, Server Health, Security Scanning, Reporting, Self-Improvement, Project Management, Backup & Verify, Analytics Intelligence |
+| **Deskripsi**          | Sistem AI agent otonom dengan 10 fungsi: SEO Pipeline, Competitor Monitoring, Server Health, Security Scanning, Reporting, Self-Improvement, Project Management, Backup & Verify, Analytics Intelligence, Social Media (Twitter/X) |
 | **Label**              | 🟡 Experimental                                                                                              |
 | **Deployment**         | HostData.id VPS (dedicated) — terpisah dari Railway backend                                                   |
 | **Stack**              | Node.js 20 + TypeScript + BullMQ + Redis + PostgreSQL + Docker                                               |
 | **LLM Provider**       | enowxAI API                                                                                                   |
-| **Komunikasi**         | Telegram Bot (@PapyrOpsBot) + Email (Resend) + Dashboard (/admin/openclaw)                                    |
-| **Estimasi**           | 80–120 jam                                                                                                    |
+| **Komunikasi**         | Telegram Bot (@PapyrOpsBot) + Email (Resend) + Dashboard (/admin/openclaw) + Twitter/X (@PapyrPDF)            |
+| **Estimasi**           | 100–140 jam                                                                                                   |
 | **Dependensi**         | Phase 2D complete (product stable)                                                                            |
 | **Dokumen Lengkap**    | PPR-CLAW-001 (30_Papyr_OpenClaw_v1.0.md)                                                                     |
 
-#### 7.7.2 9 Fungsi Agent
+#### 7.7.2 10 Fungsi Agent
 
 | **#** | **Fungsi**              | **Persona** | **Deskripsi**                                                          | **Jadwal**        |
 |-------|-------------------------|-------------|------------------------------------------------------------------------|-------------------|
@@ -923,18 +924,24 @@ Phase 2E adalah deployment sistem AI agent otonom (OpenClaw) yang mengelola oper
 | 7     | Project Management      | Dalang 🎭   | GitHub issues, sprint planning, tech debt scan, velocity tracking      | Harian            |
 | 8     | Backup & Verify         | Pustaka 📚  | R2 backup, git backup, env backup, weekly verification                 | Harian + Mingguan |
 | 9     | Analytics Intelligence  | Prasasti 📈 | Vercel Analytics analysis, anomaly detection, insights                 | Mingguan          |
+| 10    | Social Media (Twitter/X) | Kicau 🐦  | Playwright browser automation, auto-post, community engagement, meme   | Harian            |
 
 #### 7.7.3 Acceptance Criteria
 
-- 9 fungsi agent berjalan sesuai jadwal HEARTBEAT.md
+- 10 fungsi agent berjalan sesuai jadwal HEARTBEAT.md
 - Telegram Bot aktif dan responsif terhadap commands
 - Dashboard /admin/openclaw menampilkan status real-time semua agent
-- Daily report terkirim via Telegram setiap pagi
+- Daily report terkirim via Telegram setiap malam (22:00 WIB)
 - Health monitoring mendeteksi downtime dalam < 2 menit
 - Security scan berjalan harian tanpa false positive berlebihan
 - SEO Pipeline menghasilkan minimal 2 artikel/minggu
 - Backup berjalan harian dengan weekly verification pass
 - Total biaya OpenClaw < Rp 150.000/bulan (VPS + LLM tokens)
+- Quarterly report terkirim via Telegram + Email (PDF) setiap akhir quarter
+- Yearly report terkirim via Telegram + Email (PDF) setiap Januari
+- Twitter/X account aktif dengan minimal 3 posts/minggu
+- Incident auto-fix berjalan untuk P0/P1 tanpa approval
+- OpenClaw = operator utama dashboard (bukan sekadar data provider)
 
 ---
 
@@ -962,7 +969,7 @@ Phase 2F adalah unified admin panel yang memberikan visibilitas penuh terhadap s
 
 | **#** | **Modul**                    | **Deskripsi**                                                                          |
 |-------|------------------------------|----------------------------------------------------------------------------------------|
-| 1     | OpenClaw Monitoring          | Status semua 9 agent, logs, manual override, SOUL.md editor, CLI access                |
+| 1     | OpenClaw Monitoring          | Status semua 10 agent, logs, manual override, SOUL.md editor, CLI access, Twitter analytics |
 | 2     | Analytics Overview           | Traffic, tasks processed, tool usage, device breakdown, trends                         |
 | 3     | Server Health Dashboard      | Railway uptime, Vercel status, R2 storage usage, response times                        |
 | 4     | Security Scan Results        | Dependency audit results, CVE alerts, security scan history                            |
@@ -1021,7 +1028,7 @@ M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                
                                                 M18 PDF-to-Excel 🟡
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────►
-16-24 jam               25-35 jam               50-70 jam                   20-30 jam               80-120 jam              30-40 jam
+16-24 jam               25-35 jam               50-70 jam                   20-30 jam               100-140 jam             30-40 jam
 ```
 
 **Rasional urutan:**

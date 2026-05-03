@@ -19,8 +19,8 @@
 | **Penulis** | Muhammad Fa'iz Zulfikar |
 | **Reviewer** | — |
 | **Scope** | MVP 0.2 (M12–M22) |
-| **Total Tasks** | 129 tasks (PAPYR-090 — PAPYR-218) |
-| **Estimasi Total** | ~298 jam |
+| **Total Tasks** | 135 tasks (PAPYR-090 — PAPYR-224) |
+| **Estimasi Total** | ~318 jam |
 | **Model Pengembangan** | 100% AI-driven |
 
 ---
@@ -32,6 +32,7 @@
 | 1.0 | Mei 2026 | Initial draft — backlog lengkap M12–M20 | Muhammad Fa'iz Zulfikar |
 | 1.1 | Mei 2026 | Tambah M21 OpenClaw AI Agent (25 tasks, PAPYR-179—203), update total ke 114 tasks ~263 jam | AI Agent (OpenCode/Sisyphus) |
 | 1.2 | Mei 2026 | Tambah M22 Admin Dashboard (Phase 2F), 15 tasks (PAPYR-204—218), update total ke 129 tasks ~298 jam | AI Agent (OpenCode/Sisyphus) |
+| 1.3 | Mei 2026 | Tambah tasks Social Media/Twitter (PAPYR-219—224) ke M21, expand reporting tasks, update total ke 135 tasks ~318 jam | AI Agent (OpenCode/Sisyphus) |
 
 ---
 
@@ -106,11 +107,11 @@
 | M18 | **PDF-to-Excel** | 2C — Conversion | Minggu 11–13 | 10 | 21 jam |
 | M19 | **E2E Testing + Code Quality** | 2D — Quality | Minggu 13–14 | 10 | 12 jam |
 | M20 | **Performance, Monitoring & SEO** | 2D — Quality | Minggu 14–15 | 10 | 8 jam |
-| M21 | **OpenClaw AI Agent** | 2E — OpenClaw | Minggu 16–25 | 25 | 100 jam |
+| M21 | **OpenClaw AI Agent** | 2E — OpenClaw | Minggu 16–25 | 31 | 120 jam |
 | M22 | **Admin Dashboard** | 2F — Dashboard | Minggu 25–28 | 15 | 35 jam |
-| **TOTAL** | **11 Milestones** | **6 Fase** | **Minggu 1–28** | **129 tasks** | **~298 jam** |
+| **TOTAL** | **11 Milestones** | **6 Fase** | **Minggu 1–28** | **135 tasks** | **~318 jam** |
 
-> ~298 jam total ÷ 10 jam/minggu = sekitar 29–30 minggu. Realistis untuk 100% AI-driven development.
+> ~318 jam total ÷ 10 jam/minggu = sekitar 31–32 minggu. Realistis untuk 100% AI-driven development.
 
 ---
 
@@ -140,6 +141,7 @@
 | `priority:high` | #DC2626 | Blocking atau critical path |
 | `priority:medium` | #F59E0B | Penting tapi tidak blocking |
 | `priority:low` | #6B7280 | Nice-to-have, bisa ditunda |
+| `agent:kicau` | #1DA1F2 | Social Media agent tasks |
 
 ### Labels Existing (dari MVP 0.1)
 
@@ -787,14 +789,20 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 | PAPYR-201 | Test | E2E Tests | Full system test: agent scheduling → execution → reporting → Telegram delivery | 4 |
 | PAPYR-202 | Docs | Documentation Update | Update README, deployment runbook, monitoring playbook, internal ops manual untuk OpenClaw | 3 |
 | PAPYR-203 | Infra | Production Deployment & Verification | Final deploy, health check verification, first daily report, monitoring confirmation | 4 |
+| PAPYR-219 | Backend | Agent: Social Media (Kicau) | Playwright browser automation untuk Twitter/X — posting, thread, reply, engagement, anti-detection | 10 |
+| PAPYR-220 | Backend | Twitter Account Setup | Buat akun Twitter baru via Playwright, setup bio/avatar/header, initial follows | 3 |
+| PAPYR-221 | Backend | Content Generation Engine | LLM-powered tweet/thread/meme generator, content calendar integration, scheduling | 4 |
+| PAPYR-222 | Backend | Reporting: Quarterly & Yearly | Tambah quarterly report (akhir Q) dan yearly report (Januari), PDF generation, email attachment | 4 |
+| PAPYR-223 | Backend | Reporting Schedule Update | Migrate reporting ke end-of-period schedule (daily 22:00, weekly Jumat, monthly akhir bulan) | 2 |
+| PAPYR-224 | Backend | Incident Auto-Fix Engine | Auto-remediation untuk P0/P1 incidents (restart, redeploy, clear cache) tanpa approval, lapor setelahnya | 4 |
 
-**Total: 25 tasks, ~100 jam**
+**Total: 31 tasks, ~120 jam**
 
 **Acceptance Criteria M21:**
 - [ ] 9 fungsi agent berjalan sesuai jadwal HEARTBEAT.md
 - [ ] Telegram Bot aktif dan responsif terhadap commands
 - [ ] Dashboard /admin/openclaw menampilkan status real-time
-- [ ] Daily report terkirim via Telegram setiap pagi
+- [ ] Daily report terkirim via Telegram setiap malam (22:00 WIB)
 - [ ] Health monitoring mendeteksi downtime dalam < 2 menit
 - [ ] Security scan berjalan harian tanpa false positive berlebihan
 - [ ] SEO Pipeline menghasilkan minimal 2 artikel/minggu
@@ -802,6 +810,11 @@ Konversi:       Image-to-PDF | PDF-to-Image | PDF-to-Word | OCR | PDF-to-Excel
 - [ ] Total biaya OpenClaw < Rp 150.000/bulan
 - [ ] Unit test coverage ≥ 80% untuk core framework
 - [ ] CI/CD pipeline green dan auto-deploy berfungsi
+- [ ] Twitter/X account aktif dengan minimal 3 posts/minggu
+- [ ] Quarterly report terkirim via Telegram + Email (PDF) setiap akhir quarter
+- [ ] Yearly report terkirim setiap Januari
+- [ ] Incident auto-fix berjalan untuk P0/P1 tanpa approval
+- [ ] Daily report schedule updated ke 22:00 WIB (end-of-day)
 
 ---
 
@@ -965,6 +978,7 @@ Response 500: { "error": "Internal server error", "detail": "..." }
 | M19 | M12–M18 | E2E tests butuh semua tools selesai |
 | M20 | M19 | Performance/SEO update setelah semua tools + tests ready |
 | M21 | M20 | OpenClaw butuh product stable sebelum AI agent monitoring |
+| M21 (PAPYR-219) | PAPYR-181 (Core Framework) | Kicau agent depends on Core Framework + Playwright (sudah ada di Docker dari Telik agent) |
 | M22 | M21 | Admin Dashboard konsumsi data dari OpenClaw API |
 
 ---
@@ -1313,7 +1327,7 @@ frontend/
 | PAPYR-149 — PAPYR-158 | M18: PDF-to-Excel | 2C |
 | PAPYR-159 — PAPYR-168 | M19: E2E + Code Quality | 2D |
 | PAPYR-169 — PAPYR-178 | M20: Performance + SEO | 2D |
-| PAPYR-179 — PAPYR-203 | M21: OpenClaw AI Agent | 2E |
+| PAPYR-179 — PAPYR-224 | M21: OpenClaw AI Agent | 2E |
 | PAPYR-204 — PAPYR-218 | M22: Admin Dashboard | 2F |
 
 ---

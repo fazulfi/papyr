@@ -8,7 +8,7 @@
 |---------------------|----------------------------------------------|
 | **Judul Dokumen**   | OpenClaw — Sistem AI Agent Otonom Penuh      |
 | **ID Dokumen**      | PPR-CLAW-001                                 |
-| **Versi**           | 1.0                                          |
+| **Versi**           | 1.1                                          |
 | **Status**          | Draft                                        |
 | **Fase**            | Phase 2 (MVP 0.2)                            |
 | **Tanggal Dibuat**  | Juli 2025                                    |
@@ -25,6 +25,7 @@
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                |
 |-----------|-------------|------------------------------|------------------------------------------------------------------------------|
 | 1.0       | Juli 2025   | Muhammad Fa'iz Zulfikar      | Draft awal — Spesifikasi lengkap OpenClaw untuk Papyr Phase 2 (MVP 0.2)     |
+| 1.1       | Juli 2025   | Muhammad Fa'iz Zulfikar      | Major update — tambah fungsi ke-10 (Social Media/Twitter), expand reporting ke quarterly/yearly, update autonomy policy (100% autonomous), update incident response policy, update reporting schedule ke end-of-period, tambah Playwright browser automation untuk Twitter |
 
 ---
 
@@ -61,24 +62,25 @@
 10. [Fungsi 7: Project Management](#10-fungsi-7-project-management)
 11. [Fungsi 8: Backup & Verify](#11-fungsi-8-backup--verify)
 12. [Fungsi 9: Analytics Intelligence](#12-fungsi-9-analytics-intelligence)
-13. [SOUL.md Specification](#13-soulmd-specification)
-14. [HEARTBEAT.md Specification](#14-heartbeatmd-specification)
-15. [Persona System](#15-persona-system)
-16. [Dashboard (/admin/openclaw)](#16-dashboard-adminopenclaw)
-17. [Telegram Bot (@PapyrOpsBot)](#17-telegram-bot-papyropsbot)
-18. [CLI Interface](#18-cli-interface)
-19. [Database Schema](#19-database-schema)
-20. [API Endpoints (Internal)](#20-api-endpoints-internal)
-21. [Environment Variables](#21-environment-variables)
-22. [Error Handling & Resilience](#22-error-handling--resilience)
-23. [Cost Analysis](#23-cost-analysis)
-24. [Security Considerations](#24-security-considerations)
-25. [Deployment Guide](#25-deployment-guide)
-26. [Testing Strategy](#26-testing-strategy)
-27. [Cross-Reference Index](#27-cross-reference-index)
-28. [Glossary](#28-glossary)
-29. [Appendices](#29-appendices)
-30. [Document Approval](#30-document-approval)
+13. [Fungsi 10: Social Media (Twitter/X)](#13-fungsi-10-social-media-twitterx)
+14. [SOUL.md Specification](#14-soulmd-specification)
+15. [HEARTBEAT.md Specification](#15-heartbeatmd-specification)
+16. [Persona System](#16-persona-system)
+17. [Dashboard (/admin/openclaw)](#17-dashboard-adminopenclaw)
+18. [Telegram Bot (@PapyrOpsBot)](#18-telegram-bot-papyropsbot)
+19. [CLI Interface](#19-cli-interface)
+20. [Database Schema](#20-database-schema)
+21. [API Endpoints (Internal)](#21-api-endpoints-internal)
+22. [Environment Variables](#22-environment-variables)
+23. [Error Handling & Resilience](#23-error-handling--resilience)
+24. [Cost Analysis](#24-cost-analysis)
+25. [Security Considerations](#25-security-considerations)
+26. [Deployment Guide](#26-deployment-guide)
+27. [Testing Strategy](#27-testing-strategy)
+28. [Cross-Reference Index](#28-cross-reference-index)
+29. [Glossary](#29-glossary)
+30. [Appendices](#30-appendices)
+31. [Document Approval](#31-document-approval)
 
 ---
 
@@ -88,21 +90,23 @@
 
 OpenClaw adalah sistem AI agent internal yang sepenuhnya otonom untuk Papyr — tool PDF gratis, cepat, dan privacy-first untuk Indonesia (mypapyr.com). Dirancang untuk menangani tugas-tugas operasional tanpa intervensi manusia — mulai dari produksi konten SEO, monitoring server, scanning keamanan, backup, analisis kompetitor, pelaporan, analisis data, hingga perbaikan diri secara kontinu.
 
-OpenClaw beroperasi sebagai multi-persona agent system yang mengelola 9 fungsi utama secara paralel, masing-masing dengan kepribadian bertema kertas/dokumen Nusantara. Sistem ini memungkinkan Papyr — yang dikembangkan 100% oleh AI-driven development dengan satu founder — untuk beroperasi layaknya tim penuh tanpa biaya SDM.
+OpenClaw beroperasi sebagai multi-persona agent system yang mengelola 10 fungsi utama secara paralel, masing-masing dengan kepribadian bertema kertas/dokumen Nusantara. Sistem ini memungkinkan Papyr — yang dikembangkan 100% oleh AI-driven development dengan satu founder — untuk beroperasi layaknya tim penuh tanpa biaya SDM.
 
 ### 1.2 Ruang Lingkup
 
 OpenClaw adalah:
 - **100% internal** — pengguna akhir tidak pernah melihat atau berinteraksi dengannya
-- **Sepenuhnya otonom** — tidak memerlukan persetujuan manusia kecuali untuk operasi destruktif (penghapusan data/file)
+- **Sepenuhnya otonom** — 100% otonom tanpa persetujuan manusia untuk operasi apapun. Untuk incident, auto-fix safe actions lalu lapor.
 - **Self-improving** — dapat memodifikasi konfigurasi, kepribadian, dan penjadwalannya sendiri
 - **Multi-persona** — mengadopsi kepribadian berbeda per fungsi untuk output optimal
 - **Private repository** — source code tidak pernah dipublikasikan
 - **Papyr-specific** — disesuaikan sepenuhnya untuk konteks tool PDF Indonesia
+- **Operator Dashboard** — OpenClaw adalah otak di balik admin dashboard, bukan sekadar data provider
+- **Social Media Manager** — mengelola Twitter/X secara otonom via Playwright browser automation
 
 ### 1.3 Prinsip Desain Utama
 
-1. **Otonomi Penuh**: OpenClaw beroperasi secara independen. Founder membaca laporan secara pasif.
+1. **Otonomi Penuh**: OpenClaw beroperasi secara independen. Founder menerima laporan berkala (harian/mingguan/bulanan/quarterly/tahunan) secara pasif.
 2. **Keamanan via Git**: Setiap self-modification menghasilkan git commit. Rollback selalu dimungkinkan.
 3. **Least Privilege**: Setiap fungsi hanya mendapat izin yang dibutuhkan.
 4. **Observability**: Setiap aksi dicatat, setiap keputusan dapat ditelusuri.
@@ -118,7 +122,6 @@ OpenClaw adalah:
 - OpenClaw TIDAK memodifikasi atau mengakses file PDF pengguna
 - OpenClaw TIDAK menggantikan keputusan strategis founder
 - OpenClaw TIDAK membangun fitur produk (dibangun via OpenCode/Sisyphus)
-- OpenClaw TIDAK mengelola komunitas (Papyr belum punya komunitas)
 - OpenClaw TIDAK mengakses data pengguna (Papyr zero-login, no user data)
 
 ### 1.5 Dependensi
@@ -144,18 +147,21 @@ Keputusan-keputusan berikut dibuat oleh founder dan HARUS diikuti secara persis:
 3. **Budget:** Fleksibel, selama worth it
 4. **Storage:** Cloudflare R2 (existing) + R2 bucket terpisah untuk backup/reports OpenClaw
 5. **LLM:** enowxAI API, key yang sama dengan OpenCode
-6. **Self-Improvement:** Otonom penuh, frekuensi unlimited, git commit sebagai safety net
-7. **Approval Gate:** HANYA untuk menghapus data/file. Semua lainnya otonom.
+6. **Self-Improvement:** Otonom penuh, frekuensi unlimited, git commit sebagai audit trail
+7. **Approval Gate:** TIDAK ADA. 100% otonom. Untuk incident, auto-fix safe actions lalu lapor hasilnya.
 8. **Komunikasi:** Telegram bot (@PapyrOpsBot) + Web dashboard (/admin/openclaw) + CLI + Pasif
 9. **Bahasa Laporan:** Bahasa Indonesia
 10. **Blog:** Dibangun Phase 2, OpenClaw sebagai content creator utama
 11. **Data Access:** Internal API + Vercel Analytics API (read-only)
 12. **Monitoring:** OpenClaw monitor Railway + Vercel + R2 langsung via API
-13. **Persona:** Multi-persona per fungsi (9 persona bertema kertas/dokumen)
+13. **Persona:** Multi-persona per fungsi (10 persona bertema kertas/dokumen)
 14. **Repo:** Private (github.com/fazulfi/papyr-openclaw)
 15. **Deployment:** HostData.id VPS dedicated, terpisah dari Railway backend
 16. **Port:** 4200 (internal API)
 17. **Database:** PostgreSQL lokal di VPS OpenClaw, schema `openclaw`, prefix `oc_`
+18. **Social Media:** Twitter/X via Playwright browser automation (bukan API), akun baru dibuat oleh OpenClaw
+19. **Reporting Schedule:** End-of-period (Daily malam, Weekly Jumat, Monthly akhir bulan, Quarterly akhir Q, Yearly Januari)
+20. **Incident Policy:** Auto-fix safe actions (no data loss risk), lalu lapor hasilnya ke founder
 
 ---
 
@@ -177,7 +183,7 @@ Berbeda dengan BudgeZen yang memiliki database pengguna dan komunitas, Papyr ber
 ```
 +-------------------------------------------------------------------+
 |                        OPENCLAW SYSTEM                              |
-|                     (Papyr Edition v1.0)                            |
+|                     (Papyr Edition v1.1)                            |
 +-------------------------------------------------------------------+
 |                                                                     |
 |  +--------------+  +--------------+  +------------------------+    |
@@ -194,15 +200,15 @@ Berbeda dengan BudgeZen yang memiliki database pengguna dan komunitas, Papyr ber
 |  +--------------------------------+-------------------------------+ |
 |                                   |                                  |
 |  +--------------------------------v-------------------------------+ |
-|  |                     FUNCTION AGENTS (9)                         | |
+|  |                     FUNCTION AGENTS (10)                        | |
 |  |  +-------+ +-------+ +-------+ +-------+ +-------+           | |
 |  |  |Aksara | | Telik | | Jaga  | |Tameng | | Warta |           | |
 |  |  | (SEO) | |(COMP) | |(HLTH) | | (SEC) | | (RPT) |           | |
 |  |  +-------+ +-------+ +-------+ +-------+ +-------+           | |
-|  |  +-------+ +-------+ +-------+ +-------+                     | |
-|  |  | Nalar | |Kelola | |Simpan | |Cerdas |                     | |
-|  |  |(SELF) | | (PM)  | | (BKP) | |(ANLY) |                     | |
-|  |  +-------+ +-------+ +-------+ +-------+                     | |
+|  |  +-------+ +-------+ +-------+ +-------+ +-------+           | |
+|  |  | Nalar | |Kelola | |Simpan | |Cerdas | |Kicau |           | |
+|  |  |(SELF) | | (PM)  | | (BKP) | |(ANLY) | |(SOC) |           | |
+|  |  +-------+ +-------+ +-------+ +-------+ +-------+           | |
 |  +----------------------------------------------------------------+ |
 |                                                                     |
 |  +----------------------------------------------------------------+ |
@@ -225,6 +231,7 @@ Berbeda dengan BudgeZen yang memiliki database pengguna dan komunitas, Papyr ber
 | 7 | Project Management | Kelola (PM Analitis) | 📋 | Kontinu | Tidak |
 | 8 | Backup & Verify | Simpan (Arsiparis Teliti) | 💾 | Per jadwal | Tidak |
 | 9 | Analytics Intelligence | Cerdas (Analis Data) | 📈 | Mingguan | Tidak |
+| 10 | Social Media (Twitter/X) | Kicau (Penyiar Sosial) | 🐦 | Harian | Tidak |
 
 ### 2.4 Channel Komunikasi
 
@@ -237,19 +244,30 @@ Berbeda dengan BudgeZen yang memiliki database pengguna dan komunitas, Papyr ber
 | Git Commits | Outbound | Audit trail self-modification |
 | R2 Archive (papyr-openclaw bucket) | Outbound | Arsip laporan untuk dibaca nanti |
 
-### 2.5 Kebijakan Approval Gate
+### 2.5 Kebijakan Otonomi & Incident Response
 
-**HANYA SATU skenario yang memerlukan persetujuan founder:**
+**OpenClaw beroperasi 100% otonom tanpa approval gate.**
 
-> Menghapus data atau file dari sistem produksi.
+Semua operasi — termasuk self-modification, publikasi konten, posting social media, restart service, patch keamanan, dan pembuatan laporan — sepenuhnya otonom tanpa persetujuan founder.
 
-Semua hal lainnya — termasuk self-modification, publikasi konten, restart service, patch keamanan, dan pembuatan laporan — sepenuhnya otonom.
+**Incident Response Policy:**
 
-Alur persetujuan:
-1. OpenClaw mengirim permintaan persetujuan via Telegram dengan konteks
-2. Founder membalas dengan approve atau reject (inline button)
-3. Jika tidak ada respons dalam 24 jam, aksi TIDAK dilakukan (safe default)
-4. Semua permintaan persetujuan dicatat di tabel `oc_approval_requests`
+| Severity | Contoh | Aksi OpenClaw |
+|----------|--------|---------------|
+| P0 (Total Down) | Railway/Vercel unreachable | Auto-fix safe actions (restart, redeploy) → Lapor via Telegram |
+| P1 (Degraded) | Response time > 5s, error rate > 10% | Auto-fix (scale, clear cache) → Lapor via Telegram |
+| P2 (Warning) | Storage > 80%, dependency vulnerability | Auto-fix jika safe → Lapor di daily report |
+| P3 (Info) | Minor anomaly, low traffic | Catat di log → Lapor di weekly report |
+
+**Prinsip Auto-Fix:**
+- HANYA aksi yang TIDAK berisiko data loss
+- Restart service: ✅ Safe
+- Redeploy last known good: ✅ Safe
+- Clear cache: ✅ Safe
+- Delete data: ❌ TIDAK dilakukan tanpa instruksi eksplisit
+- Rollback database: ❌ TIDAK dilakukan tanpa instruksi eksplisit
+
+**Setelah auto-fix:** Selalu lapor hasilnya ke founder via Telegram, termasuk: apa yang terjadi, apa yang dilakukan, dan status sekarang.
 
 ---
 
@@ -2515,7 +2533,7 @@ export class CVEScanner {
 Reporting agent menghasilkan laporan terstruktur dalam Bahasa Indonesia dan mendistribusikannya melalui channel yang dikonfigurasi. Laporan mencakup metrik traffic, penggunaan tool, error, response time, tren pertumbuhan, performa SEO, dan ringkasan kompetitor.
 
 **Persona:** Warta (Reporter Naratif) 📊
-**Frekuensi:** Harian (08:00 WIB), Mingguan (Senin 09:00), Bulanan (Tanggal 1, 09:00)
+**Frekuensi:** Harian (malam, recap hari ini), Mingguan (Jumat malam), Bulanan (akhir bulan), Quarterly (akhir Q), Tahunan (Januari)
 **Persetujuan:** Tidak diperlukan
 **Referensi:** PPR-ANA-001 (Analytics Event Taxonomy), PPR-COST-001 (Cost Projection)
 
@@ -2523,9 +2541,11 @@ Reporting agent menghasilkan laporan terstruktur dalam Bahasa Indonesia dan mend
 
 | Tipe | Jadwal (WIB) | Cron Expression | Channel |
 |------|--------------|-----------------|---------|
-| Daily | 08:00 | `0 8 * * *` | Telegram |
-| Weekly | Senin 09:00 | `0 9 * * 1` | Telegram + Email |
-| Monthly | Tanggal 1, 09:00 | `0 9 1 * *` | Telegram + Email + R2 archive |
+| Daily | 22:00 (recap hari ini) | `0 22 * * *` | Telegram |
+| Weekly | Jumat 22:00 | `0 22 * * 5` | Telegram + Email |
+| Monthly | Hari terakhir bulan, 22:00 | `0 22 28-31 * * [last-day-check]` | Telegram + Email (PDF) |
+| Quarterly | Akhir Q (Mar/Jun/Sep/Des), 22:00 | `0 22 [last-day] 3,6,9,12 *` | Telegram + Email (PDF) |
+| Yearly | 2 Januari, 09:00 | `0 9 2 1 *` | Telegram + Email (PDF) + R2 archive |
 | Ad-hoc Alert | Immediate | Event-driven | Telegram |
 
 ### 8.3 Daily Report Template
@@ -2651,7 +2671,92 @@ Reporting agent menghasilkan laporan terstruktur dalam Bahasa Indonesia dan mend
 3. [teknis]
 ```
 
-### 8.6 Report Generation Engine
+### 8.6 Quarterly Report Template
+
+```markdown
+# Laporan Quarterly Papyr - Q[n] [Tahun]
+
+## Executive Summary
+[5-7 paragraf narasi strategis tentang performa quarter ini]
+
+## KPI Dashboard (3 Bulan)
+| KPI | Target Q | Aktual | Status | Trend |
+|-----|----------|--------|--------|-------|
+| Total tasks processed | [n] | [n] | [OK/MISS] | ↑/↓/→ |
+| Organic traffic growth | +30% | [n]% | [OK/MISS] | ↑/↓/→ |
+| Uptime | 99.9% | [n]% | [OK/MISS] | ↑/↓/→ |
+| Artikel published | 24-48 | [n] | [OK/MISS] | ↑/↓/→ |
+| Security incidents | 0 | [n] | [OK/MISS] | ↑/↓/→ |
+| Cost efficiency | < Rp 150K/mo | [n] | [OK/MISS] | ↑/↓/→ |
+
+## Growth Analysis
+[Analisis pertumbuhan traffic, user acquisition, tool adoption]
+
+## SEO Performance (Quarter)
+[Keyword rankings, impressions, clicks, articles performance]
+
+## Competitor Landscape
+[Perubahan kompetitor selama quarter, new features, pricing changes]
+
+## Infrastructure & Cost
+| Bulan | Railway | VPS | LLM | Total |
+|-------|---------|-----|-----|-------|
+| [Bulan 1] | [n] | [n] | [n] | [n] |
+| [Bulan 2] | [n] | [n] | [n] | [n] |
+| [Bulan 3] | [n] | [n] | [n] | [n] |
+
+## Strategic Recommendations (Next Quarter)
+1. [strategis]
+2. [taktis]
+3. [teknis]
+4. [growth]
+```
+
+### 8.7 Yearly Report Template
+
+```markdown
+# Laporan Tahunan Papyr - [Tahun]
+
+## Executive Summary
+[10+ paragraf narasi komprehensif tentang performa tahun ini]
+
+## Annual KPI Dashboard
+| KPI | Target Tahun | Aktual | Status |
+|-----|-------------|--------|--------|
+| Total tasks processed | [n] | [n] | [OK/MISS] |
+| Total unique visitors | [n] | [n] | [OK/MISS] |
+| Organic traffic growth YoY | [n]% | [n]% | [OK/MISS] |
+| Uptime | 99.9% | [n]% | [OK/MISS] |
+| Total articles published | [n] | [n] | [OK/MISS] |
+| Total cost | [n] | [n] | [OK/MISS] |
+| Revenue (jika ada) | [n] | [n] | [OK/MISS] |
+
+## Quarter-by-Quarter Comparison
+| Metrik | Q1 | Q2 | Q3 | Q4 | Total |
+|--------|----|----|----|----|-------|
+| Traffic | [n] | [n] | [n] | [n] | [n] |
+| Tasks | [n] | [n] | [n] | [n] | [n] |
+| Articles | [n] | [n] | [n] | [n] | [n] |
+| Cost | [n] | [n] | [n] | [n] | [n] |
+
+## Milestones Achieved
+[List semua milestone yang diselesaikan tahun ini]
+
+## Competitive Position
+[Posisi Papyr vs kompetitor, market share estimate, brand awareness]
+
+## Lessons Learned
+1. [lesson 1]
+2. [lesson 2]
+3. [lesson 3]
+
+## Strategic Plan (Next Year)
+1. [goal 1]
+2. [goal 2]
+3. [goal 3]
+```
+
+### 8.8 Report Generation Engine
 
 ```typescript
 // src/agents/reporting/index.ts
@@ -2745,11 +2850,13 @@ export class ReportingAgent {
     await this.eventBus.emit('report:monthly_generated', { date: new Date().toISOString() });
   }
 
-  private async distribute(content: string, type: 'daily' | 'weekly' | 'monthly'): Promise<void> {
+  private async distribute(content: string, type: 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'yearly'): Promise<void> {
     const channels: Record<string, string[]> = {
       daily: ['telegram'],
       weekly: ['telegram', 'email'],
       monthly: ['telegram', 'email', 'r2'],
+      quarterly: ['telegram', 'email', 'r2'],
+      yearly: ['telegram', 'email', 'r2'],
     };
 
     for (const channel of channels[type]) {
@@ -2866,13 +2973,15 @@ export class ReportingAgent {
 }
 ```
 
-### 8.7 Reporting Schedule
+### 8.9 Reporting Schedule
 
 | Task | Jadwal (WIB) | Cron Expression | Channel | Durasi |
 |------|--------------|-----------------|---------|--------|
-| Daily Report | 08:00 | `0 8 * * *` | Telegram | 3-5 menit |
-| Weekly Report | Senin 09:00 | `0 9 * * 1` | Telegram + Email | 5-10 menit |
-| Monthly Report | Tanggal 1, 09:00 | `0 9 1 * *` | Telegram + Email + R2 | 10-15 menit |
+| Daily Report | 22:00 | `0 22 * * *` | Telegram | 3-5 menit |
+| Weekly Report | Jumat 22:00 | `0 22 * * 5` | Telegram + Email | 5-10 menit |
+| Monthly Report | Akhir bulan 22:00 | `0 22 28-31 * *` | Telegram + Email (PDF) | 10-15 menit |
+| Quarterly Report | Akhir Q 22:00 | `0 22 [last] 3,6,9,12 *` | Telegram + Email (PDF) | 15-20 menit |
+| Yearly Report | 2 Januari 09:00 | `0 9 2 1 *` | Telegram + Email (PDF) + R2 | 20-30 menit |
 | Ad-hoc Alert | Immediate | Event-driven | Telegram | < 30 detik |
 
 ## 9. Fungsi 6: Self-Improvement
@@ -2882,7 +2991,7 @@ export class ReportingAgent {
 Self-Improvement agent mengevaluasi performa seluruh sistem OpenClaw dan secara otonom memodifikasi SOUL.md, HEARTBEAT.md, dan konfigurasi agent. Setiap modifikasi adalah git commit — memungkinkan rollback kapan saja.
 
 **Persona:** Lontar (Reflective Philosopher)
-**Frekuensi:** Setiap 6 jam (evaluasi) + setiap 4 jam (rollback check)
+**Frekuensi:** Unlimited — evaluasi kontinu, modifikasi kapan saja diperlukan
 **Approval Required:** Tidak
 **Referensi:** PPR-CLAW-001, PPR-MON-001
 
@@ -3564,7 +3673,7 @@ export class ScheduleABTester {
 Project Management agent memproses feedback pengguna, membuat GitHub issues secara otomatis, merencanakan sprint, dan melacak velocity. Terintegrasi dengan sistem task ID PAPYR-xxx milik Papyr.
 ```
 **Persona:** Dalang (Strategic Orchestrator)
-**Frekuensi:** Event-driven + scheduled (lihat §14)
+**Frekuensi:** Event-driven + scheduled (lihat §15)
 **Approval Required:** Tidak
 **Referensi:** PPR-PP-001, PPR-IB-001
 ```
@@ -3818,7 +3927,7 @@ export class TechDebtScanner {
 Backup agent memastikan semua data kritis Papyr di-backup dan diverifikasi. Karena Papyr **belum memiliki database** (hanya R2 + Git), fokus backup adalah pada R2 bucket, environment config, dan git repository.
 ```
 **Persona:** Pustaka (Meticulous Archivist)
-**Frekuensi:** Daily/Weekly per target (lihat §14)
+**Frekuensi:** Daily/Weekly per target (lihat §15)
 **Approval Required:** Tidak
 **Referensi:** PPR-SEC-001, PPR-CLAW-001
 ```
@@ -3975,7 +4084,7 @@ export class BackupVerifier {
 Analytics Intelligence agent menganalisis data dari Vercel Analytics untuk menghasilkan insights tentang traffic, penggunaan tool, user flow, dan korelasi SEO-to-conversion. Agent ini **baru dan unik untuk Papyr** — tidak ada di BudgeZen.
 ```
 **Persona:** Prasasti (Data Storyteller)
-**Frekuensi:** Daily analysis + Weekly report (lihat §14)
+**Frekuensi:** Daily analysis + Weekly report (lihat §15)
 **Approval Required:** Tidak
 **Referensi:** PPR-ANA-001, PPR-CLAW-001
 ```
@@ -4134,10 +4243,252 @@ Format: Markdown dengan tabel.`,
 }
 ```
 ---
+
+## 13. Fungsi 10: Social Media (Twitter/X)
+
+### 13.1 Overview
+
+Social Media agent mengelola kehadiran Papyr di Twitter/X secara otonom menggunakan Playwright browser automation. Agent ini membuat akun baru, memposting konten, berinteraksi dengan komunitas Indonesia, dan membangun brand awareness tanpa menggunakan Twitter API (yang mahal).
+
+**Persona:** Kicau (Penyiar Sosial) 🐦
+**Frekuensi:** Harian (posting) + Kontinu (engagement)
+**Persetujuan:** Tidak diperlukan
+**Referensi:** PPR-GTM-001 (Go-To-Market Strategy)
+
+### 13.2 Automation Method
+
+| Aspek | Detail |
+|-------|--------|
+| **Tool** | Playwright (Chromium headless) |
+| **Alasan** | Twitter API Basic tier $100/bulan — terlalu mahal untuk MVP |
+| **Akun** | Dibuat baru oleh OpenClaw, dikelola sepenuhnya |
+| **Handle** | @PapyrPDF (atau variasi yang tersedia) |
+| **Bio** | "Tool PDF gratis, cepat, dan aman untuk Indonesia 🇮🇩 | mypapyr.com" |
+| **Bahasa** | Bahasa Indonesia (primary), English (occasional) |
+
+### 13.3 Content Strategy
+
+| Tipe Konten | Frekuensi | Format | Contoh |
+|-------------|-----------|--------|--------|
+| Blog article shares | Setiap artikel baru | Link + ringkasan | "📄 Artikel baru: Cara Compress PDF Tanpa Kehilangan Kualitas → [link]" |
+| PDF tips & tricks | 3-4x/minggu | Thread (3-5 tweets) | "🧵 Thread: 5 Tips Mengelola Dokumen PDF di HP Android..." |
+| Product updates | Setiap fitur baru | Single tweet + screenshot | "🚀 Fitur baru: Rotate PDF! Putar halaman PDF yang terbalik dalam 1 klik → mypapyr.com/rotate" |
+| Community engagement | Harian | Reply, retweet, like | Reply ke pertanyaan tentang PDF, retweet konten relevan |
+| Meme & humor | 1-2x/minggu | Image + caption | Meme tentang "file PDF 50MB yang harus di-email" |
+
+### 13.4 Posting Schedule (WIB)
+
+| Hari | Waktu | Tipe Konten |
+|------|-------|-------------|
+| Senin | 08:00 | Tips thread |
+| Selasa | 12:00 | Blog share / Product update |
+| Rabu | 08:00 | Meme / Humor |
+| Kamis | 12:00 | Tips thread |
+| Jumat | 08:00 | Blog share / Community highlight |
+| Sabtu | 10:00 | Engagement (reply, retweet) |
+| Minggu | - | Monitoring only |
+
+### 13.5 Engagement Rules
+
+1. **Reply** ke mentions dalam < 2 jam (selama jam aktif 08:00-22:00 WIB)
+2. **Like** semua mentions positif
+3. **Retweet** konten relevan dari komunitas Indonesia (PDF, produktivitas, tech)
+4. **JANGAN** terlibat dalam kontroversi, politik, atau topik sensitif
+5. **JANGAN** spam — max 5 tweets/hari (termasuk replies)
+6. **JANGAN** follow/unfollow massal (terdeteksi sebagai bot)
+7. **Tone:** Friendly, helpful, casual Indonesian — seperti teman yang paham teknologi
+
+### 13.6 Playwright Implementation
+
+```typescript
+// src/agents/social-media/index.ts
+
+import { chromium, Browser, Page } from 'playwright';
+import { LLMClient } from '../../core/llm-client';
+import { EventBus } from '../../core/event-bus';
+import { Logger } from 'pino';
+
+interface TwitterConfig {
+  username: string;
+  password: string;
+  email: string;
+  cookiePath: string; // Persist login session
+}
+
+export class SocialMediaAgent {
+  private readonly llmClient: LLMClient;
+  private readonly eventBus: EventBus;
+  private readonly config: TwitterConfig;
+  private readonly logger: Logger;
+  private browser: Browser | null = null;
+
+  constructor(deps: {
+    llmClient: LLMClient; eventBus: EventBus;
+    config: TwitterConfig; logger: Logger;
+  }) {
+    this.llmClient = deps.llmClient;
+    this.eventBus = deps.eventBus;
+    this.config = deps.config;
+    this.logger = deps.logger.child({ agent: 'social-media', persona: 'kicau' });
+  }
+
+  async postTweet(content: string): Promise<void> {
+    const page = await this.getAuthenticatedPage();
+    try {
+      await page.goto('https://x.com/compose/tweet');
+      await page.waitForSelector('[data-testid="tweetTextarea_0"]');
+      await page.fill('[data-testid="tweetTextarea_0"]', content);
+      await page.click('[data-testid="tweetButtonInline"]');
+      await page.waitForTimeout(2000);
+      this.logger.info({ content: content.slice(0, 50) }, 'Tweet posted');
+      await this.eventBus.emit('social:tweet_posted', { content, timestamp: new Date() });
+    } finally {
+      await page.close();
+    }
+  }
+
+  async postThread(tweets: string[]): Promise<void> {
+    const page = await this.getAuthenticatedPage();
+    try {
+      await page.goto('https://x.com/compose/tweet');
+      for (let i = 0; i < tweets.length; i++) {
+        if (i > 0) {
+          await page.click('[data-testid="addButton"]'); // Add to thread
+          await page.waitForTimeout(500);
+        }
+        await page.fill(`[data-testid="tweetTextarea_${i}"]`, tweets[i]);
+      }
+      await page.click('[data-testid="tweetButtonInline"]');
+      await page.waitForTimeout(3000);
+      this.logger.info({ threadLength: tweets.length }, 'Thread posted');
+      await this.eventBus.emit('social:thread_posted', { length: tweets.length });
+    } finally {
+      await page.close();
+    }
+  }
+
+  async checkMentions(): Promise<void> {
+    const page = await this.getAuthenticatedPage();
+    try {
+      await page.goto('https://x.com/notifications/mentions');
+      await page.waitForTimeout(2000);
+      // Parse mentions and generate replies via LLM
+      const mentions = await this.parseMentions(page);
+      for (const mention of mentions) {
+        if (mention.needsReply) {
+          const reply = await this.generateReply(mention);
+          await this.replyToTweet(page, mention.tweetId, reply);
+        }
+      }
+    } finally {
+      await page.close();
+    }
+  }
+
+  async generateContent(type: 'tip' | 'meme' | 'update' | 'share'): Promise<string> {
+    const prompts: Record<string, string> = {
+      tip: 'Buat tweet thread (3-5 tweets) tentang tips PDF dalam Bahasa Indonesia. Casual, helpful, pakai emoji. Max 280 chars per tweet.',
+      meme: 'Buat caption meme lucu tentang masalah PDF sehari-hari (file besar, format rusak, dll). Bahasa Indonesia, relatable, max 200 chars.',
+      update: 'Buat tweet pengumuman fitur baru Papyr. Excited tapi tidak lebay. Bahasa Indonesia, max 280 chars.',
+      share: 'Buat tweet untuk share artikel blog Papyr. Ringkas, menarik, ajak klik. Bahasa Indonesia, max 250 chars + link.',
+    };
+
+    return this.llmClient.generate({
+      persona: 'kicau',
+      systemPrompt: `Kamu adalah Kicau, social media manager Papyr. Tone: friendly, casual Indonesian, helpful. Brand: tool PDF gratis untuk Indonesia.`,
+      prompt: prompts[type],
+      temperature: 0.7, maxTokens: 500,
+    });
+  }
+
+  private async getAuthenticatedPage(): Promise<Page> {
+    if (!this.browser) {
+      this.browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+    }
+    const context = await this.browser.newContext({
+      storageState: this.config.cookiePath, // Reuse login session
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    });
+    return context.newPage();
+  }
+
+  async destroy(): Promise<void> {
+    if (this.browser) { await this.browser.close(); this.browser = null; }
+  }
+
+  private async parseMentions(page: Page): Promise<Array<{ tweetId: string; text: string; needsReply: boolean }>> {
+    // Implementation: parse notification page DOM
+    return [];
+  }
+
+  private async generateReply(mention: { text: string }): Promise<string> {
+    return this.llmClient.generate({
+      persona: 'kicau',
+      systemPrompt: 'Kamu Kicau, social media Papyr. Balas mention dengan helpful dan friendly. Max 280 chars.',
+      prompt: `Balas mention ini: "${mention.text}"`,
+      temperature: 0.6, maxTokens: 100,
+    });
+  }
+
+  private async replyToTweet(page: Page, tweetId: string, reply: string): Promise<void> {
+    // Navigate to tweet and reply
+    await page.goto(`https://x.com/i/status/${tweetId}`);
+    await page.waitForSelector('[data-testid="tweetTextarea_0"]');
+    await page.fill('[data-testid="tweetTextarea_0"]', reply);
+    await page.click('[data-testid="tweetButtonInline"]');
+    await page.waitForTimeout(2000);
+  }
+}
 ```
-## 13. SOUL.md Specification
+
+### 13.7 Anti-Detection Measures
+
+| Measure | Implementation |
+|---------|---------------|
+| Human-like delays | Random 1-5s between actions |
+| Session persistence | Cookie storage, avoid re-login |
+| Rate limiting | Max 5 tweets/day, max 20 likes/day |
+| User agent rotation | Realistic browser fingerprints |
+| Activity patterns | Only active 08:00-22:00 WIB |
+| Content variation | LLM-generated, never templated |
+
+### 13.8 Metrics & Reporting
+
+| Metrik | Target (3 bulan) | Tracking |
+|--------|-----------------|----------|
+| Followers | 500+ | Weekly |
+| Engagement rate | > 3% | Weekly |
+| Link clicks to mypapyr.com | 50+/minggu | Weekly |
+| Mentions/replies | 10+/minggu | Daily |
+| Impressions | 10K+/minggu | Weekly |
+
+### 13.9 Schedule (HEARTBEAT.md)
+
+```yaml
+social_media:
+  post_content:
+    cron: "0 8,12 * * 1-6"  # 08:00 dan 12:00 Senin-Sabtu
+    priority: low
+    timeout: 300s
+  check_mentions:
+    cron: "0 */2 8-22 * * *"  # Setiap 2 jam, 08:00-22:00
+    priority: medium
+    timeout: 120s
+  engagement_scan:
+    cron: "0 10 * * 6"  # Sabtu 10:00
+    priority: low
+    timeout: 300s
+  weekly_analytics:
+    cron: "0 21 * * 5"  # Jumat 21:00 (sebelum weekly report)
+    priority: low
+    timeout: 120s
 ```
-### 13.1 Full Production Template
+
+---
+```
+## 14. SOUL.md Specification
+```
+### 14.1 Full Production Template
 ```markdown
 # SOUL.md — OpenClaw Papyr Agent Identity & Rules
 # Version: 1.0.0
@@ -4319,23 +4670,23 @@ rules:
 ```
 ## Tool Permissions
 ```
-| Tool | SEO | RPT | SEC | HLTH | SELF | PM | BKP | ANA | COMP |
-|------|-----|-----|-----|------|------|-----|-----|-----|------|
-| LLM API | RW | RW | R | R | RW | RW | - | RW | RW |
-| GitHub API | R | - | RW | - | R | RW | - | - | - |
-| Telegram API | - | RW | RW | RW | - | RW | RW | RW | - |
-| Vercel API | R | R | - | R | - | - | R | RW | - |
-| Railway API | - | - | - | R | - | - | R | - | - |
-| R2 API | RW | RW | - | - | R | - | RW | - | - |
-| GSC API | RW | R | - | - | - | - | - | R | - |
-| Git | - | - | - | - | RW | - | RW | - | - |
-| Playwright | - | - | RW | - | - | - | - | - | RW |
+| Tool | SEO | RPT | SEC | HLTH | SELF | PM | BKP | ANA | COMP | SOC |
+|------|-----|-----|-----|------|------|-----|-----|-----|------|-----|
+| LLM API | RW | RW | R | R | RW | RW | - | RW | RW | RW |
+| GitHub API | R | - | RW | - | R | RW | - | - | - | - |
+| Telegram API | - | RW | RW | RW | - | RW | RW | RW | - | - |
+| Vercel API | R | R | - | R | - | - | R | RW | - | - |
+| Railway API | - | - | - | R | - | - | R | - | - | - |
+| R2 API | RW | RW | - | - | R | - | RW | - | - | - |
+| GSC API | RW | R | - | - | - | - | - | R | - | - |
+| Git | - | - | - | - | RW | - | RW | - | - | - |
+| Playwright | - | - | RW | - | - | - | - | - | RW | RW |
 ```
 ---
 ```
-## 14. HEARTBEAT.md Specification
+## 15. HEARTBEAT.md Specification
 ```
-### 14.1 Full Production Template
+### 15.1 Full Production Template
 ```markdown
 # HEARTBEAT.md — OpenClaw Papyr Schedule & Timing
 # Version: 1.0.0
@@ -4561,9 +4912,9 @@ When tasks conflict (same time slot):
 ```
 ---
 ```
-## 15. Persona System
+## 16. Persona System
 ```
-### 15.1 Persona Definitions
+### 16.1 Persona Definitions
 ```
 | # | Persona | Name | Role | Tone | Temp | Emoji |
 |---|---------|------|------|------|------|-------|
@@ -4576,8 +4927,12 @@ When tasks conflict (same time slot):
 | 7 | Backup Agent | Pustaka | Data protection | Meticulous, reliable | 0.1 | 📚 |
 | 8 | Analytics | Prasasti | Data intelligence | Storytelling, insightful | 0.5 | 📈 |
 | 9 | Competitor | Dawat | Market intelligence | Investigative, objective | 0.5 | 🔍 |
+| 10 | Social Media | Kicau | Twitter/X management | Friendly, casual Indonesian | 0.7 | 🐦 |
+
+> **Catatan Warta (Reporter):** Warta menggunakan tone profesional tapi hangat — seperti kolega terpercaya yang memberikan briefing. Tidak robotik, tidak terlalu kasual. Menggunakan data-driven insights dengan actionable recommendations.
+
 ```
-### 15.2 Persona Switching Implementation
+### 16.2 Persona Switching Implementation
 ```typescript
 // src/core/persona-manager.ts
 import * as fs from 'fs/promises';
@@ -4603,6 +4958,7 @@ const PERSONA_CONFIGS: Record<string, PersonaConfig> = {
   pustaka: { name: 'Pustaka', role: 'Backup Agent', tone: 'Meticulous, reliable', temperature: 0.1, emoji: '📚', systemPrompt: 'You are Pustaka, backup agent. Ensure all data is backed up and verified. Never skip verification.', rules: ['Verify every backup', 'Weekly DR test mandatory'] },
   prasasti: { name: 'Prasasti', role: 'Analytics Intelligence', tone: 'Storytelling, insightful', temperature: 0.5, emoji: '📈', systemPrompt: 'Kamu adalah Prasasti, analytics agent Papyr. Analisis data traffic dan tool usage, generate insights actionable.', rules: ['Use z-score for anomalies', 'Always correlate with actions'] },
   dawat: { name: 'Dawat', role: 'Competitor Monitor', tone: 'Investigative, objective', temperature: 0.5, emoji: '🔍', systemPrompt: 'Kamu adalah Dawat, competitor monitor. Track kompetitor PDF tools, report perubahan signifikan.', rules: ['Be objective', 'Focus on actionable insights'] },
+  kicau: { name: 'Kicau', role: 'Social Media Manager', tone: 'Friendly, casual Indonesian', temperature: 0.7, emoji: '🐦', systemPrompt: 'Kamu adalah Kicau, social media manager Papyr. Tone: friendly, casual Indonesian, helpful. Brand: tool PDF gratis untuk Indonesia.', rules: ['Max 5 tweets/day', 'No politics/controversy', 'Bahasa Indonesia primary'] },
 };
 ```
 export class PersonaManager {
@@ -4626,7 +4982,7 @@ export class PersonaManager {
   getAllPersonas(): string[] { return Object.keys(PERSONA_CONFIGS); }
 }
 ```
-### 15.3 Context Injection & State Management
+### 16.3 Context Injection & State Management
 ```typescript
 // src/core/persona-state.ts
 interface PersonaState {
@@ -4655,16 +5011,16 @@ export class PersonaStateManager {
 ```
 ---
 ```
-## 16. Dashboard (/admin/openclaw)
+## 17. Dashboard (/admin/openclaw)
 ```
-### 16.1 Access Control
+### 17.1 Access Control
 ```
 - URL: https://mypapyr.com/admin/openclaw
 - Authentication: Admin session required (Next.js middleware)
 - Authorization: Founder only (single admin)
 - Framework: Next.js App Router page
 ```
-### 16.2 Page Layout
+### 17.2 Page Layout
 ```
 +-------------------------------------------------------------------+
 | mypapyr.com/admin/openclaw                         [Faiz] [Logout] |
@@ -4702,7 +5058,7 @@ export class PersonaStateManager {
 | +-------------------------------------------------------------------+
 +-------------------------------------------------------------------+
 ```
-### 16.3 Tabs
+### 17.3 Tabs
 ```
 | Tab | Content |
 |-----|---------|
@@ -4712,7 +5068,7 @@ export class PersonaStateManager {
 | Logs | Searchable log viewer, filter by agent/severity/date |
 | Settings | SOUL.md viewer, HEARTBEAT.md viewer, manual overrides |
 ```
-### 16.4 Manual Override Controls
+### 17.4 Manual Override Controls
 ```typescript
 // src/app/admin/openclaw/page.tsx (Next.js App Router)
 ```
@@ -4743,9 +5099,9 @@ export default function OpenClawDashboard() {
 ```
 ---
 ```
-## 17. Telegram Bot (@PapyrOpsBot)
+## 18. Telegram Bot (@PapyrOpsBot)
 ```
-### 17.1 Bot Setup
+### 18.1 Bot Setup
 ```typescript
 // src/interfaces/telegram/bot.ts
 import { Bot, Context, InlineKeyboard } from 'grammy';
@@ -4839,7 +5195,7 @@ export class PapyrOpsBot {
   private async processApproval(approved: boolean) { /* process */ }
 }
 ```
-### 17.2 Command List
+### 18.2 Command List
 ```
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -4857,7 +5213,7 @@ export class PapyrOpsBot {
 | /reject | Reject pending action | /reject |
 | /help | List all commands | /help |
 ```
-### 17.3 Report Format (Daily)
+### 18.3 Report Format (Daily)
 ```
 --- LAPORAN HARIAN OPENCLAW PAPYR ---
 Tanggal: 15 Juli 2025
@@ -4876,7 +5232,7 @@ Tanggal: 15 Juli 2025
 Detail: /report daily
 ---
 ```
-### 17.4 Alert Format
+### 18.4 Alert Format
 ```
 🚨 [CRITICAL] Server Health
 Railway API: Response time 8.2s (threshold: 5s)
@@ -4885,7 +5241,7 @@ Auto-action: Monitoring, will alert if persists
 Waktu: 2025-07-15 14:23 WIB
 Agent: Kertas
 ```
-### 17.5 Approval Flow
+### 18.5 Approval Flow
 ```
 🔐 [APPROVAL REQUIRED]
 Action: Delete old backup files (> 30 days)
@@ -4897,15 +5253,15 @@ Risk: Low
 ```
 ---
 ```
-## 18. CLI Interface
+## 19. CLI Interface
 ```
-### 18.1 Installation
+### 19.1 Installation
 ```bash
 # Dari repo openclaw
 pnpm build:cli
 npm link  # atau: alias openclaw='node /path/to/openclaw/dist/cli.js'
 ```
-### 18.2 Commands
+### 19.2 Commands
 ```bash
 # System
 openclaw status                    # System overview
@@ -4955,7 +5311,7 @@ openclaw costs today               # Today's token usage
 openclaw costs week                # This week's usage
 openclaw costs month               # This month's usage
 ```
-### 18.3 CLI Implementation
+### 19.3 CLI Implementation
 ```typescript
 // src/cli/index.ts
 import { Command } from 'commander';
@@ -4993,7 +5349,7 @@ program.command('report <type>').description('Generate report').action(async (ty
 ```
 program.parse();
 ```
-### 18.4 Output Format Example
+### 19.4 Output Format Example
 ```
 $ openclaw status
 ```
@@ -5017,7 +5373,7 @@ Server Health:
 ```
 Today: 32 tasks completed | 0 errors | 0 alerts
 ```
-### 18.5 Configuration Commands
+### 19.5 Configuration Commands
 ```
 $ openclaw config show
 ```
@@ -5037,13 +5393,13 @@ $ openclaw config history
 ```
 ---
 
-## 19. Database Schema
+## 20. Database Schema
 
-### 19.1 Overview
+### 20.1 Overview
 
 OpenClaw Papyr menggunakan PostgreSQL 16 sebagai database utama, berjalan di Supabase (shared dengan aplikasi Papyr utama). Semua tabel OpenClaw berada di schema terpisah `openclaw` dengan prefix `oc_` untuk isolasi yang jelas.
 
-### 19.2 Schema Setup
+### 20.2 Schema Setup
 
 ```sql
 -- ============================================================
@@ -5062,7 +5418,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 SET search_path TO openclaw, public;
 ```
 
-### 19.3 Full DDL
+### 20.3 Full DDL
 
 ```sql
 -- ============================================================
@@ -5555,7 +5911,7 @@ CREATE UNIQUE INDEX idx_github_unique ON openclaw.oc_github_issues(github_repo, 
 -- Security scans: retain 365 days
 ```
 
-### 19.4 Drizzle ORM Schema
+### 20.4 Drizzle ORM Schema
 
 ```typescript
 // src/database/schema.ts
@@ -5876,7 +6232,7 @@ export const githubIssues = openclawSchema.table('oc_github_issues', {
 });
 ```
 
-### 19.5 Migration Strategy
+### 20.5 Migration Strategy
 
 | Aspek | Strategi |
 |-------|----------|
@@ -5900,13 +6256,13 @@ pnpm drizzle-kit studio
 
 ---
 
-## 20. API Endpoints (Internal)
+## 21. API Endpoints (Internal)
 
-### 20.1 Overview
+### 21.1 Overview
 
 OpenClaw Papyr mengekspos internal HTTP API pada port 4200 untuk dashboard, CLI, dan inter-agent communication. Semua endpoint memerlukan autentikasi dan hanya dapat diakses dari VPS internal.
 
-### 20.2 Authentication
+### 21.2 Authentication
 
 ```typescript
 // Semua request harus menyertakan:
@@ -5915,7 +6271,7 @@ OpenClaw Papyr mengekspos internal HTTP API pada port 4200 untuk dashboard, CLI,
 // Hanya satu token (founder access only)
 ```
 
-### 20.3 Endpoint List
+### 21.3 Endpoint List
 
 | Method | Path | Deskripsi | Auth |
 |--------|------|-----------|------|
@@ -5962,7 +6318,7 @@ OpenClaw Papyr mengekspos internal HTTP API pada port 4200 untuk dashboard, CLI,
 | GET | `/config/heartbeat` | Current HEARTBEAT.md | Yes |
 | GET | `/config/history` | Config change history | Yes |
 
-### 20.4 Response Format
+### 21.4 Response Format
 
 ```typescript
 // src/types/api.ts
@@ -6033,7 +6389,7 @@ interface TaskSummary {
 }
 ```
 
-### 20.5 Request/Response Examples
+### 21.5 Request/Response Examples
 
 ```json
 // GET /api/v1/health — Response 200:
@@ -6087,9 +6443,9 @@ interface TaskSummary {
 
 ---
 
-## 21. Environment Variables
+## 22. Environment Variables
 
-### 21.1 Complete Environment Configuration
+### 22.1 Complete Environment Configuration
 
 ```bash
 # .env.openclaw
@@ -6200,7 +6556,7 @@ COST_ALERT_DAILY_LIMIT_IDR=50000
 COST_ALERT_MONTHLY_LIMIT_IDR=1000000
 ```
 
-### 21.2 Zod Validation Schema
+### 22.2 Zod Validation Schema
 
 ```typescript
 // src/config/env.ts
@@ -6310,9 +6666,9 @@ export const env = validateEnv();
 
 ---
 
-## 22. Error Handling & Resilience
+## 23. Error Handling & Resilience
 
-### 22.1 LLM API Down
+### 23.1 LLM API Down
 
 | Skenario | Aksi |
 |----------|------|
@@ -6322,7 +6678,7 @@ export const env = validateEnv();
 | Auth error (401/403) | Alert segera, pause semua agent LLM-dependent |
 | Complete outage | Queue tasks, retry setiap 5 menit, alert setelah 15 menit |
 
-### 22.2 External Service Fallbacks
+### 23.2 External Service Fallbacks
 
 | Service | Fallback | Alert Setelah |
 |---------|----------|---------------|
@@ -6335,7 +6691,7 @@ export const env = validateEnv();
 | Supabase DB | Critical - immediate alert, pause all agents | 1 menit |
 | Google Search Console | Skip SEO metrics, queue for later | 1 jam |
 
-### 22.3 Retry Strategy
+### 23.3 Retry Strategy
 
 ```typescript
 // src/utils/retry.ts
@@ -6433,7 +6789,7 @@ export async function withAPIRetry<T>(fn: () => Promise<T>, context?: string): P
 }
 ```
 
-### 22.4 Circuit Breaker
+### 23.4 Circuit Breaker
 
 ```typescript
 // src/utils/circuit-breaker.ts
@@ -6560,7 +6916,7 @@ export const r2Breaker = circuitBreakers.register({ name: 'cloudflare-r2', failu
 export const githubBreaker = circuitBreakers.register({ name: 'github-api', failureThreshold: 5, resetTimeout: 60000, halfOpenMaxAttempts: 3 });
 ```
 
-### 22.5 Graceful Degradation Priority
+### 23.5 Graceful Degradation Priority
 
 ```
 Priority order ketika resources terbatas:
@@ -6589,7 +6945,7 @@ Priority order ketika resources terbatas:
    - Cost optimization review
 ```
 
-### 22.6 Dead Letter Queue
+### 23.6 Dead Letter Queue
 
 ```typescript
 // src/utils/dead-letter-queue.ts
@@ -6620,7 +6976,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 }
 ```
 
-### 22.7 Alert Escalation
+### 23.7 Alert Escalation
 
 | Kondisi | Alert Level | Channel | Aksi |
 |---------|-------------|---------|------|
@@ -6635,9 +6991,9 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 
 ---
 
-## 23. Cost Analysis
+## 24. Cost Analysis
 
-### 23.1 Token Usage per Agent per Bulan
+### 24.1 Token Usage per Agent per Bulan
 
 | Fungsi | Calls/Hari | Avg Tokens/Call | Token Harian | Token Bulanan |
 |--------|-----------|-----------------|--------------|---------------|
@@ -6656,7 +7012,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 | Security: scan analysis | 0.14 (weekly) | 1.500 | 215 | 6.500 |
 | **TOTAL** | | | **~21.235** | **~637.200** |
 
-### 23.2 enowxAI API Pricing Assumptions
+### 24.2 enowxAI API Pricing Assumptions
 
 | Tier | Harga/1K Tokens | Estimasi Bulanan (637K tokens) |
 |------|-----------------|-------------------------------|
@@ -6666,7 +7022,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 
 > **Catatan:** Pricing enowxAI bersifat estimasi. Karena enowxAI adalah platform yang sama dengan OpenCode, kemungkinan sudah termasuk dalam subscription.
 
-### 23.3 Storage Costs
+### 24.3 Storage Costs
 
 | Item | Est. Monthly Growth | Platform | Monthly Cost |
 |------|--------------------|-----------|--------------| 
@@ -6676,7 +7032,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 | R2 SEO assets | ~500 MB | Cloudflare R2 | Rp 0 (10 GB free) |
 | **TOTAL Storage** | **~3.1 GB** | | **Rp 0** |
 
-### 23.4 VPS Cost (HostData.id)
+### 24.4 VPS Cost (HostData.id)
 
 | Item | Spesifikasi | Monthly Cost |
 |------|-------------|--------------|
@@ -6684,7 +7040,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 | Bandwidth | 2 TB/month | Included |
 | **TOTAL VPS** | | **Rp 100.000** |
 
-### 23.5 Total Monthly Cost Projection
+### 24.5 Total Monthly Cost Projection
 
 | Item | Monthly Cost (IDR) | Catatan |
 |------|-------------------|---------| 
@@ -6697,7 +7053,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 | Domain | Rp 0 | Existing mypapyr.com |
 | **TOTAL** | **Rp 100.000 - 119.116** | ~$6-7 USD/bulan |
 
-### 23.6 Optimization Strategies
+### 24.6 Optimization Strategies
 
 1. **Token caching**: Cache LLM responses untuk prompt identik (TTL: 1 jam)
 2. **Prompt optimization**: Review dan persingkat prompt secara berkala
@@ -6710,9 +7066,9 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 
 ---
 
-## 24. Security Considerations
+## 25. Security Considerations
 
-### 24.1 Access Control Model
+### 25.1 Access Control Model
 
 | Resource | Access Level | Method |
 |----------|-------------|--------|
@@ -6725,7 +7081,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 | Railway API | Project-scoped | API token |
 | Vercel API | Project-scoped | API token |
 
-### 24.2 Secrets Management
+### 25.2 Secrets Management
 
 - Semua secrets disimpan di `.env.openclaw` (tidak pernah di-commit ke git)
 - `.env.openclaw.example` berisi placeholder values (committed)
@@ -6734,7 +7090,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 - Docker environment variables untuk production
 - Tidak ada hardcoded credentials di source code
 
-### 24.3 Network Isolation
+### 25.3 Network Isolation
 
 ```
                     +---------------------------------------------+
@@ -6778,7 +7134,7 @@ export async function moveToDeadLetter(payload: DeadLetterPayload): Promise<void
 - Database connection menggunakan SSL mode `require`
 - Redis hanya accessible dari localhost (no external binding)
 
-### 24.4 Audit Trail
+### 25.4 Audit Trail
 
 Setiap aksi oleh OpenClaw dicatat di `oc_audit_logs` dengan:
 - Agent name (siapa yang melakukan)
@@ -6794,7 +7150,7 @@ Audit logs bersifat:
 - **Queryable** via API dashboard
 - **Included** dalam monthly reports
 
-### 24.5 Least Privilege per Agent
+### 25.5 Least Privilege per Agent
 
 | Agent | Database | External APIs | File System |
 |-------|----------|---------------|-------------|
@@ -6808,7 +7164,7 @@ Audit logs bersifat:
 | Mata (Competitor) | RW: competitor_snapshots | Web scraping (read-only) | None |
 | Cerdas (Analytics) | RW: analytics_insights | Vercel Analytics (read) | None |
 
-### 24.6 Telegram Bot Security
+### 25.6 Telegram Bot Security
 
 ```typescript
 // src/interfaces/telegram/middleware.ts
@@ -6833,7 +7189,7 @@ bot.use(async (ctx, next) => {
 });
 ```
 
-### 24.7 API Authentication
+### 25.7 API Authentication
 
 ```typescript
 // src/interfaces/api/middleware/auth.ts
@@ -6868,9 +7224,9 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
 
 ---
 
-## 25. Deployment Guide
+## 26. Deployment Guide
 
-### 25.1 Prerequisites
+### 26.1 Prerequisites
 
 | Requirement | Spesifikasi | Catatan |
 |-------------|-------------|---------|
@@ -6882,7 +7238,7 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
 | Git | 2.40+ | Untuk deployment |
 | SSH | Key-based auth only | No password login |
 
-### 25.2 Initial Deployment Steps
+### 26.2 Initial Deployment Steps
 
 ```bash
 # 1. SSH ke VPS
@@ -6920,7 +7276,7 @@ curl -s http://localhost:4200/health | jq .
 docker compose logs -f openclaw-daemon --tail=50
 ```
 
-### 25.3 CI/CD with GitHub Actions
+### 26.3 CI/CD with GitHub Actions
 
 ```yaml
 # .github/workflows/openclaw-deploy.yml
@@ -7018,7 +7374,7 @@ jobs:
           message: "OpenClaw deploy FAILED. Check: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 ```
 
-### 25.4 Rolling Updates Strategy
+### 26.4 Rolling Updates Strategy
 
 ```bash
 # Rolling update tanpa downtime:
@@ -7029,7 +7385,7 @@ sleep 15
 curl -sf http://localhost:4200/health
 ```
 
-### 25.5 Rollback Procedure
+### 26.5 Rollback Procedure
 
 ```bash
 # Jika deployment gagal:
@@ -7040,7 +7396,7 @@ docker compose -f docker-compose.openclaw.yml up -d openclaw-daemon
 curl -sf http://localhost:4200/health
 ```
 
-### 25.6 Health Check Verification
+### 26.6 Health Check Verification
 
 ```bash
 # Quick health check
@@ -7051,7 +7407,7 @@ curl -s http://localhost:4200/api/v1/status \
   -H "Authorization: Bearer $OPENCLAW_API_TOKEN" | jq .
 ```
 
-### 25.7 DNS/Networking Setup
+### 26.7 DNS/Networking Setup
 
 | Service | Domain/URL | Platform | Notes |
 |---------|-----------|----------|-------|
@@ -7064,9 +7420,9 @@ curl -s http://localhost:4200/api/v1/status \
 
 ---
 
-## 26. Testing Strategy
+## 27. Testing Strategy
 
-### 26.1 Test Types
+### 27.1 Test Types
 
 | Type | Tool | Coverage Target | Run When |
 |------|------|-----------------|----------|
@@ -7076,7 +7432,7 @@ curl -s http://localhost:4200/api/v1/status \
 | Type Check | `tsc --noEmit` | 100% | Setiap commit |
 | Lint | ESLint | 100% | Setiap commit |
 
-### 26.2 Unit Test Examples
+### 27.2 Unit Test Examples
 
 ```typescript
 // tests/unit/agents/seo/quality-gates.test.ts
@@ -7126,7 +7482,7 @@ describe('QualityGateEngine', () => {
 });
 ```
 
-### 26.3 Integration Test Examples
+### 27.3 Integration Test Examples
 
 ```typescript
 // tests/integration/backup/executor.test.ts
@@ -7178,7 +7534,7 @@ describe('BackupExecutor', () => {
 });
 ```
 
-### 26.4 Mock Strategies
+### 27.4 Mock Strategies
 
 ```typescript
 // tests/mocks/llm-client.mock.ts
@@ -7217,7 +7573,7 @@ export function createMockGitHubClient() {
 }
 ```
 
-### 26.5 Test Coverage Targets
+### 27.5 Test Coverage Targets
 
 | Module | Target | Rationale |
 |--------|--------|-----------|
@@ -7228,7 +7584,7 @@ export function createMockGitHubClient() {
 | Database queries | 60% | Tested via integration |
 | Telegram interface | 50% | Hard to unit test |
 
-### 26.6 CI Integration
+### 27.6 CI Integration
 
 ```yaml
 # Dalam GitHub Actions workflow (lihat 25.3):
@@ -7246,7 +7602,7 @@ export function createMockGitHubClient() {
 
 ---
 
-## 27. Cross-Reference Index
+## 28. Cross-Reference Index
 
 | Doc ID | Dokumen | Relevansi dengan OpenClaw |
 |--------|---------|---------------------------|
@@ -7269,7 +7625,7 @@ export function createMockGitHubClient() {
 
 ---
 
-## 28. Glossary
+## 29. Glossary
 
 | Term | Definisi |
 |------|----------|
@@ -7302,7 +7658,7 @@ export function createMockGitHubClient() {
 
 ---
 
-## 29. Appendices
+## 30. Appendices
 
 ### Appendix A: Healthcheck Script
 
@@ -7571,7 +7927,7 @@ main().catch((error) => {
 
 ---
 
-## 30. Document Approval
+## 31. Document Approval
 
 | Role | Nama | Status | Tanggal |
 |------|------|--------|---------|
