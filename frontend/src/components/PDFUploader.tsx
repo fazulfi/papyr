@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { formatFileSize, formatPercent } from "@/lib/format";
 import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
 import type { ToolName } from "@/lib/analytics";
@@ -116,6 +116,7 @@ export default function PDFUploader({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const xhrRef = useRef<XMLHttpRequest | null>(null);
+  const uploadFileRef = useRef<(file: File, isRetry?: boolean) => void>(() => {});
 
   const setState = useCallback((newState: UploadState) => {
     setInternalState(newState);
@@ -133,7 +134,7 @@ export default function PDFUploader({
     setDragging(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
     onReset?.();
-  }, [onReset]);
+  }, [onReset, setState]);
 
   const validateFile = useCallback(
     (file: File): string | null => {
@@ -149,6 +150,26 @@ export default function PDFUploader({
       return null;
     },
     [accept, maxSizeMB],
+  );
+
+  const handleError = useCallback(
+    (message: string, file: File, isRetry: boolean) => {
+      if (!isRetry) {
+        // First failure — auto-retry after 1 second
+        setRetrying(true);
+        setState("uploading");
+        setTimeout(() => {
+          setRetrying(false);
+          uploadFileRef.current(file, true);
+        }, 1000);
+      } else {
+        // Second failure — show error
+        setErrorMessage(message);
+        setState("error");
+        trackTaskFailed(toolName, "server_error");
+      }
+    },
+    [setState, toolName],
   );
 
   const uploadFile = useCallback(
@@ -219,28 +240,13 @@ export default function PDFUploader({
       setProgress(0);
       if (!isRetry) trackTaskStarted(toolName);
     },
-    [endpoint, onUploadComplete, toolName],
+    [endpoint, handleError, onUploadComplete, setState, toolName],
   );
 
-  const handleError = useCallback(
-    (message: string, file: File, isRetry: boolean) => {
-      if (!isRetry) {
-        // First failure — auto-retry after 1 second
-        setRetrying(true);
-        setState("uploading");
-        setTimeout(() => {
-          setRetrying(false);
-          uploadFile(file, true);
-        }, 1000);
-      } else {
-        // Second failure — show error
-        setErrorMessage(message);
-        setState("error");
-        trackTaskFailed(toolName, "server_error");
-      }
-    },
-    [uploadFile],
-  );
+  // Keep ref in sync so handleError's retry always calls latest uploadFile
+  useEffect(() => {
+    uploadFileRef.current = uploadFile;
+  }, [uploadFile]);
 
   const handleFileSelect = useCallback(
     (file: File | undefined) => {
@@ -260,7 +266,7 @@ export default function PDFUploader({
       setFileSize(file.size);
       uploadFile(file);
     },
-    [validateFile, uploadFile],
+    [validateFile, uploadFile, setState, toolName],
   );
 
   const handleDrop = useCallback(

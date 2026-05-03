@@ -1,4 +1,4 @@
-import { PDFDocument, PageSizes, degrees } from "pdf-lib";
+import { PDFDocument, degrees } from "pdf-lib";
 
 /* ── Rotate Types & Helpers ── */
 

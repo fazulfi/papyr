@@ -29,15 +29,7 @@ function createTestPNG(): File {
   return new File([png], "test.png", { type: "image/png" });
 }
 
-function createTestJPEG(): File {
-  // Minimal JPEG (just magic bytes + enough to be "valid" for type checking)
-  const jpeg = new Uint8Array([
-    0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46,
-    0x49, 0x46, 0x00, 0x01, 0x01, 0x00, 0x00, 0x01,
-    0x00, 0x01, 0x00, 0x00, 0xff, 0xd9,
-  ]);
-  return new File([jpeg], "test.jpg", { type: "image/jpeg" });
-}
+
 
 describe("getPDFPageCount", () => {
   it("returns correct page count for single page PDF", async () => {

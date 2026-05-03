@@ -6,7 +6,6 @@ import { limits } from "@/lib/config";
 import {
   getPDFPageCount,
   rotatePDF,
-  rotatePDFAllPages,
   downloadPDF,
   type PageRotationMap,
 } from "@/lib/pdfUtils";
