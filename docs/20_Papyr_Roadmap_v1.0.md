@@ -1,12 +1,12 @@
-**Papyr**
+*Papyr**
 
 *Tool PDF gratis, cepat, dan aman untuk Indonesia.*
 
 **Product Roadmap**
 
-Version 1.0
+Version 2.0
 
-Juni 2025
+Juli 2025
 
 **CONFIDENTIAL**
 
@@ -20,10 +20,10 @@ mypapyr.com
 |---------------------|----------------------------------------------|
 | **Judul Dokumen**   | Product Roadmap — Papyr                      |
 | **ID Dokumen**      | PPR-RM-001                                   |
-| **Versi**           | 1.0                                          |
-| **Status**          | Draft                                        |
+| **Versi**           | 2.0                                          |
+| **Status**          | Approved                                     |
 | **Tanggal Dibuat**  | Juni 2025                                    |
-| **Terakhir Diubah** | Juni 2025                                    |
+| **Terakhir Diubah** | Juli 2025                                    |
 | **Penulis**         | AI Agent (OpenCode/Sisyphus)                 |
 | **Ditinjau Oleh**   | Product Owner (Muhammad Fa'iz Zulfikar)      |
 | **Disetujui Oleh**  | Product Owner                                |
@@ -34,6 +34,7 @@ mypapyr.com
 | **Versi** | **Tanggal** | **Penulis**                  | **Deskripsi**                                                                          |
 |-----------|-------------|------------------------------|----------------------------------------------------------------------------------------|
 | 1.0       | Juni 2025   | AI Agent (OpenCode/Sisyphus) | Draft awal — Product Roadmap lengkap mencakup MVP 0.1 (completed) hingga Fase 3 (planned) |
+| 2.0       | Juli 2025   | AI Agent (OpenCode/Sisyphus) | Major upgrade — Roadmap philosophy & prioritization framework, feature classification labels, sub-phase breakdown MVP 0.2, UI safety rules, detailed per-feature specs, gate conditions diperkuat, "What Will NOT Be Built" section, cross-cutting quality items, success metrics dengan target spesifik |
 
 **Dokumen Terkait**
 
@@ -46,7 +47,108 @@ mypapyr.com
 
 ---
 
-## 1. Ringkasan Eksekutif
+## Daftar Isi
+
+1. [Filosofi Roadmap & Kerangka Prioritas](#1-filosofi-roadmap--kerangka-prioritas)
+2. [Ringkasan Eksekutif](#2-ringkasan-eksekutif)
+3. [Visi Produk](#3-visi-produk)
+4. [Fase & Timeline](#4-fase--timeline)
+5. [Detail MVP 0.1 — Core Tools & Launch (COMPLETED)](#5-detail-mvp-01--core-tools--launch-completed)
+6. [UI Safety Rules — Aturan Sebelum Membangun Fitur Baru](#6-ui-safety-rules--aturan-sebelum-membangun-fitur-baru)
+7. [Detail MVP 0.2 — Tool Expansion](#7-detail-mvp-02--tool-expansion)
+8. [Detail MVP 0.3 — Monetisasi](#8-detail-mvp-03--monetisasi)
+9. [Detail Fase 2 — AI Features](#9-detail-fase-2--ai-features)
+10. [Detail Fase 3 — Indonesia Deep](#10-detail-fase-3--indonesia-deep)
+11. [Yang TIDAK Akan Dibangun](#11-yang-tidak-akan-dibangun)
+12. [Prioritas & Dependensi](#12-prioritas--dependensi)
+13. [Metrik Keberhasilan per Fase](#13-metrik-keberhasilan-per-fase)
+14. [Risiko & Mitigasi](#14-risiko--mitigasi)
+15. [Referensi Silang (Cross-References)](#15-referensi-silang-cross-references)
+16. [Persetujuan Dokumen](#16-persetujuan-dokumen)
+
+---
+
+## 1. Filosofi Roadmap & Kerangka Prioritas
+
+### 1.1 Filosofi Inti
+
+Roadmap Papyr dibangun di atas satu prinsip fundamental:
+
+> **Hargai fase, bukan tanggal kalender.**
+
+Papyr dikembangkan 100% AI-driven — tanpa tim engineering tradisional, tanpa sprint planning konvensional. Kecepatan pengembangan ditentukan oleh kualitas output AI dan keputusan Product Owner, bukan oleh headcount atau jam kerja.
+
+Implikasi dari filosofi ini:
+
+| **Prinsip**                          | **Penjelasan**                                                                                                    |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| **Phase-gated, bukan time-boxed**    | Setiap fase memiliki gate condition yang harus dipenuhi. Tidak ada "deadline" artifisial.                         |
+| **Ship when ready, not when due**    | Fitur dirilis saat memenuhi acceptance criteria, bukan saat kalender menunjukkan tanggal tertentu.                |
+| **Quality over velocity**            | Lebih baik 1 tool yang sempurna daripada 3 tool yang setengah jadi. Setiap tool harus production-ready.          |
+| **Incremental value delivery**       | Setiap milestone yang dirilis harus memberikan nilai nyata bagi pengguna. Tidak ada "infrastructure-only" release.|
+| **Reversible decisions preferred**   | Pilih arsitektur yang memungkinkan perubahan. Hindari lock-in ke vendor atau teknologi tertentu.                  |
+| **Data-informed gates**              | Keputusan untuk melanjutkan ke fase berikutnya berdasarkan data (traffic, MAU, revenue), bukan asumsi.           |
+
+### 1.2 Kerangka Prioritas (Prioritization Framework)
+
+Setiap fitur dalam roadmap ini dievaluasi menggunakan 4 dimensi:
+
+| **Dimensi**        | **Bobot** | **Skala** | **Deskripsi**                                                                                     |
+|--------------------|-----------|-----------|---------------------------------------------------------------------------------------------------|
+| **User Value**     | 40%       | 1–5       | Seberapa besar dampak fitur ini bagi pengguna? Apakah menyelesaikan masalah nyata?                |
+| **Strategic Fit**  | 25%       | 1–5       | Seberapa selaras dengan visi "PDF tool #1 Indonesia"? Apakah memperkuat positioning?              |
+| **Feasibility**    | 20%       | 1–5       | Seberapa mudah dibangun dengan stack saat ini? Apakah ada risiko teknis tinggi?                   |
+| **Revenue Impact** | 15%       | 1–5       | Apakah fitur ini mendorong konversi ke Pro tier atau meningkatkan retention?                      |
+
+**Cara Menghitung Skor Prioritas:**
+
+```
+Skor = (User Value x 0.40) + (Strategic Fit x 0.25) + (Feasibility x 0.20) + (Revenue Impact x 0.15)
+```
+
+**Penerapan pada MVP 0.2 Features:**
+
+| **Fitur**      | **User Value** | **Strategic Fit** | **Feasibility** | **Revenue Impact** | **Skor** | **Prioritas** |
+|----------------|----------------|--------------------|-----------------|--------------------|----------|---------------|
+| M12 Protect    | 4              | 4                  | 5               | 2                  | 3.90     | P1            |
+| M13 Unlock     | 4              | 4                  | 5               | 2                  | 3.90     | P1            |
+| M15 Sign       | 5              | 5                  | 4               | 3                  | 4.50     | P1            |
+| M14 Watermark  | 3              | 4                  | 4               | 3                  | 3.45     | P2            |
+| M16 PDF-Word   | 5              | 5                  | 3               | 4                  | 4.45     | P2            |
+| M17 OCR        | 5              | 5                  | 2               | 5                  | 4.20     | P3            |
+| M18 PDF-Excel  | 3              | 4                  | 2               | 4                  | 3.20     | P4            |
+
+> **Catatan:** Skor prioritas bersifat panduan, bukan absolut. Urutan pengerjaan juga mempertimbangkan dependensi teknis (M12-M13, M16-M17-M18) dan shared logic.
+
+### 1.3 Klasifikasi Label Fitur (Feature Classification)
+
+Setiap fitur dalam roadmap ini diberi label klasifikasi untuk memberikan gambaran cepat tentang sifat dan kompleksitasnya:
+
+| **Label** | **Nama**            | **Arti**                                                                                          |
+|-----------|---------------------|---------------------------------------------------------------------------------------------------|
+| 🟢        | **Buildable**       | Dapat dibangun sekarang dengan stack saat ini. Pure engineering — tidak ada blocker eksternal.     |
+| 🟡        | **Hard**            | Kompleksitas tinggi — membutuhkan riset, arsitektur baru, atau integrasi berat.                   |
+| 🔴        | **Regulated**       | Membutuhkan compliance, lisensi, atau persetujuan pihak ketiga sebelum bisa dibangun.             |
+| 🔵        | **Business Outcome**| Hasilnya adalah metrik bisnis, bukan fitur teknis. Contoh: "revenue > Rp 0".                     |
+| 🟣        | **R&D**             | Membutuhkan eksperimen. Belum ada solusi yang terbukti untuk konteks Papyr.                       |
+| ⚪        | **Moonshot**        | Ambisius, high-risk high-reward. Bisa jadi game-changer atau bisa gagal total.                    |
+
+### 1.4 Distribusi Label per Fase
+
+| **Fase**    | 🟢 Buildable | 🟡 Hard | 🔴 Regulated | 🔵 Business | 🟣 R&D | ⚪ Moonshot | **Total** |
+|-------------|--------------|---------|--------------|-------------|--------|------------|-----------|
+| MVP 0.1     | 11           | 0       | 0            | 0           | 0      | 0          | 11        |
+| MVP 0.2     | 9            | 3       | 0            | 0           | 0      | 0          | 12        |
+| MVP 0.3     | 4            | 1       | 0            | 2           | 0      | 0          | 7         |
+| Fase 2      | 0            | 1       | 0            | 1           | 2      | 0          | 4         |
+| Fase 3      | 0            | 0       | 2            | 1           | 0      | 1          | 4         |
+| **Total**   | **24**       | **5**   | **2**        | **4**       | **2**  | **1**      | **38**    |
+
+> **Insight:** 63% fitur adalah 🟢 Buildable — artinya mayoritas roadmap ini bisa dieksekusi tanpa blocker eksternal. Risiko terbesar ada di Fase 3 (regulated + moonshot).
+
+---
+
+## 2. Ringkasan Eksekutif
 
 Dokumen ini mendefinisikan Product Roadmap resmi untuk Papyr — web application utilitas PDF yang dirancang khusus untuk pasar Indonesia. Roadmap ini mencakup seluruh fase pengembangan produk dari MVP 0.1 yang telah selesai hingga visi jangka panjang di Fase 3.
 
@@ -54,44 +156,45 @@ Dokumen ini mendefinisikan Product Roadmap resmi untuk Papyr — web application
 
 - **MVP 0.1** telah selesai sepenuhnya (v1.0.0 + v1.1.0) dengan 11 milestone dan 89 tasks terselesaikan.
 - **Papyr live** di [mypapyr.com](https://mypapyr.com) dengan 6 tool aktif: Compress, Merge, Split, Rotate, Image-to-PDF, dan PDF-to-Image.
-- **Fase selanjutnya** adalah MVP 0.2 (Tool Expansion) yang bersifat fleksibel tanpa hard deadline.
+- **Fase selanjutnya** adalah MVP 0.2 (Tool Expansion) — gate condition sudah terpenuhi (MVP 0.1 live & stabil).
 
-**Pendekatan Roadmap:**
+**Model Pengembangan:**
 
-Roadmap ini menggunakan pendekatan berbasis fase (phase-based) dengan gate conditions antar fase. Setiap fase memiliki kriteria keberhasilan yang harus dipenuhi sebelum melanjutkan ke fase berikutnya. Timeline bersifat fleksibel mengingat Papyr dikembangkan oleh solo developer dengan alokasi waktu 5–10 jam per minggu.
+Papyr dikembangkan 100% AI-driven — seluruh kode, dokumentasi, dan keputusan arsitektur dihasilkan melalui AI agents (OpenCode/Sisyphus). Marketing dikelola melalui OpenClaw. Tidak ada tim engineering tradisional.
 
 **Ringkasan Fase:**
 
-| **Fase**    | **Fokus**                | **Status**       | **Estimasi**         |
-|-------------|--------------------------|------------------|----------------------|
-| MVP 0.1     | Core Tools + Launch      | Selesai          | Completed            |
-| MVP 0.2     | Tool Expansion           | Selanjutnya      | Fleksibel            |
-| MVP 0.3     | Monetisasi               | Direncanakan     | Setelah gate MVP 0.2 |
-| Fase 2      | AI Features              | Visi             | Setelah gate MVP 0.3 |
-| Fase 3      | Indonesia Deep           | Visi             | Setelah gate Fase 2  |
+| **Fase**    | **Fokus**                | **Status**       | **Gate**                                          | **Label Dominan**  |
+|-------------|--------------------------|------------------|---------------------------------------------------|--------------------|
+| MVP 0.1     | Core Tools + Launch      | ✅ Selesai       | —                                                 | 🟢 Buildable      |
+| MVP 0.2     | Tool Expansion           | 🔄 Selanjutnya   | MVP 0.1 live & stabil ✅                          | 🟢🟡 Build + Hard |
+| MVP 0.3     | Monetisasi               | 📋 Direncanakan  | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU            | 🟢🔵 Build + Biz  |
+| Fase 2      | AI Features              | 🔮 Visi          | MVP 0.3 revenue > Rp 0                            | 🟣 R&D            |
+| Fase 3      | Indonesia Deep           | 🔮 Visi          | Fase 2 stabil + regulatory readiness              | 🔴⚪ Reg + Moon   |
 
 ---
 
-## 2. Visi Produk
+## 3. Visi Produk
 
-### 2.1 Visi Jangka Panjang
+### 3.1 Visi Jangka Panjang
 
 > **Menjadi platform utilitas dokumen digital #1 di Indonesia — gratis, cepat, aman, dan cerdas.**
 
 Papyr bertujuan untuk menjadi solusi lengkap bagi seluruh kebutuhan pengelolaan dokumen digital masyarakat Indonesia — mulai dari operasi PDF sederhana hingga fitur AI-powered yang canggih, dengan integrasi mendalam ke ekosistem digital Indonesia (e-Meterai, template pemerintah, compliance lokal).
 
-### 2.2 Prinsip Pengembangan
+### 3.2 Prinsip Pengembangan
 
-| **Prinsip**            | **Deskripsi**                                                                                     |
-|------------------------|---------------------------------------------------------------------------------------------------|
-| Privacy-First          | File diproses secara lokal bila memungkinkan; file server dihapus otomatis dalam 24 jam maksimal  |
-| Indonesia-First        | UI Bahasa Indonesia default, server dekat Asia, UX disesuaikan kebutuhan lokal                    |
-| Mobile-First           | Didesain untuk layar HP terlebih dahulu, bukan desktop-first yang dipaksakan responsive           |
-| Zero-Friction          | Tanpa login untuk fitur dasar, tanpa paywall yang membatasi, tanpa watermark                      |
-| Incremental Value      | Setiap fase menambah nilai nyata bagi pengguna tanpa merusak pengalaman yang sudah ada            |
-| Sustainable Business   | Monetisasi yang adil — gratis untuk kebutuhan dasar, premium untuk fitur lanjutan                 |
+| **Prinsip**            | **Deskripsi**                                                                                                     |
+|------------------------|-------------------------------------------------------------------------------------------------------------------|
+| Privacy-First          | File diproses secara lokal bila memungkinkan; file server auto-delete 60 menit (cron) + 24 jam (R2 lifecycle safety net) |
+| Indonesia-First        | UI Bahasa Indonesia default, server dekat Asia, UX disesuaikan kebutuhan lokal                                    |
+| Mobile-First           | Didesain untuk layar HP terlebih dahulu (375px primary), bukan desktop-first yang dipaksakan responsive           |
+| Zero-Friction          | Tanpa login untuk fitur dasar, tanpa paywall yang membatasi, tanpa watermark                                      |
+| Incremental Value      | Setiap fase menambah nilai nyata bagi pengguna tanpa merusak pengalaman yang sudah ada                            |
+| Sustainable Business   | Monetisasi yang adil — gratis untuk kebutuhan dasar, premium untuk fitur lanjutan                                 |
+| AI-Driven Development  | 100% dikembangkan melalui AI agents — kecepatan dan kualitas ditentukan oleh tooling, bukan headcount            |
 
-### 2.3 Target Pengguna
+### 3.3 Target Pengguna
 
 | **Segmen**             | **Kebutuhan Utama**                                    | **Fase Relevan**       |
 |------------------------|--------------------------------------------------------|------------------------|
@@ -101,7 +204,7 @@ Papyr bertujuan untuk menjadi solusi lengkap bagi seluruh kebutuhan pengelolaan 
 | UMKM                   | Invoice PDF, e-Meterai, template dokumen               | Fase 3                 |
 | Enterprise             | Batch processing, API access, compliance               | MVP 0.3 + Fase 3       |
 
-### 2.4 Evolusi Produk
+### 3.4 Evolusi Produk
 
 ```
 MVP 0.1          MVP 0.2           MVP 0.3          Fase 2          Fase 3
@@ -111,61 +214,85 @@ MVP 0.1          MVP 0.2           MVP 0.3          Fase 2          Fase 3
  6 tools         +7 tools           Login + Pro      AI Analysis    e-Meterai
  Free only       Free only          Freemium         Smart Tools    Gov Templates
  Zero-login      Zero-login         Optional login   Premium AI     Local Compliance
+ 🟢 100%         🟢75% 🟡25%       🟢🔵 mixed      🟣 R&D         🔴⚪ Regulated
 ```
 
 ---
 
-## 3. Fase & Timeline
+## 4. Fase & Timeline
 
-### 3.1 Timeline Visual
+### 4.1 Gate Conditions (Detail)
+
+Setiap transisi antar fase memiliki gate condition yang spesifik dan terukur:
+
+| **Transisi**          | **Gate Condition**                                                                                     | **Status**    |
+|-----------------------|--------------------------------------------------------------------------------------------------------|---------------|
+| MVP 0.1 → MVP 0.2    | MVP 0.1 live & stabil di mypapyr.com, semua 6 tool berfungsi, zero critical bugs selama 7 hari        | ✅ TERPENUHI  |
+| MVP 0.2 → MVP 0.3    | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU (diukur via Vercel Analytics)                                   | ⏳ Menunggu   |
+| MVP 0.3 → Fase 2     | MVP 0.3 revenue > Rp 0 (validated willingness to pay — minimal 1 paying customer)                     | ⏳ Menunggu   |
+| Fase 2 → Fase 3      | Fase 2 stabil (zero critical bugs 30 hari) + regulatory readiness assessment selesai + partnership MoU | ⏳ Menunggu   |
+
+### 4.2 Timeline Visual
 
 | **Fase**    | **Milestone**  | **Deskripsi**                          | **Status**           | **Gate Condition**                                    |
 |-------------|----------------|----------------------------------------|----------------------|-------------------------------------------------------|
 | MVP 0.1     | M01–M11        | Core 6 tools + Landing + SEO + Launch  | ✅ Selesai           | —                                                     |
-| MVP 0.2     | M12–M18        | 7 tool tambahan (advanced)             | 🔄 Selanjutnya       | MVP 0.1 live & stabil                                 |
-| MVP 0.3     | M19–M22        | Login, Pro tier, Payment               | 📋 Direncanakan      | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU                |
-| Fase 2      | M23–M25        | AI-powered features                    | 🔮 Visi              | MVP 0.3 revenue > Rp 0 (validated willingness to pay) |
-| Fase 3      | M26–M28        | Indonesia Deep integration             | 🔮 Visi              | Fase 2 stabil + regulatory readiness                  |
+| MVP 0.2     | M12–M18 + 2D   | 7 tool tambahan + cross-cutting quality| 🔄 Selanjutnya       | MVP 0.1 live & stabil ✅                              |
+| MVP 0.3     | M19–M23        | Login, Pro tier, Payment, API          | 📋 Direncanakan      | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 MAU                |
+| Fase 2      | M24–M26        | AI-powered features                    | 🔮 Visi              | MVP 0.3 revenue > Rp 0 (validated willingness to pay) |
+| Fase 3      | M27–M29        | Indonesia Deep integration             | 🔮 Visi              | Fase 2 stabil + regulatory readiness                  |
 
-### 3.2 Detail Timeline per Milestone
+### 4.3 Detail Timeline per Milestone
 
-| **#**  | **Milestone**            | **Fase**  | **Estimasi Effort** | **Dependensi**         | **Status**           |
-|--------|--------------------------|-----------|---------------------|------------------------|----------------------|
-| M01    | Project Setup            | MVP 0.1   | 10–15 jam           | —                      | ✅ Selesai           |
-| M02    | Compress PDF             | MVP 0.1   | 15–20 jam           | M01                    | ✅ Selesai           |
-| M03    | Merge PDF                | MVP 0.1   | 10–15 jam           | M01                    | ✅ Selesai           |
-| M04    | Split PDF                | MVP 0.1   | 10–15 jam           | M01                    | ✅ Selesai           |
-| M05    | Image to PDF             | MVP 0.1   | 10–15 jam           | M01                    | ✅ Selesai           |
-| M06    | PDF to Image             | MVP 0.1   | 12–18 jam           | M01                    | ✅ Selesai           |
-| M07    | Landing Page + SEO       | MVP 0.1   | 15–20 jam           | M02–M06                | ✅ Selesai           |
-| M08    | Analytics                | MVP 0.1   | 5–8 jam             | M07                    | ✅ Selesai           |
-| M09    | Cleanup & Privacy        | MVP 0.1   | 12–15 jam           | M02, M06               | ✅ Selesai           |
-| M10    | Testing + Launch         | MVP 0.1   | 8–12 jam            | M01–M09                | ✅ Selesai           |
-| M11    | Rotate PDF               | MVP 0.1   | 5–8 jam             | M01                    | ✅ Selesai           |
-| M12    | Protect PDF              | MVP 0.2   | 8–12 jam            | M01                    | 📋 Planned           |
-| M13    | Unlock PDF               | MVP 0.2   | 8–12 jam            | M12                    | 📋 Planned           |
-| M14    | Watermark PDF            | MVP 0.2   | 10–15 jam           | M01                    | 📋 Planned           |
-| M15    | Sign PDF                 | MVP 0.2   | 15–20 jam           | M01                    | 📋 Planned           |
-| M16    | PDF-to-Word              | MVP 0.2   | 15–20 jam           | M01                    | 📋 Planned           |
-| M17    | OCR                      | MVP 0.2   | 20–30 jam           | M01                    | 📋 Planned           |
-| M18    | PDF-to-Excel             | MVP 0.2   | 15–20 jam           | M16, M17               | 📋 Planned           |
-
+| **#**  | **Milestone**            | **Fase**  | **Sub-fase** | **Estimasi Effort** | **Dependensi**         | **Label** | **Status**           |
+|--------|--------------------------|-----------|--------------|---------------------|------------------------|-----------|----------------------|
+| M01    | Project Setup            | MVP 0.1   | —            | 10–15 jam           | —                      | 🟢        | ✅ Selesai           |
+| M02    | Compress PDF             | MVP 0.1   | —            | 15–20 jam           | M01                    | 🟢        | ✅ Selesai           |
+| M03    | Merge PDF                | MVP 0.1   | —            | 10–15 jam           | M01                    | 🟢        | ✅ Selesai           |
+| M04    | Split PDF                | MVP 0.1   | —            | 10–15 jam           | M01                    | 🟢        | ✅ Selesai           |
+| M05    | Image to PDF             | MVP 0.1   | —            | 10–15 jam           | M01                    | 🟢        | ✅ Selesai           |
+| M06    | PDF to Image             | MVP 0.1   | —            | 12–18 jam           | M01                    | 🟢        | ✅ Selesai           |
+| M07    | Landing Page + SEO       | MVP 0.1   | —            | 15–20 jam           | M02–M06                | 🟢        | ✅ Selesai           |
+| M08    | Analytics                | MVP 0.1   | —            | 5–8 jam             | M07                    | 🟢        | ✅ Selesai           |
+| M09    | Cleanup & Privacy        | MVP 0.1   | —            | 12–15 jam           | M02, M06               | 🟢        | ✅ Selesai           |
+| M10    | Testing + Launch         | MVP 0.1   | —            | 8–12 jam            | M01–M09                | 🟢        | ✅ Selesai           |
+| M11    | Rotate PDF               | MVP 0.1   | —            | 5–8 jam             | M01                    | 🟢        | ✅ Selesai           |
+| M12    | Protect PDF              | MVP 0.2   | Phase 2A     | 8–12 jam            | M01                    | 🟢        | 📋 Planned           |
+| M13    | Unlock PDF               | MVP 0.2   | Phase 2A     | 8–12 jam            | M12                    | 🟢        | 📋 Planned           |
+| M14    | Watermark PDF            | MVP 0.2   | Phase 2B     | 10–15 jam           | M01                    | 🟢        | 📋 Planned           |
+| M15    | Sign PDF                 | MVP 0.2   | Phase 2B     | 15–20 jam           | M01                    | 🟡        | 📋 Planned           |
+| M16    | PDF-to-Word              | MVP 0.2   | Phase 2C     | 15–20 jam           | M01                    | 🟡        | 📋 Planned           |
+| M17    | OCR                      | MVP 0.2   | Phase 2C     | 20–30 jam           | M01                    | 🟡        | 📋 Planned           |
+| M18    | PDF-to-Excel             | MVP 0.2   | Phase 2C     | 15–20 jam           | M16, M17               | 🟡        | 📋 Planned           |
+| —      | Cross-cutting Quality    | MVP 0.2   | Phase 2D     | 20–30 jam           | M12–M18                | 🟢        | 📋 Planned           |
+| M19    | Authentication           | MVP 0.3   | —            | 15–20 jam           | MVP 0.2 complete       | 🟢        | 📋 Planned           |
+| M20    | User Dashboard           | MVP 0.3   | —            | 10–15 jam           | M19                    | 🟢        | 📋 Planned           |
+| M21    | Usage Tracking           | MVP 0.3   | —            | 10–15 jam           | M19, M20               | 🟢        | 📋 Planned           |
+| M22    | Payment Integration      | MVP 0.3   | —            | 15–20 jam           | M19, M20, M21          | 🟡        | 📋 Planned           |
+| M23    | API Key System           | MVP 0.3   | —            | 8–12 jam            | M22                    | 🟢        | 📋 Planned           |
+| M24    | AI Document Analysis     | Fase 2    | —            | 30–40 jam           | MVP 0.3 complete       | 🟣        | 🔮 Visi              |
+| M25    | Smart Compression        | Fase 2    | —            | 20–30 jam           | M24                    | 🟣        | 🔮 Visi              |
+| M26    | AI Content Extraction    | Fase 2    | —            | 30–40 jam           | M24                    | 🟡        | 🔮 Visi              |
+| M27    | e-Meterai Integration    | Fase 3    | —            | 40–60 jam           | Fase 2 complete        | 🔴        | 🔮 Visi              |
+| M28    | Gov Document Templates   | Fase 3    | —            | 20–30 jam           | M27                    | 🔴        | 🔮 Visi              |
+| M29    | Local Compliance         | Fase 3    | —            | 30–50 jam           | M27, M28               | ⚪        | 🔮 Visi              |
 ---
 
-## 4. Detail MVP 0.1 — Core Tools & Launch
+## 5. Detail MVP 0.1 — Core Tools & Launch (COMPLETED)
 
-### 4.1 Ringkasan
+### 5.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
 | **Versi Rilis**        | v1.0.0 (M01–M10) + v1.1.0 (M11)                             |
-| **Status**             | COMPLETED                                                     |
+| **Status**             | ✅ COMPLETED                                                  |
 | **Total Milestone**    | 11 milestone (M01–M11)                                       |
 | **Total Tasks**        | 89 tasks (PAPYR-001 — PAPYR-089)                             |
 | **Tools Delivered**    | 6 (Compress, Merge, Split, Image-to-PDF, PDF-to-Image, Rotate) |
 | **URL Produksi**       | [mypapyr.com](https://mypapyr.com)                           |
+| **Label**              | 🟢 Buildable (semua 11 milestone)                            |
 
-### 4.2 Breakdown per Milestone
+### 5.2 Breakdown per Milestone
 
 | **Milestone** | **Scope**                                                                 | **Tasks**            | **Deliverables**                                      |
 |---------------|---------------------------------------------------------------------------|----------------------|-------------------------------------------------------|
@@ -181,148 +308,616 @@ MVP 0.1          MVP 0.2           MVP 0.3          Fase 2          Fase 3
 | M10           | Full flow testing, edge cases, FAQ, OG image, deployment verification     | PAPYR-080 — 084      | Production-ready launch                               |
 | M11           | Client-side page rotation (per-page + global)                             | PAPYR-085 — 089      | /rotate page, rotation UI                             |
 
-### 4.3 Arsitektur yang Dibangun
+### 5.3 Arsitektur yang Dibangun
 
-- **Frontend:** Next.js 16 + TypeScript + Tailwind v4 (Vercel)
-- **Backend:** FastAPI + Python 3.11 + PyMuPDF + Ghostscript (Railway)
-- **Storage:** Cloudflare R2 dengan signed URLs dan auto-delete 60 menit (cron) + 24 jam (R2 lifecycle safety net)
-- **Processing:** Hybrid — client-side (pdf-lib) untuk operasi ringan, server-side untuk operasi berat
-- **Biaya Operasional:** $0–5/bulan (Vercel Free + Railway Free + R2 Free Tier)
+| **Layer**          | **Teknologi**                                    | **Keterangan**                                                    |
+|--------------------|--------------------------------------------------|-------------------------------------------------------------------|
+| **Frontend**       | Next.js 16 + TypeScript + Tailwind v4            | Deployed di Vercel (Edge/Global CDN)                              |
+| **Backend**        | FastAPI + Python 3.11 + PyMuPDF + Ghostscript    | Deployed di Railway (us-west2 container)                          |
+| **Storage**        | Cloudflare R2                                    | Signed URLs, auto-delete 60 menit (cron) + 24 jam (R2 lifecycle safety net) |
+| **Processing**     | Hybrid client/server                             | Client (pdf-lib) untuk Merge/Split/Rotate, Server untuk Compress/PDF-to-Image/Image-to-PDF |
+| **Analytics**      | Vercel Analytics + Speed Insights                | Custom events: task_started, task_completed, task_failed + device_category |
+| **Domain**         | mypapyr.com (Hostinger DNS)                      | SSL via Vercel                                                    |
+| **Biaya**          | $0–5/bulan                                       | Vercel Free + Railway Free + R2 Free Tier                         |
+
+### 5.4 Konfigurasi Produksi
+
+| **Parameter**          | **Nilai**                  | **Keterangan**                                    |
+|------------------------|----------------------------|---------------------------------------------------|
+| Max upload size        | 20 MB                      | Dikonfigurasi di backend config.py                |
+| File retention         | 60 menit (cron cleanup)    | + 24 jam R2 lifecycle sebagai safety net           |
+| Rate limit             | 10 request/menit per IP    | Dikonfigurasi di FastAPI middleware                |
+| Supported formats      | PDF, JPG, PNG              | Input formats untuk semua tools                   |
+| Client processing      | pdf-lib                    | Merge, Split, Rotate — zero upload                |
+| Server processing      | Ghostscript + PyMuPDF      | Compress, PDF-to-Image, Image-to-PDF              |
 
 ---
 
-## 5. Detail MVP 0.2 — Tool Expansion
+## 6. UI Safety Rules — Aturan Sebelum Membangun Fitur Baru
 
-### 5.1 Ringkasan
+Sebelum membangun fitur apapun di MVP 0.2, aturan berikut **WAJIB** dipatuhi untuk memastikan fitur baru tidak merusak pengalaman pengguna yang sudah ada.
+
+| **#**  | **Rule**                                    | **Detail**                                                                                                                                                |
+|--------|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **R1** | Navbar tetap sama                           | Tidak ada nav item baru. Semua tool baru masuk ke grid di landing page dan halaman masing-masing. Navbar hanya berisi: Logo, "Alat PDF" (link ke grid), dan hamburger menu di mobile. |
+| **R2** | Setiap tool baru ikuti template yang ada    | Setiap halaman tool baru HARUS menggunakan pattern yang sama: PDFUploader component → processing → download. Tidak ada UI pattern baru tanpa persetujuan Product Owner. |
+| **R3** | Mobile-first dipertahankan                  | Primary breakpoint tetap 375px. Setiap tool baru HARUS ditest di viewport 375px sebelum merge. Desktop adalah bonus, bukan prioritas.                    |
+| **R4** | Performance budget                          | Tidak ada halaman tool baru yang boleh > 50KB JS gzipped. Gunakan `dynamic()` import untuk komponen berat (canvas, signature pad). Lazy load semua yang bisa di-lazy load. |
+| **R5** | 6 tool existing TIDAK BOLEH berubah         | Compress, Merge, Split, Rotate, Image-to-PDF, PDF-to-Image — behavior, UI, dan output HARUS identik sebelum dan sesudah penambahan tool baru. Zero regression. |
+| **R6** | Design language yang sama                   | Tailwind v4 tokens, DM Sans font, existing color palette (primary blue, neutral grays). Tidak ada warna baru, font baru, atau spacing system baru tanpa persetujuan. |
+| **R7** | Landing page grid auto-expand               | Grid tool di landing page harus otomatis menyesuaikan jumlah tool baru. Tidak ada hardcoded grid count. Urutan: existing 6 tools dulu, lalu tool baru sesuai urutan rilis. |
+| **R8** | Privacy notice di setiap halaman tool       | Setiap halaman tool (termasuk yang baru) HARUS menampilkan privacy notice: "File Anda otomatis dihapus dalam 60 menit" atau "Diproses di browser Anda — file tidak diunggah". |
+| **R9** | Error states ikuti pattern yang ada         | Auto-retry 1x untuk network errors. Pesan error dalam Bahasa Indonesia. Format: "Gagal memproses file. Silakan coba lagi." Tidak ada error dalam bahasa Inggris. |
+| **R10**| Regression testing — CI harus pass          | Setiap PR yang menambah tool baru HARUS pass CI checks. Jika ada E2E tests (Phase 2D), semua test untuk 6 tool existing harus pass sebelum merge.        |
+
+> **Prinsip Utama:** Fitur baru adalah *additive* — menambah tanpa mengubah. Jika ragu, jangan ubah yang sudah ada.
+---
+
+## 7. Detail MVP 0.2 — Tool Expansion
+
+### 7.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
-| **Status**             | NEXT — Selanjutnya dikerjakan                                |
-| **Timeline**           | Fleksibel, tanpa hard deadline                               |
-| **Total Milestone**    | 7 milestone (M12–M18)                                        |
-| **Estimasi Total**     | 91–129 jam                                                   |
-| **Pendekatan**         | Sequential per milestone, rilis incremental                  |
+| **Status**             | 🔄 NEXT — Selanjutnya dikerjakan                             |
+| **Gate Condition**     | MVP 0.1 live & stabil ✅ TERPENUHI                           |
+| **Total Milestone**    | 7 tool milestones (M12–M18) + 1 cross-cutting phase (2D)    |
+| **Estimasi Total**     | 111–159 jam (tools) + 20–30 jam (cross-cutting) = 131–189 jam |
+| **Pendekatan**         | Sub-phase sequential, rilis incremental per sub-phase         |
+| **Hasil Akhir**        | 13 tools total (6 existing + 7 baru)                         |
 
-### 5.2 M12 — Protect PDF (Password Protect)
+### 7.2 Struktur Sub-fase
 
-| **Atribut**        | **Detail**                                                            |
-|--------------------|-----------------------------------------------------------------------|
-| **Deskripsi**      | Menambahkan password protection ke file PDF                           |
-| **Scope**          | UI input password, enkripsi PDF, download file terproteksi            |
-| **Processing**     | Client-side (pdf-lib encryption) atau Server-side (PyMuPDF)           |
-| **Dependensi**     | M01 (infrastruktur dasar)                                            |
-| **Estimasi**       | 8–12 jam                                                             |
-| **Deliverables**   | /protect page, password input UI, encrypted PDF output                |
-| **Acceptance**     | User dapat set password, PDF terkunci, bisa dibuka dengan password    |
-
-### 5.3 M13 — Unlock PDF (Remove Password)
-
-| **Atribut**        | **Detail**                                                            |
-|--------------------|-----------------------------------------------------------------------|
-| **Deskripsi**      | Menghapus password dari PDF yang terproteksi (dengan password valid)   |
-| **Scope**          | UI input password existing, dekripsi PDF, download file tanpa password |
-| **Processing**     | Server-side (PyMuPDF/pikepdf)                                        |
-| **Dependensi**     | M12 (Protect PDF — shared encryption logic)                          |
-| **Estimasi**       | 8–12 jam                                                             |
-| **Deliverables**   | /unlock page, password verification, decrypted PDF output             |
-| **Acceptance**     | User input password benar → PDF unlocked; password salah → error jelas |
-
-### 5.4 M14 — Watermark PDF
-
-| **Atribut**        | **Detail**                                                            |
-|--------------------|-----------------------------------------------------------------------|
-| **Deskripsi**      | Menambahkan watermark teks atau gambar ke halaman PDF                  |
-| **Scope**          | UI konfigurasi watermark (teks/gambar, posisi, opacity, rotasi)       |
-| **Processing**     | Client-side (pdf-lib) untuk teks, Server-side untuk gambar kompleks   |
-| **Dependensi**     | M01 (infrastruktur dasar)                                            |
-| **Estimasi**       | 10–15 jam                                                            |
-| **Deliverables**   | /watermark page, watermark configurator, preview, output PDF          |
-| **Acceptance**     | Watermark terlihat di semua halaman, posisi & opacity sesuai setting  |
-
-### 5.5 M15 — Sign PDF (Digital Signature)
-
-| **Atribut**        | **Detail**                                                            |
-|--------------------|-----------------------------------------------------------------------|
-| **Deskripsi**      | Menambahkan tanda tangan digital (draw/upload) ke PDF                 |
-| **Scope**          | Canvas signature pad, upload gambar tanda tangan, placement di PDF    |
-| **Processing**     | Client-side (pdf-lib + canvas)                                       |
-| **Dependensi**     | M01 (infrastruktur dasar)                                            |
-| **Estimasi**       | 15–20 jam                                                            |
-| **Deliverables**   | /sign page, signature pad, image upload, drag-to-place, signed PDF    |
-| **Acceptance**     | Tanda tangan muncul di posisi yang dipilih, kualitas baik di print    |
-
-### 5.6 M16 — PDF-to-Word
-
-| **Atribut**        | **Detail**                                                            |
-|--------------------|-----------------------------------------------------------------------|
-| **Deskripsi**      | Konversi PDF ke format Microsoft Word (.docx)                         |
-| **Scope**          | Upload PDF, ekstraksi konten, generate DOCX, download                 |
-| **Processing**     | Server-side (pdf2docx / PyMuPDF + python-docx)                       |
-| **Dependensi**     | M01 (infrastruktur dasar)                                            |
-| **Estimasi**       | 15–20 jam                                                            |
-| **Deliverables**   | /pdf-to-word page, conversion engine, DOCX output                     |
-| **Acceptance**     | Layout terjaga, teks dapat diedit di Word, tabel terkonversi          |
-
-### 5.7 M17 — OCR (Optical Character Recognition)
-
-| **Atribut**        | **Detail**                                                            |
-|--------------------|-----------------------------------------------------------------------|
-| **Deskripsi**      | Ekstraksi teks dari PDF berbasis gambar (scanned documents)           |
-| **Scope**          | Upload scanned PDF, OCR processing, output searchable PDF/teks        |
-| **Processing**     | Server-side (Tesseract OCR / EasyOCR)                                |
-| **Dependensi**     | M01 (infrastruktur dasar)                                            |
-| **Estimasi**       | 20–30 jam                                                            |
-| **Deliverables**   | /ocr page, OCR engine, searchable PDF output, text extraction         |
-| **Acceptance**     | Akurasi ≥ 90% untuk dokumen cetak Bahasa Indonesia, output searchable |
-
-### 5.8 M18 — PDF-to-Excel
-
-| **Atribut**        | **Detail**                                                            |
-|--------------------|-----------------------------------------------------------------------|
-| **Deskripsi**      | Konversi tabel dalam PDF ke format Microsoft Excel (.xlsx)            |
-| **Scope**          | Upload PDF, deteksi tabel, ekstraksi data, generate XLSX              |
-| **Processing**     | Server-side (camelot / tabula-py + openpyxl)                         |
-| **Dependensi**     | M16 (shared PDF parsing logic), M17 (OCR untuk scanned tables)       |
-| **Estimasi**       | 15–20 jam                                                            |
-| **Deliverables**   | /pdf-to-excel page, table detection, XLSX output                      |
-| **Acceptance**     | Tabel terdeteksi otomatis, data akurat, format kolom terjaga          |
-
-### 5.9 Urutan Pengerjaan yang Direkomendasikan
+MVP 0.2 dibagi menjadi 4 sub-fase yang dieksekusi secara sequential:
 
 ```
-M12 (Protect) → M13 (Unlock) → M14 (Watermark) → M15 (Sign) → M16 (PDF-to-Word) → M17 (OCR) → M18 (PDF-to-Excel)
-     │                │                                                    │              │            │
-     └── Shared ──────┘                                                    └── Shared ────┴────────────┘
-      encryption logic                                                      PDF parsing + extraction
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        MVP 0.2 — SUB-PHASE STRUCTURE                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  Phase 2A — Security Tools 🟢                                               │
+│  ┌──────────┐    ┌──────────┐                                               │
+│  │M12 Protect│──►│M13 Unlock│    Estimasi: 16–24 jam                        │
+│  └──────────┘    └──────────┘    Shared: PyMuPDF encryption/decryption      │
+│       │                                                                     │
+│       ▼                                                                     │
+│  Phase 2B — Document Enhancement 🟢/🟡                                      │
+│  ┌──────────┐    ┌──────────┐                                               │
+│  │M14 W.mark│    │M15 Sign  │    Estimasi: 25–35 jam                        │
+│  └──────────┘    └──────────┘    Independent — bisa parallel                │
+│       │                                                                     │
+│       ▼                                                                     │
+│  Phase 2C — Document Conversion 🟡                                          │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐                               │
+│  │M16 Word  │──►│M17 OCR   │──►│M18 Excel │    Estimasi: 50–70 jam         │
+│  └──────────┘    └──────────┘    └──────────┘    Progressive complexity     │
+│       │                                                                     │
+│       ▼                                                                     │
+│  Phase 2D — Cross-cutting Quality 🟢                                        │
+│  ┌──────────────────────────────────────────┐                               │
+│  │ E2E Testing · Prettier+Ruff · Perf ·     │    Estimasi: 20–30 jam        │
+│  │ Monitoring · SEO Update · Analytics      │                               │
+│  └──────────────────────────────────────────┘                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 7.3 Phase 2A — Security Tools 🟢 Buildable
+
+Phase 2A fokus pada fitur keamanan PDF — protect dan unlock. Kedua fitur ini membentuk natural pair dengan shared encryption/decryption logic.
+
+---
+
+#### 7.3.1 M12 — Protect PDF (Password Protection)
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Menambahkan password protection (enkripsi) ke file PDF sehingga hanya bisa dibuka dengan password yang benar   |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Processing Strategy**| **Server-side (PyMuPDF encryption)**                                                                          |
+| **Library**            | PyMuPDF (`fitz`) — `doc.save(encryption=fitz.PDF_ENCRYPT_AES_256)`                                           |
+| **Alasan Server-side** | PyMuPDF menyediakan AES-256 encryption yang kuat dan reliable. pdf-lib encryption support terbatas dan kurang mature. |
+
+**UI Placement:**
+
+- Route: `/protect`
+- Landing page grid: posisi ke-7 (setelah 6 tool existing)
+- Icon: 🔒 (lock icon, konsisten dengan konvensi industri)
+- Flow: Upload PDF → Input password (2x untuk konfirmasi) → Pilih level proteksi → Proses → Download
+
+**Acceptance Criteria:**
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | User dapat upload PDF dan set password (min 4 karakter)                                               | Functional   |
+| AC2   | Password harus diinput 2x (konfirmasi) — mismatch menampilkan error Bahasa Indonesia                 | Functional   |
+| AC3   | PDF output terenkripsi AES-256 — tidak bisa dibuka tanpa password                                     | Functional   |
+| AC4   | PDF yang sudah terproteksi ditolak dengan pesan jelas: "File ini sudah dilindungi password"           | Edge case    |
+| AC5   | File auto-delete 60 menit setelah processing                                                          | Privacy      |
+| AC6   | Halaman /protect mengikuti template PDFUploader pattern (R2)                                          | UI Safety    |
+| AC7   | Privacy notice ditampilkan: "File diunggah ke server untuk diproses dan otomatis dihapus dalam 60 menit" | UI Safety |
+| AC8   | Mobile-first layout berfungsi di 375px viewport (R3)                                                  | UI Safety    |
+| AC9   | Page JS gzipped < 50KB (R4)                                                                           | Performance  |
+
+**Dependencies:**
+
+- M01 (infrastruktur dasar — backend API, R2 storage, deployment pipeline)
+- PyMuPDF sudah terinstall di backend (digunakan oleh PDF-to-Image)
+
+**Estimasi Effort:** 8–12 jam
+
+**Risiko:** Rendah — PyMuPDF encryption API well-documented dan sudah digunakan di production.
+
+---
+
+#### 7.3.2 M13 — Unlock PDF (Remove Password)
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Menghapus password dari PDF yang terproteksi — user harus mengetahui password yang benar                       |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Processing Strategy**| **Server-side (PyMuPDF decryption)**                                                                          |
+| **Library**            | PyMuPDF (`fitz`) — `doc.authenticate(password)` lalu `doc.save()` tanpa encryption                           |
+| **Alasan Server-side** | Dekripsi membutuhkan library yang sama dengan enkripsi. Shared logic dengan M12.                              |
+
+**UI Placement:**
+
+- Route: `/unlock`
+- Landing page grid: posisi ke-8 (setelah Protect)
+- Icon: 🔓 (unlock icon)
+- Flow: Upload protected PDF → Input password → Verifikasi → Proses → Download PDF tanpa password
+
+**Acceptance Criteria:**
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | User dapat upload PDF terproteksi dan input password                                                  | Functional   |
+| AC2   | Password benar → PDF di-decrypt dan bisa didownload tanpa password                                    | Functional   |
+| AC3   | Password salah → error jelas dalam Bahasa Indonesia: "Password salah. Silakan coba lagi."            | Functional   |
+| AC4   | PDF yang tidak terproteksi ditolak: "File ini tidak dilindungi password"                              | Edge case    |
+| AC5   | Owner password vs user password handled correctly (PyMuPDF handles both)                              | Edge case    |
+| AC6   | File auto-delete 60 menit setelah processing                                                          | Privacy      |
+| AC7   | Halaman /unlock mengikuti template PDFUploader pattern (R2)                                           | UI Safety    |
+| AC8   | Privacy notice ditampilkan (R8)                                                                       | UI Safety    |
+| AC9   | Mobile-first layout berfungsi di 375px viewport (R3)                                                  | UI Safety    |
+
+**Dependencies:**
+
+- M12 (Protect PDF — shared encryption/decryption logic, shared API endpoint structure)
+- PyMuPDF sudah terinstall di backend
+
+**Estimasi Effort:** 8–12 jam
+
+**Risiko:** Rendah — dekripsi adalah inverse dari enkripsi, shared codebase dengan M12.
+
+---
+
+### 7.4 Phase 2B — Document Enhancement 🟢/🟡
+
+Phase 2B fokus pada fitur enhancement dokumen — watermark dan tanda tangan. Kedua fitur ini independent dan secara teori bisa dikerjakan parallel, tapi direkomendasikan sequential untuk quality control.
+
+---
+
+#### 7.4.1 M14 — Watermark PDF
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Menambahkan watermark (teks atau gambar) ke semua halaman PDF dengan konfigurasi posisi, opacity, dan rotasi   |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Processing Strategy**| **Hybrid** — Client-side (pdf-lib) untuk text watermark, Server-side (PyMuPDF) untuk image watermark          |
+| **Library Client**     | pdf-lib — `page.drawText()` dengan opacity dan rotation                                                       |
+| **Library Server**     | PyMuPDF — `page.insert_image()` untuk image watermark overlay                                                 |
+| **Alasan Hybrid**      | Text watermark ringan dan bisa dilakukan di browser (zero upload). Image watermark membutuhkan rendering yang lebih kompleks. |
+
+**UI Placement:**
+
+- Route: `/watermark`
+- Landing page grid: posisi ke-9
+- Icon: 💧 (water drop / watermark icon)
+- Flow: Upload PDF → Pilih tipe (teks/gambar) → Konfigurasi (posisi, opacity 10-100%, rotasi, ukuran font) → Preview → Proses → Download
+
+**Acceptance Criteria:**
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | User dapat menambahkan text watermark dengan konfigurasi: teks, font size, opacity, rotasi, posisi    | Functional   |
+| AC2   | User dapat menambahkan image watermark (upload PNG/JPG) dengan konfigurasi: opacity, posisi, ukuran   | Functional   |
+| AC3   | Watermark diterapkan ke SEMUA halaman PDF                                                             | Functional   |
+| AC4   | Text watermark diproses client-side (zero upload) — privacy notice: "Diproses di browser Anda"       | Privacy      |
+| AC5   | Image watermark diproses server-side — privacy notice: "File diunggah untuk diproses"                | Privacy      |
+| AC6   | Preview watermark sebelum apply (minimal 1 halaman preview)                                           | UX           |
+| AC7   | Posisi watermark: center, top-left, top-right, bottom-left, bottom-right, diagonal                   | Functional   |
+| AC8   | Opacity range: 10% (sangat transparan) hingga 100% (solid)                                           | Functional   |
+| AC9   | Halaman /watermark mengikuti template PDFUploader pattern (R2)                                        | UI Safety    |
+| AC10  | Mobile-first layout berfungsi di 375px viewport (R3)                                                  | UI Safety    |
+
+**Dependencies:**
+
+- M01 (infrastruktur dasar)
+- pdf-lib sudah digunakan di frontend (Merge, Split, Rotate)
+- PyMuPDF sudah terinstall di backend
+
+**Estimasi Effort:** 10–15 jam
+
+**Risiko:** Medium — konfigurasi watermark yang fleksibel membutuhkan UI yang cukup kompleks (posisi, opacity, rotasi). Preview real-time bisa menambah kompleksitas.
+
+---
+
+#### 7.4.2 M15 — Sign PDF (Digital Signature)
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Menambahkan tanda tangan visual (draw atau upload gambar) ke posisi tertentu di halaman PDF                    |
+| **Label**              | 🟡 Hard                                                                                                      |
+| **Processing Strategy**| **Client-side (canvas + pdf-lib)**                                                                            |
+| **Library**            | HTML5 Canvas API untuk signature pad + pdf-lib `page.drawImage()` untuk embed ke PDF                         |
+| **Alasan Client-side** | Tanda tangan adalah data sensitif — HARUS diproses di browser tanpa upload ke server. Privacy-first.          |
+
+**UI Placement:**
+
+- Route: `/sign`
+- Landing page grid: posisi ke-10
+- Icon: ✍️ (signature / pen icon)
+- Flow: Upload PDF → Pilih halaman → Draw signature (canvas) ATAU upload gambar tanda tangan → Drag-to-place di halaman → Resize → Apply → Download
+
+**Acceptance Criteria:**
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | User dapat menggambar tanda tangan menggunakan canvas (mouse + touch support)                         | Functional   |
+| AC2   | User dapat upload gambar tanda tangan (PNG/JPG, background transparan preferred)                      | Functional   |
+| AC3   | Tanda tangan dapat di-drag ke posisi manapun di halaman PDF                                           | Functional   |
+| AC4   | Tanda tangan dapat di-resize (maintain aspect ratio)                                                  | Functional   |
+| AC5   | User dapat memilih halaman mana yang akan ditandatangani                                              | Functional   |
+| AC6   | Canvas signature pad mendukung: draw, clear, undo                                                     | UX           |
+| AC7   | Seluruh proses client-side — privacy notice: "Diproses di browser Anda — file tidak diunggah"        | Privacy      |
+| AC8   | Tanda tangan berkualitas baik saat di-print (min 150 DPI equivalent)                                  | Quality      |
+| AC9   | Halaman /sign mengikuti template PDFUploader pattern (R2)                                             | UI Safety    |
+| AC10  | Canvas dan drag-to-place berfungsi di mobile touch (R3)                                               | UI Safety    |
+| AC11  | Canvas component di-lazy load via `dynamic()` — page JS < 50KB gzipped (R4)                          | Performance  |
+
+**Dependencies:**
+
+- M01 (infrastruktur dasar)
+- pdf-lib sudah digunakan di frontend
+
+**Estimasi Effort:** 15–20 jam
+
+**Risiko:** Medium-High — Canvas signature pad + drag-to-place + resize di mobile adalah UX challenge yang signifikan. Touch events di berbagai device bisa bermasalah. Perlu dynamic import untuk canvas library agar tidak membengkakkan bundle.
+
+**Catatan Penting:** Ini adalah *visual signature* (gambar tanda tangan di-embed ke PDF), BUKAN *cryptographic digital signature* (PKI-based). Cryptographic signature membutuhkan sertifikat digital dan berada di luar scope MVP 0.2.
+
+---
+
+### 7.5 Phase 2C — Document Conversion 🟡 Hard
+
+Phase 2C adalah sub-fase paling kompleks di MVP 0.2. Ketiga fitur ini membutuhkan server-side processing yang berat dan library tambahan yang belum ada di stack saat ini.
+
+> **⚠️ Catatan Penting tentang VPS:** Phase 2C features (terutama M16 PDF-to-Word dan M17 OCR) membutuhkan resource server yang lebih besar dari Railway free tier. Jika Railway free tier tidak cukup, migrasi ke VPS (HostData.id) akan menjadi inisiatif terpisah. VPS migration adalah OUT OF SCOPE untuk dokumen roadmap ini.
+
+---
+
+#### 7.5.1 M16 — PDF-to-Word
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Konversi file PDF ke format Microsoft Word (.docx) dengan layout dan formatting yang terjaga                   |
+| **Label**              | 🟡 Hard                                                                                                      |
+| **Processing Strategy**| **Server-side (LibreOffice headless)**                                                                        |
+| **Library**            | LibreOffice headless mode (`libreoffice --headless --convert-to docx`)                                        |
+| **Alasan LibreOffice** | LibreOffice headless memberikan konversi PDF-to-DOCX terbaik dibanding alternatif Python (pdf2docx, PyMuPDF+python-docx). Layout preservation jauh lebih baik. |
+
+**UI Placement:**
+
+- Route: `/pdf-to-word`
+- Landing page grid: posisi ke-11
+- Icon: 📝 (document / Word icon)
+- Flow: Upload PDF → Proses (server) → Progress indicator → Download DOCX
+
+**Acceptance Criteria:**
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | User dapat upload PDF dan mendapatkan file .docx yang bisa dibuka di Microsoft Word / Google Docs     | Functional   |
+| AC2   | Layout terjaga — paragraf, heading, list terkonversi dengan benar                                     | Quality      |
+| AC3   | Tabel dalam PDF terkonversi menjadi tabel Word (bukan gambar)                                         | Quality      |
+| AC4   | Gambar dalam PDF ter-embed di DOCX                                                                    | Quality      |
+| AC5   | Font fallback — jika font tidak tersedia, gunakan font default yang mirip                             | Quality      |
+| AC6   | Processing time < 30 detik untuk PDF ≤ 20 halaman                                                    | Performance  |
+| AC7   | Progress indicator ditampilkan selama processing (bukan blank screen)                                 | UX           |
+| AC8   | Error handling: PDF scanned (image-only) → suggest OCR terlebih dahulu                                | Edge case    |
+| AC9   | File auto-delete 60 menit setelah processing                                                          | Privacy      |
+| AC10  | Halaman /pdf-to-word mengikuti template PDFUploader pattern (R2)                                      | UI Safety    |
+
+**Dependencies:**
+
+- M01 (infrastruktur dasar)
+- LibreOffice headless harus diinstall di Docker container backend (Dockerfile update)
+- Mungkin membutuhkan VPS jika Railway resource tidak cukup (out of scope — inisiatif terpisah)
+
+**Estimasi Effort:** 15–20 jam
+
+**Risiko:** High — LibreOffice headless membutuhkan ~500MB+ disk space di container. Railway free tier mungkin tidak cukup. Konversi quality bervariasi tergantung kompleksitas PDF.
+
+**Catatan Teknis:**
+- LibreOffice headless dipilih karena kualitas konversi terbaik
+- BUKAN pdf2docx (kualitas rendah untuk layout kompleks)
+- BUKAN PyMuPDF + python-docx (hanya bisa extract text, kehilangan layout)
+- Dockerfile perlu update: `apt-get install -y libreoffice-writer`
+
+---
+
+#### 7.5.2 M17 — OCR (Optical Character Recognition)
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Ekstraksi teks dari PDF berbasis gambar (scanned documents) dan menghasilkan searchable PDF                    |
+| **Label**              | 🟡 Hard                                                                                                      |
+| **Processing Strategy**| **Server-side (ocrmypdf + Tesseract)**                                                                        |
+| **Library**            | ocrmypdf (wrapper) + Tesseract OCR engine + bahasa Indonesia language pack (`tesseract-ocr-ind`)              |
+| **Alasan ocrmypdf**    | ocrmypdf adalah gold standard untuk PDF OCR — menghasilkan searchable PDF langsung, bukan hanya text extraction. Tesseract sebagai engine karena open-source, mature, dan mendukung Bahasa Indonesia. |
+
+**UI Placement:**
+
+- Route: `/ocr`
+- Landing page grid: posisi ke-12
+- Icon: 🔍 (search / scan icon)
+- Flow: Upload scanned PDF → Pilih bahasa (Indonesia/English) → Proses (server) → Progress indicator → Download searchable PDF + optional text extraction
+
+**Acceptance Criteria:**
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | User dapat upload scanned PDF dan mendapatkan searchable PDF (teks bisa di-select dan di-search)      | Functional   |
+| AC2   | Akurasi ≥ 90% untuk dokumen cetak Bahasa Indonesia (font standar, kualitas scan baik)                 | Quality      |
+| AC3   | Akurasi ≥ 85% untuk dokumen cetak Bahasa Inggris                                                     | Quality      |
+| AC4   | User dapat memilih bahasa OCR: Indonesia, English, atau Auto-detect                                   | Functional   |
+| AC5   | Optional: text extraction output (copy-paste teks hasil OCR)                                          | Functional   |
+| AC6   | Processing time < 60 detik untuk PDF ≤ 10 halaman                                                    | Performance  |
+| AC7   | Progress indicator dengan estimasi waktu ditampilkan                                                  | UX           |
+| AC8   | PDF yang sudah searchable (bukan scanned) → pesan: "File ini sudah memiliki teks yang bisa dicari"   | Edge case    |
+| AC9   | File auto-delete 60 menit setelah processing                                                          | Privacy      |
+| AC10  | Halaman /ocr mengikuti template PDFUploader pattern (R2)                                              | UI Safety    |
+
+**Dependencies:**
+
+- M01 (infrastruktur dasar)
+- Tesseract OCR + language packs harus diinstall di Docker container
+- ocrmypdf Python package
+- Mungkin membutuhkan VPS jika Railway resource tidak cukup (out of scope — inisiatif terpisah)
+
+**Estimasi Effort:** 20–30 jam
+
+**Risiko:** High — Tesseract + language packs membutuhkan ~200MB+ disk space. OCR processing CPU-intensive dan bisa timeout di Railway free tier. Akurasi untuk handwritten text sangat rendah (out of scope).
+
+**Catatan Teknis:**
+- ocrmypdf + Tesseract dipilih karena menghasilkan searchable PDF langsung
+- BUKAN EasyOCR (lebih berat, GPU-preferred, overkill untuk use case ini)
+- BUKAN PaddleOCR (kompleks setup, lebih cocok untuk Chinese/Asian text)
+- Dockerfile perlu update: `apt-get install -y tesseract-ocr tesseract-ocr-ind tesseract-ocr-eng`
+- pip install: `ocrmypdf`
+
+---
+
+#### 7.5.3 M18 — PDF-to-Excel
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Ekstraksi tabel dari PDF dan konversi ke format Microsoft Excel (.xlsx)                                        |
+| **Label**              | 🟡 Hard                                                                                                      |
+| **Processing Strategy**| **Server-side (camelot/tabula-py + openpyxl)**                                                                |
+| **Library**            | camelot-py (primary, lattice+stream) atau tabula-py (fallback) untuk table detection + openpyxl untuk XLSX generation |
+| **Alasan camelot**     | camelot memberikan table detection terbaik untuk PDF dengan garis tabel (lattice mode) dan tanpa garis (stream mode). openpyxl untuk generate XLSX yang clean. |
+
+**UI Placement:**
+
+- Route: `/pdf-to-excel`
+- Landing page grid: posisi ke-13
+- Icon: 📊 (chart / Excel icon)
+- Flow: Upload PDF → Auto-detect tabel → Preview tabel yang terdeteksi → Pilih tabel → Proses → Download XLSX
+
+**Acceptance Criteria:**
+
+| **#** | **Kriteria**                                                                                          | **Tipe**     |
+|-------|-------------------------------------------------------------------------------------------------------|--------------|
+| AC1   | User dapat upload PDF dan mendapatkan file .xlsx yang bisa dibuka di Microsoft Excel / Google Sheets   | Functional   |
+| AC2   | Tabel dengan garis (bordered) terdeteksi otomatis dengan akurasi ≥ 90%                                | Quality      |
+| AC3   | Tabel tanpa garis (borderless) terdeteksi dengan akurasi ≥ 70%                                        | Quality      |
+| AC4   | Data dalam sel tabel akurat — angka tetap angka, teks tetap teks                                      | Quality      |
+| AC5   | Multi-table PDF → setiap tabel menjadi sheet terpisah di XLSX                                         | Functional   |
+| AC6   | Preview tabel yang terdeteksi sebelum konversi (user bisa pilih tabel mana)                           | UX           |
+| AC7   | Processing time < 30 detik untuk PDF ≤ 20 halaman                                                    | Performance  |
+| AC8   | PDF tanpa tabel → pesan: "Tidak ditemukan tabel dalam file ini"                                      | Edge case    |
+| AC9   | Scanned PDF → suggest OCR terlebih dahulu                                                             | Edge case    |
+| AC10  | File auto-delete 60 menit setelah processing                                                          | Privacy      |
+| AC11  | Halaman /pdf-to-excel mengikuti template PDFUploader pattern (R2)                                     | UI Safety    |
+
+**Dependencies:**
+
+- M01 (infrastruktur dasar)
+- M16 (shared PDF parsing knowledge — bukan hard dependency, tapi sequential learning)
+- M17 (OCR — untuk scanned table fallback, soft dependency)
+- camelot-py atau tabula-py + openpyxl harus diinstall
+- camelot membutuhkan ghostscript (sudah ada) dan opencv (perlu install)
+
+**Estimasi Effort:** 15–20 jam
+
+**Risiko:** Medium-High — Table detection accuracy sangat bergantung pada kualitas PDF. Borderless tables adalah challenge utama. camelot membutuhkan opencv yang menambah container size.
+
+**Catatan Teknis:**
+- camelot-py (primary) — lattice mode untuk bordered tables, stream mode untuk borderless
+- tabula-py (fallback) — jika camelot gagal detect
+- openpyxl untuk XLSX generation
+- Dockerfile perlu update: `apt-get install -y python3-opencv` + `pip install camelot-py[cv] openpyxl`
+---
+
+### 7.6 Phase 2D — Cross-cutting Quality 🟢 Buildable
+
+Phase 2D bukan fitur user-facing, melainkan quality improvements yang memastikan MVP 0.2 production-ready dan maintainable. Dikerjakan SETELAH semua tool milestones (M12–M18) selesai.
+
+---
+
+#### 7.6.1 E2E Testing (Playwright)
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | End-to-end testing untuk semua 13 tools menggunakan Playwright                                                |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Scope**              | Install Playwright, tulis E2E test untuk setiap tool (upload → process → download), CI integration            |
+| **Target**             | Minimal 1 happy path test + 1 error case test per tool = 26 tests minimum                                    |
+| **Estimasi**           | 8–12 jam                                                                                                     |
+
+**Acceptance Criteria:**
+- Playwright terinstall dan terkonfigurasi di project
+- Setiap tool memiliki minimal 2 E2E tests (happy path + error case)
+- Tests berjalan di CI (GitHub Actions) pada setiap PR
+- Test report tersedia dan readable
+- Tests berjalan < 5 menit total
+
+---
+
+#### 7.6.2 Code Formatting (Prettier + Ruff)
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Setup code formatting otomatis — Prettier untuk frontend (TypeScript/CSS), Ruff untuk backend (Python)        |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Scope**              | Install & configure Prettier + Ruff, format seluruh codebase, add pre-commit hooks, CI check                 |
+| **Estimasi**           | 3–5 jam                                                                                                      |
+
+**Acceptance Criteria:**
+- Prettier terkonfigurasi untuk frontend (`.prettierrc`)
+- Ruff terkonfigurasi untuk backend (`ruff.toml` atau `pyproject.toml`)
+- Seluruh codebase sudah di-format
+- Pre-commit hook mencegah unformatted code
+- CI check gagal jika ada formatting violation
+
+---
+
+#### 7.6.3 Performance Optimization
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Optimasi performa frontend — Lighthouse score, bundle size, lazy loading                                      |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Scope**              | Lighthouse audit semua halaman, bundle analysis, implement lazy loading untuk komponen berat, image optimization |
+| **Target**             | Lighthouse Performance ≥ 90 untuk semua halaman tool                                                         |
+| **Estimasi**           | 3–5 jam                                                                                                      |
+
+**Acceptance Criteria:**
+- Lighthouse Performance score ≥ 90 untuk semua 13 halaman tool
+- Lighthouse Accessibility score ≥ 90
+- Bundle size per halaman tool < 50KB JS gzipped
+- Semua komponen berat (canvas, signature pad) menggunakan `dynamic()` import
+- No layout shift (CLS < 0.1)
+
+---
+
+#### 7.6.4 Monitoring & Alerting
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Setup uptime monitoring dan alerting untuk frontend dan backend                                               |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Scope**              | Setup BetterStack atau UptimeRobot untuk monitoring, Telegram bot untuk alerting                              |
+| **Estimasi**           | 2–3 jam                                                                                                      |
+
+**Acceptance Criteria:**
+- Uptime monitoring aktif untuk mypapyr.com (frontend)
+- Uptime monitoring aktif untuk backend health endpoint
+- Alert via Telegram dalam < 5 menit saat downtime
+- Monthly uptime report tersedia
+- Target uptime: ≥ 99.5%
+
+---
+
+#### 7.6.5 SEO Update
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Update SEO untuk 7 tool baru — meta tags, sitemap, OG images, structured data                                |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Scope**              | layout.tsx metadata untuk setiap tool baru, sitemap.ts update (13 URLs), OG image per tool, JSON-LD          |
+| **Estimasi**           | 3–5 jam                                                                                                      |
+
+**Acceptance Criteria:**
+- Setiap halaman tool baru memiliki unique title, description, dan keywords dalam Bahasa Indonesia
+- sitemap.ts menghasilkan 13+ URLs (6 existing + 7 baru + landing + privacy)
+- OG image untuk setiap tool baru (bisa generic template dengan nama tool)
+- JSON-LD structured data (WebApplication schema) di landing page
+- Google Search Console menunjukkan semua halaman ter-index
+
+---
+
+#### 7.6.6 Analytics Update
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Update analytics taxonomy untuk 7 tool baru — event tracking konsisten                                       |
+| **Label**              | 🟢 Buildable                                                                                                 |
+| **Scope**              | Tambahkan event tracking (task_started, task_completed, task_failed) untuk setiap tool baru                   |
+| **Estimasi**           | 1–2 jam                                                                                                      |
+
+**Acceptance Criteria:**
+- Setiap tool baru memiliki event tracking: `task_started`, `task_completed`, `task_failed`
+- Event properties konsisten: `tool_name`, `file_size`, `processing_time`, `device_category`
+- Analytics dashboard menunjukkan data untuk semua 13 tools
+- Taxonomy document di-update
+
+---
+
+### 7.7 Urutan Pengerjaan MVP 0.2
+
+```
+Phase 2A                Phase 2B                Phase 2C                    Phase 2D
+────────────────────    ────────────────────    ────────────────────────    ────────────────────
+M12 Protect 🟢          M14 Watermark 🟢        M16 PDF-to-Word 🟡          E2E Testing 🟢
+    │                       │                       │                       Prettier+Ruff 🟢
+    ▼                       │                       ▼                       Performance 🟢
+M13 Unlock 🟢           M15 Sign 🟡             M17 OCR 🟡                  Monitoring 🟢
+                                                    │                       SEO Update 🟢
+                                                    ▼                       Analytics 🟢
+                                                M18 PDF-to-Excel 🟡
+
+────────────────────────────────────────────────────────────────────────────────────────────►
+16-24 jam               25-35 jam               50-70 jam                   20-30 jam
 ```
 
 **Rasional urutan:**
-1. M12 → M13: Shared encryption/decryption logic, natural pair
-2. M14, M15: Independent, bisa dikerjakan kapan saja setelah M01
-3. M16 → M17 → M18: Progressive complexity, shared PDF content extraction
+1. **Phase 2A (M12→M13):** Shared encryption/decryption logic, natural pair, effort rendah — quick wins
+2. **Phase 2B (M14, M15):** Independent features, moderate effort — momentum builder
+3. **Phase 2C (M16→M17→M18):** Progressive complexity, shared PDF content extraction — heaviest phase
+4. **Phase 2D:** Quality sweep setelah semua tools selesai — ensures production readiness
+
+**Rilis Incremental:**
+- Setelah Phase 2A selesai → deploy (8 tools live)
+- Setelah Phase 2B selesai → deploy (10 tools live)
+- Setelah Phase 2C selesai → deploy (13 tools live)
+- Setelah Phase 2D selesai → deploy (quality hardened)
 
 ---
 
-## 6. Detail MVP 0.3 — Monetisasi
+## 8. Detail MVP 0.3 — Monetisasi
 
-### 6.1 Ringkasan
+### 8.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
-| **Status**             | PLANNED — Setelah gate condition terpenuhi                   |
+| **Status**             | 📋 PLANNED — Setelah gate condition terpenuhi                |
 | **Gate Condition**     | ≥ 10.000 tasks/bulan ATAU ≥ 5.000 Monthly Active Users       |
 | **Fokus**              | Login system, pricing tiers, payment integration              |
 | **Payment Provider**   | Midtrans dan/atau Xendit                                     |
+| **Label Dominan**      | 🟢 Buildable + 🔵 Business Outcome                          |
 
-### 6.2 Model Pricing
+### 8.2 Model Pricing
 
 | **Tier**                    | **Harga**                              | **Fitur**                                                                                      |
 |-----------------------------|----------------------------------------|------------------------------------------------------------------------------------------------|
-| **Free (Tanpa Login)**      | Gratis                                 | Semua basic tools unlimited, max file 20 MB, tanpa perlu akun                                  |
+| **Free (Tanpa Login)**      | Gratis                                 | Semua basic tools unlimited (9 tools), max file 20 MB, tanpa perlu akun                        |
 | **Free (Dengan Login)**     | Gratis                                 | + OCR 5x/hari, PDF-to-Word 5x/hari, PDF-to-Excel 3x/hari, Sign 5x/hari                       |
 | **Pro**                     | Rp 19.900/bulan (Rp 149.000/tahun)    | Semua fitur unlimited, batch processing, max file 100 MB, priority queue, no branding, API access |
 
-### 6.3 Perbandingan Tier Detail
+### 8.3 Perbandingan Tier Detail
 
 | **Fitur**                  | **Free (Tanpa Login)** | **Free (Dengan Login)** | **Pro**              |
 |----------------------------|------------------------|-------------------------|----------------------|
@@ -345,151 +940,407 @@ M12 (Protect) → M13 (Unlock) → M14 (Watermark) → M15 (Sign) → M16 (PDF-t
 | No Branding                | ❌                     | ❌                      | ✅                   |
 | API Access                 | ❌                     | ❌                      | ✅                   |
 
-### 6.4 Komponen Teknis Monetisasi
+### 8.4 Komponen Teknis Monetisasi
 
-| **Komponen**           | **Teknologi**                          | **Estimasi Effort**  |
-|------------------------|----------------------------------------|----------------------|
-| Authentication         | Supabase Auth (email + Google OAuth)   | 15–20 jam            |
-| User Dashboard         | Next.js protected routes               | 10–15 jam            |
-| Usage Tracking         | Supabase database + rate limiting      | 10–15 jam            |
-| Payment Integration    | Midtrans/Xendit SDK                    | 15–20 jam            |
-| Subscription Management| Webhook handlers, billing cycle        | 10–15 jam            |
-| API Key System         | Token generation, rate limiting        | 8–12 jam             |
+#### 8.4.1 M19 — Authentication System 🟢
 
-### 6.5 Strategi Monetisasi
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Sistem login/register — Supabase Auth (email + Google OAuth)  |
+| **Label**              | 🟢 Buildable                                                 |
+| **Teknologi**          | Supabase Auth (sudah standby di stack)                        |
+| **Estimasi**           | 15–20 jam                                                     |
+
+**Acceptance Criteria:**
+- User dapat register dengan email + password
+- User dapat login dengan Google OAuth (one-click)
+- Login state persisted across sessions (JWT + refresh token)
+- Logout berfungsi dan clear semua state
+- Protected routes untuk dashboard
+- Login TIDAK required untuk basic tools (Zero-Friction principle)
+- UI login/register dalam Bahasa Indonesia
+
+**Dependencies:** Supabase project (sudah ada, standby)
+
+---
+
+#### 8.4.2 M20 — User Dashboard 🟢
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Dashboard untuk logged-in users — usage stats, subscription   |
+| **Label**              | 🟢 Buildable                                                 |
+| **Teknologi**          | Next.js protected routes + Supabase database                  |
+| **Estimasi**           | 10–15 jam                                                     |
+
+**Acceptance Criteria:**
+- Dashboard menampilkan: usage hari ini (per tool), subscription status, account info
+- Usage counter real-time (berapa kali OCR/PDF-to-Word/etc digunakan hari ini)
+- Subscription status: Free / Pro (active/expired)
+- Account settings: change password, delete account
+- Mobile-first layout (R3)
+
+**Dependencies:** M19 (Authentication)
+
+---
+
+#### 8.4.3 M21 — Usage Tracking & Rate Limiting 🟢
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Tracking penggunaan per user per tool per hari + rate limiting |
+| **Label**              | 🟢 Buildable                                                 |
+| **Teknologi**          | Supabase database (usage table) + middleware rate limiting     |
+| **Estimasi**           | 10–15 jam                                                     |
+
+**Acceptance Criteria:**
+- Usage tracking per user per tool per hari (stored di Supabase)
+- Rate limiting enforced: Free+Login users dibatasi sesuai tier
+- Limit reached → pesan: "Batas harian tercapai. Upgrade ke Pro untuk unlimited."
+- Pro users → no rate limit (kecuali abuse protection)
+- Anonymous users → basic tools unlimited, advanced tools blocked
+
+**Dependencies:** M19 (Authentication), M20 (Dashboard)
+
+---
+
+#### 8.4.4 M22 — Payment Integration 🟡
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Integrasi pembayaran untuk Pro tier — Midtrans/Xendit         |
+| **Label**              | 🟡 Hard                                                      |
+| **Teknologi**          | Midtrans/Xendit SDK + webhook handlers                        |
+| **Estimasi**           | 15–20 jam                                                     |
+
+**Acceptance Criteria:**
+- User dapat upgrade ke Pro via payment page
+- Payment methods: bank transfer, e-wallet (GoPay, OVO, DANA), credit card
+- Monthly (Rp 19.900) dan yearly (Rp 149.000) options
+- Webhook handler untuk payment confirmation
+- Subscription auto-renewal dan cancellation flow
+- Invoice/receipt generation
+- Payment failure → retry mechanism + user notification
+
+**Dependencies:** M19, M20, M21
+
+---
+
+#### 8.4.5 M23 — API Key System 🟢
+
+| **Atribut**            | **Detail**                                                    |
+|------------------------|---------------------------------------------------------------|
+| **Deskripsi**          | Sistem API key untuk Pro users — akses programmatic           |
+| **Label**              | 🟢 Buildable                                                 |
+| **Teknologi**          | Token generation + API rate limiting middleware                |
+| **Estimasi**           | 8–12 jam                                                     |
+
+**Acceptance Criteria:**
+- Pro users dapat generate API key dari dashboard
+- API key memberikan akses ke semua tools via REST API
+- Rate limiting per API key (100 requests/jam)
+- API documentation (Swagger/OpenAPI) tersedia
+- Key rotation dan revocation support
+
+**Dependencies:** M22 (Payment — Pro tier must exist)
+
+### 8.5 Strategi Monetisasi
 
 - **Filosofi:** Gratis untuk kebutuhan dasar, premium untuk power users
 - **Konversi Target:** 2–5% dari registered users ke Pro
 - **Pricing Rationale:** Rp 19.900/bulan = ~$1.25 USD — sangat terjangkau untuk pasar Indonesia, lebih murah dari kompetitor global (SmallPDF $9/bulan, iLovePDF $4/bulan)
 - **Annual Discount:** ~37% diskon untuk komitmen tahunan (Rp 149.000 vs Rp 238.800)
-
+- **Business Outcome Target:** 🔵 MRR ≥ Rp 500.000/bulan dalam 6 bulan setelah launch
 ---
 
-## 7. Detail Fase 2 — AI Features
+## 9. Detail Fase 2 — AI Features
 
-### 7.1 Ringkasan
+### 9.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
-| **Status**             | VISI — Perencanaan tingkat tinggi                            |
+| **Status**             | 🔮 VISI — Perencanaan tingkat tinggi                         |
 | **Gate Condition**     | MVP 0.3 menghasilkan revenue > Rp 0 (validated willingness to pay) |
 | **Fokus**              | AI-powered document intelligence                              |
 | **Teknologi Kandidat** | OpenAI API, Google Gemini, atau model lokal                  |
+| **Label Dominan**      | 🟣 R&D                                                       |
 
-### 7.2 Fitur yang Direncanakan
-
-| **Fitur**                          | **Deskripsi**                                                                          | **Nilai bagi Pengguna**                              |
-|------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------|
-| AI Document Analysis               | Analisis konten PDF secara otomatis — ringkasan, keyword extraction, klasifikasi       | Memahami dokumen panjang dengan cepat                |
-| Smart Compression Recommendations  | AI merekomendasikan level kompresi optimal berdasarkan konten (teks vs gambar vs mixed) | Kompresi lebih efektif tanpa trial-and-error         |
-| Content Extraction with AI         | Ekstraksi data terstruktur dari dokumen (invoice, receipt, form) menggunakan AI        | Otomatisasi data entry dari dokumen fisik            |
-
-### 7.3 Pertimbangan Teknis
-
-- **Privacy:** AI processing harus tetap menghormati prinsip privacy-first — opsi client-side AI (WebLLM) untuk dokumen sensitif
-- **Cost:** API calls AI memiliki biaya per request — hanya tersedia untuk tier Pro atau dengan kuota terbatas
-- **Accuracy:** Perlu validasi akurasi untuk dokumen Bahasa Indonesia sebelum rilis publik
-- **Latency:** AI processing membutuhkan waktu lebih lama — perlu UX yang jelas (progress indicator, async processing)
+### 9.2 Fitur yang Direncanakan
 
 ---
 
-## 8. Detail Fase 3 — Indonesia Deep
+#### 9.2.1 M24 — AI Document Analysis 🟣
 
-### 8.1 Ringkasan
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Analisis konten PDF secara otomatis — ringkasan, keyword extraction, klasifikasi dokumen                       |
+| **Label**              | 🟣 R&D                                                                                                       |
+| **Processing Strategy**| Server-side (LLM API call)                                                                                    |
+| **Teknologi Kandidat** | OpenAI GPT-4o-mini / Google Gemini Flash / model lokal (Ollama)                                              |
+| **Estimasi**           | 30–40 jam                                                                                                     |
+
+**Acceptance Criteria:**
+- User dapat upload PDF dan mendapatkan ringkasan otomatis (100-300 kata)
+- Keyword extraction (5-10 keywords utama)
+- Klasifikasi dokumen (invoice, surat, laporan, kontrak, dll.)
+- Bahasa Indonesia dan English supported
+- Processing time < 30 detik
+- Hanya tersedia untuk Pro tier atau dengan kuota terbatas (Free+Login: 3x/hari)
+
+**Dependencies:** MVP 0.3 complete (authentication + payment required)
+
+**Risiko:** 🟣 R&D — Akurasi untuk dokumen Bahasa Indonesia belum tervalidasi. Cost per request perlu di-monitor ketat. Privacy concern untuk dokumen sensitif.
+
+---
+
+#### 9.2.2 M25 — Smart Compression Recommendations 🟣
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | AI merekomendasikan level kompresi optimal berdasarkan analisis konten PDF                                     |
+| **Label**              | 🟣 R&D                                                                                                       |
+| **Processing Strategy**| Server-side (content analysis + heuristics + optional LLM)                                                    |
+| **Estimasi**           | 20–30 jam                                                                                                     |
+
+**Acceptance Criteria:**
+- Analisis konten PDF: rasio teks vs gambar vs whitespace
+- Rekomendasi level kompresi: "Dokumen ini 80% gambar — kompresi agresif akan mengurangi ukuran 60% dengan sedikit penurunan kualitas"
+- Preview before/after (file size estimation)
+- One-click apply recommendation
+- Akurasi rekomendasi ≥ 80% (user satisfaction)
+
+**Dependencies:** M24 (shared AI infrastructure)
+
+---
+
+#### 9.2.3 M26 — AI Content Extraction 🟡
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Ekstraksi data terstruktur dari dokumen (invoice, receipt, form) menggunakan AI                                |
+| **Label**              | 🟡 Hard                                                                                                      |
+| **Processing Strategy**| Server-side (OCR + LLM structured output)                                                                     |
+| **Estimasi**           | 30–40 jam                                                                                                     |
+
+**Acceptance Criteria:**
+- Ekstraksi data dari invoice: tanggal, nomor invoice, total, item list
+- Ekstraksi data dari receipt: merchant, tanggal, total, items
+- Output dalam format JSON atau CSV
+- Akurasi ≥ 85% untuk dokumen standar Indonesia
+- Hanya tersedia untuk Pro tier
+
+**Dependencies:** M24 (AI infrastructure), M17 (OCR — untuk scanned documents)
+
+### 9.3 Pertimbangan Teknis Fase 2
+
+- **Privacy:** AI processing harus tetap menghormati prinsip privacy-first — opsi client-side AI (WebLLM) untuk dokumen sensitif di masa depan
+- **Cost:** API calls AI memiliki biaya per request — hanya tersedia untuk tier Pro atau dengan kuota terbatas
+- **Accuracy:** Perlu validasi akurasi untuk dokumen Bahasa Indonesia sebelum rilis publik
+- **Latency:** AI processing membutuhkan waktu lebih lama — perlu UX yang jelas (progress indicator, async processing)
+- **Model Selection:** Evaluasi cost vs quality: GPT-4o-mini (murah, cukup akurat) vs Gemini Flash (gratis tier tersedia) vs lokal (zero cost, lower quality)
+
+---
+
+## 10. Detail Fase 3 — Indonesia Deep
+
+### 10.1 Ringkasan
 
 | **Atribut**            | **Detail**                                                    |
 |------------------------|---------------------------------------------------------------|
-| **Status**             | VISI — Perencanaan tingkat tinggi                            |
-| **Gate Condition**     | Fase 2 stabil + regulatory readiness + partnership           |
+| **Status**             | 🔮 VISI — Perencanaan tingkat tinggi                         |
+| **Gate Condition**     | Fase 2 stabil + regulatory readiness + partnership            |
 | **Fokus**              | Integrasi mendalam dengan ekosistem digital Indonesia         |
+| **Label Dominan**      | 🔴 Regulated + ⚪ Moonshot                                   |
 
-### 8.2 Fitur yang Direncanakan
+### 10.2 Fitur yang Direncanakan
 
-| **Fitur**                          | **Deskripsi**                                                                          | **Nilai bagi Pengguna**                              |
-|------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------|
-| e-Meterai Integration              | Integrasi dengan sistem e-Meterai Peruri untuk pembubuhan meterai digital pada PDF     | Legalisasi dokumen digital tanpa ke kantor pos       |
-| Government Document Templates      | Template siap pakai untuk dokumen pemerintah (surat keterangan, proposal, laporan)     | Pembuatan dokumen resmi yang cepat dan benar         |
-| Local Compliance Features          | Fitur kepatuhan regulasi lokal (format NPWP, NIK validation, tanda tangan elektronik tersertifikasi) | Dokumen yang comply dengan regulasi Indonesia |
+---
 
-### 8.3 Pertimbangan Strategis
+#### 10.2.1 M27 — e-Meterai Integration 🔴
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Integrasi dengan sistem e-Meterai Peruri untuk pembubuhan meterai digital pada PDF                             |
+| **Label**              | 🔴 Regulated                                                                                                 |
+| **Requirement**        | Partnership resmi dengan Peruri atau aggregator resmi (e.g., Privy, VIDA)                                    |
+| **Estimasi**           | 40–60 jam                                                                                                     |
+
+**Acceptance Criteria:**
+- User dapat membubuhkan e-Meterai Rp 10.000 pada dokumen PDF
+- Integrasi dengan API resmi Peruri/aggregator
+- Meterai valid dan dapat diverifikasi
+- Payment flow untuk pembelian meterai
+- Audit trail dan bukti pembubuhan
+- Compliance dengan regulasi Peruri
+
+**Dependencies:** Partnership MoU dengan Peruri/aggregator, regulatory approval
+
+**Risiko:** 🔴 Regulated — Membutuhkan partnership resmi. Timeline tidak bisa diprediksi karena bergantung pada pihak ketiga.
+
+---
+
+#### 10.2.2 M28 — Government Document Templates 🔴
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Template siap pakai untuk dokumen pemerintah dan bisnis Indonesia                                              |
+| **Label**              | 🔴 Regulated                                                                                                 |
+| **Estimasi**           | 20–30 jam                                                                                                     |
+
+**Acceptance Criteria:**
+- Template surat keterangan (domisili, usaha, dll.)
+- Template proposal bisnis standar Indonesia
+- Template laporan keuangan sederhana
+- Template kontrak kerja
+- Fill-in-the-blank interface
+- Export ke PDF dengan formatting yang benar
+- Minimal 20 templates tersedia saat launch
+
+**Dependencies:** M27 (e-Meterai — untuk legalisasi template), legal review
+
+---
+
+#### 10.2.3 M29 — Local Compliance Features ⚪
+
+| **Atribut**            | **Detail**                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Deskripsi**          | Fitur kepatuhan regulasi lokal — tanda tangan elektronik tersertifikasi, validasi NPWP/NIK                    |
+| **Label**              | ⚪ Moonshot                                                                                                   |
+| **Estimasi**           | 30–50 jam                                                                                                     |
+
+**Acceptance Criteria:**
+- Tanda tangan elektronik tersertifikasi (PSrE-certified)
+- Validasi format NPWP dan NIK
+- Integration dengan BSrE (Badan Siber dan Sandi Negara)
+- Compliance reporting
+- Enterprise-grade security
+
+**Dependencies:** M27, M28, sertifikasi dari Kominfo/BSrE
+
+**Risiko:** ⚪ Moonshot — Sertifikasi PSrE membutuhkan investasi signifikan dan timeline yang panjang. Bisa jadi game-changer untuk enterprise market, tapi juga bisa gagal jika regulasi berubah.
+
+### 10.3 Pertimbangan Strategis Fase 3
 
 - **Partnership:** e-Meterai membutuhkan kerjasama resmi dengan Peruri atau aggregator resmi
 - **Regulasi:** Tanda tangan elektronik tersertifikasi membutuhkan sertifikasi dari Kominfo/BSrE
 - **Market Timing:** Adopsi e-Meterai di Indonesia masih dalam fase pertumbuhan — timing yang tepat untuk masuk
 - **Competitive Moat:** Integrasi Indonesia-specific ini menjadi differentiator kuat terhadap kompetitor global
+- **Revenue Model:** e-Meterai bisa menjadi revenue stream signifikan (margin per meterai)
 
 ---
 
-## 9. Prioritas & Dependensi
+## 11. Yang TIDAK Akan Dibangun
 
-### 9.1 Dependency Graph
+Bagian ini secara eksplisit mendefinisikan fitur dan produk yang **TIDAK** akan dibangun dalam horizon roadmap ini. Tujuannya adalah memberikan kejelasan scope dan mencegah scope creep.
+
+| **#**  | **Item**                              | **Alasan Tidak Dibangun**                                                                                     | **Kapan Mungkin Dipertimbangkan**     |
+|--------|---------------------------------------|---------------------------------------------------------------------------------------------------------------|---------------------------------------|
+| X1     | Desktop native app                    | Web app sudah cukup untuk semua use case. Native app menambah maintenance burden tanpa value tambah signifikan. | Tidak dalam horizon roadmap ini.      |
+| X2     | Mobile native app                     | Mobile web sudah dioptimasi (mobile-first). Native app hanya relevan jika ada fitur yang tidak bisa di web.   | Fase 2+ / Tahun 2 (jika ada demand)  |
+| X3     | PDF editing (text editing inside PDF) | Sangat kompleks, membutuhkan PDF rendering engine lengkap. Bukan core value proposition Papyr.                | Tidak dalam horizon roadmap ini.      |
+| X4     | PDF form filling                      | Niche use case, kompleksitas tinggi, banyak edge cases. Lebih baik fokus ke tools yang lebih universal.       | Tidak dalam horizon roadmap ini.      |
+| X5     | PDF comparison/diff                   | Niche use case untuk enterprise. Tidak sesuai dengan target user utama (mahasiswa, pekerja kantoran).         | Fase 2+ (jika enterprise demand)      |
+| X6     | Batch processing                      | Membutuhkan queue system dan resource management yang kompleks. Hanya relevan untuk Pro tier.                 | MVP 0.3 (Pro tier feature)            |
+| X7     | User accounts                         | Menambah friction untuk basic tools. Zero-login adalah core value proposition.                                 | MVP 0.3 (optional, untuk advanced)    |
+| X8     | Payment processing                    | Premature — belum ada validated demand. Hanya dibangun setelah traffic threshold terpenuhi.                   | MVP 0.3 (setelah gate condition)      |
+| X9     | AI features                           | Premature — membutuhkan revenue validation terlebih dahulu. Cost per request harus di-cover oleh Pro tier.    | Fase 2 (setelah revenue > Rp 0)      |
+| X10    | e-Meterai                             | Membutuhkan partnership resmi dan regulatory approval. Tidak bisa dibangun secara independen.                 | Fase 3 (setelah partnership MoU)      |
+| X11    | Multi-language UI                     | Bahasa Indonesia adalah satu-satunya bahasa yang didukung. English UI tidak menambah value untuk target market.| Tidak dalam horizon roadmap ini.      |
+| X12    | Collaboration features                | Real-time collaboration membutuhkan WebSocket infrastructure yang kompleks. Bukan core value.                 | Tidak dalam horizon roadmap ini.      |
+| X13    | Cloud storage integration             | Google Drive/Dropbox integration menambah kompleksitas tanpa core value. User bisa upload/download manual.    | Fase 2+ (jika ada demand)             |
+| X14    | White-label / reseller                | Premature — fokus pada brand building terlebih dahulu.                                                        | Fase 3+ (jika enterprise demand)      |
+
+> **Prinsip:** Jika ragu apakah sesuatu harus dibangun, jawabannya adalah **tidak**. Fokus pada core value proposition: tools PDF yang gratis, cepat, dan aman.
+---
+
+## 12. Prioritas & Dependensi
+
+### 12.1 Dependency Graph
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                          DEPENDENCY GRAPH                                     │
+│                          DEPENDENCY GRAPH                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  MVP 0.1 (COMPLETED)                                                         │
-│  ┌─────┐                                                                     │
-│  │ M01 │──┬──► M02 ──┐                                                      │
-│  │Setup│  ├──► M03   │                                                       │
-│  └─────┘  ├──► M04   ├──► M07 ──► M08                                       │
-│           ├──► M05   │   (SEO)   (Analytics)                                 │
-│           ├──► M06 ──┤                                                       │
-│           │          └──► M09 ──► M10 (Launch)                               │
-│           └──► M11                                                           │
-│                                                                              │
-│  MVP 0.2 (NEXT)                                                              │
-│  ┌─────┐                                                                     │
-│  │ M12 │──► M13                                                              │
-│  │Prot.│  (Unlock)                                                           │
-│  └─────┘                                                                     │
-│  ┌─────┐   ┌─────┐                                                          │
-│  │ M14 │   │ M15 │   (Independent)                                           │
-│  │W.mrk│   │Sign │                                                           │
-│  └─────┘   └─────┘                                                          │
-│  ┌─────┐                                                                     │
-│  │ M16 │──► M17 ──► M18                                                     │
-│  │Word │   (OCR)   (Excel)                                                   │
-│  └─────┘                                                                     │
-│                                                                              │
-│  MVP 0.3 (GATE: traffic/MAU threshold)                                       │
-│  ┌─────────────────────────────────────┐                                     │
-│  │ Auth → Dashboard → Payment → API    │                                     │
-│  └─────────────────────────────────────┘                                     │
-│           │                                                                  │
-│           ▼                                                                  │
-│  Fase 2 (GATE: revenue > 0)                                                 │
-│  ┌─────────────────────────────────────┐                                     │
-│  │ AI Analysis → Smart Compress → Extract │                                  │
-│  └─────────────────────────────────────┘                                     │
-│           │                                                                  │
-│           ▼                                                                  │
-│  Fase 3 (GATE: regulatory + partnership)                                     │
-│  ┌─────────────────────────────────────┐                                     │
-│  │ e-Meterai → Templates → Compliance  │                                     │
-│  └─────────────────────────────────────┘                                     │
-│                                                                              │
+│                                                                             │
+│  MVP 0.1 (COMPLETED) ✅                                                     │
+│  ┌─────┐                                                                    │
+│  │ M01 │──┬──► M02 ──┐                                                     │
+│  │Setup│  ├──► M03   │                                                      │
+│  └─────┘  ├──► M04   ├──► M07 ──► M08                                      │
+│           ├──► M05   │   (SEO)   (Analytics)                                │
+│           ├──► M06 ──┤                                                      │
+│           │          └──► M09 ──► M10 (Launch)                              │
+│           └──► M11                                                          │
+│                                                                             │
+│  MVP 0.2 — Phase 2A (Security) 🟢                                           │
+│  ┌─────┐                                                                    │
+│  │ M12 │──► M13                                                             │
+│  │Prot.│  (Unlock)                                                          │
+│  └─────┘                                                                    │
+│                                                                             │
+│  MVP 0.2 — Phase 2B (Enhancement) 🟢/🟡                                     │
+│  ┌─────┐   ┌─────┐                                                         │
+│  │ M14 │   │ M15 │   (Independent)                                          │
+│  │W.mrk│   │Sign │                                                          │
+│  └─────┘   └─────┘                                                         │
+│                                                                             │
+│  MVP 0.2 — Phase 2C (Conversion) 🟡                                         │
+│  ┌─────┐                                                                    │
+│  │ M16 │──► M17 ──► M18                                                    │
+│  │Word │   (OCR)   (Excel)                                                  │
+│  └─────┘                                                                    │
+│                                                                             │
+│  MVP 0.2 — Phase 2D (Quality) 🟢                                            │
+│  ┌─────────────────────────────────────┐                                    │
+│  │ E2E · Format · Perf · Mon · SEO · An│                                    │
+│  └─────────────────────────────────────┘                                    │
+│           │                                                                 │
+│           ▼ [GATE: ≥ 10K tasks/mo OR ≥ 5K MAU]                              │
+│                                                                             │
+│  MVP 0.3 (Monetisasi) 🟢🔵                                                  │
+│  ┌─────────────────────────────────────────────┐                            │
+│  │ M19 Auth → M20 Dashboard → M21 Usage → M22 Pay → M23 API │              │
+│  └─────────────────────────────────────────────┘                            │
+│           │                                                                 │
+│           ▼ [GATE: revenue > Rp 0]                                          │
+│                                                                             │
+│  Fase 2 (AI Features) 🟣                                                    │
+│  ┌─────────────────────────────────────┐                                    │
+│  │ M24 AI Analysis → M25 Smart Comp    │                                    │
+│  │                 → M26 AI Extract     │                                    │
+│  └─────────────────────────────────────┘                                    │
+│           │                                                                 │
+│           ▼ [GATE: stable + regulatory + partnership]                        │
+│                                                                             │
+│  Fase 3 (Indonesia Deep) 🔴⚪                                               │
+│  ┌─────────────────────────────────────┐                                    │
+│  │ M27 e-Meterai → M28 Templates → M29 Compliance │                        │
+│  └─────────────────────────────────────┘                                    │
+│                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 9.2 Matriks Prioritas
+### 12.2 Matriks Prioritas
 
-| **Milestone** | **Impact** | **Effort** | **Prioritas** | **Rasional**                                                    |
-|---------------|------------|------------|---------------|------------------------------------------------------------------|
-| M12 Protect   | Medium     | Low        | P1            | Fitur paling diminta, effort rendah, natural pair dengan M13     |
-| M13 Unlock    | Medium     | Low        | P1            | Melengkapi M12, shared logic                                     |
-| M14 Watermark | Medium     | Medium     | P2            | Berguna untuk profesional, effort moderat                        |
-| M15 Sign      | High       | Medium     | P2            | High demand di Indonesia (kontrak, surat), effort moderat        |
-| M16 PDF-Word  | High       | Medium     | P3            | Sangat diminta, tapi butuh server processing yang lebih berat    |
-| M17 OCR       | High       | High       | P3            | Kompleks tapi sangat bernilai untuk scanned documents            |
-| M18 PDF-Excel | Medium     | Medium     | P4            | Niche use case, bergantung pada M16 dan M17                      |
+| **Milestone** | **Impact** | **Effort** | **Prioritas** | **Label** | **Rasional**                                                    |
+|---------------|------------|------------|---------------|-----------|------------------------------------------------------------------|
+| M12 Protect   | Medium     | Low        | P1            | 🟢        | Fitur paling diminta, effort rendah, natural pair dengan M13     |
+| M13 Unlock    | Medium     | Low        | P1            | 🟢        | Melengkapi M12, shared logic                                     |
+| M14 Watermark | Medium     | Medium     | P2            | 🟢        | Berguna untuk profesional, effort moderat                        |
+| M15 Sign      | High       | Medium     | P2            | 🟡        | High demand di Indonesia (kontrak, surat), effort moderat        |
+| M16 PDF-Word  | High       | Medium     | P3            | 🟡        | Sangat diminta, tapi butuh server processing yang lebih berat    |
+| M17 OCR       | High       | High       | P3            | 🟡        | Kompleks tapi sangat bernilai untuk scanned documents            |
+| M18 PDF-Excel | Medium     | Medium     | P4            | 🟡        | Niche use case, bergantung pada M16 dan M17                      |
+| M19 Auth      | Medium     | Medium     | P5            | 🟢        | Enabler untuk monetisasi, bukan user-facing value                |
+| M22 Payment   | High       | High       | P5            | 🟡        | Revenue enabler, tapi hanya setelah traffic threshold            |
+| M24 AI        | High       | Very High  | P6            | 🟣        | High value tapi high risk — R&D required                         |
+| M27 e-Meterai | Very High  | Very High  | P7            | 🔴        | Game-changer tapi regulated — timeline unpredictable             |
 
 ---
 
-## 10. Metrik Keberhasilan per Fase
+## 13. Metrik Keberhasilan per Fase
 
-### 10.1 MVP 0.1 — Core Tools (COMPLETED)
+### 13.1 MVP 0.1 — Core Tools (COMPLETED)
 
 | **Metrik**                    | **Target**                | **Aktual**       | **Status**  |
 |-------------------------------|---------------------------|------------------|-------------|
@@ -498,18 +1349,23 @@ M12 (Protect) → M13 (Unlock) → M14 (Watermark) → M15 (Sign) → M16 (PDF-t
 | Production Deploy             | Live di mypapyr.com       | Live             | ✅ Met      |
 | Performance (P95)             | < 3 detik                 | TBD              | 📊 Monitoring |
 | Task Success Rate             | > 95%                     | TBD              | 📊 Monitoring |
+| Zero Critical Bugs (7 hari)  | 0 critical bugs           | 0                | ✅ Met      |
 
-### 10.2 MVP 0.2 — Tool Expansion
+### 13.2 MVP 0.2 — Tool Expansion
 
 | **Metrik**                    | **Target**                                    | **Measurement**                              |
 |-------------------------------|-----------------------------------------------|----------------------------------------------|
 | Tools Delivered               | 7 tools tambahan (total 13)                   | Count of live tools                          |
-| Tool Adoption                 | Setiap tool baru ≥ 100 uses dalam 30 hari     | Analytics event tracking                     |
-| Task Success Rate             | > 95% per tool                                | Error rate monitoring                        |
+| Tool Adoption                 | Setiap tool baru ≥ 100 uses dalam 30 hari     | Vercel Analytics event tracking              |
+| Task Success Rate             | > 95% per tool                                | Error rate monitoring (task_failed events)   |
 | SEO Ranking                   | Top 10 Google ID untuk keyword per tool       | Google Search Console                        |
 | Organic Traffic Growth        | +50% dari baseline MVP 0.1                    | Vercel Analytics                             |
+| Lighthouse Performance        | ≥ 90 untuk semua halaman tool                 | Lighthouse CI                                |
+| E2E Test Coverage             | 26 tests passing (2 per tool)                 | Playwright CI report                         |
+| Uptime                        | ≥ 99.5%                                       | BetterStack/UptimeRobot                      |
+| Bundle Size                   | < 50KB JS gzipped per tool page               | Bundle analyzer                              |
 
-### 10.3 MVP 0.3 — Monetisasi
+### 13.3 MVP 0.3 — Monetisasi
 
 | **Metrik**                    | **Target**                                    | **Measurement**                              |
 |-------------------------------|-----------------------------------------------|----------------------------------------------|
@@ -518,17 +1374,21 @@ M12 (Protect) → M13 (Unlock) → M14 (Watermark) → M15 (Sign) → M16 (PDF-t
 | Monthly Recurring Revenue     | ≥ Rp 500.000/bulan dalam 6 bulan             | Payment dashboard                            |
 | Churn Rate                    | < 10% per bulan                               | Subscription cancellation tracking           |
 | Payment Success Rate          | > 95%                                         | Midtrans/Xendit dashboard                    |
+| API Key Adoption              | ≥ 10% Pro users generate API key              | Dashboard analytics                          |
+| Tasks per Month               | ≥ 10.000 (gate condition for this phase)      | Vercel Analytics                             |
 
-### 10.4 Fase 2 — AI Features
+### 13.4 Fase 2 — AI Features
 
 | **Metrik**                    | **Target**                                    | **Measurement**                              |
 |-------------------------------|-----------------------------------------------|----------------------------------------------|
 | AI Feature Adoption           | ≥ 20% Pro users menggunakan AI features       | Feature usage analytics                      |
-| AI Accuracy                   | ≥ 90% untuk dokumen Bahasa Indonesia          | Manual sampling + user feedback              |
+| AI Accuracy (Indonesia)       | ≥ 90% untuk dokumen Bahasa Indonesia          | Manual sampling + user feedback              |
 | Revenue Impact                | +30% MRR dari AI upsell                       | Revenue attribution                          |
 | User Satisfaction             | NPS ≥ 40 untuk AI features                    | In-app survey                                |
+| Cost per AI Request           | < Rp 500 per request (sustainable)            | API cost monitoring                          |
+| AI Processing Time            | < 30 detik (P95)                              | Server metrics                               |
 
-### 10.5 Fase 3 — Indonesia Deep
+### 13.5 Fase 3 — Indonesia Deep
 
 | **Metrik**                    | **Target**                                    | **Measurement**                              |
 |-------------------------------|-----------------------------------------------|----------------------------------------------|
@@ -536,45 +1396,50 @@ M12 (Protect) → M13 (Unlock) → M14 (Watermark) → M15 (Sign) → M16 (PDF-t
 | Template Usage                | ≥ 1.000 downloads/bulan                       | Download tracking                            |
 | Enterprise Clients            | ≥ 5 paying enterprise accounts                | CRM                                          |
 | Market Position               | Top 3 PDF tool di Indonesia                   | SEO ranking + brand awareness survey         |
+| Revenue from e-Meterai        | ≥ Rp 2.000.000/bulan                          | Transaction margin tracking                  |
+| Compliance Certification      | PSrE certification obtained                   | Regulatory documentation                     |
 
 ---
 
-## 11. Risiko & Mitigasi
+## 14. Risiko & Mitigasi
 
-### 11.1 Risiko Teknis
+### 14.1 Risiko Teknis
 
-| **#** | **Risiko**                                          | **Probabilitas** | **Dampak** | **Mitigasi**                                                                    |
-|-------|-----------------------------------------------------|------------------|------------|---------------------------------------------------------------------------------|
-| R01   | OCR accuracy rendah untuk dokumen Indonesia          | Medium           | High       | Evaluasi multiple engines (Tesseract, EasyOCR, PaddleOCR); training data lokal  |
-| R02   | Server overload saat traffic meningkat               | Medium           | High       | Auto-scaling Railway, queue system, client-side processing prioritas            |
-| R03   | PDF-to-Word conversion quality tidak konsisten       | High             | Medium     | Multiple fallback engines, user expectation management, quality tiers           |
-| R04   | AI API cost melebihi revenue                         | Medium           | High       | Strict rate limiting, caching, model optimization, cost monitoring alerts       |
-| R05   | Security vulnerability pada file processing          | Low              | Critical   | Input validation, sandboxed processing, regular security audit, file type check |
+| **#** | **Risiko**                                          | **Probabilitas** | **Dampak** | **Label** | **Mitigasi**                                                                    |
+|-------|-----------------------------------------------------|------------------|------------|-----------|---------------------------------------------------------------------------------|
+| R01   | OCR accuracy rendah untuk dokumen Indonesia          | Medium           | High       | 🟡        | Evaluasi Tesseract dengan Indonesian language pack; benchmark sebelum launch     |
+| R02   | Server overload saat traffic meningkat               | Medium           | High       | 🟢        | Auto-scaling Railway, queue system, client-side processing prioritas            |
+| R03   | PDF-to-Word conversion quality tidak konsisten       | High             | Medium     | 🟡        | LibreOffice headless (best quality); expectation management di UI               |
+| R04   | AI API cost melebihi revenue                         | Medium           | High       | 🟣        | Strict rate limiting, caching, model optimization, cost monitoring alerts       |
+| R05   | Security vulnerability pada file processing          | Low              | Critical   | 🟢        | Input validation, sandboxed processing, regular security audit, file type check |
+| R06   | Railway free tier insufficient untuk Phase 2C        | High             | High       | 🟡        | VPS migration ke HostData.id sebagai inisiatif terpisah                         |
+| R07   | LibreOffice headless container size terlalu besar    | Medium           | Medium     | 🟡        | Multi-stage Docker build, minimal install, atau dedicated conversion service    |
 
-### 11.2 Risiko Bisnis
+### 14.2 Risiko Bisnis
 
-| **#** | **Risiko**                                          | **Probabilitas** | **Dampak** | **Mitigasi**                                                                    |
-|-------|-----------------------------------------------------|------------------|------------|---------------------------------------------------------------------------------|
-| R06   | Kompetitor lokal muncul dengan fitur serupa          | Medium           | Medium     | First-mover advantage, rapid iteration, Indonesia-deep features sebagai moat    |
-| R07   | Willingness to pay rendah di pasar Indonesia         | Medium           | High       | Pricing sangat rendah (Rp 19.900), freemium generous, validate sebelum invest   |
-| R08   | Solo developer bottleneck                            | High             | Medium     | Prioritas ketat, AI-assisted development, modular architecture untuk scaling    |
-| R09   | Regulasi e-Meterai berubah                           | Low              | Medium     | Monitor regulasi, partnership dengan aggregator resmi, flexible architecture    |
-| R10   | Payment provider issues (Midtrans/Xendit)            | Low              | Medium     | Dual provider setup, fallback mechanism, manual invoice option                  |
+| **#** | **Risiko**                                          | **Probabilitas** | **Dampak** | **Label** | **Mitigasi**                                                                    |
+|-------|-----------------------------------------------------|------------------|------------|-----------|---------------------------------------------------------------------------------|
+| R08   | Kompetitor lokal muncul dengan fitur serupa          | Medium           | Medium     | 🔵        | First-mover advantage, rapid iteration, Indonesia-deep features sebagai moat    |
+| R09   | Willingness to pay rendah di pasar Indonesia         | Medium           | High       | 🔵        | Pricing sangat rendah (Rp 19.900), freemium generous, validate sebelum invest   |
+| R10   | Solo developer bottleneck                            | Low              | Medium     | 🟢        | 100% AI-driven development, modular architecture untuk scaling                  |
+| R11   | Regulasi e-Meterai berubah                           | Low              | Medium     | 🔴        | Monitor regulasi, partnership dengan aggregator resmi, flexible architecture    |
+| R12   | Payment provider issues (Midtrans/Xendit)            | Low              | Medium     | 🟡        | Dual provider setup, fallback mechanism, manual invoice option                  |
 
-### 11.3 Risiko Operasional
+### 14.3 Risiko Operasional
 
-| **#** | **Risiko**                                          | **Probabilitas** | **Dampak** | **Mitigasi**                                                                    |
-|-------|-----------------------------------------------------|------------------|------------|---------------------------------------------------------------------------------|
-| R11   | Cloudflare R2 downtime                               | Low              | High       | Fallback ke direct download, health monitoring, user notification               |
-| R12   | Railway container resource limits                    | Medium           | Medium     | Monitoring resource usage, upgrade plan jika perlu, optimize processing         |
-| R13   | Domain/DNS issues                                    | Low              | High       | DNS redundancy, monitoring, documented recovery procedure                       |
-| R14   | Data loss pada file processing                       | Low              | Medium     | Retry mechanism, user notification, idempotent operations                       |
+| **#** | **Risiko**                                          | **Probabilitas** | **Dampak** | **Label** | **Mitigasi**                                                                    |
+|-------|-----------------------------------------------------|------------------|------------|-----------|---------------------------------------------------------------------------------|
+| R13   | Cloudflare R2 downtime                               | Low              | High       | 🟢        | Fallback ke direct download, health monitoring, user notification               |
+| R14   | Railway container resource limits                    | Medium           | Medium     | 🟡        | Monitoring resource usage, VPS migration plan (HostData.id)                     |
+| R15   | Domain/DNS issues                                    | Low              | High       | 🟢        | DNS redundancy, monitoring, documented recovery procedure                       |
+| R16   | Data loss pada file processing                       | Low              | Medium     | 🟢        | Retry mechanism, user notification, idempotent operations                       |
+| R17   | Dependency vulnerability (supply chain)              | Medium           | Medium     | 🟢        | Dependabot alerts, regular dependency updates, minimal dependencies             |
 
 ---
 
-## 12. Referensi Silang (Cross-References)
+## 15. Referensi Silang (Cross-References)
 
-### 12.1 Dokumen Terkait
+### 15.1 Dokumen Terkait
 
 | **ID Dokumen** | **Judul**                              | **Relevansi terhadap Roadmap**                                    |
 |----------------|----------------------------------------|-------------------------------------------------------------------|
@@ -583,7 +1448,7 @@ M12 (Protect) → M13 (Unlock) → M14 (Watermark) → M15 (Sign) → M16 (PDF-t
 | PPR-PP-001     | Project Plan                           | WBS detail, resource allocation, timeline operasional             |
 | PPR-GTM-001    | Go-To-Market Strategy                  | Launch strategy, marketing channels, user acquisition plan        |
 
-### 12.2 Mapping Roadmap ke Dokumen
+### 15.2 Mapping Roadmap ke Dokumen
 
 | **Fase Roadmap** | **BRD Section**          | **Project Plan Section** | **GTM Section**          |
 |------------------|--------------------------|--------------------------|--------------------------|
@@ -593,7 +1458,7 @@ M12 (Protect) → M13 (Unlock) → M14 (Watermark) → M15 (Sign) → M16 (PDF-t
 | Fase 2           | §5 Future Vision         | —                        | §5 Expansion             |
 | Fase 3           | §5 Future Vision         | —                        | §5 Expansion             |
 
-### 12.3 Traceability
+### 15.3 Traceability
 
 Setiap milestone dalam roadmap ini dapat di-trace ke:
 - **Tasks:** PAPYR-001 — PAPYR-089 (MVP 0.1, completed) + tasks TBD (MVP 0.2+)
@@ -601,14 +1466,29 @@ Setiap milestone dalam roadmap ini dapat di-trace ke:
 - **Test Cases:** Test plan di PPR-TP-001 (untuk fitur yang sudah dirilis)
 - **Release Notes:** PPR-RN-001 (untuk versi yang sudah dirilis)
 
+### 15.4 Teknologi Decision Log
+
+| **Keputusan**                          | **Dipilih**                    | **Alternatif yang Ditolak**           | **Alasan**                                                    |
+|----------------------------------------|--------------------------------|---------------------------------------|---------------------------------------------------------------|
+| PDF encryption/decryption              | PyMuPDF (server-side)          | pdf-lib (client-side)                 | AES-256 support lebih mature di PyMuPDF                       |
+| Text watermark                         | pdf-lib (client-side)          | PyMuPDF (server-side)                 | Zero upload, privacy-first untuk operasi ringan               |
+| Image watermark                        | PyMuPDF (server-side)          | pdf-lib (client-side)                 | Image overlay rendering lebih reliable di server              |
+| Digital signature                      | Canvas + pdf-lib (client-side) | Server-side processing                | Tanda tangan = data sensitif, HARUS client-side               |
+| PDF-to-Word conversion                 | LibreOffice headless           | pdf2docx, PyMuPDF+python-docx         | Layout preservation terbaik                                   |
+| OCR engine                             | ocrmypdf + Tesseract           | EasyOCR, PaddleOCR                    | Searchable PDF output langsung, Indonesian support, lightweight|
+| Table extraction                       | camelot-py + openpyxl          | tabula-py only, pdfplumber            | Best accuracy untuk lattice + stream tables                   |
+| Authentication                         | Supabase Auth                  | NextAuth, Firebase Auth               | Sudah standby di stack, PostgreSQL included                   |
+| Payment                                | Midtrans/Xendit                | Stripe, PayPal                        | Indonesian payment methods (GoPay, OVO, bank transfer)        |
+| VPS provider (future)                  | HostData.id                    | Contabo, Hetzner                      | Indonesian provider, local support, competitive pricing       |
+
 ---
 
-## Persetujuan Dokumen
+## 16. Persetujuan Dokumen
 
 | **Peran**                    | **Nama**                         | **Tanggal**  | **Status**   |
 |------------------------------|----------------------------------|--------------|--------------|
-| Product Owner                | Muhammad Fa'iz Zulfikar          | Juni 2025    | Approved     |
-| AI Agent                     | OpenCode/Sisyphus                | Juni 2025    | Approved     |
+| Product Owner                | Muhammad Fa'iz Zulfikar          | Juli 2025    | Approved     |
+| AI Agent                     | OpenCode/Sisyphus                | Juli 2025    | Approved     |
 
 ---
 
