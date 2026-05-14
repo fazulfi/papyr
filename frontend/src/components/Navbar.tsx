@@ -43,6 +43,7 @@ const NAV_LINKS = [
   { href: "/rotate", label: "Putar" },
   { href: "/image-to-pdf", label: "Gambar ke PDF" },
   { href: "/pdf-to-image", label: "PDF ke Gambar" },
+  { href: "/protect", label: "Proteksi" },
 ];
 
 /* ── Navbar Component ── */
