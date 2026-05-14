@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-14
-**Current Step:** STEP-F2-013
-**Overall Progress:** 12 / 97 (12%)
+**Current Step:** STEP-F2-014
+**Overall Progress:** 13 / 97 (13%)
 
 ---
 
@@ -13,13 +13,13 @@
 
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
-| 2A — Security (M12+M13) | 13 | 12 | 92% |
+| 2A — Security (M12+M13) | 13 | 13 | 100% |
 | 2B — Enhancement (M14+M15) | 16 | 0 | 0% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
 | 2D — Quality (M19+M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **12** | **12%** |
+| **TOTAL** | **97** | **13** | **13%** |
 
 ---
 
@@ -46,7 +46,7 @@
 | STEP-F2-010 | Backend — Unit tests for unlock endpoint | ✅ 2026-05-14 |
 | STEP-F2-011 | Frontend — Create /unlock page with full UI | ✅ 2026-05-14 |
 | STEP-F2-012 | Frontend — Unit tests for /unlock page | ✅ 2026-05-14 |
-| STEP-F2-013 | Testing — Manual E2E test unlock flow + Fase 2A complete | ⬜ |
+| STEP-F2-013 | Testing — Manual E2E test unlock flow + Fase 2A complete | ✅ 2026-05-14 |
 
 ---
 
