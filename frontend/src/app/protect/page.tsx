@@ -6,6 +6,7 @@ import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/ana
 import { config } from "@/lib/config";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
+import PasswordInput from "@/components/PasswordInput";
 
 /* ── Inline SVG Icons ── */
 
@@ -84,23 +85,6 @@ function AlertIcon() {
   );
 }
 
-function EyeIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-function EyeOffIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" />
-      <line x1="1" y1="1" x2="23" y2="23" />
-    </svg>
-  );
-}
 
 /* ── Types ── */
 
@@ -152,8 +136,6 @@ export default function ProtectPage() {
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState<ProtectResult | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [retrying, setRetrying] = useState(false);
   const [dragging, setDragging] = useState(false);
 
@@ -319,8 +301,6 @@ export default function ProtectPage() {
     setErrorMessage("");
     setRetrying(false);
     setDragging(false);
-    setShowPassword(false);
-    setShowConfirmPassword(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
@@ -409,54 +389,14 @@ export default function ProtectPage() {
           </div>
 
           {/* Password inputs */}
-          <div className="space-y-3 rounded-xl bg-white p-4 border border-slate-100 shadow-sm">
-            <label className="text-sm font-medium text-navy">Password</label>
-            <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Masukkan password (min 4 karakter)"
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 pr-10 text-sm text-navy placeholder:text-slate-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-                aria-label="Password"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
-              >
-                {showPassword ? <EyeOffIcon /> : <EyeIcon />}
-              </button>
-            </div>
-
-            <label className="text-sm font-medium text-navy">Konfirmasi Password</label>
-            <div className="relative">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Konfirmasi password"
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 pr-10 text-sm text-navy placeholder:text-slate-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-                aria-label="Konfirmasi password"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                aria-label={showConfirmPassword ? "Sembunyikan password" : "Tampilkan password"}
-              >
-                {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
-              </button>
-            </div>
-
-            {password && confirmPassword && password !== confirmPassword && (
-              <p className="text-xs text-red-500">
-                <AlertIcon className="inline mr-1" />
-                Password tidak cocok
-              </p>
-            )}
-          </div>
+<PasswordInput
+             password={password}
+             confirmPassword={confirmPassword}
+             onPasswordChange={setPassword}
+             onConfirmChange={setConfirmPassword}
+             showConfirm
+             minLength={4}
+           />
 
           {/* Encryption selector */}
           <div className="space-y-3 rounded-xl bg-white p-4 border border-slate-100 shadow-sm">
