@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-14
-**Current Step:** STEP-F2-009
-**Overall Progress:** 8 / 97 (8%)
+**Current Step:** STEP-F2-010
+**Overall Progress:** 9 / 97 (9%)
 
 ---
 
@@ -13,13 +13,13 @@
 
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
-| 2A — Security (M12+M13) | 13 | 8 | 62% |
+| 2A — Security (M12+M13) | 13 | 9 | 69% |
 | 2B — Enhancement (M14+M15) | 16 | 0 | 0% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
 | 2D — Quality (M19+M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **8** | **8%** |
+| **TOTAL** | **97** | **9** | **9%** |
 
 ---
 
@@ -42,7 +42,7 @@
 
 | Step | Title | Status |
 |------|-------|--------|
-| STEP-F2-009 | Backend — Create POST /api/unlock endpoint | ⬜ |
+| STEP-F2-009 | Backend — Create POST /api/unlock endpoint | ✅ 2026-05-14 |
 | STEP-F2-010 | Backend — Unit tests for unlock endpoint | ⬜ |
 | STEP-F2-011 | Frontend — Create /unlock page with full UI | ⬜ |
 | STEP-F2-012 | Frontend — Unit tests for /unlock page | ⬜ |
