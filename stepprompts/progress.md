@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-14
-**Current Step:** STEP-F2-003
-**Overall Progress:** 2 / 97 (2%)
+**Current Step:** STEP-F2-004
+**Overall Progress:** 3 / 97 (3%)
 
 ---
 
@@ -13,13 +13,13 @@
 
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
-| 2A — Security (M12+M13) | 13 | 2 | 15% |
+| 2A — Security (M12+M13) | 13 | 3 | 23% |
 | 2B — Enhancement (M14+M15) | 16 | 0 | 0% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
 | 2D — Quality (M19+M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **2** | **2%** |
+| **TOTAL** | **97** | **3** | **3%** |
 
 ---
 
@@ -31,7 +31,7 @@
 |------|-------|--------|
 | STEP-F2-001 | Backend — Create shared PDF validator utility | ✅ 2026-05-14 |
 | STEP-F2-002 | Backend — Create encryption service (shared protect/unlock) | ✅ 2026-05-14 |
-| STEP-F2-003 | Backend — Create POST /api/protect endpoint | ⬜ |
+| STEP-F2-003 | Backend — Create POST /api/protect endpoint | ✅ 2026-05-14 |
 | STEP-F2-004 | Backend — Unit tests for protect endpoint | ⬜ |
 | STEP-F2-005 | Frontend — Create /protect page with full UI | ⬜ |
 | STEP-F2-006 | Frontend — Create PasswordInput shared component | ⬜ |
