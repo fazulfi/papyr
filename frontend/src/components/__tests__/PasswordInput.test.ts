@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import {
   calculatePasswordStrength,
   getPasswordStrengthLevel,
-  type PasswordStrengthLevel,
 } from "../PasswordInput";
 
 describe("calculatePasswordStrength", () => {

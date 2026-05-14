@@ -24,15 +24,6 @@ function LockIcon() {
   );
 }
 
-function LockOpenIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-      <path d="M7 11V7a5 5 0 019.9-1" />
-    </svg>
-  );
-}
-
 function UploadIcon({ className }: { className?: string }) {
   return (
     <svg className={className} width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -66,16 +57,6 @@ function CheckIcon() {
   return (
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-
-function RefreshIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="23 4 23 10 17 10" />
-      <polyline points="1 20 1 14 7 14" />
-      <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
     </svg>
   );
 }
@@ -115,21 +96,6 @@ function Shimmer() {
   );
 }
 
-/* ── Encryption Method Badge ── */
-
-function EncryptionBadge({ method }: { method: string }) {
-  const isAES256 = method === "aes256";
-  return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-      isAES256
-        ? "bg-green-100 text-green-800"
-        : "bg-blue-100 text-blue-800"
-    }`}>
-      {isAES256 ? "AES-256" : "AES-128"}
-    </span>
-  );
-}
-
 /* ── Page Component ── */
 
 export default function ProtectPage() {
@@ -157,26 +123,22 @@ export default function ProtectPage() {
     [password, confirmPassword],
   );
 
-  const handleError = useCallback(
-    (message: string, isRetry: boolean) => {
-      if (!isRetry) {
-        setRetrying(true);
-        setState("uploading");
-        setTimeout(() => {
-          setRetrying(false);
-          sendRequest(true);
-        }, 1000);
-      } else {
-        setErrorMessage(message);
-        setState("error");
-        trackTaskFailed("protect", "server_error");
-      }
-    },
-    [],
-  );
+  function handleError(message: string, isRetry: boolean) {
+    if (!isRetry) {
+      setRetrying(true);
+      setState("uploading");
+      setTimeout(() => {
+        setRetrying(false);
+        sendRequest(true);
+      }, 1000);
+    } else {
+      setErrorMessage(message);
+      setState("error");
+      trackTaskFailed("protect", "server_error");
+    }
+  }
 
-  const sendRequest = useCallback(
-    (isRetry = false) => {
+  function sendRequest(isRetry = false) {
       if (!file) return;
 
       const formData = new FormData();
@@ -253,9 +215,7 @@ export default function ProtectPage() {
       setState("uploading");
       setProgress(0);
       if (!isRetry) trackTaskStarted("protect");
-    },
-    [file, password, encryption, handleError],
-  );
+  }
 
   const handleFileSelect = useCallback(
     (f: File | undefined) => {
@@ -273,7 +233,7 @@ export default function ProtectPage() {
     [validateFile],
   );
 
-  const handleSubmit = useCallback(() => {
+  function handleSubmit() {
     const err = validatePassword();
     if (err) {
       setErrorMessage(err);
@@ -281,7 +241,7 @@ export default function ProtectPage() {
     }
     setErrorMessage("");
     sendRequest();
-  }, [validatePassword, sendRequest]);
+  }
 
   const handleReset = useCallback(() => {
     setState("idle");
