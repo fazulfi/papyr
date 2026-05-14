@@ -13,6 +13,7 @@ from routers.connectivity import router as connectivity_router
 from routers.compress import router as compress_router
 from routers.image_to_pdf import router as image_to_pdf_router
 from routers.pdf_to_image import router as pdf_to_image_router
+from routers.protect import router as protect_router
 from utils.config import settings
 from utils.logging_config import setup_logging
 from utils.cleanup import cleanup_expired_files, CLEANUP_INTERVAL_SECONDS
@@ -94,6 +95,7 @@ app.include_router(connectivity_router)
 app.include_router(compress_router)
 app.include_router(image_to_pdf_router)
 app.include_router(pdf_to_image_router)
+app.include_router(protect_router)
 
 
 @app.get("/health")
