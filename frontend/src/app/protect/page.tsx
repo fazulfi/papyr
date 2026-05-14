@@ -7,6 +7,11 @@ import { config } from "@/lib/config";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
 import PasswordInput from "@/components/PasswordInput";
+import {
+  getProtectFailureReason,
+  validateProtectFile,
+  validateProtectPassword,
+} from "./logic";
 
 /* ── Inline SVG Icons ── */
 
@@ -143,27 +148,14 @@ export default function ProtectPage() {
   const xhrRef = useRef<XMLHttpRequest | null>(null);
 
   const validateFile = useCallback(
-    (f: File): string | null => {
-      if (!f.type || f.type !== "application/pdf") {
-        return "Tipe file tidak valid. Hanya file PDF yang diterima.";
-      }
-      if (f.size === 0) {
-        return "File kosong. Silakan upload file PDF yang valid.";
-      }
-      if (f.size > 20 * 1024 * 1024) {
-        return `Ukuran file terlalu besar. Maksimal 20MB.`;
-      }
-      return null;
-    },
+    (f: File): string | null => validateProtectFile(f),
     [],
   );
 
-  const validatePassword = useCallback((): string | null => {
-    if (password.length < 4) return "Password minimal 4 karakter.";
-    if (password.length > 128) return "Password maksimal 128 karakter.";
-    if (password !== confirmPassword) return "Password dan konfirmasi password tidak cocok.";
-    return null;
-  }, [password, confirmPassword]);
+  const validatePassword = useCallback(
+    (): string | null => validateProtectPassword(password, confirmPassword),
+    [password, confirmPassword],
+  );
 
   const handleError = useCallback(
     (message: string, isRetry: boolean) => {
@@ -212,28 +204,29 @@ export default function ProtectPage() {
           } catch {
             handleError("Gagal memproses respons server.", isRetry);
           }
-        } else if (xhr.status === 429) {
-          setErrorMessage("Terlalu banyak permintaan. Coba lagi dalam 1 menit.");
-          setState("error");
-          trackTaskFailed("protect", "rate_limit");
-        } else if (xhr.status === 409) {
-          try {
-            const body = JSON.parse(xhr.responseText);
-            setErrorMessage(body.detail || "PDF sudah terenkripsi.");
-          } catch {
-            setErrorMessage("PDF sudah terenkripsi.");
-          }
-          setState("error");
-          trackTaskFailed("protect", "already_encrypted");
         } else if (xhr.status >= 400 && xhr.status < 500) {
-          try {
-            const body = JSON.parse(xhr.responseText);
-            setErrorMessage(body.detail || "Terjadi kesalahan validasi.");
-          } catch {
-            setErrorMessage("Terjadi kesalahan validasi.");
+          const failureReason = getProtectFailureReason(xhr.status);
+
+          if (xhr.status === 429) {
+            setErrorMessage("Terlalu banyak permintaan. Coba lagi dalam 1 menit.");
+          } else if (xhr.status === 409) {
+            try {
+              const body = JSON.parse(xhr.responseText);
+              setErrorMessage(body.detail || "PDF sudah terenkripsi.");
+            } catch {
+              setErrorMessage("PDF sudah terenkripsi.");
+            }
+          } else {
+            try {
+              const body = JSON.parse(xhr.responseText);
+              setErrorMessage(body.detail || "Terjadi kesalahan validasi.");
+            } catch {
+              setErrorMessage("Terjadi kesalahan validasi.");
+            }
           }
+
           setState("error");
-          trackTaskFailed("protect", "validation_error");
+          trackTaskFailed("protect", failureReason);
         } else {
           handleError("Gagal memproses file. Silakan coba lagi.", isRetry);
         }

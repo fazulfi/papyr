@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-14
-**Current Step:** STEP-F2-007
-**Overall Progress:** 6 / 97 (6%)
+**Current Step:** STEP-F2-008
+**Overall Progress:** 7 / 97 (7%)
 
 ---
 
@@ -13,13 +13,13 @@
 
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
-| 2A — Security (M12+M13) | 13 | 6 | 46% |
+| 2A — Security (M12+M13) | 13 | 7 | 54% |
 | 2B — Enhancement (M14+M15) | 16 | 0 | 0% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
 | 2D — Quality (M19+M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **6** | **6%** |
+| **TOTAL** | **97** | **7** | **7%** |
 
 ---
 
@@ -35,7 +35,7 @@
 | STEP-F2-004 | Backend — Unit tests for protect endpoint | ✅ 2026-05-14 |
 | STEP-F2-005 | Frontend — Create /protect page with full UI | ✅ 2026-05-14 |
 | STEP-F2-006 | Frontend — Create PasswordInput shared component | ✅ 2026-05-14 |
-| STEP-F2-007 | Frontend — Unit tests for /protect page and PasswordInput | ⬜ |
+| STEP-F2-007 | Frontend — Unit tests for /protect page and PasswordInput | ✅ 2026-05-14 |
 | STEP-F2-008 | Testing — Manual E2E test protect flow | ⬜ |
 
 ### M13: Unlock PDF (Remove Password)

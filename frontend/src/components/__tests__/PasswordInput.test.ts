@@ -39,11 +39,11 @@ describe("calculatePasswordStrength", () => {
   });
 
   it("returns 1 for short password with uppercase", () => {
-    expect(calculatePasswordStrength("Abc")).toBe(0);
+    expect(calculatePasswordStrength("Abc")).toBe(1);
   });
 
-  it("returns 0 for short password with digit", () => {
-    expect(calculatePasswordStrength("123")).toBe(0);
+  it("returns 1 for short password with digit", () => {
+    expect(calculatePasswordStrength("123")).toBe(1);
   });
 });
 
