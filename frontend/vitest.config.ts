@@ -1,14 +1,18 @@
 import { defineConfig } from "vitest/config";
-import { fileURLToPath, URL } from "node:url";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   test: {
     globals: true,
     environment: "node",
+    pool: "threads",
   },
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@": path.resolve(__dirname, "src"),
     },
   },
 });
