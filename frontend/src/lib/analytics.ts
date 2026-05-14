@@ -13,7 +13,8 @@ export type ToolName =
   | "split"
   | "image-to-pdf"
   | "pdf-to-image"
-  | "rotate";
+  | "rotate"
+  | "protect";
 
 export type DeviceCategory = "mobile" | "tablet" | "desktop";
 

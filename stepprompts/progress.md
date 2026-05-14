@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-14
-**Current Step:** STEP-F2-005
-**Overall Progress:** 4 / 97 (4%)
+**Current Step:** STEP-F2-006
+**Overall Progress:** 5 / 97 (5%)
 
 ---
 
@@ -13,13 +13,13 @@
 
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
-| 2A — Security (M12+M13) | 13 | 4 | 31% |
+| 2A — Security (M12+M13) | 13 | 5 | 38% |
 | 2B — Enhancement (M14+M15) | 16 | 0 | 0% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
 | 2D — Quality (M19+M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **4** | **4%** |
+| **TOTAL** | **97** | **5** | **5%** |
 
 ---
 
@@ -33,7 +33,7 @@
 | STEP-F2-002 | Backend — Create encryption service (shared protect/unlock) | ✅ 2026-05-14 |
 | STEP-F2-003 | Backend — Create POST /api/protect endpoint | ✅ 2026-05-14 |
 | STEP-F2-004 | Backend — Unit tests for protect endpoint | ✅ 2026-05-14 |
-| STEP-F2-005 | Frontend — Create /protect page with full UI | ⬜ |
+| STEP-F2-005 | Frontend — Create /protect page with full UI | ✅ 2026-05-14 |
 | STEP-F2-006 | Frontend — Create PasswordInput shared component | ⬜ |
 | STEP-F2-007 | Frontend — Unit tests for /protect page and PasswordInput | ⬜ |
 | STEP-F2-008 | Testing — Manual E2E test protect flow | ⬜ |

@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/rotate",
     "/image-to-pdf",
     "/pdf-to-image",
+    "/protect",
   ];
 
   return [
