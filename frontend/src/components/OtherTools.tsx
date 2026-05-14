@@ -22,6 +22,7 @@ const ALL_TOOLS = [
   { href: "/pdf-to-image", name: "PDF ke Gambar" },
   { href: "/protect", name: "Proteksi PDF" },
   { href: "/unlock", name: "Hapus Password PDF" },
+  { href: "/watermark", name: "Tambah Watermark PDF" },
 ];
 
 /* ── Component ── */
