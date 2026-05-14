@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/image-to-pdf",
     "/pdf-to-image",
     "/protect",
+    "/unlock",
   ];
 
   return [
