@@ -292,6 +292,72 @@ async def test_watermark_upload_failure_returns_500(test_client):
 
 
 @pytest.mark.asyncio
+async def test_watermark_invalid_pdf_returns_400(test_client):
+    """STEP-F2-019 case 2: invalid PDF file rejected."""
+    response = await test_client.post(
+        "/api/watermark",
+        files=_build_files(
+            "invalid.pdf",
+            b"NOT A PDF",
+            "application/pdf",
+            "wm.png",
+            VALID_IMG_BYTES,
+            "image/png",
+        ),
+    )
+
+    assert response.status_code == 400
+    assert "bukan file PDF" in response.json()["detail"]
+
+
+@pytest.mark.asyncio
+async def test_watermark_empty_pdf_returns_400(test_client):
+    """STEP-F2-019 case 7: empty PDF file rejected."""
+    with patch("routers.watermark.validate_pdf_file") as mock_validate:
+        mock_validate.side_effect = HTTPException(status_code=400, detail="File kosong. Silakan upload file PDF yang valid.")
+
+        response = await test_client.post(
+            "/api/watermark",
+            files=_build_files(
+                "empty.pdf",
+                b"",
+                "application/pdf",
+                "wm.png",
+                VALID_IMG_BYTES,
+                "image/png",
+            ),
+        )
+
+        assert response.status_code == 400
+        assert "kosong" in response.json()["detail"]
+
+
+@pytest.mark.asyncio
+async def test_watermark_encrypted_pdf_rejected(test_client):
+    """STEP-F2-019 case 8: encrypted PDF rejected (reject_encrypted=True)."""
+    with patch("routers.watermark.validate_pdf_file") as mock_validate:
+        mock_validate.side_effect = HTTPException(
+            status_code=400,
+            detail="PDF ini dilindungi kata sandi. Gunakan fitur Unlock terlebih dahulu.",
+        )
+
+        response = await test_client.post(
+            "/api/watermark",
+            files=_build_files(
+                "locked.pdf",
+                VALID_PDF_BYTES,
+                "application/pdf",
+                "wm.png",
+                VALID_IMG_BYTES,
+                "image/png",
+            ),
+        )
+
+        assert response.status_code == 400
+        assert "dilindungi" in response.json()["detail"]
+
+
+@pytest.mark.asyncio
 async def test_watermark_missing_watermark_image_returns_422(test_client):
     response = await test_client.post(
         "/api/watermark",
