@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-15
-**Current Step:** STEP-F2-019
-**Overall Progress:** 18 / 97 (19%)
+**Current Step:** STEP-F2-020
+**Overall Progress:** 19 / 97 (20%)
 
 ---
 
@@ -14,12 +14,12 @@
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
-| 2B — Enhancement (M14+M15) | 16 | 5 | 31% |
+| 2B — Enhancement (M14+M15) | 16 | 6 | 38% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
-| 2D — Quality (M19+M20) | 14 | 0 | 0% |
+| 2D — Quality (M19-M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **18** | **19%** |
+| **TOTAL** | **97** | **19** | **20%** |
 
 ---
 
@@ -61,7 +61,7 @@
 | STEP-F2-016 | Frontend — Text watermark processing client-side (pdf-lib) | ✅ 2026-05-15 |
 | STEP-F2-017 | Backend — Create POST /api/watermark for image watermark | ✅ 2026-05-15 |
 | STEP-F2-018 | Frontend — Image watermark API integration + analytics | ✅ 2026-05-15 |
-| STEP-F2-019 | Backend — Unit tests for watermark endpoint | ⬜ |
+| STEP-F2-019 | Backend — Unit tests for watermark endpoint | ✅ 2026-05-15 |
 | STEP-F2-020 | Frontend — Unit tests for /watermark page | ⬜ |
 | STEP-F2-021 | Testing — Manual E2E test watermark flow | ⬜ |
 
