@@ -1,12 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { config } from "@/lib/config";
 import type {
   WatermarkImageConfig,
   WatermarkTab,
   WatermarkTextConfig,
 } from "./logic";
 import {
+  getWatermarkErrorMessage,
+  getWatermarkFailureReason,
   validateWatermarkImageConfig,
   validateWatermarkImageFile,
   validateWatermarkPdfFile,
@@ -92,6 +95,8 @@ export default function WatermarkPage() {
   const [imageError, setImageError] = useState("");
   const [applyError, setApplyError] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [downloadUrl, setDownloadUrl] = useState("");
   const [textConfig, setTextConfig] = useState<WatermarkTextConfig>({
     text: "CONFIDENTIAL",
     fontSize: 32,
@@ -148,20 +153,122 @@ export default function WatermarkPage() {
     try {
       setProcessing(true);
       setApplyError("");
-      trackTaskStarted("watermark");
+      setDownloadUrl("");
+      setProgress(0);
+      trackTaskStarted("watermark", { watermark_type: "text" });
 
       const processed = await applyTextWatermark(new Uint8Array(fileBytes), textConfig);
       const baseName = pdfFile.name.replace(/\.pdf$/i, "") || "watermarked";
       downloadPDF(processed, `${baseName}-watermark.pdf`);
 
-      trackTaskCompleted("watermark");
+      trackTaskCompleted("watermark", { watermark_type: "text" });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Gagal memproses watermark.";
       setApplyError(msg);
-      trackTaskFailed("watermark", msg);
+      trackTaskFailed("watermark", msg, {
+        watermark_type: "text",
+        error_type: "client_processing_error",
+      });
     } finally {
       setProcessing(false);
     }
+  };
+
+  const handleApplyImage = () => {
+    if (!pdfFile || !imageFile || tab !== "image") return;
+
+    const formData = new FormData();
+    formData.append("file", pdfFile);
+    formData.append("watermark_image", imageFile);
+    formData.append(
+      "config",
+      JSON.stringify({
+        opacity: imageConfig.opacity,
+        position: imageConfig.position,
+        scale: imageConfig.scale,
+      }),
+    );
+
+    setProcessing(true);
+    setApplyError("");
+    setDownloadUrl("");
+    setProgress(0);
+    trackTaskStarted("watermark", { watermark_type: "image" });
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.upload.addEventListener("progress", (event) => {
+      if (event.lengthComputable) {
+        setProgress(Math.round((event.loaded / event.total) * 100));
+      }
+    });
+
+    xhr.upload.addEventListener("loadend", () => {
+      if (xhr.readyState !== XMLHttpRequest.DONE) {
+        setProgress(100);
+      }
+    });
+
+    xhr.addEventListener("load", () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        const data = JSON.parse(xhr.responseText) as {
+          download_url: string;
+          pages_processed?: number;
+        };
+        setDownloadUrl(data.download_url);
+        setProgress(100);
+        trackTaskCompleted("watermark", {
+          watermark_type: "image",
+          pages_count: data.pages_processed ?? 0,
+        });
+        setProcessing(false);
+        return;
+      }
+
+      let bodyDetail: string | undefined;
+      try {
+        const body = JSON.parse(xhr.responseText) as {
+          detail?: string;
+          error?: string;
+        };
+        bodyDetail = body.detail || body.error || undefined;
+      } catch {
+        /* ignore parse failures */
+      }
+
+      const reason = getWatermarkFailureReason(xhr.status);
+      const message = getWatermarkErrorMessage(xhr.status, bodyDetail);
+      setApplyError(message);
+      trackTaskFailed("watermark", message, {
+        watermark_type: "image",
+        error_type: reason,
+      });
+      setProcessing(false);
+    });
+
+    xhr.addEventListener("error", () => {
+      const msg = "Terjadi gangguan jaringan saat upload watermark.";
+      setApplyError(msg);
+      trackTaskFailed("watermark", msg, {
+        watermark_type: "image",
+        error_type: "network_error",
+      });
+      setProcessing(false);
+    });
+
+    xhr.addEventListener("timeout", () => {
+      const msg = "Permintaan timeout. Coba lagi dengan file lebih kecil.";
+      setApplyError(msg);
+      trackTaskFailed("watermark", msg, {
+        watermark_type: "image",
+        error_type: "timeout",
+      });
+      setProcessing(false);
+    });
+
+    xhr.open("POST", `${config.apiUrl}/api/watermark`);
+    xhr.timeout = 120000;
+    xhr.send(formData);
   };
 
   return (
@@ -298,10 +405,37 @@ export default function WatermarkPage() {
         </div>
       )}
 
+      {processing && tab === "image" && (
+        <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="mb-2 flex items-center justify-between text-sm text-slate-600">
+            <span>Mengupload watermark...</span>
+            <span>{progress}%</span>
+          </div>
+          <div className="h-2 overflow-hidden rounded-full bg-slate-200">
+            <div
+              className="h-full rounded-full bg-accent transition-all duration-200"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+      )}
+
+      {downloadUrl && (
+        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+          <p className="text-sm text-emerald-700">Watermark gambar berhasil diterapkan.</p>
+          <a
+            href={downloadUrl}
+            className="mt-3 inline-flex items-center rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+          >
+            Download PDF Watermarked
+          </a>
+        </div>
+      )}
+
       <button
         type="button"
         disabled={!canApply || processing}
-        onClick={handleApplyText}
+        onClick={tab === "image" ? handleApplyImage : handleApplyText}
         className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:bg-slate-300"
       >
         {processing ? "Memproses..." : "Terapkan Watermark"}

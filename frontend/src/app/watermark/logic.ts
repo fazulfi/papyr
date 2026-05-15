@@ -212,3 +212,28 @@ export function getPreviewState(params: {
   if (params.isRendering) return "loading";
   return "ready";
 }
+
+/** STEP-F2-018: Image watermark API helpers */
+
+export type WatermarkApiErrorType =
+  | "validation_error"
+  | "rate_limit"
+  | "server_error"
+  | "network_error"
+  | "timeout";
+
+export function getWatermarkFailureReason(status: number): WatermarkApiErrorType {
+  if (status === 429) return "rate_limit";
+  if (status >= 400 && status < 500) return "validation_error";
+  return "server_error";
+}
+
+export function getWatermarkErrorMessage(
+  status: number,
+  detail?: string,
+): string {
+  if (status === 429) return "Terlalu banyak permintaan. Coba lagi nanti.";
+  if (detail) return detail;
+  if (status >= 500) return "Gagal memproses file. Silakan coba lagi.";
+  return "Gagal memproses watermark gambar.";
+}

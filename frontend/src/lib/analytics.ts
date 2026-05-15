@@ -32,18 +32,21 @@ function getDeviceCategory(): DeviceCategory {
 
 /* ── Track Helpers ── */
 
-export function trackTaskStarted(tool: ToolName) {
-  track("task_started", { tool, device_category: getDeviceCategory() });
+type AnalyticsProps = Record<string, string | number | boolean | null | undefined>;
+
+export function trackTaskStarted(tool: ToolName, props: AnalyticsProps = {}) {
+  track("task_started", { tool, device_category: getDeviceCategory(), ...props });
 }
 
-export function trackTaskCompleted(tool: ToolName) {
-  track("task_completed", { tool, device_category: getDeviceCategory() });
+export function trackTaskCompleted(tool: ToolName, props: AnalyticsProps = {}) {
+  track("task_completed", { tool, device_category: getDeviceCategory(), ...props });
 }
 
-export function trackTaskFailed(tool: ToolName, error: string) {
+export function trackTaskFailed(tool: ToolName, error: string, props: AnalyticsProps = {}) {
   track("task_failed", {
     tool,
     error: error.slice(0, 200),
     device_category: getDeviceCategory(),
+    ...props,
   });
 }
