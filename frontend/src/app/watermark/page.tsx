@@ -7,13 +7,13 @@ import type {
   WatermarkTextConfig,
 } from "./logic";
 import {
-  isValidWatermarkTab,
   validateWatermarkImageConfig,
   validateWatermarkImageFile,
   validateWatermarkPdfFile,
   validateWatermarkTextConfig,
 } from "./logic";
 import WatermarkConfig from "@/components/WatermarkConfig";
+import WatermarkPreview from "@/components/WatermarkPreview";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
 import { formatFileSize } from "@/lib/format";
@@ -43,24 +43,6 @@ function FileIcon({ className }: { className?: string }) {
     <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z" />
       <polyline points="14 2 14 8 20 8" />
-    </svg>
-  );
-}
-
-function DownloadIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
     </svg>
   );
 }
@@ -264,12 +246,13 @@ export default function WatermarkPage() {
         )}
       </div>
 
-      <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">Preview</h2>
-        <div className="flex min-h-40 items-center justify-center rounded-xl border border-dashed border-slate-200 bg-slate-50 p-6 text-sm text-slate-400">
-          Preview halaman pertama PDF akan muncul di langkah berikutnya.
-        </div>
-      </div>
+      <WatermarkPreview
+        pdfFile={pdfFile}
+        tab={tab}
+        textConfig={textConfig}
+        imageConfig={imageConfig}
+        imageFile={imageFile}
+      />
 
       {validationMessage && (
         <div className="mt-4 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">

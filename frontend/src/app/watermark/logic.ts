@@ -93,3 +93,122 @@ export function validateWatermarkImageConfig(config: WatermarkImageConfig): stri
 export function isValidWatermarkTab(tab: string): tab is WatermarkTab {
   return tab === "text" || tab === "image";
 }
+
+export interface WatermarkOverlayStyle {
+  x: number;
+  y: number;
+  rotationDegrees: number;
+}
+
+export function calculateTextOverlayStyle(
+  config: WatermarkTextConfig,
+  canvasWidth: number,
+  canvasHeight: number,
+): WatermarkOverlayStyle {
+  const centerX = canvasWidth / 2;
+  const centerY = canvasHeight / 2;
+
+  switch (config.position) {
+    case "center":
+      return { x: centerX, y: centerY, rotationDegrees: config.rotation };
+    case "diagonal":
+      return { x: centerX, y: centerY, rotationDegrees: -30 };
+    case "top":
+      return { x: centerX, y: Math.max(48, canvasHeight * 0.2), rotationDegrees: config.rotation };
+    case "bottom":
+      return {
+        x: centerX,
+        y: Math.min(canvasHeight - 48, canvasHeight * 0.8),
+        rotationDegrees: config.rotation,
+      };
+    default:
+      return { x: centerX, y: centerY, rotationDegrees: config.rotation };
+  }
+}
+
+export function calculateImageOverlayStyle(
+  config: WatermarkImageConfig,
+  canvasWidth: number,
+  canvasHeight: number,
+): WatermarkOverlayStyle {
+  const insetX = Math.max(24, canvasWidth * 0.12);
+  const insetY = Math.max(24, canvasHeight * 0.12);
+
+  switch (config.position) {
+    case "center":
+      return { x: canvasWidth / 2, y: canvasHeight / 2, rotationDegrees: 0 };
+    case "top-left":
+      return { x: insetX, y: insetY, rotationDegrees: 0 };
+    case "top-right":
+      return { x: canvasWidth - insetX, y: insetY, rotationDegrees: 0 };
+    case "bottom-left":
+      return { x: insetX, y: canvasHeight - insetY, rotationDegrees: 0 };
+    case "bottom-right":
+      return { x: canvasWidth - insetX, y: canvasHeight - insetY, rotationDegrees: 0 };
+    default:
+      return { x: canvasWidth / 2, y: canvasHeight / 2, rotationDegrees: 0 };
+  }
+}
+
+export function calculatePreviewDimensions(
+  pageWidth: number,
+  pageHeight: number,
+  maxWidth = 720,
+  maxHeight = 960,
+): { width: number; height: number; scale: number } {
+  if (pageWidth <= 0 || pageHeight <= 0) {
+    return { width: 480, height: 640, scale: 1 };
+  }
+
+  const widthScale = maxWidth / pageWidth;
+  const heightScale = maxHeight / pageHeight;
+  const scale = Math.min(widthScale, heightScale, 1);
+
+  return {
+    width: Math.max(240, Math.round(pageWidth * scale)),
+    height: Math.max(320, Math.round(pageHeight * scale)),
+    scale,
+  };
+}
+
+export function createDebouncedRunner(delayMs: number) {
+  let timer: ReturnType<typeof setTimeout> | null = null;
+
+  return {
+    run(callback: () => void) {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        callback();
+        timer = null;
+      }, delayMs);
+    },
+    cancel() {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+    },
+  };
+}
+
+export function hexToRgba(hex: string, opacity: number): string {
+  const normalized = hex.replace("#", "");
+  const red = Number.parseInt(normalized.substring(0, 2), 16);
+  const green = Number.parseInt(normalized.substring(2, 4), 16);
+  const blue = Number.parseInt(normalized.substring(4, 6), 16);
+
+  return `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+}
+
+export function getPreviewState(params: {
+  hasPdf: boolean;
+  isRendering: boolean;
+  errorMessage: string;
+}): "placeholder" | "loading" | "error" | "ready" {
+  if (!params.hasPdf) return "placeholder";
+  if (params.errorMessage) return "error";
+  if (params.isRendering) return "loading";
+  return "ready";
+}
