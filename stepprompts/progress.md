@@ -3,9 +3,9 @@
 > **Instruksi:** Setelah menyelesaikan setiap STEP, update status di file ini menjadi ✅ beserta tanggal selesai.
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
-**Last Updated:** 2026-05-14
-**Current Step:** STEP-F2-017
-**Overall Progress:** 16 / 97 (16%)
+**Last Updated:** 2026-05-15
+**Current Step:** STEP-F2-018
+**Overall Progress:** 17 / 97 (17%)
 
 ---
 
@@ -14,12 +14,12 @@
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
-| 2B — Enhancement (M14+M15) | 16 | 3 | 19% |
+| 2B — Enhancement (M14+M15) | 16 | 4 | 25% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
 | 2D — Quality (M19+M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **16** | **16%** |
+| **TOTAL** | **97** | **17** | **17%** |
 
 ---
 
@@ -59,7 +59,7 @@
 | STEP-F2-014 | Frontend — Create /watermark page with tab UI (text/image) | ✅ 2026-05-14 |
 | STEP-F2-015 | Frontend — Watermark preview on first PDF page | ✅ 2026-05-14 |
 | STEP-F2-016 | Frontend — Text watermark processing client-side (pdf-lib) | ✅ 2026-05-15 |
-| STEP-F2-017 | Backend — Create POST /api/watermark for image watermark | ⬜ |
+| STEP-F2-017 | Backend — Create POST /api/watermark for image watermark | ✅ 2026-05-15 |
 | STEP-F2-018 | Frontend — Image watermark API integration + analytics | ⬜ |
 | STEP-F2-019 | Backend — Unit tests for watermark endpoint | ⬜ |
 | STEP-F2-020 | Frontend — Unit tests for /watermark page | ⬜ |
