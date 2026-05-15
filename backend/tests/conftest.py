@@ -59,6 +59,11 @@ def mock_r2_and_cleanup():
             "routers.pdf_to_image.generate_signed_url",
             return_value="https://example.com/mock-pages.zip",
         ),
+        patch("routers.watermark.upload_file", return_value={"key": "mock-watermarked.pdf"}),
+        patch(
+            "routers.watermark.generate_signed_url",
+            return_value="https://example.com/mock-watermarked.pdf",
+        ),
         patch("main.cleanup_expired_files", return_value={"deleted": 0, "failed": 0, "scanned": 0}),
         patch(
             "utils.cleanup.cleanup_expired_files",
