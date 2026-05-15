@@ -24,6 +24,8 @@ import {
   calculateTextOverlayStyle,
   createDebouncedRunner,
   getPreviewState,
+  getWatermarkErrorMessage,
+  getWatermarkFailureReason,
   hexToRgba,
   isValidWatermarkTab,
   validateWatermarkImageConfig,
@@ -395,6 +397,22 @@ describe("STEP-F2-015 — /watermark preview logic coverage", () => {
       expect(getPasswordStrengthLevel(calculatePasswordStrength("abc"))).toBe("weak");
       expect(getPasswordStrengthLevel(calculatePasswordStrength("Abcdefgh"))).toBe("medium");
       expect(getPasswordStrengthLevel(calculatePasswordStrength("Abcdefg1!"))).toBe("strong");
+    });
+  });
+
+  describe("STEP-F2-018 image watermark API helpers", () => {
+    it("maps HTTP status to failure reason", () => {
+      expect(getWatermarkFailureReason(429)).toBe("rate_limit");
+      expect(getWatermarkFailureReason(400)).toBe("validation_error");
+      expect(getWatermarkFailureReason(422)).toBe("validation_error");
+      expect(getWatermarkFailureReason(500)).toBe("server_error");
+    });
+
+    it("returns exact error messages for API states", () => {
+      expect(getWatermarkErrorMessage(429)).toBe("Terlalu banyak permintaan. Coba lagi nanti.");
+      expect(getWatermarkErrorMessage(400, "Config JSON tidak valid.")).toBe("Config JSON tidak valid.");
+      expect(getWatermarkErrorMessage(500)).toBe("Gagal memproses file. Silakan coba lagi.");
+      expect(getWatermarkErrorMessage(400)).toBe("Gagal memproses watermark gambar.");
     });
   });
 });

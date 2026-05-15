@@ -38,4 +38,33 @@ describe("analytics", () => {
       device_category: "desktop",
     });
   });
+
+  it("accepts additional analytics props for watermark flows", () => {
+    trackTaskStarted("watermark", { watermark_type: "image" });
+    expect(track).toHaveBeenLastCalledWith("task_started", {
+      tool: "watermark",
+      device_category: "desktop",
+      watermark_type: "image",
+    });
+
+    trackTaskCompleted("watermark", { watermark_type: "image", pages_count: 3 });
+    expect(track).toHaveBeenLastCalledWith("task_completed", {
+      tool: "watermark",
+      device_category: "desktop",
+      watermark_type: "image",
+      pages_count: 3,
+    });
+
+    trackTaskFailed("watermark", "timeout", {
+      watermark_type: "image",
+      error_type: "timeout",
+    });
+    expect(track).toHaveBeenLastCalledWith("task_failed", {
+      tool: "watermark",
+      error: "timeout",
+      device_category: "desktop",
+      watermark_type: "image",
+      error_type: "timeout",
+    });
+  });
 });
