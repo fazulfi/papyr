@@ -1,4 +1,23 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+vi.mock("pdf-lib", () => {
+  const drawTextMock = vi.fn();
+  const getSizeMock = vi.fn(() => ({ width: 600, height: 800 }));
+  const pageMock = { drawText: drawTextMock, getSize: getSizeMock };
+
+  return {
+    PDFDocument: {
+      load: vi.fn(async () => ({
+        embedFont: vi.fn(async () => "HelveticaFont"),
+        getPages: vi.fn(() => [pageMock, pageMock]),
+        save: vi.fn(async () => new Uint8Array([1, 2, 3])),
+      })),
+    },
+    StandardFonts: { Helvetica: "Helvetica" },
+    rgb: vi.fn((r: number, g: number, b: number) => ({ r, g, b })),
+    degrees: vi.fn((value: number) => value),
+  };
+});
 import {
   calculateImageOverlayStyle,
   calculatePreviewDimensions,
@@ -12,6 +31,11 @@ import {
   validateWatermarkPdfFile,
   validateWatermarkTextConfig,
 } from "@/app/watermark/logic";
+import {
+  applyTextWatermark,
+  hexToRgbNormalized,
+  mapTextWatermarkPosition,
+} from "@/app/watermark/processing";
 import {
   calculatePasswordStrength,
   getPasswordStrengthLevel,
@@ -167,6 +191,54 @@ describe("STEP-F2-015 — /watermark preview logic coverage", () => {
 
     it("accepts valid image config", () => {
       expect(validateWatermarkImageConfig({ opacity: 0.75, position: "bottom-right", scale: 0.4 })).toBeNull();
+    });
+  });
+
+  describe("STEP-F2-016 processing helpers", () => {
+    it("normalizes hex color into pdf-lib rgb values", () => {
+      expect(hexToRgbNormalized("#FFFFFF")).toEqual({ r: 1, g: 1, b: 1 });
+      expect(hexToRgbNormalized("#0A64FF")).toEqual({
+        r: 10 / 255,
+        g: 100 / 255,
+        b: 1,
+      });
+    });
+
+    it("maps text watermark position correctly", () => {
+      expect(mapTextWatermarkPosition("center", 600, 800)).toEqual({
+        x: 300,
+        y: 400,
+        rotationDegrees: 0,
+      });
+      expect(mapTextWatermarkPosition("diagonal", 600, 800)).toEqual({
+        x: 300,
+        y: 400,
+        rotationDegrees: -30,
+      });
+      expect(mapTextWatermarkPosition("top", 600, 800)).toEqual({
+        x: 300,
+        y: 750,
+        rotationDegrees: 0,
+      });
+      expect(mapTextWatermarkPosition("bottom", 600, 800)).toEqual({
+        x: 300,
+        y: 50,
+        rotationDegrees: 0,
+      });
+    });
+
+    it("applies text watermark to all pages and returns bytes", async () => {
+      const input = new Uint8Array([10, 20, 30]);
+      const output = await applyTextWatermark(input, {
+        text: "CONFIDENTIAL",
+        fontSize: 32,
+        opacity: 0.2,
+        rotation: 15,
+        color: "#CCCCCC",
+        position: "center",
+      });
+
+      expect(output).toEqual(new Uint8Array([1, 2, 3]));
     });
   });
 

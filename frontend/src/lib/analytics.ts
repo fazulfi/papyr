@@ -15,7 +15,8 @@ export type ToolName =
   | "pdf-to-image"
   | "rotate"
   | "protect"
-  | "unlock";
+  | "unlock"
+  | "watermark";
 
 export type DeviceCategory = "mobile" | "tablet" | "desktop";
 

@@ -12,11 +12,14 @@ import {
   validateWatermarkPdfFile,
   validateWatermarkTextConfig,
 } from "./logic";
+import { applyTextWatermark } from "./processing";
 import WatermarkConfig from "@/components/WatermarkConfig";
 import WatermarkPreview from "@/components/WatermarkPreview";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
+import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
 import { formatFileSize } from "@/lib/format";
+import { downloadPDF } from "@/lib/pdfUtils";
 
 function WatermarkIcon() {
   return (
@@ -87,6 +90,8 @@ export default function WatermarkPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [pdfError, setPdfError] = useState("");
   const [imageError, setImageError] = useState("");
+  const [applyError, setApplyError] = useState("");
+  const [processing, setProcessing] = useState(false);
   const [textConfig, setTextConfig] = useState<WatermarkTextConfig>({
     text: "CONFIDENTIAL",
     fontSize: 32,
@@ -113,6 +118,7 @@ export default function WatermarkPage() {
     }
     setPdfFile(file);
     setPdfError("");
+    setApplyError("");
   };
 
   const handleImageSelect = (file?: File) => {
@@ -125,6 +131,7 @@ export default function WatermarkPage() {
     }
     setImageFile(file);
     setImageError("");
+    setApplyError("");
   };
 
   const validationMessage =
@@ -133,6 +140,29 @@ export default function WatermarkPage() {
       : validateWatermarkImageConfig(imageConfig);
 
   const canApply = Boolean(pdfFile) && !validationMessage && (tab === "text" || Boolean(imageFile));
+
+  const handleApplyText = async () => {
+    if (!pdfFile || tab !== "text") return;
+
+    const fileBytes = await pdfFile.arrayBuffer();
+    try {
+      setProcessing(true);
+      setApplyError("");
+      trackTaskStarted("watermark");
+
+      const processed = await applyTextWatermark(new Uint8Array(fileBytes), textConfig);
+      const baseName = pdfFile.name.replace(/\.pdf$/i, "") || "watermarked";
+      downloadPDF(processed, `${baseName}-watermark.pdf`);
+
+      trackTaskCompleted("watermark");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Gagal memproses watermark.";
+      setApplyError(msg);
+      trackTaskFailed("watermark", msg);
+    } finally {
+      setProcessing(false);
+    }
+  };
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 sm:py-12">
@@ -261,13 +291,22 @@ export default function WatermarkPage() {
         </div>
       )}
 
+      {applyError && (
+        <div className="mt-4 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
+          <AlertIcon className="mt-0.5 shrink-0" />
+          <p>{applyError}</p>
+        </div>
+      )}
+
       <button
         type="button"
-        disabled={!canApply}
+        disabled={!canApply || processing}
+        onClick={handleApplyText}
         className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:bg-slate-300"
       >
-        Terapkan Watermark
+        {processing ? "Memproses..." : "Terapkan Watermark"}
       </button>
+
 
       <PrivacyNotice model="hybrid" />
       <OtherTools currentTool="/watermark" />
