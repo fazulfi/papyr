@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { config } from "@/lib/config";
 import type {
   WatermarkImageConfig,
@@ -97,6 +97,7 @@ export default function WatermarkPage() {
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState("");
+  const applyInFlightRef = useRef(false);
   const [textConfig, setTextConfig] = useState<WatermarkTextConfig>({
     text: "CONFIDENTIAL",
     fontSize: 32,
@@ -147,8 +148,9 @@ export default function WatermarkPage() {
   const canApply = Boolean(pdfFile) && !validationMessage && (tab === "text" || Boolean(imageFile));
 
   const handleApplyText = async () => {
-    if (!pdfFile || tab !== "text") return;
+    if (!pdfFile || tab !== "text" || applyInFlightRef.current) return;
 
+    applyInFlightRef.current = true;
     const fileBytes = await pdfFile.arrayBuffer();
     try {
       setProcessing(true);
@@ -170,13 +172,15 @@ export default function WatermarkPage() {
         error_type: "client_processing_error",
       });
     } finally {
+      applyInFlightRef.current = false;
       setProcessing(false);
     }
   };
 
   const handleApplyImage = () => {
-    if (!pdfFile || !imageFile || tab !== "image") return;
+    if (!pdfFile || !imageFile || tab !== "image" || applyInFlightRef.current) return;
 
+    applyInFlightRef.current = true;
     const formData = new FormData();
     formData.append("file", pdfFile);
     formData.append("watermark_image", imageFile);
@@ -221,6 +225,7 @@ export default function WatermarkPage() {
           watermark_type: "image",
           pages_count: data.pages_processed ?? 0,
         });
+        applyInFlightRef.current = false;
         setProcessing(false);
         return;
       }
@@ -243,6 +248,7 @@ export default function WatermarkPage() {
         watermark_type: "image",
         error_type: reason,
       });
+      applyInFlightRef.current = false;
       setProcessing(false);
     });
 
@@ -253,6 +259,7 @@ export default function WatermarkPage() {
         watermark_type: "image",
         error_type: "network_error",
       });
+      applyInFlightRef.current = false;
       setProcessing(false);
     });
 
@@ -263,6 +270,7 @@ export default function WatermarkPage() {
         watermark_type: "image",
         error_type: "timeout",
       });
+      applyInFlightRef.current = false;
       setProcessing(false);
     });
 
