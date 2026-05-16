@@ -53,7 +53,6 @@ export default function PDFPageViewer({
   const renderVersionRef = useRef(0);
   const [isRendering, setIsRendering] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [viewerWidth, setViewerWidth] = useState<number | null>(null);
 
   const handlePrev = useCallback(() => {
     onPageChange(clampPage(currentPage - 1, totalPages));
@@ -71,7 +70,6 @@ export default function PDFPageViewer({
     if (!pdfFile || !canvas) {
       setIsRendering(false);
       setErrorMessage("");
-      setViewerWidth(null);
       return;
     }
 
@@ -122,18 +120,16 @@ export default function PDFPageViewer({
         const renderHeight = Math.round(viewport.height);
         canvas.width = Math.round(renderWidth * dpr);
         canvas.height = Math.round(renderHeight * dpr);
-        canvas.style.width = `${renderWidth}px`;
-        canvas.style.height = `${renderHeight}px`;
+        canvas.removeAttribute("style");
 
         await page.render({
           canvas,
           canvasContext: context,
           viewport,
           transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
-        }).promise; 
+        }).promise;
 
         if (!cancelled && renderVersionRef.current === version) {
-          setViewerWidth(Math.round(viewport.width));
           setIsRendering(false);
         }
 
@@ -172,11 +168,12 @@ export default function PDFPageViewer({
       )}
 
       {showCanvas && (
-        <div
-          className="relative mx-auto overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-inner"
-          style={viewerWidth ? { maxWidth: "100%", width: viewerWidth } : undefined}
-        >
-          <canvas ref={canvasRef} className="block h-auto w-full" aria-label={`Preview halaman ${currentPage} PDF`} />
+        <div className="relative mx-auto w-fit max-w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-inner">
+          <canvas
+            ref={canvasRef}
+            className="block h-auto max-h-[70vh] max-w-full w-auto"
+            aria-label={`Preview halaman ${currentPage} PDF`}
+          />
           {children}
           {isRendering && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
