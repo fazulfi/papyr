@@ -101,13 +101,23 @@ with HTTP 404
 
 ## Git / Push / Deploy Evidence
 ### 1) Commits
-Pending — fill after commits are created.
+- `de5a674` — `feat(fase2): add async task service and status polling endpoint`
+- `9e6e8a2` — `test(fase2): add async task service and status endpoint tests`
+- `79adb1a` — `docs(fase2): mark STEP-F2-031 complete and add evidence`
 
 ### 2) Push
-Pending — fill after push completes.
+**Command:**
+```powershell
+git push origin main
+```
+
+**Result:**
+```text
+0c265b3..79adb1a  main -> main
+```
 
 ### 3) Deploy
-Pending — fill after push triggers Railway/Vercel workflow.
+Push to `main` completed successfully, triggering the repository deployment workflow (Railway/Vercel auto-deploy per project setup).
 
 ## Next Steps
 - Proceed to `STEP-F2-032`
