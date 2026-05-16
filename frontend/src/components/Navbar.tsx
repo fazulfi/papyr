@@ -45,6 +45,7 @@ const NAV_LINKS = [
   { href: "/pdf-to-image", label: "PDF ke Gambar" },
   { href: "/protect", label: "Proteksi" },
   { href: "/unlock", label: "Unlock" },
+  { href: "/watermark", label: "Watermark" },
 ];
 
 /* ── Navbar Component ── */
