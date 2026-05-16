@@ -60,9 +60,17 @@ Result:
   - `STEP-F2-023` marked `✅ 2026-05-16`
 
 ## Git / Push / Deploy Evidence
-- Commit hashes: pending (to be filled after commit step)
-- Push output: pending (to be filled after push step)
-- Deploy status/URL: pending (to be filled after push/deploy verification)
+Commits:
+1. `bf998be` — `feat(fase2): add SignaturePad draw logic and test helpers`
+2. `539962c` — `feat(fase2): add SignaturePad component with canvas drawing`
+3. `d889c79` — `docs(fase2): mark STEP-F2-023 complete and add evidence`
+
+Push:
+- `git push origin main`
+- Result: `84d8d4b..d889c79  main -> main`
+
+Deploy trigger:
+- Push to `main` triggers auto-deploy (Vercel workflow). Deploy will run automatically.
 
 ## Notes
 - Out of scope kept intact: upload/type modes (STEP-F2-024), PDF viewer/nav (STEP-F2-025), placement/apply pipeline (STEP-F2-026+).
