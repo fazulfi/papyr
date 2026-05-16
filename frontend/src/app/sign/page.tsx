@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
+import SignaturePad from "@/components/SignaturePad";
 import { formatFileSize } from "@/lib/format";
 import { trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
 import {
@@ -86,13 +87,12 @@ function TabButton({ active, children, onClick }: { active: boolean; children: R
   );
 }
 
-function PlaceholderPanel({ mode }: { mode: SignMode }) {
+function PlaceholderPanel({ mode }: { mode: Exclude<SignMode, "draw"> }) {
   const label = getSignModeLabel(mode);
   const copy = {
-    draw: "Area canvas tanda tangan akan ditambahkan pada STEP-F2-023.",
     upload: "Upload gambar tanda tangan akan ditambahkan pada STEP-F2-024.",
     type: "Input nama dan pilihan font tanda tangan akan ditambahkan pada STEP-F2-024.",
-  } satisfies Record<SignMode, string>;
+  } satisfies Record<Exclude<SignMode, "draw">, string>;
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center">
@@ -272,7 +272,15 @@ export default function SignPage() {
               <TabButton active={signatureState.mode === "type"} onClick={() => handleModeChange("type")}>Type</TabButton>
             </div>
             <div className="mt-4">
-              <PlaceholderPanel mode={signatureState.mode} />
+              {signatureState.mode === "draw" ? (
+                <SignaturePad
+                  onSave={(signatureImage) => {
+                    setSignatureState((current) => ({ ...current, signatureImage }));
+                  }}
+                />
+              ) : (
+                <PlaceholderPanel mode={signatureState.mode} />
+              )}
             </div>
           </div>
 
