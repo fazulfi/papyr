@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/protect",
     "/unlock",
     "/watermark",
+    "/sign",
   ];
 
   return [

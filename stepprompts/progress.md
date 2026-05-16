@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-16
-**Current Step:** STEP-F2-022
-**Overall Progress:** 21 / 97 (22%)
+**Current Step:** STEP-F2-023
+**Overall Progress:** 22 / 97 (23%)
 
 ---
 
@@ -14,12 +14,12 @@
 | Fase | Steps | Done | Progress |
 |------|-------|------|----------|
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
-| 2B — Enhancement (M14+M15) | 16 | 8 | 50% |
+| 2B — Enhancement (M14+M15) | 16 | 9 | 56% |
 | 2C — Conversion (M16+M17+M18) | 11 | 0 | 0% |
 | 2D — Quality (M19-M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **21** | **22%** |
+| **TOTAL** | **97** | **22** | **23%** |
 
 ---
 
@@ -69,7 +69,7 @@
 
 | Step | Title | Status |
 |------|-------|--------|
-| STEP-F2-022 | Frontend — Create /sign page with main layout | ⬜ |
+| STEP-F2-022 | Frontend — Create /sign page with main layout | ✅ 2026-05-16 |
 | STEP-F2-023 | Frontend — Signature pad component (draw mode) | ⬜ |
 | STEP-F2-024 | Frontend — Signature upload mode + type mode | ⬜ |
 | STEP-F2-025 | Frontend — PDF page viewer with navigation | ⬜ |
