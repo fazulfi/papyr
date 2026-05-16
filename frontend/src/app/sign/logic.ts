@@ -222,6 +222,159 @@ export interface SignatureState {
 
 export const MAX_SIGN_PDF_SIZE_BYTES = 20 * 1024 * 1024; // 20MB
 
+/* ── STEP-F2-024 Upload Mode ── */
+
+export const MAX_SIGNATURE_IMAGE_SIZE_BYTES = 1024 * 1024; // 1MB
+
+export const ALLOWED_SIGNATURE_IMAGE_TYPES = ["image/png", "image/jpeg"] as const;
+
+export type AllowedSignatureImageType = (typeof ALLOWED_SIGNATURE_IMAGE_TYPES)[number];
+
+/**
+ * Validates a signature image file (PNG/JPG, max 1MB).
+ * Returns an error message string, or null if valid.
+ */
+export function validateSignatureImageFile(
+  file: Pick<File, "type" | "size">,
+): string | null {
+  if (!file.type || !(ALLOWED_SIGNATURE_IMAGE_TYPES as readonly string[]).includes(file.type)) {
+    return "Tipe file tidak valid. Hanya file PNG dan JPG yang diterima.";
+  }
+  if (file.size === 0) {
+    return "File kosong. Silakan upload file yang valid.";
+  }
+  if (file.size > MAX_SIGNATURE_IMAGE_SIZE_BYTES) {
+    return "Ukuran file terlalu besar. Maksimal 1MB.";
+  }
+  return null;
+}
+
+/**
+ * Loads an image File into an HTMLImageElement.
+ * Returns a promise resolved with the load event.
+ */
+function loadImage(file: File): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Gagal memuat gambar."));
+    };
+    img.src = url;
+  });
+}
+
+/**
+ * Converts an uploaded image file to a base64 PNG data URL.
+ * Maintains aspect ratio, fit within 560×200 max.
+ */
+export async function imageFileToBase64Png(file: File): Promise<string> {
+  const img = await loadImage(file);
+  const MAX_W = 560;
+  const MAX_H = 200;
+  let { width, height } = img;
+  if (width > MAX_W) {
+    height = Math.round((height * MAX_W) / width);
+    width = MAX_W;
+  }
+  if (height > MAX_H) {
+    width = Math.round((width * MAX_H) / height);
+    height = MAX_H;
+  }
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas tidak tersedia.");
+  ctx.drawImage(img, 0, 0, width, height);
+  return canvas.toDataURL("image/png");
+}
+
+/* ── STEP-F2-024 Type Mode Constants ── */
+
+export interface SignatureFont {
+  /** Full CSS font-family value (including fallbacks). */
+  family: string;
+  /** Human-readable label shown in UI. */
+  label: string;
+  /** Google Fonts URL-safe family name (spaces → +). */
+  googleFontName: string;
+}
+
+export const SIGNATURE_FONTS: SignatureFont[] = [
+  { family: "'Dancing Script', cursive", label: "Dancing Script", googleFontName: "Dancing+Script" },
+  { family: "'Caveat', cursive", label: "Caveat", googleFontName: "Caveat" },
+  { family: "'Satisfy', cursive", label: "Satisfy", googleFontName: "Satisfy" },
+  { family: "'Pacifico', cursive", label: "Pacifico", googleFontName: "Pacifico" },
+];
+
+export const DEFAULT_SIGNATURE_FONT: SignatureFont = SIGNATURE_FONTS[0];
+
+/**
+ * Renders text to an off-screen canvas and returns a base64 PNG data URL.
+ * The font is expected to be already loaded via injected Google Fonts link.
+ */
+export async function renderSignatureText(
+  text: string,
+  fontFamily: string,
+  color: string,
+): Promise<string> {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas tidak tersedia.");
+
+  const fontSize = 48;
+  const padding = 20;
+
+  ctx.font = `${fontSize}px ${fontFamily}`;
+  const metrics = ctx.measureText(text);
+  const textWidth = metrics.width;
+  const textHeight = fontSize * 1.2;
+
+  const width = Math.ceil(textWidth + padding * 2);
+  const height = Math.ceil(textHeight + padding * 2);
+
+  canvas.width = width;
+  canvas.height = height;
+
+  ctx.font = `${fontSize}px ${fontFamily}`;
+  ctx.fillStyle = color;
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+  ctx.fillText(text, width / 2, height / 2);
+
+  return canvas.toDataURL("image/png");
+}
+
+/**
+ * Generates the Google Fonts <link> href for all signature fonts.
+ * Use this to inject into the document <head> before rendering type-mode signatures.
+ */
+export function getGoogleFontsLink(): string {
+  const families = SIGNATURE_FONTS.map((f) => f.googleFontName).join("&family=");
+  return `https://fonts.googleapis.com/css2?family=${families}&display=swap`;
+}
+
+/**
+ * Injects the Google Fonts stylesheet into the document <head>.
+ * Safe to call multiple times — checks for existing link before adding.
+ */
+export function injectSignatureFonts(): void {
+  if (typeof document === "undefined") return;
+  const linkId = "signature-fonts-link";
+  if (document.getElementById(linkId)) return;
+  const link = document.createElement("link");
+  link.id = linkId;
+  link.rel = "stylesheet";
+  link.href = getGoogleFontsLink();
+  document.head.appendChild(link);
+}
+
 /* ── Validation Helpers ── */
 
 /**
