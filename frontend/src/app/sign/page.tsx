@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
+import PDFPageViewer from "@/components/PDFPageViewer";
 import SignaturePad from "@/components/SignaturePad";
 import SignatureUpload from "@/components/SignatureUpload";
 import SignatureType from "@/components/SignatureType";
@@ -88,26 +89,6 @@ function StepBadge({ active, done, label, number }: { active: boolean; done: boo
   );
 }
 
-function PlacementPlaceholder({ signatureState }: { signatureState: SignatureState }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="mb-3 flex items-center justify-between text-sm">
-        <span className="font-semibold text-navy">Preview PDF</span>
-        <span className="text-slate-400">
-          Halaman {signatureState.currentPage}/{signatureState.totalPages || 1}
-        </span>
-      </div>
-      <div className="flex aspect-[3/4] items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 text-center">
-        <div>
-          <p className="text-sm font-medium text-slate-600">Area penempatan tanda tangan</p>
-          <p className="mt-1 text-xs text-slate-400">
-            Drag-and-drop placement engine akan diimplementasikan pada STEP-F2-025+.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function SignPage() {
   const [pageState, setPageState] = useState<SignState>("idle");
@@ -291,7 +272,17 @@ export default function SignPage() {
 
       {pageState === "placing-signature" && (
         <div className="space-y-4">
-          <PlacementPlaceholder signatureState={signatureState} />
+          <PDFPageViewer
+            pdfFile={signatureState.pdfFile}
+            currentPage={signatureState.currentPage}
+            totalPages={signatureState.totalPages}
+            onPageChange={(page) =>
+              setSignatureState((current) => ({ ...current, currentPage: page }))
+            }
+            onTotalPagesChange={(totalPages) =>
+              setSignatureState((current) => ({ ...current, totalPages }))
+            }
+          />
           {errorMessage && (
             <div className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
               <AlertIcon className="mt-0.5 shrink-0" />

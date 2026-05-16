@@ -12,6 +12,7 @@ import {
   DEFAULT_SIGNATURE_FONT,
   type SignatureFont,
 } from "@/app/sign/logic";
+import { clampPage } from "@/components/PDFPageViewer";
 
 describe("STEP-F2-022 — /sign page scaffold coverage", () => {
   describe("sign PDF file validation", () => {
