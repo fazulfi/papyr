@@ -67,4 +67,23 @@
 
 ## Git / Push / Deploy
 
-- Pending (will be updated after commit/push)
+### Commits
+
+1. **a412d27** — `feat(fase2): add POST /api/pdf-to-word with async LibreOffice conversion`
+   - Files: `backend/routers/pdf_to_word.py`, `backend/main.py`
+   - Refs: PAPYR-129, PAPYR-130, PAPYR-132
+
+2. **9bcf31d** — `test(fase2): add unit tests for pdf-to-word endpoint`
+   - Files: `backend/tests/test_api_pdf_to_word.py`
+   - 13 tests, 92% coverage
+
+3. **b13705c** — `docs(fase2): mark STEP-F2-032 complete and add evidence`
+   - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-032-setup-evidence.md`
+   - Progress: 32/97 (33%), Fase 2C: 3/11 (27%)
+
+### Push
+
+- **Range**: `38c493e..b13705c main -> main`
+- **Status**: ✅ Pushed successfully
+- **Deploy**: Vercel auto-deploy triggered from main push
+- **Timestamp**: 2026-05-16 14:21:29 UTC
