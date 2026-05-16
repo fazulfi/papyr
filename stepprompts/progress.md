@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-16
-**Current Step:** STEP-F2-031
-**Overall Progress:** 30 / 97 (31%)
+**Current Step:** STEP-F2-032
+**Overall Progress:** 31 / 97 (32%)
 
 ---
 
@@ -15,11 +15,11 @@
 |------|-------|------|----------|
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
 | 2B — Enhancement (M14+M15) | 16 | 16 | 100% |
-| 2C — Conversion (M16+M17+M18) | 11 | 1 | 9% |
+| 2C — Conversion (M16+M17+M18) | 11 | 2 | 18% |
 | 2D — Quality (M19-M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **30** | **31%** |
+| **TOTAL** | **97** | **31** | **32%** |
 
 ---
 
@@ -87,7 +87,7 @@
 | Step | Title | Status |
 |------|-------|--------|
 | STEP-F2-030 | Infra — Install LibreOffice headless in Docker/Railway | ✅ 2026-05-16 |
-| STEP-F2-031 | Backend — Create async task service (shared M16/M17) | ⬜ |
+| STEP-F2-031 | Backend — Create async task service (shared M16/M17) | ✅ 2026-05-16 |
 | STEP-F2-032 | Backend — Create POST /api/pdf-to-word endpoint | ⬜ |
 | STEP-F2-033 | Backend — Unit tests for pdf-to-word + Frontend page + tests | ⬜ |
 
