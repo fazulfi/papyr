@@ -16,7 +16,8 @@ export type ToolName =
   | "rotate"
   | "protect"
   | "unlock"
-  | "watermark";
+  | "watermark"
+  | "sign";
 
 export type DeviceCategory = "mobile" | "tablet" | "desktop";
 

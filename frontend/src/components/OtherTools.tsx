@@ -23,6 +23,7 @@ const ALL_TOOLS = [
   { href: "/protect", name: "Proteksi PDF" },
   { href: "/unlock", name: "Hapus Password PDF" },
   { href: "/watermark", name: "Tambah Watermark PDF" },
+  { href: "/sign", name: "Tanda Tangani PDF" },
 ];
 
 /* ── Component ── */
