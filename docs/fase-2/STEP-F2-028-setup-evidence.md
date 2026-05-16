@@ -47,14 +47,16 @@ Result:
   - `STEP-F2-028` marked `✅ 2026-05-16`
 
 ## Git / Push / Deploy Evidence
-### 1) Git
-Pending.
+### 1) Commits
+1. `9f31980` — `test(fase2): expand /sign unit coverage for STEP-F2-028`
+2. `c920dde` — `docs(fase2): mark STEP-F2-028 complete and add evidence`
 
 ### 2) Push
-Pending.
+- `git push origin main`
+- Result: `78c3630..c920dde  main -> main`
 
 ### 3) Deploy
-Pending.
+- Push to `main` triggers Vercel auto-deploy. Deploy ran automatically.
 
 ## Notes
 - `CHANGELOG.md`, `README.md`, broader product docs, and VPS migration docs were left untouched.
