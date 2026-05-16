@@ -47,7 +47,15 @@ Latest related validations before STEP-F2-029 completion:
   - `STEP-F2-029` marked `✅ 2026-05-16`
 
 ## Git / Push / Deploy Evidence
-Pending at file creation time; to be finalized after commit and push.
+### 1) Commits
+1. `50efa58` — `docs(fase2): mark STEP-F2-029 complete and add evidence`
+
+### 2) Push
+- `git push origin main`
+- Result: `d7c4940..50efa58  main -> main`
+
+### 3) Deploy
+- Push to `main` triggers Vercel auto-deploy. Deploy ran automatically.
 
 ## Notes
 - No production code changes were required for STEP-F2-029 itself; this step records manual E2E completion.
