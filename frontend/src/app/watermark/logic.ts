@@ -114,11 +114,11 @@ export function calculateTextOverlayStyle(
     case "diagonal":
       return { x: centerX, y: centerY, rotationDegrees: -30 };
     case "top":
-      return { x: centerX, y: Math.max(48, canvasHeight * 0.2), rotationDegrees: config.rotation };
+      return { x: centerX, y: Math.min(canvasHeight - 48, 50), rotationDegrees: config.rotation };
     case "bottom":
       return {
         x: centerX,
-        y: Math.min(canvasHeight - 48, canvasHeight * 0.8),
+        y: Math.max(48, canvasHeight - 50),
         rotationDegrees: config.rotation,
       };
     default:

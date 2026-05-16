@@ -340,7 +340,7 @@ describe("STEP-F2-015 — /watermark preview logic coverage", () => {
           600,
           800,
         ),
-      ).toEqual({ x: 300, y: 160, rotationDegrees: 10 });
+      ).toEqual({ x: 300, y: 50, rotationDegrees: 10 });
 
       expect(
         calculateTextOverlayStyle(
@@ -355,7 +355,41 @@ describe("STEP-F2-015 — /watermark preview logic coverage", () => {
           600,
           800,
         ),
-      ).toEqual({ x: 300, y: 640, rotationDegrees: 10 });
+      ).toEqual({ x: 300, y: 750, rotationDegrees: 10 });
+    });
+
+    it("keeps preview and PDF output positions in the same visual location", () => {
+      const canvasHeight = 800;
+      const topPreview = calculateTextOverlayStyle(
+        {
+          text: "CONFIDENTIAL",
+          fontSize: 32,
+          opacity: 0.2,
+          rotation: 0,
+          color: "#CCCCCC",
+          position: "top",
+        },
+        600,
+        canvasHeight,
+      );
+      const topPdf = mapTextWatermarkPosition("top", 600, canvasHeight);
+
+      const bottomPreview = calculateTextOverlayStyle(
+        {
+          text: "CONFIDENTIAL",
+          fontSize: 32,
+          opacity: 0.2,
+          rotation: 0,
+          color: "#CCCCCC",
+          position: "bottom",
+        },
+        600,
+        canvasHeight,
+      );
+      const bottomPdf = mapTextWatermarkPosition("bottom", 600, canvasHeight);
+
+      expect(topPreview.y).toBe(canvasHeight - topPdf.y);
+      expect(bottomPreview.y).toBe(canvasHeight - bottomPdf.y);
     });
 
     it("calculates image overlay positions for all supported placements", () => {

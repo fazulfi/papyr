@@ -149,21 +149,13 @@ export default function WatermarkPreview({
     errorMessage,
   });
 
-  const textStyle = useMemo(() => {
+  const textOverlay = useMemo(() => {
     if (!dimensions) return null;
-    const position = calculateTextOverlayStyle(
+    return calculateTextOverlayStyle(
       debouncedTextConfig,
       dimensions.width,
       dimensions.height,
     );
-
-    return {
-      left: `${position.x}px`,
-      top: `${position.y}px`,
-      color: hexToRgba(debouncedTextConfig.color, debouncedTextConfig.opacity),
-      fontSize: `${debouncedTextConfig.fontSize}px`,
-      transform: "translate(-50%, -50%) rotate(" + position.rotationDegrees + "deg)",
-    };
   }, [debouncedTextConfig, dimensions]);
 
   const imageStyle = useMemo(() => {
@@ -209,14 +201,28 @@ export default function WatermarkPreview({
         }`}
         style={dimensions ? { maxWidth: "100%", width: dimensions.width } : undefined}
       >
-        <canvas ref={canvasRef} className="block h-auto max-w-full" aria-label="Preview halaman pertama PDF" />
-        {dimensions && debouncedTab === "text" && textStyle && (
-          <div
-            className="pointer-events-none absolute whitespace-nowrap font-bold tracking-wide"
-            style={textStyle}
+        <canvas ref={canvasRef} className="block h-auto w-full" aria-label="Preview halaman pertama PDF" />
+        {dimensions && debouncedTab === "text" && textOverlay && (
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full"
+            preserveAspectRatio="none"
+            viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
           >
-            {debouncedTextConfig.text}
-          </div>
+            <text
+              dominantBaseline="central"
+              fill={hexToRgba(debouncedTextConfig.color, debouncedTextConfig.opacity)}
+              fontSize={debouncedTextConfig.fontSize}
+              fontWeight="700"
+              letterSpacing="0.08em"
+              textAnchor="middle"
+              transform={`rotate(${textOverlay.rotationDegrees} ${textOverlay.x} ${textOverlay.y})`}
+              x={textOverlay.x}
+              y={textOverlay.y}
+            >
+              {debouncedTextConfig.text}
+            </text>
+          </svg>
         )}
         {dimensions && debouncedTab === "image" && imageStyle && imageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
