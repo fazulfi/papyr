@@ -66,13 +66,15 @@ Result:
 
 ## Git / Push / Deploy Evidence
 Commits:
-- Pending (to be filled after commit step).
+1. `83888aa` — `feat(fase2): add PDFPageViewer component with navigation`
+2. `2fae644` — `feat(fase2): integrate PDFPageViewer into /sign placement flow`
 
 Push:
-- Pending.
+- `git push origin main`
+- Result: `19c610b..2fae644  main -> main`
 
 Deploy trigger:
-- Push to `main` triggers auto-deploy (Vercel workflow).
+- Push to `main` triggers auto-deploy (Vercel workflow). Deploy ran automatically.
 
 ## Notes
 - Validation sections are intentionally left open for completion after the step is verified.
