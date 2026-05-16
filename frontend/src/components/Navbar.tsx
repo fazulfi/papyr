@@ -46,6 +46,7 @@ const NAV_LINKS = [
   { href: "/protect", label: "Proteksi" },
   { href: "/unlock", label: "Unlock" },
   { href: "/watermark", label: "Watermark" },
+  { href: "/sign", label: "Tanda Tangan" },
 ];
 
 /* ── Navbar Component ── */
