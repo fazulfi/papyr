@@ -1,4 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { track } from "@vercel/analytics";
+
+vi.mock("@vercel/analytics", () => ({
+  track: vi.fn(),
+}));
 
 vi.mock("pdf-lib", () => {
   const drawTextMock = vi.fn();
@@ -42,6 +47,11 @@ import {
   calculatePasswordStrength,
   getPasswordStrengthLevel,
 } from "@/components/PasswordInput";
+import {
+  trackTaskCompleted,
+  trackTaskFailed,
+  trackTaskStarted,
+} from "@/lib/analytics";
 
 describe("STEP-F2-015 — /watermark preview logic coverage", () => {
   beforeEach(() => {
@@ -413,6 +423,84 @@ describe("STEP-F2-015 — /watermark preview logic coverage", () => {
       expect(getWatermarkErrorMessage(400, "Config JSON tidak valid.")).toBe("Config JSON tidak valid.");
       expect(getWatermarkErrorMessage(500)).toBe("Gagal memproses file. Silakan coba lagi.");
       expect(getWatermarkErrorMessage(400)).toBe("Gagal memproses watermark gambar.");
+    });
+  });
+
+  describe("STEP-F2-020 /watermark unit coverage", () => {
+    it("tracks watermark text task_started event", () => {
+      const mockedTrack = vi.mocked(track);
+
+      trackTaskStarted("watermark", { watermark_type: "text" });
+
+      expect(mockedTrack).toHaveBeenCalledWith(
+        "task_started",
+        expect.objectContaining({
+          tool: "watermark",
+          watermark_type: "text",
+        }),
+      );
+    });
+
+    it("tracks watermark image task_completed event with pages_count", () => {
+      const mockedTrack = vi.mocked(track);
+
+      trackTaskCompleted("watermark", {
+        watermark_type: "image",
+        pages_count: 5,
+      });
+
+      expect(mockedTrack).toHaveBeenCalledWith(
+        "task_completed",
+        expect.objectContaining({
+          tool: "watermark",
+          watermark_type: "image",
+          pages_count: 5,
+        }),
+      );
+    });
+
+    it("tracks watermark task_failed with error_type", () => {
+      const mockedTrack = vi.mocked(track);
+
+      trackTaskFailed("watermark", "Network error", {
+        watermark_type: "image",
+        error_type: "network_error",
+      });
+
+      expect(mockedTrack).toHaveBeenCalledWith(
+        "task_failed",
+        expect.objectContaining({
+          tool: "watermark",
+          watermark_type: "image",
+          error_type: "network_error",
+          error: "Network error",
+        }),
+      );
+    });
+
+    it("validates tab switching support between text and image modes", () => {
+      const tabs = ["text", "image", "text", "image"];
+      expect(tabs.every((tab) => isValidWatermarkTab(tab))).toBe(true);
+    });
+
+    it("keeps text and image config panel validation independent across tab switches", () => {
+      const textError = validateWatermarkTextConfig({
+        text: "CONFIDENTIAL",
+        fontSize: 32,
+        opacity: 0.5,
+        rotation: -10,
+        color: "#CCCCCC",
+        position: "center",
+      });
+
+      const imageError = validateWatermarkImageConfig({
+        opacity: 0.8,
+        position: "bottom-right",
+        scale: 0.4,
+      });
+
+      expect(textError).toBeNull();
+      expect(imageError).toBeNull();
     });
   });
 });
