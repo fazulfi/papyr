@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-16
-**Current Step:** STEP-F2-035
-**Overall Progress:** 34 / 97 (35%)
+**Current Step:** STEP-F2-036
+**Overall Progress:** 35 / 97 (36%)
 
 ---
 
@@ -15,11 +15,11 @@
 |------|-------|------|----------|
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
 | 2B — Enhancement (M14+M15) | 16 | 16 | 100% |
-| 2C — Conversion (M16+M17+M18) | 11 | 5 | 45% |
+| 2C — Conversion (M16+M17+M18) | 11 | 6 | 55% |
 | 2D — Quality (M19-M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **34** | **35%** |
+| **TOTAL** | **97** | **35** | **36%** |
 
 ---
 
@@ -96,7 +96,7 @@
 | Step | Title | Status |
 |------|-------|--------|
 | STEP-F2-034 | Infra — Install Tesseract + ocrmypdf in Docker | ✅ 2026-05-16 |
-| STEP-F2-035 | Backend — Create POST /api/ocr endpoint | ⬜ |
+| STEP-F2-035 | Backend — Create POST /api/ocr endpoint | ✅ 2026-05-16 |
 | STEP-F2-036 | Backend + Frontend — Complete M17 (OCR tests + page + frontend tests) | ⬜ |
 
 ### M18: PDF-to-Excel
