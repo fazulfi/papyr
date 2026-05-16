@@ -8,6 +8,7 @@ interface PDFPageViewerProps {
   totalPages: number;
   onPageChange: (page: number) => void;
   onTotalPagesChange: (totalPages: number) => void;
+  children?: React.ReactNode;
 }
 
 const DEFAULT_VIEWER_WIDTH = 720;
@@ -46,6 +47,7 @@ export default function PDFPageViewer({
   totalPages,
   onPageChange,
   onTotalPagesChange,
+  children,
 }: PDFPageViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const renderVersionRef = useRef(0);
@@ -162,10 +164,11 @@ export default function PDFPageViewer({
 
       {showCanvas && (
         <div
-          className="mx-auto overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-inner"
+          className="relative mx-auto overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-inner"
           style={viewerWidth ? { maxWidth: "100%", width: viewerWidth } : undefined}
         >
           <canvas ref={canvasRef} className="block h-auto w-full" aria-label={`Preview halaman ${currentPage} PDF`} />
+          {children}
         </div>
       )}
 

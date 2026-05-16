@@ -1,14 +1,21 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
 import PDFPageViewer from "@/components/PDFPageViewer";
 import SignaturePad from "@/components/SignaturePad";
 import SignatureUpload from "@/components/SignatureUpload";
 import SignatureType from "@/components/SignatureType";
+import SignaturePlacementOverlay from "@/components/SignaturePlacementOverlay";
 import { formatFileSize } from "@/lib/format";
 import { trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
+import {
+  applyToAllPages,
+  calculateAspectRatio,
+  filterPlacementsByPage,
+  getPagePlacementsCount,
+} from "./placement-logic";
 import {
   getInitialSignatureState,
   validateSignPdfFile,
@@ -95,6 +102,8 @@ export default function SignPage() {
   const [signatureState, setSignatureState] = useState<SignatureState>(() => getInitialSignatureState());
   const [errorMessage, setErrorMessage] = useState("");
   const [dragging, setDragging] = useState(false);
+  const [applyAllPages, setApplyAllPages] = useState(false);
+  const [signatureAspectRatio, setSignatureAspectRatio] = useState(0.4);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const currentStep = useMemo(() => {
@@ -125,6 +134,7 @@ export default function SignPage() {
       signatureImage: null,
     }));
     setErrorMessage("");
+    setApplyAllPages(false);
     setPageState("pdf-selected");
     trackTaskStarted("sign", { step: "create_signature" });
   }, []);
@@ -143,6 +153,7 @@ export default function SignPage() {
     setSignatureState(getInitialSignatureState());
     setErrorMessage("");
     setDragging(false);
+    setApplyAllPages(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
@@ -153,6 +164,68 @@ export default function SignPage() {
     }));
     setPageState("placing-signature");
   };
+
+  useEffect(() => {
+    if (!signatureState.signatureImage || signatureState.signatureImage === "data:image/png;base64,placeholder") return;
+    const img = new Image();
+    img.onload = () => {
+      setSignatureAspectRatio(calculateAspectRatio(0.25, img.width, img.height));
+    };
+    img.src = signatureState.signatureImage;
+  }, [signatureState.signatureImage]);
+
+  const handlePlacementChange = useCallback(
+    (placements: SignatureState["placements"]) => {
+      if (!applyAllPages) {
+        setSignatureState((current) => ({ ...current, placements }));
+        return;
+      }
+
+      const source = placements.find((p) => p.page === signatureState.currentPage) ?? placements[0];
+      if (!source) {
+        setSignatureState((current) => ({ ...current, placements }));
+        return;
+      }
+
+      const applied = applyToAllPages({ ...source, id: "apply-all" }, signatureState.totalPages);
+      setSignatureState((current) => ({ ...current, placements: applied }));
+    },
+    [applyAllPages, signatureState.currentPage, signatureState.totalPages],
+  );
+
+  const handleDeletePlacement = useCallback(
+    (placementId: string) => {
+      setSignatureState((current) => ({
+        ...current,
+        placements: current.placements.filter((p) => p.id !== placementId),
+      }));
+    },
+    [],
+  );
+
+  const handleToggleApplyAll = useCallback(() => {
+    setApplyAllPages((prev) => {
+      const next = !prev;
+      if (next) {
+        setSignatureState((current) => {
+          if (!current.placements.length || !current.totalPages) return current;
+          const source =
+            current.placements.find((p) => p.page === current.currentPage) ?? current.placements[0];
+          if (!source) return current;
+          return {
+            ...current,
+            placements: applyToAllPages({ ...source, id: "apply-all" }, current.totalPages),
+          };
+        });
+      }
+      return next;
+    });
+  }, []);
+
+  const currentPagePlacements = useMemo(
+    () => filterPlacementsByPage(signatureState.placements, signatureState.currentPage),
+    [signatureState.placements, signatureState.currentPage],
+  );
 
   const handleApplySignature = () => {
     setErrorMessage("Fitur apply dan download akan diaktifkan pada STEP-F2-026. Scaffold STEP-F2-022 hanya menyiapkan layout dan state.");
@@ -282,7 +355,80 @@ export default function SignPage() {
             onTotalPagesChange={(totalPages) =>
               setSignatureState((current) => ({ ...current, totalPages }))
             }
-          />
+          >
+            <SignaturePlacementOverlay
+              signatureImage={signatureState.signatureImage}
+              currentPage={signatureState.currentPage}
+              totalPages={signatureState.totalPages}
+              placements={signatureState.placements}
+              defaultWidth={0.25}
+              defaultHeight={Math.max(0.08, signatureAspectRatio * 0.25)}
+              onChange={handlePlacementChange}
+            />
+          </PDFPageViewer>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <label className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                checked={applyAllPages}
+                onChange={handleToggleApplyAll}
+                className="h-4 w-4 rounded border-slate-300 text-accent focus:ring-accent"
+              />
+              <span className="text-sm font-medium text-slate-600">Terapkan ke semua halaman</span>
+            </label>
+            <p className="mt-2 text-xs text-slate-400">
+              Aktifkan untuk menyalin posisi signature ke semua halaman PDF.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="mb-3 flex items-center justify-between">
+              <p className="text-sm font-semibold text-navy">Daftar penempatan signature</p>
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-500">
+                {signatureState.placements.length} total
+              </span>
+            </div>
+
+            {signatureState.placements.length === 0 ? (
+              <p className="text-sm text-slate-400">
+                Belum ada signature ditempatkan. Tap halaman PDF untuk menambahkan.
+              </p>
+            ) : (
+              <div className="space-y-2">
+                {signatureState.placements.map((placement, index) => {
+                  const isCurrentPage = placement.page === signatureState.currentPage;
+                  return (
+                    <div
+                      key={placement.id}
+                      className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm ${
+                        isCurrentPage ? "border-accent/40 bg-accent/5" : "border-slate-200 bg-slate-50"
+                      }`}
+                    >
+                      <div>
+                        <p className="font-medium text-slate-700">Signature #{index + 1}</p>
+                        <p className="text-xs text-slate-400">
+                          Halaman {placement.page} • x {placement.x.toFixed(2)} • y {placement.y.toFixed(2)}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleDeletePlacement(placement.id)}
+                        className="rounded-full border border-rose-200 px-3 py-1 text-xs font-semibold text-rose-600 transition-colors hover:bg-rose-50"
+                      >
+                        Hapus
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-500">
+              Halaman ini: {currentPagePlacements.length} signature • Total halaman aktif: {getPagePlacementsCount(signatureState.placements, signatureState.currentPage)}
+            </div>
+          </div>
+
           {errorMessage && (
             <div className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
               <AlertIcon className="mt-0.5 shrink-0" />
@@ -294,6 +440,7 @@ export default function SignPage() {
               type="button"
               onClick={() => {
                 setErrorMessage("");
+                setApplyAllPages(false);
                 setPageState("pdf-selected");
               }}
               className="rounded-xl bg-slate-100 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200"
@@ -310,6 +457,7 @@ export default function SignPage() {
           </div>
         </div>
       )}
+
 
       {pageState === "error" && (
         <div className="space-y-4">
