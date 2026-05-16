@@ -49,13 +49,12 @@ Result:
 
 ## Git / Push / Deploy Evidence
 Commits:
-1. `<commit_hash_1>` — `feat(fase2): add signature upload and type modes with fonts and tests`
-2. `<commit_hash_2>` — `feat(fase2): wire upload and type modes into /sign page`
-3. `<commit_hash_3>` — `docs(fase2): mark STEP-F2-024 complete and add evidence`
+1. `0306a3e` — `feat(fase2): add signature upload mode and type mode with Google Fonts`
+2. `c5c86ff` — `feat(fase2): integrate upload and type components into /sign mode flow`
 
 Push:
 - `git push origin main`
-- Result: pending (see commit hashes after execution)
+- Result: `04f700b..c5c86ff  main -> main`
 
 Deploy trigger:
 - Push to `main` triggers auto-deploy (Vercel workflow).
