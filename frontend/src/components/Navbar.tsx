@@ -57,9 +57,9 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200 bg-bg/92 backdrop-blur-md">
-      <div className="mx-auto flex h-[52px] max-w-[1200px] items-center gap-8 px-6">
+      <div className="mx-auto flex h-[52px] max-w-[1440px] items-center gap-4 px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+        <Link href="/" className="flex shrink-0 items-center gap-2" onClick={() => setMobileOpen(false)}>
           <div className="flex h-7 w-7 items-center justify-center rounded-md bg-navy">
             <FileIcon />
           </div>
@@ -67,12 +67,12 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 md:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`whitespace-nowrap rounded-md px-2 py-1.5 text-xs font-medium transition-colors lg:px-2.5 lg:text-sm ${
                 pathname === link.href
                   ? "text-accent"
                   : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
@@ -83,12 +83,10 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex-1" />
-
         {/* Desktop CTA */}
         <Link
           href="/compress"
-          className="hidden rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md md:inline-flex"
+          className="hidden shrink-0 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md md:inline-flex"
         >
           Coba Gratis
         </Link>
