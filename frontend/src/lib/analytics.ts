@@ -17,7 +17,8 @@ export type ToolName =
   | "protect"
   | "unlock"
   | "watermark"
-  | "sign";
+  | "sign"
+  | "pdf-to-word";
 
 export type DeviceCategory = "mobile" | "tablet" | "desktop";
 

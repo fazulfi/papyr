@@ -47,6 +47,7 @@ const NAV_LINKS = [
   { href: "/unlock", label: "Unlock" },
   { href: "/watermark", label: "Watermark" },
   { href: "/sign", label: "Tanda Tangan" },
+  { href: "/pdf-to-word", label: "PDF ke Word" },
 ];
 
 /* ── Navbar Component ── */
