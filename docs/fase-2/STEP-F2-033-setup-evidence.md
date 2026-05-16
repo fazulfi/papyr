@@ -90,11 +90,20 @@
 3. **b13705c** — `docs(fase2): mark STEP-F2-032 complete and add evidence`
    - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-032-setup-evidence.md`
 
-4. **[pending]** — `feat(fase2): add /pdf-to-word frontend page + analytics + nav`
-   - Files: `frontend/src/app/pdf-to-word/page.tsx`, `frontend/src/components/pdf-to-word/`, `frontend/src/app/sitemap.ts`, `frontend/src/lib/analytics.ts`, `frontend/src/components/OtherTools.tsx`, `frontend/src/components/Navbar.tsx`
-   - Refs: PAPYR-129, PAPYR-130
+4. **7c994a4** — `feat(fase2): add /pdf-to-word frontend page, useAsyncTask hook, and nav/sitemap updates`
+   - Files: `frontend/src/hooks/useAsyncTask.ts`, `frontend/src/app/pdf-to-word/page.tsx`, `frontend/src/app/pdf-to-word/layout.tsx`, `frontend/src/app/sitemap.ts`, `frontend/src/lib/analytics.ts`, `frontend/src/components/OtherTools.tsx`, `frontend/src/components/Navbar.tsx`
+   - Refs: PAPYR-133, PAPYR-134, PAPYR-135
+
+5. **4afce54** — `test(fase2): add frontend unit tests for /pdf-to-word page and useAsyncTask hook`
+   - Files: `frontend/src/__tests__/pdf-to-word.test.tsx`
+   - 25 tests, node environment
+
+6. **550dbcc** — `docs(fase2): mark STEP-F2-033 complete and add evidence`
+   - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-033-setup-evidence.md`
 
 ### Push
 
-- **Status**: Git push pending (frontend changes staged)
-- **Deploy**: Vercel auto-deploy will trigger after push
+- **Command**: `git push origin main`
+- **Result**: `0ca80e1..550dbcc  main -> main`
+- **Status**: ✅ Pushed successfully
+- **Deploy**: Vercel auto-deploy triggered (main branch push)
