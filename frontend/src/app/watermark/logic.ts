@@ -15,6 +15,27 @@ export interface WatermarkImageConfig {
   scale: number;
 }
 
+const TEXT_POSITION_PRESETS: Record<
+  WatermarkTextConfig["position"],
+  Pick<WatermarkTextConfig, "fontSize" | "opacity" | "rotation">
+> = {
+  center: { fontSize: 36, opacity: 0.5, rotation: 0 },
+  top: { fontSize: 32, opacity: 0.5, rotation: 0 },
+  bottom: { fontSize: 32, opacity: 0.5, rotation: 0 },
+  diagonal: { fontSize: 54, opacity: 0.75, rotation: -30 },
+};
+
+export function applyTextPositionPreset(
+  config: WatermarkTextConfig,
+  position: WatermarkTextConfig["position"],
+): WatermarkTextConfig {
+  return {
+    ...config,
+    position,
+    ...TEXT_POSITION_PRESETS[position],
+  };
+}
+
 export function validateWatermarkPdfFile(file: { type: string; size: number }): string | null {
   if (file.size <= 0) {
     return "File kosong. Silakan upload file PDF yang valid.";

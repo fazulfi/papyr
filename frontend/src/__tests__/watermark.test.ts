@@ -30,6 +30,7 @@ vi.mock("pdf-lib", () => ({
   degrees: vi.fn((value: number) => value),
 }));
 import {
+  applyTextPositionPreset,
   calculateImageOverlayStyle,
   calculatePreviewDimensions,
   calculateTextOverlayStyle,
@@ -195,6 +196,49 @@ describe("STEP-F2-015 — /watermark preview logic coverage", () => {
           position: "diagonal",
         }),
       ).toBeNull();
+    });
+
+    it("applies default presets when text position changes", () => {
+      const baseConfig = {
+        text: "CONFIDENTIAL",
+        fontSize: 12,
+        opacity: 0.1,
+        rotation: 45,
+        color: "#123456",
+        position: "center" as const,
+      };
+
+      expect(applyTextPositionPreset(baseConfig, "center")).toMatchObject({
+        text: "CONFIDENTIAL",
+        color: "#123456",
+        position: "center",
+        fontSize: 36,
+        opacity: 0.5,
+        rotation: 0,
+      });
+
+      expect(applyTextPositionPreset(baseConfig, "diagonal")).toMatchObject({
+        text: "CONFIDENTIAL",
+        color: "#123456",
+        position: "diagonal",
+        fontSize: 54,
+        opacity: 0.75,
+        rotation: -30,
+      });
+
+      expect(applyTextPositionPreset(baseConfig, "top")).toMatchObject({
+        position: "top",
+        fontSize: 32,
+        opacity: 0.5,
+        rotation: 0,
+      });
+
+      expect(applyTextPositionPreset(baseConfig, "bottom")).toMatchObject({
+        position: "bottom",
+        fontSize: 32,
+        opacity: 0.5,
+        rotation: 0,
+      });
     });
   });
 

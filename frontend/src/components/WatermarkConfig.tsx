@@ -1,6 +1,10 @@
 "use client";
 
-import type { WatermarkImageConfig, WatermarkTextConfig } from "@/app/watermark/logic";
+import {
+  applyTextPositionPreset,
+  type WatermarkImageConfig,
+  type WatermarkTextConfig,
+} from "@/app/watermark/logic";
 
 interface WatermarkConfigProps {
   tab: "text" | "image";
@@ -127,10 +131,12 @@ export default function WatermarkConfig({
           <select
             value={textConfig.position}
             onChange={(event) =>
-              onTextConfigChange({
-                ...textConfig,
-                position: event.target.value as WatermarkTextConfig["position"],
-              })
+              onTextConfigChange(
+                applyTextPositionPreset(
+                  textConfig,
+                  event.target.value as WatermarkTextConfig["position"],
+                ),
+              )
             }
             className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-navy focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
           >
