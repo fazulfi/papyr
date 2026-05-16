@@ -4,16 +4,34 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import PrivacyNotice from "@/components/PrivacyNotice";
 import OtherTools from "@/components/OtherTools";
 import SignaturePad from "@/components/SignaturePad";
+import SignatureUpload from "@/components/SignatureUpload";
+import SignatureType from "@/components/SignatureType";
 import { formatFileSize } from "@/lib/format";
 import { trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
 import {
   getInitialSignatureState,
-  getSignModeLabel,
   validateSignPdfFile,
   type SignMode,
   type SignState,
   type SignatureState,
 } from "./logic";
+
+function TabButton({ active, children, onClick }: { active: boolean; children: React.ReactNode; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+        active
+          ? "bg-accent text-white shadow-sm"
+          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
 
 function SignatureIcon() {
   return (
@@ -66,41 +84,6 @@ function StepBadge({ active, done, label, number }: { active: boolean; done: boo
       <span className={`text-sm font-medium ${active ? "text-navy" : done ? "text-slate-600" : "text-slate-400"}`}>
         {label}
       </span>
-    </div>
-  );
-}
-
-function TabButton({ active, children, onClick }: { active: boolean; children: React.ReactNode; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-        active
-          ? "bg-accent text-white shadow-sm"
-          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
-
-function PlaceholderPanel({ mode }: { mode: Exclude<SignMode, "draw"> }) {
-  const label = getSignModeLabel(mode);
-  const copy = {
-    upload: "Upload gambar tanda tangan akan ditambahkan pada STEP-F2-024.",
-    type: "Input nama dan pilihan font tanda tangan akan ditambahkan pada STEP-F2-024.",
-  } satisfies Record<Exclude<SignMode, "draw">, string>;
-
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center">
-      <p className="text-sm font-semibold text-navy">Mode {label}</p>
-      <p className="mt-1 text-sm text-slate-500">{copy[mode]}</p>
-      <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-white px-4 py-8 text-xs text-slate-400">
-        Placeholder non-fungsional — belum membuat signature image.
-      </div>
     </div>
   );
 }
@@ -272,14 +255,26 @@ export default function SignPage() {
               <TabButton active={signatureState.mode === "type"} onClick={() => handleModeChange("type")}>Type</TabButton>
             </div>
             <div className="mt-4">
-              {signatureState.mode === "draw" ? (
+              {signatureState.mode === "draw" && (
                 <SignaturePad
                   onSave={(signatureImage) => {
                     setSignatureState((current) => ({ ...current, signatureImage }));
                   }}
                 />
-              ) : (
-                <PlaceholderPanel mode={signatureState.mode} />
+              )}
+              {signatureState.mode === "upload" && (
+                <SignatureUpload
+                  onSave={(signatureImage) => {
+                    setSignatureState((current) => ({ ...current, signatureImage }));
+                  }}
+                />
+              )}
+              {signatureState.mode === "type" && (
+                <SignatureType
+                  onSave={(signatureImage) => {
+                    setSignatureState((current) => ({ ...current, signatureImage }));
+                  }}
+                />
               )}
             </div>
           </div>
