@@ -46,14 +46,27 @@ export async function applyTextWatermark(
   const pages = pdfDoc.getPages();
   const { r, g, b } = hexToRgbNormalized(config.color);
 
+  const textWidth = helveticaFont.widthOfTextAtSize(config.text, config.fontSize);
+  const textHeight = helveticaFont.heightAtSize(config.fontSize);
+
   for (const page of pages) {
     const { width, height } = page.getSize();
     const mapped = mapTextWatermarkPosition(config.position, width, height);
-    const rotation = config.position === "diagonal" ? mapped.rotationDegrees : config.rotation;
+    const rotation =
+      config.position === "diagonal" ? mapped.rotationDegrees : config.rotation;
+    const angleRad = (rotation * Math.PI) / 180;
+    const cosA = Math.cos(angleRad);
+    const sinA = Math.sin(angleRad);
+
+    // pdf-lib draws text with the (x, y) point as the bottom-left baseline anchor
+    // and rotates around that anchor. Offset (x, y) so the text's visual center
+    // aligns with the mapped position after rotation.
+    const x = mapped.x - (cosA * textWidth - sinA * textHeight) / 2;
+    const y = mapped.y - (sinA * textWidth + cosA * textHeight) / 2;
 
     page.drawText(config.text, {
-      x: mapped.x,
-      y: mapped.y,
+      x,
+      y,
       size: config.fontSize,
       font: helveticaFont,
       color: rgb(r, g, b),

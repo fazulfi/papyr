@@ -5,24 +5,30 @@ vi.mock("@vercel/analytics", () => ({
   track: vi.fn(),
 }));
 
-vi.mock("pdf-lib", () => {
+const pdfLibMocks = vi.hoisted(() => {
   const drawTextMock = vi.fn();
   const getSizeMock = vi.fn(() => ({ width: 600, height: 800 }));
+  const fontMock = {
+    widthOfTextAtSize: vi.fn(() => 120),
+    heightAtSize: vi.fn(() => 32),
+  };
   const pageMock = { drawText: drawTextMock, getSize: getSizeMock };
 
-  return {
-    PDFDocument: {
-      load: vi.fn(async () => ({
-        embedFont: vi.fn(async () => "HelveticaFont"),
-        getPages: vi.fn(() => [pageMock, pageMock]),
-        save: vi.fn(async () => new Uint8Array([1, 2, 3])),
-      })),
-    },
-    StandardFonts: { Helvetica: "Helvetica" },
-    rgb: vi.fn((r: number, g: number, b: number) => ({ r, g, b })),
-    degrees: vi.fn((value: number) => value),
-  };
+  return { drawTextMock, fontMock, pageMock };
 });
+
+vi.mock("pdf-lib", () => ({
+  PDFDocument: {
+    load: vi.fn(async () => ({
+      embedFont: vi.fn(async () => pdfLibMocks.fontMock),
+      getPages: vi.fn(() => [pdfLibMocks.pageMock, pdfLibMocks.pageMock]),
+      save: vi.fn(async () => new Uint8Array([1, 2, 3])),
+    })),
+  },
+  StandardFonts: { Helvetica: "Helvetica" },
+  rgb: vi.fn((r: number, g: number, b: number) => ({ r, g, b })),
+  degrees: vi.fn((value: number) => value),
+}));
 import {
   calculateImageOverlayStyle,
   calculatePreviewDimensions,
@@ -55,6 +61,7 @@ import {
 
 describe("STEP-F2-015 — /watermark preview logic coverage", () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     vi.useFakeTimers();
   });
 
@@ -251,6 +258,40 @@ describe("STEP-F2-015 — /watermark preview logic coverage", () => {
       });
 
       expect(output).toEqual(new Uint8Array([1, 2, 3]));
+    });
+
+    it("anchors text watermark at the configured position with rotation offset", async () => {
+      pdfLibMocks.drawTextMock.mockClear();
+
+      await applyTextWatermark(new Uint8Array([1]), {
+        text: "CONFIDENTIAL",
+        fontSize: 32,
+        opacity: 0.5,
+        rotation: 0,
+        color: "#000000",
+        position: "center",
+      });
+
+      // Page 600x800 → center expected at x=300-60, y=400-16 with rotation=0
+      const firstCallArgs = pdfLibMocks.drawTextMock.mock.calls[0]?.[1];
+      expect(firstCallArgs).toMatchObject({ x: 240, y: 384 });
+      expect(pdfLibMocks.drawTextMock).toHaveBeenCalledTimes(2);
+    });
+
+    it("forces -30deg rotation when position is diagonal", async () => {
+      pdfLibMocks.drawTextMock.mockClear();
+
+      await applyTextWatermark(new Uint8Array([1]), {
+        text: "CONFIDENTIAL",
+        fontSize: 32,
+        opacity: 0.5,
+        rotation: 12,
+        color: "#000000",
+        position: "diagonal",
+      });
+
+      const firstCallArgs = pdfLibMocks.drawTextMock.mock.calls[0]?.[1];
+      expect(firstCallArgs?.rotate).toBe(-30);
     });
   });
 
