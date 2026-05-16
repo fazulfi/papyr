@@ -59,16 +59,17 @@ Result:
   - `STEP-F2-027` marked `✅ 2026-05-16`
 
 ## Git / Push / Deploy Evidence
-(Pending — to be filled after commit and push.)
-
 Commits:
-- Pending.
+1. `96f49d4` — `feat(fase2): add pdf-lib apply-signature pipeline and download flow`
+2. `a7d2d33` — `feat(fase2): integrate sign apply/download states into /sign flow`
+3. `dbc03cd` — `docs(fase2): mark STEP-F2-027 complete and add evidence`
 
 Push:
-- Pending.
+- `git push origin main`
+- Result: `41df2c2..dbc03cd  main -> main`
 
 Deploy trigger:
-- Push to `main` triggers auto-deploy (Vercel workflow).
+- Push to `main` triggers auto-deploy (Vercel workflow). Deploy ran automatically.
 
 ## Notes
 - Out of scope kept intact: STEP-F2-028 (unit tests for /sign page), STEP-F2-029 (manual E2E test).
