@@ -9,7 +9,7 @@ import SignatureUpload from "@/components/SignatureUpload";
 import SignatureType from "@/components/SignatureType";
 import SignaturePlacementOverlay from "@/components/SignaturePlacementOverlay";
 import { formatFileSize } from "@/lib/format";
-import { trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
+import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
 import {
   applyToAllPages,
   calculateAspectRatio,
@@ -23,6 +23,8 @@ import {
   type SignState,
   type SignatureState,
 } from "./logic";
+import { applySignatures } from "@/app/sign/apply-signature";
+import { downloadPDF } from "@/lib/pdfUtils";
 
 function TabButton({ active, children, onClick }: { active: boolean; children: React.ReactNode; onClick: () => void }) {
   return (
@@ -105,6 +107,7 @@ export default function SignPage() {
   const [applyAllPages, setApplyAllPages] = useState(false);
   const [signatureAspectRatio, setSignatureAspectRatio] = useState(0.4);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [signedPdfBytes, setSignedPdfBytes] = useState<Uint8Array | null>(null);
 
   const currentStep = useMemo(() => {
     if (pageState === "placing-signature" || pageState === "signing" || pageState === "done") return 2;
@@ -227,9 +230,35 @@ export default function SignPage() {
     [signatureState.placements, signatureState.currentPage],
   );
 
-  const handleApplySignature = () => {
-    setErrorMessage("Fitur apply dan download akan diaktifkan pada STEP-F2-026. Scaffold STEP-F2-022 hanya menyiapkan layout dan state.");
-  };
+  const handleApplySignature = useCallback(async () => {
+    if (!signatureState.pdfFile || !signatureState.signatureImage || signatureState.placements.length === 0) {
+      setErrorMessage("Pilih PDF, buat signature, dan tempatkan minimal 1 tanda tangan.");
+      setPageState("error");
+      trackTaskFailed("sign", "Missing required data", { error_type: "validation_error" });
+      return;
+    }
+
+    setPageState("signing");
+    setErrorMessage("");
+    trackTaskStarted("sign", { step: "apply_signature", placements: signatureState.placements.length });
+
+    try {
+      const pdfBytes = new Uint8Array(await signatureState.pdfFile.arrayBuffer());
+      const result = await applySignatures(
+        pdfBytes,
+        signatureState.signatureImage,
+        signatureState.placements,
+      );
+      setSignedPdfBytes(result);
+      setPageState("done");
+      trackTaskCompleted("sign", { placements_count: signatureState.placements.length });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Gagal menambahkan tanda tangan. Coba lagi.";
+      setErrorMessage(msg);
+      setPageState("error");
+      trackTaskFailed("sign", msg, { error_type: "apply_signature_error" });
+    }
+  }, [signatureState]);
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 sm:py-12">
@@ -456,8 +485,44 @@ export default function SignPage() {
             </button>
           </div>
         </div>
+       )}
+
+      {pageState === "signing" && (
+        <div className="space-y-4">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+            <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-accent/20 border-t-accent" />
+            <p className="text-sm font-medium text-navy">Menambahkan tanda tangan...</p>
+            <p className="mt-1 text-xs text-slate-400">
+              {signatureState.placements.length} penempatan pada {signatureState.totalPages} halaman
+            </p>
+          </div>
+        </div>
       )}
 
+      {pageState === "done" && signedPdfBytes && (
+        <div className="space-y-4">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-green-200 bg-green-50 p-6 text-center shadow-sm">
+            <p className="text-2xl font-bold text-green-700">✓ PDF Ditandatangani!</p>
+            <p className="mt-1 text-sm text-green-600">File sudah ter-download secara otomatis.</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              downloadPDF(signedPdfBytes, signatureState.pdfFile?.name?.replace(/\.pdf$/i, "-signed.pdf") ?? "signed.pdf");
+            }}
+            className="w-full rounded-2xl bg-accent px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-accent/90"
+          >
+            Download Ulang
+          </button>
+          <button
+            type="button"
+            onClick={handleReset}
+            className="w-full rounded-2xl border border-slate-200 bg-white px-6 py-4 text-base font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+          >
+            Tanda Tangani PDF Lain
+          </button>
+        </div>
+      )}
 
       {pageState === "error" && (
         <div className="space-y-4">
