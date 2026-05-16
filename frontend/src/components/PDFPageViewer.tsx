@@ -51,16 +51,25 @@ export default function PDFPageViewer({
 }: PDFPageViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const renderVersionRef = useRef(0);
+  const onPageChangeRef = useRef(onPageChange);
+  const onTotalPagesChangeRef = useRef(onTotalPagesChange);
+  const totalPagesRef = useRef(totalPages);
   const [isRendering, setIsRendering] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    onPageChangeRef.current = onPageChange;
+    onTotalPagesChangeRef.current = onTotalPagesChange;
+    totalPagesRef.current = totalPages;
+  }, [onPageChange, onTotalPagesChange, totalPages]);
+
   const handlePrev = useCallback(() => {
-    onPageChange(clampPage(currentPage - 1, totalPages));
-  }, [currentPage, totalPages, onPageChange]);
+    onPageChangeRef.current(clampPage(currentPage - 1, totalPages));
+  }, [currentPage, totalPages]);
 
   const handleNext = useCallback(() => {
-    onPageChange(clampPage(currentPage + 1, totalPages));
-  }, [currentPage, totalPages, onPageChange]);
+    onPageChangeRef.current(clampPage(currentPage + 1, totalPages));
+  }, [currentPage, totalPages]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -96,13 +105,13 @@ export default function PDFPageViewer({
         }
 
         const nextTotalPages = pdf.numPages;
-        if (nextTotalPages !== totalPages) {
-          onTotalPagesChange(nextTotalPages);
+        if (nextTotalPages !== totalPagesRef.current) {
+          onTotalPagesChangeRef.current(nextTotalPages);
         }
 
         const safePage = clampPage(currentPage, nextTotalPages);
         if (safePage !== currentPage) {
-          onPageChange(safePage);
+          onPageChangeRef.current(safePage);
         }
 
         const page = await pdf.getPage(safePage);
@@ -147,7 +156,7 @@ export default function PDFPageViewer({
     return () => {
       cancelled = true;
     };
-  }, [pdfFile, currentPage, totalPages, onPageChange, onTotalPagesChange]);
+  }, [pdfFile, currentPage]);
 
   const showPlaceholder = !pdfFile;
   const showError = Boolean(errorMessage);
@@ -174,7 +183,7 @@ export default function PDFPageViewer({
             className="block h-auto max-h-[70vh] max-w-full w-auto"
             aria-label={`Preview halaman ${currentPage} PDF`}
           />
-          {children}
+          {!isRendering && children}
           {isRendering && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
               <PDFLoading />
