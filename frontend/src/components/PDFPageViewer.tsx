@@ -117,10 +117,20 @@ export default function PDFPageViewer({
           throw new Error("Canvas tidak tersedia di browser ini.");
         }
 
-        canvas.width = Math.round(viewport.width);
-        canvas.height = Math.round(viewport.height);
+        const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+        const renderWidth = Math.round(viewport.width);
+        const renderHeight = Math.round(viewport.height);
+        canvas.width = Math.round(renderWidth * dpr);
+        canvas.height = Math.round(renderHeight * dpr);
+        canvas.style.width = `${renderWidth}px`;
+        canvas.style.height = `${renderHeight}px`;
 
-        await page.render({ canvas, canvasContext: context, viewport }).promise;
+        await page.render({
+          canvas,
+          canvasContext: context,
+          viewport,
+          transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
+        }).promise; 
 
         if (!cancelled && renderVersionRef.current === version) {
           setViewerWidth(Math.round(viewport.width));
@@ -145,7 +155,7 @@ export default function PDFPageViewer({
 
   const showPlaceholder = !pdfFile;
   const showError = Boolean(errorMessage);
-  const showCanvas = pdfFile && !isRendering && !showError;
+  const showCanvas = Boolean(pdfFile) && !showError;
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -155,7 +165,6 @@ export default function PDFPageViewer({
       </div>
 
       {showPlaceholder && <PDFPlaceholder />}
-      {isRendering && <PDFLoading />}
       {showError && (
         <div className="flex min-h-52 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 px-6 text-center text-sm text-rose-600">
           {errorMessage}
@@ -169,6 +178,11 @@ export default function PDFPageViewer({
         >
           <canvas ref={canvasRef} className="block h-auto w-full" aria-label={`Preview halaman ${currentPage} PDF`} />
           {children}
+          {isRendering && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
+              <PDFLoading />
+            </div>
+          )}
         </div>
       )}
 
