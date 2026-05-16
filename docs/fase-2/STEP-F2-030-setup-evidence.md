@@ -100,17 +100,11 @@ curl -X POST https://papyr-production.up.railway.app/api/pdf-to-word \
 ## Git / Push / Deploy Evidence
 
 ### 1) Commits
-**Commit 1: Dockerfile + progress update**
-- Message: `infra(fase2): install LibreOffice headless in Docker`
-- Body: `Refs: PAPYR-128`
-- Files:
-  - `backend/Dockerfile`
-  - `stepprompts/progress.md`
-
-**Commit 2: Evidence documentation**
-- Message: `docs(fase2): add STEP-F2-030 setup evidence`
-- Files:
-  - `docs/fase-2/STEP-F2-030-setup-evidence.md`
+1. `e3efa1d` — `infra(fase2): install LibreOffice headless in Docker`
+   - Body: `Refs: PAPYR-128`
+   - Files: `backend/Dockerfile`, `stepprompts/progress.md`
+2. `e72ceb4` — `docs(fase2): add STEP-F2-030 setup evidence`
+   - Files: `docs/fase-2/STEP-F2-030-setup-evidence.md`
 
 ### 2) Push
 **Command:**
@@ -118,9 +112,9 @@ curl -X POST https://papyr-production.up.railway.app/api/pdf-to-word \
 git push origin main
 ```
 
-**Expected result:**
-- Push to `main` triggers Railway webhook
-- Railway auto-build starts
+**Result:**
+- `cb379b8..e72ceb4  main -> main`
+- Push to `main` triggered Railway webhook for backend auto-build
 - Build logs available in Railway Dashboard > Deployments > Build Log
 
 ### 3) Deploy
