@@ -6,14 +6,180 @@
  *  1. Create signature (draw / upload / type) on uploaded PDF.
  *  2. Place signature on PDF pages (drag-and-drop placement).
  *
- * Deep behavior (canvas drawing, placement engine, pdf-lib pipeline)
- * is implemented in subsequent steps (F2-023+). This module only
- * exposes scaffolding types and pure validation helpers.
+ * Canvas drawing logic (STEP-F2-023) exports pure helpers here
+ * so tests can verify state transitions and data transformations
+ * without a live canvas DOM element.
  */
 
 /* ── Mode + Step Types ── */
 
 export type SignMode = "draw" | "upload" | "type";
+
+/* ── STEP-F2-023 SignaturePad Draw Types ── */
+
+/** A single (x,y) point in the stroke path. */
+export interface DrawPoint {
+  x: number;
+  y: number;
+}
+
+/** A complete stroke: sequence of points + rendering params. */
+export interface Stroke {
+  points: DrawPoint[];
+  color: string;   // hex e.g. "#000000" or "#1E40AF"
+  width: number;   // pixels e.g. 2, 4, or 6
+}
+
+/** Supported line-width labels (used in the UI selector). */
+export type LineWidth = "thin" | "medium" | "thick";
+
+/* ── STEP-F2-023 Constants ── */
+
+export const LINE_WIDTH_MAP: Record<LineWidth, number> = {
+  thin: 2,
+  medium: 4,
+  thick: 6,
+} as const;
+
+export const LINE_WIDTH_LABELS: LineWidth[] = ["thin", "medium", "thick"];
+
+export const SIGNATURE_COLORS = ["#000000", "#1E40AF"] as const;
+
+export type SignatureColor = (typeof SIGNATURE_COLORS)[number];
+
+/** Default canvas dimensions for the draw pad. */
+export const CANVAS_WIDTH = 560;
+export const CANVAS_HEIGHT = 200;
+
+/* ── STEP-F2-023 Type Guards ── */
+
+export function isValidLineWidth(value: string): value is LineWidth {
+  return value === "thin" || value === "medium" || value === "thick";
+}
+
+export function isValidSignatureColor(value: string): value is SignatureColor {
+  return (SIGNATURE_COLORS as readonly string[]).includes(value);
+}
+
+export function isValidLineWidthIndex(value: number): value is 0 | 1 | 2 {
+  return value === 0 || value === 1 || value === 2;
+}
+
+/* ── STEP-F2-023 Pure Helpers ── */
+
+/**
+ * Return the numeric pixel width for a LineWidth label.
+ */
+export function getLineWidthPixels(label: LineWidth): number {
+  return LINE_WIDTH_MAP[label];
+}
+
+/**
+ * Produce the data-URL string that canvas.toDataURL("image/png")
+ * would return, for a transparent PNG export contract check.
+ * Used to verify the export pathway shape without a real canvas.
+ */
+export function createSignaturePngDataUrl(pixelData: string): string {
+  return `data:image/png;base64,${pixelData}`;
+}
+
+/**
+ * Extracts just the base64 payload from a PNG data URL.
+ * Returns null if the format is unexpected.
+ */
+export function extractPngBase64(dataUrl: string): string | null {
+  const prefix = "data:image/png;base64,";
+  if (!dataUrl.startsWith(prefix)) return null;
+  return dataUrl.slice(prefix.length);
+}
+
+/**
+ * Remove the last stroke from a strokes array (undo operation).
+ * Returns the new array (immutable).
+ */
+export function removeLastStroke(strokes: Stroke[]): Stroke[] {
+  if (strokes.length === 0) return strokes;
+  return strokes.slice(0, -1);
+}
+
+/**
+ * Return the total number of points across all strokes.
+ * Useful for determining if the pad has "real" content.
+ */
+export function getTotalPoints(strokes: Stroke[]): number {
+  let count = 0;
+  for (const s of strokes) {
+    count += s.points.length;
+  }
+  return count;
+}
+
+/**
+ * Returns true if the strokes array contains meaningful drawing data
+ * (at least one stroke with at least two points — i.e. a drawn line).
+ */
+export function hasMeaningfulStroke(strokes: Stroke[]): boolean {
+  return strokes.some((s) => s.points.length >= 2);
+}
+
+/**
+ * Build a Stroke object from the current drawing params.
+ */
+export function createStroke(
+  points: DrawPoint[],
+  color: string,
+  width: number,
+): Stroke {
+  return { points, color, width };
+}
+
+/**
+ * Compute a "pixel bounding-box" of all strokes so the export
+ * can optionally crop whitespace. Returns { minX, minY, maxX, maxY }.
+ * When no points exist, returns the full canvas dimensions.
+ */
+export function getStrokesBounds(
+  strokes: Stroke[],
+  fallbackWidth = CANVAS_WIDTH,
+  fallbackHeight = CANVAS_HEIGHT,
+): { minX: number; minY: number; maxX: number; maxY: number } {
+  if (strokes.length === 0) {
+    return { minX: 0, minY: 0, maxX: fallbackWidth, maxY: fallbackHeight };
+  }
+
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+
+  for (const s of strokes) {
+    for (const p of s.points) {
+      if (p.x < minX) minX = p.x;
+      if (p.y < minY) minY = p.y;
+      if (p.x > maxX) maxX = p.x;
+      if (p.y > maxY) maxY = p.y;
+    }
+  }
+
+  // No points case
+  if (!isFinite(minX)) {
+    return { minX: 0, minY: 0, maxX: fallbackWidth, maxY: fallbackHeight };
+  }
+
+  return { minX, minY, maxX, maxY };
+}
+
+/**
+ * Returns the recommended canvas dimensions based on the parent width.
+ * Used to size the canvas responsively while keeping min/max constraints.
+ */
+export function getCanvasDimensions(
+  parentWidth: number,
+): { width: number; height: number } {
+  const clamped = Math.min(Math.max(parentWidth, 280), CANVAS_WIDTH);
+  const ratio = CANVAS_HEIGHT / CANVAS_WIDTH;
+  return { width: Math.round(clamped), height: Math.round(clamped * ratio) };
+}
 
 /**
  * High-level page state for the /sign route.
