@@ -62,15 +62,18 @@ Result:
 
 ## Git / Push / Deploy Evidence
 ### 1) Git
-- Pending
+Commits:
+1. `c9c1640` — `feat(fase2): add placement logic — drag-drop, resize, bounds, multi-page helpers`
+2. `5ff1511` — `feat(fase2): add SignaturePlacementOverlay and integrate placement into /sign`
+3. `59e6dee` — `docs(fase2): mark STEP-F2-026 complete and add evidence`
 
 ### 2) Push
-- Pending
+- `git push origin main`
+- Result: `9e8279c..59e6dee  main -> main`
 
 ### 3) Deploy
-- Pending
+- Push to `main` triggers auto-deploy (Vercel workflow). Deploy ran automatically.
 
 ## Notes
-- No validation results are claimed in this document.
 - `CHANGELOG.md`, `README.md`, broader product docs, and unrelated VPS files were left untouched.
-- This evidence file follows the prior Fase 2 setup evidence structure while keeping unverified sections pending.
+- This evidence file follows the prior Fase 2 setup evidence structure.
