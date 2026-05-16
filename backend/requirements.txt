@@ -6,3 +6,4 @@ python-dotenv==1.1.0
 PyMuPDF==1.25.5
 Pillow==11.2.1
 slowapi==0.1.9
+ocrmypdf>=16.0.0

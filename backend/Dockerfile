@@ -12,11 +12,15 @@ WORKDIR /app
 
 # Install Ghostscript for server-side PDF compression
 # Install LibreOffice headless for PDF-to-Word conversion (PAPYR-128)
+# Install Tesseract OCR with Indonesian + English language packs (PAPYR-138)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ghostscript \
         libreoffice-writer \
-        libreoffice-common && \
+        libreoffice-common \
+        tesseract-ocr \
+        tesseract-ocr-ind \
+        tesseract-ocr-eng && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
