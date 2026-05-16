@@ -155,15 +155,24 @@ Actual image size will be measured from Docker/Railway build logs when runtime b
 
 ### Commits
 
-Pending — will be finalized after commit.
+1. **62e02db** — `docs(fase2): finalize STEP-F2-033 evidence with deploy details`
+   - File: `docs/fase-2/STEP-F2-033-setup-evidence.md`
+   - Reason: preserve and finalize important STEP-F2-033 evidence details.
+
+2. **1cbee0e** — `infra(fase2): install Tesseract OCR and ocrmypdf dependencies`
+   - Files: `backend/Dockerfile`, `backend/requirements.txt`, `stepprompts/progress.md`, `docs/fase-2/STEP-F2-034-setup-evidence.md`
+   - Refs: PAPYR-138, PAPYR-139
 
 ### Push
 
-Pending — will be finalized after push.
+- **Command**: `git push origin main`
+- **Result**: `550dbcc..1cbee0e  main -> main`
+- **Status**: ✅ Pushed successfully
 
 ### Deploy
 
-Pending — push to `main` will trigger Railway backend auto-build/deploy.
+- **Trigger**: Push to `main` completed.
+- **Expected behavior**: Railway backend auto-build/deploy triggered per deployment runbook.
 
 ## Notes
 
