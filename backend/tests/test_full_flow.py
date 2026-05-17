@@ -13,8 +13,6 @@ Default API: https://papyr-production.up.railway.app
 
 import argparse
 import io
-import os
-import struct
 import sys
 import time
 import zipfile
@@ -74,7 +72,7 @@ def generate_3_pdfs() -> list[tuple[bytes, str]]:
     colors = [(0.8, 0.2, 0.2), (0.2, 0.8, 0.2), (0.2, 0.2, 0.8)]
     names = ["dokumen_A.pdf", "dokumen_B.pdf", "dokumen_C.pdf"]
 
-    for idx, (color, name) in enumerate(zip(colors, names)):
+    for idx, (color, name) in enumerate(zip(colors, names, strict=False)):
         doc = fitz.open()
         for page_num in range(2):
             page = doc.new_page(width=595, height=842)
@@ -228,7 +226,7 @@ def test_compress(api_url: str) -> dict:
         dl_size = len(dl_resp.content)
         is_smaller = dl_size < original_size
         print(f"  Download: {dl_size:,} bytes (smaller: {is_smaller})")
-        print(f"  ✅ PASSED" if is_smaller else f"  ⚠️ PASSED (not smaller but valid)")
+        print("  ✅ PASSED" if is_smaller else "  ⚠️ PASSED (not smaller but valid)")
 
         return {
             "tool": "compress",
@@ -321,7 +319,7 @@ def test_image_to_pdf(api_url: str) -> dict:
             }
 
         print(f"  Download: {len(dl_resp.content):,} bytes, {page_count} pages")
-        print(f"  ✅ PASSED")
+        print("  ✅ PASSED")
 
         return {
             "tool": "image-to-pdf",
@@ -431,7 +429,7 @@ def test_pdf_to_image(api_url: str) -> dict:
 
         print(f"  Download: {len(dl_resp.content):,} bytes ZIP, {len(png_files)} PNGs")
         print(f"  ZIP contents: {', '.join(png_files)}")
-        print(f"  ✅ PASSED")
+        print("  ✅ PASSED")
 
         return {
             "tool": "pdf-to-image",
@@ -503,7 +501,7 @@ def test_pdf_to_image_single(api_url: str) -> dict:
 
         print(f"  Response: file_type={file_type}, page_count={data.get('page_count')}")
         print(f"  Download: {len(dl_resp.content):,} bytes PNG")
-        print(f"  ✅ PASSED")
+        print("  ✅ PASSED")
 
         return {
             "tool": "pdf-to-image-single",
@@ -561,23 +559,25 @@ def generate_report(results: list[dict]) -> str:
 
         lines.append(f"| {i} | {tool} | {emoji} | {detail} | {elapsed} |")
 
-    lines.extend([
-        "",
-        "## Client-Side Tools (Manual Verification Required)",
-        "",
-        "| Tool | Test Scenario | Status |",
-        "|------|---------------|--------|",
-        "| merge | Upload 3 PDFs, reorder, merge → verify all pages | ⏳ Manual |",
-        "| split | Upload 10-page PDF, select 2-5 → verify 4 pages | ⏳ Manual |",
-        "",
-        "## Catatan",
-        "",
-        "- Compress, Image-to-PDF, PDF-to-Image: server-side (Railway + R2)",
-        "- Merge, Split: client-side only (pdf-lib in browser) — tidak bisa ditest via API",
-        "- Download URL diverifikasi: magic bytes + content validation",
-        "- Semua test menggunakan file yang di-generate otomatis",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Client-Side Tools (Manual Verification Required)",
+            "",
+            "| Tool | Test Scenario | Status |",
+            "|------|---------------|--------|",
+            "| merge | Upload 3 PDFs, reorder, merge → verify all pages | ⏳ Manual |",
+            "| split | Upload 10-page PDF, select 2-5 → verify 4 pages | ⏳ Manual |",
+            "",
+            "## Catatan",
+            "",
+            "- Compress, Image-to-PDF, PDF-to-Image: server-side (Railway + R2)",
+            "- Merge, Split: client-side only (pdf-lib in browser) — tidak bisa ditest via API",
+            "- Download URL diverifikasi: magic bytes + content validation",
+            "- Semua test menggunakan file yang di-generate otomatis",
+            "",
+        ]
+    )
 
     return "\n".join(lines)
 
@@ -620,7 +620,7 @@ if __name__ == "__main__":
     failed = len(results) - passed
     print(f"\n{'=' * 70}")
     print(f"  SUMMARY: {passed} passed, {failed} failed (server-side)")
-    print(f"  Note: Merge + Split require manual browser testing")
+    print("  Note: Merge + Split require manual browser testing")
     print(f"{'=' * 70}")
 
     sys.exit(0 if failed == 0 else 1)

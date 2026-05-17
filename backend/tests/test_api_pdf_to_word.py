@@ -7,7 +7,6 @@ from fastapi import HTTPException
 from routers import pdf_to_word
 from services.async_task import _tasks
 
-
 PDF_BYTES = b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\n"
 
 
@@ -38,7 +37,10 @@ class _DummyDoc:
 async def test_pdf_to_word_valid_returns_202(test_client):
     with (
         patch("routers.pdf_to_word.validate_pdf_file") as mock_validate,
-        patch("routers.pdf_to_word.fitz.open", return_value=_DummyDoc(["teks cukup panjang untuk lolos"])),
+        patch(
+            "routers.pdf_to_word.fitz.open",
+            return_value=_DummyDoc(["teks cukup panjang untuk lolos"]),
+        ),
     ):
         mock_validate.return_value.filename = "sample.pdf"
         mock_validate.return_value.page_count = 3

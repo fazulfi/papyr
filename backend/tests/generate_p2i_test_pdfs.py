@@ -26,7 +26,6 @@ import os
 
 import fitz  # PyMuPDF
 
-
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "p2i_test_files")
 
 
@@ -57,7 +56,7 @@ def create_5page_text_pdf(path: str) -> None:
         # Identifikasi unik
         page.insert_text(
             fitz.Point(50, 100),
-            f"Dokumen: 5_pages.pdf",
+            "Dokumen: 5_pages.pdf",
             fontsize=14,
             fontname="helv",
             color=(0.6, 0.6, 0.6),
@@ -196,7 +195,7 @@ def create_not_a_pdf(path: str) -> None:
     """File teks biasa untuk test validasi."""
     with open(path, "w") as f:
         f.write("Ini bukan file PDF. Hanya file teks biasa untuk testing validasi MIME type.")
-    print(f"  ✅ not_a_pdf.txt — file bukan PDF")
+    print("  ✅ not_a_pdf.txt — file bukan PDF")
 
 
 def main() -> None:

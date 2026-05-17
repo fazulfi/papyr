@@ -1,14 +1,13 @@
+import importlib
 import os
 import sys
-import importlib
+from collections.abc import AsyncIterator
 from pathlib import Path
-from typing import AsyncIterator
 from unittest.mock import patch
 
 import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
-
 
 # Set required env vars BEFORE importing app/utils.config
 os.environ["R2_ACCOUNT_ID"] = "test-account-id"

@@ -20,7 +20,6 @@ Stub strategy:
 import os
 import sys
 import types
-from pathlib import Path
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -28,7 +27,6 @@ from fastapi import HTTPException
 
 from routers import pdf_to_excel
 from services.async_task import _tasks
-
 
 PDF_BYTES = b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\n"
 
@@ -64,6 +62,7 @@ class _DummyDoc:
 
 class _FakeTable:
     """Stand-in for camelot.Table — no pandas import."""
+
     def __init__(self):
         self._rows = [["A", "B"], ["1", "2"], ["3", "4"]]
 
@@ -100,6 +99,7 @@ def _stub_pandas_module():
 
     class _FakeBook:
         """Minimal xlsx workbook written as a real zip/xlsx file."""
+
         def __init__(self, path: str):
             self._path = path
             self._sheets: list[tuple[str, list[list[str]]]] = []
@@ -115,24 +115,25 @@ def _stub_pandas_module():
         def save(self, path: str | None = None):
             target = path or self._path
             import os
+
             if os.path.exists(str(target)):
                 os.remove(str(target))
             with zipfile.ZipFile(str(target), "w", zipfile.ZIP_DEFLATED) as zf:
                 for sheet_name, rows in self._sheets:
                     s_idx = self._sheets.index((sheet_name, rows)) + 1
-                    cols = len(rows[0]) if rows else 1
+                    len(rows[0]) if rows else 1
                     rows_xml = ""
                     for r_idx, row in enumerate(rows, start=1):
                         cells = "".join(
                             f'<c r="{chr(65 + c_idx)}{r_idx}" t="inlineStr">'
-                            f'<is><t>{v}</t></is></c>'
+                            f"<is><t>{v}</t></is></c>"
                             for c_idx, v in enumerate(row)
                         )
                         rows_xml += f'<row r="{r_idx}">{cells}</row>'
                     sheet_xml = (
                         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
                         '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
-                        f'<sheetData>{rows_xml}</sheetData></worksheet>'
+                        f"<sheetData>{rows_xml}</sheetData></worksheet>"
                     )
                     zf.writestr(f"xl/worksheets/sheet{s_idx}.xml", sheet_xml)
 
@@ -198,22 +199,28 @@ def _clear_tasks_between_tests():
 
 def _make_patched_to_thread_returns_tables():
     """Returns [_FakeTable()]; pandas then writes xlsx OR fails (no pandas)."""
+
     def fake_to_thread(func, *args, **kwargs):
         return [_FakeTable()]
+
     return fake_to_thread
 
 
 def _make_patched_to_thread_returns_empty():
     """Returns [] — triggers 'Tidak ada tabel' error."""
+
     def fake_to_thread(func, *args, **kwargs):
         return []
+
     return fake_to_thread
 
 
 def _make_patched_to_thread_raises():
     """Raises RuntimeError — triggers exception propagation."""
+
     def fake_to_thread(func, *args, **kwargs):
         raise RuntimeError("camelot error")
+
     return fake_to_thread
 
 
@@ -381,6 +388,7 @@ async def test_pdf_to_excel_run_task_in_background_passed_correct_kwargs(test_cl
 
 def _mkstemp_fake_factory(input_path, output_path, output_ref: list):
     """Create a fake mkstemp that alternates between input and output paths."""
+
     def fake_mkstemp(suffix="", prefix=""):
         if not hasattr(fake_mkstemp, "_n"):
             fake_mkstemp._n = 0
@@ -392,6 +400,7 @@ def _mkstemp_fake_factory(input_path, output_path, output_ref: list):
         output_ref[0] = str(output_path)
         fd = os.open(str(output_path), os.O_CREAT | os.O_WRONLY)
         return fd, str(output_path)
+
     return fake_mkstemp
 
 
@@ -405,7 +414,10 @@ async def test_convert_pdf_to_excel_success(tmp_path, _stub_pandas_module, _stub
 
     with (
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_returns_tables()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread",
+            side_effect=_make_patched_to_thread_returns_tables(),
+        ),
         patch("routers.pdf_to_excel.upload_file", return_value={"key": "k"}),
         patch("routers.pdf_to_excel.generate_signed_url", return_value="https://signed/url"),
     ):
@@ -424,7 +436,9 @@ async def test_convert_pdf_to_excel_success(tmp_path, _stub_pandas_module, _stub
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_excel_prefers_camelot_lattice_read_pdf(tmp_path, _stub_pandas_module, _stub_camelot_module):
+async def test_convert_pdf_to_excel_prefers_camelot_lattice_read_pdf(
+    tmp_path, _stub_pandas_module, _stub_camelot_module
+):
     """Regression: Camelot 1.x exposes read_pdf; bordered invoices prefer lattice."""
     input_path = tmp_path / "in.pdf"
     output_path = tmp_path / "out.xlsx"
@@ -477,7 +491,10 @@ async def test_convert_pdf_to_excel_falls_back_to_stream_when_lattice_empty(
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
         patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=fake_to_thread),
         patch("routers.pdf_to_excel.upload_file", return_value={"key": "k"}),
-        patch("routers.pdf_to_excel.generate_signed_url", return_value="https://signed/stream-fallback"),
+        patch(
+            "routers.pdf_to_excel.generate_signed_url",
+            return_value="https://signed/stream-fallback",
+        ),
     ):
         result = await pdf_to_excel._convert_pdf_to_excel(
             file_bytes=PDF_BYTES,
@@ -500,7 +517,10 @@ async def test_convert_pdf_to_excel_no_tables_found(tmp_path, _stub_camelot_modu
 
     with (
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_returns_empty()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread",
+            side_effect=_make_patched_to_thread_returns_empty(),
+        ),
     ):
         with pytest.raises(RuntimeError) as exc_info:
             await pdf_to_excel._convert_pdf_to_excel(
@@ -512,7 +532,9 @@ async def test_convert_pdf_to_excel_no_tables_found(tmp_path, _stub_camelot_modu
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_excel_output_missing(tmp_path, _stub_pandas_module, _stub_camelot_module):
+async def test_convert_pdf_to_excel_output_missing(
+    tmp_path, _stub_pandas_module, _stub_camelot_module
+):
     """H3: Valid conversion (pandas stub writes xlsx successfully).
 
     The 'output missing' scenario (no file produced by pandas) is not
@@ -527,7 +549,10 @@ async def test_convert_pdf_to_excel_output_missing(tmp_path, _stub_pandas_module
 
     with (
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_returns_tables()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread",
+            side_effect=_make_patched_to_thread_returns_tables(),
+        ),
         patch("routers.pdf_to_excel.upload_file", return_value={"key": "k"}),
         patch("routers.pdf_to_excel.generate_signed_url", return_value="https://signed/output"),
     ):
@@ -543,7 +568,9 @@ async def test_convert_pdf_to_excel_output_missing(tmp_path, _stub_pandas_module
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_excel_empty_output(tmp_path, _stub_pandas_module, _stub_camelot_module):
+async def test_convert_pdf_to_excel_empty_output(
+    tmp_path, _stub_pandas_module, _stub_camelot_module
+):
     """H4: Output file is empty → RuntimeError with 'empty' or 'kosong'."""
     input_path = tmp_path / "in.pdf"
     output_path = tmp_path / "out.xlsx"
@@ -589,7 +616,9 @@ async def test_convert_pdf_to_excel_camelot_raises(tmp_path, _stub_camelot_modul
 
     with (
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_raises()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_raises()
+        ),
     ):
         with pytest.raises(RuntimeError) as exc_info:
             await pdf_to_excel._convert_pdf_to_excel(
@@ -601,7 +630,9 @@ async def test_convert_pdf_to_excel_camelot_raises(tmp_path, _stub_camelot_modul
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_excel_upload_failure(tmp_path, _stub_pandas_module, _stub_camelot_module):
+async def test_convert_pdf_to_excel_upload_failure(
+    tmp_path, _stub_pandas_module, _stub_camelot_module
+):
     """H6: upload_file raises RuntimeError → RuntimeError propagated."""
     input_path = tmp_path / "in.pdf"
     output_path = tmp_path / "out.xlsx"
@@ -610,7 +641,10 @@ async def test_convert_pdf_to_excel_upload_failure(tmp_path, _stub_pandas_module
 
     with (
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_returns_tables()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread",
+            side_effect=_make_patched_to_thread_returns_tables(),
+        ),
         patch("routers.pdf_to_excel.upload_file", side_effect=RuntimeError("upload failed")),
     ):
         with pytest.raises(RuntimeError) as exc_info:
@@ -623,7 +657,9 @@ async def test_convert_pdf_to_excel_upload_failure(tmp_path, _stub_pandas_module
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_excel_cleanup_on_error(tmp_path, _stub_pandas_module, _stub_camelot_module):
+async def test_convert_pdf_to_excel_cleanup_on_error(
+    tmp_path, _stub_pandas_module, _stub_camelot_module
+):
     """H7: Input temp file cleaned up even when upload raises RuntimeError."""
     input_path = tmp_path / "in.pdf"
     output_path = tmp_path / "out.xlsx"
@@ -632,7 +668,10 @@ async def test_convert_pdf_to_excel_cleanup_on_error(tmp_path, _stub_pandas_modu
 
     with (
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_returns_tables()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread",
+            side_effect=_make_patched_to_thread_returns_tables(),
+        ),
         patch("routers.pdf_to_excel.upload_file", side_effect=RuntimeError("cleanup test")),
     ):
         with pytest.raises(RuntimeError):
@@ -647,7 +686,9 @@ async def test_convert_pdf_to_excel_cleanup_on_error(tmp_path, _stub_pandas_modu
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_excel_generic_exception(tmp_path, _stub_pandas_module, _stub_camelot_module):
+async def test_convert_pdf_to_excel_generic_exception(
+    tmp_path, _stub_pandas_module, _stub_camelot_module
+):
     """H8: Generic non-RuntimeError exception → wrapped as RuntimeError."""
     input_path = tmp_path / "in.pdf"
     output_path = tmp_path / "out.xlsx"
@@ -656,7 +697,10 @@ async def test_convert_pdf_to_excel_generic_exception(tmp_path, _stub_pandas_mod
 
     with (
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_returns_tables()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread",
+            side_effect=_make_patched_to_thread_returns_tables(),
+        ),
         patch("routers.pdf_to_excel.upload_file", side_effect=ValueError("generic error")),
     ):
         with pytest.raises((RuntimeError, Exception)) as exc_info:
@@ -686,7 +730,10 @@ async def test_pdf_to_excel_background_task_completion_flow(test_client, tmp_pat
         patch("routers.pdf_to_excel.validate_pdf_file") as mock_validate,
         patch("routers.pdf_to_excel.fitz.open", return_value=_DummyDoc(["some content"])),
         patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
-        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=_make_patched_to_thread_returns_tables()),
+        patch(
+            "routers.pdf_to_excel.asyncio.to_thread",
+            side_effect=_make_patched_to_thread_returns_tables(),
+        ),
         patch("routers.pdf_to_excel.upload_file", return_value={"key": "k"}),
         patch("routers.pdf_to_excel.generate_signed_url", return_value="https://signed/poll"),
     ):

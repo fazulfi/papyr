@@ -23,6 +23,7 @@ def ensure_dir():
 # Minimal JPG generator (no Pillow needed)
 # ---------------------------------------------------------------------------
 
+
 def _create_minimal_jpg(width: int, height: int, r: int, g: int, b: int) -> bytes:
     """Create a minimal valid JPEG with solid color using raw JFIF encoding."""
     # This creates a tiny valid JPEG. For larger images we tile this approach.
@@ -35,8 +36,10 @@ def _create_minimal_jpg(width: int, height: int, r: int, g: int, b: int) -> byte
     # OR use PIL if available, falling back to raw bytes.
 
     try:
-        from PIL import Image
         import io
+
+        from PIL import Image
+
         img = Image.new("RGB", (width, height), (r, g, b))
         buf = io.BytesIO()
         img.save(buf, format="JPEG", quality=85)
@@ -54,8 +57,10 @@ def _minimal_1x1_jpeg(r: int, g: int, b: int) -> bytes:
     # For testing purposes, we use a pre-encoded minimal JPEG
     # and just return a valid JPEG file
     try:
-        from PIL import Image
         import io
+
+        from PIL import Image
+
         img = Image.new("RGB", (1, 1), (r, g, b))
         buf = io.BytesIO()
         img.save(buf, format="JPEG")
@@ -106,6 +111,7 @@ def _create_png(width: int, height: int, r: int, g: int, b: int) -> bytes:
 # ---------------------------------------------------------------------------
 # File generators
 # ---------------------------------------------------------------------------
+
 
 def gen_small_jpg():
     """Small JPG — 200x300, red-ish, ~few KB."""
@@ -193,9 +199,11 @@ def _create_noisy_png(width: int, height: int) -> bytes:
 def gen_large_jpg():
     """Large image > 3MB to trigger backend fallback."""
     try:
-        from PIL import Image
         import io
         import random
+
+        from PIL import Image
+
         # With Pillow: create noisy JPEG
         path = os.path.join(OUTPUT_DIR, "large_photo.jpg")
         img = Image.new("RGB", (3000, 2000))
@@ -261,6 +269,7 @@ def gen_not_image_txt():
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
 
 def main():
     print("=" * 60)

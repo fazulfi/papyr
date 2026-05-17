@@ -5,9 +5,9 @@ Provides upload, signed URL generation, and deletion for temporary PDF files.
 Uses boto3 S3-compatible API with Cloudflare R2 endpoint.
 """
 
-import uuid
 import logging
-from datetime import datetime, timezone
+import uuid
+from datetime import UTC, datetime
 
 import boto3
 from botocore.config import Config
@@ -91,7 +91,7 @@ def upload_file(
         "key": object_key,
         "bucket": settings.r2_bucket_name,
         "size_bytes": len(file_bytes),
-        "uploaded_at": datetime.now(timezone.utc).isoformat(),
+        "uploaded_at": datetime.now(UTC).isoformat(),
     }
 
 
@@ -120,9 +120,7 @@ def generate_signed_url(
     params: dict = {"Bucket": settings.r2_bucket_name, "Key": object_key}
 
     if download_filename:
-        params["ResponseContentDisposition"] = (
-            f'attachment; filename="{download_filename}"'
-        )
+        params["ResponseContentDisposition"] = f'attachment; filename="{download_filename}"'
 
     try:
         url = client.generate_presigned_url(

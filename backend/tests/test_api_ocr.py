@@ -19,7 +19,6 @@ from fastapi import HTTPException
 from routers import ocr
 from services.async_task import _tasks
 
-
 PDF_BYTES = b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\n"
 
 
@@ -327,7 +326,7 @@ async def _fake_to_thread_no_output(func, *args, **kwargs):
 async def test_process_ocr_happy_path(tmp_path, _stub_ocrmypdf_module):
     """T12: _process_ocr happy path — returns expected dict with all keys."""
     input_path = tmp_path / "in.pdf"
-    output_path = tmp_path / "in_ocr.pdf"
+    tmp_path / "in_ocr.pdf"
 
     def fake_mkstemp(suffix="", prefix=""):
         fd = os.open(str(input_path), os.O_CREAT | os.O_WRONLY)
@@ -370,10 +369,13 @@ async def test_process_ocr_uses_quality_settings(tmp_path, _stub_ocrmypdf_module
         return None
 
     with (
-        patch("routers.ocr.tempfile.mkstemp", side_effect=[
-            (os.open(str(input_path), os.O_WRONLY), str(input_path)),
-            (os.open(str(output_path), os.O_CREAT | os.O_WRONLY), str(output_path)),
-        ]),
+        patch(
+            "routers.ocr.tempfile.mkstemp",
+            side_effect=[
+                (os.open(str(input_path), os.O_WRONLY), str(input_path)),
+                (os.open(str(output_path), os.O_CREAT | os.O_WRONLY), str(output_path)),
+            ],
+        ),
         patch("routers.ocr.asyncio.to_thread", side_effect=fake_to_thread),
         patch("routers.ocr.upload_file", return_value={"key": "k"}),
         patch("routers.ocr.generate_signed_url", return_value="https://signed/url"),
@@ -430,10 +432,13 @@ async def test_process_ocr_empty_output(tmp_path, _stub_ocrmypdf_module):
     input_path.write_bytes(PDF_BYTES)
     output_path.write_text("")
 
-    with patch("routers.ocr.tempfile.mkstemp", side_effect=[
-        (os.open(str(input_path), os.O_WRONLY), str(input_path)),
-        (os.open(str(output_path), os.O_RDONLY), str(output_path)),
-    ]):
+    with patch(
+        "routers.ocr.tempfile.mkstemp",
+        side_effect=[
+            (os.open(str(input_path), os.O_WRONLY), str(input_path)),
+            (os.open(str(output_path), os.O_RDONLY), str(output_path)),
+        ],
+    ):
         with pytest.raises(RuntimeError) as exc_info:
             await ocr._process_ocr(
                 file_bytes=PDF_BYTES,
@@ -456,10 +461,13 @@ async def test_process_ocr_generic_exception(tmp_path, _stub_ocrmypdf_module):
     output_path.write_bytes(b"non-empty-ocr-output")
 
     with (
-        patch("routers.ocr.tempfile.mkstemp", side_effect=[
-            (os.open(str(input_path), os.O_WRONLY), str(input_path)),
-            (os.open(str(output_path), os.O_RDONLY), str(output_path)),
-        ]),
+        patch(
+            "routers.ocr.tempfile.mkstemp",
+            side_effect=[
+                (os.open(str(input_path), os.O_WRONLY), str(input_path)),
+                (os.open(str(output_path), os.O_RDONLY), str(output_path)),
+            ],
+        ),
         patch("routers.ocr.asyncio.to_thread", return_value=None),
         patch("routers.ocr.upload_file", side_effect=ValueError("simulated upload failure")),
     ):
@@ -484,10 +492,13 @@ async def test_process_ocr_cleanup_on_error(tmp_path, _stub_ocrmypdf_module):
     output_path.write_bytes(b"non-empty-ocr-output")
 
     with (
-        patch("routers.ocr.tempfile.mkstemp", side_effect=[
-            (os.open(str(input_path), os.O_WRONLY), str(input_path)),
-            (os.open(str(output_path), os.O_RDONLY), str(output_path)),
-        ]),
+        patch(
+            "routers.ocr.tempfile.mkstemp",
+            side_effect=[
+                (os.open(str(input_path), os.O_WRONLY), str(input_path)),
+                (os.open(str(output_path), os.O_RDONLY), str(output_path)),
+            ],
+        ),
         patch("routers.ocr.asyncio.to_thread", return_value=None),
         patch("routers.ocr.upload_file", side_effect=RuntimeError("upload fails")),
     ):
@@ -511,10 +522,13 @@ async def test_process_ocr_output_missing(tmp_path, _stub_ocrmypdf_module):
     output_path.write_bytes(b"placeholder")  # Will be deleted by _fake_to_thread_no_output
 
     with (
-        patch("routers.ocr.tempfile.mkstemp", side_effect=[
-            (os.open(str(input_path), os.O_WRONLY), str(input_path)),
-            (os.open(str(output_path), os.O_RDONLY), str(output_path)),
-        ]),
+        patch(
+            "routers.ocr.tempfile.mkstemp",
+            side_effect=[
+                (os.open(str(input_path), os.O_WRONLY), str(input_path)),
+                (os.open(str(output_path), os.O_RDONLY), str(output_path)),
+            ],
+        ),
         patch("routers.ocr.asyncio.to_thread", side_effect=_fake_to_thread_no_output),
     ):
         with pytest.raises(RuntimeError) as exc_info:
@@ -555,7 +569,7 @@ async def test_ocr_endpoint_unexpected_error_returns_500(test_client):
 async def test_background_task_polling_flow(test_client, tmp_path):
     """T15: POST returns 202 → GET /api/status/{task_id} returns 200 with same id; unknown id 404."""
     input_p = tmp_path / "in.pdf"
-    output_p = tmp_path / "in_ocr.pdf"
+    tmp_path / "in_ocr.pdf"
 
     def fake_mkstemp(suffix="", prefix=""):
         fd = os.open(str(input_p), os.O_CREAT | os.O_WRONLY)

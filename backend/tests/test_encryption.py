@@ -1,10 +1,10 @@
 """Unit tests for shared encryption service."""
 
 import importlib
+from unittest.mock import MagicMock, patch
+from unittest.mock import mock_open as mock_file_open
 
 import pytest
-import fitz
-from unittest.mock import MagicMock, mock_open as mock_file_open, patch
 from fastapi import HTTPException
 
 encryption = importlib.import_module("services.encryption")
@@ -67,17 +67,21 @@ class TestEncryptPdf:
             with pytest.raises(HTTPException) as exc_info:
                 encrypt_pdf(file_bytes, "password123")
             assert exc_info.value.status_code == 409
-            assert "sudah terenkripsi" in exc_info.value.detail or "proteksi ganda" in exc_info.value.detail
+            assert (
+                "sudah terenkripsi" in exc_info.value.detail
+                or "proteksi ganda" in exc_info.value.detail
+            )
 
     def test_aes256_encrypt_success(self):
         file_bytes = _make_minimal_pdf_bytes()
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close") as mock_close, \
-             patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove") as mock_remove, \
-             patch("builtins.open", mock_file_open(read_data=b"encrypted_pdf_content")):
-
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove"),
+            patch("builtins.open", mock_file_open(read_data=b"encrypted_pdf_content")),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_enc_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=False)
             mock_open.return_value = mock_doc
@@ -93,13 +97,14 @@ class TestEncryptPdf:
 
     def test_aes128_encrypt_success(self):
         file_bytes = _make_minimal_pdf_bytes()
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close") as mock_close, \
-             patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove") as mock_remove, \
-             patch("builtins.open", mock_file_open(read_data=b"encrypted_pdf_content")):
-
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove"),
+            patch("builtins.open", mock_file_open(read_data=b"encrypted_pdf_content")),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_enc_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=False)
             mock_open.return_value = mock_doc
@@ -113,13 +118,14 @@ class TestEncryptPdf:
     def test_custom_permissions(self):
         file_bytes = _make_minimal_pdf_bytes()
         custom_perms = PDF_PERM_ANNOTATE | PDF_PERM_ACCESSIBILITY
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close") as mock_close, \
-             patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove") as mock_remove, \
-             patch("builtins.open", mock_file_open(read_data=b"encrypted")):
-
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove"),
+            patch("builtins.open", mock_file_open(read_data=b"encrypted")),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_enc_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=False)
             mock_open.return_value = mock_doc
@@ -131,13 +137,14 @@ class TestEncryptPdf:
 
     def test_output_empty_raises_500(self):
         file_bytes = _make_minimal_pdf_bytes()
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close") as mock_close, \
-             patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove") as mock_remove, \
-             patch("builtins.open", mock_file_open(read_data=b"")):
-
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove"),
+            patch("builtins.open", mock_file_open(read_data=b"")),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_enc_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=False)
             mock_open.return_value = mock_doc
@@ -149,9 +156,11 @@ class TestEncryptPdf:
 
     def test_unexpected_error_raises_500(self):
         file_bytes = _make_minimal_pdf_bytes()
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close"):
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_enc_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=False)
             mock_doc.save.side_effect = RuntimeError("Unexpected error")
@@ -184,7 +193,10 @@ class TestDecryptPdf:
             with pytest.raises(HTTPException) as exc_info:
                 decrypt_pdf(file_bytes, "password123")
             assert exc_info.value.status_code == 400
-            assert "tidak terproteksi" in exc_info.value.detail or "terenkripsi" in exc_info.value.detail.lower()
+            assert (
+                "tidak terproteksi" in exc_info.value.detail
+                or "terenkripsi" in exc_info.value.detail.lower()
+            )
 
     def test_wrong_password_raises_401(self):
         file_bytes = b"%PDF-test"
@@ -198,13 +210,14 @@ class TestDecryptPdf:
 
     def test_correct_password_decrypts_success(self):
         file_bytes = b"%PDF-encrypted"
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close") as mock_close, \
-             patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove") as mock_remove, \
-             patch("builtins.open", mock_file_open(read_data=b"decrypted_pdf_content")):
-
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove"),
+            patch("builtins.open", mock_file_open(read_data=b"decrypted_pdf_content")),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_dec_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=True, authenticate_result=2)
             mock_open.return_value = mock_doc
@@ -217,13 +230,14 @@ class TestDecryptPdf:
 
     def test_output_empty_raises_500(self):
         file_bytes = b"%PDF-encrypted"
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close") as mock_close, \
-             patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove") as mock_remove, \
-             patch("builtins.open", mock_file_open(read_data=b"")):
-
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove"),
+            patch("builtins.open", mock_file_open(read_data=b"")),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_dec_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=True, authenticate_result=2)
             mock_open.return_value = mock_doc
@@ -234,9 +248,11 @@ class TestDecryptPdf:
 
     def test_unexpected_error_raises_500(self):
         file_bytes = b"%PDF-test"
-        with patch("services.encryption.fitz.open") as mock_open, \
-             patch("services.encryption.tempfile.mkstemp") as mock_mkstemp, \
-             patch("services.encryption.os.close"):
+        with (
+            patch("services.encryption.fitz.open") as mock_open,
+            patch("services.encryption.tempfile.mkstemp") as mock_mkstemp,
+            patch("services.encryption.os.close"),
+        ):
             mock_mkstemp.return_value = (99, "/tmp/papyr_dec_xxx.pdf")
             mock_doc = _make_mock_doc(is_encrypted=True, authenticate_result=2)
             mock_doc.save.side_effect = RuntimeError("Unexpected error")
@@ -249,20 +265,26 @@ class TestDecryptPdf:
 
 class TestCleanup:
     def test_cleanup_removes_existing_file(self):
-        with patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove") as mock_remove:
+        with (
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove") as mock_remove,
+        ):
             _cleanup("/tmp/test_file.pdf")
             mock_remove.assert_called_once_with("/tmp/test_file.pdf")
 
     def test_cleanup_nonexistent_path_noop(self):
-        with patch("services.encryption.os.path.exists", return_value=False), \
-             patch("services.encryption.os.remove") as mock_remove:
+        with (
+            patch("services.encryption.os.path.exists", return_value=False),
+            patch("services.encryption.os.remove") as mock_remove,
+        ):
             _cleanup("/tmp/nonexistent.pdf")
             mock_remove.assert_not_called()
 
     def test_cleanup_oserror_noop(self):
-        with patch("services.encryption.os.path.exists", return_value=True), \
-             patch("services.encryption.os.remove", side_effect=OSError):
+        with (
+            patch("services.encryption.os.path.exists", return_value=True),
+            patch("services.encryption.os.remove", side_effect=OSError),
+        ):
             # Should not raise
             _cleanup("/tmp/test_file.pdf")
 

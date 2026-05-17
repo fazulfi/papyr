@@ -72,7 +72,7 @@ def parse_page_range(page_range: str, total_pages: int) -> list[int]:
                 raise HTTPException(
                     status_code=400,
                     detail=f"Nomor halaman tidak valid: '{part}'.",
-                )
+                ) from None
 
             if start > end:
                 raise HTTPException(
@@ -96,7 +96,7 @@ def parse_page_range(page_range: str, total_pages: int) -> list[int]:
                 raise HTTPException(
                     status_code=400,
                     detail=f"Nomor halaman tidak valid: '{part}'.",
-                )
+                ) from None
 
             if page_num < 1 or page_num > total_pages:
                 raise HTTPException(
@@ -137,7 +137,7 @@ def rasterize_pages(
         raise HTTPException(
             status_code=400,
             detail="File PDF tidak bisa dibuka. Pastikan file tidak corrupt atau terproteksi password.",
-        )
+        ) from None
 
     try:
         total_pages = len(doc)
@@ -161,7 +161,7 @@ def rasterize_pages(
                 raise HTTPException(
                     status_code=500,
                     detail=f"Gagal merender halaman {page_idx + 1}. File mungkin corrupt.",
-                )
+                ) from None
 
             # Simpan ke temp file
             fd, output_path = tempfile.mkstemp(
@@ -207,7 +207,7 @@ def package_output(output_paths: list[str], pages: list[int]) -> tuple[str, str]
 
     try:
         with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
-            for idx, (png_path, page_idx) in enumerate(zip(output_paths, pages)):
+            for _idx, (png_path, page_idx) in enumerate(zip(output_paths, pages, strict=False)):
                 # Nama file dalam ZIP: page_1.png, page_2.png, etc. (1-indexed)
                 arcname = f"page_{page_idx + 1}.png"
                 zf.write(png_path, arcname)
@@ -225,7 +225,7 @@ def package_output(output_paths: list[str], pages: list[int]) -> tuple[str, str]
         raise HTTPException(
             status_code=500,
             detail="Gagal membuat file ZIP.",
-        )
+        ) from None
 
 
 def _cleanup(path: str) -> None:

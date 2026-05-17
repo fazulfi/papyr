@@ -9,8 +9,7 @@ Covers:
 """
 
 import asyncio
-from datetime import datetime, timedelta, timezone
-from unittest.mock import AsyncMock, patch
+from datetime import UTC, datetime, timedelta
 
 import pytest
 
@@ -26,10 +25,10 @@ from services.async_task import (
     update_task_status,
 )
 
-
 # ---------------------------------------------------------------------------
 # Task lifecycle — synchronous helpers
 # ---------------------------------------------------------------------------
+
 
 class TestCreateTask:
     def test_create_task_returns_task_info(self):
@@ -88,13 +87,13 @@ class TestUpdateTaskStatus:
 
     def test_update_completed_at(self):
         task = create_task()
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         update_task_status(task.task_id, completed_at=now)
         assert task.completed_at == now
 
     def test_update_multiple_fields_at_once(self):
         task = create_task()
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         update_task_status(
             task.task_id,
             status=TaskStatus.DONE,
@@ -128,7 +127,7 @@ class TestTaskToResponse:
 
     def test_response_with_all_fields(self):
         task = create_task()
-        started = datetime.now(timezone.utc)
+        started = datetime.now(UTC)
         completed = started + timedelta(seconds=5)
         task.started_at = started
         task.completed_at = completed
@@ -147,6 +146,7 @@ class TestTaskToResponse:
 # ---------------------------------------------------------------------------
 # Background execution
 # ---------------------------------------------------------------------------
+
 
 class TestRunTaskInBackground:
     @pytest.mark.asyncio
@@ -199,6 +199,7 @@ class TestRunTaskInBackground:
     @pytest.mark.asyncio
     async def test_timeout_is_configurable(self):
         """A short timeout (0.1s) should fire before a 1s sleep."""
+
         async def slow():
             await asyncio.sleep(1)
             return "done"
@@ -213,11 +214,12 @@ class TestRunTaskInBackground:
 # TTL cleanup
 # ---------------------------------------------------------------------------
 
+
 class TestCleanupExpiredTasks:
     def test_removes_old_tasks(self):
         old_task = create_task(metadata={"role": "old"})
         # Set created_at to 3 hours ago (past 2-hour TTL)
-        old_task.created_at = datetime.now(timezone.utc) - timedelta(hours=3)
+        old_task.created_at = datetime.now(UTC) - timedelta(hours=3)
 
         fresh_task = create_task(metadata={"role": "fresh"})
 
@@ -229,7 +231,7 @@ class TestCleanupExpiredTasks:
     def test_removes_multiple_expired(self):
         for _ in range(3):
             t = create_task()
-            t.created_at = datetime.now(timezone.utc) - timedelta(hours=5)
+            t.created_at = datetime.now(UTC) - timedelta(hours=5)
 
         fresh = create_task()
 
@@ -247,11 +249,10 @@ class TestCleanupExpiredTasks:
 # HTTP endpoint via FastAPI test client
 # ---------------------------------------------------------------------------
 
+
 class TestStatusEndpoint:
     @pytest.mark.asyncio
     async def test_valid_task_returns_200(self, test_client):
-        from services.async_task import _tasks  # noqa: E402
-
         task = create_task()
         response = await test_client.get(f"/api/status/{task.task_id}")
 
@@ -273,8 +274,8 @@ class TestStatusEndpoint:
         task.status = TaskStatus.DONE
         task.progress = 100
         task.result = {"download_url": "https://cdn.example.com/file.docx"}
-        task.completed_at = datetime.now(timezone.utc)
-        task.started_at = datetime.now(timezone.utc) - timedelta(seconds=3)
+        task.completed_at = datetime.now(UTC)
+        task.started_at = datetime.now(UTC) - timedelta(seconds=3)
 
         response = await test_client.get(f"/api/status/{task.task_id}")
         assert response.status_code == 200
@@ -287,6 +288,7 @@ class TestStatusEndpoint:
 # ---------------------------------------------------------------------------
 # Isolation — clear _tasks between test classes that touch global state
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture(autouse=True)
 def _clear_tasks():

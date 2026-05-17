@@ -14,8 +14,6 @@ Default API: https://papyr-production.up.railway.app
 
 import argparse
 import io
-import os
-import struct
 import sys
 import time
 import zipfile
@@ -313,7 +311,9 @@ def test_1_multipage_zip(api_url: str, pdf_bytes: bytes) -> dict:
         print(f"    FAIL: ZIP contains {dl['png_count']} PNGs, expected 2")
         return {"test": "1", "passed": False, "reason": f"ZIP has {dl['png_count']} PNGs"}
 
-    print(f"    PASS: ZIP with {dl['png_count']} PNGs ({fmt_size(dl['size'])}) [{result['elapsed_ms']}ms]")
+    print(
+        f"    PASS: ZIP with {dl['png_count']} PNGs ({fmt_size(dl['size'])}) [{result['elapsed_ms']}ms]"
+    )
     return {"test": "1", "passed": True, "elapsed_ms": result["elapsed_ms"], "size": dl["size"]}
 
 
@@ -376,7 +376,9 @@ def test_3_mixed_content(api_url: str) -> dict:
         print(f"    FAIL: ZIP contains {dl['png_count']} PNGs, expected 2")
         return {"test": "3", "passed": False, "reason": f"ZIP has {dl['png_count']} PNGs"}
 
-    print(f"    PASS: Mixed content rendered OK, ZIP {fmt_size(dl['size'])} [{result['elapsed_ms']}ms]")
+    print(
+        f"    PASS: Mixed content rendered OK, ZIP {fmt_size(dl['size'])} [{result['elapsed_ms']}ms]"
+    )
     return {"test": "3", "passed": True, "elapsed_ms": result["elapsed_ms"], "size": dl["size"]}
 
 
@@ -412,7 +414,9 @@ def test_4_scanned_pdf(api_url: str) -> dict:
         print(f"    FAIL: PNG too small ({dl['size']} bytes), likely blank")
         return {"test": "4", "passed": False, "reason": f"PNG only {dl['size']} bytes"}
 
-    print(f"    PASS: Scanned PDF rendered OK, PNG {fmt_size(dl['size'])} [{result['elapsed_ms']}ms]")
+    print(
+        f"    PASS: Scanned PDF rendered OK, PNG {fmt_size(dl['size'])} [{result['elapsed_ms']}ms]"
+    )
     return {"test": "4", "passed": True, "elapsed_ms": result["elapsed_ms"], "size": dl["size"]}
 
 
@@ -428,7 +432,7 @@ def test_5_invalid_page_zero(api_url: str, pdf_bytes: bytes) -> dict:
         return {"test": "5", "passed": True, "detail": detail}
 
     if result["status"] == "OK":
-        print(f"    FAIL: API accepted page 0 (should reject)")
+        print("    FAIL: API accepted page 0 (should reject)")
         return {"test": "5", "passed": False, "reason": "API accepted invalid page 0"}
 
     print(f"    FAIL: Expected 400, got {result['status_code']}: {result.get('detail', '')}")
@@ -452,7 +456,7 @@ def test_6_page_out_of_bounds(api_url: str, pdf_bytes: bytes) -> dict:
             return {"test": "6", "passed": True, "detail": detail}
 
     if result["status"] == "OK":
-        print(f"    FAIL: API accepted page 10 on 5-page PDF")
+        print("    FAIL: API accepted page 10 on 5-page PDF")
         return {"test": "6", "passed": False, "reason": "API accepted out-of-bounds page"}
 
     print(f"    FAIL: Expected 400, got {result['status_code']}: {result.get('detail', '')}")
@@ -497,7 +501,7 @@ def test_7_all_pages_default(api_url: str, pdf_bytes: bytes) -> dict:
 def run_tests(api_url: str) -> list[dict]:
     """Run all 7 test cases and return results."""
     print(f"\n{'='*70}")
-    print(f"  PAPYR-050 — PDF to Image Test Suite")
+    print("  PAPYR-050 — PDF to Image Test Suite")
     print(f"  API: {api_url}")
     print(f"{'='*70}\n")
 
@@ -540,13 +544,13 @@ def run_tests(api_url: str) -> list[dict]:
 def generate_report(results: list[dict]) -> str:
     """Generate markdown report."""
     passed = sum(1 for r in results if r["passed"])
-    failed = len(results) - passed
+    len(results) - passed
 
     lines = [
         "# PAPYR-050 — Hasil Test PDF to Image",
         "",
         f"**Tanggal:** {time.strftime('%Y-%m-%d %H:%M WIB')}",
-        f"**API:** Production (Railway)",
+        "**API:** Production (Railway)",
         "",
         f"**Hasil:** {passed}/{len(results)} passed",
         "",
@@ -569,7 +573,7 @@ def generate_report(results: list[dict]) -> str:
     for r in results:
         test_num = r["test"]
         desc = test_descriptions.get(test_num, "Unknown")
-        status = "PASS" if r["passed"] else "FAIL"
+        "PASS" if r["passed"] else "FAIL"
         emoji = "PASS" if r["passed"] else "FAIL"
 
         if r["passed"]:
@@ -585,18 +589,20 @@ def generate_report(results: list[dict]) -> str:
 
         lines.append(f"| {test_num} | {desc} | {emoji} | {detail} | {elapsed} |")
 
-    lines.extend([
-        "",
-        "## Catatan",
-        "",
-        "- Test 1-2: Validasi output format (ZIP vs PNG) berdasarkan jumlah halaman",
-        "- Test 3: PDF campuran teks+gambar harus menghasilkan output yang terbaca",
-        "- Test 4: PDF scan (full-page raster) harus dirender dengan benar",
-        "- Test 5-6: Validasi error handling untuk input halaman tidak valid",
-        "- Test 7: Default behavior (semua halaman) saat parameter pages kosong",
-        "- Download URL diverifikasi: magic bytes (PNG/ZIP) + isi ZIP dicek",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Catatan",
+            "",
+            "- Test 1-2: Validasi output format (ZIP vs PNG) berdasarkan jumlah halaman",
+            "- Test 3: PDF campuran teks+gambar harus menghasilkan output yang terbaca",
+            "- Test 4: PDF scan (full-page raster) harus dirender dengan benar",
+            "- Test 5-6: Validasi error handling untuk input halaman tidak valid",
+            "- Test 7: Default behavior (semua halaman) saat parameter pages kosong",
+            "- Download URL diverifikasi: magic bytes (PNG/ZIP) + isi ZIP dicek",
+            "",
+        ]
+    )
 
     return "\n".join(lines)
 

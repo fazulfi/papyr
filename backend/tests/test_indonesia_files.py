@@ -51,7 +51,11 @@ def test_compress_ktp(api_url: str) -> dict:
 
     pdf_path = TEST_FILES_DIR / "scan_ktp_ijazah.pdf"
     if not pdf_path.exists():
-        return {"name": "compress: scan KTP", "passed": False, "reason": "File not found. Run generate_indonesia_test_files.py first."}
+        return {
+            "name": "compress: scan KTP",
+            "passed": False,
+            "reason": "File not found. Run generate_indonesia_test_files.py first.",
+        }
 
     pdf_bytes = pdf_path.read_bytes()
     original_size = len(pdf_bytes)
@@ -68,17 +72,32 @@ def test_compress_ktp(api_url: str) -> dict:
         elapsed_ms = int((time.time() - start) * 1000)
 
         if resp.status_code != 200:
-            return {"name": "compress: scan KTP", "passed": False, "reason": f"HTTP {resp.status_code}: {resp.text[:100]}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "compress: scan KTP",
+                "passed": False,
+                "reason": f"HTTP {resp.status_code}: {resp.text[:100]}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         data = resp.json()
         dl_resp = requests.get(data["download_url"], timeout=30)
 
         if dl_resp.status_code != 200:
-            return {"name": "compress: scan KTP", "passed": False, "reason": f"Download failed: HTTP {dl_resp.status_code}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "compress: scan KTP",
+                "passed": False,
+                "reason": f"Download failed: HTTP {dl_resp.status_code}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         # Verify it's a valid PDF
         if not dl_resp.content[:4] == b"%PDF":
-            return {"name": "compress: scan KTP", "passed": False, "reason": "Not a valid PDF", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "compress: scan KTP",
+                "passed": False,
+                "reason": "Not a valid PDF",
+                "elapsed_ms": elapsed_ms,
+            }
 
         # Verify page count preserved
         doc = fitz.open(stream=dl_resp.content, filetype="pdf")
@@ -89,10 +108,20 @@ def test_compress_ktp(api_url: str) -> dict:
         print(f"  Saved: {data.get('saved_percent', 0):.1f}%")
         print(f"  ✅ PASSED — compressed, still readable ({pages} pages)")
 
-        return {"name": "compress: scan KTP", "passed": True, "pages": pages, "elapsed_ms": elapsed_ms}
+        return {
+            "name": "compress: scan KTP",
+            "passed": True,
+            "pages": pages,
+            "elapsed_ms": elapsed_ms,
+        }
 
     except Exception as e:
-        return {"name": "compress: scan KTP", "passed": False, "reason": str(e)[:100], "elapsed_ms": int((time.time() - start) * 1000)}
+        return {
+            "name": "compress: scan KTP",
+            "passed": False,
+            "reason": str(e)[:100],
+            "elapsed_ms": int((time.time() - start) * 1000),
+        }
 
 
 def test_p2i_invoice(api_url: str) -> dict:
@@ -119,21 +148,41 @@ def test_p2i_invoice(api_url: str) -> dict:
         elapsed_ms = int((time.time() - start) * 1000)
 
         if resp.status_code != 200:
-            return {"name": "pdf-to-image: invoice", "passed": False, "reason": f"HTTP {resp.status_code}: {resp.text[:100]}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "pdf-to-image: invoice",
+                "passed": False,
+                "reason": f"HTTP {resp.status_code}: {resp.text[:100]}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         data = resp.json()
         dl_resp = requests.get(data["download_url"], timeout=30)
 
         if dl_resp.content[:8] != b"\x89PNG\r\n\x1a\n":
-            return {"name": "pdf-to-image: invoice", "passed": False, "reason": "Not a valid PNG", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "pdf-to-image: invoice",
+                "passed": False,
+                "reason": "Not a valid PNG",
+                "elapsed_ms": elapsed_ms,
+            }
 
         print(f"  Output: {len(dl_resp.content) / 1024:.1f} KB PNG")
-        print(f"  ✅ PASSED — clean PNG output")
+        print("  ✅ PASSED — clean PNG output")
 
-        return {"name": "pdf-to-image: invoice", "passed": True, "png_size": len(dl_resp.content), "elapsed_ms": elapsed_ms}
+        return {
+            "name": "pdf-to-image: invoice",
+            "passed": True,
+            "png_size": len(dl_resp.content),
+            "elapsed_ms": elapsed_ms,
+        }
 
     except Exception as e:
-        return {"name": "pdf-to-image: invoice", "passed": False, "reason": str(e)[:100], "elapsed_ms": int((time.time() - start) * 1000)}
+        return {
+            "name": "pdf-to-image: invoice",
+            "passed": False,
+            "reason": str(e)[:100],
+            "elapsed_ms": int((time.time() - start) * 1000),
+        }
 
 
 def test_p2i_tugas(api_url: str) -> dict:
@@ -160,14 +209,29 @@ def test_p2i_tugas(api_url: str) -> dict:
         elapsed_ms = int((time.time() - start) * 1000)
 
         if resp.status_code != 200:
-            return {"name": "pdf-to-image: tugas kuliah", "passed": False, "reason": f"HTTP {resp.status_code}: {resp.text[:100]}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "pdf-to-image: tugas kuliah",
+                "passed": False,
+                "reason": f"HTTP {resp.status_code}: {resp.text[:100]}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         data = resp.json()
         if data.get("file_type") != "zip":
-            return {"name": "pdf-to-image: tugas kuliah", "passed": False, "reason": f"Expected zip, got {data.get('file_type')}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "pdf-to-image: tugas kuliah",
+                "passed": False,
+                "reason": f"Expected zip, got {data.get('file_type')}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         if data.get("page_count") != 3:
-            return {"name": "pdf-to-image: tugas kuliah", "passed": False, "reason": f"Expected 3 pages, got {data.get('page_count')}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "pdf-to-image: tugas kuliah",
+                "passed": False,
+                "reason": f"Expected 3 pages, got {data.get('page_count')}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         # Verify ZIP download
         dl_resp = requests.get(data["download_url"], timeout=30)
@@ -175,12 +239,22 @@ def test_p2i_tugas(api_url: str) -> dict:
             png_files = [n for n in zf.namelist() if n.endswith(".png")]
 
         print(f"  Output: ZIP with {len(png_files)} PNGs ({len(dl_resp.content) / 1024:.1f} KB)")
-        print(f"  ✅ PASSED — 3 pages extracted correctly")
+        print("  ✅ PASSED — 3 pages extracted correctly")
 
-        return {"name": "pdf-to-image: tugas kuliah", "passed": True, "page_count": len(png_files), "elapsed_ms": elapsed_ms}
+        return {
+            "name": "pdf-to-image: tugas kuliah",
+            "passed": True,
+            "page_count": len(png_files),
+            "elapsed_ms": elapsed_ms,
+        }
 
     except Exception as e:
-        return {"name": "pdf-to-image: tugas kuliah", "passed": False, "reason": str(e)[:100], "elapsed_ms": int((time.time() - start) * 1000)}
+        return {
+            "name": "pdf-to-image: tugas kuliah",
+            "passed": False,
+            "reason": str(e)[:100],
+            "elapsed_ms": int((time.time() - start) * 1000),
+        }
 
 
 def test_img2pdf_photos(api_url: str) -> dict:
@@ -195,7 +269,11 @@ def test_img2pdf_photos(api_url: str) -> dict:
     for fname in photo_files:
         fpath = TEST_FILES_DIR / fname
         if not fpath.exists():
-            return {"name": "image-to-pdf: foto HP", "passed": False, "reason": f"{fname} not found."}
+            return {
+                "name": "image-to-pdf: foto HP",
+                "passed": False,
+                "reason": f"{fname} not found.",
+            }
         files_data.append(("files", (fname, fpath.read_bytes(), "image/jpeg")))
         print(f"  Input: {fname} ({fpath.stat().st_size / 1024:.1f} KB)")
 
@@ -209,11 +287,21 @@ def test_img2pdf_photos(api_url: str) -> dict:
         elapsed_ms = int((time.time() - start) * 1000)
 
         if resp.status_code != 200:
-            return {"name": "image-to-pdf: foto HP", "passed": False, "reason": f"HTTP {resp.status_code}: {resp.text[:100]}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "image-to-pdf: foto HP",
+                "passed": False,
+                "reason": f"HTTP {resp.status_code}: {resp.text[:100]}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         data = resp.json()
         if data.get("image_count") != 3:
-            return {"name": "image-to-pdf: foto HP", "passed": False, "reason": f"Expected 3 images, got {data.get('image_count')}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "image-to-pdf: foto HP",
+                "passed": False,
+                "reason": f"Expected 3 images, got {data.get('image_count')}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         # Verify download
         dl_resp = requests.get(data["download_url"], timeout=30)
@@ -224,10 +312,20 @@ def test_img2pdf_photos(api_url: str) -> dict:
         print(f"  Output: {len(dl_resp.content) / 1024:.1f} KB PDF, {pages} pages")
         print(f"  ✅ PASSED — 3 photos → {pages}-page PDF")
 
-        return {"name": "image-to-pdf: foto HP", "passed": True, "page_count": pages, "elapsed_ms": elapsed_ms}
+        return {
+            "name": "image-to-pdf: foto HP",
+            "passed": True,
+            "page_count": pages,
+            "elapsed_ms": elapsed_ms,
+        }
 
     except Exception as e:
-        return {"name": "image-to-pdf: foto HP", "passed": False, "reason": str(e)[:100], "elapsed_ms": int((time.time() - start) * 1000)}
+        return {
+            "name": "image-to-pdf: foto HP",
+            "passed": False,
+            "reason": str(e)[:100],
+            "elapsed_ms": int((time.time() - start) * 1000),
+        }
 
 
 def test_compress_laporan(api_url: str) -> dict:
@@ -254,7 +352,12 @@ def test_compress_laporan(api_url: str) -> dict:
         elapsed_ms = int((time.time() - start) * 1000)
 
         if resp.status_code != 200:
-            return {"name": "compress: laporan kantor", "passed": False, "reason": f"HTTP {resp.status_code}: {resp.text[:100]}", "elapsed_ms": elapsed_ms}
+            return {
+                "name": "compress: laporan kantor",
+                "passed": False,
+                "reason": f"HTTP {resp.status_code}: {resp.text[:100]}",
+                "elapsed_ms": elapsed_ms,
+            }
 
         data = resp.json()
         dl_resp = requests.get(data["download_url"], timeout=30)
@@ -266,10 +369,20 @@ def test_compress_laporan(api_url: str) -> dict:
         print(f"  Output: {len(dl_resp.content) / 1024:.1f} KB, {pages} pages")
         print(f"  ✅ PASSED — compressed, {pages} pages preserved")
 
-        return {"name": "compress: laporan kantor", "passed": True, "pages": pages, "elapsed_ms": elapsed_ms}
+        return {
+            "name": "compress: laporan kantor",
+            "passed": True,
+            "pages": pages,
+            "elapsed_ms": elapsed_ms,
+        }
 
     except Exception as e:
-        return {"name": "compress: laporan kantor", "passed": False, "reason": str(e)[:100], "elapsed_ms": int((time.time() - start) * 1000)}
+        return {
+            "name": "compress: laporan kantor",
+            "passed": False,
+            "reason": str(e)[:100],
+            "elapsed_ms": int((time.time() - start) * 1000),
+        }
 
 
 # --- Report -------------------------------------------------------------------
@@ -299,22 +412,24 @@ def generate_report(results: list[dict]) -> str:
         elapsed = f"{r.get('elapsed_ms', '-')}ms"
         lines.append(f"| {i} | {r['name']} | {emoji} | {detail} | {elapsed} |")
 
-    lines.extend([
-        "",
-        "## Test Scenarios",
-        "",
-        "1. **Scan KTP/ijazah** → Compress → verify masih terbaca",
-        "2. **Laporan kantor** (5 hal) → Compress → verify halaman utuh",
-        "3. **Tugas kuliah** (8 hal) → PDF to Image (hal 3-5) → verify 3 PNG",
-        "4. **Foto dokumen HP** (3 JPG) → Image to PDF → verify 3 halaman",
-        "5. **Invoice** (1 hal) → PDF to Image → verify PNG bersih",
-        "",
-        "## Catatan",
-        "",
-        "- Merge dan Split adalah client-side (pdf-lib) — tidak bisa ditest via API",
-        "- File test di-generate oleh generate_indonesia_test_files.py",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Test Scenarios",
+            "",
+            "1. **Scan KTP/ijazah** → Compress → verify masih terbaca",
+            "2. **Laporan kantor** (5 hal) → Compress → verify halaman utuh",
+            "3. **Tugas kuliah** (8 hal) → PDF to Image (hal 3-5) → verify 3 PNG",
+            "4. **Foto dokumen HP** (3 JPG) → Image to PDF → verify 3 halaman",
+            "5. **Invoice** (1 hal) → PDF to Image → verify PNG bersih",
+            "",
+            "## Catatan",
+            "",
+            "- Merge dan Split adalah client-side (pdf-lib) — tidak bisa ditest via API",
+            "- File test di-generate oleh generate_indonesia_test_files.py",
+            "",
+        ]
+    )
 
     return "\n".join(lines)
 

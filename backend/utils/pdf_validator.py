@@ -7,10 +7,9 @@ Validasi: kosong, MIME type, ekstensi, magic bytes, ukuran, page count, encrypte
 
 import logging
 from dataclasses import dataclass
-from typing import Optional
 
 import fitz  # PyMuPDF
-from fastapi import UploadFile, HTTPException
+from fastapi import HTTPException, UploadFile
 
 from .config import settings
 
@@ -36,8 +35,8 @@ def validate_pdf_file(
     file: UploadFile,
     file_bytes: bytes,
     *,
-    max_size_bytes: Optional[int] = None,
-    max_pages: Optional[int] = None,
+    max_size_bytes: int | None = None,
+    max_pages: int | None = None,
     require_encrypted: bool = False,
     reject_encrypted: bool = False,
 ) -> PDFInfo:
@@ -112,7 +111,7 @@ def validate_pdf_file(
         raise HTTPException(
             status_code=400,
             detail=f'"{filename}" bukan file PDF yang valid atau file corrupt.',
-        )
+        ) from None
 
     # 7. Page count limit
     if max_pages and page_count > max_pages:

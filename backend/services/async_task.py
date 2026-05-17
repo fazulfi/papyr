@@ -12,11 +12,11 @@ from __future__ import annotations
 import asyncio
 import inspect
 import uuid
-from concurrent.futures import ThreadPoolExecutor
-from dataclasses import asdict, dataclass, field
-from datetime import datetime, timedelta, timezone
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from datetime import UTC, datetime, timedelta
 from enum import Enum
-from typing import Any, Callable, Optional
+from typing import Any
 
 
 class TaskStatus(Enum):
@@ -54,7 +54,7 @@ def create_task(
 ) -> TaskInfo:
     """Create a new task and store it in memory."""
     task_id = uuid.uuid4().hex
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     task = TaskInfo(
         task_id=task_id,
         status=TaskStatus.QUEUED,
@@ -142,10 +142,10 @@ async def run_task_in_background(
     if task is None:
         return
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     _update_helper(task_id, started_at=now, status=TaskStatus.PROCESSING)
 
-    loop = asyncio.get_running_loop()
+    asyncio.get_running_loop()
 
     try:
         call_kwargs = dict(coro_kwargs)
@@ -161,15 +161,15 @@ async def run_task_in_background(
             coro_func(**call_kwargs),
             timeout=timeout,
         )
-        completed_at = datetime.now(timezone.utc)
+        completed_at = datetime.now(UTC)
         _update_helper(
             task_id,
             status=TaskStatus.DONE,
             result=result,
             completed_at=completed_at,
         )
-    except asyncio.TimeoutError:
-        completed_at = datetime.now(timezone.utc)
+    except TimeoutError:
+        completed_at = datetime.now(UTC)
         _update_helper(
             task_id,
             status=TaskStatus.FAILED,
@@ -177,7 +177,7 @@ async def run_task_in_background(
             completed_at=completed_at,
         )
     except Exception as exc:
-        completed_at = datetime.now(timezone.utc)
+        completed_at = datetime.now(UTC)
         _update_helper(
             task_id,
             status=TaskStatus.FAILED,
@@ -200,10 +200,8 @@ def cleanup_expired_tasks(ttl_hours: int = _TTL_HOURS) -> int:
 
     Returns the number of tasks removed.
     """
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=ttl_hours)
-    expired_ids = [
-        tid for tid, t in _tasks.items() if t.created_at < cutoff
-    ]
+    cutoff = datetime.now(UTC) - timedelta(hours=ttl_hours)
+    expired_ids = [tid for tid, t in _tasks.items() if t.created_at < cutoff]
     for tid in expired_ids:
         del _tasks[tid]
     return len(expired_ids)

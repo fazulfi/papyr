@@ -17,6 +17,7 @@ and test each scenario described in the output.
 """
 
 import os
+
 import fitz  # PyMuPDF
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "merge_test_files")

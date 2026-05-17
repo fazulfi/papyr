@@ -15,8 +15,8 @@ Output:
 """
 
 import os
-import fitz  # PyMuPDF
 
+import fitz  # PyMuPDF
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "split_test_files")
 

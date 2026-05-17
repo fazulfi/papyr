@@ -19,7 +19,6 @@ Default API: https://papyr-production.up.railway.app
 import argparse
 import io
 import os
-import struct
 import sys
 import time
 from datetime import datetime
@@ -93,19 +92,19 @@ def generate_20mb_pdf() -> bytes:
 
     # Use uncompressible random-ish data embedded as a file attachment
     # This is much faster than generating images
-    chunk = os.urandom(1024 * 1024)  # 1MB of random data
+    os.urandom(1024 * 1024)  # 1MB of random data
     pdf_bytes_initial = doc.tobytes()
 
     # Build raw PDF by padding with random data in a stream
     # Simpler approach: just create a big bytes object
     target = 19 * 1024 * 1024
-    padding = os.urandom(target - len(pdf_bytes_initial))
+    os.urandom(target - len(pdf_bytes_initial))
     doc.close()
 
     # Create a proper PDF with embedded file to reach target size
     doc2 = fitz.open()
     # Add pages with large text blocks to increase size
-    text_block = "A" * 50000 + "\n"
+    "A" * 50000 + "\n"
     pages_needed = target // 50000
     for i in range(min(pages_needed, 400)):
         p = doc2.new_page(width=595, height=842)
@@ -187,12 +186,15 @@ def run_test(
         if expect_success:
             passed = status == 200
             if passed:
-                print(f"    ✅ PASSED — HTTP 200, response OK")
+                print("    ✅ PASSED — HTTP 200, response OK")
             else:
                 print(f"    ❌ FAILED — Expected 200, got {status}: {detail}")
         else:
             status_ok = expect_status is None or status == expect_status
-            detail_ok = expect_detail_contains is None or expect_detail_contains.lower() in str(detail).lower()
+            detail_ok = (
+                expect_detail_contains is None
+                or expect_detail_contains.lower() in str(detail).lower()
+            )
             passed = not (status == 200) and status_ok and detail_ok
 
             if passed:
@@ -235,36 +237,58 @@ def run_compress_edge_cases(api_url: str, skip_large: bool = False) -> list[dict
     ep = ENDPOINTS["compress"]
 
     # 1. Empty file
-    results.append(run_test(
-        "compress: empty file (0 bytes)",
-        api_url, ep,
-        generate_empty_file(), "empty.pdf", "application/pdf",
-        expect_success=False, expect_status=400,
-    ))
+    results.append(
+        run_test(
+            "compress: empty file (0 bytes)",
+            api_url,
+            ep,
+            generate_empty_file(),
+            "empty.pdf",
+            "application/pdf",
+            expect_success=False,
+            expect_status=400,
+        )
+    )
 
     # 2. Wrong content (.pdf extension but JPEG content)
-    results.append(run_test(
-        "compress: fake PDF (JPEG renamed to .pdf)",
-        api_url, ep,
-        generate_fake_pdf(), "fake.pdf", "application/pdf",
-        expect_success=False, expect_status=400,
-    ))
+    results.append(
+        run_test(
+            "compress: fake PDF (JPEG renamed to .pdf)",
+            api_url,
+            ep,
+            generate_fake_pdf(),
+            "fake.pdf",
+            "application/pdf",
+            expect_success=False,
+            expect_status=400,
+        )
+    )
 
     # 3. Password-protected PDF
-    results.append(run_test(
-        "compress: password-protected PDF",
-        api_url, ep,
-        generate_password_pdf(), "protected.pdf", "application/pdf",
-        expect_success=False,
-    ))
+    results.append(
+        run_test(
+            "compress: password-protected PDF",
+            api_url,
+            ep,
+            generate_password_pdf(),
+            "protected.pdf",
+            "application/pdf",
+            expect_success=False,
+        )
+    )
 
     # 4. Very small PDF (<10KB)
-    results.append(run_test(
-        "compress: tiny PDF (1 page, <10KB)",
-        api_url, ep,
-        generate_tiny_pdf(), "tiny.pdf", "application/pdf",
-        expect_success=True,
-    ))
+    results.append(
+        run_test(
+            "compress: tiny PDF (1 page, <10KB)",
+            api_url,
+            ep,
+            generate_tiny_pdf(),
+            "tiny.pdf",
+            "application/pdf",
+            expect_success=True,
+        )
+    )
 
     if not skip_large:
         # 5. Maximum file size (~20MB)
@@ -273,12 +297,17 @@ def run_compress_edge_cases(api_url: str, skip_large: bool = False) -> list[dict
         actual_mb = len(pdf_20mb) / 1024 / 1024
         print(f"  Generated: {actual_mb:.1f} MB")
 
-        results.append(run_test(
-            f"compress: max size PDF ({actual_mb:.1f}MB)",
-            api_url, ep,
-            pdf_20mb, "large.pdf", "application/pdf",
-            expect_success=True,
-        ))
+        results.append(
+            run_test(
+                f"compress: max size PDF ({actual_mb:.1f}MB)",
+                api_url,
+                ep,
+                pdf_20mb,
+                "large.pdf",
+                "application/pdf",
+                expect_success=True,
+            )
+        )
 
         # 6. Over limit (>20MB)
         print("\n  ⏳ Generating >20MB PDF...")
@@ -286,12 +315,18 @@ def run_compress_edge_cases(api_url: str, skip_large: bool = False) -> list[dict
         over_mb = len(pdf_over) / 1024 / 1024
         print(f"  Generated: {over_mb:.1f} MB")
 
-        results.append(run_test(
-            f"compress: oversized PDF ({over_mb:.1f}MB)",
-            api_url, ep,
-            pdf_over, "oversized.pdf", "application/pdf",
-            expect_success=False, expect_status=400,
-        ))
+        results.append(
+            run_test(
+                f"compress: oversized PDF ({over_mb:.1f}MB)",
+                api_url,
+                ep,
+                pdf_over,
+                "oversized.pdf",
+                "application/pdf",
+                expect_success=False,
+                expect_status=400,
+            )
+        )
     else:
         print("\n  ⏭️ Skipping large file tests (--skip-large)")
 
@@ -304,58 +339,92 @@ def run_pdf_to_image_edge_cases(api_url: str) -> list[dict]:
     ep = ENDPOINTS["pdf_to_image"]
 
     # 1. Empty file
-    results.append(run_test(
-        "pdf-to-image: empty file",
-        api_url, ep,
-        generate_empty_file(), "empty.pdf", "application/pdf",
-        expect_success=False, expect_status=400,
-        extra_data={"pages": ""},
-    ))
+    results.append(
+        run_test(
+            "pdf-to-image: empty file",
+            api_url,
+            ep,
+            generate_empty_file(),
+            "empty.pdf",
+            "application/pdf",
+            expect_success=False,
+            expect_status=400,
+            extra_data={"pages": ""},
+        )
+    )
 
     # 2. Fake PDF
-    results.append(run_test(
-        "pdf-to-image: fake PDF (JPEG content)",
-        api_url, ep,
-        generate_fake_pdf(), "fake.pdf", "application/pdf",
-        expect_success=False, expect_status=400,
-        extra_data={"pages": ""},
-    ))
+    results.append(
+        run_test(
+            "pdf-to-image: fake PDF (JPEG content)",
+            api_url,
+            ep,
+            generate_fake_pdf(),
+            "fake.pdf",
+            "application/pdf",
+            expect_success=False,
+            expect_status=400,
+            extra_data={"pages": ""},
+        )
+    )
 
     # 3. Password-protected PDF
-    results.append(run_test(
-        "pdf-to-image: password-protected PDF",
-        api_url, ep,
-        generate_password_pdf(), "protected.pdf", "application/pdf",
-        expect_success=False,
-        extra_data={"pages": ""},
-    ))
+    results.append(
+        run_test(
+            "pdf-to-image: password-protected PDF",
+            api_url,
+            ep,
+            generate_password_pdf(),
+            "protected.pdf",
+            "application/pdf",
+            expect_success=False,
+            extra_data={"pages": ""},
+        )
+    )
 
     # 4. Tiny PDF — should work
-    results.append(run_test(
-        "pdf-to-image: tiny PDF (1 page)",
-        api_url, ep,
-        generate_tiny_pdf(), "tiny.pdf", "application/pdf",
-        expect_success=True,
-        extra_data={"pages": "1"},
-    ))
+    results.append(
+        run_test(
+            "pdf-to-image: tiny PDF (1 page)",
+            api_url,
+            ep,
+            generate_tiny_pdf(),
+            "tiny.pdf",
+            "application/pdf",
+            expect_success=True,
+            extra_data={"pages": "1"},
+        )
+    )
 
     # 5. Invalid page range
-    results.append(run_test(
-        "pdf-to-image: invalid page '0'",
-        api_url, ep,
-        generate_tiny_pdf(), "tiny.pdf", "application/pdf",
-        expect_success=False, expect_status=400,
-        extra_data={"pages": "0"},
-    ))
+    results.append(
+        run_test(
+            "pdf-to-image: invalid page '0'",
+            api_url,
+            ep,
+            generate_tiny_pdf(),
+            "tiny.pdf",
+            "application/pdf",
+            expect_success=False,
+            expect_status=400,
+            extra_data={"pages": "0"},
+        )
+    )
 
     # 6. Out of bounds page
-    results.append(run_test(
-        "pdf-to-image: out-of-bounds page '99'",
-        api_url, ep,
-        generate_tiny_pdf(), "tiny.pdf", "application/pdf",
-        expect_success=False, expect_status=400,
-        extra_data={"pages": "99"},
-    ))
+    results.append(
+        run_test(
+            "pdf-to-image: out-of-bounds page '99'",
+            api_url,
+            ep,
+            generate_tiny_pdf(),
+            "tiny.pdf",
+            "application/pdf",
+            expect_success=False,
+            expect_status=400,
+            extra_data={"pages": "99"},
+        )
+    )
 
     return results
 
@@ -366,32 +435,49 @@ def run_image_to_pdf_edge_cases(api_url: str) -> list[dict]:
     ep = ENDPOINTS["image_to_pdf"]
 
     # 1. Empty file as image
-    results.append(run_test(
-        "image-to-pdf: empty file",
-        api_url, ep,
-        generate_empty_file(), "empty.png", "image/png",
-        expect_success=False, expect_status=400,
-        extra_files=[("files", ("empty.png", generate_empty_file(), "image/png"))],
-    ))
+    results.append(
+        run_test(
+            "image-to-pdf: empty file",
+            api_url,
+            ep,
+            generate_empty_file(),
+            "empty.png",
+            "image/png",
+            expect_success=False,
+            expect_status=400,
+            extra_files=[("files", ("empty.png", generate_empty_file(), "image/png"))],
+        )
+    )
 
     # 2. PDF file instead of image
-    results.append(run_test(
-        "image-to-pdf: PDF instead of image",
-        api_url, ep,
-        generate_tiny_pdf(), "document.pdf", "application/pdf",
-        expect_success=False, expect_status=400,
-        extra_files=[("files", ("document.pdf", generate_tiny_pdf(), "application/pdf"))],
-    ))
+    results.append(
+        run_test(
+            "image-to-pdf: PDF instead of image",
+            api_url,
+            ep,
+            generate_tiny_pdf(),
+            "document.pdf",
+            "application/pdf",
+            expect_success=False,
+            expect_status=400,
+            extra_files=[("files", ("document.pdf", generate_tiny_pdf(), "application/pdf"))],
+        )
+    )
 
     # 3. Valid small image — should work
     small_img = generate_small_image()
-    results.append(run_test(
-        "image-to-pdf: small valid PNG",
-        api_url, ep,
-        small_img, "small.png", "image/png",
-        expect_success=True,
-        extra_files=[("files", ("small.png", small_img, "image/png"))],
-    ))
+    results.append(
+        run_test(
+            "image-to-pdf: small valid PNG",
+            api_url,
+            ep,
+            small_img,
+            "small.png",
+            "image/png",
+            expect_success=True,
+            extra_files=[("files", ("small.png", small_img, "image/png"))],
+        )
+    )
 
     return results
 
@@ -424,18 +510,20 @@ def generate_report(results: list[dict]) -> str:
         elapsed = f"{r.get('elapsed_ms', '-')}ms"
         lines.append(f"| {i} | {r['name']} | {emoji} | {status} | {detail} | {elapsed} |")
 
-    lines.extend([
-        "",
-        "## Edge Cases Tested",
-        "",
-        "1. **Empty file (0 bytes)** → Harus menampilkan error yang jelas",
-        "2. **File .pdf tapi isi JPEG** → Harus gagal dengan pesan yang tepat",
-        "3. **PDF dilindungi password** → Harus menampilkan pesan khusus",
-        "4. **PDF sangat kecil (<10KB)** → Harus tetap berfungsi",
-        "5. **File maksimum (20MB)** → Harus tetap berfungsi",
-        "6. **File melebihi batas (>20MB)** → Harus menampilkan error ukuran",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Edge Cases Tested",
+            "",
+            "1. **Empty file (0 bytes)** → Harus menampilkan error yang jelas",
+            "2. **File .pdf tapi isi JPEG** → Harus gagal dengan pesan yang tepat",
+            "3. **PDF dilindungi password** → Harus menampilkan pesan khusus",
+            "4. **PDF sangat kecil (<10KB)** → Harus tetap berfungsi",
+            "5. **File maksimum (20MB)** → Harus tetap berfungsi",
+            "6. **File melebihi batas (>20MB)** → Harus menampilkan error ukuran",
+            "",
+        ]
+    )
 
     return "\n".join(lines)
 

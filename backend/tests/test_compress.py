@@ -12,10 +12,6 @@ Default API: https://papyr-production.up.railway.app
 
 import argparse
 import io
-import json
-import os
-import struct
-import sys
 import time
 from pathlib import Path
 
@@ -97,7 +93,9 @@ def generate_mixed_pdf(size_target_kb: int = 2000) -> tuple[bytes, str]:
         page = doc.new_page(width=595, height=842)
 
         # Text section
-        page.insert_text((72, 72), f"Bab {i + 1}: Pengujian Kompresi\n\n", fontsize=16, fontname="helv")
+        page.insert_text(
+            (72, 72), f"Bab {i + 1}: Pengujian Kompresi\n\n", fontsize=16, fontname="helv"
+        )
         page.insert_text((72, 110), text_block * 3, fontsize=10, fontname="helv")
 
         # Image section (smaller than image-heavy)
@@ -191,9 +189,7 @@ def generate_empty_pdf() -> tuple[bytes, str]:
 # ─── API Client ──────────────────────────────────────────────────────────────
 
 
-def compress_file(
-    api_url: str, pdf_bytes: bytes, filename: str, quality: str = "ebook"
-) -> dict:
+def compress_file(api_url: str, pdf_bytes: bytes, filename: str, quality: str = "ebook") -> dict:
     """Send PDF to compress API and return result."""
     url = f"{api_url}{COMPRESS_ENDPOINT}?quality={quality}"
 
@@ -253,7 +249,7 @@ def fmt_size(size_bytes: int) -> str:
 def run_tests(api_url: str) -> list[dict]:
     """Run all test cases and return results."""
     print(f"\n{'='*70}")
-    print(f"  PAPYR-020 — Compress Test Suite")
+    print("  PAPYR-020 — Compress Test Suite")
     print(f"  API: {api_url}")
     print(f"{'='*70}\n")
 
@@ -290,7 +286,9 @@ def run_tests(api_url: str) -> list[dict]:
                 f"({direction} {abs(saved)}%) [{result['elapsed_ms']}ms]"
             )
         else:
-            print(f"  {'⚠️' if result['status_code'] == 400 else '❌'} {result['status']}: {result.get('detail', 'N/A')}")
+            print(
+                f"  {'⚠️' if result['status_code'] == 400 else '❌'} {result['status']}: {result.get('detail', 'N/A')}"
+            )
 
         results.append(result)
         print()
@@ -304,7 +302,7 @@ def run_tests(api_url: str) -> list[dict]:
 def run_quality_comparison(api_url: str) -> list[dict]:
     """Compare screen/ebook/printer presets on the same file."""
     print(f"\n{'='*70}")
-    print(f"  Quality Preset Comparison")
+    print("  Quality Preset Comparison")
     print(f"{'='*70}\n")
 
     pdf_bytes, label = generate_mixed_pdf(size_target_kb=2500)
@@ -337,7 +335,7 @@ def generate_report(test_results: list[dict], quality_results: list[dict]) -> st
         "# PAPYR-020 — Hasil Test Kompresi PDF",
         "",
         f"**Tanggal:** {time.strftime('%Y-%m-%d %H:%M WIB')}",
-        f"**API:** Production (Railway)",
+        "**API:** Production (Railway)",
         "",
         "## Test Cases",
         "",
@@ -363,13 +361,15 @@ def generate_report(test_results: list[dict], quality_results: list[dict]) -> st
                 f"— | — | {status_emoji} {r['status']} | — |"
             )
 
-    lines.extend([
-        "",
-        "## Perbandingan Preset Kualitas",
-        "",
-        "| Preset | Input | Output | Hemat | Waktu |",
-        "|--------|-------|--------|-------|-------|",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Perbandingan Preset Kualitas",
+            "",
+            "| Preset | Input | Output | Hemat | Waktu |",
+            "|--------|-------|--------|-------|-------|",
+        ]
+    )
 
     for r in quality_results:
         if r["status"] == "OK":
@@ -380,16 +380,18 @@ def generate_report(test_results: list[dict], quality_results: list[dict]) -> st
         else:
             lines.append(f"| {r['quality']} | {fmt_size(r['input_size'])} | — | — | ❌ |")
 
-    lines.extend([
-        "",
-        "## Catatan",
-        "",
-        "- File PDF yang sudah optimal mungkin bertambah besar setelah kompresi (Ghostscript overhead)",
-        "- Password-protected PDF seharusnya mengembalikan error 400",
-        "- File sangat kecil (<1KB) bisa bertambah besar karena overhead metadata Ghostscript",
-        "- Waktu termasuk network latency (client → Railway → R2 → response)",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Catatan",
+            "",
+            "- File PDF yang sudah optimal mungkin bertambah besar setelah kompresi (Ghostscript overhead)",
+            "- Password-protected PDF seharusnya mengembalikan error 400",
+            "- File sangat kecil (<1KB) bisa bertambah besar karena overhead metadata Ghostscript",
+            "- Waktu termasuk network latency (client → Railway → R2 → response)",
+            "",
+        ]
+    )
 
     return "\n".join(lines)
 

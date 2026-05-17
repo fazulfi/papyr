@@ -4,8 +4,9 @@ Covers: happy path, validation errors, encryption edge cases.
 Refs: PAPYR-092, PAPYR-093
 """
 
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 from fastapi import HTTPException
 
 # Minimal PDF-like bytes for tests
@@ -149,9 +150,7 @@ async def test_protect_corrupt_pdf_returns_400(test_client):
 async def test_protect_already_encrypted_returns_409(test_client):
     """Already-encrypted PDF rejected with 409."""
     with patch("routers.protect.validate_pdf_file") as mock_validate:
-        mock_validate.side_effect = HTTPException(
-            status_code=409, detail="PDF sudah terenkripsi."
-        )
+        mock_validate.side_effect = HTTPException(status_code=409, detail="PDF sudah terenkripsi.")
 
         response = await test_client.post(
             "/api/protect",

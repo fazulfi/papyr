@@ -7,17 +7,17 @@ dekripsi dengan PyMuPDF, upload ke R2, return signed download URL.
 
 import logging
 import time
-from datetime import datetime, timezone, timedelta
+from datetime import UTC, datetime, timedelta
 
-from fastapi import APIRouter, File, Form, Request, UploadFile, HTTPException
+from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
+from services.encryption import decrypt_pdf
 from utils.config import settings
 from utils.logging_config import log_task_event
 from utils.pdf_validator import validate_pdf_file
-from services.encryption import decrypt_pdf
-from utils.r2 import upload_file, generate_signed_url
+from utils.r2 import generate_signed_url, upload_file
 
 limiter = Limiter(key_func=get_remote_address)
 
@@ -73,9 +73,7 @@ async def unlock_endpoint(
             success=True,
         )
 
-        expires_at = (
-            datetime.now(timezone.utc) + timedelta(seconds=3600)
-        ).isoformat()
+        expires_at = (datetime.now(UTC) + timedelta(seconds=3600)).isoformat()
 
         return {
             "success": True,
@@ -112,4 +110,4 @@ async def unlock_endpoint(
         raise HTTPException(
             status_code=500,
             detail="Gagal memproses file. Silakan coba lagi.",
-        )
+        ) from exc

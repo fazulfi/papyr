@@ -10,7 +10,7 @@ import time
 
 from fastapi import APIRouter
 
-from utils.r2 import upload_file, generate_signed_url, delete_file
+from utils.r2 import delete_file, generate_signed_url, upload_file
 
 logger = logging.getLogger(__name__)
 

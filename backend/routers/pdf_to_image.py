@@ -10,20 +10,19 @@ import os
 import tempfile
 import time
 
-from fastapi import APIRouter, File, Form, Request, UploadFile, HTTPException
+import fitz  # PyMuPDF — untuk mendapatkan total halaman saat validasi
+from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
-import fitz  # PyMuPDF — untuk mendapatkan total halaman saat validasi
-
-from utils.config import settings
-from utils.logging_config import log_task_event
-from utils.r2 import upload_file, generate_signed_url
 from services.pdf_to_image_service import (
+    package_output,
     parse_page_range,
     rasterize_pages,
-    package_output,
 )
+from utils.config import settings
+from utils.logging_config import log_task_event
+from utils.r2 import generate_signed_url, upload_file
 
 limiter = Limiter(key_func=get_remote_address)
 
@@ -102,7 +101,7 @@ def _validate_pdf(file: UploadFile, file_bytes: bytes) -> None:
         raise HTTPException(
             status_code=400,
             detail=f'"{filename}" bukan file PDF yang valid atau file corrupt.',
-        )
+        ) from None
 
 
 @router.post("/pdf-to-image")
@@ -150,7 +149,7 @@ async def pdf_to_image_endpoint(
             raise HTTPException(
                 status_code=400,
                 detail="File PDF tidak bisa dibuka. Pastikan file tidak corrupt atau terproteksi password.",
-            )
+            ) from None
 
         if total_pages == 0:
             raise HTTPException(
@@ -233,7 +232,9 @@ async def pdf_to_image_endpoint(
             success=False,
             error=type(exc).__name__,
         )
-        raise HTTPException(status_code=500, detail="Gagal memproses file. Silakan coba lagi.")
+        raise HTTPException(
+            status_code=500, detail="Gagal memproses file. Silakan coba lagi."
+        ) from exc
 
     finally:
         # Cleanup semua temp files

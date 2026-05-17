@@ -4,7 +4,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-
 PDF_BYTES = b"%PDF-1.4 fake content"
 
 

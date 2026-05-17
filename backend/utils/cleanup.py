@@ -8,7 +8,7 @@ TIDAK BOLEH log: file names asli, file contents, user info.
 
 import logging
 import time
-from datetime import datetime, timezone, timedelta
+from datetime import UTC, datetime, timedelta
 
 from botocore.exceptions import ClientError
 
@@ -30,9 +30,7 @@ def list_expired_objects() -> list[dict]:
     """
     client = _get_client()
     expired: list[dict] = []
-    cutoff = datetime.now(timezone.utc) - timedelta(
-        minutes=settings.file_retention_minutes
-    )
+    cutoff = datetime.now(UTC) - timedelta(minutes=settings.file_retention_minutes)
 
     continuation_token = None
     while True:
@@ -55,7 +53,7 @@ def list_expired_objects() -> list[dict]:
             last_modified = obj["LastModified"]
             # Pastikan timezone-aware
             if last_modified.tzinfo is None:
-                last_modified = last_modified.replace(tzinfo=timezone.utc)
+                last_modified = last_modified.replace(tzinfo=UTC)
             if last_modified < cutoff:
                 expired.append({"Key": obj["Key"], "LastModified": last_modified})
 
@@ -83,7 +81,7 @@ def cleanup_expired_files() -> dict:
         extra={
             "event_data": {
                 "event": "cleanup_started",
-                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "timestamp": datetime.now(UTC).isoformat(),
             }
         },
     )
@@ -127,7 +125,7 @@ def cleanup_expired_files() -> dict:
                     "scanned": total_scanned,
                     "deleted": deleted,
                     "duration_ms": duration_ms,
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.now(UTC).isoformat(),
                 }
             },
         )
@@ -141,7 +139,7 @@ def cleanup_expired_files() -> dict:
                     "deleted": deleted,
                     "failed": failed,
                     "duration_ms": duration_ms,
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.now(UTC).isoformat(),
                 }
             },
         )

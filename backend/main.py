@@ -1,16 +1,17 @@
 import asyncio
 import logging
 from contextlib import asynccontextmanager
+from datetime import UTC
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
+from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
-from routers.connectivity import router as connectivity_router
 from routers.compress import router as compress_router
+from routers.connectivity import router as connectivity_router
 from routers.image_to_pdf import router as image_to_pdf_router
 from routers.ocr import router as ocr_router
 from routers.pdf_to_excel import router as pdf_to_excel_router
@@ -20,10 +21,9 @@ from routers.protect import router as protect_router
 from routers.status import router as status_router
 from routers.unlock import router as unlock_router
 from routers.watermark import router as watermark_router
-
+from utils.cleanup import CLEANUP_INTERVAL_SECONDS, cleanup_expired_files
 from utils.config import settings
 from utils.logging_config import setup_logging
-from utils.cleanup import cleanup_expired_files, CLEANUP_INTERVAL_SECONDS
 
 # --- Structured Logging ---
 setup_logging()
@@ -51,9 +51,7 @@ async def _cleanup_loop():
 async def lifespan(app: FastAPI):
     """App lifespan: start cleanup cron on startup, cancel on shutdown."""
     task = asyncio.create_task(_cleanup_loop())
-    logger.info(
-        "Cleanup cron started (interval: %ds)", CLEANUP_INTERVAL_SECONDS
-    )
+    logger.info("Cleanup cron started (interval: %ds)", CLEANUP_INTERVAL_SECONDS)
     yield
     task.cancel()
     try:
@@ -111,13 +109,12 @@ app.include_router(unlock_router)
 app.include_router(watermark_router)
 
 
-
 @app.get("/health")
 async def health_check():
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     return {
         "status": "ok",
         "version": app.version,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
     }

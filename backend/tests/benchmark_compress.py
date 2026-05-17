@@ -14,7 +14,6 @@ Output:
 
 import argparse
 import io
-import os
 import time
 from pathlib import Path
 
@@ -55,7 +54,9 @@ def generate_text_document() -> tuple[bytes, str]:
     for page_num in range(15):
         page = doc.new_page(width=595, height=842)
         y = 72
-        page.insert_text((72, y), f"LAPORAN BULANAN — Halaman {page_num + 1}", fontsize=16, fontname="helv")
+        page.insert_text(
+            (72, y), f"LAPORAN BULANAN — Halaman {page_num + 1}", fontsize=16, fontname="helv"
+        )
         y += 40
 
         for para in paragraphs:
@@ -114,12 +115,12 @@ def generate_presentation() -> tuple[bytes, str]:
     doc = fitz.open()
 
     slide_colors = [
-        (30, 58, 95),    # Navy (Papyr brand)
-        (37, 99, 235),   # Blue (Papyr accent)
-        (220, 38, 38),   # Red
-        (22, 163, 74),   # Green
+        (30, 58, 95),  # Navy (Papyr brand)
+        (37, 99, 235),  # Blue (Papyr accent)
+        (220, 38, 38),  # Red
+        (22, 163, 74),  # Green
         (147, 51, 234),  # Purple
-        (234, 88, 12),   # Orange
+        (234, 88, 12),  # Orange
     ]
 
     for slide_num in range(12):
@@ -198,7 +199,11 @@ def compress_via_papyr(api_url: str, pdf_bytes: bytes, filename: str) -> dict:
             "elapsed_ms": elapsed_ms,
         }
     else:
-        detail = resp.json().get("detail", resp.text[:200]) if resp.headers.get("content-type", "").startswith("application/json") else resp.text[:200]
+        detail = (
+            resp.json().get("detail", resp.text[:200])
+            if resp.headers.get("content-type", "").startswith("application/json")
+            else resp.text[:200]
+        )
         return {"status": "ERROR", "detail": detail, "elapsed_ms": elapsed_ms}
 
 
@@ -216,7 +221,7 @@ if __name__ == "__main__":
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     print(f"\n{'='*70}")
-    print(f"  PAPYR-021 — Benchmark: Papyr vs iLovePDF")
+    print("  PAPYR-021 — Benchmark: Papyr vs iLovePDF")
     print(f"  API: {api_url}")
     print(f"{'='*70}\n")
 
@@ -254,24 +259,28 @@ if __name__ == "__main__":
             )
             print(f"  Saved: {papyr_path.name}")
 
-            results.append({
-                "test_name": test_name,
-                "label": label,
-                "input_size": input_size,
-                "papyr_size": result["compressed_size"],
-                "papyr_percent": result["saved_percent"],
-                "papyr_ms": result["elapsed_ms"],
-            })
+            results.append(
+                {
+                    "test_name": test_name,
+                    "label": label,
+                    "input_size": input_size,
+                    "papyr_size": result["compressed_size"],
+                    "papyr_percent": result["saved_percent"],
+                    "papyr_ms": result["elapsed_ms"],
+                }
+            )
         else:
             print(f"  ❌ Papyr error: {result.get('detail', 'Unknown')}")
-            results.append({
-                "test_name": test_name,
-                "label": label,
-                "input_size": input_size,
-                "papyr_size": None,
-                "papyr_percent": None,
-                "papyr_ms": None,
-            })
+            results.append(
+                {
+                    "test_name": test_name,
+                    "label": label,
+                    "input_size": input_size,
+                    "papyr_size": None,
+                    "papyr_percent": None,
+                    "papyr_ms": None,
+                }
+            )
 
         print()
         time.sleep(2)
@@ -281,8 +290,8 @@ if __name__ == "__main__":
         "# PAPYR-021 — Benchmark: Papyr vs iLovePDF",
         "",
         f"**Tanggal:** {time.strftime('%Y-%m-%d %H:%M WIB')}",
-        f"**Papyr preset:** ebook (150 dpi)",
-        f"**iLovePDF preset:** default (recommended compression)",
+        "**Papyr preset:** ebook (150 dpi)",
+        "**iLovePDF preset:** default (recommended compression)",
         "",
         "## Hasil Perbandingan",
         "",
@@ -299,34 +308,38 @@ if __name__ == "__main__":
             f"___ KB/MB | __% | ___ |"
         )
 
-    report_lines.extend([
-        "",
-        "## Instruksi Pengisian iLovePDF",
-        "",
-        "1. Buka https://www.ilovepdf.com/compress_pdf",
-        "2. Upload file `*-original.pdf` dari folder `tests/benchmark/`",
-        "3. Pilih **Recommended Compression**",
-        "4. Catat ukuran output dan persentase",
-        "5. Isi kolom iLovePDF di tabel di atas",
-        "6. Bandingkan visual quality: buka kedua file (`*-papyr.pdf` dan hasil iLovePDF) di browser",
-        "",
-        "## File Test",
-        "",
-    ])
+    report_lines.extend(
+        [
+            "",
+            "## Instruksi Pengisian iLovePDF",
+            "",
+            "1. Buka https://www.ilovepdf.com/compress_pdf",
+            "2. Upload file `*-original.pdf` dari folder `tests/benchmark/`",
+            "3. Pilih **Recommended Compression**",
+            "4. Catat ukuran output dan persentase",
+            "5. Isi kolom iLovePDF di tabel di atas",
+            "6. Bandingkan visual quality: buka kedua file (`*-papyr.pdf` dan hasil iLovePDF) di browser",
+            "",
+            "## File Test",
+            "",
+        ]
+    )
 
     for r in results:
         report_lines.append(f"- `{r['label']}-original.pdf` ({fmt_size(r['input_size'])})")
 
-    report_lines.extend([
-        "",
-        "## Catatan",
-        "",
-        "- Test PDF menggunakan synthetic content (generated via PyMuPDF)",
-        "- Solid-color images compress sangat baik — hasil real-world akan berbeda",
-        "- Untuk benchmark akurat, gunakan PDF asli (scan KTP, presentasi, laporan)",
-        "- Papyr menggunakan Ghostscript /ebook preset (150 dpi)",
-        "",
-    ])
+    report_lines.extend(
+        [
+            "",
+            "## Catatan",
+            "",
+            "- Test PDF menggunakan synthetic content (generated via PyMuPDF)",
+            "- Solid-color images compress sangat baik — hasil real-world akan berbeda",
+            "- Untuk benchmark akurat, gunakan PDF asli (scan KTP, presentasi, laporan)",
+            "- Papyr menggunakan Ghostscript /ebook preset (150 dpi)",
+            "",
+        ]
+    )
 
     report_path = Path(__file__).parent / "benchmark_results.md"
     report_path.write_text("\n".join(report_lines), encoding="utf-8")
@@ -334,6 +347,6 @@ if __name__ == "__main__":
     print(f"\n📄 Report template: {report_path}")
     print(f"📁 Test files: {OUTPUT_DIR}/")
     print(f"\n{'='*70}")
-    print(f"  Next: Upload *-original.pdf files to ilovepdf.com")
-    print(f"  and fill in the benchmark_results.md table")
+    print("  Next: Upload *-original.pdf files to ilovepdf.com")
+    print("  and fill in the benchmark_results.md table")
     print(f"{'='*70}")

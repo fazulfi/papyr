@@ -8,7 +8,7 @@ import logging
 import os
 import tempfile
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import fitz  # PyMuPDF
 from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
@@ -118,9 +118,7 @@ async def _process_ocr(
             download_filename=ocr_filename,
         )
 
-        expires_at = (
-            datetime.now(timezone.utc) + timedelta(seconds=3600)
-        ).isoformat()
+        expires_at = (datetime.now(UTC) + timedelta(seconds=3600)).isoformat()
 
         logger.info(
             "OCR OK: task_id=%s input=%d output=%d pages=%d lang=%s",
@@ -144,7 +142,7 @@ async def _process_ocr(
         raise
     except Exception as exc:
         logger.error("OCR failed for task %s: %s", task_id, str(exc))
-        raise RuntimeError(f"OCR processing failed: {str(exc)[:200]}")
+        raise RuntimeError(f"OCR processing failed: {str(exc)[:200]}") from exc
 
     finally:
         # Cleanup temp files
@@ -177,9 +175,7 @@ async def ocr_endpoint(
 
     try:
         # 1. Validate PDF (reject encrypted, max 50 pages)
-        pdf_info = validate_pdf_file(
-            file, file_bytes, reject_encrypted=True, max_pages=50
-        )
+        pdf_info = validate_pdf_file(file, file_bytes, reject_encrypted=True, max_pages=50)
 
         # 2. Language validation
         if language not in _OCR_LANGS:
@@ -267,4 +263,4 @@ async def ocr_endpoint(
         raise HTTPException(
             status_code=500,
             detail="Gagal memproses file. Silakan coba lagi.",
-        )
+        ) from exc

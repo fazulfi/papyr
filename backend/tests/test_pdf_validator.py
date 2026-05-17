@@ -1,10 +1,11 @@
 """Unit tests for shared PDF validator."""
 
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 from fastapi import HTTPException
 
-from utils.pdf_validator import validate_pdf_file, PDFInfo
+from utils.pdf_validator import PDFInfo, validate_pdf_file
 
 
 def _make_upload_file(filename="test.pdf", content_type="application/pdf"):
@@ -196,12 +197,7 @@ class TestValidatePdfFile:
 
 class TestPDFInfo:
     def test_pdfinfo_dataclass(self):
-        info = PDFInfo(
-            size_bytes=1024,
-            page_count=5,
-            is_encrypted=False,
-            filename="test.pdf"
-        )
+        info = PDFInfo(size_bytes=1024, page_count=5, is_encrypted=False, filename="test.pdf")
         assert info.size_bytes == 1024
         assert info.page_count == 5
         assert info.is_encrypted is False

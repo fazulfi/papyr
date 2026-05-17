@@ -16,7 +16,9 @@ VALID_PDF_BYTES = b"%PDF-1.4\n1 0 obj\n<<>>\nendobj\ntrailer\n<<>>\nstartxref\n0
 VALID_IMG_BYTES = b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR"
 
 
-def _build_files(pdf_name: str, pdf_bytes: bytes, pdf_type: str, img_name: str, img_bytes: bytes, img_type: str):
+def _build_files(
+    pdf_name: str, pdf_bytes: bytes, pdf_type: str, img_name: str, img_bytes: bytes, img_type: str
+):
     return {
         "file": (pdf_name, pdf_bytes, pdf_type),
         "watermark_image": (img_name, img_bytes, img_type),
@@ -221,7 +223,9 @@ async def test_watermark_invalid_position_returns_400(test_client):
 @pytest.mark.asyncio
 async def test_watermark_pdf_validation_error_propagates(test_client):
     with patch("routers.watermark.validate_pdf_file") as mock_validate:
-        mock_validate.side_effect = HTTPException(status_code=413, detail="Ukuran file terlalu besar")
+        mock_validate.side_effect = HTTPException(
+            status_code=413, detail="Ukuran file terlalu besar"
+        )
 
         response = await test_client.post(
             "/api/watermark",
@@ -314,7 +318,9 @@ async def test_watermark_invalid_pdf_returns_400(test_client):
 async def test_watermark_empty_pdf_returns_400(test_client):
     """STEP-F2-019 case 7: empty PDF file rejected."""
     with patch("routers.watermark.validate_pdf_file") as mock_validate:
-        mock_validate.side_effect = HTTPException(status_code=400, detail="File kosong. Silakan upload file PDF yang valid.")
+        mock_validate.side_effect = HTTPException(
+            status_code=400, detail="File kosong. Silakan upload file PDF yang valid."
+        )
 
         response = await test_client.post(
             "/api/watermark",
@@ -377,6 +383,7 @@ async def test_watermark_missing_pdf_file_returns_422(test_client):
 
 # ── Internal helper tests ──────────────────────────────────────────────
 
+
 def test_cleanup_none_path_does_nothing():
     watermark_router._cleanup(None)
 
@@ -393,7 +400,9 @@ def test_cleanup_oserror_logs_warning():
 
 def test_parse_watermark_config_invalid_types():
     with pytest.raises(HTTPException) as exc:
-        watermark_router._parse_watermark_config('{"opacity": "abc", "position": "center", "scale": 0.5}')
+        watermark_router._parse_watermark_config(
+            '{"opacity": "abc", "position": "center", "scale": 0.5}'
+        )
     assert exc.value.status_code == 400
     assert "tidak valid" in exc.value.detail
 
@@ -451,7 +460,10 @@ def test_apply_image_watermark_success():
         mock_pdf_doc.save.side_effect = lambda path: open(path, "wb").write(fake_output)
 
         output_bytes, pages = watermark_router._apply_image_watermark(
-            pdf_bytes, img_bytes, "image/png", config,
+            pdf_bytes,
+            img_bytes,
+            "image/png",
+            config,
         )
 
         assert output_bytes == fake_output
@@ -472,7 +484,9 @@ def test_apply_image_watermark_empty_output_raises_500():
     mock_pdf_doc = MagicMock()
     mock_pdf_doc.__iter__.return_value = iter([page])
     mock_image_doc = MagicMock()
-    mock_image_doc.__getitem__.return_value = SimpleNamespace(rect=SimpleNamespace(width=100, height=100))
+    mock_image_doc.__getitem__.return_value = SimpleNamespace(
+        rect=SimpleNamespace(width=100, height=100)
+    )
 
     def fitz_open_side(path_or_stream=None, **kwargs):
         if isinstance(path_or_stream, str):
@@ -488,7 +502,10 @@ def test_apply_image_watermark_empty_output_raises_500():
 
         with pytest.raises(HTTPException) as exc:
             watermark_router._apply_image_watermark(
-                pdf_bytes, img_bytes, "image/jpeg", config,
+                pdf_bytes,
+                img_bytes,
+                "image/jpeg",
+                config,
             )
         assert exc.value.status_code == 500
         assert "Gagal memproses" in exc.value.detail

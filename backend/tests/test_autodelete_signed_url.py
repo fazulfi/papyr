@@ -18,13 +18,13 @@ Untuk tes auto-delete penuh, jalankan:
   (akan menunggu 65 menit lalu verifikasi ulang)
 """
 
+import argparse
 import os
 import sys
 import time
 import uuid
-import argparse
-from datetime import datetime, timezone
-from urllib.parse import urlparse, parse_qs
+from datetime import UTC, datetime
+from urllib.parse import parse_qs, urlparse
 
 import requests
 
@@ -48,7 +48,7 @@ def _generate_test_pdf() -> bytes:
     page = doc.new_page()
     page.insert_text(
         (72, 100),
-        f"Test auto-delete - {datetime.now(timezone.utc).isoformat()}",
+        f"Test auto-delete - {datetime.now(UTC).isoformat()}",
         fontsize=14,
     )
     pdf_bytes = doc.tobytes()
@@ -81,9 +81,9 @@ def _upload_and_get_url() -> dict:
         sys.exit(1)
 
     data = resp.json()
-    print(f"  Upload berhasil!")
+    print("  Upload berhasil!")
     print(f"  Download URL: {data.get('download_url', 'N/A')[:80]}...")
-    print(f"  Timestamp: {datetime.now(timezone.utc).isoformat()}")
+    print(f"  Timestamp: {datetime.now(UTC).isoformat()}")
 
     return data
 
@@ -126,7 +126,7 @@ def _analyze_signed_url(download_url: str):
         print(f"  X-Amz-Expires: {expires_in} seconds ({expires_in // 60} menit)")
 
         if expires_in == 3600:
-            print(f"  ✅ Expiry = 3600s (1 jam) — sesuai konfigurasi")
+            print("  ✅ Expiry = 3600s (1 jam) — sesuai konfigurasi")
         else:
             print(f"  ⚠️  Expiry = {expires_in}s — TIDAK sesuai (expected 3600)")
 
@@ -155,11 +155,11 @@ def _analyze_signed_url(download_url: str):
             # uuid.uuid4().hex = 32 hex chars
             if len(key_without_ext) == 32:
                 int(key_without_ext, 16)  # Validate hex
-                print(f"  ✅ Key adalah UUID hex (32 chars) — tidak bisa ditebak")
+                print("  ✅ Key adalah UUID hex (32 chars) — tidak bisa ditebak")
             else:
                 print(f"  ⚠️  Key length = {len(key_without_ext)} (expected 32)")
         except ValueError:
-            print(f"  ⚠️  Key bukan valid hex")
+            print("  ⚠️  Key bukan valid hex")
 
 
 def _test_url_guessing(download_url: str):
@@ -182,7 +182,7 @@ def _test_url_guessing(download_url: str):
         if resp.status_code in (403, 404):
             print(f"  ✅ URL guessing GAGAL (status {resp.status_code}) — aman!")
         elif resp.status_code == 200:
-            print(f"  ❌ URL guessing BERHASIL — SECURITY ISSUE!")
+            print("  ❌ URL guessing BERHASIL — SECURITY ISSUE!")
         else:
             print(f"  ℹ️  Status {resp.status_code} — kemungkinan signature mismatch")
     except Exception as e:
@@ -200,11 +200,11 @@ def _test_expired_url(download_url: str) -> bool:
 
     if status in (403, 404):
         print(f"  ✅ Signed URL expired — status {status}")
-        print(f"  File sudah tidak bisa diakses setelah 1 jam")
+        print("  File sudah tidak bisa diakses setelah 1 jam")
         return True
     elif status == 200:
         print(f"  ❌ Signed URL MASIH accessible — status {status}")
-        print(f"  Auto-delete mungkin belum berjalan")
+        print("  Auto-delete mungkin belum berjalan")
         return False
     else:
         print(f"  ℹ️  Status {status} — kemungkinan expired (non-200)")
@@ -226,17 +226,15 @@ def _check_r2_direct():
 
     client = _get_client()
     try:
-        response = client.list_objects_v2(
-            Bucket=settings.r2_bucket_name, MaxKeys=100
-        )
+        response = client.list_objects_v2(Bucket=settings.r2_bucket_name, MaxKeys=100)
         contents = response.get("Contents", [])
         print(f"  Total objects di bucket: {len(contents)}")
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         for obj in contents:
             last_mod = obj["LastModified"]
             if last_mod.tzinfo is None:
-                last_mod = last_mod.replace(tzinfo=timezone.utc)
+                last_mod = last_mod.replace(tzinfo=UTC)
             age_minutes = (now - last_mod).total_seconds() / 60
             print(f"    {obj['Key'][:40]}... — age: {age_minutes:.0f} min")
 
@@ -257,7 +255,7 @@ def _test_cleanup_manual():
 
         print("  Menjalankan cleanup_expired_files()...")
         result = cleanup_expired_files()
-        print(f"  ✅ Cleanup selesai:")
+        print("  ✅ Cleanup selesai:")
         print(f"     Scanned: {result['scanned']}")
         print(f"     Deleted: {result['deleted']}")
         print(f"     Failed:  {result['failed']}")
@@ -297,8 +295,8 @@ def main():
     print("║  PAPYR-073 + PAPYR-074: Auto-Delete & Signed URL Test  ║")
     print("╠══════════════════════════════════════════════════════════╣")
     print(f"║  API: {API_BASE:<51}║")
-    print(f"║  Mode: {'WAIT ({} min)'.format(WAIT_MINUTES) if args.wait else 'INSTANT (no wait)':<51}║")
-    print(f"║  Time: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC'):<51}║")
+    print(f"║  Mode: {f'WAIT ({WAIT_MINUTES} min)' if args.wait else 'INSTANT (no wait)':<51}║")
+    print(f"║  Time: {datetime.now(UTC).strftime('%Y-%m-%d %H:%M:%S UTC'):<51}║")
     print("╚══════════════════════════════════════════════════════════╝")
 
     # --- Phase 1: Upload & immediate tests ---
@@ -327,9 +325,9 @@ def main():
         print("\n" + "=" * 60)
         print(f"MENUNGGU {WAIT_MINUTES} MENIT...")
         print("=" * 60)
-        print(f"  Start: {datetime.now(timezone.utc).strftime('%H:%M:%S UTC')}")
-        target = datetime.now(timezone.utc).timestamp() + (WAIT_MINUTES * 60)
-        print(f"  Target: {datetime.fromtimestamp(target, tz=timezone.utc).strftime('%H:%M:%S UTC')}")
+        print(f"  Start: {datetime.now(UTC).strftime('%H:%M:%S UTC')}")
+        target = datetime.now(UTC).timestamp() + (WAIT_MINUTES * 60)
+        print(f"  Target: {datetime.fromtimestamp(target, tz=UTC).strftime('%H:%M:%S UTC')}")
         print()
 
         for i in range(WAIT_MINUTES):
@@ -337,7 +335,7 @@ def main():
             print(f"\r  ⏳ {remaining} menit tersisa...", end="", flush=True)
             time.sleep(60)
 
-        print(f"\r  ✅ Waktu tunggu selesai!                    ")
+        print("\r  ✅ Waktu tunggu selesai!                    ")
 
         # Test expired URL
         _test_expired_url(download_url)
@@ -358,7 +356,7 @@ def main():
     python tests/test_autodelete_signed_url.py --wait
 
   OPSI B — Manual test:
-    1. Catat waktu upload: {datetime.now(timezone.utc).strftime('%H:%M:%S UTC')}
+    1. Catat waktu upload: {datetime.now(UTC).strftime('%H:%M:%S UTC')}
     2. Catat URL: {download_url[:60]}...
     3. Tunggu 65 menit
     4. Jalankan:

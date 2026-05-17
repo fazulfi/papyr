@@ -13,7 +13,7 @@ import logging
 import os
 import tempfile
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import fitz
 from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
@@ -235,7 +235,7 @@ async def watermark_endpoint(
         return {
             "success": True,
             "download_url": download_url,
-            "expires_at": (datetime.now(timezone.utc) + timedelta(seconds=3600)).isoformat(),
+            "expires_at": (datetime.now(UTC) + timedelta(seconds=3600)).isoformat(),
             "pages_processed": pages_processed,
         }
     except HTTPException:

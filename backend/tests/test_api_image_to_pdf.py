@@ -3,7 +3,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-
 JPEG_BYTES = b"\xff\xd8\xff\xe0" + (b"\x00" * 100)
 PNG_BYTES = b"\x89PNG\r\n\x1a\n" + (b"\x00" * 100)
 WEBP_BYTES = b"RIFF" + b"\x00\x00\x00\x00" + b"WEBP" + (b"\x00" * 100)

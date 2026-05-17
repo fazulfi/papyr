@@ -9,16 +9,15 @@ import logging
 import os
 import tempfile
 import time
-from typing import List
 
 import fitz  # PyMuPDF
-from fastapi import APIRouter, File, Request, UploadFile, HTTPException
+from fastapi import APIRouter, File, HTTPException, Request, UploadFile
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
 from utils.config import settings
 from utils.logging_config import log_task_event
-from utils.r2 import upload_file, generate_signed_url
+from utils.r2 import generate_signed_url, upload_file
 
 limiter = Limiter(key_func=get_remote_address)
 
@@ -73,9 +72,7 @@ def _validate_image(file: UploadFile, file_bytes: bytes) -> None:
     is_jpeg = file_bytes[:3] == _JPEG_MAGIC
     is_png = file_bytes[:8] == _PNG_MAGIC
     is_webp = (
-        len(file_bytes) >= 12
-        and file_bytes[:4] == _WEBP_RIFF
-        and file_bytes[8:12] == _WEBP_MAGIC
+        len(file_bytes) >= 12 and file_bytes[:4] == _WEBP_RIFF and file_bytes[8:12] == _WEBP_MAGIC
     )
     if not (is_jpeg or is_png or is_webp):
         raise HTTPException(
@@ -97,7 +94,7 @@ def _validate_image(file: UploadFile, file_bytes: bytes) -> None:
 @limiter.limit(f"{settings.rate_limit_per_minute}/minute")
 async def image_to_pdf_endpoint(
     request: Request,
-    files: List[UploadFile] = File(...),
+    files: list[UploadFile] = File(...),
 ):
     """
     Konversi beberapa gambar (JPG/PNG) menjadi satu file PDF.
@@ -127,7 +124,7 @@ async def image_to_pdf_endpoint(
     try:
         doc = fitz.open()
 
-        for idx, (filename, img_bytes) in enumerate(image_data):
+        for _idx, (filename, img_bytes) in enumerate(image_data):
             # Simpan gambar ke temp file (PyMuPDF butuh path atau bytes)
             lower_name = filename.lower()
             if lower_name.endswith(".png"):
@@ -152,7 +149,7 @@ async def image_to_pdf_endpoint(
                 raise HTTPException(
                     status_code=400,
                     detail=f'"{filename}" tidak bisa dibaca sebagai gambar. File mungkin rusak.',
-                )
+                ) from None
 
             # Buat halaman PDF sesuai ukuran gambar
             page = doc.new_page(width=rect.width, height=rect.height)
@@ -221,7 +218,9 @@ async def image_to_pdf_endpoint(
             success=False,
             error=type(exc).__name__,
         )
-        raise HTTPException(status_code=500, detail="Gagal memproses file. Silakan coba lagi.")
+        raise HTTPException(
+            status_code=500, detail="Gagal memproses file. Silakan coba lagi."
+        ) from exc
 
     finally:
         # Cleanup semua temp files

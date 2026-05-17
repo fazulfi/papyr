@@ -31,9 +31,9 @@ logger = logging.getLogger(__name__)
 
 # Preset Ghostscript — mapping nama ke dPDFSETTINGS value
 QUALITY_PRESETS = {
-    "screen": "/screen",      # Ukuran kecil, kualitas rendah (72 dpi)
-    "ebook": "/ebook",        # Seimbang (150 dpi) — default
-    "printer": "/printer",    # Kualitas tinggi (300 dpi)
+    "screen": "/screen",  # Ukuran kecil, kualitas rendah (72 dpi)
+    "ebook": "/ebook",  # Seimbang (150 dpi) — default
+    "printer": "/printer",  # Kualitas tinggi (300 dpi)
 }
 
 # Timeout untuk proses Ghostscript (detik)
@@ -99,14 +99,16 @@ def compress_pdf(input_path: str, quality: str = "ebook") -> dict:
         raise HTTPException(
             status_code=500,
             detail="Ghostscript tidak tersedia di server. Hubungi administrator.",
-        )
+        ) from None
     except subprocess.TimeoutExpired:
         _cleanup(output_path)
-        logger.error("Ghostscript timeout setelah %ds untuk file %d bytes", GS_TIMEOUT_SECONDS, original_size)
+        logger.error(
+            "Ghostscript timeout setelah %ds untuk file %d bytes", GS_TIMEOUT_SECONDS, original_size
+        )
         raise HTTPException(
             status_code=500,
             detail=f"Proses kompresi melebihi batas waktu ({GS_TIMEOUT_SECONDS} detik). Coba file yang lebih kecil.",
-        )
+        ) from None
 
     if result.returncode != 0:
         stderr = result.stderr.strip() if result.stderr else "Unknown error"
@@ -126,7 +128,9 @@ def compress_pdf(input_path: str, quality: str = "ebook") -> dict:
         )
 
     compressed_size = os.path.getsize(output_path)
-    compression_ratio = round((1 - compressed_size / original_size) * 100, 1) if original_size > 0 else 0.0
+    compression_ratio = (
+        round((1 - compressed_size / original_size) * 100, 1) if original_size > 0 else 0.0
+    )
 
     logger.info(
         "Compress OK: preset=%s original=%d compressed=%d ratio=%.1f%%",

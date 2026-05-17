@@ -12,9 +12,9 @@ import logging
 import os
 import tempfile
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
-import fitz  # PyMuPDF
+import fitz  # noqa: F401  # PyMuPDF — exposed for tests to patch routers.pdf_to_excel.fitz.open
 from fastapi import APIRouter, File, HTTPException, Request, UploadFile
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -130,9 +130,7 @@ async def _convert_pdf_to_excel(
         os.close(input_fd)
 
     # Prepare output XLSX path
-    output_fd, output_xlsx_path = tempfile.mkstemp(
-        suffix=".xlsx", prefix="papyr_pdf2excel_out_"
-    )
+    output_fd, output_xlsx_path = tempfile.mkstemp(suffix=".xlsx", prefix="papyr_pdf2excel_out_")
     try:
         os.close(output_fd)
     except OSError:
@@ -189,9 +187,7 @@ async def _convert_pdf_to_excel(
             download_filename=xlsx_filename,
         )
 
-        expires_at = (
-            datetime.now(timezone.utc) + timedelta(seconds=_SIGNED_URL_EXPIRY_SECONDS)
-        ).isoformat()
+        expires_at = (datetime.now(UTC) + timedelta(seconds=_SIGNED_URL_EXPIRY_SECONDS)).isoformat()
 
         logger.info(
             "PDF-to-Excel OK: task_id=%s input=%d output=%d tables=%d",
@@ -252,9 +248,7 @@ async def pdf_to_excel_endpoint(
             )
 
         # 2. Validate PDF (reject encrypted, max 50 pages)
-        pdf_info = validate_pdf_file(
-            file, file_bytes, reject_encrypted=True, max_pages=50
-        )
+        pdf_info = validate_pdf_file(file, file_bytes, reject_encrypted=True, max_pages=50)
 
         # 3. Create async task
         task = create_task(
@@ -325,4 +319,4 @@ async def pdf_to_excel_endpoint(
         raise HTTPException(
             status_code=500,
             detail="Gagal memproses file. Silakan coba lagi.",
-        )
+        ) from exc

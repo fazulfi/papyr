@@ -11,14 +11,14 @@ import tempfile
 import time
 
 import fitz  # PyMuPDF — untuk deteksi password-protected PDF
-from fastapi import APIRouter, File, Request, UploadFile, HTTPException, Query
+from fastapi import APIRouter, File, HTTPException, Query, Request, UploadFile
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
+from services.compress_service import compress_pdf
 from utils.config import settings
 from utils.logging_config import log_task_event
-from services.compress_service import compress_pdf
-from utils.r2 import upload_file, generate_signed_url
+from utils.r2 import generate_signed_url, upload_file
 
 limiter = Limiter(key_func=get_remote_address)
 
@@ -98,7 +98,7 @@ def _validate_pdf(file: UploadFile, file_bytes: bytes) -> None:
         raise HTTPException(
             status_code=400,
             detail=f'"{filename}" bukan file PDF yang valid atau file corrupt.',
-        )
+        ) from None
 
 
 @router.post("/compress")
@@ -161,7 +161,9 @@ async def compress_endpoint(
         # Hitung persentase penghematan
         original_size = result["original_size"]
         compressed_size = result["compressed_size"]
-        saved_percent = round((1 - compressed_size / original_size) * 100) if original_size > 0 else 0
+        saved_percent = (
+            round((1 - compressed_size / original_size) * 100) if original_size > 0 else 0
+        )
 
         duration_ms = int((time.time() - start_time) * 1000)
         log_task_event(
@@ -205,7 +207,9 @@ async def compress_endpoint(
             success=False,
             error=type(exc).__name__,
         )
-        raise HTTPException(status_code=500, detail="Gagal memproses file. Silakan coba lagi.")
+        raise HTTPException(
+            status_code=500, detail="Gagal memproses file. Silakan coba lagi."
+        ) from exc
 
     finally:
         # Cleanup temp files — selalu bersihkan

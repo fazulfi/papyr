@@ -13,7 +13,7 @@ import os
 import subprocess
 import tempfile
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import fitz  # PyMuPDF
 from fastapi import APIRouter, File, HTTPException, Request, UploadFile
@@ -158,9 +158,7 @@ async def _convert_pdf_to_docx(
             download_filename=docx_filename,
         )
 
-        expires_at = (
-            datetime.now(timezone.utc) + timedelta(seconds=_SIGNED_URL_EXPIRY_SECONDS)
-        ).isoformat()
+        expires_at = (datetime.now(UTC) + timedelta(seconds=_SIGNED_URL_EXPIRY_SECONDS)).isoformat()
 
         logger.info(
             "PDF-to-Word OK: task_id=%s input=%d output=%d",
@@ -177,12 +175,14 @@ async def _convert_pdf_to_docx(
         }
 
     except subprocess.TimeoutExpired:
-        logger.error("LibreOffice timeout after %ds for task %s", _CONVERSION_TIMEOUT_SECONDS, task_id)
-        raise RuntimeError(f"Conversion timeout (>{_CONVERSION_TIMEOUT_SECONDS}s)")
+        logger.error(
+            "LibreOffice timeout after %ds for task %s", _CONVERSION_TIMEOUT_SECONDS, task_id
+        )
+        raise RuntimeError(f"Conversion timeout (>{_CONVERSION_TIMEOUT_SECONDS}s)") from None
 
     except FileNotFoundError:
         logger.error("LibreOffice not found in PATH")
-        raise RuntimeError("LibreOffice tidak tersedia di server")
+        raise RuntimeError("LibreOffice tidak tersedia di server") from None
 
     finally:
         # Cleanup temp files
@@ -293,4 +293,4 @@ async def pdf_to_word_endpoint(
         raise HTTPException(
             status_code=500,
             detail="Gagal memproses file. Silakan coba lagi.",
-        )
+        ) from exc

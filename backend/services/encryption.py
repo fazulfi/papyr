@@ -18,11 +18,11 @@ from fastapi import HTTPException
 logger = logging.getLogger(__name__)
 
 # Encryption method mapping
-PDF_ENCRYPT_AES_128 = getattr(fitz, "PDF_ENCRYPT_AES_128")
-PDF_ENCRYPT_AES_256 = getattr(fitz, "PDF_ENCRYPT_AES_256")
-PDF_PERM_ACCESSIBILITY = getattr(fitz, "PDF_PERM_ACCESSIBILITY")
-PDF_PERM_ANNOTATE = getattr(fitz, "PDF_PERM_ANNOTATE")
-PDF_PERM_FORM = getattr(fitz, "PDF_PERM_FORM")
+PDF_ENCRYPT_AES_128 = fitz.PDF_ENCRYPT_AES_128
+PDF_ENCRYPT_AES_256 = fitz.PDF_ENCRYPT_AES_256
+PDF_PERM_ACCESSIBILITY = fitz.PDF_PERM_ACCESSIBILITY
+PDF_PERM_ANNOTATE = fitz.PDF_PERM_ANNOTATE
+PDF_PERM_FORM = fitz.PDF_PERM_FORM
 
 ENCRYPTION_METHODS = {
     "aes128": PDF_ENCRYPT_AES_128,
@@ -30,11 +30,7 @@ ENCRYPTION_METHODS = {
 }
 
 # Permission flags — deny print and copy by default
-DEFAULT_PERMISSIONS = (
-    PDF_PERM_ACCESSIBILITY
-    | PDF_PERM_ANNOTATE
-    | PDF_PERM_FORM
-)
+DEFAULT_PERMISSIONS = PDF_PERM_ACCESSIBILITY | PDF_PERM_ANNOTATE | PDF_PERM_FORM
 
 
 def encrypt_pdf(
@@ -84,7 +80,7 @@ def encrypt_pdf(
         raise HTTPException(
             status_code=400,
             detail="File PDF tidak bisa dibuka. File mungkin corrupt.",
-        )
+        ) from None
 
     try:
         if doc.is_encrypted:
@@ -116,7 +112,9 @@ def encrypt_pdf(
 
         logger.info(
             "PDF encrypted: method=%s input_size=%d output_size=%d",
-            method, len(file_bytes), len(encrypted_bytes),
+            method,
+            len(file_bytes),
+            len(encrypted_bytes),
         )
 
         return encrypted_bytes
@@ -128,7 +126,7 @@ def encrypt_pdf(
         raise HTTPException(
             status_code=500,
             detail="Gagal mengenkripsi PDF. Silakan coba lagi.",
-        )
+        ) from exc
     finally:
         _cleanup(output_path)
         if doc is not None:
@@ -165,7 +163,7 @@ def decrypt_pdf(file_bytes: bytes, password: str) -> bytes:
         raise HTTPException(
             status_code=400,
             detail="File PDF tidak bisa dibuka. File mungkin corrupt.",
-        )
+        ) from None
 
     try:
         if not doc.is_encrypted:
@@ -199,7 +197,8 @@ def decrypt_pdf(file_bytes: bytes, password: str) -> bytes:
 
         logger.info(
             "PDF decrypted: input_size=%d output_size=%d",
-            len(file_bytes), len(decrypted_bytes),
+            len(file_bytes),
+            len(decrypted_bytes),
         )
 
         return decrypted_bytes
@@ -211,7 +210,7 @@ def decrypt_pdf(file_bytes: bytes, password: str) -> bytes:
         raise HTTPException(
             status_code=500,
             detail="Gagal mendekripsi PDF. Silakan coba lagi.",
-        )
+        ) from exc
     finally:
         _cleanup(output_path)
         if doc is not None:
