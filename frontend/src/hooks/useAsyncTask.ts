@@ -26,10 +26,11 @@ interface StatusResponse {
 /* ── Hook ── */
 
 export function useAsyncTask(
-  apiUrl: string,
-  options: UseAsyncTaskOptions = {}
+  submitUrl: string,
+  options: UseAsyncTaskOptions & { statusBaseUrl?: string } = {}
 ) {
-  const { pollingIntervalMs = 3000, timeoutMs = 180000 } = options;
+  const { pollingIntervalMs = 3000, timeoutMs = 180000, statusBaseUrl } = options;
+  const normalizedStatusBaseUrl = (statusBaseUrl || submitUrl.replace(/\/[^/]+$/, "")).replace(/\/$/, "");
 
   const [state, setState] = useState<AsyncTaskState>({
     taskId: null,
@@ -73,7 +74,7 @@ export function useAsyncTask(
         const controller = new AbortController();
         abortControllerRef.current = controller;
 
-        const response = await fetch(`${apiUrl}/status/${taskId}`, {
+        const response = await fetch(`${normalizedStatusBaseUrl}/status/${taskId}`, {
           signal: controller.signal,
         });
 
@@ -117,7 +118,7 @@ export function useAsyncTask(
         }));
       }
     },
-    [apiUrl, timeoutMs, clearPolling]
+    [normalizedStatusBaseUrl, timeoutMs, clearPolling]
   );
 
   const submit = useCallback(
@@ -132,7 +133,7 @@ export function useAsyncTask(
       });
 
       try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(submitUrl, {
           method: "POST",
           body: formData,
         });
@@ -175,7 +176,7 @@ export function useAsyncTask(
         });
       }
     },
-    [apiUrl, pollingIntervalMs, pollStatus, clearPolling]
+    [submitUrl, pollingIntervalMs, pollStatus, clearPolling]
   );
 
   const reset = useCallback(() => {
