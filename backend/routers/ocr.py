@@ -85,7 +85,6 @@ async def _process_ocr(
             output_path,
             language=language,
             deskew=True,
-            clean=True,
             oversample=300,
             tesseract_pagesegmode=6,
             optimize=1,

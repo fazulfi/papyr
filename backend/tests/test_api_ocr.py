@@ -357,7 +357,7 @@ async def test_process_ocr_happy_path(tmp_path, _stub_ocrmypdf_module):
 
 @pytest.mark.asyncio
 async def test_process_ocr_uses_quality_settings(tmp_path, _stub_ocrmypdf_module):
-    """Regression: OCR uses safer quality settings for low-resolution scanned PDFs."""
+    """Regression: OCR uses memory-safe quality settings for low-resolution scanned PDFs."""
     input_path = tmp_path / "in.pdf"
     output_path = tmp_path / "in_ocr.pdf"
     calls = []
@@ -388,7 +388,7 @@ async def test_process_ocr_uses_quality_settings(tmp_path, _stub_ocrmypdf_module
 
     assert len(calls) == 1
     _, _, kwargs = calls[0]
-    assert kwargs["clean"] is True
+    assert "clean" not in kwargs
     assert kwargs["oversample"] == 300
     assert kwargs["tesseract_pagesegmode"] == 6
     assert kwargs["deskew"] is True
