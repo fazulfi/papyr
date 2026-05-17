@@ -1,4 +1,4 @@
-import { PDFDocument, degrees } from "pdf-lib";
+import { PDFDocument, degrees } from 'pdf-lib';
 
 /* ── Rotate Types & Helpers ── */
 
@@ -18,12 +18,9 @@ const normalizeDegree = (value: number): number => ((value % 360) + 360) % 360;
  * @param pageRotationMap   Map of 1-indexed page number → degrees to add (90, 180, 270)
  * @returns                 Uint8Array of the rotated PDF
  */
-export async function rotatePDF(
-  file: File,
-  pageRotationMap: PageRotationMap,
-): Promise<Uint8Array> {
+export async function rotatePDF(file: File, pageRotationMap: PageRotationMap): Promise<Uint8Array> {
   if (pageRotationMap.size === 0) {
-    throw new Error("Pilih minimal 1 halaman untuk diputar.");
+    throw new Error('Pilih minimal 1 halaman untuk diputar.');
   }
 
   const buffer = await file.arrayBuffer();
@@ -32,18 +29,14 @@ export async function rotatePDF(
   try {
     doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
   } catch {
-    throw new Error(
-      `Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`,
-    );
+    throw new Error(`Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`);
   }
 
   const pages = doc.getPages();
 
   for (const [pageNum, addDegree] of pageRotationMap) {
     if (pageNum < 1 || pageNum > pages.length) {
-      throw new Error(
-        `Halaman ${pageNum} melebihi total halaman dokumen (${pages.length}).`,
-      );
+      throw new Error(`Halaman ${pageNum} melebihi total halaman dokumen (${pages.length}).`);
     }
     const page = pages[pageNum - 1];
     const current = page.getRotation().angle;
@@ -60,12 +53,9 @@ export async function rotatePDF(
  * @param addDegree  Degrees to add: 90, 180, or 270
  * @returns          Uint8Array of the rotated PDF
  */
-export async function rotatePDFAllPages(
-  file: File,
-  addDegree: number,
-): Promise<Uint8Array> {
+export async function rotatePDFAllPages(file: File, addDegree: number): Promise<Uint8Array> {
   if (![90, 180, 270].includes(addDegree)) {
-    throw new Error("Derajat rotasi tidak valid. Gunakan 90, 180, atau 270.");
+    throw new Error('Derajat rotasi tidak valid. Gunakan 90, 180, atau 270.');
   }
 
   const buffer = await file.arrayBuffer();
@@ -74,9 +64,7 @@ export async function rotatePDFAllPages(
   try {
     doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
   } catch {
-    throw new Error(
-      `Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`,
-    );
+    throw new Error(`Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`);
   }
 
   for (const page of doc.getPages()) {
@@ -94,11 +82,11 @@ export async function rotatePDFAllPages(
 async function webpToPng(file: File): Promise<Uint8Array> {
   const bitmap = await createImageBitmap(file);
   const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Canvas 2D context tidak tersedia.");
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas 2D context tidak tersedia.');
   ctx.drawImage(bitmap, 0, 0);
   bitmap.close();
-  const blob = await canvas.convertToBlob({ type: "image/png" });
+  const blob = await canvas.convertToBlob({ type: 'image/png' });
   const buffer = await blob.arrayBuffer();
   return new Uint8Array(buffer);
 }
@@ -114,7 +102,7 @@ async function webpToPng(file: File): Promise<Uint8Array> {
  */
 export async function imagesToPDF(files: File[]): Promise<Uint8Array> {
   if (files.length === 0) {
-    throw new Error("Pilih minimal 1 gambar untuk dikonversi.");
+    throw new Error('Pilih minimal 1 gambar untuk dikonversi.');
   }
 
   const doc = await PDFDocument.create();
@@ -124,13 +112,13 @@ export async function imagesToPDF(files: File[]): Promise<Uint8Array> {
     let image;
 
     try {
-      if (type === "image/png") {
+      if (type === 'image/png') {
         const bytes = new Uint8Array(await file.arrayBuffer());
         image = await doc.embedPng(bytes);
-      } else if (type === "image/jpeg" || type === "image/jpg") {
+      } else if (type === 'image/jpeg' || type === 'image/jpg') {
         const bytes = new Uint8Array(await file.arrayBuffer());
         image = await doc.embedJpg(bytes);
-      } else if (type === "image/webp") {
+      } else if (type === 'image/webp') {
         // Convert WebP to PNG via canvas, then embed
         const pngBytes = await webpToPng(file);
         image = await doc.embedPng(pngBytes);
@@ -140,7 +128,7 @@ export async function imagesToPDF(files: File[]): Promise<Uint8Array> {
         );
       }
     } catch (err) {
-      if (err instanceof Error && err.message.includes("bukan format")) {
+      if (err instanceof Error && err.message.includes('bukan format')) {
         throw err;
       }
       throw new Error(
@@ -168,9 +156,7 @@ export async function getPDFPageCount(file: File): Promise<number> {
     const doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
     return doc.getPageCount();
   } catch {
-    throw new Error(
-      "File tidak dapat dibaca. Pastikan PDF tidak terlindungi kata sandi.",
-    );
+    throw new Error('File tidak dapat dibaca. Pastikan PDF tidak terlindungi kata sandi.');
   }
 }
 
@@ -181,12 +167,9 @@ export async function getPDFPageCount(file: File): Promise<number> {
  * @param pages  1-indexed page numbers to extract (e.g. [1, 2, 5])
  * @returns      Uint8Array of the new PDF containing only the selected pages
  */
-export async function splitPDF(
-  file: File,
-  pages: number[],
-): Promise<Uint8Array> {
+export async function splitPDF(file: File, pages: number[]): Promise<Uint8Array> {
   if (pages.length === 0) {
-    throw new Error("Pilih minimal 1 halaman untuk dipisahkan.");
+    throw new Error('Pilih minimal 1 halaman untuk dipisahkan.');
   }
 
   const buffer = await file.arrayBuffer();
@@ -195,9 +178,7 @@ export async function splitPDF(
   try {
     source = await PDFDocument.load(buffer, { ignoreEncryption: true });
   } catch {
-    throw new Error(
-      `Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`,
-    );
+    throw new Error(`Gagal membaca "${file.name}". File mungkin rusak atau terenkripsi.`);
   }
 
   const totalPages = source.getPageCount();
@@ -205,9 +186,7 @@ export async function splitPDF(
   // Validate page indices (1-indexed → 0-indexed)
   for (const p of pages) {
     if (p < 1 || p > totalPages) {
-      throw new Error(
-        `Halaman ${p} melebihi total halaman dokumen (${totalPages}).`,
-      );
+      throw new Error(`Halaman ${p} melebihi total halaman dokumen (${totalPages}).`);
     }
   }
 
@@ -229,7 +208,7 @@ export async function splitPDF(
  */
 export async function mergePDFs(files: File[]): Promise<Uint8Array> {
   if (files.length < 2) {
-    throw new Error("Minimal 2 file PDF untuk digabungkan.");
+    throw new Error('Minimal 2 file PDF untuk digabungkan.');
   }
 
   const merged = await PDFDocument.create();
@@ -259,10 +238,10 @@ export async function mergePDFs(files: File[]): Promise<Uint8Array> {
  * Creates a temporary <a> element, clicks it, then revokes the object URL.
  */
 export function downloadPDF(data: Uint8Array, filename: string): void {
-  const blob = new Blob([data.slice().buffer as ArrayBuffer], { type: "application/pdf" });
+  const blob = new Blob([data.slice().buffer as ArrayBuffer], { type: 'application/pdf' });
   const url = URL.createObjectURL(blob);
 
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = url;
   a.download = filename;
   document.body.appendChild(a);

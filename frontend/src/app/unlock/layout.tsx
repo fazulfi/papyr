@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Hapus Password PDF - Papyr",
+  title: 'Hapus Password PDF - Papyr',
   description:
-    "Buka kunci PDF yang terproteksi password. Masukkan password, download PDF tanpa proteksi. Gratis dan privasi terjaga.",
+    'Buka kunci PDF yang terproteksi password. Masukkan password, download PDF tanpa proteksi. Gratis dan privasi terjaga.',
   openGraph: {
-    title: "Hapus Password PDF - Papyr",
-    description: "Buka kunci PDF yang terproteksi password. Gratis dan privasi terjaga.",
-    url: "https://mypapyr.com/unlock",
-    images: ["/og/unlock.png"],
+    title: 'Hapus Password PDF - Papyr',
+    description: 'Buka kunci PDF yang terproteksi password. Gratis dan privasi terjaga.',
+    url: 'https://mypapyr.com/unlock',
+    images: ['/og/unlock.png'],
   },
 };
 

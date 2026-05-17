@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * PrivacyNotice — Reusable privacy notice component for all tool pages.
@@ -23,22 +23,16 @@ function ShieldIcon() {
   );
 }
 
-type ProcessingModel = "server" | "client" | "hybrid";
+type ProcessingModel = 'server' | 'client' | 'hybrid';
 
 const MESSAGES: Record<ProcessingModel, string> = {
-  server:
-    "File kamu otomatis dihapus setelah 1 jam. Kami tidak pernah menyimpan dokumenmu.",
-  client:
-    "File tidak pernah meninggalkan perangkatmu. Semua proses berjalan di browser.",
+  server: 'File kamu otomatis dihapus setelah 1 jam. Kami tidak pernah menyimpan dokumenmu.',
+  client: 'File tidak pernah meninggalkan perangkatmu. Semua proses berjalan di browser.',
   hybrid:
-    "File kecil diproses di browser. File besar dikirim ke server dan otomatis dihapus dalam 1 jam.",
+    'File kecil diproses di browser. File besar dikirim ke server dan otomatis dihapus dalam 1 jam.',
 };
 
-export default function PrivacyNotice({
-  model,
-}: {
-  model: ProcessingModel;
-}) {
+export default function PrivacyNotice({ model }: { model: ProcessingModel }) {
   return (
     <div className="mt-6 flex items-start justify-center rounded-xl bg-slate-50 p-4 text-sm text-slate-500 border border-slate-100">
       <span className="mt-0.5 text-slate-400 mr-2 shrink-0">

@@ -5,12 +5,12 @@
  * and pdf-lib integration (mocked).
  */
 
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { base64PngToUint8Array, applySignatures } from "@/app/sign/apply-signature";
-import type { SignaturePlacement } from "@/app/sign/logic";
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { base64PngToUint8Array, applySignatures } from '@/app/sign/apply-signature';
+import type { SignaturePlacement } from '@/app/sign/logic';
 
 // Mock pdf-lib
-vi.mock("pdf-lib", () => ({
+vi.mock('pdf-lib', () => ({
   PDFDocument: {
     load: vi.fn(async (bytes) => ({
       getPages: vi.fn(() => [
@@ -33,38 +33,40 @@ vi.mock("pdf-lib", () => ({
   },
 }));
 
-describe("STEP-F2-027 — Apply Signature Pipeline", () => {
-  describe("base64PngToUint8Array", () => {
-    it("decodes valid base64 PNG data URL", () => {
-      const dataUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+describe('STEP-F2-027 — Apply Signature Pipeline', () => {
+  describe('base64PngToUint8Array', () => {
+    it('decodes valid base64 PNG data URL', () => {
+      const dataUrl =
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
       const result = base64PngToUint8Array(dataUrl);
       expect(result).toBeInstanceOf(Uint8Array);
       expect(result.length).toBeGreaterThan(0);
     });
 
-    it("throws on invalid data URL", () => {
-      expect(() => base64PngToUint8Array("not-a-data-url")).toThrow();
+    it('throws on invalid data URL', () => {
+      expect(() => base64PngToUint8Array('not-a-data-url')).toThrow();
     });
 
-    it("throws on missing base64 payload", () => {
-      expect(() => base64PngToUint8Array("data:image/png;base64,")).toThrow();
+    it('throws on missing base64 payload', () => {
+      expect(() => base64PngToUint8Array('data:image/png;base64,')).toThrow();
     });
   });
 
-  describe("applySignatures", () => {
+  describe('applySignatures', () => {
     const mockPdfBytes = new Uint8Array([0x25, 0x50, 0x44, 0x46]); // "%PDF"
-    const mockSignatureDataUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+    const mockSignatureDataUrl =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
 
-    it("throws when placements array is empty", async () => {
+    it('throws when placements array is empty', async () => {
       await expect(applySignatures(mockPdfBytes, mockSignatureDataUrl, [])).rejects.toThrow(
-        "Tidak ada penempatan tanda tangan"
+        'Tidak ada penempatan tanda tangan',
       );
     });
 
-    it("throws when placement page exceeds PDF page count", async () => {
+    it('throws when placement page exceeds PDF page count', async () => {
       const placements: SignaturePlacement[] = [
         {
-          id: "p1",
+          id: 'p1',
           page: 99,
           x: 0.1,
           y: 0.1,
@@ -73,14 +75,14 @@ describe("STEP-F2-027 — Apply Signature Pipeline", () => {
         },
       ];
       await expect(applySignatures(mockPdfBytes, mockSignatureDataUrl, placements)).rejects.toThrow(
-        "Halaman 99 tidak ditemukan"
+        'Halaman 99 tidak ditemukan',
       );
     });
 
-    it("applies single placement to first page", async () => {
+    it('applies single placement to first page', async () => {
       const placements: SignaturePlacement[] = [
         {
-          id: "p1",
+          id: 'p1',
           page: 1,
           x: 0.1,
           y: 0.2,
@@ -93,10 +95,10 @@ describe("STEP-F2-027 — Apply Signature Pipeline", () => {
       expect(result.length).toBeGreaterThan(0);
     });
 
-    it("applies multiple placements across pages", async () => {
+    it('applies multiple placements across pages', async () => {
       const placements: SignaturePlacement[] = [
         {
-          id: "p1",
+          id: 'p1',
           page: 1,
           x: 0.1,
           y: 0.2,
@@ -104,7 +106,7 @@ describe("STEP-F2-027 — Apply Signature Pipeline", () => {
           height: 0.15,
         },
         {
-          id: "p2",
+          id: 'p2',
           page: 2,
           x: 0.5,
           y: 0.5,
@@ -116,10 +118,10 @@ describe("STEP-F2-027 — Apply Signature Pipeline", () => {
       expect(result).toBeInstanceOf(Uint8Array);
     });
 
-    it("converts coordinates correctly (0-1 relative to absolute)", async () => {
+    it('converts coordinates correctly (0-1 relative to absolute)', async () => {
       const placements: SignaturePlacement[] = [
         {
-          id: "p1",
+          id: 'p1',
           page: 1,
           x: 0.5,
           y: 0.5,
@@ -132,10 +134,10 @@ describe("STEP-F2-027 — Apply Signature Pipeline", () => {
       // Coordinate conversion is tested implicitly by successful execution
     });
 
-    it("throws when signature data URL format is invalid", async () => {
+    it('throws when signature data URL format is invalid', async () => {
       const placements: SignaturePlacement[] = [
         {
-          id: "p1",
+          id: 'p1',
           page: 1,
           x: 0.1,
           y: 0.1,
@@ -143,15 +145,15 @@ describe("STEP-F2-027 — Apply Signature Pipeline", () => {
           height: 0.1,
         },
       ];
-      await expect(
-        applySignatures(mockPdfBytes, "not-a-data-url", placements)
-      ).rejects.toThrow("Data URL tanda tangan tidak valid");
+      await expect(applySignatures(mockPdfBytes, 'not-a-data-url', placements)).rejects.toThrow(
+        'Data URL tanda tangan tidak valid',
+      );
     });
 
-    it("scales signature to fit placement bounds", async () => {
+    it('scales signature to fit placement bounds', async () => {
       const placements: SignaturePlacement[] = [
         {
-          id: "p1",
+          id: 'p1',
           page: 1,
           x: 0.1,
           y: 0.1,

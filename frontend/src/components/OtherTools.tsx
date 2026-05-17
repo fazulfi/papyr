@@ -1,10 +1,19 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 /* ── Inline SVG Icons ── */
 
 function ArrowRightIcon() {
   return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <line x1="5" y1="12" x2="19" y2="12" />
       <polyline points="12 5 19 12 12 19" />
     </svg>
@@ -14,19 +23,19 @@ function ArrowRightIcon() {
 /* ── Tools Data ── */
 
 const ALL_TOOLS = [
-  { href: "/compress", name: "Kompres PDF" },
-  { href: "/merge", name: "Gabungkan PDF" },
-  { href: "/split", name: "Pisahkan PDF" },
-  { href: "/rotate", name: "Putar PDF" },
-  { href: "/image-to-pdf", name: "Gambar ke PDF" },
-  { href: "/pdf-to-image", name: "PDF ke Gambar" },
-  { href: "/protect", name: "Proteksi PDF" },
-  { href: "/unlock", name: "Hapus Password PDF" },
-  { href: "/watermark", name: "Tambah Watermark PDF" },
-  { href: "/sign", name: "Tanda Tangani PDF" },
-  { href: "/pdf-to-word", name: "PDF ke Word" },
-  { href: "/pdf-to-excel", name: "PDF ke Excel" },
-  { href: "/ocr", name: "OCR PDF" },
+  { href: '/compress', name: 'Kompres PDF' },
+  { href: '/merge', name: 'Gabungkan PDF' },
+  { href: '/split', name: 'Pisahkan PDF' },
+  { href: '/rotate', name: 'Putar PDF' },
+  { href: '/image-to-pdf', name: 'Gambar ke PDF' },
+  { href: '/pdf-to-image', name: 'PDF ke Gambar' },
+  { href: '/protect', name: 'Proteksi PDF' },
+  { href: '/unlock', name: 'Hapus Password PDF' },
+  { href: '/watermark', name: 'Tambah Watermark PDF' },
+  { href: '/sign', name: 'Tanda Tangani PDF' },
+  { href: '/pdf-to-word', name: 'PDF ke Word' },
+  { href: '/pdf-to-excel', name: 'PDF ke Excel' },
+  { href: '/ocr', name: 'OCR PDF' },
 ];
 
 /* ── Component ── */

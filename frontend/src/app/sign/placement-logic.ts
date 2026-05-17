@@ -9,9 +9,9 @@
  * to keep the placement contract centralised.
  */
 
-import type { SignaturePlacement } from "./logic";
+import type { SignaturePlacement } from './logic';
 
-export type { SignaturePlacement } from "./logic";
+export type { SignaturePlacement } from './logic';
 
 /* ── Constants ── */
 
@@ -59,18 +59,9 @@ export function clampToBounds(
  * Normalize a placement so all values are clamped within bounds and the
  * page index is at least 1.
  */
-export function normalizePlacement(
-  placement: SignaturePlacement,
-): SignaturePlacement {
-  const bounded = clampToBounds(
-    placement.x,
-    placement.y,
-    placement.width,
-    placement.height,
-  );
-  const safePage = Number.isFinite(placement.page)
-    ? Math.max(1, Math.round(placement.page))
-    : 1;
+export function normalizePlacement(placement: SignaturePlacement): SignaturePlacement {
+  const bounded = clampToBounds(placement.x, placement.y, placement.width, placement.height);
+  const safePage = Number.isFinite(placement.page) ? Math.max(1, Math.round(placement.page)) : 1;
   return {
     ...placement,
     page: safePage,
@@ -84,8 +75,8 @@ export function normalizePlacement(
 export function isPlacementValid(placement: SignaturePlacement): boolean {
   if (!placement.id) return false;
   if (!Number.isFinite(placement.page) || placement.page < 1) return false;
-  const allFinite = [placement.x, placement.y, placement.width, placement.height].every(
-    (n) => Number.isFinite(n),
+  const allFinite = [placement.x, placement.y, placement.width, placement.height].every((n) =>
+    Number.isFinite(n),
   );
   if (!allFinite) return false;
   if (placement.width < MIN_PLACEMENT_SIZE || placement.width > MAX_PLACEMENT_SIZE) return false;
@@ -153,10 +144,7 @@ export function filterPlacementsByPage(
 /**
  * Return the count of placements on a given page.
  */
-export function getPagePlacementsCount(
-  placements: SignaturePlacement[],
-  page: number,
-): number {
+export function getPagePlacementsCount(placements: SignaturePlacement[], page: number): number {
   return filterPlacementsByPage(placements, page).length;
 }
 
@@ -251,11 +239,9 @@ export function removePlacementsByPage(
 export function updatePlacement(
   placements: SignaturePlacement[],
   id: string,
-  patch: Partial<Omit<SignaturePlacement, "id">>,
+  patch: Partial<Omit<SignaturePlacement, 'id'>>,
 ): SignaturePlacement[] {
-  return placements.map((p) =>
-    p.id === id ? normalizePlacement({ ...p, ...patch }) : p,
-  );
+  return placements.map((p) => (p.id === id ? normalizePlacement({ ...p, ...patch }) : p));
 }
 
 /**
@@ -290,27 +276,27 @@ export function resizePlacement(
  */
 export function resizeFromHandle(
   placement: SignaturePlacement,
-  handle: "nw" | "ne" | "sw" | "se",
+  handle: 'nw' | 'ne' | 'sw' | 'se',
   dx: number,
   dy: number,
 ): SignaturePlacement {
   let { x, y, width, height } = placement;
   switch (handle) {
-    case "se":
+    case 'se':
       width += dx;
       height += dy;
       break;
-    case "sw":
+    case 'sw':
       x += dx;
       width -= dx;
       height += dy;
       break;
-    case "ne":
+    case 'ne':
       y += dy;
       width += dx;
       height -= dy;
       break;
-    case "nw":
+    case 'nw':
       x += dx;
       y += dy;
       width -= dx;
@@ -325,7 +311,7 @@ export function resizeFromHandle(
  * falls back to a timestamp+random combo otherwise.
  */
 export function createPlacementId(): string {
-  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
   return `placement-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;

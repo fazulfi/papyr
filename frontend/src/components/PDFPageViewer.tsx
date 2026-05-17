@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface PDFPageViewerProps {
   pdfFile: File | null;
@@ -55,7 +55,7 @@ export default function PDFPageViewer({
   const onTotalPagesChangeRef = useRef(onTotalPagesChange);
   const totalPagesRef = useRef(totalPages);
   const [isRendering, setIsRendering] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     onPageChangeRef.current = onPageChange;
@@ -78,21 +78,21 @@ export default function PDFPageViewer({
 
     if (!pdfFile || !canvas) {
       setIsRendering(false);
-      setErrorMessage("");
+      setErrorMessage('');
       return;
     }
 
     setIsRendering(true);
-    setErrorMessage("");
+    setErrorMessage('');
 
     let cancelled = false;
 
     async function renderPage() {
       if (!pdfFile || !canvas) return;
       try {
-        const pdfjs = await import("pdfjs-dist");
+        const pdfjs = await import('pdfjs-dist');
         pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-          "pdfjs-dist/build/pdf.worker.mjs",
+          'pdfjs-dist/build/pdf.worker.mjs',
           import.meta.url,
         ).toString();
 
@@ -119,17 +119,17 @@ export default function PDFPageViewer({
         const fitWidthScale = DEFAULT_VIEWER_WIDTH / originalViewport.width;
         const viewport = page.getViewport({ scale: fitWidthScale });
 
-        const context = canvas.getContext("2d");
+        const context = canvas.getContext('2d');
         if (!context) {
-          throw new Error("Canvas tidak tersedia di browser ini.");
+          throw new Error('Canvas tidak tersedia di browser ini.');
         }
 
-        const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+        const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
         const renderWidth = Math.round(viewport.width);
         const renderHeight = Math.round(viewport.height);
         canvas.width = Math.round(renderWidth * dpr);
         canvas.height = Math.round(renderHeight * dpr);
-        canvas.removeAttribute("style");
+        canvas.removeAttribute('style');
 
         await page.render({
           canvas,
@@ -145,7 +145,7 @@ export default function PDFPageViewer({
         pdf.destroy();
       } catch {
         if (!cancelled && renderVersionRef.current === version) {
-          setErrorMessage("Gagal menampilkan halaman PDF. Pastikan file PDF valid.");
+          setErrorMessage('Gagal menampilkan halaman PDF. Pastikan file PDF valid.');
           setIsRendering(false);
         }
       }
@@ -166,7 +166,9 @@ export default function PDFPageViewer({
     <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between text-sm">
         <span className="font-semibold text-navy">Preview PDF</span>
-        <span className="text-slate-400">Halaman {currentPage} dari {totalPages || 1}</span>
+        <span className="text-slate-400">
+          Halaman {currentPage} dari {totalPages || 1}
+        </span>
       </div>
 
       {showPlaceholder && <PDFPlaceholder />}
@@ -201,7 +203,9 @@ export default function PDFPageViewer({
         >
           Sebelumnya
         </button>
-        <span className="text-xs font-medium text-slate-500">Halaman {currentPage} dari {totalPages || 1}</span>
+        <span className="text-xs font-medium text-slate-500">
+          Halaman {currentPage} dari {totalPages || 1}
+        </span>
         <button
           type="button"
           onClick={handleNext}

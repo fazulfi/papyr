@@ -1,5 +1,5 @@
-import { PDFDocument, StandardFonts, degrees, rgb } from "pdf-lib";
-import type { WatermarkTextConfig } from "./logic";
+import { PDFDocument, StandardFonts, degrees, rgb } from 'pdf-lib';
+import type { WatermarkTextConfig } from './logic';
 
 interface WatermarkDrawPosition {
   x: number;
@@ -8,7 +8,7 @@ interface WatermarkDrawPosition {
 }
 
 export function hexToRgbNormalized(hex: string): { r: number; g: number; b: number } {
-  const normalized = hex.replace("#", "");
+  const normalized = hex.replace('#', '');
   const r = Number.parseInt(normalized.slice(0, 2), 16) / 255;
   const g = Number.parseInt(normalized.slice(2, 4), 16) / 255;
   const b = Number.parseInt(normalized.slice(4, 6), 16) / 255;
@@ -16,7 +16,7 @@ export function hexToRgbNormalized(hex: string): { r: number; g: number; b: numb
 }
 
 export function mapTextWatermarkPosition(
-  position: WatermarkTextConfig["position"],
+  position: WatermarkTextConfig['position'],
   pageWidth: number,
   pageHeight: number,
 ): WatermarkDrawPosition {
@@ -24,13 +24,13 @@ export function mapTextWatermarkPosition(
   const centerY = pageHeight / 2;
 
   switch (position) {
-    case "center":
+    case 'center':
       return { x: centerX, y: centerY, rotationDegrees: 0 };
-    case "diagonal":
+    case 'diagonal':
       return { x: centerX, y: centerY, rotationDegrees: -30 };
-    case "top":
+    case 'top':
       return { x: centerX, y: pageHeight - 50, rotationDegrees: 0 };
-    case "bottom":
+    case 'bottom':
       return { x: centerX, y: 50, rotationDegrees: 0 };
     default:
       return { x: centerX, y: centerY, rotationDegrees: 0 };
@@ -52,8 +52,7 @@ export async function applyTextWatermark(
   for (const page of pages) {
     const { width, height } = page.getSize();
     const mapped = mapTextWatermarkPosition(config.position, width, height);
-    const rotation =
-      config.position === "diagonal" ? mapped.rotationDegrees : config.rotation;
+    const rotation = config.position === 'diagonal' ? mapped.rotationDegrees : config.rotation;
     const angleRad = (rotation * Math.PI) / 180;
     const cosA = Math.cos(angleRad);
     const sinA = Math.sin(angleRad);

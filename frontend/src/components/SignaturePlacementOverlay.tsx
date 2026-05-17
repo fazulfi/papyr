@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { SignaturePlacement } from "@/app/sign/logic";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { SignaturePlacement } from '@/app/sign/logic';
 import {
   calculateDragDelta,
   clamp,
@@ -12,7 +12,7 @@ import {
   normalizePlacement,
   relativeToScreen,
   screenToRelative,
-} from "@/app/sign/placement-logic";
+} from '@/app/sign/placement-logic';
 
 interface SignaturePlacementOverlayProps {
   signatureImage: string | null;
@@ -24,17 +24,17 @@ interface SignaturePlacementOverlayProps {
   onChange: (placements: SignaturePlacement[]) => void;
 }
 
-type ResizeCorner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+type ResizeCorner = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
 type InteractionState =
   | {
-      type: "drag";
+      type: 'drag';
       placementId: string;
       lastClientX: number;
       lastClientY: number;
     }
   | {
-      type: "resize";
+      type: 'resize';
       placementId: string;
       corner: ResizeCorner;
       lastClientX: number;
@@ -42,8 +42,7 @@ type InteractionState =
     }
   | null;
 
-const HANDLE_CLASS =
-  "absolute h-4 w-4 rounded-full border-2 border-white bg-accent shadow-sm";
+const HANDLE_CLASS = 'absolute h-4 w-4 rounded-full border-2 border-white bg-accent shadow-sm';
 
 export default function SignaturePlacementOverlay({
   signatureImage,
@@ -104,71 +103,74 @@ export default function SignaturePlacementOverlay({
     setIsPressed(false);
   }, []);
 
-  const handleGlobalMove = useCallback((clientX: number, clientY: number) => {
-    const interaction = interactionRef.current;
-    const container = containerRef.current;
-    if (!interaction || !container) return;
+  const handleGlobalMove = useCallback(
+    (clientX: number, clientY: number) => {
+      const interaction = interactionRef.current;
+      const container = containerRef.current;
+      if (!interaction || !container) return;
 
-    const rect = container.getBoundingClientRect();
-    const { dx, dy } = calculateDragDelta(
-      interaction.lastClientX,
-      interaction.lastClientY,
-      clientX,
-      clientY,
-      rect.width,
-      rect.height,
-    );
+      const rect = container.getBoundingClientRect();
+      const { dx, dy } = calculateDragDelta(
+        interaction.lastClientX,
+        interaction.lastClientY,
+        clientX,
+        clientY,
+        rect.width,
+        rect.height,
+      );
 
-    if (interaction.type === "drag") {
-      updatePlacement(interaction.placementId, (placement) => {
-        const next = clampToBounds(
-          placement.x + dx,
-          placement.y + dy,
-          placement.width,
-          placement.height,
-        );
-        return { ...placement, ...next };
-      });
-    }
+      if (interaction.type === 'drag') {
+        updatePlacement(interaction.placementId, (placement) => {
+          const next = clampToBounds(
+            placement.x + dx,
+            placement.y + dy,
+            placement.width,
+            placement.height,
+          );
+          return { ...placement, ...next };
+        });
+      }
 
-    if (interaction.type === "resize") {
-      updatePlacement(interaction.placementId, (placement) => {
-        let nextX = placement.x;
-        let nextY = placement.y;
-        let nextWidth = placement.width;
-        let nextHeight = placement.height;
+      if (interaction.type === 'resize') {
+        updatePlacement(interaction.placementId, (placement) => {
+          let nextX = placement.x;
+          let nextY = placement.y;
+          let nextWidth = placement.width;
+          let nextHeight = placement.height;
 
-        if (interaction.corner === "top-left") {
-          nextX += dx;
-          nextY += dy;
-          nextWidth -= dx;
-          nextHeight -= dy;
-        }
+          if (interaction.corner === 'top-left') {
+            nextX += dx;
+            nextY += dy;
+            nextWidth -= dx;
+            nextHeight -= dy;
+          }
 
-        if (interaction.corner === "top-right") {
-          nextY += dy;
-          nextWidth += dx;
-          nextHeight -= dy;
-        }
+          if (interaction.corner === 'top-right') {
+            nextY += dy;
+            nextWidth += dx;
+            nextHeight -= dy;
+          }
 
-        if (interaction.corner === "bottom-left") {
-          nextX += dx;
-          nextWidth -= dx;
-          nextHeight += dy;
-        }
+          if (interaction.corner === 'bottom-left') {
+            nextX += dx;
+            nextWidth -= dx;
+            nextHeight += dy;
+          }
 
-        if (interaction.corner === "bottom-right") {
-          nextWidth += dx;
-          nextHeight += dy;
-        }
+          if (interaction.corner === 'bottom-right') {
+            nextWidth += dx;
+            nextHeight += dy;
+          }
 
-        const bounded = clampToBounds(nextX, nextY, nextWidth, nextHeight);
-        return { ...placement, ...bounded };
-      });
-    }
+          const bounded = clampToBounds(nextX, nextY, nextWidth, nextHeight);
+          return { ...placement, ...bounded };
+        });
+      }
 
-    interactionRef.current = { ...interaction, lastClientX: clientX, lastClientY: clientY };
-  }, [updatePlacement]);
+      interactionRef.current = { ...interaction, lastClientX: clientX, lastClientY: clientY };
+    },
+    [updatePlacement],
+  );
 
   useEffect(() => {
     function handleMouseMove(event: MouseEvent) {
@@ -194,24 +196,24 @@ export default function SignaturePlacementOverlay({
       finishInteraction();
     }
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener("touchcancel", handleTouchEnd);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('touchcancel', handleTouchEnd);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("touchcancel", handleTouchEnd);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('touchcancel', handleTouchEnd);
     };
   }, [finishInteraction, handleGlobalMove]);
 
   const startDrag = useCallback((placementId: string, clientX: number, clientY: number) => {
     interactionRef.current = {
-      type: "drag",
+      type: 'drag',
       placementId,
       lastClientX: clientX,
       lastClientY: clientY,
@@ -219,29 +221,33 @@ export default function SignaturePlacementOverlay({
     setIsPressed(true);
   }, []);
 
-  const startResize = useCallback((placementId: string, corner: ResizeCorner, clientX: number, clientY: number) => {
-    interactionRef.current = {
-      type: "resize",
-      placementId,
-      corner,
-      lastClientX: clientX,
-      lastClientY: clientY,
-    };
-    setIsPressed(true);
-  }, []);
+  const startResize = useCallback(
+    (placementId: string, corner: ResizeCorner, clientX: number, clientY: number) => {
+      interactionRef.current = {
+        type: 'resize',
+        placementId,
+        corner,
+        lastClientX: clientX,
+        lastClientY: clientY,
+      };
+      setIsPressed(true);
+    },
+    [],
+  );
 
   return (
     <div
       ref={containerRef}
       className="absolute inset-0 z-10"
-      style={{ touchAction: "none" }}
+      style={{ touchAction: 'none' }}
       onMouseDown={(event) => {
         if (event.target !== event.currentTarget || !signatureImage) return;
         event.preventDefault();
         createPlacementAtPoint(event.clientX, event.clientY);
       }}
       onTouchStart={(event) => {
-        if (event.target !== event.currentTarget || !signatureImage || event.touches.length === 0) return;
+        if (event.target !== event.currentTarget || !signatureImage || event.touches.length === 0)
+          return;
         event.preventDefault();
         const touch = event.touches[0];
         createPlacementAtPoint(touch.clientX, touch.clientY);
@@ -272,7 +278,7 @@ export default function SignaturePlacementOverlay({
         return (
           <div
             key={placement.id}
-            className={`absolute ${isPressed ? "select-none" : ""}`}
+            className={`absolute ${isPressed ? 'select-none' : ''}`}
             style={box}
           >
             <div
@@ -293,21 +299,33 @@ export default function SignaturePlacementOverlay({
                 startDrag(placement.id, touch.clientX, touch.clientY);
               }}
               onKeyDown={(event) => {
-                if (event.key === "ArrowLeft") {
+                if (event.key === 'ArrowLeft') {
                   event.preventDefault();
-                  updatePlacement(placement.id, (current) => ({ ...current, ...clampToBounds(current.x - 0.01, current.y, current.width, current.height) }));
+                  updatePlacement(placement.id, (current) => ({
+                    ...current,
+                    ...clampToBounds(current.x - 0.01, current.y, current.width, current.height),
+                  }));
                 }
-                if (event.key === "ArrowRight") {
+                if (event.key === 'ArrowRight') {
                   event.preventDefault();
-                  updatePlacement(placement.id, (current) => ({ ...current, ...clampToBounds(current.x + 0.01, current.y, current.width, current.height) }));
+                  updatePlacement(placement.id, (current) => ({
+                    ...current,
+                    ...clampToBounds(current.x + 0.01, current.y, current.width, current.height),
+                  }));
                 }
-                if (event.key === "ArrowUp") {
+                if (event.key === 'ArrowUp') {
                   event.preventDefault();
-                  updatePlacement(placement.id, (current) => ({ ...current, ...clampToBounds(current.x, current.y - 0.01, current.width, current.height) }));
+                  updatePlacement(placement.id, (current) => ({
+                    ...current,
+                    ...clampToBounds(current.x, current.y - 0.01, current.width, current.height),
+                  }));
                 }
-                if (event.key === "ArrowDown") {
+                if (event.key === 'ArrowDown') {
                   event.preventDefault();
-                  updatePlacement(placement.id, (current) => ({ ...current, ...clampToBounds(current.x, current.y + 0.01, current.width, current.height) }));
+                  updatePlacement(placement.id, (current) => ({
+                    ...current,
+                    ...clampToBounds(current.x, current.y + 0.01, current.width, current.height),
+                  }));
                 }
               }}
             >
@@ -325,12 +343,14 @@ export default function SignaturePlacementOverlay({
                 Hlm {placement.page}
               </div>
 
-              {([
-                ["top-left", "-left-2 -top-2 cursor-nwse-resize"],
-                ["top-right", "-right-2 -top-2 cursor-nesw-resize"],
-                ["bottom-left", "-bottom-2 -left-2 cursor-nesw-resize"],
-                ["bottom-right", "-bottom-2 -right-2 cursor-nwse-resize"],
-              ] as [ResizeCorner, string][]).map(([corner, positionClass]) => (
+              {(
+                [
+                  ['top-left', '-left-2 -top-2 cursor-nwse-resize'],
+                  ['top-right', '-right-2 -top-2 cursor-nesw-resize'],
+                  ['bottom-left', '-bottom-2 -left-2 cursor-nesw-resize'],
+                  ['bottom-right', '-bottom-2 -right-2 cursor-nwse-resize'],
+                ] as [ResizeCorner, string][]
+              ).map(([corner, positionClass]) => (
                 <button
                   key={corner}
                   type="button"

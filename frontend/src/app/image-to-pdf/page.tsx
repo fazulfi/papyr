@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState, useRef, useCallback, useMemo } from "react";
+import { useState, useRef, useCallback, useMemo } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -9,21 +9,21 @@ import {
   useSensor,
   useSensors,
   type DragEndEvent,
-} from "@dnd-kit/core";
+} from '@dnd-kit/core';
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
   rectSortingStrategy,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { formatFileSize } from "@/lib/format";
-import { limits, config } from "@/lib/config";
-import { imagesToPDF, downloadPDF } from "@/lib/pdfUtils";
-import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
-import OtherTools from "@/components/OtherTools";
-import PrivacyNotice from "@/components/PrivacyNotice";
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { formatFileSize } from '@/lib/format';
+import { limits, config } from '@/lib/config';
+import { imagesToPDF, downloadPDF } from '@/lib/pdfUtils';
+import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from '@/lib/analytics';
+import OtherTools from '@/components/OtherTools';
+import PrivacyNotice from '@/components/PrivacyNotice';
 
 /* ── Types ── */
 
@@ -33,12 +33,12 @@ interface ImageItem {
   preview: string; // object URL for thumbnail
 }
 
-type PageState = "idle" | "processing" | "done" | "error";
+type PageState = 'idle' | 'processing' | 'done' | 'error';
 
 /* ── Constants ── */
 
-const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
-const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
+const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+const ALLOWED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
 /** Client-side threshold: below this total size, process in browser */
 const CLIENT_THRESHOLD_BYTES = 3 * 1024 * 1024; // 3MB
 
@@ -55,7 +55,7 @@ function readFileHeader(file: File, bytes: number): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(new Uint8Array(reader.result as ArrayBuffer));
-    reader.onerror = () => reject(new Error("Gagal membaca file."));
+    reader.onerror = () => reject(new Error('Gagal membaca file.'));
     reader.readAsArrayBuffer(file.slice(0, bytes));
   });
 }
@@ -75,7 +75,16 @@ function isValidImageHeader(header: Uint8Array): boolean {
 
 function ImageIcon() {
   return (
-    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="21"
+      height="21"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
       <circle cx="8.5" cy="8.5" r="1.5" />
       <polyline points="21 15 16 10 5 21" />
@@ -85,7 +94,16 @@ function ImageIcon() {
 
 function UploadIcon() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="26"
+      height="26"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="17 8 12 3 7 8" />
       <line x1="12" y1="3" x2="12" y2="15" />
@@ -95,25 +113,56 @@ function UploadIcon() {
 
 function DragIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="9" cy="5" r="1" /><circle cx="15" cy="5" r="1" />
-      <circle cx="9" cy="12" r="1" /><circle cx="15" cy="12" r="1" />
-      <circle cx="9" cy="19" r="1" /><circle cx="15" cy="19" r="1" />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="9" cy="5" r="1" />
+      <circle cx="15" cy="5" r="1" />
+      <circle cx="9" cy="12" r="1" />
+      <circle cx="15" cy="12" r="1" />
+      <circle cx="9" cy="19" r="1" />
+      <circle cx="15" cy="19" r="1" />
     </svg>
   );
 }
 
 function XIcon() {
   return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
   );
 }
 
 function CheckIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="white"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -121,7 +170,16 @@ function CheckIcon() {
 
 function DownloadIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="7 10 12 15 17 10" />
       <line x1="12" y1="15" x2="12" y2="3" />
@@ -131,7 +189,16 @@ function DownloadIcon() {
 
 function RefreshIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="23 4 23 10 17 10" />
       <polyline points="1 20 1 14 7 14" />
       <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
@@ -141,7 +208,16 @@ function RefreshIcon() {
 
 function AlertIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="8" x2="12" y2="12" />
       <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -151,7 +227,16 @@ function AlertIcon() {
 
 function ShieldIcon({ size = 16 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
     </svg>
   );
@@ -159,7 +244,16 @@ function ShieldIcon({ size = 16 }: { size?: number }) {
 
 function ZapIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
     </svg>
   );
@@ -167,7 +261,16 @@ function ZapIcon() {
 
 function LockIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
       <path d="M7 11V7a5 5 0 0110 0v4" />
     </svg>
@@ -185,14 +288,9 @@ function SortableImageItem({
   index: number;
   onRemove: (id: string) => void;
 }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: item.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: item.id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -205,19 +303,13 @@ function SortableImageItem({
       ref={setNodeRef}
       style={style}
       className={`group relative overflow-hidden rounded-xl border bg-white transition-shadow ${
-        isDragging
-          ? "border-accent shadow-lg"
-          : "border-slate-200 hover:border-slate-300"
+        isDragging ? 'border-accent shadow-lg' : 'border-slate-200 hover:border-slate-300'
       }`}
     >
       {/* Thumbnail */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-50">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={item.preview}
-          alt={item.file.name}
-          className="h-full w-full object-cover"
-        />
+        <img src={item.preview} alt={item.file.name} className="h-full w-full object-cover" />
 
         {/* Order badge */}
         <span className="absolute left-2 top-2 flex h-6 w-6 items-center justify-center rounded-md bg-accent text-xs font-bold text-white shadow-sm">
@@ -257,9 +349,9 @@ function SortableImageItem({
 /* ── Feature Badges ── */
 
 const FEATURES = [
-  { icon: <ZapIcon />, text: "Proses instan" },
-  { icon: <LockIcon />, text: "Tanpa upload server" },
-  { icon: <ShieldIcon />, text: "Privasi terjaga" },
+  { icon: <ZapIcon />, text: 'Proses instan' },
+  { icon: <LockIcon />, text: 'Tanpa upload server' },
+  { icon: <ShieldIcon />, text: 'Privasi terjaga' },
 ] as const;
 
 /* ── Page ── */
@@ -271,17 +363,17 @@ function generateId(): string {
 }
 
 function getExtension(filename: string): string {
-  const dot = filename.lastIndexOf(".");
-  return dot >= 0 ? filename.slice(dot).toLowerCase() : "";
+  const dot = filename.lastIndexOf('.');
+  return dot >= 0 ? filename.slice(dot).toLowerCase() : '';
 }
 
 export default function ImageToPdfPage() {
   const [images, setImages] = useState<ImageItem[]>([]);
-  const [pageState, setPageState] = useState<PageState>("idle");
+  const [pageState, setPageState] = useState<PageState>('idle');
   const [resultData, setResultData] = useState<Uint8Array | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [imageCount, setImageCount] = useState(0);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [dragging, setDragging] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -293,10 +385,7 @@ export default function ImageToPdfPage() {
 
   const imageIds = useMemo(() => images.map((i) => i.id), [images]);
 
-  const totalSize = useMemo(
-    () => images.reduce((sum, i) => sum + i.file.size, 0),
-    [images],
-  );
+  const totalSize = useMemo(() => images.reduce((sum, i) => sum + i.file.size, 0), [images]);
 
   /* ── Image Management ── */
 
@@ -342,15 +431,15 @@ export default function ImageToPdfPage() {
     }
 
     if (errors.length > 0) {
-      setErrorMessage(errors.join(" "));
-      setPageState("error");
+      setErrorMessage(errors.join(' '));
+      setPageState('error');
     }
 
     if (toAdd.length > 0) {
       setImages((prev) => [...prev, ...toAdd]);
       if (errors.length === 0) {
-        setPageState("idle");
-        setErrorMessage("");
+        setPageState('idle');
+        setErrorMessage('');
       }
     }
   }, []);
@@ -390,9 +479,9 @@ export default function ImageToPdfPage() {
   const handleConvert = useCallback(async () => {
     if (images.length === 0) return;
 
-    setPageState("processing");
-    setErrorMessage("");
-    trackTaskStarted("image-to-pdf");
+    setPageState('processing');
+    setErrorMessage('');
+    trackTaskStarted('image-to-pdf');
 
     const files = images.map((i) => i.file);
 
@@ -403,16 +492,16 @@ export default function ImageToPdfPage() {
         setResultData(result);
         setResultUrl(null);
         setImageCount(images.length);
-        setPageState("done");
+        setPageState('done');
       } else {
         // Backend fallback for large files
         const formData = new FormData();
         for (const file of files) {
-          formData.append("files", file);
+          formData.append('files', file);
         }
 
         const response = await fetch(`${config.apiUrl}/api/image-to-pdf`, {
-          method: "POST",
+          method: 'POST',
           body: formData,
         });
 
@@ -426,22 +515,22 @@ export default function ImageToPdfPage() {
         setResultUrl(data.download_url);
         setResultData(null);
         setImageCount(images.length);
-        setPageState("done");
+        setPageState('done');
       }
-      trackTaskCompleted("image-to-pdf");
+      trackTaskCompleted('image-to-pdf');
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Gagal membuat PDF. Silakan coba lagi.";
+      const msg = err instanceof Error ? err.message : 'Gagal membuat PDF. Silakan coba lagi.';
       setErrorMessage(msg);
-      setPageState("error");
-      trackTaskFailed("image-to-pdf", "server_error");
+      setPageState('error');
+      trackTaskFailed('image-to-pdf', 'server_error');
     }
   }, [images, totalSize]);
 
   const handleDownload = useCallback(() => {
     if (resultData) {
-      downloadPDF(resultData, "images.pdf");
+      downloadPDF(resultData, 'images.pdf');
     } else if (resultUrl) {
-      window.open(resultUrl, "_blank");
+      window.open(resultUrl, '_blank');
     }
   }, [resultData, resultUrl]);
 
@@ -451,13 +540,13 @@ export default function ImageToPdfPage() {
       URL.revokeObjectURL(img.preview);
     }
     setImages([]);
-    setPageState("idle");
+    setPageState('idle');
     setResultData(null);
     setResultUrl(null);
     setImageCount(0);
-    setErrorMessage("");
+    setErrorMessage('');
     setDragging(false);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }, [images]);
 
   /* ── Render ── */
@@ -472,28 +561,25 @@ export default function ImageToPdfPage() {
         <h1 className="mb-2 text-3xl font-bold tracking-tight text-navy md:text-4xl">
           Gambar ke PDF
         </h1>
-        <p className="text-base text-slate-500">
-          Ubah foto atau gambar menjadi file PDF.
-        </p>
+        <p className="text-base text-slate-500">Ubah foto atau gambar menjadi file PDF.</p>
         <p className="mt-2 text-sm text-slate-400 max-w-md">
-          Jadikan foto KTP, bukti transfer, atau hasil scan jadi PDF rapi untuk dikirim lewat email atau di-upload ke formulir online.
+          Jadikan foto KTP, bukti transfer, atau hasil scan jadi PDF rapi untuk dikirim lewat email
+          atau di-upload ke formulir online.
         </p>
       </div>
 
       {/* Done state */}
-      {pageState === "done" && (
+      {pageState === 'done' && (
         <div className="animate-fade-up rounded-2xl border border-accent/20 bg-white p-6 shadow-[0_4px_20px_rgba(37,99,235,0.06)]">
           <div className="mb-6 flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-500">
               <CheckIcon />
             </div>
             <div>
-              <p className="text-base font-semibold text-navy">
-                PDF berhasil dibuat!
-              </p>
+              <p className="text-base font-semibold text-navy">PDF berhasil dibuat!</p>
               <p className="text-xs text-slate-500">
                 {imageCount} gambar
-                {resultData ? ` · ${formatFileSize(resultData.length)}` : ""}
+                {resultData ? ` · ${formatFileSize(resultData.length)}` : ''}
               </p>
             </div>
           </div>
@@ -519,7 +605,7 @@ export default function ImageToPdfPage() {
       )}
 
       {/* Processing state */}
-      {pageState === "processing" && (
+      {pageState === 'processing' && (
         <div className="animate-fade-up rounded-2xl border border-slate-200 bg-white p-6">
           <p className="mb-2.5 text-sm font-medium text-slate-500">
             Membuat PDF dari {images.length} gambar...
@@ -529,14 +615,14 @@ export default function ImageToPdfPage() {
           </div>
           <p className="mt-2.5 text-center text-xs text-slate-400">
             {totalSize <= CLIENT_THRESHOLD_BYTES
-              ? "Proses berjalan di browser — file tidak dikirim ke server."
-              : "Mengirim ke server untuk diproses..."}
+              ? 'Proses berjalan di browser — file tidak dikirim ke server.'
+              : 'Mengirim ke server untuk diproses...'}
           </p>
         </div>
       )}
 
       {/* Error state */}
-      {pageState === "error" && (
+      {pageState === 'error' && (
         <div className="animate-fade-up mb-4 rounded-2xl border border-rose-200 bg-rose-50/50 p-6">
           <div className="mb-4 flex items-center gap-3 text-rose-500">
             <AlertIcon />
@@ -546,8 +632,8 @@ export default function ImageToPdfPage() {
           <button
             type="button"
             onClick={() => {
-              setPageState("idle");
-              setErrorMessage("");
+              setPageState('idle');
+              setErrorMessage('');
             }}
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent/90"
           >
@@ -557,7 +643,7 @@ export default function ImageToPdfPage() {
       )}
 
       {/* Upload + image grid (visible in idle and error states) */}
-      {(pageState === "idle" || pageState === "error") && (
+      {(pageState === 'idle' || pageState === 'error') && (
         <div className="animate-fade-up">
           {/* Upload zone */}
           <div
@@ -565,7 +651,7 @@ export default function ImageToPdfPage() {
             tabIndex={0}
             onClick={() => fileInputRef.current?.click()}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
+              if (e.key === 'Enter' || e.key === ' ') fileInputRef.current?.click();
             }}
             onDragOver={(e) => {
               e.preventDefault();
@@ -574,9 +660,7 @@ export default function ImageToPdfPage() {
             onDragLeave={() => setDragging(false)}
             onDrop={handleDrop}
             className={`cursor-pointer rounded-2xl border-2 border-dashed bg-white px-5 py-14 text-center transition-all ${
-              dragging
-                ? "border-accent bg-accent/5"
-                : "border-slate-300 hover:border-accent/50"
+              dragging ? 'border-accent bg-accent/5' : 'border-slate-300 hover:border-accent/50'
             }`}
           >
             <input
@@ -588,7 +672,7 @@ export default function ImageToPdfPage() {
               onChange={(e) => {
                 if (e.target.files && e.target.files.length > 0) {
                   addImages(e.target.files);
-                  e.target.value = "";
+                  e.target.value = '';
                 }
               }}
             />
@@ -597,8 +681,8 @@ export default function ImageToPdfPage() {
             </div>
             <p className="mb-2 text-base font-semibold tracking-tight text-navy">
               {images.length === 0
-                ? "Seret gambar ke sini\natau klik untuk memilih"
-                : "Tambah gambar lagi"}
+                ? 'Seret gambar ke sini\natau klik untuk memilih'
+                : 'Tambah gambar lagi'}
             </p>
             <p className="text-xs text-slate-400">
               Maks {limits.maxUploadMB}MB per file · JPG, PNG, WEBP
@@ -668,8 +752,7 @@ export default function ImageToPdfPage() {
                   </div>
                 ))}
               </div>
-
-             </>
+            </>
           )}
 
           {/* Other tools */}

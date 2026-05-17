@@ -13,7 +13,7 @@
 
 /* ── Mode + Step Types ── */
 
-export type SignMode = "draw" | "upload" | "type";
+export type SignMode = 'draw' | 'upload' | 'type';
 
 /* ── STEP-F2-023 SignaturePad Draw Types ── */
 
@@ -26,12 +26,12 @@ export interface DrawPoint {
 /** A complete stroke: sequence of points + rendering params. */
 export interface Stroke {
   points: DrawPoint[];
-  color: string;   // hex e.g. "#000000" or "#1E40AF"
-  width: number;   // pixels e.g. 2, 4, or 6
+  color: string; // hex e.g. "#000000" or "#1E40AF"
+  width: number; // pixels e.g. 2, 4, or 6
 }
 
 /** Supported line-width labels (used in the UI selector). */
-export type LineWidth = "thin" | "medium" | "thick";
+export type LineWidth = 'thin' | 'medium' | 'thick';
 
 /* ── STEP-F2-023 Constants ── */
 
@@ -41,9 +41,9 @@ export const LINE_WIDTH_MAP: Record<LineWidth, number> = {
   thick: 6,
 } as const;
 
-export const LINE_WIDTH_LABELS: LineWidth[] = ["thin", "medium", "thick"];
+export const LINE_WIDTH_LABELS: LineWidth[] = ['thin', 'medium', 'thick'];
 
-export const SIGNATURE_COLORS = ["#000000", "#1E40AF"] as const;
+export const SIGNATURE_COLORS = ['#000000', '#1E40AF'] as const;
 
 export type SignatureColor = (typeof SIGNATURE_COLORS)[number];
 
@@ -54,7 +54,7 @@ export const CANVAS_HEIGHT = 200;
 /* ── STEP-F2-023 Type Guards ── */
 
 export function isValidLineWidth(value: string): value is LineWidth {
-  return value === "thin" || value === "medium" || value === "thick";
+  return value === 'thin' || value === 'medium' || value === 'thick';
 }
 
 export function isValidSignatureColor(value: string): value is SignatureColor {
@@ -88,7 +88,7 @@ export function createSignaturePngDataUrl(pixelData: string): string {
  * Returns null if the format is unexpected.
  */
 export function extractPngBase64(dataUrl: string): string | null {
-  const prefix = "data:image/png;base64,";
+  const prefix = 'data:image/png;base64,';
   if (!dataUrl.startsWith(prefix)) return null;
   return dataUrl.slice(prefix.length);
 }
@@ -125,11 +125,7 @@ export function hasMeaningfulStroke(strokes: Stroke[]): boolean {
 /**
  * Build a Stroke object from the current drawing params.
  */
-export function createStroke(
-  points: DrawPoint[],
-  color: string,
-  width: number,
-): Stroke {
+export function createStroke(points: DrawPoint[], color: string, width: number): Stroke {
   return { points, color, width };
 }
 
@@ -173,9 +169,7 @@ export function getStrokesBounds(
  * Returns the recommended canvas dimensions based on the parent width.
  * Used to size the canvas responsively while keeping min/max constraints.
  */
-export function getCanvasDimensions(
-  parentWidth: number,
-): { width: number; height: number } {
+export function getCanvasDimensions(parentWidth: number): { width: number; height: number } {
   const clamped = Math.min(Math.max(parentWidth, 280), CANVAS_WIDTH);
   const ratio = CANVAS_HEIGHT / CANVAS_WIDTH;
   return { width: Math.round(clamped), height: Math.round(clamped * ratio) };
@@ -191,12 +185,12 @@ export function getCanvasDimensions(
  * - error             : a recoverable error occurred
  */
 export type SignState =
-  | "idle"
-  | "pdf-selected"
-  | "placing-signature"
-  | "signing"
-  | "done"
-  | "error";
+  | 'idle'
+  | 'pdf-selected'
+  | 'placing-signature'
+  | 'signing'
+  | 'done'
+  | 'error';
 
 /* ── Required STEP-F2-022 State Interfaces (exact shape) ── */
 
@@ -226,7 +220,7 @@ export const MAX_SIGN_PDF_SIZE_BYTES = 20 * 1024 * 1024; // 20MB
 
 export const MAX_SIGNATURE_IMAGE_SIZE_BYTES = 1024 * 1024; // 1MB
 
-export const ALLOWED_SIGNATURE_IMAGE_TYPES = ["image/png", "image/jpeg"] as const;
+export const ALLOWED_SIGNATURE_IMAGE_TYPES = ['image/png', 'image/jpeg'] as const;
 
 export type AllowedSignatureImageType = (typeof ALLOWED_SIGNATURE_IMAGE_TYPES)[number];
 
@@ -234,17 +228,15 @@ export type AllowedSignatureImageType = (typeof ALLOWED_SIGNATURE_IMAGE_TYPES)[n
  * Validates a signature image file (PNG/JPG, max 1MB).
  * Returns an error message string, or null if valid.
  */
-export function validateSignatureImageFile(
-  file: Pick<File, "type" | "size">,
-): string | null {
+export function validateSignatureImageFile(file: Pick<File, 'type' | 'size'>): string | null {
   if (!file.type || !(ALLOWED_SIGNATURE_IMAGE_TYPES as readonly string[]).includes(file.type)) {
-    return "Tipe file tidak valid. Hanya file PNG dan JPG yang diterima.";
+    return 'Tipe file tidak valid. Hanya file PNG dan JPG yang diterima.';
   }
   if (file.size === 0) {
-    return "File kosong. Silakan upload file yang valid.";
+    return 'File kosong. Silakan upload file yang valid.';
   }
   if (file.size > MAX_SIGNATURE_IMAGE_SIZE_BYTES) {
-    return "Ukuran file terlalu besar. Maksimal 1MB.";
+    return 'Ukuran file terlalu besar. Maksimal 1MB.';
   }
   return null;
 }
@@ -263,7 +255,7 @@ function loadImage(file: File): Promise<HTMLImageElement> {
     };
     img.onerror = () => {
       URL.revokeObjectURL(url);
-      reject(new Error("Gagal memuat gambar."));
+      reject(new Error('Gagal memuat gambar.'));
     };
     img.src = url;
   });
@@ -286,13 +278,13 @@ export async function imageFileToBase64Png(file: File): Promise<string> {
     width = Math.round((width * MAX_H) / height);
     height = MAX_H;
   }
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Canvas tidak tersedia.");
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas tidak tersedia.');
   ctx.drawImage(img, 0, 0, width, height);
-  return canvas.toDataURL("image/png");
+  return canvas.toDataURL('image/png');
 }
 
 /* ── STEP-F2-024 Type Mode Constants ── */
@@ -307,10 +299,14 @@ export interface SignatureFont {
 }
 
 export const SIGNATURE_FONTS: SignatureFont[] = [
-  { family: "'Dancing Script', cursive", label: "Dancing Script", googleFontName: "Dancing+Script" },
-  { family: "'Caveat', cursive", label: "Caveat", googleFontName: "Caveat" },
-  { family: "'Satisfy', cursive", label: "Satisfy", googleFontName: "Satisfy" },
-  { family: "'Pacifico', cursive", label: "Pacifico", googleFontName: "Pacifico" },
+  {
+    family: "'Dancing Script', cursive",
+    label: 'Dancing Script',
+    googleFontName: 'Dancing+Script',
+  },
+  { family: "'Caveat', cursive", label: 'Caveat', googleFontName: 'Caveat' },
+  { family: "'Satisfy', cursive", label: 'Satisfy', googleFontName: 'Satisfy' },
+  { family: "'Pacifico', cursive", label: 'Pacifico', googleFontName: 'Pacifico' },
 ];
 
 export const DEFAULT_SIGNATURE_FONT: SignatureFont = SIGNATURE_FONTS[0];
@@ -324,9 +320,9 @@ export async function renderSignatureText(
   fontFamily: string,
   color: string,
 ): Promise<string> {
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Canvas tidak tersedia.");
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas tidak tersedia.');
 
   const fontSize = 48;
   const padding = 20;
@@ -344,11 +340,11 @@ export async function renderSignatureText(
 
   ctx.font = `${fontSize}px ${fontFamily}`;
   ctx.fillStyle = color;
-  ctx.textBaseline = "middle";
-  ctx.textAlign = "center";
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
   ctx.fillText(text, width / 2, height / 2);
 
-  return canvas.toDataURL("image/png");
+  return canvas.toDataURL('image/png');
 }
 
 /**
@@ -356,7 +352,7 @@ export async function renderSignatureText(
  * Use this to inject into the document <head> before rendering type-mode signatures.
  */
 export function getGoogleFontsLink(): string {
-  const families = SIGNATURE_FONTS.map((f) => f.googleFontName).join("&family=");
+  const families = SIGNATURE_FONTS.map((f) => f.googleFontName).join('&family=');
   return `https://fonts.googleapis.com/css2?family=${families}&display=swap`;
 }
 
@@ -365,12 +361,12 @@ export function getGoogleFontsLink(): string {
  * Safe to call multiple times — checks for existing link before adding.
  */
 export function injectSignatureFonts(): void {
-  if (typeof document === "undefined") return;
-  const linkId = "signature-fonts-link";
+  if (typeof document === 'undefined') return;
+  const linkId = 'signature-fonts-link';
   if (document.getElementById(linkId)) return;
-  const link = document.createElement("link");
+  const link = document.createElement('link');
   link.id = linkId;
-  link.rel = "stylesheet";
+  link.rel = 'stylesheet';
   link.href = getGoogleFontsLink();
   document.head.appendChild(link);
 }
@@ -381,19 +377,17 @@ export function injectSignatureFonts(): void {
  * Validates that the uploaded file is a valid PDF candidate for signing.
  * Returns an error message in Bahasa Indonesia, or null if the file is OK.
  */
-export function validateSignPdfFile(
-  file: Pick<File, "type" | "size">,
-): string | null {
-  if (!file.type || file.type !== "application/pdf") {
-    return "Tipe file tidak valid. Hanya file PDF yang diterima.";
+export function validateSignPdfFile(file: Pick<File, 'type' | 'size'>): string | null {
+  if (!file.type || file.type !== 'application/pdf') {
+    return 'Tipe file tidak valid. Hanya file PDF yang diterima.';
   }
 
   if (file.size === 0) {
-    return "File kosong. Silakan upload file PDF yang valid.";
+    return 'File kosong. Silakan upload file PDF yang valid.';
   }
 
   if (file.size > MAX_SIGN_PDF_SIZE_BYTES) {
-    return "Ukuran file terlalu besar. Maksimal 20MB.";
+    return 'Ukuran file terlalu besar. Maksimal 20MB.';
   }
 
   return null;
@@ -403,7 +397,7 @@ export function validateSignPdfFile(
  * Type guard for valid SignMode values.
  */
 export function isValidSignMode(value: string): value is SignMode {
-  return value === "draw" || value === "upload" || value === "type";
+  return value === 'draw' || value === 'upload' || value === 'type';
 }
 
 /* ── State Helpers ── */
@@ -413,7 +407,7 @@ export function isValidSignMode(value: string): value is SignMode {
  */
 export function getInitialSignatureState(): SignatureState {
   return {
-    mode: "draw",
+    mode: 'draw',
     signatureImage: null,
     placements: [],
     currentPage: 1,
@@ -427,11 +421,11 @@ export function getInitialSignatureState(): SignatureState {
  */
 export function getSignModeLabel(mode: SignMode): string {
   switch (mode) {
-    case "draw":
-      return "Gambar";
-    case "upload":
-      return "Upload";
-    case "type":
-      return "Ketik";
+    case 'draw':
+      return 'Gambar';
+    case 'upload':
+      return 'Upload';
+    case 'type':
+      return 'Ketik';
   }
 }

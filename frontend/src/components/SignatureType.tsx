@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * STEP-F2-024: Type-mode signature component.
@@ -11,14 +11,14 @@
  * - Injects Google Fonts stylesheet on mount
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   SIGNATURE_FONTS,
   DEFAULT_SIGNATURE_FONT,
   injectSignatureFonts,
   renderSignatureText,
   type SignatureFont,
-} from "@/app/sign/logic";
+} from '@/app/sign/logic';
 
 /* ── Types ── */
 
@@ -26,7 +26,7 @@ interface SignatureTypeProps {
   onSave: (signatureImage: string) => void;
 }
 
-type TypeStatus = "idle" | "ready" | "rendering" | "error";
+type TypeStatus = 'idle' | 'ready' | 'rendering' | 'error';
 
 /* ── Icons ── */
 
@@ -51,18 +51,18 @@ function TypeIcon() {
 
 /* ── Colors (match SignaturePad) ── */
 
-const SIGNATURE_COLORS = ["#000000", "#1E40AF"] as const;
+const SIGNATURE_COLORS = ['#000000', '#1E40AF'] as const;
 type SignatureColor = (typeof SIGNATURE_COLORS)[number];
 
 /* ── Component ── */
 
 export default function SignatureType({ onSave }: SignatureTypeProps) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [selectedFont, setSelectedFont] = useState<SignatureFont>(DEFAULT_SIGNATURE_FONT);
-  const [selectedColor, setSelectedColor] = useState<SignatureColor>("#000000");
-  const [status, setStatus] = useState<TypeStatus>("idle");
+  const [selectedColor, setSelectedColor] = useState<SignatureColor>('#000000');
+  const [status, setStatus] = useState<TypeStatus>('idle');
   const [previewDataUrl, setPreviewDataUrl] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // Inject fonts once on mount
@@ -74,19 +74,19 @@ export default function SignatureType({ onSave }: SignatureTypeProps) {
   const renderPreview = useCallback(async () => {
     if (!text.trim()) {
       setPreviewDataUrl(null);
-      setStatus("idle");
+      setStatus('idle');
       return;
     }
 
-    setStatus("rendering");
+    setStatus('rendering');
     try {
       const dataUrl = await renderSignatureText(text, selectedFont.family, selectedColor);
       setPreviewDataUrl(dataUrl);
-      setErrorMessage("");
-      setStatus("ready");
+      setErrorMessage('');
+      setStatus('ready');
     } catch {
-      setErrorMessage("Gagal membuat preview tanda tangan. Coba lagi.");
-      setStatus("error");
+      setErrorMessage('Gagal membuat preview tanda tangan. Coba lagi.');
+      setStatus('error');
     }
   }, [text, selectedFont, selectedColor]);
 
@@ -99,7 +99,7 @@ export default function SignatureType({ onSave }: SignatureTypeProps) {
   }, [renderPreview]);
 
   const handleSave = useCallback(() => {
-    if (status === "ready" && previewDataUrl) {
+    if (status === 'ready' && previewDataUrl) {
       onSave(previewDataUrl);
     }
   }, [status, previewDataUrl, onSave]);
@@ -150,11 +150,11 @@ export default function SignatureType({ onSave }: SignatureTypeProps) {
                 onClick={() => setSelectedColor(color)}
                 className={`h-8 w-8 rounded-full border-2 transition-all ${
                   selectedColor === color
-                    ? "scale-110 border-accent shadow-sm"
-                    : "border-slate-300 hover:border-slate-400"
+                    ? 'scale-110 border-accent shadow-sm'
+                    : 'border-slate-300 hover:border-slate-400'
                 }`}
                 style={{ backgroundColor: color }}
-                aria-label={`Warna ${color === "#000000" ? "Hitam" : "Biru"}`}
+                aria-label={`Warna ${color === '#000000' ? 'Hitam' : 'Biru'}`}
                 aria-pressed={selectedColor === color}
               />
             ))}
@@ -164,7 +164,7 @@ export default function SignatureType({ onSave }: SignatureTypeProps) {
 
       {/* Preview (rounded-2xl container like draw mode) */}
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-        {status === "idle" || !previewDataUrl ? (
+        {status === 'idle' || !previewDataUrl ? (
           <div className="flex aspect-[560/200] max-h-40 items-center justify-center">
             <p className="text-sm text-slate-400">Nama tanda tangan akan muncul di sini</p>
           </div>
@@ -177,7 +177,7 @@ export default function SignatureType({ onSave }: SignatureTypeProps) {
           />
         )}
 
-        {(status === "rendering" || status === "error") && errorMessage && (
+        {(status === 'rendering' || status === 'error') && errorMessage && (
           <div className="mt-2 flex items-center gap-2 justify-center text-sm text-rose-500">
             {errorMessage}
           </div>
@@ -189,11 +189,11 @@ export default function SignatureType({ onSave }: SignatureTypeProps) {
         <button
           type="button"
           onClick={() => {
-            setText("");
+            setText('');
             setSelectedFont(DEFAULT_SIGNATURE_FONT);
-            setSelectedColor("#000000");
-            setErrorMessage("");
-            setStatus("idle");
+            setSelectedColor('#000000');
+            setErrorMessage('');
+            setStatus('idle');
             setPreviewDataUrl(null);
           }}
           className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100"
@@ -203,7 +203,7 @@ export default function SignatureType({ onSave }: SignatureTypeProps) {
         <button
           type="button"
           onClick={handleSave}
-          disabled={status !== "ready"}
+          disabled={status !== 'ready'}
           className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-accent py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Gunakan Tanda Tangan

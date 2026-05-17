@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import { formatFileSize, formatPercent } from "@/lib/format";
-import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from "@/lib/analytics";
-import type { ToolName } from "@/lib/analytics";
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { formatFileSize, formatPercent } from '@/lib/format';
+import { trackTaskStarted, trackTaskCompleted, trackTaskFailed } from '@/lib/analytics';
+import type { ToolName } from '@/lib/analytics';
 
 /* ── Types ── */
 
@@ -14,7 +14,7 @@ interface CompressResult {
   saved_percent: number;
 }
 
-type UploadState = "idle" | "uploading" | "processing" | "done" | "error";
+type UploadState = 'idle' | 'uploading' | 'processing' | 'done' | 'error';
 
 interface PDFUploaderProps {
   endpoint: string;
@@ -30,7 +30,17 @@ interface PDFUploaderProps {
 
 function UploadIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="26"
+      height="26"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="17 8 12 3 7 8" />
       <line x1="12" y1="3" x2="12" y2="15" />
@@ -40,7 +50,17 @@ function UploadIcon({ className }: { className?: string }) {
 
 function FileIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z" />
       <polyline points="14 2 14 8 20 8" />
     </svg>
@@ -49,7 +69,16 @@ function FileIcon({ className }: { className?: string }) {
 
 function DownloadIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="7 10 12 15 17 10" />
       <line x1="12" y1="15" x2="12" y2="3" />
@@ -59,7 +88,16 @@ function DownloadIcon() {
 
 function CheckIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="white"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -67,7 +105,16 @@ function CheckIcon() {
 
 function RefreshIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="23 4 23 10 17 10" />
       <polyline points="1 20 1 14 7 14" />
       <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
@@ -77,7 +124,16 @@ function RefreshIcon() {
 
 function ArrowRightIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#CBD5E1"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <line x1="5" y1="12" x2="19" y2="12" />
       <polyline points="12 5 19 12 12 19" />
     </svg>
@@ -86,7 +142,16 @@ function ArrowRightIcon() {
 
 function AlertIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="8" x2="12" y2="12" />
       <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -98,19 +163,19 @@ function AlertIcon() {
 
 export default function PDFUploader({
   endpoint,
-  toolName = "compress",
+  toolName = 'compress',
   maxSizeMB = 20,
-  accept = "application/pdf",
+  accept = 'application/pdf',
   onUploadComplete,
   onReset,
   onStateChange,
 }: PDFUploaderProps) {
-  const [state, setInternalState] = useState<UploadState>("idle");
+  const [state, setInternalState] = useState<UploadState>('idle');
   const [progress, setProgress] = useState(0);
-  const [fileName, setFileName] = useState("");
+  const [fileName, setFileName] = useState('');
   const [fileSize, setFileSize] = useState(0);
   const [result, setResult] = useState<CompressResult | null>(null);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [retrying, setRetrying] = useState(false);
   const [dragging, setDragging] = useState(false);
 
@@ -118,31 +183,34 @@ export default function PDFUploader({
   const xhrRef = useRef<XMLHttpRequest | null>(null);
   const uploadFileRef = useRef<(file: File, isRetry?: boolean) => void>(() => {});
 
-  const setState = useCallback((newState: UploadState) => {
-    setInternalState(newState);
-    onStateChange?.(newState);
-  }, [onStateChange]);
+  const setState = useCallback(
+    (newState: UploadState) => {
+      setInternalState(newState);
+      onStateChange?.(newState);
+    },
+    [onStateChange],
+  );
 
   const resetState = useCallback(() => {
-    setState("idle");
+    setState('idle');
     setProgress(0);
-    setFileName("");
+    setFileName('');
     setFileSize(0);
     setResult(null);
-    setErrorMessage("");
+    setErrorMessage('');
     setRetrying(false);
     setDragging(false);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (fileInputRef.current) fileInputRef.current.value = '';
     onReset?.();
   }, [onReset, setState]);
 
   const validateFile = useCallback(
     (file: File): string | null => {
-      if (!file.type || !accept.split(",").some((t) => file.type === t.trim())) {
-        return "Tipe file tidak valid. Hanya file PDF yang diterima.";
+      if (!file.type || !accept.split(',').some((t) => file.type === t.trim())) {
+        return 'Tipe file tidak valid. Hanya file PDF yang diterima.';
       }
       if (file.size === 0) {
-        return "File kosong.";
+        return 'File kosong.';
       }
       if (file.size > maxSizeMB * 1024 * 1024) {
         return `Ukuran file terlalu besar. Maksimal ${maxSizeMB}MB.`;
@@ -157,7 +225,7 @@ export default function PDFUploader({
       if (!isRetry) {
         // First failure — auto-retry after 1 second
         setRetrying(true);
-        setState("uploading");
+        setState('uploading');
         setTimeout(() => {
           setRetrying(false);
           uploadFileRef.current(file, true);
@@ -165,8 +233,8 @@ export default function PDFUploader({
       } else {
         // Second failure — show error
         setErrorMessage(message);
-        setState("error");
-        trackTaskFailed(toolName, "server_error");
+        setState('error');
+        trackTaskFailed(toolName, 'server_error');
       }
     },
     [setState, toolName],
@@ -175,68 +243,68 @@ export default function PDFUploader({
   const uploadFile = useCallback(
     (file: File, isRetry = false) => {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append('file', file);
 
       const xhr = new XMLHttpRequest();
       xhrRef.current = xhr;
 
-      xhr.upload.addEventListener("progress", (e) => {
+      xhr.upload.addEventListener('progress', (e) => {
         if (e.lengthComputable) {
           const pct = Math.round((e.loaded / e.total) * 100);
           setProgress(pct);
         }
       });
 
-      xhr.addEventListener("load", () => {
+      xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           try {
             const data: CompressResult = JSON.parse(xhr.responseText);
             setResult(data);
-            setState("done");
+            setState('done');
             trackTaskCompleted(toolName);
             onUploadComplete?.(data);
           } catch {
-            handleError("Gagal memproses respons server.", file, isRetry);
+            handleError('Gagal memproses respons server.', file, isRetry);
           }
         } else if (xhr.status === 429) {
-          setErrorMessage("Terlalu banyak permintaan. Coba lagi dalam 1 menit.");
-          setState("error");
-          trackTaskFailed(toolName, "rate_limit");
+          setErrorMessage('Terlalu banyak permintaan. Coba lagi dalam 1 menit.');
+          setState('error');
+          trackTaskFailed(toolName, 'rate_limit');
         } else if (xhr.status >= 400 && xhr.status < 500) {
           // Client/validation error — no retry
           try {
             const body = JSON.parse(xhr.responseText);
-            setErrorMessage(body.detail || "File terlalu besar untuk diproses.");
+            setErrorMessage(body.detail || 'File terlalu besar untuk diproses.');
           } catch {
-            setErrorMessage("File terlalu besar untuk diproses.");
+            setErrorMessage('File terlalu besar untuk diproses.');
           }
-          setState("error");
-          trackTaskFailed(toolName, "server_error");
+          setState('error');
+          trackTaskFailed(toolName, 'server_error');
         } else {
           // Server error — retry eligible
-          handleError("Gagal memproses file. Silakan coba lagi.", file, isRetry);
+          handleError('Gagal memproses file. Silakan coba lagi.', file, isRetry);
         }
       });
 
-      xhr.addEventListener("error", () => {
-        handleError("Gagal memproses file. Silakan coba lagi.", file, isRetry);
+      xhr.addEventListener('error', () => {
+        handleError('Gagal memproses file. Silakan coba lagi.', file, isRetry);
       });
 
-      xhr.addEventListener("timeout", () => {
-        handleError("Koneksi timeout. Silakan coba lagi.", file, isRetry);
+      xhr.addEventListener('timeout', () => {
+        handleError('Koneksi timeout. Silakan coba lagi.', file, isRetry);
       });
 
-      xhr.upload.addEventListener("loadend", () => {
+      xhr.upload.addEventListener('loadend', () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
-          setState("processing");
+          setState('processing');
         }
       });
 
-      xhr.open("POST", `${endpoint}?quality=ebook`);
+      xhr.open('POST', `${endpoint}?quality=ebook`);
       xhr.timeout = 120000; // 2 minutes
       xhr.send(formData);
 
-      setState("uploading");
+      setState('uploading');
       setProgress(0);
       if (!isRetry) trackTaskStarted(toolName);
     },
@@ -257,8 +325,8 @@ export default function PDFUploader({
         setFileName(file.name);
         setFileSize(file.size);
         setErrorMessage(validationError);
-        setState("error");
-        trackTaskFailed(toolName, "invalid_file");
+        setState('error');
+        trackTaskFailed(toolName, 'invalid_file');
         return;
       }
 
@@ -281,7 +349,7 @@ export default function PDFUploader({
 
   /* ── Render States ── */
 
-  if (state === "idle") {
+  if (state === 'idle') {
     return (
       <div className="animate-fade-up">
         {/* Upload zone */}
@@ -290,7 +358,7 @@ export default function PDFUploader({
           tabIndex={0}
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
+            if (e.key === 'Enter' || e.key === ' ') fileInputRef.current?.click();
           }}
           onDragOver={(e) => {
             e.preventDefault();
@@ -299,9 +367,7 @@ export default function PDFUploader({
           onDragLeave={() => setDragging(false)}
           onDrop={handleDrop}
           className={`cursor-pointer rounded-2xl border-2 border-dashed bg-white px-5 py-14 text-center transition-all ${
-            dragging
-              ? "border-accent bg-accent/5"
-              : "border-slate-300 hover:border-accent/50"
+            dragging ? 'border-accent bg-accent/5' : 'border-slate-300 hover:border-accent/50'
           }`}
         >
           <input
@@ -327,7 +393,7 @@ export default function PDFUploader({
     );
   }
 
-  if (state === "uploading") {
+  if (state === 'uploading') {
     return (
       <div className="animate-fade-up rounded-2xl border border-slate-200 bg-white p-6">
         {/* File info */}
@@ -343,7 +409,7 @@ export default function PDFUploader({
 
         {/* Progress */}
         <p className="mb-2.5 text-sm font-medium text-slate-500">
-          {retrying ? "Mencoba ulang..." : `Mengunggah... ${progress}%`}
+          {retrying ? 'Mencoba ulang...' : `Mengunggah... ${progress}%`}
         </p>
         <div className="h-1.5 overflow-hidden rounded-full bg-slate-100">
           <div
@@ -355,7 +421,7 @@ export default function PDFUploader({
     );
   }
 
-  if (state === "processing") {
+  if (state === 'processing') {
     return (
       <div className="animate-fade-up rounded-2xl border border-slate-200 bg-white p-6">
         {/* File info */}
@@ -381,7 +447,7 @@ export default function PDFUploader({
     );
   }
 
-  if (state === "done" && result) {
+  if (state === 'done' && result) {
     const saved = formatPercent(result.original_size, result.compressed_size);
 
     return (
@@ -448,7 +514,7 @@ export default function PDFUploader({
     );
   }
 
-  if (state === "error") {
+  if (state === 'error') {
     return (
       <div className="animate-fade-up rounded-2xl border border-rose-200 bg-rose-50/50 p-6">
         <div className="mb-4 flex items-center gap-3 text-rose-500">

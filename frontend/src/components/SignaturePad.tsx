@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * STEP-F2-023: Draw-mode SignaturePad component
@@ -13,7 +13,7 @@
  * - onSave(signatureImage: string) callback with base64 output
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 /* ── Types ── */
 
@@ -22,7 +22,7 @@ export interface SignaturePadProps {
   onCancel?: () => void;
 }
 
-type StrokeColor = "#000000" | "#1E40AF";
+type StrokeColor = '#000000' | '#1E40AF';
 type LineWidth = 2 | 4 | 6;
 
 interface Point {
@@ -40,18 +40,14 @@ interface Stroke {
 
 const LINE_WIDTHS: LineWidth[] = [2, 4, 6];
 const STROKE_COLORS: { value: StrokeColor; label: string }[] = [
-  { value: "#000000", label: "Hitam" },
-  { value: "#1E40AF", label: "Biru" },
+  { value: '#000000', label: 'Hitam' },
+  { value: '#1E40AF', label: 'Biru' },
 ];
 const CANVAS_HEIGHT = 200;
 
 /* ── Helpers ── */
 
-function getCanvasPoint(
-  canvas: HTMLCanvasElement,
-  clientX: number,
-  clientY: number,
-): Point {
+function getCanvasPoint(canvas: HTMLCanvasElement, clientX: number, clientY: number): Point {
   const rect = canvas.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
   return {
@@ -72,8 +68,8 @@ function redrawStrokes(
     ctx.beginPath();
     ctx.strokeStyle = stroke.color;
     ctx.lineWidth = stroke.width * (window.devicePixelRatio || 1);
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
     ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
     for (let i = 1; i < stroke.points.length; i++) {
       ctx.lineTo(stroke.points[i].x, stroke.points[i].y);
@@ -83,7 +79,7 @@ function redrawStrokes(
 }
 
 function isCanvasBlank(canvas: HTMLCanvasElement): boolean {
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext('2d');
   if (!ctx) return true;
   const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
   for (let i = 3; i < data.length; i += 4) {
@@ -96,7 +92,16 @@ function isCanvasBlank(canvas: HTMLCanvasElement): boolean {
 
 function UndoIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M3 7v6h6" />
       <path d="M3 13C5.333 7.667 9.6 5 16 5c4 0 7 1.667 9 5" />
     </svg>
@@ -105,7 +110,16 @@ function UndoIcon() {
 
 function TrashIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="3 6 5 6 21 6" />
       <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
       <path d="M10 11v6M14 11v6" />
@@ -124,20 +138,26 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
   const [currentStroke, setCurrentStroke] = useState<Point[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [lineWidth, setLineWidth] = useState<LineWidth>(2);
-  const [strokeColor, setStrokeColor] = useState<StrokeColor>("#000000");
+  const [strokeColor, setStrokeColor] = useState<StrokeColor>('#000000');
   const [isEmpty, setIsEmpty] = useState(true);
 
   // Refs for drawing loop (avoid stale closure in pointer handlers)
   const isDrawingRef = useRef(false);
   const currentStrokeRef = useRef<Point[]>([]);
   const lineWidthRef = useRef<LineWidth>(2);
-  const strokeColorRef = useRef<StrokeColor>("#000000");
+  const strokeColorRef = useRef<StrokeColor>('#000000');
   const strokesRef = useRef<Stroke[]>([]);
 
   // Keep refs in sync with state
-  useEffect(() => { lineWidthRef.current = lineWidth; }, [lineWidth]);
-  useEffect(() => { strokeColorRef.current = strokeColor; }, [strokeColor]);
-  useEffect(() => { strokesRef.current = strokes; }, [strokes]);
+  useEffect(() => {
+    lineWidthRef.current = lineWidth;
+  }, [lineWidth]);
+  useEffect(() => {
+    strokeColorRef.current = strokeColor;
+  }, [strokeColor]);
+  useEffect(() => {
+    strokesRef.current = strokes;
+  }, [strokes]);
 
   /* ── Canvas setup: DPR scaling ── */
   const setupCanvas = useCallback(() => {
@@ -154,7 +174,7 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
     canvas.style.width = `${cssWidth}px`;
     canvas.style.height = `${cssHeight}px`;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // Redraw existing strokes after resize
@@ -177,14 +197,14 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
     setCurrentStroke([point]);
 
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+    const ctx = canvas?.getContext('2d');
     if (!ctx || !canvas) return;
 
     ctx.beginPath();
     ctx.strokeStyle = strokeColorRef.current;
     ctx.lineWidth = lineWidthRef.current * (window.devicePixelRatio || 1);
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
     ctx.moveTo(point.x, point.y);
   }, []);
 
@@ -193,7 +213,7 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
     currentStrokeRef.current = [...currentStrokeRef.current, point];
 
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+    const ctx = canvas?.getContext('2d');
     if (!ctx) return;
 
     ctx.lineTo(point.x, point.y);
@@ -209,7 +229,7 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
     if (points.length < 2) {
       // Single tap — draw a dot
       const canvas = canvasRef.current;
-      const ctx = canvas?.getContext("2d");
+      const ctx = canvas?.getContext('2d');
       if (ctx && points.length === 1) {
         const dpr = window.devicePixelRatio || 1;
         ctx.beginPath();
@@ -235,25 +255,34 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
 
   /* ── Mouse events ── */
 
-  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
-    e.preventDefault();
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    startStroke(getCanvasPoint(canvas, e.clientX, e.clientY));
-  }, [startStroke]);
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      e.preventDefault();
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      startStroke(getCanvasPoint(canvas, e.clientX, e.clientY));
+    },
+    [startStroke],
+  );
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!isDrawingRef.current) return;
-    e.preventDefault();
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    continueStroke(getCanvasPoint(canvas, e.clientX, e.clientY));
-  }, [continueStroke]);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      if (!isDrawingRef.current) return;
+      e.preventDefault();
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      continueStroke(getCanvasPoint(canvas, e.clientX, e.clientY));
+    },
+    [continueStroke],
+  );
 
-  const handleMouseUp = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
-    e.preventDefault();
-    endStroke();
-  }, [endStroke]);
+  const handleMouseUp = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      e.preventDefault();
+      endStroke();
+    },
+    [endStroke],
+  );
 
   const handleMouseLeave = useCallback(() => {
     if (isDrawingRef.current) endStroke();
@@ -261,32 +290,41 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
 
   /* ── Touch events ── */
 
-  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
-    e.preventDefault(); // prevent scroll while drawing
-    const canvas = canvasRef.current;
-    if (!canvas || e.touches.length === 0) return;
-    const touch = e.touches[0];
-    startStroke(getCanvasPoint(canvas, touch.clientX, touch.clientY));
-  }, [startStroke]);
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent<HTMLCanvasElement>) => {
+      e.preventDefault(); // prevent scroll while drawing
+      const canvas = canvasRef.current;
+      if (!canvas || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      startStroke(getCanvasPoint(canvas, touch.clientX, touch.clientY));
+    },
+    [startStroke],
+  );
 
-  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
-    e.preventDefault();
-    const canvas = canvasRef.current;
-    if (!canvas || e.touches.length === 0) return;
-    const touch = e.touches[0];
-    continueStroke(getCanvasPoint(canvas, touch.clientX, touch.clientY));
-  }, [continueStroke]);
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent<HTMLCanvasElement>) => {
+      e.preventDefault();
+      const canvas = canvasRef.current;
+      if (!canvas || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      continueStroke(getCanvasPoint(canvas, touch.clientX, touch.clientY));
+    },
+    [continueStroke],
+  );
 
-  const handleTouchEnd = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
-    e.preventDefault();
-    endStroke();
-  }, [endStroke]);
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent<HTMLCanvasElement>) => {
+      e.preventDefault();
+      endStroke();
+    },
+    [endStroke],
+  );
 
   /* ── Controls ── */
 
   const handleClear = useCallback(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+    const ctx = canvas?.getContext('2d');
     if (!ctx || !canvas) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     strokesRef.current = [];
@@ -296,7 +334,7 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
 
   const handleUndo = useCallback(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+    const ctx = canvas?.getContext('2d');
     if (!ctx || !canvas) return;
 
     const updated = strokesRef.current.slice(0, -1);
@@ -309,7 +347,7 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
   const handleSave = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas || isCanvasBlank(canvas)) return;
-    const dataUrl = canvas.toDataURL("image/png");
+    const dataUrl = canvas.toDataURL('image/png');
     onSave(dataUrl);
   }, [onSave]);
 
@@ -330,8 +368,8 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
               onClick={() => setStrokeColor(value)}
               className={`h-6 w-6 rounded-full border-2 transition-all ${
                 strokeColor === value
-                  ? "scale-110 border-accent shadow-sm"
-                  : "border-slate-300 hover:border-slate-400"
+                  ? 'scale-110 border-accent shadow-sm'
+                  : 'border-slate-300 hover:border-slate-400'
               }`}
               style={{ backgroundColor: value }}
             />
@@ -352,8 +390,8 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
               onClick={() => setLineWidth(w)}
               className={`flex h-7 w-7 items-center justify-center rounded-lg border transition-colors ${
                 lineWidth === w
-                  ? "border-accent bg-accent/10 text-accent"
-                  : "border-slate-200 bg-slate-50 text-slate-500 hover:border-slate-300 hover:bg-slate-100"
+                  ? 'border-accent bg-accent/10 text-accent'
+                  : 'border-slate-200 bg-slate-50 text-slate-500 hover:border-slate-300 hover:bg-slate-100'
               }`}
             >
               <span
@@ -361,7 +399,7 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
                 style={{
                   width: w + 4,
                   height: w,
-                  backgroundColor: lineWidth === w ? "#2563EB" : "#94a3b8",
+                  backgroundColor: lineWidth === w ? '#2563EB' : '#94a3b8',
                 }}
               />
             </button>
@@ -411,7 +449,7 @@ export default function SignaturePad({ onSave, onCancel }: SignaturePadProps) {
         <canvas
           ref={canvasRef}
           className="block"
-          style={{ touchAction: "none", cursor: "crosshair" }}
+          style={{ touchAction: 'none', cursor: 'crosshair' }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}

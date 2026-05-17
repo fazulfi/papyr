@@ -1,10 +1,19 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 /* ── Inline SVG Icons ── */
 
 function ArrowRightIcon({ size = 18 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <line x1="5" y1="12" x2="19" y2="12" />
       <polyline points="12 5 19 12 12 19" />
     </svg>
@@ -13,7 +22,16 @@ function ArrowRightIcon({ size = 18 }: { size?: number }) {
 
 function CheckIcon() {
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -21,7 +39,16 @@ function CheckIcon() {
 
 function ClockIcon() {
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <polyline points="12 6 12 12 16 14" />
     </svg>
@@ -30,7 +57,16 @@ function ClockIcon() {
 
 function MobileIcon() {
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
       <line x1="12" y1="18" x2="12.01" y2="18" />
     </svg>
@@ -39,7 +75,16 @@ function MobileIcon() {
 
 function ShieldIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
     </svg>
   );
@@ -47,7 +92,16 @@ function ShieldIcon() {
 
 function LockIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
       <path d="M7 11V7a5 5 0 0110 0v4" />
     </svg>
@@ -58,7 +112,16 @@ function LockIcon() {
 
 function CompressIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M4 14h6v6M14 4h6v6M14 20h6v-6M4 4h6v6" />
       <path d="M10 14L4 20M20 4l-6 6" />
     </svg>
@@ -67,7 +130,16 @@ function CompressIcon() {
 
 function MergeIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M8 6H5a2 2 0 00-2 2v8a2 2 0 002 2h3M16 6h3a2 2 0 012 2v8a2 2 0 01-2 2h-3" />
       <path d="M12 3v18M9 9l3-3 3 3M9 15l3 3 3-3" />
     </svg>
@@ -76,7 +148,16 @@ function MergeIcon() {
 
 function SplitIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <line x1="16" y1="3" x2="16" y2="21" />
       <line x1="16" y1="12" x2="22" y2="6" />
       <line x1="16" y1="12" x2="22" y2="18" />
@@ -87,7 +168,16 @@ function SplitIcon() {
 
 function ImgToPdfIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="3" y="3" width="18" height="18" rx="2" />
       <circle cx="8.5" cy="8.5" r="1.5" />
       <path d="M21 15l-5-5L5 21" />
@@ -97,7 +187,16 @@ function ImgToPdfIcon() {
 
 function PdfToImgIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z" />
       <polyline points="14 2 14 8 20 8" />
       <path d="M8 13h8M8 17h4" />
@@ -107,7 +206,16 @@ function PdfToImgIcon() {
 
 function RotateToolIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="23 4 23 10 17 10" />
       <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
     </svg>
@@ -118,46 +226,46 @@ function RotateToolIcon() {
 
 const TOOLS = [
   {
-    id: "compress",
-    href: "/compress",
+    id: 'compress',
+    href: '/compress',
     icon: <CompressIcon />,
-    name: "Kompres PDF",
-    desc: "Perkecil ukuran file tanpa mengurangi kualitas.",
+    name: 'Kompres PDF',
+    desc: 'Perkecil ukuran file tanpa mengurangi kualitas.',
   },
   {
-    id: "merge",
-    href: "/merge",
+    id: 'merge',
+    href: '/merge',
     icon: <MergeIcon />,
-    name: "Gabungkan PDF",
-    desc: "Satukan beberapa PDF menjadi satu file.",
+    name: 'Gabungkan PDF',
+    desc: 'Satukan beberapa PDF menjadi satu file.',
   },
   {
-    id: "split",
-    href: "/split",
+    id: 'split',
+    href: '/split',
     icon: <SplitIcon />,
-    name: "Pisahkan PDF",
-    desc: "Ambil halaman tertentu atau bagi menjadi bagian.",
+    name: 'Pisahkan PDF',
+    desc: 'Ambil halaman tertentu atau bagi menjadi bagian.',
   },
   {
-    id: "img-to-pdf",
-    href: "/image-to-pdf",
+    id: 'img-to-pdf',
+    href: '/image-to-pdf',
     icon: <ImgToPdfIcon />,
-    name: "Gambar ke PDF",
-    desc: "Ubah JPG, PNG, atau WEBP menjadi PDF.",
+    name: 'Gambar ke PDF',
+    desc: 'Ubah JPG, PNG, atau WEBP menjadi PDF.',
   },
   {
-    id: "pdf-to-img",
-    href: "/pdf-to-image",
+    id: 'pdf-to-img',
+    href: '/pdf-to-image',
     icon: <PdfToImgIcon />,
-    name: "PDF ke Gambar",
-    desc: "Ekspor setiap halaman sebagai gambar resolusi tinggi.",
+    name: 'PDF ke Gambar',
+    desc: 'Ekspor setiap halaman sebagai gambar resolusi tinggi.',
   },
   {
-    id: "rotate",
-    href: "/rotate",
+    id: 'rotate',
+    href: '/rotate',
     icon: <RotateToolIcon />,
-    name: "Putar PDF",
-    desc: "Putar halaman PDF sesuai kebutuhan orientasi.",
+    name: 'Putar PDF',
+    desc: 'Putar halaman PDF sesuai kebutuhan orientasi.',
   },
 ];
 
@@ -166,27 +274,27 @@ const TOOLS = [
 const PRIVACY_ITEMS = [
   {
     icon: <ShieldIcon />,
-    title: "Transfer aman",
-    desc: "File ditransmisikan melalui HTTPS dan diproses secara aman.",
+    title: 'Transfer aman',
+    desc: 'File ditransmisikan melalui HTTPS dan diproses secara aman.',
   },
   {
     icon: <ClockIcon />,
-    title: "Dihapus dalam 1 jam",
-    desc: "Setiap file yang diunggah dihapus permanen dalam 60 menit, tanpa pengecualian.",
+    title: 'Dihapus dalam 1 jam',
+    desc: 'Setiap file yang diunggah dihapus permanen dalam 60 menit, tanpa pengecualian.',
   },
   {
     icon: <LockIcon />,
-    title: "Tanpa penyimpanan",
-    desc: "Kami tidak pernah membaca, menganalisis, atau menyimpan dokumenmu. Selamanya.",
+    title: 'Tanpa penyimpanan',
+    desc: 'Kami tidak pernah membaca, menganalisis, atau menyimpan dokumenmu. Selamanya.',
   },
 ];
 
 /* ── Trust Badges ── */
 
 const TRUST_BADGES = [
-  { icon: <CheckIcon />, text: "Tanpa akun" },
-  { icon: <ClockIcon />, text: "Auto-hapus 1 jam" },
-  { icon: <MobileIcon />, text: "Bisa di HP" },
+  { icon: <CheckIcon />, text: 'Tanpa akun' },
+  { icon: <ClockIcon />, text: 'Auto-hapus 1 jam' },
+  { icon: <MobileIcon />, text: 'Bisa di HP' },
 ];
 
 /* ── Landing Page ── */
@@ -227,7 +335,10 @@ export default function Home() {
         {/* Trust badges */}
         <div className="flex flex-wrap items-center justify-center gap-6">
           {TRUST_BADGES.map((b) => (
-            <div key={b.text} className="flex items-center gap-1.5 text-[13.5px] font-medium text-slate-500">
+            <div
+              key={b.text}
+              className="flex items-center gap-1.5 text-[13.5px] font-medium text-slate-500"
+            >
               <span className="text-accent">{b.icon}</span>
               {b.text}
             </div>

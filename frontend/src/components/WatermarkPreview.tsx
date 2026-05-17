@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type {
   WatermarkImageConfig,
   WatermarkTab,
   WatermarkTextConfig,
-} from "@/app/watermark/logic";
+} from '@/app/watermark/logic';
 import {
   calculateImageOverlayStyle,
   calculatePreviewDimensions,
@@ -13,7 +13,7 @@ import {
   createDebouncedRunner,
   getPreviewState,
   hexToRgba,
-} from "@/app/watermark/logic";
+} from '@/app/watermark/logic';
 
 interface WatermarkPreviewProps {
   pdfFile: File | null;
@@ -30,10 +30,13 @@ interface PreviewDimensions {
 
 const PREVIEW_DEBOUNCE_MS = 200;
 
-async function renderFirstPdfPage(file: File, canvas: HTMLCanvasElement): Promise<PreviewDimensions> {
-  const pdfjs = await import("pdfjs-dist");
+async function renderFirstPdfPage(
+  file: File,
+  canvas: HTMLCanvasElement,
+): Promise<PreviewDimensions> {
+  const pdfjs = await import('pdfjs-dist');
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.mjs",
+    'pdfjs-dist/build/pdf.worker.mjs',
     import.meta.url,
   ).toString();
 
@@ -41,12 +44,17 @@ async function renderFirstPdfPage(file: File, canvas: HTMLCanvasElement): Promis
   const pdf = await pdfjs.getDocument({ data: pdfBytes }).promise;
   const page = await pdf.getPage(1);
   const originalViewport = page.getViewport({ scale: 1 });
-  const dimensions = calculatePreviewDimensions(originalViewport.width, originalViewport.height, 720, 960);
+  const dimensions = calculatePreviewDimensions(
+    originalViewport.width,
+    originalViewport.height,
+    720,
+    960,
+  );
   const viewport = page.getViewport({ scale: dimensions.scale });
-  const context = canvas.getContext("2d");
+  const context = canvas.getContext('2d');
 
   if (!context) {
-    throw new Error("Canvas tidak tersedia di browser ini.");
+    throw new Error('Canvas tidak tersedia di browser ini.');
   }
 
   canvas.width = dimensions.width;
@@ -87,7 +95,7 @@ export default function WatermarkPreview({
   const renderVersionRef = useRef(0);
   const debouncerRef = useRef(createDebouncedRunner(PREVIEW_DEBOUNCE_MS));
   const [isRendering, setIsRendering] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [dimensions, setDimensions] = useState<PreviewDimensions | null>(null);
   const [debouncedTab, setDebouncedTab] = useState(tab);
   const [debouncedTextConfig, setDebouncedTextConfig] = useState(textConfig);
@@ -121,13 +129,13 @@ export default function WatermarkPreview({
 
     if (!pdfFile || !canvas) {
       setDimensions(null);
-      setErrorMessage("");
+      setErrorMessage('');
       setIsRendering(false);
       return;
     }
 
     setIsRendering(true);
-    setErrorMessage("");
+    setErrorMessage('');
     setDimensions(null);
 
     renderFirstPdfPage(pdfFile, canvas)
@@ -138,7 +146,7 @@ export default function WatermarkPreview({
       })
       .catch(() => {
         if (renderVersionRef.current !== version) return;
-        setErrorMessage("Preview PDF gagal dibuat. Pastikan file PDF tidak rusak.");
+        setErrorMessage('Preview PDF gagal dibuat. Pastikan file PDF tidak rusak.');
         setIsRendering(false);
       });
   }, [pdfFile]);
@@ -151,11 +159,7 @@ export default function WatermarkPreview({
 
   const textOverlay = useMemo(() => {
     if (!dimensions) return null;
-    return calculateTextOverlayStyle(
-      debouncedTextConfig,
-      dimensions.width,
-      dimensions.height,
-    );
+    return calculateTextOverlayStyle(debouncedTextConfig, dimensions.width, dimensions.height);
   }, [debouncedTextConfig, dimensions]);
 
   const imageStyle = useMemo(() => {
@@ -165,14 +169,17 @@ export default function WatermarkPreview({
       dimensions.width,
       dimensions.height,
     );
-    const size = Math.max(48, Math.round(Math.min(dimensions.width, dimensions.height) * debouncedImageConfig.scale));
+    const size = Math.max(
+      48,
+      Math.round(Math.min(dimensions.width, dimensions.height) * debouncedImageConfig.scale),
+    );
 
     return {
       left: `${position.x}px`,
       top: `${position.y}px`,
       width: `${size}px`,
       opacity: debouncedImageConfig.opacity,
-      transform: "translate(-50%, -50%)",
+      transform: 'translate(-50%, -50%)',
     };
   }, [debouncedImageConfig, dimensions]);
 
@@ -187,9 +194,9 @@ export default function WatermarkPreview({
         )}
       </div>
 
-      {previewState === "placeholder" && <PreviewPlaceholder />}
-      {previewState === "loading" && <PreviewLoading />}
-      {previewState === "error" && (
+      {previewState === 'placeholder' && <PreviewPlaceholder />}
+      {previewState === 'loading' && <PreviewLoading />}
+      {previewState === 'error' && (
         <div className="flex min-h-52 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 p-6 text-center text-sm text-rose-600">
           {errorMessage}
         </div>
@@ -197,12 +204,16 @@ export default function WatermarkPreview({
 
       <div
         className={`relative mx-auto overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-inner ${
-          previewState === "ready" ? "block" : "hidden"
+          previewState === 'ready' ? 'block' : 'hidden'
         }`}
-        style={dimensions ? { maxWidth: "100%", width: dimensions.width } : undefined}
+        style={dimensions ? { maxWidth: '100%', width: dimensions.width } : undefined}
       >
-        <canvas ref={canvasRef} className="block h-auto w-full" aria-label="Preview halaman pertama PDF" />
-        {dimensions && debouncedTab === "text" && textOverlay && (
+        <canvas
+          ref={canvasRef}
+          className="block h-auto w-full"
+          aria-label="Preview halaman pertama PDF"
+        />
+        {dimensions && debouncedTab === 'text' && textOverlay && (
           <svg
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 h-full w-full"
@@ -224,7 +235,7 @@ export default function WatermarkPreview({
             </text>
           </svg>
         )}
-        {dimensions && debouncedTab === "image" && imageStyle && imageUrl && (
+        {dimensions && debouncedTab === 'image' && imageStyle && imageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={imageUrl}
@@ -233,7 +244,7 @@ export default function WatermarkPreview({
             style={imageStyle}
           />
         )}
-        {dimensions && debouncedTab === "image" && !imageUrl && (
+        {dimensions && debouncedTab === 'image' && !imageUrl && (
           <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-lg bg-white/90 px-3 py-2 text-center text-xs text-slate-500 shadow-sm">
             Upload gambar watermark untuk melihat overlay.
           </div>

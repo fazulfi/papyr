@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 /* ── Inline SVG Icons ── */
 
@@ -15,7 +15,7 @@ function ChevronDownIcon({ open }: { open: boolean }) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`shrink-0 text-slate-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+      className={`shrink-0 text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
     >
       <polyline points="6 9 12 15 18 9" />
     </svg>
@@ -46,44 +46,44 @@ function HelpCircleIcon() {
 
 const FAQ_ITEMS = [
   {
-    question: "Apakah file saya aman?",
+    question: 'Apakah file saya aman?',
     answer:
-      "Ya, keamanan file-mu adalah prioritas kami. Semua transfer menggunakan HTTPS (terenkripsi). File yang di-upload ke server disimpan di Cloudflare R2 dengan akses terbatas, dan otomatis dihapus dalam 1 jam. Untuk fitur yang diproses di browser (Gabungkan PDF, Pisahkan PDF), file-mu tidak pernah meninggalkan perangkatmu.",
+      'Ya, keamanan file-mu adalah prioritas kami. Semua transfer menggunakan HTTPS (terenkripsi). File yang di-upload ke server disimpan di Cloudflare R2 dengan akses terbatas, dan otomatis dihapus dalam 1 jam. Untuk fitur yang diproses di browser (Gabungkan PDF, Pisahkan PDF), file-mu tidak pernah meninggalkan perangkatmu.',
   },
   {
-    question: "Berapa lama file disimpan di server?",
+    question: 'Berapa lama file disimpan di server?',
     answer:
-      "Maksimal 1 jam. Setelah itu, file dihapus otomatis dari server kami — tanpa pengecualian. Link download juga kedaluwarsa setelah 1 jam. Untuk fitur yang diproses di browser, file tidak pernah di-upload ke server sama sekali.",
+      'Maksimal 1 jam. Setelah itu, file dihapus otomatis dari server kami — tanpa pengecualian. Link download juga kedaluwarsa setelah 1 jam. Untuk fitur yang diproses di browser, file tidak pernah di-upload ke server sama sekali.',
   },
   {
-    question: "Apakah perlu daftar akun?",
+    question: 'Apakah perlu daftar akun?',
     answer:
-      "Tidak. Papyr bisa langsung dipakai tanpa daftar, tanpa login, tanpa email. Buka website, pilih alat, selesai. Kami tidak mengumpulkan data pribadi apapun.",
+      'Tidak. Papyr bisa langsung dipakai tanpa daftar, tanpa login, tanpa email. Buka website, pilih alat, selesai. Kami tidak mengumpulkan data pribadi apapun.',
   },
   {
-    question: "Berapa ukuran file maksimum?",
+    question: 'Berapa ukuran file maksimum?',
     answer:
-      "Saat ini batas upload adalah 20 MB per file. Untuk fitur yang diproses di browser (Gabungkan PDF, Pisahkan PDF), batasnya lebih fleksibel karena tidak perlu upload ke server.",
+      'Saat ini batas upload adalah 20 MB per file. Untuk fitur yang diproses di browser (Gabungkan PDF, Pisahkan PDF), batasnya lebih fleksibel karena tidak perlu upload ke server.',
   },
   {
-    question: "Bisa dipakai di HP?",
+    question: 'Bisa dipakai di HP?',
     answer:
-      "Ya! Papyr dioptimalkan untuk mobile. Semua fitur bisa diakses dari browser HP tanpa perlu install aplikasi. Cukup buka mypapyr.com dari Chrome, Safari, atau browser lainnya.",
+      'Ya! Papyr dioptimalkan untuk mobile. Semua fitur bisa diakses dari browser HP tanpa perlu install aplikasi. Cukup buka mypapyr.com dari Chrome, Safari, atau browser lainnya.',
   },
   {
-    question: "Apakah Papyr gratis?",
+    question: 'Apakah Papyr gratis?',
     answer:
-      "Ya, semua fitur dasar Papyr gratis — kompres PDF, gabungkan PDF, pisahkan PDF, gambar ke PDF, dan PDF ke gambar. Tidak ada biaya tersembunyi untuk penggunaan normal.",
+      'Ya, semua fitur dasar Papyr gratis — kompres PDF, gabungkan PDF, pisahkan PDF, gambar ke PDF, dan PDF ke gambar. Tidak ada biaya tersembunyi untuk penggunaan normal.',
   },
   {
-    question: "Format file apa yang didukung?",
+    question: 'Format file apa yang didukung?',
     answer:
-      "Papyr mendukung file PDF, JPG, dan PNG. Kamu bisa mengompres PDF, menggabungkan beberapa PDF, memisahkan halaman PDF, mengubah gambar (JPG/PNG) menjadi PDF, dan mengubah halaman PDF menjadi gambar PNG.",
+      'Papyr mendukung file PDF, JPG, dan PNG. Kamu bisa mengompres PDF, menggabungkan beberapa PDF, memisahkan halaman PDF, mengubah gambar (JPG/PNG) menjadi PDF, dan mengubah halaman PDF menjadi gambar PNG.',
   },
   {
-    question: "Bagaimana cara menghubungi Papyr?",
+    question: 'Bagaimana cara menghubungi Papyr?',
     answer:
-      "Kamu bisa menghubungi kami melalui email di privacy@mypapyr.com. Kami akan merespons secepat mungkin.",
+      'Kamu bisa menghubungi kami melalui email di privacy@mypapyr.com. Kami akan merespons secepat mungkin.',
   },
 ];
 
@@ -110,12 +110,10 @@ function AccordionItem({
         <ChevronDownIcon open={isOpen} />
       </button>
       <div
-        className={`grid transition-all duration-200 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+        className={`grid transition-all duration-200 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
       >
         <div className="overflow-hidden">
-          <p className="px-5 pb-4 text-[15px] leading-relaxed text-slate-600">
-            {answer}
-          </p>
+          <p className="px-5 pb-4 text-[15px] leading-relaxed text-slate-600">{answer}</p>
         </div>
       </div>
     </div>
@@ -132,9 +130,7 @@ export default function FAQPage() {
       {/* Header */}
       <div className="flex items-center gap-3">
         <HelpCircleIcon />
-        <h1 className="text-2xl font-bold text-navy sm:text-3xl">
-          Pertanyaan Umum
-        </h1>
+        <h1 className="text-2xl font-bold text-navy sm:text-3xl">Pertanyaan Umum</h1>
       </div>
       <p className="mt-3 text-[15px] text-slate-500">
         Jawaban untuk pertanyaan yang sering ditanyakan tentang Papyr.
@@ -148,18 +144,14 @@ export default function FAQPage() {
             question={item.question}
             answer={item.answer}
             isOpen={openIndex === index}
-            onToggle={() =>
-              setOpenIndex(openIndex === index ? null : index)
-            }
+            onToggle={() => setOpenIndex(openIndex === index ? null : index)}
           />
         ))}
       </div>
 
       {/* CTA */}
       <div className="mt-10 rounded-xl bg-slate-50 p-6 text-center">
-        <p className="text-[15px] text-slate-600">
-          Masih punya pertanyaan?
-        </p>
+        <p className="text-[15px] text-slate-600">Masih punya pertanyaan?</p>
         <a
           href="mailto:privacy@mypapyr.com"
           className="mt-2 inline-block text-[15px] font-medium text-accent underline underline-offset-2 hover:text-navy"

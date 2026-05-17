@@ -1,12 +1,8 @@
-"use client";
+'use client';
 
-import { useMemo, useRef, useState } from "react";
-import { config } from "@/lib/config";
-import type {
-  WatermarkImageConfig,
-  WatermarkTab,
-  WatermarkTextConfig,
-} from "./logic";
+import { useMemo, useRef, useState } from 'react';
+import { config } from '@/lib/config';
+import type { WatermarkImageConfig, WatermarkTab, WatermarkTextConfig } from './logic';
 import {
   getWatermarkErrorMessage,
   getWatermarkFailureReason,
@@ -14,19 +10,28 @@ import {
   validateWatermarkImageFile,
   validateWatermarkPdfFile,
   validateWatermarkTextConfig,
-} from "./logic";
-import { applyTextWatermark } from "./processing";
-import WatermarkConfig from "@/components/WatermarkConfig";
-import WatermarkPreview from "@/components/WatermarkPreview";
-import PrivacyNotice from "@/components/PrivacyNotice";
-import OtherTools from "@/components/OtherTools";
-import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
-import { formatFileSize } from "@/lib/format";
-import { downloadPDF } from "@/lib/pdfUtils";
+} from './logic';
+import { applyTextWatermark } from './processing';
+import WatermarkConfig from '@/components/WatermarkConfig';
+import WatermarkPreview from '@/components/WatermarkPreview';
+import PrivacyNotice from '@/components/PrivacyNotice';
+import OtherTools from '@/components/OtherTools';
+import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from '@/lib/analytics';
+import { formatFileSize } from '@/lib/format';
+import { downloadPDF } from '@/lib/pdfUtils';
 
 function WatermarkIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M3 7h18" />
       <path d="M3 12h18" />
       <path d="M3 17h18" />
@@ -36,7 +41,17 @@ function WatermarkIcon() {
 
 function UploadIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="17 8 12 3 7 8" />
       <line x1="12" y1="3" x2="12" y2="15" />
@@ -46,7 +61,17 @@ function UploadIcon({ className }: { className?: string }) {
 
 function FileIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z" />
       <polyline points="14 2 14 8 20 8" />
     </svg>
@@ -55,7 +80,17 @@ function FileIcon({ className }: { className?: string }) {
 
 function AlertIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="8" x2="12" y2="12" />
       <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -77,9 +112,7 @@ function TabButton({
       type="button"
       onClick={onClick}
       className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-        active
-          ? "bg-accent text-white shadow-sm"
-          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+        active ? 'bg-accent text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
       }`}
     >
       {children}
@@ -88,31 +121,31 @@ function TabButton({
 }
 
 export default function WatermarkPage() {
-  const [tab, setTab] = useState<WatermarkTab>("text");
+  const [tab, setTab] = useState<WatermarkTab>('text');
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [pdfError, setPdfError] = useState("");
-  const [imageError, setImageError] = useState("");
-  const [applyError, setApplyError] = useState("");
+  const [pdfError, setPdfError] = useState('');
+  const [imageError, setImageError] = useState('');
+  const [applyError, setApplyError] = useState('');
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [downloadUrl, setDownloadUrl] = useState("");
+  const [downloadUrl, setDownloadUrl] = useState('');
   const applyInFlightRef = useRef(false);
   const [textConfig, setTextConfig] = useState<WatermarkTextConfig>({
-    text: "CONFIDENTIAL",
+    text: 'CONFIDENTIAL',
     fontSize: 32,
     opacity: 0.2,
     rotation: -30,
-    color: "#CCCCCC",
-    position: "diagonal",
+    color: '#CCCCCC',
+    position: 'diagonal',
   });
   const [imageConfig, setImageConfig] = useState<WatermarkImageConfig>({
     opacity: 0.75,
-    position: "bottom-right",
+    position: 'bottom-right',
     scale: 0.4,
   });
 
-  const selectedModeLabel = useMemo(() => (tab === "text" ? "Teks" : "Gambar"), [tab]);
+  const selectedModeLabel = useMemo(() => (tab === 'text' ? 'Teks' : 'Gambar'), [tab]);
 
   const handlePdfSelect = (file?: File) => {
     if (!file) return;
@@ -123,8 +156,8 @@ export default function WatermarkPage() {
       return;
     }
     setPdfFile(file);
-    setPdfError("");
-    setApplyError("");
+    setPdfError('');
+    setApplyError('');
   };
 
   const handleImageSelect = (file?: File) => {
@@ -136,40 +169,40 @@ export default function WatermarkPage() {
       return;
     }
     setImageFile(file);
-    setImageError("");
-    setApplyError("");
+    setImageError('');
+    setApplyError('');
   };
 
   const validationMessage =
-    tab === "text"
+    tab === 'text'
       ? validateWatermarkTextConfig(textConfig)
       : validateWatermarkImageConfig(imageConfig);
 
-  const canApply = Boolean(pdfFile) && !validationMessage && (tab === "text" || Boolean(imageFile));
+  const canApply = Boolean(pdfFile) && !validationMessage && (tab === 'text' || Boolean(imageFile));
 
   const handleApplyText = async () => {
-    if (!pdfFile || tab !== "text" || applyInFlightRef.current) return;
+    if (!pdfFile || tab !== 'text' || applyInFlightRef.current) return;
 
     applyInFlightRef.current = true;
     const fileBytes = await pdfFile.arrayBuffer();
     try {
       setProcessing(true);
-      setApplyError("");
-      setDownloadUrl("");
+      setApplyError('');
+      setDownloadUrl('');
       setProgress(0);
-      trackTaskStarted("watermark", { watermark_type: "text" });
+      trackTaskStarted('watermark', { watermark_type: 'text' });
 
       const processed = await applyTextWatermark(new Uint8Array(fileBytes), textConfig);
-      const baseName = pdfFile.name.replace(/\.pdf$/i, "") || "watermarked";
+      const baseName = pdfFile.name.replace(/\.pdf$/i, '') || 'watermarked';
       downloadPDF(processed, `${baseName}-watermark.pdf`);
 
-      trackTaskCompleted("watermark", { watermark_type: "text" });
+      trackTaskCompleted('watermark', { watermark_type: 'text' });
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Gagal memproses watermark.";
+      const msg = err instanceof Error ? err.message : 'Gagal memproses watermark.';
       setApplyError(msg);
-      trackTaskFailed("watermark", msg, {
-        watermark_type: "text",
-        error_type: "client_processing_error",
+      trackTaskFailed('watermark', msg, {
+        watermark_type: 'text',
+        error_type: 'client_processing_error',
       });
     } finally {
       applyInFlightRef.current = false;
@@ -178,14 +211,14 @@ export default function WatermarkPage() {
   };
 
   const handleApplyImage = () => {
-    if (!pdfFile || !imageFile || tab !== "image" || applyInFlightRef.current) return;
+    if (!pdfFile || !imageFile || tab !== 'image' || applyInFlightRef.current) return;
 
     applyInFlightRef.current = true;
     const formData = new FormData();
-    formData.append("file", pdfFile);
-    formData.append("watermark_image", imageFile);
+    formData.append('file', pdfFile);
+    formData.append('watermark_image', imageFile);
     formData.append(
-      "config",
+      'config',
       JSON.stringify({
         opacity: imageConfig.opacity,
         position: imageConfig.position,
@@ -194,26 +227,26 @@ export default function WatermarkPage() {
     );
 
     setProcessing(true);
-    setApplyError("");
-    setDownloadUrl("");
+    setApplyError('');
+    setDownloadUrl('');
     setProgress(0);
-    trackTaskStarted("watermark", { watermark_type: "image" });
+    trackTaskStarted('watermark', { watermark_type: 'image' });
 
     const xhr = new XMLHttpRequest();
 
-    xhr.upload.addEventListener("progress", (event) => {
+    xhr.upload.addEventListener('progress', (event) => {
       if (event.lengthComputable) {
         setProgress(Math.round((event.loaded / event.total) * 100));
       }
     });
 
-    xhr.upload.addEventListener("loadend", () => {
+    xhr.upload.addEventListener('loadend', () => {
       if (xhr.readyState !== XMLHttpRequest.DONE) {
         setProgress(100);
       }
     });
 
-    xhr.addEventListener("load", () => {
+    xhr.addEventListener('load', () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         const data = JSON.parse(xhr.responseText) as {
           download_url: string;
@@ -221,8 +254,8 @@ export default function WatermarkPage() {
         };
         setDownloadUrl(data.download_url);
         setProgress(100);
-        trackTaskCompleted("watermark", {
-          watermark_type: "image",
+        trackTaskCompleted('watermark', {
+          watermark_type: 'image',
           pages_count: data.pages_processed ?? 0,
         });
         applyInFlightRef.current = false;
@@ -244,37 +277,37 @@ export default function WatermarkPage() {
       const reason = getWatermarkFailureReason(xhr.status);
       const message = getWatermarkErrorMessage(xhr.status, bodyDetail);
       setApplyError(message);
-      trackTaskFailed("watermark", message, {
-        watermark_type: "image",
+      trackTaskFailed('watermark', message, {
+        watermark_type: 'image',
         error_type: reason,
       });
       applyInFlightRef.current = false;
       setProcessing(false);
     });
 
-    xhr.addEventListener("error", () => {
-      const msg = "Terjadi gangguan jaringan saat upload watermark.";
+    xhr.addEventListener('error', () => {
+      const msg = 'Terjadi gangguan jaringan saat upload watermark.';
       setApplyError(msg);
-      trackTaskFailed("watermark", msg, {
-        watermark_type: "image",
-        error_type: "network_error",
+      trackTaskFailed('watermark', msg, {
+        watermark_type: 'image',
+        error_type: 'network_error',
       });
       applyInFlightRef.current = false;
       setProcessing(false);
     });
 
-    xhr.addEventListener("timeout", () => {
-      const msg = "Permintaan timeout. Coba lagi dengan file lebih kecil.";
+    xhr.addEventListener('timeout', () => {
+      const msg = 'Permintaan timeout. Coba lagi dengan file lebih kecil.';
       setApplyError(msg);
-      trackTaskFailed("watermark", msg, {
-        watermark_type: "image",
-        error_type: "timeout",
+      trackTaskFailed('watermark', msg, {
+        watermark_type: 'image',
+        error_type: 'timeout',
       });
       applyInFlightRef.current = false;
       setProcessing(false);
     });
 
-    xhr.open("POST", `${config.apiUrl}/api/watermark`);
+    xhr.open('POST', `${config.apiUrl}/api/watermark`);
     xhr.timeout = 120000;
     xhr.send(formData);
   };
@@ -292,7 +325,8 @@ export default function WatermarkPage() {
           Tambahkan watermark teks atau gambar ke PDF Anda.
         </p>
         <p className="mt-2 text-sm text-slate-400 max-w-md">
-          Pilih mode {selectedModeLabel.toLowerCase()} untuk melihat konfigurasi, preview, dan tombol terapkan watermark.
+          Pilih mode {selectedModeLabel.toLowerCase()} untuk melihat konfigurasi, preview, dan
+          tombol terapkan watermark.
         </p>
       </div>
 
@@ -310,7 +344,8 @@ export default function WatermarkPage() {
         >
           <UploadIcon className="mx-auto mb-4 h-10 w-10 text-slate-400" />
           <p className="text-sm text-slate-500">
-            <span className="font-medium text-accent">Klik untuk upload PDF</span> atau seret file di sini
+            <span className="font-medium text-accent">Klik untuk upload PDF</span> atau seret file
+            di sini
           </p>
           <p className="mt-1 text-xs text-slate-400">Maksimal 20MB</p>
         </label>
@@ -333,12 +368,16 @@ export default function WatermarkPage() {
       </div>
 
       <div className="mt-6 flex items-center gap-2">
-        <TabButton active={tab === "text"} onClick={() => setTab("text")}>Text</TabButton>
-        <TabButton active={tab === "image"} onClick={() => setTab("image")}>Image</TabButton>
+        <TabButton active={tab === 'text'} onClick={() => setTab('text')}>
+          Text
+        </TabButton>
+        <TabButton active={tab === 'image'} onClick={() => setTab('image')}>
+          Image
+        </TabButton>
       </div>
 
       <div className="mt-4">
-        {tab === "text" ? (
+        {tab === 'text' ? (
           <WatermarkConfig
             tab="text"
             textConfig={textConfig}
@@ -361,7 +400,9 @@ export default function WatermarkPage() {
                 className="block rounded-2xl border-2 border-dashed border-slate-200 px-6 py-10 text-center transition-colors hover:border-accent/50 cursor-pointer"
               >
                 <p className="text-sm text-slate-500">
-                  <span className="font-medium text-accent">Klik untuk upload gambar watermark</span>
+                  <span className="font-medium text-accent">
+                    Klik untuk upload gambar watermark
+                  </span>
                 </p>
                 <p className="mt-1 text-xs text-slate-400">PNG / JPG / WEBP, maksimal 2MB</p>
               </label>
@@ -413,7 +454,7 @@ export default function WatermarkPage() {
         </div>
       )}
 
-      {processing && tab === "image" && (
+      {processing && tab === 'image' && (
         <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="mb-2 flex items-center justify-between text-sm text-slate-600">
             <span>Mengupload watermark...</span>
@@ -443,12 +484,11 @@ export default function WatermarkPage() {
       <button
         type="button"
         disabled={!canApply || processing}
-        onClick={tab === "image" ? handleApplyImage : handleApplyText}
+        onClick={tab === 'image' ? handleApplyImage : handleApplyText}
         className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:bg-slate-300"
       >
-        {processing ? "Memproses..." : "Terapkan Watermark"}
+        {processing ? 'Memproses...' : 'Terapkan Watermark'}
       </button>
-
 
       <PrivacyNotice model="hybrid" />
       <OtherTools currentTool="/watermark" />

@@ -11,9 +11,9 @@
  *  - Placement coordinate system (0-1 relative, top-left origin) → pdf-lib (bottom-left origin)
  */
 
-import { PDFDocument } from "pdf-lib";
-import type { SignaturePlacement } from "./logic";
-import { extractPngBase64 } from "./logic";
+import { PDFDocument } from 'pdf-lib';
+import type { SignaturePlacement } from './logic';
+import { extractPngBase64 } from './logic';
 
 /**
  * Decode a base64 PNG data URL into a Uint8Array suitable for pdf-lib's embedPng().
@@ -21,7 +21,7 @@ import { extractPngBase64 } from "./logic";
 export function base64PngToUint8Array(dataUrl: string): Uint8Array {
   const base64 = extractPngBase64(dataUrl);
   if (!base64) {
-    throw new Error("Data URL tanda tangan tidak valid. Harap buat ulang tanda tangan.");
+    throw new Error('Data URL tanda tangan tidak valid. Harap buat ulang tanda tangan.');
   }
   // atob is available in all JS environments (browser + node ≥ 16).
   return Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
@@ -41,14 +41,14 @@ export async function applySignatures(
   placements: SignaturePlacement[],
 ): Promise<Uint8Array> {
   if (placements.length === 0) {
-    throw new Error("Tidak ada penempatan tanda tangan. Tempatkan minimal 1 tanda tangan.");
+    throw new Error('Tidak ada penempatan tanda tangan. Tempatkan minimal 1 tanda tangan.');
   }
 
   let pdfDoc: PDFDocument;
   try {
     pdfDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
   } catch {
-    throw new Error("Gagal membuka file PDF. File mungkin rusak atau terenkripsi.");
+    throw new Error('Gagal membuka file PDF. File mungkin rusak atau terenkripsi.');
   }
 
   const pages = pdfDoc.getPages();
@@ -59,7 +59,9 @@ export async function applySignatures(
   try {
     embeddedImage = await pdfDoc.embedPng(sigBytes);
   } catch {
-    throw new Error("Gagal memuat gambar tanda tangan. Pastikan file PNG/JPG yang digunakan valid.");
+    throw new Error(
+      'Gagal memuat gambar tanda tangan. Pastikan file PNG/JPG yang digunakan valid.',
+    );
   }
 
   for (const placement of placements) {
@@ -90,7 +92,7 @@ export async function applySignatures(
 
     // Convert from top-left relative (0-1) to pdf-lib bottom-left absolute coords.
     const pdfX = x * pageW;
-    const pdfY = pageH - (y * pageH) - drawH;
+    const pdfY = pageH - y * pageH - drawH;
 
     pdfPage.drawImage(embeddedImage, {
       x: pdfX,

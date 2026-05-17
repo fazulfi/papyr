@@ -1,22 +1,31 @@
-"use client";
+'use client';
 
-import { useCallback, useRef, useState } from "react";
-import PasswordInput from "@/components/PasswordInput";
-import PrivacyNotice from "@/components/PrivacyNotice";
-import OtherTools from "@/components/OtherTools";
-import { config } from "@/lib/config";
-import { formatFileSize } from "@/lib/format";
-import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
+import { useCallback, useRef, useState } from 'react';
+import PasswordInput from '@/components/PasswordInput';
+import PrivacyNotice from '@/components/PrivacyNotice';
+import OtherTools from '@/components/OtherTools';
+import { config } from '@/lib/config';
+import { formatFileSize } from '@/lib/format';
+import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from '@/lib/analytics';
 import {
   getUnlockErrorMessage,
   getUnlockFailureReason,
   validateUnlockFile,
   validateUnlockPassword,
-} from "./logic";
+} from './logic';
 
 function UnlockIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
       <path d="M7 11V7a5 5 0 019.5-2.2" />
     </svg>
@@ -25,7 +34,17 @@ function UnlockIcon() {
 
 function UploadIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="17 8 12 3 7 8" />
       <line x1="12" y1="3" x2="12" y2="15" />
@@ -35,7 +54,17 @@ function UploadIcon({ className }: { className?: string }) {
 
 function FileIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z" />
       <polyline points="14 2 14 8 20 8" />
     </svg>
@@ -44,7 +73,17 @@ function FileIcon({ className }: { className?: string }) {
 
 function DownloadIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="7 10 12 15 17 10" />
       <line x1="12" y1="15" x2="12" y2="3" />
@@ -54,7 +93,16 @@ function DownloadIcon({ className }: { className?: string }) {
 
 function CheckIcon() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="white"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -62,7 +110,17 @@ function CheckIcon() {
 
 function AlertIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="8" x2="12" y2="12" />
       <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -70,7 +128,7 @@ function AlertIcon({ className }: { className?: string }) {
   );
 }
 
-type UnlockState = "idle" | "file-selected" | "uploading" | "processing" | "done" | "error";
+type UnlockState = 'idle' | 'file-selected' | 'uploading' | 'processing' | 'done' | 'error';
 
 interface UnlockResult {
   success: boolean;
@@ -100,12 +158,12 @@ function parseErrorDetail(responseText: string): string | undefined {
 }
 
 export default function UnlockPage() {
-  const [state, setState] = useState<UnlockState>("idle");
+  const [state, setState] = useState<UnlockState>('idle');
   const [file, setFile] = useState<File | null>(null);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState<UnlockResult | null>(null);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [retrying, setRetrying] = useState(false);
   const [dragging, setDragging] = useState(false);
 
@@ -120,15 +178,15 @@ export default function UnlockPage() {
   function handleError(message: string, isRetry: boolean) {
     if (!isRetry) {
       setRetrying(true);
-      setState("uploading");
+      setState('uploading');
       setTimeout(() => {
         setRetrying(false);
         sendRequest(true);
       }, 1000);
     } else {
       setErrorMessage(message);
-      setState("error");
-      trackTaskFailed("unlock", "server_error");
+      setState('error');
+      trackTaskFailed('unlock', 'server_error');
     }
   }
 
@@ -136,60 +194,60 @@ export default function UnlockPage() {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("password", password);
+    formData.append('file', file);
+    formData.append('password', password);
 
     const xhr = new XMLHttpRequest();
     xhrRef.current = xhr;
 
-    xhr.upload.addEventListener("progress", (event) => {
+    xhr.upload.addEventListener('progress', (event) => {
       if (event.lengthComputable) {
         setProgress(Math.round((event.loaded / event.total) * 100));
       }
     });
 
-    xhr.addEventListener("load", () => {
+    xhr.addEventListener('load', () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
           const data = JSON.parse(xhr.responseText) as UnlockResult;
           setResult(data);
-          setState("done");
-          trackTaskCompleted("unlock");
+          setState('done');
+          trackTaskCompleted('unlock');
         } catch {
-          handleError("Gagal memproses respons server.", isRetry);
+          handleError('Gagal memproses respons server.', isRetry);
         }
       } else if (xhr.status >= 400 && xhr.status < 500) {
         const detail = parseErrorDetail(xhr.responseText);
         const failureReason = getUnlockFailureReason(xhr.status);
         setErrorMessage(getUnlockErrorMessage(xhr.status, detail));
-        setState("error");
-        trackTaskFailed("unlock", failureReason);
+        setState('error');
+        trackTaskFailed('unlock', failureReason);
       } else {
-        handleError("Gagal memproses file. Silakan coba lagi.", isRetry);
+        handleError('Gagal memproses file. Silakan coba lagi.', isRetry);
       }
     });
 
-    xhr.addEventListener("error", () => {
-      handleError("Gagal memproses file. Silakan coba lagi.", isRetry);
+    xhr.addEventListener('error', () => {
+      handleError('Gagal memproses file. Silakan coba lagi.', isRetry);
     });
 
-    xhr.addEventListener("timeout", () => {
-      handleError("Koneksi timeout. Silakan coba lagi.", isRetry);
+    xhr.addEventListener('timeout', () => {
+      handleError('Koneksi timeout. Silakan coba lagi.', isRetry);
     });
 
-    xhr.upload.addEventListener("loadend", () => {
+    xhr.upload.addEventListener('loadend', () => {
       if (xhr.readyState !== XMLHttpRequest.DONE) {
-        setState("processing");
+        setState('processing');
       }
     });
 
-    xhr.open("POST", `${config.apiUrl}/api/unlock`);
+    xhr.open('POST', `${config.apiUrl}/api/unlock`);
     xhr.timeout = 120000;
     xhr.send(formData);
 
-    setState("uploading");
+    setState('uploading');
     setProgress(0);
-    if (!isRetry) trackTaskStarted("unlock");
+    if (!isRetry) trackTaskStarted('unlock');
   }
 
   const handleFileSelect = useCallback(
@@ -198,12 +256,12 @@ export default function UnlockPage() {
       const error = validateFile(selectedFile);
       if (error) {
         setErrorMessage(error);
-        setState("error");
+        setState('error');
         return;
       }
       setFile(selectedFile);
-      setErrorMessage("");
-      setState("file-selected");
+      setErrorMessage('');
+      setState('file-selected');
     },
     [validateFile],
   );
@@ -214,20 +272,20 @@ export default function UnlockPage() {
       setErrorMessage(error);
       return;
     }
-    setErrorMessage("");
+    setErrorMessage('');
     sendRequest();
   }
 
   const handleReset = useCallback(() => {
-    setState("idle");
+    setState('idle');
     setFile(null);
-    setPassword("");
+    setPassword('');
     setProgress(0);
     setResult(null);
-    setErrorMessage("");
+    setErrorMessage('');
     setRetrying(false);
     setDragging(false);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }, []);
 
   const handleDrop = useCallback(
@@ -256,17 +314,15 @@ export default function UnlockPage() {
           Buka kunci PDF terproteksi dengan password yang benar.
         </p>
         <p className="mt-2 text-sm text-slate-400 max-w-md">
-          Upload PDF yang terkunci, masukkan password, lalu unduh file tanpa proteksi.
-          File tersedia selama 1 jam.
+          Upload PDF yang terkunci, masukkan password, lalu unduh file tanpa proteksi. File tersedia
+          selama 1 jam.
         </p>
       </div>
 
-      {state === "idle" && (
+      {state === 'idle' && (
         <div
           className={`relative rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
-            dragging
-              ? "border-accent bg-accent/5"
-              : "border-slate-200 hover:border-accent/50"
+            dragging ? 'border-accent bg-accent/5' : 'border-slate-200 hover:border-accent/50'
           }`}
           onDragOver={(event) => {
             event.preventDefault();
@@ -279,7 +335,7 @@ export default function UnlockPage() {
           tabIndex={0}
           aria-label="Upload area"
           onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") handlePasteClick();
+            if (event.key === 'Enter' || event.key === ' ') handlePasteClick();
           }}
         >
           <input
@@ -292,14 +348,14 @@ export default function UnlockPage() {
           />
           <UploadIcon className="mx-auto mb-4 h-10 w-10 text-slate-400" />
           <p className="text-sm text-slate-500">
-            <span className="font-medium text-accent">Klik untuk upload</span>{" "}
-            atau seret file PDF terenkripsi di sini
+            <span className="font-medium text-accent">Klik untuk upload</span> atau seret file PDF
+            terenkripsi di sini
           </p>
           <p className="mt-1 text-xs text-slate-400">Maksimal 20MB</p>
         </div>
       )}
 
-      {state === "file-selected" && file && (
+      {state === 'file-selected' && file && (
         <div className="animate-fade-up space-y-4">
           <div className="flex items-center gap-3 rounded-xl bg-white p-4 border border-slate-100 shadow-sm">
             <FileIcon className="h-8 w-8 text-slate-400 shrink-0" />
@@ -334,12 +390,12 @@ export default function UnlockPage() {
             disabled={retrying}
             className="w-full rounded-xl bg-accent py-3 text-sm font-semibold text-white shadow-sm hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            {retrying ? "Mencoba lagi..." : "Hapus Password"}
+            {retrying ? 'Mencoba lagi...' : 'Hapus Password'}
           </button>
         </div>
       )}
 
-      {state === "uploading" && (
+      {state === 'uploading' && (
         <div className="animate-fade-up text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-slate-200 border-t-accent" />
           <p className="text-sm text-slate-500 mb-2">Sedang mengunggah...</p>
@@ -353,14 +409,16 @@ export default function UnlockPage() {
         </div>
       )}
 
-      {state === "processing" && (
+      {state === 'processing' && (
         <div className="animate-fade-up space-y-4 text-center">
-          <div className="mx-auto h-10 w-10"><Shimmer /></div>
+          <div className="mx-auto h-10 w-10">
+            <Shimmer />
+          </div>
           <p className="text-sm text-slate-500">Sedang membuka proteksi file Anda...</p>
         </div>
       )}
 
-      {state === "done" && result && (
+      {state === 'done' && result && (
         <div className="animate-fade-up space-y-4">
           <div className="flex items-center justify-center rounded-2xl bg-green-50 p-4 border border-green-200">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
@@ -371,7 +429,9 @@ export default function UnlockPage() {
             {result.original_size && result.output_size && (
               <div className="flex justify-between text-sm">
                 <span className="text-slate-500">Ukuran asli</span>
-                <span className="font-medium text-navy">{formatFileSize(result.original_size)}</span>
+                <span className="font-medium text-navy">
+                  {formatFileSize(result.original_size)}
+                </span>
               </div>
             )}
             {result.output_size && (
@@ -405,7 +465,7 @@ export default function UnlockPage() {
         </div>
       )}
 
-      {state === "error" && (
+      {state === 'error' && (
         <div className="animate-fade-up space-y-4">
           <div className="rounded-xl bg-red-50 p-4 text-sm text-red-600 border border-red-200">
             <AlertIcon className="inline mr-2 mb-1" />
@@ -421,8 +481,8 @@ export default function UnlockPage() {
             <button
               onClick={() => {
                 setRetrying(false);
-                setState("file-selected");
-                setErrorMessage("");
+                setState('file-selected');
+                setErrorMessage('');
               }}
               className="flex-1 rounded-xl bg-accent py-3 text-sm font-semibold text-white shadow-sm hover:bg-accent/90 transition-colors"
             >

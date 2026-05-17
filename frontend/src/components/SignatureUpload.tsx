@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * STEP-F2-024: Upload-mode signature component.
@@ -10,11 +10,8 @@
  * - Follows existing rounded-2xl / rounded-xl / rounded-full visual conventions
  */
 
-import { useCallback, useRef, useState } from "react";
-import {
-  validateSignatureImageFile,
-  imageFileToBase64Png,
-} from "@/app/sign/logic";
+import { useCallback, useRef, useState } from 'react';
+import { validateSignatureImageFile, imageFileToBase64Png } from '@/app/sign/logic';
 
 /* ── Types ── */
 
@@ -22,7 +19,7 @@ interface SignatureUploadProps {
   onSave: (signatureImage: string) => void;
 }
 
-type UploadStatus = "idle" | "preview" | "loading" | "error";
+type UploadStatus = 'idle' | 'preview' | 'loading' | 'error';
 
 /* ── Icons ── */
 
@@ -104,32 +101,29 @@ function ResetIcon() {
 /* ── Component ── */
 
 export default function SignatureUpload({ onSave }: SignatureUploadProps) {
-  const [status, setStatus] = useState<UploadStatus>("idle");
+  const [status, setStatus] = useState<UploadStatus>('idle');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = useCallback(
-    async (file: File | undefined) => {
-      if (!file) return;
+  const handleFile = useCallback(async (file: File | undefined) => {
+    if (!file) return;
 
-      const validationError = validateSignatureImageFile(file);
-      if (validationError) {
-        setErrorMessage(validationError);
-        setStatus("error");
-        return;
-      }
+    const validationError = validateSignatureImageFile(file);
+    if (validationError) {
+      setErrorMessage(validationError);
+      setStatus('error');
+      return;
+    }
 
-      // Show preview immediately
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-      setErrorMessage("");
-      setStatus("preview");
-    },
-    [],
-  );
+    // Show preview immediately
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
+    setErrorMessage('');
+    setStatus('preview');
+  }, []);
 
   const handleConfirm = useCallback(async () => {
     if (!previewUrl || !fileInputRef.current?.files?.[0]) return;
@@ -138,8 +132,8 @@ export default function SignatureUpload({ onSave }: SignatureUploadProps) {
       const base64 = await imageFileToBase64Png(fileInputRef.current.files[0]);
       onSave(base64);
     } catch {
-      setErrorMessage("Gagal memproses gambar. Silakan coba lagi.");
-      setStatus("error");
+      setErrorMessage('Gagal memproses gambar. Silakan coba lagi.');
+      setStatus('error');
     } finally {
       setIsProcessing(false);
     }
@@ -148,10 +142,10 @@ export default function SignatureUpload({ onSave }: SignatureUploadProps) {
   const handleReset = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     setPreviewUrl(null);
-    setErrorMessage("");
-    setStatus("idle");
+    setErrorMessage('');
+    setStatus('idle');
     setIsDragging(false);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }, [previewUrl]);
 
   const handleDrop = useCallback(
@@ -175,14 +169,14 @@ export default function SignatureUpload({ onSave }: SignatureUploadProps) {
         aria-hidden="true"
       />
 
-      {status === "idle" && (
+      {status === 'idle' && (
         <div
           role="button"
           tabIndex={0}
           aria-label="Upload gambar tanda tangan (PNG atau JPG, maks 1MB)"
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
+            if (e.key === 'Enter' || e.key === ' ') fileInputRef.current?.click();
           }}
           onDragOver={(e) => {
             e.preventDefault();
@@ -192,20 +186,20 @@ export default function SignatureUpload({ onSave }: SignatureUploadProps) {
           onDrop={handleDrop}
           className={`flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 text-center transition-colors cursor-pointer ${
             isDragging
-              ? "border-accent bg-accent/5"
-              : "border-slate-300 bg-slate-50 hover:border-accent/50"
+              ? 'border-accent bg-accent/5'
+              : 'border-slate-300 bg-slate-50 hover:border-accent/50'
           }`}
         >
           <UploadIcon className="mb-3 text-slate-400" />
           <p className="text-sm text-slate-500">
-            <span className="font-medium text-accent">Klik untuk upload</span>{" "}
-            atau seret gambar ke sini
+            <span className="font-medium text-accent">Klik untuk upload</span> atau seret gambar ke
+            sini
           </p>
           <p className="mt-1 text-xs text-slate-400">PNG atau JPG, maksimal 1MB</p>
         </div>
       )}
 
-      {status === "preview" && previewUrl && (
+      {status === 'preview' && previewUrl && (
         <div className="space-y-3">
           {/* Image preview */}
           <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
@@ -218,9 +212,7 @@ export default function SignatureUpload({ onSave }: SignatureUploadProps) {
           </div>
 
           {/* Preview hint */}
-          <p className="text-center text-xs text-slate-500">
-            Tanda tangan di atas siap digunakan.
-          </p>
+          <p className="text-center text-xs text-slate-500">Tanda tangan di atas siap digunakan.</p>
 
           {/* Actions */}
           <div className="flex gap-2">
@@ -252,7 +244,7 @@ export default function SignatureUpload({ onSave }: SignatureUploadProps) {
         </div>
       )}
 
-      {status === "error" && errorMessage && (
+      {status === 'error' && errorMessage && (
         <div className="space-y-3">
           <div className="flex items-start gap-2.5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
             <AlertCircleIcon />

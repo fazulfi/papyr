@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
 import {
   applyTextPositionPreset,
   type WatermarkImageConfig,
   type WatermarkTextConfig,
-} from "@/app/watermark/logic";
+} from '@/app/watermark/logic';
 
 interface WatermarkConfigProps {
-  tab: "text" | "image";
+  tab: 'text' | 'image';
   textConfig: WatermarkTextConfig;
   imageConfig: WatermarkImageConfig;
   onTextConfigChange: (next: WatermarkTextConfig) => void;
   onImageConfigChange: (next: WatermarkImageConfig) => void;
 }
 
-const POSITION_OPTIONS = ["center", "diagonal", "top", "bottom"] as const;
+const POSITION_OPTIONS = ['center', 'diagonal', 'top', 'bottom'] as const;
 const IMAGE_POSITION_OPTIONS = [
-  "center",
-  "top-left",
-  "top-right",
-  "bottom-left",
-  "bottom-right",
+  'center',
+  'top-left',
+  'top-right',
+  'bottom-left',
+  'bottom-right',
 ] as const;
 
 function SliderRow({
@@ -44,7 +44,10 @@ function SliderRow({
     <label className="space-y-2 text-sm font-medium text-navy">
       <div className="flex items-center justify-between">
         <span>{label}</span>
-        <span className="text-slate-500">{value}{suffix}</span>
+        <span className="text-slate-500">
+          {value}
+          {suffix}
+        </span>
       </div>
       <input
         type="range"
@@ -66,7 +69,7 @@ export default function WatermarkConfig({
   onTextConfigChange,
   onImageConfigChange,
 }: WatermarkConfigProps) {
-  if (tab === "text") {
+  if (tab === 'text') {
     return (
       <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <label className="space-y-2 text-sm font-medium text-navy">
@@ -75,9 +78,7 @@ export default function WatermarkConfig({
             type="text"
             maxLength={50}
             value={textConfig.text}
-            onChange={(event) =>
-              onTextConfigChange({ ...textConfig, text: event.target.value })
-            }
+            onChange={(event) => onTextConfigChange({ ...textConfig, text: event.target.value })}
             className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
             placeholder="Contoh: DOKUMEN RAHASIA"
           />
@@ -118,9 +119,7 @@ export default function WatermarkConfig({
           <input
             type="color"
             value={textConfig.color}
-            onChange={(event) =>
-              onTextConfigChange({ ...textConfig, color: event.target.value })
-            }
+            onChange={(event) => onTextConfigChange({ ...textConfig, color: event.target.value })}
             className="h-11 w-full rounded-lg border border-slate-200 bg-slate-50 p-1"
             aria-label="Warna watermark"
           />
@@ -134,7 +133,7 @@ export default function WatermarkConfig({
               onTextConfigChange(
                 applyTextPositionPreset(
                   textConfig,
-                  event.target.value as WatermarkTextConfig["position"],
+                  event.target.value as WatermarkTextConfig['position'],
                 ),
               )
             }
@@ -174,7 +173,7 @@ export default function WatermarkConfig({
           onChange={(event) =>
             onImageConfigChange({
               ...imageConfig,
-              position: event.target.value as WatermarkImageConfig["position"],
+              position: event.target.value as WatermarkImageConfig['position'],
             })
           }
           className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-navy focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"

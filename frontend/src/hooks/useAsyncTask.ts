@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 /* ── Types ── */
 
@@ -9,7 +9,7 @@ export interface UseAsyncTaskOptions {
 
 export interface AsyncTaskState {
   taskId: string | null;
-  status: "idle" | "submitting" | "queued" | "processing" | "done" | "failed" | "timeout";
+  status: 'idle' | 'submitting' | 'queued' | 'processing' | 'done' | 'failed' | 'timeout';
   progress: number | null;
   result: Record<string, unknown> | null;
   error: string | null;
@@ -17,7 +17,7 @@ export interface AsyncTaskState {
 
 interface StatusResponse {
   task_id: string;
-  status: "queued" | "processing" | "done" | "failed";
+  status: 'queued' | 'processing' | 'done' | 'failed';
   progress?: number;
   result?: Record<string, unknown>;
   error?: string;
@@ -27,14 +27,17 @@ interface StatusResponse {
 
 export function useAsyncTask(
   submitUrl: string,
-  options: UseAsyncTaskOptions & { statusBaseUrl?: string } = {}
+  options: UseAsyncTaskOptions & { statusBaseUrl?: string } = {},
 ) {
   const { pollingIntervalMs = 3000, timeoutMs = 180000, statusBaseUrl } = options;
-  const normalizedStatusBaseUrl = (statusBaseUrl || submitUrl.replace(/\/[^/]+$/, "")).replace(/\/$/, "");
+  const normalizedStatusBaseUrl = (statusBaseUrl || submitUrl.replace(/\/[^/]+$/, '')).replace(
+    /\/$/,
+    '',
+  );
 
   const [state, setState] = useState<AsyncTaskState>({
     taskId: null,
-    status: "idle",
+    status: 'idle',
     progress: null,
     result: null,
     error: null,
@@ -64,8 +67,8 @@ export function useAsyncTask(
         clearPolling();
         setState((prev) => ({
           ...prev,
-          status: "timeout",
-          error: "Konversi timeout setelah 3 menit. Coba lagi dengan file lebih kecil.",
+          status: 'timeout',
+          error: 'Konversi timeout setelah 3 menit. Coba lagi dengan file lebih kecil.',
         }));
         return;
       }
@@ -84,20 +87,20 @@ export function useAsyncTask(
 
         const data: StatusResponse = await response.json();
 
-        if (data.status === "done") {
+        if (data.status === 'done') {
           clearPolling();
           setState((prev) => ({
             ...prev,
-            status: "done",
+            status: 'done',
             progress: 100,
             result: data.result || null,
           }));
-        } else if (data.status === "failed") {
+        } else if (data.status === 'failed') {
           clearPolling();
           setState((prev) => ({
             ...prev,
-            status: "failed",
-            error: data.error || "Konversi gagal.",
+            status: 'failed',
+            error: data.error || 'Konversi gagal.',
           }));
         } else {
           setState((prev) => ({
@@ -107,18 +110,18 @@ export function useAsyncTask(
           }));
         }
       } catch (err) {
-        if (err instanceof Error && err.name === "AbortError") {
+        if (err instanceof Error && err.name === 'AbortError') {
           return;
         }
         clearPolling();
         setState((prev) => ({
           ...prev,
-          status: "failed",
-          error: "Gagal memeriksa status konversi.",
+          status: 'failed',
+          error: 'Gagal memeriksa status konversi.',
         }));
       }
     },
-    [normalizedStatusBaseUrl, timeoutMs, clearPolling]
+    [normalizedStatusBaseUrl, timeoutMs, clearPolling],
   );
 
   const submit = useCallback(
@@ -126,7 +129,7 @@ export function useAsyncTask(
       clearPolling();
       setState({
         taskId: null,
-        status: "submitting",
+        status: 'submitting',
         progress: null,
         result: null,
         error: null,
@@ -134,7 +137,7 @@ export function useAsyncTask(
 
       try {
         const response = await fetch(submitUrl, {
-          method: "POST",
+          method: 'POST',
           body: formData,
         });
 
@@ -148,12 +151,12 @@ export function useAsyncTask(
         const taskId = data.task_id;
 
         if (!taskId) {
-          throw new Error("Server tidak mengembalikan task_id.");
+          throw new Error('Server tidak mengembalikan task_id.');
         }
 
         setState({
           taskId,
-          status: data.status || "queued",
+          status: data.status || 'queued',
           progress: 0,
           result: null,
           error: null,
@@ -169,14 +172,14 @@ export function useAsyncTask(
       } catch (err) {
         setState({
           taskId: null,
-          status: "failed",
+          status: 'failed',
           progress: null,
           result: null,
-          error: err instanceof Error ? err.message : "Gagal mengirim file.",
+          error: err instanceof Error ? err.message : 'Gagal mengirim file.',
         });
       }
     },
-    [submitUrl, pollingIntervalMs, pollStatus, clearPolling]
+    [submitUrl, pollingIntervalMs, pollStatus, clearPolling],
   );
 
   const reset = useCallback(() => {
@@ -184,7 +187,7 @@ export function useAsyncTask(
     startTimeRef.current = null;
     setState({
       taskId: null,
-      status: "idle",
+      status: 'idle',
       progress: null,
       result: null,
       error: null,

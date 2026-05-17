@@ -1,38 +1,38 @@
-import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { DM_Sans } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import './globals.css';
 
 const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
+  variable: '--font-dm-sans',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Papyr — Alat PDF Gratis untuk Indonesia",
-    template: "%s | Papyr",
+    default: 'Papyr — Alat PDF Gratis untuk Indonesia',
+    template: '%s | Papyr',
   },
   description:
-    "Kompres, gabungkan, pisahkan, dan konversi PDF dengan mudah. Gratis, tanpa akun, dan menjaga privasi. Dibuat untuk pengguna Indonesia.",
-  metadataBase: new URL("https://mypapyr.com"),
+    'Kompres, gabungkan, pisahkan, dan konversi PDF dengan mudah. Gratis, tanpa akun, dan menjaga privasi. Dibuat untuk pengguna Indonesia.',
+  metadataBase: new URL('https://mypapyr.com'),
   openGraph: {
-    type: "website",
-    locale: "id_ID",
-    siteName: "Papyr",
-    title: "Papyr — Alat PDF Gratis untuk Indonesia",
+    type: 'website',
+    locale: 'id_ID',
+    siteName: 'Papyr',
+    title: 'Papyr — Alat PDF Gratis untuk Indonesia',
     description:
-      "Kompres, gabungkan, pisahkan, dan konversi PDF dengan mudah. Gratis, tanpa akun, dan menjaga privasi.",
-    url: "https://mypapyr.com",
+      'Kompres, gabungkan, pisahkan, dan konversi PDF dengan mudah. Gratis, tanpa akun, dan menjaga privasi.',
+    url: 'https://mypapyr.com',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Papyr — Alat PDF Gratis untuk Indonesia",
+    card: 'summary_large_image',
+    title: 'Papyr — Alat PDF Gratis untuk Indonesia',
     description:
-      "Kompres, gabungkan, pisahkan, dan konversi PDF. Gratis, tanpa akun, auto-hapus 1 jam.",
+      'Kompres, gabungkan, pisahkan, dan konversi PDF. Gratis, tanpa akun, auto-hapus 1 jam.',
   },
 };
 

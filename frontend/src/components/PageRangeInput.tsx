@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
 /* ── Types ── */
 
@@ -19,7 +19,7 @@ interface ParseResult {
 function parsePageRange(input: string, totalPages: number): ParseResult {
   const trimmed = input.trim();
 
-  if (trimmed === "") {
+  if (trimmed === '') {
     return { pages: [], error: null };
   }
 
@@ -27,16 +27,19 @@ function parsePageRange(input: string, totalPages: number): ParseResult {
   if (!/^[\d\s,\-]+$/.test(trimmed)) {
     return {
       pages: [],
-      error: "Gunakan angka, tanda hubung, dan koma saja.",
+      error: 'Gunakan angka, tanda hubung, dan koma saja.',
     };
   }
 
-  const parts = trimmed.split(",").map((s) => s.trim()).filter(Boolean);
+  const parts = trimmed
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
   const pages = new Set<number>();
 
   for (const part of parts) {
-    if (part.includes("-")) {
-      const [startStr, endStr, ...rest] = part.split("-");
+    if (part.includes('-')) {
+      const [startStr, endStr, ...rest] = part.split('-');
       if (rest.length > 0 || !startStr || !endStr) {
         return { pages: [], error: `Rentang tidak valid: "${part}".` };
       }
@@ -51,8 +54,7 @@ function parsePageRange(input: string, totalPages: number): ParseResult {
       if (start > end) {
         return {
           pages: [],
-          error:
-            "Rentang tidak valid: angka awal harus lebih kecil dari angka akhir.",
+          error: 'Rentang tidak valid: angka awal harus lebih kecil dari angka akhir.',
         };
       }
 
@@ -88,11 +90,8 @@ function parsePageRange(input: string, totalPages: number): ParseResult {
 
 /* ── Component ── */
 
-export default function PageRangeInput({
-  totalPages,
-  onChange,
-}: PageRangeInputProps) {
-  const [raw, setRaw] = useState("");
+export default function PageRangeInput({ totalPages, onChange }: PageRangeInputProps) {
+  const [raw, setRaw] = useState('');
 
   const result = useMemo(() => parsePageRange(raw, totalPages), [raw, totalPages]);
 
@@ -100,20 +99,14 @@ export default function PageRangeInput({
     onChange(result.pages, raw);
   }, [result.pages, raw, onChange]);
 
-  const handleQuickSelect = useCallback(
-    (value: string) => {
-      setRaw(value);
-    },
-    [],
-  );
+  const handleQuickSelect = useCallback((value: string) => {
+    setRaw(value);
+  }, []);
 
   return (
     <div>
       {/* Input */}
-      <label
-        htmlFor="page-range"
-        className="mb-1.5 block text-sm font-medium text-navy"
-      >
+      <label htmlFor="page-range" className="mb-1.5 block text-sm font-medium text-navy">
         Halaman yang diambil
       </label>
       <input
@@ -124,8 +117,8 @@ export default function PageRangeInput({
         placeholder="Contoh: 1-3, 5, 7-10"
         className={`w-full rounded-xl border bg-white px-4 py-3 text-sm text-navy outline-none transition-colors placeholder:text-slate-300 ${
           result.error
-            ? "border-rose-400 focus:border-rose-500 focus:ring-1 focus:ring-rose-200"
-            : "border-slate-200 focus:border-accent focus:ring-1 focus:ring-accent/20"
+            ? 'border-rose-400 focus:border-rose-500 focus:ring-1 focus:ring-rose-200'
+            : 'border-slate-200 focus:border-accent focus:ring-1 focus:ring-accent/20'
         }`}
       />
       <p className="mt-1.5 text-xs text-slate-400">
@@ -133,15 +126,12 @@ export default function PageRangeInput({
       </p>
 
       {/* Error */}
-      {result.error && (
-        <p className="mt-2 text-xs font-medium text-rose-500">{result.error}</p>
-      )}
+      {result.error && <p className="mt-2 text-xs font-medium text-rose-500">{result.error}</p>}
 
       {/* Live preview */}
       {!result.error && result.pages.length > 0 && (
         <p className="mt-2 text-xs text-accent">
-          Halaman yang dipilih: {result.pages.join(", ")} ({result.pages.length}{" "}
-          halaman)
+          Halaman yang dipilih: {result.pages.join(', ')} ({result.pages.length} halaman)
         </p>
       )}
 
@@ -149,7 +139,7 @@ export default function PageRangeInput({
       <div className="mt-3 flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => handleQuickSelect("1")}
+          onClick={() => handleQuickSelect('1')}
           className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-500 transition-colors hover:border-accent hover:text-accent"
         >
           Halaman Pertama

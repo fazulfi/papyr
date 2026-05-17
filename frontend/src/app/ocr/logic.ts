@@ -4,21 +4,21 @@
  * Mirrors the inline helpers in frontend/src/app/ocr/page.tsx exactly.
  */
 
-export type OcrLanguage = "ind" | "eng" | "ind+eng";
+export type OcrLanguage = 'ind' | 'eng' | 'ind+eng';
 
-export const LANGUAGE_OPTIONS: OcrLanguage[] = ["ind", "eng", "ind+eng"];
+export const LANGUAGE_OPTIONS: OcrLanguage[] = ['ind', 'eng', 'ind+eng'];
 
 /**
  * Returns display label for a language code.
  */
 export function getLanguageLabel(lang: OcrLanguage): string {
   switch (lang) {
-    case "ind":
-      return "Bahasa Indonesia";
-    case "eng":
-      return "English";
-    case "ind+eng":
-      return "Indonesia + English";
+    case 'ind':
+      return 'Bahasa Indonesia';
+    case 'eng':
+      return 'English';
+    case 'ind+eng':
+      return 'Indonesia + English';
   }
 }
 
@@ -28,22 +28,17 @@ interface Limits {
   maxUploadMB: number;
 }
 
-type FileLike = Pick<File, "type" | "size" | "name">;
+type FileLike = Pick<File, 'type' | 'size' | 'name'>;
 
 /**
  * Validates file for OCR upload — PDF only, max 20MB, non-empty.
  * Mirrors getFileValidationError() in page.tsx.
  */
-export function getFileValidationError(
-  file: FileLike,
-  limits?: Limits,
-): string | null {
+export function getFileValidationError(file: FileLike, limits?: Limits): string | null {
   const maxBytes = limits?.maxUploadBytes ?? 20 * 1024 * 1024;
-  const allowedPdfMimeTypes = limits?.allowedPdfMimeTypes ?? ["application/pdf"];
+  const allowedPdfMimeTypes = limits?.allowedPdfMimeTypes ?? ['application/pdf'];
 
-  const isPdfMime = allowedPdfMimeTypes.includes(
-    file.type as (typeof allowedPdfMimeTypes)[number],
-  );
+  const isPdfMime = allowedPdfMimeTypes.includes(file.type as (typeof allowedPdfMimeTypes)[number]);
   const hasPdfExtension = /\.pdf$/i.test(file.name);
 
   if (!isPdfMime && !hasPdfExtension) {
@@ -64,13 +59,13 @@ export function getFileValidationError(
 /* ── Async task state types (mirrors useAsyncTask) ── */
 
 export type AsyncTaskStatus =
-  | "idle"
-  | "submitting"
-  | "queued"
-  | "processing"
-  | "done"
-  | "failed"
-  | "timeout";
+  | 'idle'
+  | 'submitting'
+  | 'queued'
+  | 'processing'
+  | 'done'
+  | 'failed'
+  | 'timeout';
 
 export interface AsyncTaskState {
   taskId: string | null;
@@ -82,7 +77,7 @@ export interface AsyncTaskState {
 
 export const IDLE_STATE: AsyncTaskState = {
   taskId: null,
-  status: "idle",
+  status: 'idle',
   progress: null,
   result: null,
   error: null,
@@ -99,21 +94,18 @@ export interface OcrResult {
 
 /* ── Progress / UI helpers ── */
 
-export function computeProgressValue(
-  status: AsyncTaskStatus,
-  progress: number | null,
-): number {
-  if (typeof progress === "number") return Math.max(0, Math.min(100, progress));
-  if (status === "queued") return 15;
-  if (status === "processing") return 65;
-  if (status === "done") return 100;
+export function computeProgressValue(status: AsyncTaskStatus, progress: number | null): number {
+  if (typeof progress === 'number') return Math.max(0, Math.min(100, progress));
+  if (status === 'queued') return 15;
+  if (status === 'processing') return 65;
+  if (status === 'done') return 100;
   return 0;
 }
 
 export function isTerminalOcrStatus(status: string): boolean {
-  return status === "done" || status === "failed" || status === "timeout";
+  return status === 'done' || status === 'failed' || status === 'timeout';
 }
 
 /* ── Analytics event names (match page.tsx TOOL_NAME) ── */
 
-export const OCR_TOOL_NAME = "ocr" as const;
+export const OCR_TOOL_NAME = 'ocr' as const;

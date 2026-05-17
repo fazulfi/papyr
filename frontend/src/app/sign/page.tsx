@@ -1,41 +1,47 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import PrivacyNotice from "@/components/PrivacyNotice";
-import OtherTools from "@/components/OtherTools";
-import PDFPageViewer from "@/components/PDFPageViewer";
-import SignaturePad from "@/components/SignaturePad";
-import SignatureUpload from "@/components/SignatureUpload";
-import SignatureType from "@/components/SignatureType";
-import SignaturePlacementOverlay from "@/components/SignaturePlacementOverlay";
-import { formatFileSize } from "@/lib/format";
-import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from "@/lib/analytics";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import PrivacyNotice from '@/components/PrivacyNotice';
+import OtherTools from '@/components/OtherTools';
+import PDFPageViewer from '@/components/PDFPageViewer';
+import SignaturePad from '@/components/SignaturePad';
+import SignatureUpload from '@/components/SignatureUpload';
+import SignatureType from '@/components/SignatureType';
+import SignaturePlacementOverlay from '@/components/SignaturePlacementOverlay';
+import { formatFileSize } from '@/lib/format';
+import { trackTaskCompleted, trackTaskFailed, trackTaskStarted } from '@/lib/analytics';
 import {
   applyToAllPages,
   calculateAspectRatio,
   filterPlacementsByPage,
   getPagePlacementsCount,
-} from "./placement-logic";
+} from './placement-logic';
 import {
   getInitialSignatureState,
   validateSignPdfFile,
   type SignMode,
   type SignState,
   type SignatureState,
-} from "./logic";
-import { applySignatures } from "@/app/sign/apply-signature";
-import { downloadPDF } from "@/lib/pdfUtils";
+} from './logic';
+import { applySignatures } from '@/app/sign/apply-signature';
+import { downloadPDF } from '@/lib/pdfUtils';
 
-function TabButton({ active, children, onClick }: { active: boolean; children: React.ReactNode; onClick: () => void }) {
+function TabButton({
+  active,
+  children,
+  onClick,
+}: {
+  active: boolean;
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
       className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-        active
-          ? "bg-accent text-white shadow-sm"
-          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+        active ? 'bg-accent text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
       }`}
     >
       {children}
@@ -45,7 +51,16 @@ function TabButton({ active, children, onClick }: { active: boolean; children: R
 
 function SignatureIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M3 17c3.333-3.333 5-8 9-8s4 5 9 8" />
       <path d="M3 17h18" />
     </svg>
@@ -54,7 +69,17 @@ function SignatureIcon() {
 
 function UploadIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="17 8 12 3 7 8" />
       <line x1="12" y1="3" x2="12" y2="15" />
@@ -64,7 +89,17 @@ function UploadIcon({ className }: { className?: string }) {
 
 function FileIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z" />
       <polyline points="14 2 14 8 20 8" />
     </svg>
@@ -73,7 +108,17 @@ function FileIcon({ className }: { className?: string }) {
 
 function AlertIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="8" x2="12" y2="12" />
       <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -81,28 +126,41 @@ function AlertIcon({ className }: { className?: string }) {
   );
 }
 
-function StepBadge({ active, done, label, number }: { active: boolean; done: boolean; label: string; number: number }) {
+function StepBadge({
+  active,
+  done,
+  label,
+  number,
+}: {
+  active: boolean;
+  done: boolean;
+  label: string;
+  number: number;
+}) {
   return (
     <div className="flex items-center gap-3">
       <div
         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-          active || done ? "bg-accent text-white" : "bg-slate-100 text-slate-400"
+          active || done ? 'bg-accent text-white' : 'bg-slate-100 text-slate-400'
         }`}
       >
         {number}
       </div>
-      <span className={`text-sm font-medium ${active ? "text-navy" : done ? "text-slate-600" : "text-slate-400"}`}>
+      <span
+        className={`text-sm font-medium ${active ? 'text-navy' : done ? 'text-slate-600' : 'text-slate-400'}`}
+      >
         {label}
       </span>
     </div>
   );
 }
 
-
 export default function SignPage() {
-  const [pageState, setPageState] = useState<SignState>("idle");
-  const [signatureState, setSignatureState] = useState<SignatureState>(() => getInitialSignatureState());
-  const [errorMessage, setErrorMessage] = useState("");
+  const [pageState, setPageState] = useState<SignState>('idle');
+  const [signatureState, setSignatureState] = useState<SignatureState>(() =>
+    getInitialSignatureState(),
+  );
+  const [errorMessage, setErrorMessage] = useState('');
   const [dragging, setDragging] = useState(false);
   const [applyAllPages, setApplyAllPages] = useState(false);
   const [signatureAspectRatio, setSignatureAspectRatio] = useState(0.4);
@@ -110,7 +168,8 @@ export default function SignPage() {
   const [signedPdfBytes, setSignedPdfBytes] = useState<Uint8Array | null>(null);
 
   const currentStep = useMemo(() => {
-    if (pageState === "placing-signature" || pageState === "signing" || pageState === "done") return 2;
+    if (pageState === 'placing-signature' || pageState === 'signing' || pageState === 'done')
+      return 2;
     return 1;
   }, [pageState]);
 
@@ -123,8 +182,8 @@ export default function SignPage() {
     const validationError = validateSignPdfFile(file);
     if (validationError) {
       setErrorMessage(validationError);
-      setPageState("error");
-      trackTaskFailed("sign", validationError, { error_type: "validation_error" });
+      setPageState('error');
+      trackTaskFailed('sign', validationError, { error_type: 'validation_error' });
       return;
     }
 
@@ -136,10 +195,10 @@ export default function SignPage() {
       placements: [],
       signatureImage: null,
     }));
-    setErrorMessage("");
+    setErrorMessage('');
     setApplyAllPages(false);
-    setPageState("pdf-selected");
-    trackTaskStarted("sign", { step: "create_signature" });
+    setPageState('pdf-selected');
+    trackTaskStarted('sign', { step: 'create_signature' });
   }, []);
 
   const handleDrop = useCallback(
@@ -152,24 +211,28 @@ export default function SignPage() {
   );
 
   const handleReset = useCallback(() => {
-    setPageState("idle");
+    setPageState('idle');
     setSignatureState(getInitialSignatureState());
-    setErrorMessage("");
+    setErrorMessage('');
     setDragging(false);
     setApplyAllPages(false);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }, []);
 
   const handleContinueToPlacement = () => {
     setSignatureState((current) => ({
       ...current,
-      signatureImage: current.signatureImage ?? "data:image/png;base64,placeholder",
+      signatureImage: current.signatureImage ?? 'data:image/png;base64,placeholder',
     }));
-    setPageState("placing-signature");
+    setPageState('placing-signature');
   };
 
   useEffect(() => {
-    if (!signatureState.signatureImage || signatureState.signatureImage === "data:image/png;base64,placeholder") return;
+    if (
+      !signatureState.signatureImage ||
+      signatureState.signatureImage === 'data:image/png;base64,placeholder'
+    )
+      return;
     const img = new Image();
     img.onload = () => {
       setSignatureAspectRatio(calculateAspectRatio(0.25, img.width, img.height));
@@ -178,7 +241,7 @@ export default function SignPage() {
   }, [signatureState.signatureImage]);
 
   const handlePlacementChange = useCallback(
-    (placements: SignatureState["placements"]) => {
+    (placements: SignatureState['placements']) => {
       if (!applyAllPages) {
         setSignatureState((current) => ({ ...current, placements }));
         return;
@@ -190,21 +253,18 @@ export default function SignPage() {
         return;
       }
 
-      const applied = applyToAllPages({ ...source, id: "apply-all" }, signatureState.totalPages);
+      const applied = applyToAllPages({ ...source, id: 'apply-all' }, signatureState.totalPages);
       setSignatureState((current) => ({ ...current, placements: applied }));
     },
     [applyAllPages, signatureState.currentPage, signatureState.totalPages],
   );
 
-  const handleDeletePlacement = useCallback(
-    (placementId: string) => {
-      setSignatureState((current) => ({
-        ...current,
-        placements: current.placements.filter((p) => p.id !== placementId),
-      }));
-    },
-    [],
-  );
+  const handleDeletePlacement = useCallback((placementId: string) => {
+    setSignatureState((current) => ({
+      ...current,
+      placements: current.placements.filter((p) => p.id !== placementId),
+    }));
+  }, []);
 
   const handleToggleApplyAll = useCallback(() => {
     setApplyAllPages((prev) => {
@@ -217,7 +277,7 @@ export default function SignPage() {
           if (!source) return current;
           return {
             ...current,
-            placements: applyToAllPages({ ...source, id: "apply-all" }, current.totalPages),
+            placements: applyToAllPages({ ...source, id: 'apply-all' }, current.totalPages),
           };
         });
       }
@@ -231,16 +291,23 @@ export default function SignPage() {
   );
 
   const handleApplySignature = useCallback(async () => {
-    if (!signatureState.pdfFile || !signatureState.signatureImage || signatureState.placements.length === 0) {
-      setErrorMessage("Pilih PDF, buat signature, dan tempatkan minimal 1 tanda tangan.");
-      setPageState("error");
-      trackTaskFailed("sign", "Missing required data", { error_type: "validation_error" });
+    if (
+      !signatureState.pdfFile ||
+      !signatureState.signatureImage ||
+      signatureState.placements.length === 0
+    ) {
+      setErrorMessage('Pilih PDF, buat signature, dan tempatkan minimal 1 tanda tangan.');
+      setPageState('error');
+      trackTaskFailed('sign', 'Missing required data', { error_type: 'validation_error' });
       return;
     }
 
-    setPageState("signing");
-    setErrorMessage("");
-    trackTaskStarted("sign", { step: "apply_signature", placements: signatureState.placements.length });
+    setPageState('signing');
+    setErrorMessage('');
+    trackTaskStarted('sign', {
+      step: 'apply_signature',
+      placements: signatureState.placements.length,
+    });
 
     try {
       const pdfBytes = new Uint8Array(await signatureState.pdfFile.arrayBuffer());
@@ -250,13 +317,13 @@ export default function SignPage() {
         signatureState.placements,
       );
       setSignedPdfBytes(result);
-      setPageState("done");
-      trackTaskCompleted("sign", { placements_count: signatureState.placements.length });
+      setPageState('done');
+      trackTaskCompleted('sign', { placements_count: signatureState.placements.length });
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Gagal menambahkan tanda tangan. Coba lagi.";
+      const msg = err instanceof Error ? err.message : 'Gagal menambahkan tanda tangan. Coba lagi.';
       setErrorMessage(msg);
-      setPageState("error");
-      trackTaskFailed("sign", msg, { error_type: "apply_signature_error" });
+      setPageState('error');
+      trackTaskFailed('sign', msg, { error_type: 'apply_signature_error' });
     }
   }, [signatureState]);
 
@@ -273,19 +340,25 @@ export default function SignPage() {
           Buat tanda tangan, lalu tempatkan di halaman PDF.
         </p>
         <p className="mt-2 max-w-md text-sm text-slate-400">
-          Scaffold client-side: gambar, upload, atau ketik tanda tangan — tanpa upload file ke server.
+          Scaffold client-side: gambar, upload, atau ketik tanda tangan — tanpa upload file ke
+          server.
         </p>
       </div>
 
       <div className="mb-6 grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-2">
-        <StepBadge active={currentStep === 1} done={currentStep > 1} number={1} label="Buat signature" />
+        <StepBadge
+          active={currentStep === 1}
+          done={currentStep > 1}
+          number={1}
+          label="Buat signature"
+        />
         <StepBadge active={currentStep === 2} done={false} number={2} label="Tempatkan di PDF" />
       </div>
 
-      {pageState === "idle" && (
+      {pageState === 'idle' && (
         <div
           className={`relative rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
-            dragging ? "border-accent bg-accent/5" : "border-slate-200 hover:border-accent/50"
+            dragging ? 'border-accent bg-accent/5' : 'border-slate-200 hover:border-accent/50'
           }`}
           onDragOver={(event) => {
             event.preventDefault();
@@ -298,7 +371,7 @@ export default function SignPage() {
           tabIndex={0}
           aria-label="Upload PDF untuk ditandatangani"
           onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") fileInputRef.current?.click();
+            if (event.key === 'Enter' || event.key === ' ') fileInputRef.current?.click();
           }}
         >
           <input
@@ -311,21 +384,30 @@ export default function SignPage() {
           />
           <UploadIcon className="mx-auto mb-4 h-10 w-10 text-slate-400" />
           <p className="text-sm text-slate-500">
-            <span className="font-medium text-accent">Klik untuk upload PDF</span> atau seret file di sini
+            <span className="font-medium text-accent">Klik untuk upload PDF</span> atau seret file
+            di sini
           </p>
           <p className="mt-1 text-xs text-slate-400">Maksimal 20MB</p>
         </div>
       )}
 
-      {pageState === "pdf-selected" && signatureState.pdfFile && (
+      {pageState === 'pdf-selected' && signatureState.pdfFile && (
         <div className="space-y-4">
           <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
             <FileIcon className="h-8 w-8 shrink-0 text-slate-400" />
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium text-navy">{signatureState.pdfFile.name}</p>
-              <p className="text-xs text-slate-400">{formatFileSize(signatureState.pdfFile.size)}</p>
+              <p className="truncate text-sm font-medium text-navy">
+                {signatureState.pdfFile.name}
+              </p>
+              <p className="text-xs text-slate-400">
+                {formatFileSize(signatureState.pdfFile.size)}
+              </p>
             </div>
-            <button type="button" onClick={handleReset} className="text-xs font-medium text-slate-400 hover:text-accent">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="text-xs font-medium text-slate-400 hover:text-accent"
+            >
               Ganti
             </button>
           </div>
@@ -333,26 +415,41 @@ export default function SignPage() {
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <p className="mb-3 text-sm font-semibold text-navy">Pilih mode tanda tangan</p>
             <div className="flex flex-wrap gap-2">
-              <TabButton active={signatureState.mode === "draw"} onClick={() => handleModeChange("draw")}>Draw</TabButton>
-              <TabButton active={signatureState.mode === "upload"} onClick={() => handleModeChange("upload")}>Upload</TabButton>
-              <TabButton active={signatureState.mode === "type"} onClick={() => handleModeChange("type")}>Type</TabButton>
+              <TabButton
+                active={signatureState.mode === 'draw'}
+                onClick={() => handleModeChange('draw')}
+              >
+                Draw
+              </TabButton>
+              <TabButton
+                active={signatureState.mode === 'upload'}
+                onClick={() => handleModeChange('upload')}
+              >
+                Upload
+              </TabButton>
+              <TabButton
+                active={signatureState.mode === 'type'}
+                onClick={() => handleModeChange('type')}
+              >
+                Type
+              </TabButton>
             </div>
             <div className="mt-4">
-              {signatureState.mode === "draw" && (
+              {signatureState.mode === 'draw' && (
                 <SignaturePad
                   onSave={(signatureImage) => {
                     setSignatureState((current) => ({ ...current, signatureImage }));
                   }}
                 />
               )}
-              {signatureState.mode === "upload" && (
+              {signatureState.mode === 'upload' && (
                 <SignatureUpload
                   onSave={(signatureImage) => {
                     setSignatureState((current) => ({ ...current, signatureImage }));
                   }}
                 />
               )}
-              {signatureState.mode === "type" && (
+              {signatureState.mode === 'type' && (
                 <SignatureType
                   onSave={(signatureImage) => {
                     setSignatureState((current) => ({ ...current, signatureImage }));
@@ -372,7 +469,7 @@ export default function SignPage() {
         </div>
       )}
 
-      {pageState === "placing-signature" && (
+      {pageState === 'placing-signature' && (
         <div className="space-y-4">
           <PDFPageViewer
             pdfFile={signatureState.pdfFile}
@@ -431,13 +528,16 @@ export default function SignPage() {
                     <div
                       key={placement.id}
                       className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm ${
-                        isCurrentPage ? "border-accent/40 bg-accent/5" : "border-slate-200 bg-slate-50"
+                        isCurrentPage
+                          ? 'border-accent/40 bg-accent/5'
+                          : 'border-slate-200 bg-slate-50'
                       }`}
                     >
                       <div>
                         <p className="font-medium text-slate-700">Signature #{index + 1}</p>
                         <p className="text-xs text-slate-400">
-                          Halaman {placement.page} • x {placement.x.toFixed(2)} • y {placement.y.toFixed(2)}
+                          Halaman {placement.page} • x {placement.x.toFixed(2)} • y{' '}
+                          {placement.y.toFixed(2)}
                         </p>
                       </div>
                       <button
@@ -454,7 +554,8 @@ export default function SignPage() {
             )}
 
             <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-500">
-              Halaman ini: {currentPagePlacements.length} signature • Total halaman aktif: {getPagePlacementsCount(signatureState.placements, signatureState.currentPage)}
+              Halaman ini: {currentPagePlacements.length} signature • Total halaman aktif:{' '}
+              {getPagePlacementsCount(signatureState.placements, signatureState.currentPage)}
             </div>
           </div>
 
@@ -468,9 +569,9 @@ export default function SignPage() {
             <button
               type="button"
               onClick={() => {
-                setErrorMessage("");
+                setErrorMessage('');
                 setApplyAllPages(false);
-                setPageState("pdf-selected");
+                setPageState('pdf-selected');
               }}
               className="rounded-xl bg-slate-100 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200"
             >
@@ -485,9 +586,9 @@ export default function SignPage() {
             </button>
           </div>
         </div>
-       )}
+      )}
 
-      {pageState === "signing" && (
+      {pageState === 'signing' && (
         <div className="space-y-4">
           <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
             <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-accent/20 border-t-accent" />
@@ -499,7 +600,7 @@ export default function SignPage() {
         </div>
       )}
 
-      {pageState === "done" && signedPdfBytes && (
+      {pageState === 'done' && signedPdfBytes && (
         <div className="space-y-4">
           <div className="flex flex-col items-center justify-center rounded-2xl border border-green-200 bg-green-50 p-6 text-center shadow-sm">
             <p className="text-2xl font-bold text-green-700">✓ PDF Ditandatangani!</p>
@@ -508,7 +609,10 @@ export default function SignPage() {
           <button
             type="button"
             onClick={() => {
-              downloadPDF(signedPdfBytes, signatureState.pdfFile?.name?.replace(/\.pdf$/i, "-signed.pdf") ?? "signed.pdf");
+              downloadPDF(
+                signedPdfBytes,
+                signatureState.pdfFile?.name?.replace(/\.pdf$/i, '-signed.pdf') ?? 'signed.pdf',
+              );
             }}
             className="w-full rounded-2xl bg-accent px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-accent/90"
           >
@@ -524,7 +628,7 @@ export default function SignPage() {
         </div>
       )}
 
-      {pageState === "error" && (
+      {pageState === 'error' && (
         <div className="space-y-4">
           <div className="flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
             <AlertIcon className="mt-0.5 shrink-0" />
