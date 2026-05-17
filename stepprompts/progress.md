@@ -4,7 +4,7 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-17
-**Current Step:** STEP-F2-043
+**Current Step:** STEP-F2-045
 **Overall Progress:** 42 / 97 (43%)
 
 ---
@@ -118,8 +118,8 @@
 |------|-------|--------|
 | STEP-F2-041 | Setup Playwright di frontend project | ✅ 2026-05-17 |
 | STEP-F2-042 | E2E tests untuk client-side tools (Merge, Split, Rotate, Sign) | ✅ 2026-05-17 |
-| STEP-F2-043 | E2E tests untuk server-side tools (7 tools) | ⬜ |
-| STEP-F2-044 | E2E tests untuk PDF-to-Excel, Image-to-PDF, dan Navigation | ⬜ |
+| STEP-F2-043 | E2E tests untuk server-side tools (7 tools) | ⏭️ Skipped 2026-05-17 |
+| STEP-F2-044 | E2E tests untuk PDF-to-Excel, Image-to-PDF, dan Navigation | ⏭️ Skipped 2026-05-17 |
 | STEP-F2-045 | Setup Prettier untuk frontend | ⬜ |
 | STEP-F2-046 | Setup Ruff untuk backend | ⬜ |
 | STEP-F2-047 | Update CI/CD pipeline (E2E + lint/format checks) | ⬜ |
