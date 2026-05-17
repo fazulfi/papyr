@@ -356,6 +356,46 @@ async def test_process_ocr_happy_path(tmp_path, _stub_ocrmypdf_module):
 
 
 @pytest.mark.asyncio
+async def test_process_ocr_uses_quality_settings(tmp_path, _stub_ocrmypdf_module):
+    """Regression: OCR uses safer quality settings for low-resolution scanned PDFs."""
+    input_path = tmp_path / "in.pdf"
+    output_path = tmp_path / "in_ocr.pdf"
+    calls = []
+
+    input_path.write_bytes(PDF_BYTES)
+
+    async def fake_to_thread(func, *args, **kwargs):
+        calls.append((func, args, kwargs))
+        Path(args[1]).write_bytes(b"fake-ocr-output-content")
+        return None
+
+    with (
+        patch("routers.ocr.tempfile.mkstemp", side_effect=[
+            (os.open(str(input_path), os.O_WRONLY), str(input_path)),
+            (os.open(str(output_path), os.O_CREAT | os.O_WRONLY), str(output_path)),
+        ]),
+        patch("routers.ocr.asyncio.to_thread", side_effect=fake_to_thread),
+        patch("routers.ocr.upload_file", return_value={"key": "k"}),
+        patch("routers.ocr.generate_signed_url", return_value="https://signed/url"),
+    ):
+        await ocr._process_ocr(
+            file_bytes=PDF_BYTES,
+            original_filename="scan.pdf",
+            language="ind+eng",
+            task_id="quality-settings",
+            page_count=1,
+        )
+
+    assert len(calls) == 1
+    _, _, kwargs = calls[0]
+    assert kwargs["clean"] is True
+    assert kwargs["oversample"] == 300
+    assert kwargs["tesseract_pagesegmode"] == 6
+    assert kwargs["deskew"] is True
+    assert kwargs["skip_text"] is True
+
+
+@pytest.mark.asyncio
 async def test_process_ocr_ocrmypdf_raises(tmp_path, _stub_ocrmypdf_module):
     """T13: _process_ocr failure when ocrmypdf raises → RuntimeError propagated."""
     input_path = tmp_path / "in.pdf"
