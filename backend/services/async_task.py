@@ -10,6 +10,7 @@ Refs: PAPYR-131, PAPYR-142
 from __future__ import annotations
 
 import asyncio
+import inspect
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass, field
@@ -147,8 +148,17 @@ async def run_task_in_background(
     loop = asyncio.get_running_loop()
 
     try:
+        call_kwargs = dict(coro_kwargs)
+        signature = inspect.signature(coro_func)
+        accepts_task_id = "task_id" in signature.parameters or any(
+            parameter.kind is inspect.Parameter.VAR_KEYWORD
+            for parameter in signature.parameters.values()
+        )
+        if accepts_task_id and "task_id" not in call_kwargs:
+            call_kwargs["task_id"] = task_id
+
         result = await asyncio.wait_for(
-            coro_func(**coro_kwargs),
+            coro_func(**call_kwargs),
             timeout=timeout,
         )
         completed_at = datetime.now(timezone.utc)

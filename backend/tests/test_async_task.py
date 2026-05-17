@@ -163,6 +163,17 @@ class TestRunTaskInBackground:
         assert task.completed_at is not None
 
     @pytest.mark.asyncio
+    async def test_forwards_task_id_to_coroutine_when_supported(self):
+        async def dummy_coro(task_id: str):
+            return {"task_id": task_id}
+
+        task = create_task()
+        await run_task_in_background(dummy_coro, task_id=task.task_id, timeout=30)
+
+        assert task.status == TaskStatus.DONE
+        assert task.result == {"task_id": task.task_id}
+
+    @pytest.mark.asyncio
     async def test_timeout_sets_failed(self):
         async def slow_coro():
             await asyncio.sleep(10)
