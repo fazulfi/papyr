@@ -328,9 +328,19 @@ export default function PdfToExcelPage() {
           </div>
 
           {combinedErrorMessage && (
-            <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600">
-              <AlertIcon className="mr-2 inline" />
-              {combinedErrorMessage}
+            <div className="space-y-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600">
+              <div>
+                <AlertIcon className="mr-2 inline" />
+                {combinedErrorMessage}
+              </div>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-medium text-red-600 shadow-sm transition-colors hover:bg-red-100"
+              >
+                <RefreshIcon />
+                Pilih File Lain
+              </button>
             </div>
           )}
         </div>
