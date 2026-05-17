@@ -139,7 +139,9 @@ export default function PdfToExcelPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { state, submit, reset } = useAsyncTask(`${config.apiUrl}/api/pdf-to-excel`);
+  const { state, submit, reset } = useAsyncTask(`${config.apiUrl}/api/pdf-to-excel`, {
+    statusBaseUrl: `${config.apiUrl}/api`,
+  });
 
   const result = state.result as PdfToExcelResult | null;
   const isBusy = state.status === "submitting" || state.status === "queued" || state.status === "processing";

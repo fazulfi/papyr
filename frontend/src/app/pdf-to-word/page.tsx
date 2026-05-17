@@ -129,7 +129,9 @@ export default function PdfToWordPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { state, submit, reset } = useAsyncTask(`${config.apiUrl}/api/pdf-to-word`);
+  const { state, submit, reset } = useAsyncTask(`${config.apiUrl}/api/pdf-to-word`, {
+    statusBaseUrl: `${config.apiUrl}/api`,
+  });
 
   const result = state.result as PdfToWordResult | null;
   const isBusy = state.status === "submitting" || state.status === "queued" || state.status === "processing";

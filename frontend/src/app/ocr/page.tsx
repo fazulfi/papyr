@@ -159,7 +159,9 @@ export default function OcrPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { state, submit, reset } = useAsyncTask(`${config.apiUrl}/api/ocr`);
+  const { state, submit, reset } = useAsyncTask(`${config.apiUrl}/api/ocr`, {
+    statusBaseUrl: `${config.apiUrl}/api`,
+  });
 
   const result = state.result as OcrResult | null;
   const isBusy = state.status === "submitting" || state.status === "queued" || state.status === "processing";
