@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-17
-**Current Step:** STEP-F2-037
-**Overall Progress:** 36 / 97 (37%)
+**Current Step:** STEP-F2-038
+**Overall Progress:** 37 / 97 (38%)
 
 ---
 
@@ -103,7 +103,7 @@
 
 | Step | Title | Status |
 |------|-------|--------|
-| STEP-F2-037 | Infra — Install camelot-py + dependencies in Docker | ⬜ |
+| STEP-F2-037 | Infra — Install camelot-py + dependencies in Docker | ✅ 2026-05-17 |
 | STEP-F2-038 | Backend — Create POST /api/pdf-to-excel + preview endpoint | ⬜ |
 | STEP-F2-039 | Backend + Frontend — Complete M18 (tests + page + frontend tests) | ⬜ |
 | STEP-F2-040 | Testing — Manual E2E test Fase 2C (all conversion tools) | ⬜ |

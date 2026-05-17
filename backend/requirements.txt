@@ -7,3 +7,8 @@ PyMuPDF==1.25.5
 Pillow==11.2.1
 slowapi==0.1.9
 ocrmypdf>=16.0.0
+# PDF table extraction (M18 - PDF-to-Excel)
+# camelot-py[base] uses pdfium backend (no ghostscript/apt needed)
+# Pin opencv to avoid libxcb.so.1 bug on headless Linux
+opencv-python-headless==4.12.0.88
+camelot-py[base]>=1.0.0
