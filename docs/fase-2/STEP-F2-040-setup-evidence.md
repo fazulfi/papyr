@@ -118,11 +118,14 @@ Production/runtime fixes from E2E were committed separately in the commits liste
 
 ### 1) Completion Commit
 
-> Filled after commit.
+- `cf1d47d` — `docs(fase2): mark STEP-F2-040 manual E2E complete`
+- Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-040-setup-evidence.md`
 
 ### 2) Push
 
-> Filled after push.
+- Command: `git push origin main`
+- Result: `9ff3b99..cf1d47d  main -> main`
+- Status: pushed ✅
 
 ### 3) Deploy
 
