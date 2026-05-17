@@ -89,26 +89,27 @@
 
 ### Commits
 
-> ⏳ **Placeholders — execution pending. Fill in after git push.**
-
-1. **`<hash>`** — `feat(fase2): add POST /api/pdf-to-excel with async camelot extraction`
+1. **5f98112** — `feat(fase2): add POST /api/pdf-to-excel with async camelot extraction`
    - Files: `backend/routers/pdf_to_excel.py`, `backend/main.py`
    - Refs: PAPYR-149, PAPYR-150, PAPYR-151
 
-2. **`<hash>`** — `test(fase2): add backend unit tests for /api/pdf-to-excel (16 tests)`
-   - Files: `backend/tests/test_api_pdf_to_excel.py`
+2. **185fd48** — `test(fase2): add backend unit tests for /api/pdf-to-excel (16 tests)`
+   - File: `backend/tests/test_api_pdf_to_excel.py`
+   - 16 tests, all pass
 
-3. **`<hash>`** — `docs(fase2): mark STEP-F2-038 complete and add evidence`
-   - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-038-setup-evidence.md`
+3. **828f67a** — `docs(fase2): mark STEP-F2-038 complete and add evidence`
+   - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-038-setup-evidence.md`, `docs/fase-2/STEP-F2-035-setup-evidence.md` (commit hash updates)
 
 ### Push
 
-> ⏳ **Placeholder — execution pending.**
-
 - **Command**: `git push origin main`
-- **Result**: _pending_
-- **Status**: _pending_
-- **Deploy**: Railway backend auto-deploy triggered after push to `main`
+- **Result**: `33bf1c5..828f67a  main -> main`
+- **Status**: ✅ Pushed successfully
+
+### Deploy
+
+- **Trigger**: Push to `main` completed → Railway backend auto-build/deploy triggered.
+- **Status**: ✅ Deploy triggered (verify on Railway dashboard)
 
 ## Notes
 
