@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-17
-**Current Step:** STEP-F2-040
-**Overall Progress:** 39 / 97 (40%)
+**Current Step:** STEP-F2-041
+**Overall Progress:** 40 / 97 (41%)
 
 ---
 
@@ -15,11 +15,11 @@
 |------|-------|------|----------|
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
 | 2B — Enhancement (M14+M15) | 16 | 16 | 100% |
-| 2C — Conversion (M16+M17+M18) | 11 | 8 | 73% |
+| 2C — Conversion (M16+M17+M18) | 11 | 9 | 82% |
 | 2D — Quality (M19-M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **36** | **37%** |
+| **TOTAL** | **97** | **37** | **38%** |
 
 ---
 
@@ -106,7 +106,7 @@
 | STEP-F2-037 | Infra — Install camelot-py + dependencies in Docker | ✅ 2026-05-17 |
 | STEP-F2-038 | Backend — Create POST /api/pdf-to-excel + preview endpoint | ✅ 2026-05-17 |
 | STEP-F2-039 | Backend + Frontend — Complete M18 (tests + page + frontend tests) | ✅ 2026-05-17 |
-| STEP-F2-040 | Testing — Manual E2E test Fase 2C (all conversion tools) | 🔄 |
+| STEP-F2-040 | Testing — Manual E2E test Fase 2C (all conversion tools) | ✅ 2026-05-17 |
 
 ---
 
