@@ -255,8 +255,10 @@ export default function OcrPage() {
         setEstimatedSeconds(body.estimated_seconds);
       }
 
-      // Submit to polling hook using the task_id from the 202 response
-      await submit(new FormData());
+      const proxiedFormData = new FormData();
+      proxiedFormData.append("file", file);
+      proxiedFormData.append("language", language);
+      await submit(proxiedFormData);
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Gagal mengirim file.");
       trackTaskFailed(TOOL_NAME, error instanceof Error ? error.message : "submit_failed");
