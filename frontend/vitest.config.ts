@@ -14,6 +14,14 @@ export default defineConfig({
         singleFork: true,
       },
     },
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.next/**",
+      "**/e2e/**",
+      "**/playwright-report/**",
+      "**/test-results/**",
+    ],
   },
   resolve: {
     alias: {
