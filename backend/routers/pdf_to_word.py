@@ -16,7 +16,6 @@ import time
 from datetime import datetime, timedelta, timezone
 
 import fitz  # PyMuPDF
-from docx import Document as DocxDocument
 from fastapi import APIRouter, File, HTTPException, Request, UploadFile
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -62,36 +61,21 @@ def _is_scanned_pdf(file_bytes: bytes) -> bool:
         return False
 
 
-def _create_text_layer_docx(file_bytes: bytes, output_path: str) -> None:
-    """Create a basic DOCX from extractable PDF text as a LibreOffice fallback."""
-    document = DocxDocument()
-    extracted_any_text = False
+def _create_layout_docx(input_path: str, output_path: str) -> None:
+    """Create a DOCX with layout-aware PDF conversion as a LibreOffice fallback."""
+    from pdf2docx import Converter
 
-    doc = fitz.open(stream=file_bytes, filetype="pdf")
+    converter = Converter(input_path)
     try:
-        page_index = 0
-        for page in doc:
-            text = page.get_text().strip()
-            if page_index > 0:
-                document.add_page_break()
-
-            if text:
-                extracted_any_text = True
-                for paragraph in text.splitlines():
-                    cleaned = paragraph.strip()
-                    if cleaned:
-                        document.add_paragraph(cleaned)
-            else:
-                document.add_paragraph("")
-
-            page_index += 1
+        converter.convert(
+            output_path,
+            start=0,
+            end=None,
+            multi_processing=False,
+            ignore_page_error=True,
+        )
     finally:
-        doc.close()
-
-    if not extracted_any_text:
-        raise RuntimeError("PDF ini adalah scan, gunakan OCR terlebih dahulu.")
-
-    document.save(output_path)
+        converter.close()
 
 
 async def _convert_pdf_to_docx(
@@ -146,10 +130,10 @@ async def _convert_pdf_to_docx(
 
         if not os.path.exists(output_path):
             logger.warning(
-                "LibreOffice did not produce output file for task %s; using text-layer fallback",
+                "LibreOffice did not produce output file for task %s; using layout-aware fallback",
                 task_id,
             )
-            _create_text_layer_docx(file_bytes, output_path)
+            _create_layout_docx(input_path, output_path)
 
         output_size = os.path.getsize(output_path)
         if output_size == 0:

@@ -246,7 +246,7 @@ async def test_convert_pdf_to_docx_no_output_file(tmp_path):
         patch("routers.pdf_to_word.tempfile.mkstemp", side_effect=fake_mkstemp),
         patch("routers.pdf_to_word.subprocess.run", return_value=_Done()),
         patch(
-            "routers.pdf_to_word._create_text_layer_docx",
+            "routers.pdf_to_word._create_layout_docx",
             side_effect=RuntimeError("LibreOffice did not produce output file"),
         ),
     ):
@@ -256,7 +256,7 @@ async def test_convert_pdf_to_docx_no_output_file(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_docx_falls_back_to_text_layer_docx(tmp_path):
+async def test_convert_pdf_to_docx_falls_back_to_layout_docx(tmp_path):
     output_dir = tmp_path / "out"
     output_dir.mkdir()
 
@@ -272,8 +272,8 @@ async def test_convert_pdf_to_docx_falls_back_to_text_layer_docx(tmp_path):
         returncode = 0
         stderr = ""
 
-    def fake_fallback(file_bytes: bytes, output_path: str):
-        assert file_bytes == PDF_BYTES
+    def fake_fallback(input_path: str, output_path: str):
+        assert input_path.endswith("in.pdf")
         with open(output_path, "wb") as file:
             file.write(b"fallback-docx")
 
@@ -281,7 +281,7 @@ async def test_convert_pdf_to_docx_falls_back_to_text_layer_docx(tmp_path):
         patch("routers.pdf_to_word.tempfile.mkdtemp", side_effect=fake_mkdtemp),
         patch("routers.pdf_to_word.tempfile.mkstemp", side_effect=fake_mkstemp),
         patch("routers.pdf_to_word.subprocess.run", return_value=_Done()),
-        patch("routers.pdf_to_word._create_text_layer_docx", side_effect=fake_fallback),
+        patch("routers.pdf_to_word._create_layout_docx", side_effect=fake_fallback),
         patch("routers.pdf_to_word.upload_file", return_value={"key": "k"}),
         patch("routers.pdf_to_word.generate_signed_url", return_value="https://signed/url"),
     ):
