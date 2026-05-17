@@ -122,14 +122,21 @@
 > ⏳ **Placeholders — execution pending. Fill in after git push.**
 
 1. **`<hash>`** — `feat(fase2): add /ocr frontend page + analytics integration + nav/sitemap updates`
-   - Files: `frontend/src/app/ocr/page.tsx`, `frontend/src/app/ocr/layout.tsx`, `frontend/src/app/sitemap.ts`, `frontend/src/lib/analytics.ts`, `frontend/src/components/OtherTools.tsx`, `frontend/src/components/Navbar.tsx`
+   - Files: `frontend/src/app/ocr/page.tsx`, `frontend/src/app/ocr/layout.tsx`, `frontend/src/app/ocr/logic.ts`, `frontend/src/app/sitemap.ts`, `frontend/src/lib/analytics.ts`, `frontend/src/components/OtherTools.tsx`, `frontend/src/components/Navbar.tsx`
    - Refs: PAPYR-144, PAPYR-145
+   - Commit: `8c0e286`
 
-2. **`<hash>`** — `test(fase2): add frontend unit tests for /ocr page`
+2. **`<hash>`** — `fix(fase2): correct OCR_TOOL_NAME to 'ocr' in logic.ts`
+   - Files: `frontend/src/app/ocr/logic.ts`
+   - Commit: `05ea6cb`
+
+3. **`<hash>`** — `test(fase2): add frontend unit tests for /ocr page`
    - Files: `frontend/src/__tests__/ocr.test.tsx`
+   - Commit: `c9a5326`
 
-3. **`<hash>`** — `docs(fase2): mark STEP-F2-036 complete and add evidence`
+4. **`<hash>`** — `docs(fase2): mark STEP-F2-036 complete and add evidence`
    - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-036-setup-evidence.md`
+   - Commit: `4b080fe`
 
 ### Push
 
