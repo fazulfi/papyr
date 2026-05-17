@@ -39,12 +39,10 @@ async function generateFixtures(): Promise<void> {
   const singleBytes = await singleDoc.save();
   fs.writeFileSync(path.join(outputDir, 'single-page.pdf'), singleBytes);
 
-  // eslint-disable-next-line no-console
   console.log('Fixtures generated successfully.');
 }
 
 generateFixtures().catch((error) => {
-  // eslint-disable-next-line no-console
   console.error('Failed to generate fixtures:', error);
   process.exit(1);
 });

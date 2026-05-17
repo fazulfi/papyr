@@ -253,7 +253,7 @@ export function resizePlacement(
   newHeight: number,
   preserveRatio: boolean = false,
 ): SignaturePlacement {
-  let width = newWidth;
+  const width = newWidth;
   let height = newHeight;
 
   if (preserveRatio && placement.height > 0) {

@@ -375,7 +375,7 @@ describe('STEP-F2-025 — PDF Page Viewer', () => {
     });
 
     it('navigation works correctly after error recovery', () => {
-      let currentPage = 1;
+      const currentPage = 1;
       let errorMessage = 'Error occurred';
 
       // Simulate error recovery
