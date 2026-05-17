@@ -61,27 +61,27 @@
 
 ### Commits
 
-1. **(pending)** — `feat(fase2): add POST /api/ocr with async OCR conversion`
-   - File: `backend/routers/ocr.py`
+1. **2c64ffe** — `feat(fase2): add POST /api/ocr with async OCR conversion`
+   - Files: `backend/routers/ocr.py`, `backend/main.py`
    - Refs: PAPYR-140, PAPYR-141, PAPYR-142, PAPYR-143
 
-2. **(pending)** — `test(fase2): add backend unit tests for /api/ocr endpoint`
+2. **130025d** — `test(fase2): add backend unit tests for /api/ocr endpoint`
    - File: `backend/tests/test_api_ocr.py`
-   - Coverage target: 94% scoped coverage verified
+   - 21 tests, 94% scoped coverage on `routers/ocr.py`
 
-3. **(pending)** — `docs(fase2): mark STEP-F2-035 complete and add evidence`
+3. **94f51b4** — `docs(fase2): mark STEP-F2-035 complete and add evidence`
    - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-035-setup-evidence.md`
 
 ### Push
 
 - **Command**: `git push origin main`
-- **Result**: _Pending finalization_
-- **Status**: _Pending finalization_
+- **Result**: `4234961..94f51b4  main -> main`
+- **Status**: ✅ Pushed successfully
 
 ### Deploy
 
-- **Trigger**: Push to `main` expected to trigger Railway backend auto-build/deploy.
-- **Status**: _Pending finalization_
+- **Trigger**: Push to `main` completed → Railway backend auto-build/deploy triggered.
+- **Status**: ✅ Deploy triggered (verify on Railway dashboard)
 
 ## Notes
 
