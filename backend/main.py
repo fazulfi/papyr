@@ -13,6 +13,7 @@ from routers.connectivity import router as connectivity_router
 from routers.compress import router as compress_router
 from routers.image_to_pdf import router as image_to_pdf_router
 from routers.ocr import router as ocr_router
+from routers.pdf_to_excel import router as pdf_to_excel_router
 from routers.pdf_to_image import router as pdf_to_image_router
 from routers.pdf_to_word import router as pdf_to_word_router
 from routers.protect import router as protect_router
@@ -101,6 +102,7 @@ app.include_router(connectivity_router)
 app.include_router(compress_router)
 app.include_router(image_to_pdf_router)
 app.include_router(ocr_router)
+app.include_router(pdf_to_excel_router)
 app.include_router(pdf_to_image_router)
 app.include_router(pdf_to_word_router)
 app.include_router(protect_router)
