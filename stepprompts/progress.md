@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-17
-**Current Step:** STEP-F2-042
-**Overall Progress:** 41 / 97 (42%)
+**Current Step:** STEP-F2-043
+**Overall Progress:** 42 / 97 (43%)
 
 ---
 
@@ -16,10 +16,10 @@
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
 | 2B — Enhancement (M14+M15) | 16 | 16 | 100% |
 | 2C — Conversion (M16+M17+M18) | 11 | 9 | 82% |
-| 2D — Quality (M19-M20) | 14 | 1 | 7% |
+| 2D — Quality (M19-M20) | 14 | 2 | 14% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
-| **TOTAL** | **97** | **38** | **39%** |
+| **TOTAL** | **97** | **39** | **40%** |
 
 ---
 
@@ -117,7 +117,7 @@
 | Step | Title | Status |
 |------|-------|--------|
 | STEP-F2-041 | Setup Playwright di frontend project | ✅ 2026-05-17 |
-| STEP-F2-042 | E2E tests untuk client-side tools (Merge, Split, Rotate, Sign) | ⬜ |
+| STEP-F2-042 | E2E tests untuk client-side tools (Merge, Split, Rotate, Sign) | ✅ 2026-05-17 |
 | STEP-F2-043 | E2E tests untuk server-side tools (7 tools) | ⬜ |
 | STEP-F2-044 | E2E tests untuk PDF-to-Excel, Image-to-PDF, dan Navigation | ⬜ |
 | STEP-F2-045 | Setup Prettier untuk frontend | ⬜ |
