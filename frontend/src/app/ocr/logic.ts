@@ -116,4 +116,4 @@ export function isTerminalOcrStatus(status: string): boolean {
 
 /* ── Analytics event names (match page.tsx TOOL_NAME) ── */
 
-export const OCR_TOOL_NAME = "pdf-to-word" as const;
+export const OCR_TOOL_NAME = "ocr" as const;

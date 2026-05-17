@@ -3,9 +3,9 @@
 > **Instruksi:** Setelah menyelesaikan setiap STEP, update status di file ini menjadi ✅ beserta tanggal selesai.
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
-**Last Updated:** 2026-05-16
-**Current Step:** STEP-F2-036
-**Overall Progress:** 35 / 97 (36%)
+**Last Updated:** 2026-05-17
+**Current Step:** STEP-F2-037
+**Overall Progress:** 36 / 97 (37%)
 
 ---
 
@@ -15,7 +15,7 @@
 |------|-------|------|----------|
 | 2A — Security (M12+M13) | 13 | 13 | 100% |
 | 2B — Enhancement (M14+M15) | 16 | 16 | 100% |
-| 2C — Conversion (M16+M17+M18) | 11 | 6 | 55% |
+| 2C — Conversion (M16+M17+M18) | 11 | 7 | 64% |
 | 2D — Quality (M19-M20) | 14 | 0 | 0% |
 | 2E — OpenClaw (M21) | 28 | 0 | 0% |
 | 2F — Dashboard (M22) | 15 | 0 | 0% |
@@ -97,7 +97,7 @@
 |------|-------|--------|
 | STEP-F2-034 | Infra — Install Tesseract + ocrmypdf in Docker | ✅ 2026-05-16 |
 | STEP-F2-035 | Backend — Create POST /api/ocr endpoint | ✅ 2026-05-16 |
-| STEP-F2-036 | Backend + Frontend — Complete M17 (OCR tests + page + frontend tests) | ⬜ |
+| STEP-F2-036 | Backend + Frontend — Complete M17 (OCR tests + page + frontend tests) | ✅ 2026-05-17 |
 
 ### M18: PDF-to-Excel
 
