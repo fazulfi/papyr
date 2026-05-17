@@ -48,6 +48,7 @@ const NAV_LINKS = [
   { href: "/watermark", label: "Watermark" },
   { href: "/sign", label: "Tanda Tangan" },
   { href: "/pdf-to-word", label: "PDF ke Word" },
+  { href: "/pdf-to-excel", label: "PDF ke Excel" },
   { href: "/ocr", label: "OCR" },
 ];
 

@@ -19,6 +19,7 @@ export type ToolName =
   | "watermark"
   | "sign"
   | "pdf-to-word"
+  | "pdf-to-excel"
   | "ocr";
 
 export type DeviceCategory = "mobile" | "tablet" | "desktop";
