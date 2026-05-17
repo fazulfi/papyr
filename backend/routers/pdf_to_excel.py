@@ -77,8 +77,8 @@ async def _convert_pdf_to_excel(
         # Run Camelot table extraction in thread pool
         # Using stream flavor for better text alignment extraction
         tables = await asyncio.to_thread(
-            camelot.extract,
-            file=input_path,
+            camelot.read_pdf,
+            input_path,
             pages="1-end",
             flavor="stream",
         )

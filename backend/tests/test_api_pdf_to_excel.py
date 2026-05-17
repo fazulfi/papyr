@@ -173,7 +173,7 @@ def _stub_pandas_module():
 @pytest.fixture
 def _stub_camelot_module():
     mod = types.ModuleType("camelot")
-    mod.extract = lambda file, pages, flavor: [_FakeTable()]
+    mod.read_pdf = lambda file, pages, flavor: [_FakeTable()]
     sys.modules["camelot"] = mod
     try:
         yield mod
@@ -419,6 +419,36 @@ async def test_convert_pdf_to_excel_success(tmp_path, _stub_pandas_module, _stub
     # Verify output_size > 0 (xlsx was written successfully by pandas stub)
     # Note: file is cleaned up by the finally block, so we check result dict instead
     assert result["output_size"] > 0, "xlsx should have non-zero size"
+
+
+@pytest.mark.asyncio
+async def test_convert_pdf_to_excel_uses_camelot_read_pdf(tmp_path, _stub_pandas_module, _stub_camelot_module):
+    """Regression: Camelot 1.x exposes read_pdf, not extract."""
+    input_path = tmp_path / "in.pdf"
+    output_path = tmp_path / "out.xlsx"
+    output_ref = [str(output_path)]
+    fake_mkstemp = _mkstemp_fake_factory(input_path, output_path, output_ref)
+
+    async def fake_to_thread(func, *args, **kwargs):
+        assert func is _stub_camelot_module.read_pdf
+        assert args == (str(input_path),)
+        assert kwargs == {"pages": "1-end", "flavor": "stream"}
+        return [_FakeTable()]
+
+    with (
+        patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
+        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=fake_to_thread),
+        patch("routers.pdf_to_excel.upload_file", return_value={"key": "k"}),
+        patch("routers.pdf_to_excel.generate_signed_url", return_value="https://signed/read-pdf"),
+    ):
+        result = await pdf_to_excel._convert_pdf_to_excel(
+            file_bytes=PDF_BYTES,
+            original_filename="camelot.pdf",
+            task_id="camelot-read-pdf",
+        )
+
+    assert result["download_url"] == "https://signed/read-pdf"
+    assert result["tables_found"] == 1
 
 
 @pytest.mark.asyncio
