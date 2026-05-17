@@ -41,6 +41,33 @@ _XLSX_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetm
 _MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # 20 MB
 
 
+def _excel_column_name(column_index: int) -> str:
+    """Convert 1-based Excel column index to a column letter."""
+    name = ""
+    current = column_index
+    while current:
+        current, remainder = divmod(current - 1, 26)
+        name = chr(65 + remainder) + name
+    return name
+
+
+def _autosize_excel_columns(writer, sheet_name: str, df) -> None:
+    """Apply readable column widths when openpyxl worksheet access is available."""
+    worksheet = getattr(writer, "sheets", {}).get(sheet_name)
+    if worksheet is None or not hasattr(worksheet, "column_dimensions"):
+        return
+
+    try:
+        column_count = len(df.columns)
+        for column_index in range(1, column_count + 1):
+            values = df.iloc[:, column_index - 1].astype(str)
+            max_length = int(values.map(len).max()) if len(values) else 0
+            width = min(max(max_length + 2, 12), 48)
+            worksheet.column_dimensions[_excel_column_name(column_index)].width = width
+    except Exception as exc:
+        logger.debug("Skipping Excel autosize for %s: %s", sheet_name, exc)
+
+
 async def _extract_tables_with_camelot(camelot, input_path: str) -> list:
     """Extract tables with bordered-table preference, then stream fallback.
 
@@ -132,7 +159,8 @@ async def _convert_pdf_to_excel(
                 # Clean up empty rows/cols
                 df = df.dropna(how="all").dropna(axis=1, how="all")
                 sheet_name = f"Table_{i + 1}"
-                df.to_excel(writer, sheet_name=sheet_name, index=False)
+                df.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
+                _autosize_excel_columns(writer, sheet_name, df)
 
         # Validate output file
         if not os.path.exists(output_xlsx_path):

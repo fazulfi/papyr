@@ -79,7 +79,9 @@ class _FakeDataFrame:
     def dropna(self, *args, **kwargs):
         return self
 
-    def to_excel(self, writer, sheet_name: str, index: bool):
+    def to_excel(self, writer, sheet_name: str, index: bool, header: bool = True):
+        assert index is False
+        assert header is False
         # Access openpyxl workbook via pd.ExcelWriter.book attribute
         book = getattr(writer, "book", None)
         if book is not None:
