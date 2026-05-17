@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/watermark",
     "/sign",
     "/pdf-to-word",
+    "/ocr",
   ];
 
   return [

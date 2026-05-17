@@ -18,7 +18,8 @@ export type ToolName =
   | "unlock"
   | "watermark"
   | "sign"
-  | "pdf-to-word";
+  | "pdf-to-word"
+  | "ocr";
 
 export type DeviceCategory = "mobile" | "tablet" | "desktop";
 

@@ -25,6 +25,7 @@ const ALL_TOOLS = [
   { href: "/watermark", name: "Tambah Watermark PDF" },
   { href: "/sign", name: "Tanda Tangani PDF" },
   { href: "/pdf-to-word", name: "PDF ke Word" },
+  { href: "/ocr", name: "OCR PDF" },
 ];
 
 /* ── Component ── */

@@ -8,7 +8,12 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
-    pool: "threads",
+    pool: "forks",
+    poolOptions: {
+      forks: {
+        singleFork: true,
+      },
+    },
   },
   resolve: {
     alias: {
