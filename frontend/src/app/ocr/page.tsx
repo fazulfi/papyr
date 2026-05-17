@@ -294,10 +294,10 @@ export default function OcrPage() {
           OCR PDF
         </h1>
         <p className="text-base text-slate-500">
-          Ekstrak teks dari file PDF gambar atau scan menjadi dokumen Word (.docx).
+          Jadikan PDF scan memiliki text layer agar teksnya bisa dicari dan diseleksi.
         </p>
         <p className="mt-2 max-w-md text-sm text-slate-400">
-          Cocok untuk dokumen scan, foto dokumen, atau PDF berisi gambar teks.
+          Hasil tetap berupa PDF, cocok untuk dokumen scan, foto dokumen, atau PDF berisi gambar teks.
           File diproses di server dan otomatis dihapus setelah 1 jam.
         </p>
         <p className="mt-2 rounded-full bg-amber-50 px-4 py-2 text-xs font-medium text-amber-700">
@@ -532,7 +532,7 @@ export default function OcrPage() {
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent/90"
           >
             <DownloadIcon className="-mt-0.5" />
-            Download File Word
+            Download PDF OCR
           </a>
 
           <button

@@ -274,7 +274,7 @@ describe("OCR page", () => {
       const html = renderPage();
 
       expect(html).toContain("OCR PDF");
-      expect(html).toContain("Ekstrak teks dari file PDF gambar atau scan menjadi dokumen Word (.docx).");
+    expect(html).toContain("Jadikan PDF scan memiliki text layer agar teksnya bisa dicari dan diseleksi.");
       expect(html).toContain("Maksimal 50 halaman");
       expect(html).toContain("Estimasi 30 detik – 3 menit");
       expect(html).toContain("Upload file PDF");
@@ -362,7 +362,7 @@ describe("OCR page", () => {
       expect(html).toContain("Link berlaku");
       expect(html).toContain("1:00");
       expect(html).toContain("href=\"https://files.example.com/ocr.docx\"");
-      expect(html).toContain("Download File Word");
+    expect(html).toContain("Download PDF OCR");
       expect(html).toContain("OCR File Lain");
     });
 
@@ -390,7 +390,7 @@ describe("OCR page", () => {
     it("renders no done panel when status is done but result is null", () => {
       setTaskState({ status: "done", result: null });
       const html = renderPage();
-      expect(html).not.toContain("Download File Word");
+    expect(html).not.toContain("Download PDF OCR");
     });
 
     it("renders failed state with file, error, back and retry controls", () => {

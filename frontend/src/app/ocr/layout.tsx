@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "OCR PDF — Konversi Gambar ke Teks (DOCX) - Papyr",
+  title: "OCR PDF — Jadikan PDF Scan Bisa Dicari - Papyr",
   description:
-    "Ekstrak teks dari file PDF gambar atau scan menggunakan OCR. Hasil dalam format Word (.docx). Gratis, tanpa registrasi.",
+    "Jadikan file PDF gambar atau scan memiliki text layer yang bisa dicari dan diseleksi. Hasil tetap dalam format PDF. Gratis, tanpa registrasi.",
   openGraph: {
-    title: "OCR PDF — Konversi Gambar ke Teks (DOCX) - Papyr",
+    title: "OCR PDF — Jadikan PDF Scan Bisa Dicari - Papyr",
     description:
-      "Ekstrak teks dari file PDF gambar atau scan menggunakan OCR. Hasil dalam format Word (.docx). Gratis, tanpa registrasi.",
+      "Jadikan file PDF gambar atau scan memiliki text layer yang bisa dicari dan diseleksi. Hasil tetap dalam format PDF. Gratis, tanpa registrasi.",
     url: "https://mypapyr.com/ocr",
     images: ["/og/ocr.png"],
   },
