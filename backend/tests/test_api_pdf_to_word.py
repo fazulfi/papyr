@@ -239,15 +239,56 @@ async def test_convert_pdf_to_docx_no_output_file(tmp_path):
         returncode = 0
         stderr = ""
 
-    # Don't create any output file — LibreOffice "succeeded" but produced nothing
+    # Don't create any output file — LibreOffice "succeeded" but produced nothing.
+    # Fallback also fails for this fake PDF, so the original output-file error path remains covered.
     with (
         patch("routers.pdf_to_word.tempfile.mkdtemp", side_effect=fake_mkdtemp),
         patch("routers.pdf_to_word.tempfile.mkstemp", side_effect=fake_mkstemp),
         patch("routers.pdf_to_word.subprocess.run", return_value=_Done()),
+        patch(
+            "routers.pdf_to_word._create_text_layer_docx",
+            side_effect=RuntimeError("LibreOffice did not produce output file"),
+        ),
     ):
         with pytest.raises(RuntimeError) as exc_info:
             await pdf_to_word._convert_pdf_to_docx(PDF_BYTES, "a.pdf", "t6")
     assert "did not produce" in str(exc_info.value).lower()
+
+
+@pytest.mark.asyncio
+async def test_convert_pdf_to_docx_falls_back_to_text_layer_docx(tmp_path):
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+
+    def fake_mkdtemp(prefix=""):
+        return str(output_dir)
+
+    def fake_mkstemp(suffix="", prefix=""):
+        p = tmp_path / "in.pdf"
+        fd = os.open(str(p), os.O_CREAT | os.O_WRONLY)
+        return fd, str(p)
+
+    class _Done:
+        returncode = 0
+        stderr = ""
+
+    def fake_fallback(file_bytes: bytes, output_path: str):
+        assert file_bytes == PDF_BYTES
+        with open(output_path, "wb") as file:
+            file.write(b"fallback-docx")
+
+    with (
+        patch("routers.pdf_to_word.tempfile.mkdtemp", side_effect=fake_mkdtemp),
+        patch("routers.pdf_to_word.tempfile.mkstemp", side_effect=fake_mkstemp),
+        patch("routers.pdf_to_word.subprocess.run", return_value=_Done()),
+        patch("routers.pdf_to_word._create_text_layer_docx", side_effect=fake_fallback),
+        patch("routers.pdf_to_word.upload_file", return_value={"key": "k"}),
+        patch("routers.pdf_to_word.generate_signed_url", return_value="https://signed/url"),
+    ):
+        result = await pdf_to_word._convert_pdf_to_docx(PDF_BYTES, "a.pdf", "t7")
+
+    assert result["download_url"] == "https://signed/url"
+    assert result["output_size"] == len(b"fallback-docx")
 
 
 def test_is_scanned_pdf_exception_returns_false():

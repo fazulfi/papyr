@@ -16,6 +16,7 @@ import time
 from datetime import datetime, timedelta, timezone
 
 import fitz  # PyMuPDF
+from docx import Document as DocxDocument
 from fastapi import APIRouter, File, HTTPException, Request, UploadFile
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -61,11 +62,43 @@ def _is_scanned_pdf(file_bytes: bytes) -> bool:
         return False
 
 
+def _create_text_layer_docx(file_bytes: bytes, output_path: str) -> None:
+    """Create a basic DOCX from extractable PDF text as a LibreOffice fallback."""
+    document = DocxDocument()
+    extracted_any_text = False
+
+    doc = fitz.open(stream=file_bytes, filetype="pdf")
+    try:
+        page_index = 0
+        for page in doc:
+            text = page.get_text().strip()
+            if page_index > 0:
+                document.add_page_break()
+
+            if text:
+                extracted_any_text = True
+                for paragraph in text.splitlines():
+                    cleaned = paragraph.strip()
+                    if cleaned:
+                        document.add_paragraph(cleaned)
+            else:
+                document.add_paragraph("")
+
+            page_index += 1
+    finally:
+        doc.close()
+
+    if not extracted_any_text:
+        raise RuntimeError("PDF ini adalah scan, gunakan OCR terlebih dahulu.")
+
+    document.save(output_path)
+
+
 async def _convert_pdf_to_docx(
     file_bytes: bytes,
     original_filename: str,
     task_id: str,
-) -> dict:
+) -> dict[str, str | int]:
     """
     Background coroutine: convert PDF to DOCX via LibreOffice, upload to R2.
 
@@ -112,7 +145,11 @@ async def _convert_pdf_to_docx(
         output_path = os.path.join(output_dir, f"{base_name}.docx")
 
         if not os.path.exists(output_path):
-            raise RuntimeError("LibreOffice did not produce output file")
+            logger.warning(
+                "LibreOffice did not produce output file for task %s; using text-layer fallback",
+                task_id,
+            )
+            _create_text_layer_docx(file_bytes, output_path)
 
         output_size = os.path.getsize(output_path)
         if output_size == 0:
