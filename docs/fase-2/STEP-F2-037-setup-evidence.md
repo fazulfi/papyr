@@ -193,11 +193,11 @@ docker images papyr-backend --format "{{.Repository}}:{{.Tag}} size={{.Size}}"
 
 ### Commits
 
-1. **`<hash>`** — `infra(fase2): install camelot-py + opencv-python-headless for PDF-to-Excel (M18)`
+1. **1ce786a** — `infra(fase2): install camelot-py + opencv-python-headless for PDF-to-Excel (M18)`
    - Files: `backend/requirements.txt`, `backend/Dockerfile`, `stepprompts/progress.md`
    - Refs: PAPYR-146, PAPYR-147, PAPYR-148
 
-2. **`<hash>`** — `docs(fase2): mark STEP-F2-037 complete and add evidence`
+2. **9fc0b8a** — `docs(fase2): mark STEP-F2-037 complete and add evidence`
    - Files: `docs/fase-2/STEP-F2-037-setup-evidence.md`
    - Refs: PAPYR-146
 
