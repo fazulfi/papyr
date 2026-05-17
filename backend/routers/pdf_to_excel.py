@@ -41,6 +41,44 @@ _XLSX_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetm
 _MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # 20 MB
 
 
+async def _extract_tables_with_camelot(camelot, input_path: str) -> list:
+    """Extract tables with bordered-table preference, then stream fallback.
+
+    Lattice captures invoices/forms with visible table borders more accurately,
+    while stream still helps with borderless tables. Keep both so the first sheet
+    is the most structured result for common invoice PDFs.
+    """
+    tables: list = []
+    errors: list[str] = []
+
+    extraction_attempts = (
+        ("lattice", {}),
+        ("stream", {"edge_tol": 500, "row_tol": 10}),
+    )
+
+    for flavor, options in extraction_attempts:
+        try:
+            extracted = await asyncio.to_thread(
+                camelot.read_pdf,
+                input_path,
+                pages="1-end",
+                flavor=flavor,
+                **options,
+            )
+        except Exception as exc:
+            errors.append(f"{flavor}: {exc}")
+            logger.warning("Camelot %s extraction failed: %s", flavor, exc)
+            continue
+
+        if extracted:
+            return list(extracted)
+
+    if errors and not tables:
+        raise RuntimeError("; ".join(errors))
+
+    return tables
+
+
 async def _convert_pdf_to_excel(
     file_bytes: bytes,
     original_filename: str,
@@ -74,14 +112,10 @@ async def _convert_pdf_to_excel(
         pass
 
     try:
-        # Run Camelot table extraction in thread pool
-        # Using stream flavor for better text alignment extraction
-        tables = await asyncio.to_thread(
-            camelot.read_pdf,
-            input_path,
-            pages="1-end",
-            flavor="stream",
-        )
+        # Run Camelot table extraction in thread pool.
+        # Prefer lattice for invoices/forms with visible table borders, then
+        # stream for borderless tables.
+        tables = await _extract_tables_with_camelot(camelot, input_path)
 
         if not tables or len(tables) == 0:
             raise RuntimeError("Tidak ada tabel yang ditemukan di PDF.")

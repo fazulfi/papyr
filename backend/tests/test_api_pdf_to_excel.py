@@ -422,8 +422,8 @@ async def test_convert_pdf_to_excel_success(tmp_path, _stub_pandas_module, _stub
 
 
 @pytest.mark.asyncio
-async def test_convert_pdf_to_excel_uses_camelot_read_pdf(tmp_path, _stub_pandas_module, _stub_camelot_module):
-    """Regression: Camelot 1.x exposes read_pdf, not extract."""
+async def test_convert_pdf_to_excel_prefers_camelot_lattice_read_pdf(tmp_path, _stub_pandas_module, _stub_camelot_module):
+    """Regression: Camelot 1.x exposes read_pdf; bordered invoices prefer lattice."""
     input_path = tmp_path / "in.pdf"
     output_path = tmp_path / "out.xlsx"
     output_ref = [str(output_path)]
@@ -432,7 +432,7 @@ async def test_convert_pdf_to_excel_uses_camelot_read_pdf(tmp_path, _stub_pandas
     async def fake_to_thread(func, *args, **kwargs):
         assert func is _stub_camelot_module.read_pdf
         assert args == (str(input_path),)
-        assert kwargs == {"pages": "1-end", "flavor": "stream"}
+        assert kwargs == {"pages": "1-end", "flavor": "lattice"}
         return [_FakeTable()]
 
     with (
@@ -448,6 +448,43 @@ async def test_convert_pdf_to_excel_uses_camelot_read_pdf(tmp_path, _stub_pandas
         )
 
     assert result["download_url"] == "https://signed/read-pdf"
+    assert result["tables_found"] == 1
+
+
+@pytest.mark.asyncio
+async def test_convert_pdf_to_excel_falls_back_to_stream_when_lattice_empty(
+    tmp_path, _stub_pandas_module, _stub_camelot_module
+):
+    """Borderless tables still use Camelot stream when lattice finds nothing."""
+    input_path = tmp_path / "in.pdf"
+    output_path = tmp_path / "out.xlsx"
+    output_ref = [str(output_path)]
+    fake_mkstemp = _mkstemp_fake_factory(input_path, output_path, output_ref)
+    flavors_seen = []
+
+    async def fake_to_thread(func, *args, **kwargs):
+        assert func is _stub_camelot_module.read_pdf
+        assert args == (str(input_path),)
+        flavors_seen.append(kwargs["flavor"])
+        if kwargs["flavor"] == "lattice":
+            return []
+        assert kwargs == {"pages": "1-end", "flavor": "stream", "edge_tol": 500, "row_tol": 10}
+        return [_FakeTable()]
+
+    with (
+        patch("routers.pdf_to_excel.tempfile.mkstemp", side_effect=fake_mkstemp),
+        patch("routers.pdf_to_excel.asyncio.to_thread", side_effect=fake_to_thread),
+        patch("routers.pdf_to_excel.upload_file", return_value={"key": "k"}),
+        patch("routers.pdf_to_excel.generate_signed_url", return_value="https://signed/stream-fallback"),
+    ):
+        result = await pdf_to_excel._convert_pdf_to_excel(
+            file_bytes=PDF_BYTES,
+            original_filename="stream.pdf",
+            task_id="stream-fallback",
+        )
+
+    assert flavors_seen == ["lattice", "stream"]
+    assert result["download_url"] == "https://signed/stream-fallback"
     assert result["tables_found"] == 1
 
 
