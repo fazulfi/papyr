@@ -109,22 +109,22 @@ All modified/new files — zero errors:
 
 ### Commits
 
-1. **`<hash>`** — `feat(fase2): add /pdf-to-excel frontend page + analytics integration + nav/sitemap updates`
+1. **`5e6c243`** — `feat(fase2): add /pdf-to-excel frontend page + analytics integration + nav/sitemap updates`
    - Files: `frontend/src/app/pdf-to-excel/page.tsx`, `frontend/src/app/pdf-to-excel/layout.tsx`, `frontend/src/app/sitemap.ts`, `frontend/src/lib/analytics.ts`, `frontend/src/components/OtherTools.tsx`, `frontend/src/components/Navbar.tsx`
    - Refs: PAPYR-147, PAPYR-148
 
-2. **`<hash>`** — `test(fase2): add frontend unit tests for /pdf-to-excel page`
+2. **`d33bb51`** — `test(fase2): add frontend unit tests for /pdf-to-excel page (40 tests)`
    - Files: `frontend/src/__tests__/pdf-to-excel.test.tsx`
    - Refs: PAPYR-149
 
-3. **`<hash>`** — `docs(fase2): mark STEP-F2-039 complete and add evidence`
+3. **`4aaab47`** — `docs(fase2): mark STEP-F2-039 complete and add evidence`
    - Files: `stepprompts/progress.md`, `docs/fase-2/STEP-F2-039-setup-evidence.md`
 
 ### Push
 
 - **Command**: `git push origin main`
-- **Result**: _pending_
-- **Status**: _pending_
+- **Result**: `main -> main` (`964d3b8..4aaab47`)
+- **Status**: ✅ pushed
 - **Deploy**: Vercel auto-deploy triggered after push to `main` branch; Railway auto-deploy for backend
 
 ## Notes
