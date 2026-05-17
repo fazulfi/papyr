@@ -1,0 +1,18 @@
+target-version = "py311"
+line-length = 100
+
+[lint]
+select = ["E", "F", "I", "W", "UP", "B"]
+ignore = [
+  # Line length is delegated to the formatter; no need to lint it.
+  "E501",
+  # FastAPI dependency-injection pattern uses Depends() in default values.
+  "B008",
+]
+
+[lint.isort]
+known-first-party = ["routers", "services", "utils"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
