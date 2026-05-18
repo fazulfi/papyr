@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-18
-**Current Step:** STEP-MIG-000 (Pre-flight audit; Fase 2D paused after STEP-F2-050; Railway → VPS migration takes priority)
-**Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps)
+**Current Step:** STEP-MIG-001 (emergency lockdown VPS — STEP-MIG-000 complete with caveats)
+**Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps, 1/22 done)
 
 ---
 
@@ -222,7 +222,7 @@
 
 | Step | Title | Status |
 |------|-------|--------|
-| STEP-MIG-000 | Pre-flight audit + Railway extraction | ⬜ |
+| STEP-MIG-000 | Pre-flight audit + Railway extraction | ✅ 2026-05-18 (with caveats: R2 keys leaked in chat → must rotate before MIG-013; Linode/IDCH no-2FA documented as known risk; Linode snapshot skipped — reseller account, mitigated via restic) |
 | STEP-MIG-001 | Emergency lockdown VPS | ⬜ |
 | STEP-MIG-002 | Intrusion prevention layer (CrowdSec, auditd, sysctl) | ⬜ |
 | STEP-MIG-003 | Filesystem integrity + rootkit detection (AIDE) | ⬜ |
