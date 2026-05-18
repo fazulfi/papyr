@@ -20,6 +20,7 @@ This document is the executable, step-by-step companion to the migration plan. E
 7. Snapshots first, changes second. Take a Linode snapshot at the start of each major track (000, 001, 008, 014, 017).
 8. All commands assume non-interactive execution. Use `-y`, `--no-pager`, `DEBIAN_FRONTEND=noninteractive` where applicable.
 9. Bahasa Indonesia for prose, English for code/identifiers.
+10. **Setup evidence per step** — setiap STEP-MIG-XXX selesai, buat `docs/migration/STEP-MIG-XXX-setup-evidence.md` dengan format yang sama (Step Info, Scope, Files Changed, Validation Evidence, Definition of Done, Issues + Resolutions, Git commits, Notes). Pattern reference: `docs/migration/STEP-MIG-002-setup-evidence.md`. Commit evidence sebelum mark step complete di `progress.md`.
 
 ### SSH Alias Convention (post-MIG-001)
 
