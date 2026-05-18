@@ -4,7 +4,7 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-18
-**Current Step:** STEP-MIG-003 (filesystem integrity + rootkit detection — STEP-MIG-002 complete)
+**Current Step:** STEP-MIG-004 (egress filtering + honeypot — STEP-MIG-003 complete)
 **Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps, 1/22 done)
 
 ---
@@ -225,7 +225,7 @@
 | STEP-MIG-000 | Pre-flight audit + Railway extraction | ✅ 2026-05-18 (with caveats: R2 keys leaked in chat → operator-accepted, rotation deferred to MIG-020; Linode/IDCH no-2FA documented as known risk; Linode snapshot skipped — reseller account, mitigated via restic) |
 | STEP-MIG-001 | Emergency lockdown VPS | ✅ 2026-05-18 (deploy user + key-only auth on port 52022, root SSH disabled, UFW deny default + 52022/80/443 allow, sshd_config backup at /etc/ssh/sshd_config.bak.pre-mig-001, SSH alias `papyr` configured on laptop) |
 | STEP-MIG-002 | Intrusion prevention layer (CrowdSec, auditd, sysctl) | ✅ 2026-05-18 (CrowdSec + firewall bouncer + 3 collections active, fail2ban purged, unattended-upgrades enabled with auto-reboot 04:00, auditd 10 rules loaded, sysctl hardening applied, USB storage blocked, snapd masked, umask 027 for deploy user) |
-| STEP-MIG-003 | Filesystem integrity + rootkit detection (AIDE) | ⬜ |
+| STEP-MIG-003 | Filesystem integrity + rootkit detection (AIDE) | ✅ 2026-05-19 (AIDE 26MB baseline + daily cron with --config, /tmp+/var/tmp tmpfs noexec/nosuid/nodev, chkrootkit + rkhunter + weekly cron, Lynis hardening index 74/100) |
 | STEP-MIG-004 | Egress filtering + honeypot (block mining ports + endlessh) | ⬜ |
 | STEP-MIG-005 | Compliance baselines (OpenSCAP CIS L1 + Lynis) | ⬜ |
 | STEP-MIG-006 | Server foundation (Docker + 4GB swap + dirs) | ⬜ |
