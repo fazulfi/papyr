@@ -805,10 +805,13 @@ sudo apt install -y aide aide-common
 
 **3.2 Configure AIDE untuk Papyr:**
 
+`/opt/papyr/` belum exist saat MIG-003 dijalankan (akan dibuat di MIG-008). AIDE akan no-op untuk path yang tidak exist; saat MIG-008 nanti baru run `sudo aide --update` untuk register direktori baru ke baseline.
+
 ```bash
 sudo tee /etc/aide/aide.conf.d/99_papyr_local > /dev/null <<'EOF'
 # Papyr-specific AIDE rules
 # Monitor /opt/papyr but exclude logs/temp dirs
+# Note: /opt/papyr/ akan dibuat di STEP-MIG-008. AIDE no-op until then.
 /opt/papyr$ NORMAL
 !/opt/papyr/logs
 !/opt/papyr/temp
@@ -850,6 +853,10 @@ Ubuntu 22.04 default `/tmp` shared dengan rootfs. Kita bind-mount dengan flags k
 ```bash
 # Backup current fstab
 sudo cp /etc/fstab /etc/fstab.bak.pre-mig-003
+
+# Safety: pastikan tidak ada file di /tmp yang sedang dipakai (lsof harus kosong atau hanya systemd noise)
+sudo lsof /tmp 2>/dev/null | head -10
+sudo lsof /var/tmp 2>/dev/null | head -10
 
 # Append tmpfs mounts
 sudo tee -a /etc/fstab > /dev/null <<'EOF'
@@ -904,8 +911,8 @@ sudo chmod +x /etc/cron.weekly/rootkit-scan
 ```bash
 sudo apt install -y lynis
 sudo mkdir -p /opt/papyr/security
+sudo chown -R deploy:deploy /opt/papyr
 sudo lynis audit system --no-colors > /opt/papyr/security/lynis-baseline-$(date +%Y%m%d).log 2>&1
-sudo chown -R deploy:deploy /opt/papyr/security
 ```
 
 ### Verifikasi
