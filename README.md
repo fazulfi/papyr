@@ -18,7 +18,7 @@
   <br />
   <br />
 
-  <a href="https://papyr-production.up.railway.app/health">
+  <a href="https://api.mypapyr.com/health">
     <img src="https://img.shields.io/badge/API-online-success?style=flat-square" alt="API Status" />
   </a>
   <a href="https://github.com/fazulfi/papyr/commits/develop">

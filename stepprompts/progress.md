@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-18
-**Current Step:** STEP-F2-051
-**Overall Progress:** 48 / 97 (49%)
+**Current Step:** STEP-MIG-001 (Fase 2D paused after STEP-F2-050; Railway → VPS migration takes priority)
+**Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below
 
 ---
 
@@ -209,3 +209,32 @@
 | STEP-F2-041 — 054 | PAPYR-159 — 178 | M19-M20: Cross-cutting Quality | 2D |
 | STEP-F2-055 — 082 | PAPYR-179 — 224 | M21: OpenClaw AI Agent | 2E |
 | STEP-F2-083 — 097 | PAPYR-204 — 218 | M22: Admin Dashboard | 2F |
+
+---
+
+## Sub-track: Railway → VPS Migration (STEP-MIG-*)
+
+> Fase 2D paused after STEP-F2-050. Backend migration from Railway to HostData.id NAT 4GB VPS takes priority because STEP-F2-051+ wires monitoring to the production backend URL — running it before migration would mean rewiring monitors immediately afterward. Single environment (production-only); no staging.
+>
+> Reference plan: [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](../docs/35_Papyr_VPS_Migration_Plan_v1.0.md)
+> Step prompts: [`stepprompts/step-prompts-vps-migration.md`](step-prompts-vps-migration.md)
+
+| Step | Title | Status |
+|------|-------|--------|
+| STEP-MIG-001 | Order VPS at HostData.id (NAT 4GB) + initial SSH access | ⬜ |
+| STEP-MIG-002 | Server hardening (Docker, UFW, fail2ban, swap, deploy user) | ⬜ |
+| STEP-MIG-003 | Production Dockerfile (multi-stage, native deps) | ⬜ |
+| STEP-MIG-004 | docker-compose.yml (single backend service + Nginx) | ⬜ |
+| STEP-MIG-005 | Nginx reverse proxy for `api.mypapyr.com` | ⬜ |
+| STEP-MIG-006 | GitHub Actions deploy workflow → GHCR → SSH deploy | ⬜ |
+| STEP-MIG-007 | Cloudflare DNS (`api.mypapyr.com` CNAME → VPS via VDF) | ⬜ |
+| STEP-MIG-008 | First deploy + smoke verify on VPS | ⬜ |
+| STEP-MIG-009 | Cutover (Vercel `NEXT_PUBLIC_API_URL` → `api.mypapyr.com`) | ⬜ |
+| STEP-MIG-010 | Production verification (24h soak, 13 tools end-to-end) | ⬜ |
+| STEP-MIG-011 | Decommission Railway | ⬜ |
+| STEP-MIG-012 | Monitoring agent + log rotation on VPS | ⬜ |
+| STEP-MIG-013 | RAM mitigation hardening (swap config, container limits, OOM trigger) | ⬜ |
+| STEP-MIG-014 | Operations runbook (`docs/runbook.md`) | ⬜ |
+| STEP-MIG-015 | Tag release v2.0.0 | ⬜ |
+
+After STEP-MIG-015 completes, Fase 2D resumes at STEP-F2-051 with all monitoring URLs pointing at `api.mypapyr.com` instead of the legacy Railway endpoint.
