@@ -1151,8 +1151,7 @@ sudo apt install -y libopenscap8 ssg-base ssg-applications scap-security-guide
 **5.2 Run OpenSCAP scan dengan CIS Ubuntu 22.04 profile:**
 
 ```bash
-mkdir -p /opt/papyr/security
-cd /opt/papyr/security
+# /opt/papyr/security sudah dibuat di STEP-MIG-003 (owner deploy:deploy).
 
 # List available profiles
 sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2204-ds.xml | grep "Profile" | head -10
@@ -1178,50 +1177,60 @@ scp -i $HOME\.ssh\papyr\operator -P 52022 deploy@172.235.251.193:/opt/papyr/secu
 
 **5.4 Apply mandatory remediations dari OpenSCAP findings:**
 
-Common findings dan fix:
+Common findings dan fix (idempotent — safe to re-run):
 
 ```bash
 # Sebagai deploy + sudo
 
-# Disable IPv4 forwarding
-sudo sed -i 's/^#net.ipv4.ip_forward.*/net.ipv4.ip_forward=0/' /etc/sysctl.d/99-papyr-hardening.conf
-echo "net.ipv4.ip_forward = 0" | sudo tee -a /etc/sysctl.d/99-papyr-hardening.conf
+# Disable IPv4 forwarding (idempotent: only append if not present)
+if ! grep -qE '^net\.ipv4\.ip_forward\s*=\s*0' /etc/sysctl.d/99-papyr-hardening.conf; then
+  echo "net.ipv4.ip_forward = 0" | sudo tee -a /etc/sysctl.d/99-papyr-hardening.conf
+fi
 
-# Disable core dumps
-echo "* hard core 0" | sudo tee -a /etc/security/limits.d/papyr.conf
-echo "fs.suid_dumpable = 0" | sudo tee -a /etc/sysctl.d/99-papyr-hardening.conf
+# Disable core dumps via limits.d (sysctl suid_dumpable already set di MIG-002)
+if ! sudo test -f /etc/security/limits.d/papyr.conf || ! sudo grep -q '^\* hard core 0' /etc/security/limits.d/papyr.conf; then
+  echo "* hard core 0" | sudo tee /etc/security/limits.d/papyr.conf
+fi
 
-# Set login banner
+# Set login banner (idempotent)
 sudo tee /etc/issue.net > /dev/null <<'EOF'
 WARNING: Authorized access only. All activity is logged and monitored.
 EOF
-sudo sed -i 's/^#Banner.*/Banner \/etc\/issue.net/' /etc/ssh/sshd_config
+
+# Add Banner directive to sshd_config (idempotent)
+if ! sudo grep -qE '^Banner\s+/etc/issue\.net' /etc/ssh/sshd_config; then
+  echo "Banner /etc/issue.net" | sudo tee -a /etc/ssh/sshd_config
+fi
 
 # Apply sysctl
-sudo sysctl --system
+sudo sysctl --system > /dev/null
 
-# Restart sshd to apply banner
-sudo systemctl restart sshd
+# Reload sshd (no disconnect; reload supported di OpenSSH 8+ Ubuntu 22.04)
+sudo sshd -t  # validate config first
+sudo systemctl reload sshd
 
-# Set default umask di profile
-echo "umask 027" | sudo tee /etc/profile.d/umask.sh
+# Set default umask di profile (idempotent)
+echo "umask 027" | sudo tee /etc/profile.d/umask.sh > /dev/null
 sudo chmod +x /etc/profile.d/umask.sh
 ```
 
 **5.5 Document deferred items:**
 
+Note: heredoc dengan `'EOF'` quoted prevents `$()` substitution. Render `Last updated:` lewat real `date` substitution dulu, baru tee.
+
 ```bash
-sudo tee /opt/papyr/security/security-baseline.md > /dev/null <<'EOF'
+TODAY=$(date +%Y-%m-%d)
+sudo tee /opt/papyr/security/security-baseline.md > /dev/null <<EOF
 # Security Baseline — Papyr Production VPS
 
-Last updated: $(date +%Y-%m-%d)
+Last updated: ${TODAY}
 
 ## Compliance Reference
 - CIS Ubuntu Linux 22.04 Benchmark Level 1 Server
 
 ## Applied Remediations
-- See `openscap-results-*.xml` for full audit trail
-- Kernel hardening sysctl applied (`/etc/sysctl.d/99-papyr-hardening.conf`)
+- See \`openscap-results-*.xml\` for full audit trail
+- Kernel hardening sysctl applied (\`/etc/sysctl.d/99-papyr-hardening.conf\`)
 - Login banner set
 - IPv4 forwarding disabled
 - Core dumps disabled
@@ -1241,11 +1250,13 @@ Last updated: $(date +%Y-%m-%d)
 - Rootkit: weekly (cron, see STEP-MIG-003)
 
 ## Audit Trail
-- `/opt/papyr/security/openscap-results-*.xml` — raw OpenSCAP results
-- `/opt/papyr/security/openscap-report-*.html` — human-readable report
-- `/opt/papyr/security/lynis-baseline-*.log` — Lynis baseline (STEP-MIG-003)
-- `/opt/papyr/security/lynis-postharden-*.log` — Lynis after hardening (this step)
+- \`/opt/papyr/security/openscap-results-*.xml\` — raw OpenSCAP results
+- \`/opt/papyr/security/openscap-report-*.html\` — human-readable report
+- \`/opt/papyr/security/lynis-baseline-*.log\` — Lynis baseline (STEP-MIG-003)
+- \`/opt/papyr/security/lynis-postharden-*.log\` — Lynis after hardening (this step)
 EOF
+
+sudo chown deploy:deploy /opt/papyr/security/security-baseline.md
 ```
 
 **5.6 Re-run Lynis untuk compare hardening index:**
