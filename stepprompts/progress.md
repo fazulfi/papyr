@@ -4,8 +4,8 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-18
-**Current Step:** STEP-MIG-001 (Fase 2D paused after STEP-F2-050; Railway → VPS migration takes priority)
-**Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below
+**Current Step:** STEP-MIG-000 (Pre-flight audit; Fase 2D paused after STEP-F2-050; Railway → VPS migration takes priority)
+**Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps)
 
 ---
 
@@ -214,27 +214,35 @@
 
 ## Sub-track: Railway → VPS Migration (STEP-MIG-*)
 
-> Fase 2D paused after STEP-F2-050. Backend migration from Railway to HostData.id NAT 4GB VPS takes priority because STEP-F2-051+ wires monitoring to the production backend URL — running it before migration would mean rewiring monitors immediately afterward. Single environment (production-only); no staging.
+> Fase 2D paused after STEP-F2-050. Backend migration from Railway to **Linode VPS Jakarta (8GB / 4 cores, dedicated IPv4)** takes priority because STEP-F2-051+ wires monitoring to the production backend URL — running it before migration would mean rewiring monitors immediately afterward. **Single environment (production-only); no staging.** Threat model is paranoid-grade because of prior cryptojacking history.
 >
-> Reference plan: [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](../docs/35_Papyr_VPS_Migration_Plan_v1.0.md)
-> Step prompts: [`stepprompts/step-prompts-vps-migration.md`](step-prompts-vps-migration.md)
+> - Reference plan: [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](../docs/35_Papyr_VPS_Migration_Plan_v1.0.md) *(rewrite deferred to actual migration start; existing dual-stack draft is reference-only)*
+> - Step prompts: [`stepprompts/step-prompts-vps-migration.md`](step-prompts-vps-migration.md) *(22 steps, production-only, paranoid-grade)*
+> - Access credentials: `docs/vps-access.md` *(gitignored, on operator laptop)*
 
 | Step | Title | Status |
 |------|-------|--------|
-| STEP-MIG-001 | Order VPS at HostData.id (NAT 4GB) + initial SSH access | ⬜ |
-| STEP-MIG-002 | Server hardening (Docker, UFW, fail2ban, swap, deploy user) | ⬜ |
-| STEP-MIG-003 | Production Dockerfile (multi-stage, native deps) | ⬜ |
-| STEP-MIG-004 | docker-compose.yml (single backend service + Nginx) | ⬜ |
-| STEP-MIG-005 | Nginx reverse proxy for `api.mypapyr.com` | ⬜ |
-| STEP-MIG-006 | GitHub Actions deploy workflow → GHCR → SSH deploy | ⬜ |
-| STEP-MIG-007 | Cloudflare DNS (`api.mypapyr.com` CNAME → VPS via VDF) | ⬜ |
-| STEP-MIG-008 | First deploy + smoke verify on VPS | ⬜ |
-| STEP-MIG-009 | Cutover (Vercel `NEXT_PUBLIC_API_URL` → `api.mypapyr.com`) | ⬜ |
-| STEP-MIG-010 | Production verification (24h soak, 13 tools end-to-end) | ⬜ |
-| STEP-MIG-011 | Decommission Railway | ⬜ |
-| STEP-MIG-012 | Monitoring agent + log rotation on VPS | ⬜ |
-| STEP-MIG-013 | RAM mitigation hardening (swap config, container limits, OOM trigger) | ⬜ |
-| STEP-MIG-014 | Operations runbook (`docs/runbook.md`) | ⬜ |
-| STEP-MIG-015 | Tag release v2.0.0 | ⬜ |
+| STEP-MIG-000 | Pre-flight audit + Railway extraction | ⬜ |
+| STEP-MIG-001 | Emergency lockdown VPS | ⬜ |
+| STEP-MIG-002 | Intrusion prevention layer (CrowdSec, auditd, sysctl) | ⬜ |
+| STEP-MIG-003 | Filesystem integrity + rootkit detection (AIDE) | ⬜ |
+| STEP-MIG-004 | Egress filtering + honeypot (block mining ports + endlessh) | ⬜ |
+| STEP-MIG-005 | Compliance baselines (OpenSCAP CIS L1 + Lynis) | ⬜ |
+| STEP-MIG-006 | Server foundation (Docker + 4GB swap + dirs) | ⬜ |
+| STEP-MIG-007 | SSH 2FA (TOTP) + LISH emergency recovery | ⬜ |
+| STEP-MIG-008 | Production Dockerfile + SBOM (syft) | ⬜ |
+| STEP-MIG-009 | docker-compose + container hardening (digest pinning) | ⬜ |
+| STEP-MIG-010 | Nginx reverse proxy + security headers | ⬜ |
+| STEP-MIG-011 | Cloudflare DNS + WAF + DNSSEC + Let's Encrypt | ⬜ |
+| STEP-MIG-012 | GitHub Actions deploy + supply chain (trivy + SBOM) | ⬜ |
+| STEP-MIG-013 | First deploy + smoke verify | ⬜ |
+| STEP-MIG-014 | Cutover Vercel `NEXT_PUBLIC_API_URL` → `api.mypapyr.com` | ⬜ |
+| STEP-MIG-015 | Monitoring stack (Netdata + BetterStack + Telegram) | ⬜ |
+| STEP-MIG-016 | 24h soak + verify all 13 tools end-to-end | ⬜ |
+| STEP-MIG-017 | Decommission Railway | ⬜ |
+| STEP-MIG-018 | IDCloudHost S3 backup (restic) + DR drill | ⬜ |
+| STEP-MIG-019 | Operations runbook (`docs/runbook-vps.md`) | ⬜ |
+| STEP-MIG-020 | Post-migration secret rotation | ⬜ |
+| STEP-MIG-021 | Tag v2.0.0 + CHANGELOG + closeout | ⬜ |
 
-After STEP-MIG-015 completes, Fase 2D resumes at STEP-F2-051 with all monitoring URLs pointing at `api.mypapyr.com` instead of the legacy Railway endpoint.
+After STEP-MIG-021 completes, Fase 2D resumes. STEP-F2-051 (BetterStack monitoring) is delivered as part of STEP-MIG-015, so it can be marked ✅ at that point.
