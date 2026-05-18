@@ -807,12 +807,15 @@ sudo apt install -y aide aide-common
 
 `/opt/papyr/` belum exist saat MIG-003 dijalankan (akan dibuat di MIG-008). AIDE akan no-op untuk path yang tidak exist; saat MIG-008 nanti baru run `sudo aide --update` untuk register direktori baru ke baseline.
 
+> ⚠️ **Group selection note**: Ubuntu's AIDE drop-in (`/etc/aide/aide.conf.d/`) di-include **sebelum** group definitions di main config. Group `NORMAL` (umum di Debian) tidak ada di Ubuntu. Pakai `Full` (line 51 di `/etc/aide/aide.conf`) yang setara — covers OwnerMode + i + n + Size + l + X + Checksums.
+
 ```bash
 sudo tee /etc/aide/aide.conf.d/99_papyr_local > /dev/null <<'EOF'
 # Papyr-specific AIDE rules
 # Monitor /opt/papyr but exclude logs/temp dirs
 # Note: /opt/papyr/ akan dibuat di STEP-MIG-008. AIDE no-op until then.
-/opt/papyr$ NORMAL
+# Use Full group (defined in /etc/aide/aide.conf line 51) — covers OwnerMode + i + n + Size + l + X + Checksums
+/opt/papyr$ Full
 !/opt/papyr/logs
 !/opt/papyr/temp
 !/opt/papyr/backups
