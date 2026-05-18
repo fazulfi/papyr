@@ -1,6 +1,6 @@
 # Lighthouse + Bundle Analysis
 
-Last updated: 2026-05-17
+Last updated: 2026-05-18
 
 This document captures Papyr's frontend performance and SEO/accessibility
 audit setup. **The full Lighthouse run is not executed on the operator
@@ -106,6 +106,28 @@ not commitments:
 
 These will be re-evaluated against Lighthouse output once the audit is run
 in a non-laptop environment.
+
+## STEP-F2-050 Optimization Audit (2026-05-18)
+
+The conservative optimization pass (Option B) re-checked each item from
+the recommendations list against the live codebase. Results:
+
+| # | Recommendation | Audit result | Action taken |
+|---|----------------|--------------|--------------|
+| 1 | `pdfjs-dist` dynamically imported | **Already lazy** — both consumers (`components/PDFPageViewer.tsx`, `components/WatermarkPreview.tsx`) use `await import('pdfjs-dist')` inside effects. The PDF worker (`pdfjs-dist/build/pdf.worker.mjs`) is only fetched after the user uploads a file. | None needed. |
+| 2 | `pdf-lib` tree-shaken | **Already named-import only** — 4 production sites (`lib/pdfUtils.ts`, `app/watermark/processing.ts`, `app/sign/apply-signature.ts`, plus tests) import `{ PDFDocument, degrees, StandardFonts, rgb }`, never the full namespace. Each route only loads its own chunk on visit. | None needed. |
+| 3 | `@dnd-kit/*` per-tool footprint | Used by Merge for drag-and-drop reorder. Code-split per route by Next.js automatically; not pulled into homepage bundle. | None needed (further split would require larger refactor — out of scope for Option B). |
+| 4 | Replace `<img>` with `next/image` | One occurrence in `app/image-to-pdf/page.tsx` line 312, used to preview a `URL.createObjectURL()` blob. `next/image` requires `loader` config or remote pattern allow-list and explicit `width`/`height`; blob URLs intentionally don't have stable dimensions. | Left as-is, documented. |
+| 5 | Font setup with `display: swap` + `preload` | `next/font/google` was already used with DM_Sans, but `display` and `preload` were unset (relying on Next.js defaults). | **Applied:** added `display: 'swap'` and explicit `preload: true` to the `DM_Sans` import in `frontend/src/app/layout.tsx`. |
+| 6 | Theme inline script (FOUC risk) | Already inlined; no FOUC observed on local dev / build. | Re-evaluate after a real Lighthouse run on CI. |
+
+Net diff for STEP-F2-050: a single 2-line change in `frontend/src/app/layout.tsx`.
+
+The wider recommendations (extracting tool components into
+`components/tools/*` for forced dynamic-import boundaries, replacing the
+blob-URL preview in `image-to-pdf` with a custom `next/image` loader, etc.)
+are intentionally deferred. They require either real Lighthouse audit data
+or larger refactors that are out of scope for this conservative pass.
 
 ## Definition of "Done" for STEP-F2-049 (Option B)
 
