@@ -4,7 +4,7 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-18
-**Current Step:** STEP-MIG-001 (emergency lockdown VPS — STEP-MIG-000 complete with caveats)
+**Current Step:** STEP-MIG-002 (intrusion prevention layer — STEP-MIG-001 complete)
 **Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps, 1/22 done)
 
 ---
@@ -222,8 +222,8 @@
 
 | Step | Title | Status |
 |------|-------|--------|
-| STEP-MIG-000 | Pre-flight audit + Railway extraction | ✅ 2026-05-18 (with caveats: R2 keys leaked in chat → must rotate before MIG-013; Linode/IDCH no-2FA documented as known risk; Linode snapshot skipped — reseller account, mitigated via restic) |
-| STEP-MIG-001 | Emergency lockdown VPS | ⬜ |
+| STEP-MIG-000 | Pre-flight audit + Railway extraction | ✅ 2026-05-18 (with caveats: R2 keys leaked in chat → operator-accepted, rotation deferred to MIG-020; Linode/IDCH no-2FA documented as known risk; Linode snapshot skipped — reseller account, mitigated via restic) |
+| STEP-MIG-001 | Emergency lockdown VPS | ✅ 2026-05-18 (deploy user + key-only auth on port 52022, root SSH disabled, UFW deny default + 52022/80/443 allow, sshd_config backup at /etc/ssh/sshd_config.bak.pre-mig-001, SSH alias `papyr` configured on laptop) |
 | STEP-MIG-002 | Intrusion prevention layer (CrowdSec, auditd, sysctl) | ⬜ |
 | STEP-MIG-003 | Filesystem integrity + rootkit detection (AIDE) | ⬜ |
 | STEP-MIG-004 | Egress filtering + honeypot (block mining ports + endlessh) | ⬜ |

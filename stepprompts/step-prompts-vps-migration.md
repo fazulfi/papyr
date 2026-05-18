@@ -21,6 +21,27 @@ This document is the executable, step-by-step companion to the migration plan. E
 8. All commands assume non-interactive execution. Use `-y`, `--no-pager`, `DEBIAN_FRONTEND=noninteractive` where applicable.
 9. Bahasa Indonesia for prose, English for code/identifiers.
 
+### SSH Alias Convention (post-MIG-001)
+
+Setelah STEP-MIG-001 selesai, SSH ke VPS dilakukan via alias `papyr` yang terdaftar di laptop operator (`~/.ssh/config`). Mulai STEP-MIG-002 dan seterusnya, semua contoh perintah SSH/SCP dari laptop pakai bentuk alias supaya lebih ringkas dan konsisten.
+
+Bentuk alias (gunakan ini di STEP-MIG-002+):
+
+```
+ssh papyr                                        # interactive login as deploy
+ssh papyr "<remote command>"                     # run remote command
+scp file.txt papyr:/home/deploy/                 # copy file (modern OpenSSH membaca ~/.ssh/config untuk scp)
+```
+
+Bentuk eksplisit (fallback kalau alias belum di-setup atau di-debug ada masalah):
+
+```
+ssh -i $HOME\.ssh\papyr\operator -p 52022 deploy@172.235.251.193
+scp -i $HOME\.ssh\papyr\operator -P 52022 file.txt deploy@172.235.251.193:/home/deploy/
+```
+
+Konfigurasi alias didokumentasikan di `docs/vps-access.md` (gitignored). Kalau operator pakai laptop baru, regenerate alias dari snippet di file tersebut.
+
 ---
 
 ## Migration Context
