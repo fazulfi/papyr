@@ -4406,6 +4406,18 @@ Tidak applicable — docs only, additive.
 
 Selama migrasi, beberapa secret pernah ada di laptop plaintext, di-paste ke chat AI, atau visible di screenshots. Best practice: rotate semua sensitive credentials setelah migrasi stable. Ini quarterly cadence baseline.
 
+⚠️ **Mandatory rotation untuk Papyr (deferred dari MIG-000):**
+R2 keys (`R2_ACCESS_KEY_ID` dan `R2_SECRET_ACCESS_KEY`) sudah pernah di-paste ke chat AI di MIG-000. Operator-accepted risk dengan deferral ke step ini. Rotation R2 di 20.2 **tidak boleh di-skip**, dan harus dijalankan paling lambat akhir minggu pertama setelah migrasi stable.
+
+### Compensating Controls (selama deferral window MIG-000 → MIG-020)
+
+Selama window di mana keys lama masih dipakai, operator wajib:
+
+- Cek **Cloudflare R2 dashboard activity log** mingguan: anomalous request volume, unfamiliar source IPs, unusual object-key patterns. Investigate immediately kalau ada anomali.
+- Apply **R2 bucket storage cap** (kalau Cloudflare expose option) untuk bound billing blast-radius kalau attacker upload junk.
+- Monitor `papyr-files` bucket size growth via dashboard. Production normal: kosong setiap 60 menit (file retention).
+- Cek apakah ada object dengan key yang tidak dibuat oleh backend (suspicious pattern).
+
 ### Prerequisites
 
 - STEP-MIG-019 selesai
