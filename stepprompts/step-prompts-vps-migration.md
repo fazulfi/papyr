@@ -1055,7 +1055,10 @@ EOF
 ```bash
 sudo ufw allow 22/tcp comment 'endlessh honeypot'
 sudo systemctl enable --now endlessh
+sudo systemctl restart endlessh
 sudo systemctl status endlessh --no-pager | head -5
+# Confirm endlessh actually listening on :22
+sudo ss -tlnp | grep ":22 "
 ```
 
 **4.5 Optional honeypot di 2222 (alternate SSH port yang sering di-scan):**
@@ -1070,10 +1073,13 @@ Skip kalau gak mau noise di logs. Kalau mau:
 **4.6 Test honeypot:**
 
 ```bash
-# Dari laptop, test koneksi ke port 22
-nc -v 172.235.251.193 22
-# Expected: connect OK, then SSH banner data slow drip — connection HOLDS
-# Tekan Ctrl+C setelah ~5 detik
+# Dari laptop (PowerShell native, no nc dependency):
+Test-NetConnection -ComputerName 172.235.251.193 -Port 22
+# Expected: TcpTestSucceeded : True (means endlessh accepted connection)
+
+# Optional slow-drip verification: ssh -o ConnectTimeout=5 -p 22 root@172.235.251.193
+# Expected: hangs/timeout — banner drips slowly, never completes handshake.
+# Real SSH still works via: ssh papyr (port 52022)
 ```
 
 ### Verifikasi
