@@ -183,7 +183,7 @@ Semua persona mengharapkan: antarmuka Bahasa Indonesia, proses cepat (<1 menit),
 
 | Komponen       | Spesifikasi                                                    |
 |----------------|----------------------------------------------------------------|
-| Runtime        | Python 3.11 di Railway (containerized)                         |
+| Runtime        | Python 3.11 di Railway (containerized) *(migrasi → HostData.id VPS; lihat `docs/35_Papyr_VPS_Migration_Plan_v1.0.md`)* |
 | Framework      | FastAPI 0.1.0                                                  |
 | PDF Engine     | Ghostscript 10+ (kompresi), PyMuPDF/fitz (rendering, konversi) |
 | Rate Limiter   | slowapi (berbasis IP)                                          |

@@ -946,7 +946,7 @@ Backend logs tersedia di Railway dashboard:
 | **Entry Point**     | `uvicorn main:app --host 0.0.0.0 --port $PORT`               |
 | **Region**          | us-west2                                                      |
 | **Health Check**    | `GET /health`                                                 |
-| **URL**             | `papyr-production.up.railway.app`                             |
+| **URL**             | `papyr-production.up.railway.app` *(migrasi → `api.mypapyr.com` via HostData.id VPS; lihat `docs/35_Papyr_VPS_Migration_Plan_v1.0.md`)* |
 
 **Environment Variables (Backend):**
 

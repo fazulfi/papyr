@@ -132,6 +132,8 @@ Runbook ini mencakup:
 
 ### 2.2 Komponen & Platform
 
+> 🚧 **Migrasi backend sedang berlangsung**: Backend API sedang dipindahkan dari Railway ke HostData.id VPS (`api.mypapyr.com`). Tabel di bawah merefleksikan kondisi sekarang. Setelah cutover (STEP-MIG-009), URL backend akan menjadi `https://api.mypapyr.com` dan deploy trigger berpindah ke workflow `.github/workflows/deploy-vps.yml`. Lihat [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](./35_Papyr_VPS_Migration_Plan_v1.0.md).
+
 | **Komponen**       | **Platform**     | **URL Produksi**                                    | **Deploy Trigger**          |
 |--------------------|------------------|-----------------------------------------------------|-----------------------------|
 | Frontend           | Vercel           | https://mypapyr.com                                 | Push ke branch `main`       |

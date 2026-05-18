@@ -399,6 +399,8 @@ Spesifikasi fungsional detail didokumentasikan dalam Software Requirements Speci
 
 **11. Dependencies**
 
+> 🚧 **Migrasi backend sedang berlangsung**: Baris "Railway" akan diganti dengan "HostData.id VPS (NAT 4GB)" setelah migrasi selesai. Lihat [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](./35_Papyr_VPS_Migration_Plan_v1.0.md).
+
 | **Dependency**         | **Tipe**          | **Tujuan**                                                              | **Tingkat Risiko** |
 |------------------------|-------------------|-------------------------------------------------------------------------|---------------------|
 | Vercel                 | Platform          | Frontend hosting (Next.js), analytics, edge network                     | Rendah              |

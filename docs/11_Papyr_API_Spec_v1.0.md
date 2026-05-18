@@ -79,9 +79,11 @@ Operasi client-side (Merge, Split, Rotate) diproses sepenuhnya di browser menggu
 
 ### 1.3 Base URL
 
+> 🚧 **Migrasi backend sedang berlangsung**: Selama migrasi dari Railway ke HostData.id VPS, base URL produksi tetap di Railway. Setelah cutover, base URL akan menjadi `https://api.mypapyr.com`. Curl example di dokumen ini akan otomatis valid jika operator mengganti base URL. Lihat [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](./35_Papyr_VPS_Migration_Plan_v1.0.md).
+
 | **Environment** | **Base URL**                                    |
 |-----------------|-------------------------------------------------|
-| Production      | `https://papyr-production.up.railway.app`       |
+| Production      | `https://papyr-production.up.railway.app` *(target: `https://api.mypapyr.com`)* |
 | Local Dev       | `http://localhost:8000`                          |
 
 ### 1.4 Autentikasi

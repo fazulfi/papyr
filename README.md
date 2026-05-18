@@ -152,11 +152,13 @@
 
 ## 🌐 Deployed URLs
 
+> 🚧 **Migrasi backend sedang berlangsung**: Backend API sedang dipindahkan dari Railway ke HostData.id VPS (`api.mypapyr.com`). Selama migrasi, URL produksi resmi tetap di Railway. Lihat [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](docs/35_Papyr_VPS_Migration_Plan_v1.0.md) dan sub-track `STEP-MIG-*` di [`stepprompts/progress.md`](stepprompts/progress.md).
+
 | Service | URL | Platform |
 |---------|-----|----------|
 | 🖥️ Frontend | [frontend-ten-omega-35.vercel.app](https://frontend-ten-omega-35.vercel.app) | Vercel |
-| ⚙️ Backend API | [papyr-production.up.railway.app](https://papyr-production.up.railway.app) | Railway |
-| 💓 Health Check | [/health](https://papyr-production.up.railway.app/health) | Railway |
+| ⚙️ Backend API | [papyr-production.up.railway.app](https://papyr-production.up.railway.app) | Railway *(migrasi → HostData.id VPS in progress)* |
+| 💓 Health Check | [/health](https://papyr-production.up.railway.app/health) | Railway *(target: `https://api.mypapyr.com/health`)* |
 | 🌍 Domain | [mypapyr.com](https://mypapyr.com) | Hostinger |
 
 ---

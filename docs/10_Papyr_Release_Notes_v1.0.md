@@ -195,7 +195,7 @@ Rilis pertama Papyr sebagai MVP (Minimum Viable Product) yang mencakup 5 tool PD
 | Service   | Platform         | URL                                        | Biaya              |
 |-----------|------------------|--------------------------------------------|--------------------|
 | Frontend  | Vercel (Free)    | frontend-ten-omega-35.vercel.app           | $0                 |
-| Backend   | Railway (Trial)  | papyr-production.up.railway.app            | $5 credit/30 hari  |
+| Backend   | Railway (Trial)  | papyr-production.up.railway.app *(migrasi → HostData.id VPS, `api.mypapyr.com`)* | $5 credit/30 hari  |
 | Storage   | Cloudflare R2    | Bucket: papyr-files                        | Free (10 GB/mo)    |
 | Database  | Supabase         | Singapore region                           | Free (standby)     |
 | Domain    | Hostinger        | mypapyr.com                                | Expires 2027-04-26 |

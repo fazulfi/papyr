@@ -229,6 +229,8 @@ Papyr hadir untuk mengisi gap ini dengan value proposition yang jelas:
 
 ### 6.1 Anggaran Infrastruktur (Bulanan)
 
+> 🚧 **Migrasi backend sedang berlangsung**: Backend API sedang dipindahkan dari Railway ke HostData.id VPS (`api.mypapyr.com`). Setelah migrasi, baris Railway akan diganti dengan VPS HostData.id NAT 4GB (~Rp 50.000/bulan ≈ $3.20/bulan, payment lokal). Lihat [`docs/35_Papyr_VPS_Migration_Plan_v1.0.md`](./35_Papyr_VPS_Migration_Plan_v1.0.md).
+
 | **Service**          | **Tier**              | **Biaya/Bulan**  | **Keterangan**                                    |
 |----------------------|-----------------------|------------------|---------------------------------------------------|
 | Vercel               | Free Tier             | $0               | Frontend hosting, edge CDN, analytics             |

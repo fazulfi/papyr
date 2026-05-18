@@ -203,11 +203,11 @@ Papyr beroperasi dengan model unik yang perlu dipahami dalam konteks incident re
 |---|---|---|---|
 | **Vercel Dashboard** | Deployment logs, function invocation logs, error rate | vercel.com/dashboard | Harian (AI Agent) |
 | **Vercel Analytics** | Page views, Web Vitals, traffic pattern | vercel.com/analytics | Harian (AI Agent) |
-| **Railway Dashboard** | Container logs, CPU/memory metrics, deploy history | railway.app/dashboard | Harian (AI Agent) |
-| **Railway Metrics** | Request count, response time, error rate | railway.app/metrics | Harian (AI Agent) |
+| **Railway Dashboard** *(akan dipensiunkan setelah migrasi VPS)* | Container logs, CPU/memory metrics, deploy history | railway.app/dashboard | Harian (AI Agent) |
+| **Railway Metrics** *(akan dipensiunkan setelah migrasi VPS)* | Request count, response time, error rate | railway.app/metrics | Harian (AI Agent) |
 | **Cloudflare R2 Dashboard** | Storage usage, request count, bandwidth | dash.cloudflare.com | Mingguan (AI Agent) |
 | **GitHub Actions** | CI/CD status, test results | github.com/fazulfi/papyr | Per-commit |
-| **Health Endpoint** | `GET /health` — API liveness check | papyr-production.up.railway.app/health | Harian (manual/AI) |
+| **Health Endpoint** | `GET /health` — API liveness check | papyr-production.up.railway.app/health *(target: api.mypapyr.com/health)* | Harian (manual/AI) |
 
 ### 4.2 Indikator Insiden (Trigger)
 
