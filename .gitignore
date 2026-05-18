@@ -86,3 +86,9 @@ backend/tests/split_test_files/
 backend/tests/img2pdf_test_files/
 backend/tests/compress_test_results.md
 backend/tests/benchmark_results.md
+
+# ========================
+# VPS Migration secrets (paths only, never commit values)
+# ========================
+docs/vps-access.md
+gitleaks-report.json
