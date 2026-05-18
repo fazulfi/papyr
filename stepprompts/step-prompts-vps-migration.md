@@ -602,8 +602,9 @@ sudo apt purge -y fail2ban
 **2.5 Configure unattended-upgrades:**
 
 ```bash
-sudo dpkg-reconfigure -plow unattended-upgrades
-# Pilih "Yes" saat ditanya
+# Non-interactive enable (avoid TUI prompt)
+echo 'unattended-upgrades unattended-upgrades/enable_auto_updates boolean true' | sudo debconf-set-selections
+sudo dpkg-reconfigure -f noninteractive unattended-upgrades
 ```
 
 Edit config untuk auto-reboot kalau perlu:
@@ -707,6 +708,16 @@ sudo sed -i 's/^UMASK.*/UMASK 027/' /etc/login.defs
 grep "^UMASK" /etc/login.defs
 ```
 
+**2.11 Apply umask 027 ke deploy user yang sudah ada:**
+
+`/etc/login.defs` UMASK hanya affect user yang dibuat sesudahnya. Deploy user sudah ada dari MIG-001, jadi set umask explicit di shell init.
+
+```bash
+echo "umask 027" | sudo tee -a /home/deploy/.bashrc
+echo "umask 027" | sudo tee -a /home/deploy/.profile
+sudo chown deploy:deploy /home/deploy/.bashrc /home/deploy/.profile
+```
+
 ### Verifikasi
 
 ```bash
@@ -763,6 +774,7 @@ sudo sysctl --system
 - [ ] USB storage disabled
 - [ ] Unused services disabled (avahi/cups/snapd)
 - [ ] umask 027 untuk new users
+- [ ] umask 027 applied ke deploy user (`.bashrc` + `.profile`)
 
 ### Catatan
 
