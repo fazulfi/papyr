@@ -1857,258 +1857,144 @@ sudo systemctl restart sshd
 
 Build Dockerfile production yang minimal attack surface, multi-stage untuk image size kecil, run as non-root, native deps untuk OCR/LibreOffice/Camelot. Generate SBOM (Software Bill of Materials) dengan syft untuk track dependencies untuk CVE response. Scan dengan trivy untuk catch CVEs sebelum push.
 
+> **Build location**: Dockerfile + .dockerignore di-author di laptop dan commit ke repo, tapi **build, SBOM, dan trivy scan dilakukan di VPS** karena: (1) build LibreOffice/Tesseract base ~600MB butuh resource yang dimiliki VPS (8GB RAM), bukan laptop. (2) VPS adalah build environment yang akan production-deploy nanti — runtime parity. SBOM + trivy reports lalu di-scp balik ke laptop dan committed sebagai audit trail.
+
 ### Prerequisites
 
 - STEP-MIG-007 selesai
-- Repo Papyr ada di laptop (untuk test build local dulu)
+- Repo Papyr accessible publicly atau via deploy key (gha-deploy dari MIG-000)
+- Docker daemon running di VPS (dari MIG-006)
 
 ### Langkah
 
-**8.1 Buat Dockerfile.production di laptop (BUKAN di VPS):**
+**8.1 Buat Dockerfile.production di laptop (commit ke repo):**
+
+Edit `backend/Dockerfile.production` di laptop dengan content multi-stage hardened (lihat content lengkap di file tersebut, atau referensi original step prompt). Key features:
+
+- Multi-stage builder + runtime
+- Base: `python:3.11.9-slim-bookworm`
+- Builder: `build-essential libffi-dev libxml2-dev libxslt1-dev zlib1g-dev`
+- Runtime: tesseract + libreoffice-writer + ghostscript + poppler-utils + libxcb-xfixes0 + curl + tini
+- Non-root user `appuser:appgroup` UID/GID 1001
+- `TMPDIR=/opt/papyr/temp` (host /tmp noexec dari MIG-003)
+- Healthcheck on `/health`
+- `tini --` ENTRYPOINT for SIGTERM handling
+- `uvicorn --workers 4`
+
+**8.2 Update `backend/.dockerignore` (commit ke repo):**
+
+Whitelist approach: ignore everything by default, then allow only `main.py`, `requirements.txt`, `routers/`, `services/`, `utils/`. Re-exclude `__pycache__`, tests, .env, .git, dev fixtures.
+
+**8.3 Commit + push Dockerfile + .dockerignore:**
 
 ```bash
-# Di laptop, di repo papyr
-cd C:\Users\faizz\papyr
+git add backend/Dockerfile.production backend/.dockerignore
+git commit -m "feat(backend): add hardened production Dockerfile + dockerignore whitelist"
+git push origin main
 ```
 
-Buat `backend/Dockerfile.production`:
-
-```dockerfile
-# syntax=docker/dockerfile:1.7
-# Papyr backend production Dockerfile (multi-stage, hardened)
-
-# ============================================================
-# Stage 1: Builder
-# ============================================================
-FROM python:3.11.9-slim-bookworm AS builder
-
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
-
-# Build deps for native Python packages
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        build-essential \
-        libffi-dev \
-        libxml2-dev \
-        libxslt1-dev \
-        zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /build
-COPY requirements.txt requirements-dev.txt ./
-RUN pip install --no-cache-dir --user -r requirements.txt
-
-# ============================================================
-# Stage 2: Runtime
-# ============================================================
-FROM python:3.11.9-slim-bookworm AS runtime
-
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PATH=/home/appuser/.local/bin:$PATH \
-    TMPDIR=/opt/papyr/temp
-
-# Runtime native deps for Papyr tools:
-# - tesseract-ocr-eng/ind: OCR for English + Indonesian
-# - libreoffice-writer: PDF→Word fallback
-# - ghostscript: PDF compression
-# - poppler-utils: PDF utilities (used by camelot)
-# - libxcb-xfixes0: opencv-python-headless dependency
-# - curl: healthcheck inside container
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        tesseract-ocr \
-        tesseract-ocr-eng \
-        tesseract-ocr-ind \
-        libreoffice-writer \
-        libreoffice-common \
-        ghostscript \
-        poppler-utils \
-        libxcb-xfixes0 \
-        curl \
-        ca-certificates \
-        tini \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Create non-root user
-RUN groupadd -r appuser --gid 1001 && \
-    useradd -r -m -g appuser --uid 1001 -s /bin/bash appuser && \
-    mkdir -p /opt/papyr/temp && \
-    chown -R appuser:appuser /opt/papyr
-
-WORKDIR /app
-
-# Copy installed packages from builder
-COPY --from=builder --chown=appuser:appuser /root/.local /home/appuser/.local
-
-# Copy application code
-COPY --chown=appuser:appuser . /app
-
-USER appuser
-
-EXPOSE 8000
-
-# Healthcheck — used by Docker + compose
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD curl -fsS http://localhost:8000/health || exit 1
-
-# Use tini for proper signal handling (graceful shutdown)
-ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--log-level", "info"]
-```
-
-**8.2 Update `backend/.dockerignore`:**
-
-```
-# Ignore everything by default
-**
-
-# Whitelist what we need
-!main.py
-!requirements.txt
-!routers/
-!services/
-!utils/
-
-# Re-exclude development files
-**/__pycache__
-**/*.pyc
-**/*.pyo
-**/*.pyd
-**/.pytest_cache
-**/tests/
-**/test_*.py
-**/*_test.py
-**/.venv
-**/venv
-**/env
-**/.env
-**/.env.*
-!**/.env.example
-**/Dockerfile*
-**/docker-compose*
-**/*.md
-**/.git
-**/.github
-```
-
-**8.3 Test build di laptop:**
+**8.4 Clone/pull repo di VPS:**
 
 ```bash
-cd C:\Users\faizz\papyr\backend
-docker build -f Dockerfile.production -t papyr-backend:test .
-# Expected: build success, image size <800MB
-docker images papyr-backend:test
+ssh papyr "if [ -d /opt/papyr/source ]; then cd /opt/papyr/source && git pull origin main; else sudo git clone https://github.com/<owner>/papyr.git /opt/papyr/source && sudo chown -R deploy:deploy /opt/papyr/source; fi"
 ```
 
-**8.4 Install syft + trivy di laptop:**
+> Kalau repo private, setup deploy key dulu: tambah pubkey gha-deploy dari laptop (`~/.ssh/papyr/gha-deploy.pub`) sebagai GitHub deploy key (read-only), lalu setup `~/.ssh/config` di VPS untuk klona via SSH.
+
+**8.5 Install syft + trivy di VPS:**
 
 ```bash
-# Windows (scoop)
-scoop install syft
-scoop install trivy
-# Verify
-syft version
-trivy --version
+ssh papyr "echo 'deb [trusted=yes] https://apt.releases.hashicorp.com $(lsb_release -cs) main' | sudo tee /etc/apt/sources.list.d/hashicorp.list >/dev/null"
+# atau download binary release langsung untuk syft + trivy
+ssh papyr 'curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin'
+ssh papyr 'curl -sSfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin'
+ssh papyr "syft version | head -3 && trivy --version | head -3"
 ```
 
-**8.5 Generate SBOM (Software Bill of Materials):**
+**8.6 Build image di VPS:**
+
+```bash
+ssh papyr "cd /opt/papyr/source/backend && docker build -f Dockerfile.production -t papyr-backend:test ."
+ssh papyr "docker images papyr-backend:test"
+# Expected: image size 600-800MB
+```
+
+**8.7 Generate SBOM:**
+
+```bash
+ssh papyr "mkdir -p /opt/papyr/security && \
+  syft packages docker:papyr-backend:test -o cyclonedx-json > /opt/papyr/security/sbom-papyr-backend.json && \
+  syft packages docker:papyr-backend:test -o spdx-json > /opt/papyr/security/sbom-papyr-backend.spdx.json && \
+  syft packages docker:papyr-backend:test -o table > /opt/papyr/security/sbom-papyr-backend.txt && \
+  head -20 /opt/papyr/security/sbom-papyr-backend.txt"
+```
+
+**8.8 Trivy CVE scan:**
+
+```bash
+ssh papyr "trivy image --severity HIGH,CRITICAL --exit-code 0 papyr-backend:test"
+ssh papyr "trivy image --severity HIGH,CRITICAL --format json -o /opt/papyr/security/trivy-papyr-backend.json papyr-backend:test"
+ssh papyr "trivy image --severity HIGH,CRITICAL --format table papyr-backend:test > /opt/papyr/security/trivy-papyr-backend.txt"
+```
+
+**8.9 Download reports ke laptop + commit:**
 
 ```bash
 mkdir -p docs/security
-syft packages docker:papyr-backend:test -o cyclonedx-json > docs/security/sbom-papyr-backend.json
-syft packages docker:papyr-backend:test -o spdx-json > docs/security/sbom-papyr-backend.spdx.json
-syft packages docker:papyr-backend:test -o table > docs/security/sbom-papyr-backend.txt
+scp papyr:/opt/papyr/security/sbom-papyr-backend.* docs/security/
+scp papyr:/opt/papyr/security/trivy-papyr-backend.* docs/security/
 
-# View summary
-head -50 docs/security/sbom-papyr-backend.txt
+# Commit
+git add docs/security/
+git commit -m "docs(mig): add SBOM + trivy CVE scan reports for production image"
+git push origin main
 ```
 
-**8.6 Run trivy scan untuk CVE check:**
+**8.10 Document SBOM regeneration cadence:**
 
-```bash
-trivy image --severity HIGH,CRITICAL --exit-code 0 papyr-backend:test
-```
-
-Review output. Action:
-- **CRITICAL**: harus fix sebelum push (update base image, dep, atau patch)
-- **HIGH**: dokumentasikan kalau gak bisa fix immediately
-
-```bash
-# Save report
-trivy image --severity HIGH,CRITICAL --format json -o docs/security/trivy-papyr-backend.json papyr-backend:test
-trivy image --severity HIGH,CRITICAL --format table papyr-backend:test > docs/security/trivy-papyr-backend.txt
-```
-
-**8.7 Document SBOM regeneration cadence:**
-
-Add to `docs/security/security-baseline.md` (di laptop, akan di-sync ke VPS via STEP-MIG-019):
-
-```markdown
-## SBOM + CVE Scan Cadence
-
-- SBOM regeneration: setiap deploy (auto via GitHub Actions, STEP-MIG-012)
-- Manual SBOM check: monthly (operator)
-- CVE scan: setiap deploy (trivy in CI), monthly cron in production
-```
+Append ke `docs/security/security-baseline.md` di laptop (akan jadi master copy yang sync ke VPS via STEP-MIG-019), lalu commit.
 
 ### Verifikasi
 
 ```bash
-# Image build success
-docker images papyr-backend:test --format "{{.Size}}"
-# Expected: <800MB (Python slim + deps)
-
 # Image runs as non-root
-docker run --rm papyr-backend:test whoami
+ssh papyr "docker run --rm papyr-backend:test whoami"
 # Expected: appuser
 
-# SBOM generated
+# SBOM downloaded
 ls -la docs/security/sbom-papyr-backend.*
 # Expected: .json + .spdx.json + .txt
 
-# Trivy report exists
+# Trivy report downloaded
 ls -la docs/security/trivy-papyr-backend.*
 # Expected: .json + .txt
 
-# Healthcheck command works (will fail because no app running, but command exists)
-docker inspect papyr-backend:test --format '{{json .Config.Healthcheck}}'
+# Healthcheck command works (dry test)
+ssh papyr "docker inspect papyr-backend:test --format '{{json .Config.Healthcheck}}'"
 # Expected: shows healthcheck config
-
-# Test container can run uvicorn (briefly)
-docker run --rm -d --name papyr-test -p 8888:8000 papyr-backend:test
-sleep 5
-curl -fsS http://localhost:8888/health || echo "ENV VARS MISSING (expected for test)"
-docker stop papyr-test
-# Expected: container starts, /health returns either 200 (if R2 mock) or fails on missing env (acceptable for test)
 ```
 
 ### Rollback
 
 ```bash
-# Remove test image
-docker rmi papyr-backend:test
-# Remove SBOM/trivy reports
-rm docs/security/sbom-* docs/security/trivy-*
-# Remove Dockerfile.production
-git checkout backend/Dockerfile.production
+ssh papyr "docker rmi papyr-backend:test"
+ssh papyr "rm -f /opt/papyr/security/sbom-papyr-backend.* /opt/papyr/security/trivy-papyr-backend.*"
+git rm backend/Dockerfile.production
+git checkout backend/.dockerignore
+rm -rf docs/security
+git commit -am "Revert STEP-MIG-008"
 ```
 
 ### Definition of Done
 
-- [ ] `backend/Dockerfile.production` exists, multi-stage, hardened
-- [ ] `backend/.dockerignore` updated dengan whitelist approach
-- [ ] Image builds successfully di laptop (test image size <800MB)
+- [ ] `backend/Dockerfile.production` exists, multi-stage, hardened — committed
+- [ ] `backend/.dockerignore` whitelist approach — committed
+- [ ] Image builds successfully di VPS (image size <800MB)
 - [ ] Container runs as `appuser` (UID 1001), bukan root
 - [ ] Healthcheck configured di Dockerfile
-- [ ] SBOM generated (CycloneDX JSON + SPDX + TXT) di `docs/security/`
-- [ ] Trivy scan run, output saved, CRITICAL = 0
-- [ ] SBOM regeneration cadence documented
+- [ ] SBOM generated (CycloneDX JSON + SPDX + TXT) di `/opt/papyr/security/` + downloaded ke `docs/security/`
+- [ ] Trivy scan run, output saved + downloaded, CRITICAL count documented
+- [ ] SBOM regeneration cadence documented di `docs/security/security-baseline.md`
 
 ### Catatan
 
@@ -2116,6 +2002,8 @@ git checkout backend/Dockerfile.production
 - `tini` sebagai PID 1 supaya graceful SIGTERM handling pas docker stop.
 - Multi-stage build = builder layer (build-essential, etc) tidak shipped ke final image.
 - `userns-remap` di daemon (STEP-MIG-006) akan remap UID 1001 ke UID > 100000 di host. Ownership di mounted volumes butuh adjustment di STEP-MIG-009.
+- Build di VPS = build environment match runtime environment (no surprise platform diff).
+- TOTP friction: untuk minimize TOTP prompts, bundle steps 8.5–8.8 ke single script, run via 1-2 SSH session.
 
 ---
 
