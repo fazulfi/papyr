@@ -70,7 +70,6 @@ RUN apt-get update && \
         ghostscript \
         poppler-utils \
         libxcb-xfixes0 \
-    && update-ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
