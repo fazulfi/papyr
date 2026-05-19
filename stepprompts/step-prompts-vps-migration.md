@@ -2450,20 +2450,15 @@ server {
 }
 ```
 
-**10.3 Sync ke VPS:**
+**10.3 Sync ke VPS (git pull pattern, sama dengan MIG-008/009):**
 
 ```bash
-# Dari laptop
-scp -i $HOME\.ssh\papyr\operator -P 52022 -r deploy/nginx/ deploy@172.235.251.193:/opt/papyr/staging-conf/
-```
+# Compose + nginx config sudah committed di repo dari step 10.1+10.2.
+# Di VPS, pull repo lalu copy ke production location.
+ssh papyr 'cd /opt/papyr/source && git pull origin main 2>&1 | tail -3'
 
-**Di VPS:**
-
-```bash
-sudo cp -r /opt/papyr/staging-conf/conf.d/* /opt/papyr/nginx/conf.d/
-sudo rm -rf /opt/papyr/staging-conf
-sudo chown -R deploy:deploy /opt/papyr/nginx/conf.d/
-ls -la /opt/papyr/nginx/conf.d/
+# Copy nginx confs ke /opt/papyr/nginx/conf.d/
+ssh papyr 'sudo install -m 644 -o deploy -g deploy /opt/papyr/source/deploy/nginx/conf.d/production.conf /opt/papyr/nginx/conf.d/production.conf && sudo install -m 644 -o deploy -g deploy /opt/papyr/source/deploy/nginx/conf.d/default.conf /opt/papyr/nginx/conf.d/default.conf && ls -la /opt/papyr/nginx/conf.d/'
 ```
 
 **10.4 Test config dengan ephemeral nginx container:**
