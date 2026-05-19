@@ -55,16 +55,15 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     TMPDIR=/opt/papyr/temp
 
 # Runtime native deps for Papyr tools, split into two apt steps.
-# Base utilities first so ca-certificates triggers run cleanly before
-# heavier packages (libreoffice) install. This avoids the bookworm
-# dpkg "Errors were encountered while processing: ca-certificates"
-# failure that occurs when ca-certs trigger reruns after libreoffice
-# transition is partially complete.
-#  - apt-utils + ca-certificates + curl + tini + ghostscript + poppler-utils + libxcb-xfixes0
+# ca-certificates is already in python:3.11.9-slim-bookworm base image; do not re-install
+# (apt would try to upgrade it and the buildkit-side trigger order conflicts with
+# libc-bin and other concurrent triggers in the same RUN, surfacing as
+# "Errors were encountered while processing: ca-certificates").
+# Base utilities first so smaller layer + faster fail-fast on simple deps.
+#  - apt-utils + curl + tini + ghostscript + poppler-utils + libxcb-xfixes0
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         apt-utils \
-        ca-certificates \
         curl \
         tini \
         ghostscript \
