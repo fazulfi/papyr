@@ -4,7 +4,7 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-19
-**Current Step:** STEP-MIG-010 (Nginx reverse proxy + security headers — STEP-MIG-009 complete)
+**Current Step:** STEP-MIG-011 (Cloudflare DNS + WAF + Let's Encrypt — STEP-MIG-010 complete)
 **Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps, 1/22 done)
 
 ---
@@ -232,7 +232,7 @@
 | STEP-MIG-007 | SSH 2FA (TOTP) + LISH emergency recovery | ✅ 2026-05-19 (Google Authenticator PAM module + qrencode installed, deploy enrolled with TOTP secret saved to operator password manager, /etc/pam.d/sshd includes pam_google_authenticator.so nullok, sshd_config AuthenticationMethods publickey,keyboard-interactive enforced, sshd reload-only no disconnect, server-side BatchMode tests confirm 2FA enforcement, IDCH reseller support ticket documented as primary recovery path with LISH as fallback once direct Linode access gained, AIDE rebaselined post-changes) |
 | STEP-MIG-008 | Production Dockerfile + SBOM (syft) | ✅ 2026-05-19 (multi-stage hardened Dockerfile.production with non-root appuser UID 1001 + tini + healthcheck, build on VPS produces 1.13 GB image, syft v1.44.0 generates SBOM with 355 packages CycloneDX+SPDX+table, trivy v0.70.0 reports 12 CRITICAL + 65 HIGH CVEs documented for follow-up, all reports downloaded to docs/security/, repo master copy of security-baseline.md created with cadence schedule) |
 | STEP-MIG-009 | docker-compose + container hardening (digest pinning) | ✅ 2026-05-19 (deploy/docker-compose.yml authored with hardened backend service: read-only rootfs, drop ALL caps + minimal add, mem 4G + cpus 3.5, tmpfs /tmp 512M exec for LibreOffice, persistent volume /opt/papyr/temp chowned 101001:101001 for userns-remap, image override via PAPYR_BACKEND_IMAGE env, healthcheck on /health, json-file logging 10m×3; nginx service stub for MIG-010; .env.production.example template + gitignore for real values; compose synced to VPS at /opt/papyr/production/, docker compose config validates after empty .env placeholder) |
-| STEP-MIG-010 | Nginx reverse proxy + security headers | ⬜ |
+| STEP-MIG-010 | Nginx reverse proxy + security headers | ✅ 2026-05-19 (deploy/nginx/conf.d/{production,default}.conf authored: api.mypapyr.com server block with 15 Cloudflare set_real_ip_from ranges + CF-Connecting-IP recovery, bad-bot UA map → 403, sensitive-path map → 444, papyr_api 30r/m + papyr_burst 2r/s rate zones, security headers HSTS+X-Frame-Options+X-Content-Type-Options+Referrer-Policy+Permissions-Policy, /health proxy with access_log off, /test/connectivity match backend connectivity_router, /api/ with 300s read/send timeout for async polling + streaming buffering off, /status/ burst 20 for useAsyncTask, catch-all 444, default.conf drops unknown hosts; deployed to /opt/papyr/nginx/conf.d/, ephemeral nginx -t passes, /opt/papyr/security/cloudflare-ips-v4.txt synced from cloudflare.com/ips-v4) |
 | STEP-MIG-011 | Cloudflare DNS + WAF + DNSSEC + Let's Encrypt | ⬜ |
 | STEP-MIG-012 | GitHub Actions deploy + supply chain (trivy + SBOM) | ⬜ |
 | STEP-MIG-013 | First deploy + smoke verify | ⬜ |
