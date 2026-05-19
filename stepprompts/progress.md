@@ -4,7 +4,7 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-19
-**Current Step:** STEP-MIG-008 (production Dockerfile + SBOM — STEP-MIG-007 complete)
+**Current Step:** STEP-MIG-009 (docker-compose + container hardening — STEP-MIG-008 complete)
 **Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps, 1/22 done)
 
 ---
@@ -230,7 +230,7 @@
 | STEP-MIG-005 | Compliance baselines (OpenSCAP + Lynis) | ✅ 2026-05-19 (CIS L1 server scan via upstream SSG v0.1.74, 5 remediations applied (ip_forward off, core dumps off, login banner, sshd Banner reloaded, umask 027), Lynis hardening index 74 → 75) |
 | STEP-MIG-006 | Server foundation (Docker + swap + dirs) | ✅ 2026-05-19 (Docker CE 29.5.1 + compose-plugin v5.1.3, daemon hardened with userns-remap kept/no-new-priv/icc/json-file 10MB×3 rotation/live-restore, deploy in docker group, /swapfile 4GB persisted, /opt/papyr dir tree {production,nginx/{conf.d,ssl},logs,backups,temp} with strict modes, MIG-005 security/ intact, logrotate weekly + docker-prune weekly cron, AIDE rebaselined) |
 | STEP-MIG-007 | SSH 2FA (TOTP) + LISH emergency recovery | ✅ 2026-05-19 (Google Authenticator PAM module + qrencode installed, deploy enrolled with TOTP secret saved to operator password manager, /etc/pam.d/sshd includes pam_google_authenticator.so nullok, sshd_config AuthenticationMethods publickey,keyboard-interactive enforced, sshd reload-only no disconnect, server-side BatchMode tests confirm 2FA enforcement, IDCH reseller support ticket documented as primary recovery path with LISH as fallback once direct Linode access gained, AIDE rebaselined post-changes) |
-| STEP-MIG-008 | Production Dockerfile + SBOM (syft) | ⬜ |
+| STEP-MIG-008 | Production Dockerfile + SBOM (syft) | ✅ 2026-05-19 (multi-stage hardened Dockerfile.production with non-root appuser UID 1001 + tini + healthcheck, build on VPS produces 1.13 GB image, syft v1.44.0 generates SBOM with 355 packages CycloneDX+SPDX+table, trivy v0.70.0 reports 12 CRITICAL + 65 HIGH CVEs documented for follow-up, all reports downloaded to docs/security/, repo master copy of security-baseline.md created with cadence schedule) |
 | STEP-MIG-009 | docker-compose + container hardening (digest pinning) | ⬜ |
 | STEP-MIG-010 | Nginx reverse proxy + security headers | ⬜ |
 | STEP-MIG-011 | Cloudflare DNS + WAF + DNSSEC + Let's Encrypt | ⬜ |
