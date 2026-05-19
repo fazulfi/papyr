@@ -50,17 +50,33 @@ FROM python:3.11.9-slim-bookworm AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
+    DEBIAN_FRONTEND=noninteractive \
     PATH=/home/appuser/.local/bin:$PATH \
     TMPDIR=/opt/papyr/temp
 
-# Runtime native deps for Papyr tools:
+# Runtime native deps for Papyr tools, split into two apt steps.
+# Base utilities first so ca-certificates triggers run cleanly before
+# heavier packages (libreoffice) install. This avoids the bookworm
+# dpkg "Errors were encountered while processing: ca-certificates"
+# failure that occurs when ca-certs trigger reruns after libreoffice
+# transition is partially complete.
+#  - apt-utils + ca-certificates + curl + tini + ghostscript + poppler-utils + libxcb-xfixes0
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        apt-utils \
+        ca-certificates \
+        curl \
+        tini \
+        ghostscript \
+        poppler-utils \
+        libxcb-xfixes0 \
+    && update-ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Heavy runtime deps: tesseract OCR + LibreOffice
 #  - tesseract-ocr-eng/ind: OCR for English + Indonesian (PAPYR-138)
 #  - libreoffice-writer: PDF→Word fallback (PAPYR-128)
-#  - ghostscript: PDF compression
-#  - poppler-utils: PDF utilities (used by camelot)
-#  - libxcb-xfixes0: opencv-python-headless dependency
-#  - tini: PID 1 signal forwarding
-#  - curl + ca-certificates: healthcheck + R2 TLS
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         tesseract-ocr \
@@ -68,12 +84,6 @@ RUN apt-get update && \
         tesseract-ocr-ind \
         libreoffice-writer \
         libreoffice-common \
-        ghostscript \
-        poppler-utils \
-        libxcb-xfixes0 \
-        curl \
-        ca-certificates \
-        tini \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
