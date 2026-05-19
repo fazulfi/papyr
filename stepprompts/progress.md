@@ -4,7 +4,7 @@
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
 **Last Updated:** 2026-05-19
-**Current Step:** STEP-MIG-006 (server foundation — STEP-MIG-005 complete)
+**Current Step:** STEP-MIG-007 (SSH 2FA + LISH emergency recovery — STEP-MIG-006 complete)
 **Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps, 1/22 done)
 
 ---
@@ -228,7 +228,7 @@
 | STEP-MIG-003 | Filesystem integrity + rootkit detection (AIDE) | ✅ 2026-05-19 (AIDE 26MB baseline + daily cron with --config, /tmp+/var/tmp tmpfs noexec/nosuid/nodev, chkrootkit + rkhunter + weekly cron, Lynis hardening index 74/100) |
 | STEP-MIG-004 | Egress filtering + honeypot | ✅ 2026-05-19 (UFW deny out 10 mining ports, endlessh on :22 with slow drip banner, real sshd remains on :52022 deploy-only) |
 | STEP-MIG-005 | Compliance baselines (OpenSCAP + Lynis) | ✅ 2026-05-19 (CIS L1 server scan via upstream SSG v0.1.74, 5 remediations applied (ip_forward off, core dumps off, login banner, sshd Banner reloaded, umask 027), Lynis hardening index 74 → 75) |
-| STEP-MIG-006 | Server foundation (Docker + 4GB swap + dirs) | ⬜ |
+| STEP-MIG-006 | Server foundation (Docker + swap + dirs) | ✅ 2026-05-19 (Docker CE 29.5.1 + compose-plugin v5.1.3, daemon hardened with userns-remap kept/no-new-priv/icc/json-file 10MB×3 rotation/live-restore, deploy in docker group, /swapfile 4GB persisted, /opt/papyr dir tree {production,nginx/{conf.d,ssl},logs,backups,temp} with strict modes, MIG-005 security/ intact, logrotate weekly + docker-prune weekly cron, AIDE rebaselined) |
 | STEP-MIG-007 | SSH 2FA (TOTP) + LISH emergency recovery | ⬜ |
 | STEP-MIG-008 | Production Dockerfile + SBOM (syft) | ⬜ |
 | STEP-MIG-009 | docker-compose + container hardening (digest pinning) | ⬜ |
