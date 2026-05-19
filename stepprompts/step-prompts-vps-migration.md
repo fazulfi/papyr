@@ -2036,9 +2036,11 @@ name: papyr-prod
 
 services:
   backend:
-    # Pinned by SHA256 digest in production (set after first GHCR push, MIG-013)
-    # Placeholder for first deploy:
-    image: ghcr.io/fazulfi/papyr-backend:latest
+    # Image reference is overridable via PAPYR_BACKEND_IMAGE env var.
+    # Default to local tag for MIG-009/010 standalone tests.
+    # MIG-013 first deploy switches to GHCR-pinned digest:
+    #   PAPYR_BACKEND_IMAGE=ghcr.io/fazulfi/papyr-backend@sha256:abc...
+    image: ${PAPYR_BACKEND_IMAGE:-papyr-backend:test}
     container_name: papyr-backend
     restart: unless-stopped
 
@@ -2068,7 +2070,11 @@ services:
       - /tmp:exec,mode=1777,size=512M
       - /home/appuser/.cache:size=128M
     volumes:
-      # Persistent temp dir for LibreOffice/OCRmyPDF subprocess (needs exec)
+      # Persistent temp dir for LibreOffice/OCRmyPDF subprocess (needs exec).
+      # IMPORTANT: with userns-remap=default in /etc/docker/daemon.json
+      # the container UID 1001 maps to host UID 101001. Run
+      # `sudo chown 101001:101001 /opt/papyr/temp` before first compose up,
+      # otherwise the appuser inside the container cannot write here.
       - /opt/papyr/temp:/opt/papyr/temp:rw
       # Read-only env file
       - /opt/papyr/production/.env:/app/.env:ro
@@ -2141,11 +2147,9 @@ services:
     networks:
       - papyr-net
 
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
+    # Healthcheck depends on a /health route in nginx config (added in MIG-010).
+    # Disabled here so MIG-009 standalone validation does not require it.
+    # MIG-010 will replace this with the wget spider variant.
 
     logging:
       driver: json-file
@@ -2211,23 +2215,24 @@ git add backend/Dockerfile.production backend/.dockerignore deploy/docker-compos
 git commit -m "build(backend): production Dockerfile + compose + SBOM baseline" -m "Multi-stage Dockerfile with hardened runtime (non-root, healthcheck, tini PID1). docker-compose with read-only fs, dropped capabilities, no-new-privileges, memory/CPU limits. Initial SBOM (CycloneDX + SPDX) and trivy CVE scan baseline. Image will be referenced by SHA256 digest in production once first GHCR push completes (STEP-MIG-013)."
 ```
 
-**9.5 Sync ke VPS (manual SCP, akan dipakai untuk first deploy):**
+**9.5 Sync ke VPS (git pull pattern, sama dengan MIG-008):**
 
 ```bash
-# Dari laptop
-scp -i $HOME\.ssh\papyr\operator -P 52022 -r deploy/ deploy@172.235.251.193:/opt/papyr/production-config/
+# Compose sudah committed di repo dari step 9.4. Di VPS, pull repo lalu copy ke production location.
+ssh papyr 'cd /opt/papyr/source && git pull origin main 2>&1 | tail -3'
+
+# Copy compose + env example ke /opt/papyr/production/
+ssh papyr 'sudo install -m 644 -o deploy -g deploy /opt/papyr/source/deploy/docker-compose.yml /opt/papyr/production/docker-compose.yml && sudo install -m 644 -o deploy -g deploy /opt/papyr/source/deploy/.env.production.example /opt/papyr/production/.env.production.example && ls -la /opt/papyr/production/'
 ```
 
-**Di VPS:**
+**9.5b Pre-deploy chown for userns-remap mapped volume:**
 
 ```bash
-# Move files
-sudo mv /opt/papyr/production-config/docker-compose.yml /opt/papyr/production/docker-compose.yml
-sudo mv /opt/papyr/production-config/.env.production.example /opt/papyr/production/.env.production.example
-sudo rm -rf /opt/papyr/production-config
-sudo chown deploy:deploy /opt/papyr/production/*
-ls -la /opt/papyr/production/
+# /opt/papyr/temp must be writable by host UID 101001 (container appuser UID 1001 + userns-remap subuid offset 100000).
+ssh papyr 'sudo chown 101001:101001 /opt/papyr/temp && sudo chmod 750 /opt/papyr/temp && ls -ld /opt/papyr/temp'
 ```
+
+⚠️ Without this, the container's appuser cannot write to the mounted /opt/papyr/temp at first deploy and LibreOffice/OCRmyPDF subprocess output will fail with permission errors.
 
 **9.6 Test compose syntax:**
 
