@@ -1,11 +1,42 @@
-__pycache__/
-*.pyc
-*.pyo
-.env
-.git/
-.gitignore
-*.md
-.venv/
-venv/
-.mypy_cache/
-.pytest_cache/
+# Whitelist approach: ignore everything by default, then allow only what we need.
+**
+
+# Application code
+!main.py
+!requirements.txt
+!routers/
+!services/
+!utils/
+
+# Re-exclude development noise even from whitelisted dirs
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/tests/
+**/test_*.py
+**/*_test.py
+
+# Local environments and secrets
+**/.venv
+**/venv
+**/env
+**/.env
+**/.env.*
+!**/.env.example
+
+# Build artifacts and IDE
+**/Dockerfile*
+**/docker-compose*
+**/*.md
+**/.git
+**/.github
+**/.vscode
+**/.idea
+
+# Local dev test fixtures (only used by pytest, not production)
+indonesia_test_files/
+p2i_test_files/

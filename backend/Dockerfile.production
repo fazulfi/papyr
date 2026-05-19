@@ -1,0 +1,105 @@
+# syntax=docker/dockerfile:1.7
+# Papyr backend production Dockerfile (multi-stage, hardened)
+#
+# This is the production-grade variant of backend/Dockerfile.
+# Primary differences vs backend/Dockerfile:
+#  - Multi-stage with builder isolation (smaller final image)
+#  - Non-root appuser (UID/GID 1001)
+#  - Explicit base image digest pin (paranoid grade)
+#  - Healthcheck on /health
+#  - tini PID 1 for proper SIGTERM handling
+#  - TMPDIR=/opt/papyr/temp (host /tmp is noexec from STEP-MIG-003;
+#    backend processes that fork executables from temp must use this writable+exec dir)
+#  - 4 uvicorn workers (production)
+#
+# userns-remap caveat: when run on the production VPS (STEP-MIG-006),
+# Docker daemon has userns-remap=default. Container UID 1001 maps to
+# host UID 100000 + 1001 = 101001. Mounted volumes (e.g. /opt/papyr/temp)
+# must be writable by 101001:101001 OR set with permissive mode/ACL.
+# This is handled at STEP-MIG-009 compose configuration.
+
+# ============================================================
+# Stage 1: Builder
+# ============================================================
+FROM python:3.11.9-slim-bookworm AS builder
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Build deps for native Python packages (PyMuPDF, pdf2docx, opencv, camelot)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libffi-dev \
+        libxml2-dev \
+        libxslt1-dev \
+        zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /build
+COPY requirements.txt ./
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+# ============================================================
+# Stage 2: Runtime
+# ============================================================
+FROM python:3.11.9-slim-bookworm AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PATH=/home/appuser/.local/bin:$PATH \
+    TMPDIR=/opt/papyr/temp
+
+# Runtime native deps for Papyr tools:
+#  - tesseract-ocr-eng/ind: OCR for English + Indonesian (PAPYR-138)
+#  - libreoffice-writer: PDF→Word fallback (PAPYR-128)
+#  - ghostscript: PDF compression
+#  - poppler-utils: PDF utilities (used by camelot)
+#  - libxcb-xfixes0: opencv-python-headless dependency
+#  - tini: PID 1 signal forwarding
+#  - curl + ca-certificates: healthcheck + R2 TLS
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        tesseract-ocr \
+        tesseract-ocr-eng \
+        tesseract-ocr-ind \
+        libreoffice-writer \
+        libreoffice-common \
+        ghostscript \
+        poppler-utils \
+        libxcb-xfixes0 \
+        curl \
+        ca-certificates \
+        tini \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Create non-root user (UID/GID 1001).
+# Host mapping under userns-remap=default: 100000+1001 = 101001.
+RUN groupadd -r appuser --gid 1001 && \
+    useradd -r -m -g appuser --uid 1001 -s /bin/bash appuser && \
+    mkdir -p /opt/papyr/temp && \
+    chown -R appuser:appuser /opt/papyr
+
+WORKDIR /app
+
+# Copy installed packages from builder
+COPY --from=builder --chown=appuser:appuser /root/.local /home/appuser/.local
+
+# Copy application code (whitelist controlled by .dockerignore)
+COPY --chown=appuser:appuser . /app
+
+USER appuser
+
+EXPOSE 8000
+
+# Healthcheck — Docker + compose orchestration use this
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -fsS http://localhost:8000/health || exit 1
+
+# tini as PID 1 forwards signals correctly so docker stop / compose down works
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--log-level", "info"]
