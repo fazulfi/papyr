@@ -9,7 +9,7 @@
 | Track | VPS Migration (paranoid-grade) |
 | Refs | `stepprompts/step-prompts-vps-migration.md` STEP-MIG-007 |
 | Date | 2026-05-19 |
-| Status | ✅ Completed |
+| Status | ⚠️ Implemented then rolled back same day per operator decision (key-only auth, TOTP file retained for future re-enable) |
 
 ## Scope
 
@@ -220,3 +220,34 @@ LISH path retained for future when direct Linode access is gained.
 - AIDE rebaseline took 10m 16s on this hardware (longer than initial 3m 34s at MIG-003 because more files exist now post-Docker, post-OpenSCAP, post-MIG-005).
 - Linode LISH access requires Linode account 2FA — recommended to enable once direct access is gained (currently blocked by reseller chain).
 - This step is the last hardening layer before application deployment. Subsequent steps (MIG-008+) focus on production Dockerfile, image build, secrets, deploy, monitoring.
+
+## Rollback (operator decision, same day)
+
+Operator: "jangan pake totp aja, ribet" (TOTP every-login friction is unacceptable for solo-operator workflow with frequent automation).
+
+Decision: roll back enforcement to key-only auth. Preserve enrollment artifacts so re-enable is one-step in the future.
+
+### What was reverted
+
+- `/etc/pam.d/sshd` restored from `.bak.pre-mig-007` (no `pam_google_authenticator.so` line)
+- `/etc/ssh/sshd_config` restored from `.bak.pre-mig-007` (no `AuthenticationMethods` line, `ChallengeResponseAuthentication` and `KbdInteractiveAuthentication` back to default `no`)
+- sshd validated with `sshd -t` and reloaded (no disconnect)
+
+### What was kept
+
+- `/home/deploy/.google_authenticator` (mode 400) — operator can re-enable strict 2FA in seconds by re-running Phase C of original step
+- TOTP secret + scratch codes still in operator password manager (not deleted)
+- AIDE database rebaseline from Phase E (legitimate filesystem snapshot)
+- `security-baseline.md` Emergency Recovery section (still useful even without TOTP)
+
+### Implications
+
+- Future SSH from any source: pubkey only. No TOTP prompt.
+- If pubkey file (`~/.ssh/papyr/operator`) leaks → attacker gets full deploy access. Compensating controls:
+  - Laptop disk encryption (Windows BitLocker)
+  - Key file permission ACL (Windows default)
+  - Repo `.gitignore` already excludes private keys
+  - Activity monitoring via auditd (MIG-002) + AIDE (MIG-003) + CrowdSec
+- Re-enable path: re-run STEP-MIG-007 Phase C + reload sshd. ~5 minutes including verification.
+
+Operator-accepted risk. Tracked.
