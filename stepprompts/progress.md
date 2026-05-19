@@ -3,8 +3,8 @@
 > **Instruksi:** Setelah menyelesaikan setiap STEP, update status di file ini menjadi ✅ beserta tanggal selesai.
 > Format: `| STEP-F2-XXX | Judul | ⬜ |` → `| STEP-F2-XXX | Judul | ✅ YYYY-MM-DD |`
 
-**Last Updated:** 2026-05-18
-**Current Step:** STEP-MIG-005 (compliance baselines — STEP-MIG-004 complete)
+**Last Updated:** 2026-05-19
+**Current Step:** STEP-MIG-006 (server foundation — STEP-MIG-005 complete)
 **Overall Progress:** 48 / 97 (49%) — Fase 2 only; STEP-MIG-* tracked separately below (22 steps, 1/22 done)
 
 ---
@@ -227,7 +227,7 @@
 | STEP-MIG-002 | Intrusion prevention layer (CrowdSec, auditd, sysctl) | ✅ 2026-05-18 (CrowdSec + firewall bouncer + 3 collections active, fail2ban purged, unattended-upgrades enabled with auto-reboot 04:00, auditd 10 rules loaded, sysctl hardening applied, USB storage blocked, snapd masked, umask 027 for deploy user) |
 | STEP-MIG-003 | Filesystem integrity + rootkit detection (AIDE) | ✅ 2026-05-19 (AIDE 26MB baseline + daily cron with --config, /tmp+/var/tmp tmpfs noexec/nosuid/nodev, chkrootkit + rkhunter + weekly cron, Lynis hardening index 74/100) |
 | STEP-MIG-004 | Egress filtering + honeypot | ✅ 2026-05-19 (UFW deny out 10 mining ports, endlessh on :22 with slow drip banner, real sshd remains on :52022 deploy-only) |
-| STEP-MIG-005 | Compliance baselines (OpenSCAP CIS L1 + Lynis) | ⬜ |
+| STEP-MIG-005 | Compliance baselines (OpenSCAP + Lynis) | ✅ 2026-05-19 (CIS L1 server scan via upstream SSG v0.1.74, 5 remediations applied (ip_forward off, core dumps off, login banner, sshd Banner reloaded, umask 027), Lynis hardening index 74 → 75) |
 | STEP-MIG-006 | Server foundation (Docker + 4GB swap + dirs) | ⬜ |
 | STEP-MIG-007 | SSH 2FA (TOTP) + LISH emergency recovery | ⬜ |
 | STEP-MIG-008 | Production Dockerfile + SBOM (syft) | ⬜ |
