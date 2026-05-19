@@ -1360,6 +1360,10 @@ sudo usermod -aG docker deploy
 
 **6.3 Configure Docker daemon hardening:**
 
+> ⚠️ **userns-remap caveat**: option `"userns-remap": "default"` membuat container UID 0 di-shift ke host UID 100000+. Trade-off: shared volumes butuh ownership adjustment. File yang ditulis container akan owned `100000:100000` di host, bukan `deploy:deploy`. Akan dihandle di STEP-MIG-009 saat compose volumes di-setup (set host directory owner to 100000 atau pakai user mapping di compose). Kalau ternyata ribet, comment line ini dan restart docker — daemon hardening lain tetap aktif tanpa userns-remap.
+
+> **Heredoc note**: tulis `daemon.json` di laptop lokal lalu `scp + install` untuk avoid PowerShell heredoc mangling.
+
 ```bash
 sudo tee /etc/docker/daemon.json > /dev/null <<'EOF'
 {
@@ -1409,13 +1413,17 @@ sysctl vm.swappiness
 
 **6.6 Create Papyr directory structure:**
 
+> ⚠️ `/opt/papyr/security` sudah exists sejak STEP-MIG-005 dengan ownership `deploy:deploy` mode 750 dan berisi files (openscap report, lynis logs, ssg/, security-baseline.md). `mkdir -p` idempotent dan `chown -R` no-op untuk file yang sudah deploy:deploy, tapi targeted chmod harus pakai non-recursive di top-level untuk avoid accidental permission flip pada existing files.
+
 ```bash
-sudo mkdir -p /opt/papyr/{production,nginx/conf.d,nginx/ssl,logs,security,backups,temp}
+sudo mkdir -p /opt/papyr/{production,nginx/conf.d,nginx/ssl,logs,backups,temp}
+# /opt/papyr/security sudah ada dari MIG-005 — tidak buat ulang
 sudo chown -R deploy:deploy /opt/papyr
 sudo chmod 750 /opt/papyr
 sudo chmod 700 /opt/papyr/production  # contains .env
 sudo chmod 700 /opt/papyr/nginx/ssl
-sudo chmod 750 /opt/papyr/{logs,security,backups,temp}
+sudo chmod 750 /opt/papyr/{logs,backups,temp,nginx,nginx/conf.d}
+# /opt/papyr/security mode tetap 750 dari MIG-003
 ls -la /opt/papyr/
 ```
 
@@ -1468,23 +1476,29 @@ sudo chmod +x /etc/cron.weekly/docker-prune
 
 **6.9 Verify deploy user can run Docker:**
 
-```bash
-# Logout dan login ulang untuk apply docker group
-exit
-# Dari laptop, ssh lagi:
-ssh -i $HOME\.ssh\papyr\operator -p 52022 deploy@172.235.251.193
+⚠️ Setelah `usermod -aG docker deploy` (task 6.2), group apply tidak immediate untuk session yang sudah jalan. Pakai pattern berikut tanpa harus disconnect:
 
-# Test
-docker run --rm hello-world
-# Expected: "Hello from Docker!" message
+```bash
+# Option A (recommended): re-SSH baru dari laptop, group langsung apply.
+ssh -i $HOME\.ssh\papyr\operator -p 52022 deploy@172.235.251.193 'docker run --rm hello-world | head -3'
+# atau via alias:
+ssh papyr 'docker run --rm hello-world | head -3'
+
+# Option B (kalau current session perlu langsung): pakai sg untuk run sub-shell dengan docker group.
+sg docker -c 'docker run --rm hello-world | head -3'
 ```
+
+Expected output: 3 baris pertama dari "Hello from Docker!" message.
 
 **6.10 AIDE update setelah Docker install:**
 
+⚠️ AIDE rebaseline butuh ~6 menit (sama seperti aide-init di MIG-003). Run ini paling akhir setelah semua perubahan filesystem (Docker install, swap file, /opt/papyr dirs, logrotate, cron) selesai supaya satu sweep covers everything.
+
 ```bash
 # Docker install adds many files. Re-baseline AIDE.
-sudo aide --update
+sudo aide --config /etc/aide/aide.conf --update
 sudo cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+ls -la /var/lib/aide/aide.db
 ```
 
 ### Verifikasi
