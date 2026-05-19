@@ -92,3 +92,9 @@ backend/tests/benchmark_results.md
 # ========================
 docs/vps-access.md
 gitleaks-report.json
+
+# ========================
+# Deploy secrets (real values live at /opt/papyr/production/.env on VPS)
+# ========================
+deploy/.env.production
+deploy/.env.local
