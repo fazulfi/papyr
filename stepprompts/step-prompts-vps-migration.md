@@ -1659,75 +1659,146 @@ EOF
 
 **7.4 Update sshd_config untuk enforce 2FA:**
 
+> **Idempotent edit pattern**: kita pakai grep-then-append (idempotent, safe to re-run) supaya tidak break kalau line sudah ada atau format berbeda dari ekspektasi sed. Reload (no restart) supaya tidak drop session existing.
+
 ```bash
-# Enable challenge-response untuk 2FA
-sudo sed -i 's/^ChallengeResponseAuthentication.*/ChallengeResponseAuthentication yes/' /etc/ssh/sshd_config
-sudo sed -i 's/^KbdInteractiveAuthentication.*/KbdInteractiveAuthentication yes/' /etc/ssh/sshd_config
+# Backup sshd_config sebelum edit
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.pre-mig-007
 
-# Add AuthenticationMethods (require pubkey + TOTP)
-echo "AuthenticationMethods publickey,keyboard-interactive" | sudo tee -a /etc/ssh/sshd_config
-echo "UsePAM yes" | sudo tee -a /etc/ssh/sshd_config
+# Enable challenge-response untuk 2FA (idempotent)
+if sudo grep -qE '^ChallengeResponseAuthentication\s+no' /etc/ssh/sshd_config; then
+  sudo sed -i 's/^ChallengeResponseAuthentication.*/ChallengeResponseAuthentication yes/' /etc/ssh/sshd_config
+elif ! sudo grep -qE '^ChallengeResponseAuthentication\s+yes' /etc/ssh/sshd_config; then
+  echo "ChallengeResponseAuthentication yes" | sudo tee -a /etc/ssh/sshd_config
+fi
 
-# Validate
+# KbdInteractive (idempotent)
+if sudo grep -qE '^KbdInteractiveAuthentication\s+no' /etc/ssh/sshd_config; then
+  sudo sed -i 's/^KbdInteractiveAuthentication.*/KbdInteractiveAuthentication yes/' /etc/ssh/sshd_config
+elif ! sudo grep -qE '^KbdInteractiveAuthentication\s+yes' /etc/ssh/sshd_config; then
+  echo "KbdInteractiveAuthentication yes" | sudo tee -a /etc/ssh/sshd_config
+fi
+
+# AuthenticationMethods (idempotent)
+if ! sudo grep -qE '^AuthenticationMethods\s+publickey,keyboard-interactive' /etc/ssh/sshd_config; then
+  echo "AuthenticationMethods publickey,keyboard-interactive" | sudo tee -a /etc/ssh/sshd_config
+fi
+
+# UsePAM (idempotent — actually already in sshd_config from MIG-001)
+if ! sudo grep -qE '^UsePAM\s+yes' /etc/ssh/sshd_config; then
+  echo "UsePAM yes" | sudo tee -a /etc/ssh/sshd_config
+fi
+
+# Validate config
 sudo sshd -t
-# Expected: silent (valid)
+echo "sshd -t exit: $?"
+# Expected: 0 (silent = valid)
 ```
 
 **7.5 Test 2FA login DALAM SAFETY-NET MODE:**
 
-⚠️ **JANGAN TUTUP terminal SSH yang sekarang.** Buka terminal BARU di laptop.
+⚠️ **JANGAN TUTUP terminal SSH yang sekarang.** Buka terminal BARU di laptop. Pakai SSH alias.
+
+Step 1 — reload sshd di terminal lama (no disconnect):
 
 ```bash
-# Terminal baru di laptop
-ssh -i $HOME\.ssh\papyr\operator -p 52022 deploy@172.235.251.193
-# Expected: prompt for "Verification code:"
-# Enter TOTP code dari authenticator app
-# Should login successfully
-```
-
-**Kalau login OK**, restart sshd di terminal lama:
-
-```bash
-# Di terminal lama (yang masih open)
-sudo systemctl restart sshd
+# Di terminal lama (yang masih open). Reload, bukan restart, supaya session existing tidak terputus.
+sudo systemctl reload sshd
 sudo systemctl status sshd --no-pager | head -3
 ```
 
-**Test sekali lagi di terminal baru** untuk konfirm 2FA enforced setelah restart.
+Step 2 — test 2FA dari terminal kedua di laptop:
 
-**7.6 Document Linode LISH emergency procedure:**
+```bash
+# Terminal BARU di laptop
+ssh papyr
+# atau full form: ssh -i $HOME\.ssh\papyr\operator -p 52022 deploy@172.235.251.193
+
+# Expected: prompt "Verification code:" setelah pubkey accepted
+# Enter TOTP code dari authenticator app (6 digits)
+# Should login successfully
+```
+
+⚠️ **Kalau Step 2 fail (no TOTP prompt atau access denied)**, JANGAN tutup terminal lama. Debug di terminal lama:
+
+```bash
+# Cek PAM config
+sudo grep "google_authenticator" /etc/pam.d/sshd
+# Cek sshd config
+sudo grep -E "AuthenticationMethods|ChallengeResponse|KbdInteractive|UsePAM" /etc/ssh/sshd_config
+# Cek user TOTP file
+ls -la /home/deploy/.google_authenticator
+# Cek sshd logs
+sudo journalctl -u sshd -n 30 --no-pager
+```
+
+Kalau Step 2 PASS, lanjut Step 3:
+
+Step 3 — verify key-only login (without TOTP) is BLOCKED:
+
+```bash
+# Terminal kedua di laptop
+ssh -o "PreferredAuthentications=publickey" papyr
+# Expected: "Permission denied (keyboard-interactive)" — 2FA enforced
+```
+
+Kalau Step 3 PASS, kamu boleh tutup terminal lama. Future SSH lewat `ssh papyr` akan minta TOTP.
+
+**7.6 Document emergency SSH recovery procedure:**
+
+> **Reseller caveat**: Papyr VPS dibeli via IDCloudHost reseller, jadi operator **tidak punya** akses Linode dashboard / LISH. Recovery path utama bukan LISH, tapi IDCH support ticket. Section ini document keduanya untuk completeness.
 
 ```bash
 # Append to /opt/papyr/security/security-baseline.md
 sudo tee -a /opt/papyr/security/security-baseline.md > /dev/null <<'EOF'
 
-## Emergency SSH Recovery via Linode LISH
+## Emergency SSH Recovery
+
+### Primary path: IDCloudHost reseller support (operator's situation)
+
+VPS provisioned via IDCH reseller, no direct Linode dashboard access.
 
 If SSH is unreachable (locked out, sshd misconfig, network failure):
 
-1. Login to Linode Cloud Manager: https://cloud.linode.com
-2. Navigate to Linodes → select papyr-prod-id
-3. Click "Launch LISH Console" (top-right)
-4. Login as `root` with password from password manager (rotated MIG-001)
-5. Diagnose:
+1. Open IDCloudHost support ticket marked URGENT — request emergency console access ke VPS Linode mereka.
+2. Wait for IDCH ops to provide console (web SSH or VNC) — response time 30 min-4 hour business hours.
+3. Login as `root` with password from password manager (rotated MIG-001).
+4. Diagnose:
    - sshd status: `systemctl status sshd`
    - sshd config valid: `sshd -t`
    - UFW status: `ufw status`
    - Network interface: `ip addr show`
-6. Common fixes:
-   - Restore sshd_config: `cp /etc/ssh/sshd_config.bak.pre-mig-XXX /etc/ssh/sshd_config && systemctl restart sshd`
+5. Common fixes:
+   - Restore sshd_config: `cp /etc/ssh/sshd_config.bak.pre-mig-XXX /etc/ssh/sshd_config && systemctl reload sshd`
+   - Restore PAM config: `cp /etc/pam.d/sshd.bak.pre-mig-007 /etc/pam.d/sshd`
    - Disable UFW temporarily: `ufw disable` then re-enable after fix
-   - Check fail2ban/CrowdSec self-ban: `cscli decisions list` and remove your laptop IP if banned
-7. After fix, exit LISH and SSH again from laptop.
+   - CrowdSec self-ban: `cscli decisions list` and remove laptop IP if banned (`cscli decisions delete --ip <laptop_public_ip>`)
+6. After fix, exit console and SSH again from laptop.
+
+### Fallback path: Linode LISH (not available to operator, documented for future)
+
+If at some point the operator gains direct Linode account access:
+
+1. Login to Linode Cloud Manager: https://cloud.linode.com
+2. Navigate to Linodes → select papyr-prod-id
+3. Click "Launch LISH Console" (top-right)
+4. Same diagnose + fix steps as above.
+5. LISH access requires Linode account 2FA (recommended once direct access available).
 
 ## 2FA Recovery
 
-If TOTP device lost:
-1. SSH via LISH (root)
-2. Edit `/home/deploy/.google_authenticator` to insert backup scratch codes
-3. Or temporarily set `nullok` in `/etc/pam.d/sshd` to bypass 2FA, login, re-enroll TOTP
-4. Re-enable strict 2FA after recovery
+If TOTP device lost or 2FA-locked-out:
+
+1. Enter via IDCH support ticket (or LISH if available) as `root`
+2. Edit `/home/deploy/.google_authenticator` to validate one of the 5 backup scratch codes
+3. Or temporarily set `nullok` in `/etc/pam.d/sshd` to bypass 2FA:
+   `sudo sed -i 's/auth required pam_google_authenticator.so/auth required pam_google_authenticator.so nullok/' /etc/pam.d/sshd && sudo systemctl reload sshd`
+4. SSH as deploy, re-enroll TOTP: `google-authenticator -t -d -f -r 3 -R 30 -W`
+5. Save new secrets to password manager
+6. Re-enable strict 2FA after recovery: remove `nullok` and reload sshd
+
 EOF
+sudo chown deploy:deploy /opt/papyr/security/security-baseline.md
 ```
 
 ### Verifikasi
