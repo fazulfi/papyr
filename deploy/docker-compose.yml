@@ -107,7 +107,7 @@ services:
 
     volumes:
       - /opt/papyr/nginx/conf.d:/etc/nginx/conf.d:ro
-      - /opt/papyr/nginx/ssl:/etc/letsencrypt:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
       - /opt/papyr/logs/nginx:/var/log/nginx
 
     depends_on:
